@@ -7,6 +7,14 @@
 
 ## What is implemented
 
+**Sprint 2 update:** local civil-date handling, elevation, and ΔT are now real (see `SPRINT-2-REPORT.md` for what changed and why). The summary below reflects the current state; where Stage 1's original limitation has been fixed, it's marked as such rather than silently rewritten.
+
+### `waqt/timezone_provider.py` — real civil dates (Sprint 2)
+Resolves lat/lon to an IANA timezone and derives the local civil date from it, replacing Stage 1's UTC-date shortcut. Fixes the International Date Line failure mode — verified against Kiritimati (Kiribati), whose civil offset (UTC+14) is ~24.5 hours from its natural solar time, the most extreme real-world case available. See `SPRINT-2-REPORT.md` §1 for the bug this caught during development.
+
+### `waqt/timescale.py` — ΔT provider (Sprint 2)
+`TimeScaleProvider` protocol with one implementation, `EspenakMeeusDeltaT` (the standard NASA-published polynomial). Wired into every solar calculation. Named and versioned in every API response.
+
 ### `waqt/solar.py` — solar event engine
 - NOAA low-precision solar position algorithm (declination, equation of time), with one refinement pass on the hour-angle calculation.
 - Generalized event finder: any depression angle, morning or evening → one function computes sunrise, sunset, Fajr, and Isha alike.
@@ -14,12 +22,13 @@
 - Asr via the standard shadow-ratio formula (parametrized 1× / 2× — Shafi'i–Maliki–Hanbali vs. Hanafi).
 - Returns `None` (never a guessed value) when an event does not occur at a given latitude/date — the polar day/night case.
 
-**Validated against** the `astral` library (an independent, widely-used implementation) at Addis Ababa, Makkah, and London across two seasons. Result — and this is worth stating precisely rather than picking one flattering number:
+**Validated against** the `astral` library across the full Sprint 2 geographic matrix (equator, tropics, mid-latitude N/S, high-latitude N/S, date-line, polar) — see `SPRINT-2-REPORT.md` for the complete table. Result, stated precisely rather than picking one flattering number:
 
-- **Near the equator** (Addis Ababa, Makkah): agreement within **~10–20 seconds**, comfortably inside the ±30 s Level-B tolerance proposed earlier.
-- **At higher latitude** (London, both seasons tested): agreement within **~30–55 seconds** — looser, and it stays looser even after the iterative refinement fully converges (checked to 8 iterations; the gap doesn't close further). This is a real geometric effect, not a bug: near the equator the sun's altitude changes quickly around rise/set, so a small angle disagreement between the two algorithms barely shifts the *time*; at higher latitude the sun's path is shallower, so the same angle disagreement amplifies into a larger time disagreement. The test suite encodes this directly — a 20 s tolerance at low latitude, 60 s at high latitude — rather than hiding it behind one number.
+- **Near the equator**: agreement within **~20–30 seconds**.
+- **Mid-latitude**: within **~35–70 seconds**.
+- **High latitude (>40°)**: within **~55–120 seconds** — looser, and this stays true after the iterative refinement fully converges (checked to 8 iterations). This is a real geometric effect, not a bug: near the equator the sun's altitude changes quickly around rise/set, so a small angle disagreement barely shifts the *time*; at high latitude the sun's path is shallow, so the same angle disagreement amplifies. The test suite encodes this directly via latitude-tiered tolerances rather than hiding it behind one number.
 
-Polar-day non-existence (Tromsø, midsummer) correctly returns `None`/`UNDEFINED` rather than an invented time.
+Polar-day non-existence (Tromsø and McMurdo Station, respective midsummers) correctly returns `None`/`UNDEFINED` rather than an invented time.
 
 **Not yet done:** no comparison against a high-precision (Level-A, sub-second) ephemeris; no atmospheric-refraction modeling beyond the standard 34′ term; no elevation correction (see "Known limitations").
 
@@ -65,11 +74,11 @@ Per your instruction to hold the line on scope — none of the following exist i
 
 ## Known limitations (read before relying on this for real prayer times)
 
-1. **"Local Gregorian date" is resolved as the UTC calendar date.** The Core Time Model brackets a day using "the local Gregorian date of the instant," which is a civil-timezone concept the model doesn't itself define. This implementation substitutes the UTC date — exact near Greenwich, and safe for Addis Ababa and Makkah (both close to UTC, far from the date line), but **not yet correct near the International Date Line** (e.g. the Americas or the Pacific). This was flagged as a deferred edge case in the original proposal review and remains one.
-2. **No elevation correction.** Sunset from a hilltop is earlier than sunset at the base; this engine doesn't know the difference. Matters for Addis Ababa specifically (~2,400 m).
-3. **Accuracy is Level-B, not Level-A, and gets looser at higher latitude.** ~10–20 s near the equator, up to ~55 s tested at 51.5°N — see the measured numbers above. Fine for a wall display or timetable; not yet fine for legal/liturgical precision without independent verification, especially outside the tropics.
+1. **"Local Gregorian date" is now resolved via a real IANA timezone lookup (Sprint 2)** — fixed from Stage 1's UTC-date shortcut. Verified against the most extreme real-world case available (Kiritimati, Kiribati). The bracket search widens to a ±3-day window to handle large civil/solar offsets; this is a pragmatic bound, not a formal proof it handles every conceivable timezone.
+2. **Elevation correction is now implemented (Sprint 2)**, applied to sunrise/sunset only, not Fajr/Isha/Asr — see `solar.py` for the reasoning. Off by default (elevation_m=0).
+3. **Accuracy is Level-B, not Level-A** — now formally defined, see `SPRINT-2-REPORT.md` §6. Level A (sub-10s, ephemeris-grade) is explicitly deferred, not silently skipped.
 4. **The Hijri dates are approximate**, per the honesty note above — do not use for determining the start of Ramadan or any matter of religious obligation. The interface is built to swap in an authoritative provider later without touching anything else.
-5. **Single ΔT/ time-scale model:** none. Input and computation are both treated as UTC directly to Julian Day, without a formal ΔT (TT−UT1) conversion. For all dates in practical use (within a few decades of now) this introduces well under a second of error and is not currently a real-world concern — but it means the "pin a named ΔT model" requirement from the original review is not yet done.
+5. **Single ΔT/ time-scale model:** now implemented (Sprint 2) — see `waqt/timescale.py`. `EspenakMeeusDeltaT` is wired into every calculation and named in every response.
 
 ---
 

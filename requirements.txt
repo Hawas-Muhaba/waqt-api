@@ -1,5 +1,6 @@
 fastapi
 uvicorn
+timezonefinder
 # astral is a dev/test-only dependency, used solely to cross-validate
 # the solar engine in tests/test_core.py. It is not imported by
 # anything in waqt/ itself.
