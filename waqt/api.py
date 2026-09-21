@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 
 from .core import AstronomyProfile, Location, compute_waqt
 from .hijri import ArithmeticTabularProvider
@@ -47,6 +47,11 @@ _CALENDAR_PROVIDERS = {
 
 def _iso(dt: datetime | None) -> str | None:
     return dt.isoformat() if dt is not None else None
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/v1/waqt")
