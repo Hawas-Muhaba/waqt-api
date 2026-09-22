@@ -7,6 +7,13 @@ lookup). Local civil date is now resolved via a real timezone lookup
 by default (see waqt.timezone_provider) rather than Stage 1's UTC-date
 shortcut.
 
+Sprint 3 adds: pluggable calendar provider system with five provider
+categories. The calendar_provider query parameter now accepts:
+  - arithmetic-tabular  (default, Sprint 1/2 arithmetic approximation)
+  - umm-al-qura         (astronomical approximation of the real UAQ rule)
+  - declared            (demo: empty overrides, falls back to arithmetic)
+  - local-observation   (demo: empty sightings, falls back to arithmetic)
+
 Run:
     uvicorn waqt.api:app --reload --port 8000
 
@@ -14,6 +21,7 @@ Try:
     curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525"
     curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525&elevation_m=2400"
     curl "http://localhost:8000/v1/waqt?lat=-17.7134&lon=178.0650"   # Fiji, date-line case
+    curl "http://localhost:8000/v1/waqt?lat=21.4225&lon=39.8262&calendar_provider=umm-al-qura"
 """
 
 from __future__ import annotations
@@ -25,24 +33,50 @@ from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from .core import AstronomyProfile, Location, compute_waqt
-from .hijri import ArithmeticTabularProvider
+from .calendar_providers import (
+    ArithmeticTabularProvider,
+    DeclaredProvider,
+    LocalObservationProvider,
+    UmmAlQuraProvider,
+)
 from .timescale import DEFAULT_TIMESCALE_PROVIDER
 from .timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 
 app = FastAPI(
     title="Waqt API",
-    version="0.2.0",
+    version="0.3.0",
     description=(
         "Reference implementation of the Waqt Core Time Model v0.1, "
-        "with Sprint 2's astronomical/location corrections (real "
-        "timezone-based day boundary, elevation, DeltaT). "
-        "See SCOPE.md and SPRINT-2-REPORT.md."
+        "with Sprint 2's location/astronomy corrections and Sprint 3's "
+        "pluggable calendar provider system. "
+        "See SCOPE.md, SPRINT-2-REPORT.md, SPRINT-3-REPORT.md."
     ),
 )
 
-_CALENDAR_PROVIDERS = {
-    "arithmetic-tabular": ArithmeticTabularProvider(),
+# Lazy construction: UmmAlQuraProvider() triggers an ephem calculation;
+# wrap each entry in a lambda so the object is created only when the
+# endpoint is first called, not at import time.
+_CALENDAR_PROVIDER_FACTORIES = {
+    "arithmetic-tabular": lambda: ArithmeticTabularProvider(),
+    "umm-al-qura":        lambda: UmmAlQuraProvider(),
+    # Demo variants of the data-driven providers — backed by empty
+    # dictionaries so they immediately fall through to the arithmetic
+    # fallback. Exposed here so they are demonstrable via /docs without
+    # needing any per-deployment configuration.
+    "declared":           lambda: DeclaredProvider(overrides={}, fallback=ArithmeticTabularProvider()),
+    "local-observation":  lambda: LocalObservationProvider(sightings={}, fallback=ArithmeticTabularProvider()),
 }
+_CALENDAR_PROVIDERS: dict[str, object] = {}  # cache of already-constructed instances
+
+
+def _get_provider(name: str):
+    """Lazy-construct and cache calendar providers."""
+    if name not in _CALENDAR_PROVIDERS:
+        factory = _CALENDAR_PROVIDER_FACTORIES.get(name)
+        if factory is None:
+            return None
+        _CALENDAR_PROVIDERS[name] = factory()
+    return _CALENDAR_PROVIDERS[name]
 
 
 def _iso(dt: datetime | None) -> str | None:
@@ -68,7 +102,8 @@ def get_waqt(
     isha_angle: float = Query(17.0, description="Isha depression angle, degrees"),
     asr_ratio: float = Query(1.0, description="Asr shadow ratio: 1.0 = standard, 2.0 = Hanafi"),
     calendar_provider: str = Query(
-        "arithmetic-tabular", description=f"One of: {', '.join(_CALENDAR_PROVIDERS)}"
+        "arithmetic-tabular",
+        description=f"One of: {', '.join(_CALENDAR_PROVIDER_FACTORIES)}",
     ),
 ):
     if instant is None:
@@ -79,11 +114,12 @@ def get_waqt(
         except ValueError:
             raise HTTPException(400, f"Could not parse instant: {instant!r}")
 
-    provider = _CALENDAR_PROVIDERS.get(calendar_provider)
+    provider = _get_provider(calendar_provider)
     if provider is None:
         raise HTTPException(
             400,
-            f"Unknown calendar_provider {calendar_provider!r}. Available: {list(_CALENDAR_PROVIDERS)}",
+            f"Unknown calendar_provider {calendar_provider!r}. "
+            f"Available: {list(_CALENDAR_PROVIDER_FACTORIES)}",
         )
 
     location = Location(lat=lat, lon=lon, elevation_m=elevation_m)
@@ -127,6 +163,7 @@ def get_waqt(
                 "display": str(r.hijri_date),
                 "weekday": r.weekday,
                 "provider": r.hijri_date.provider,
+                "version": r.hijri_date.version,
             },
             "day": {
                 "maghrib_open": _iso(r.day_start_maghrib),

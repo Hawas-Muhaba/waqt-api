@@ -2,28 +2,39 @@
 waqt.hijri — Calendar provider interface.
 
 Per the Core Time Model (Sec. 1), Waqt does not designate a canonical
-religious calendar. It defines a provider interface and ships one
-reference provider for testing/demo purposes.
+religious calendar. It defines a provider interface (this module) and
+this package ships several implementations under waqt/calendar_providers/
+(Sprint 3). Every provider identifies itself with a `name` AND a
+`version`, per the sprint brief's requirement that a date is never
+reported without knowing which algorithm/dataset produced it:
+
+    { "provider": "umm-al-qura", "version": "...", "date": "..." }
+
+This module holds the interface itself plus the two simplest
+providers (arithmetic-tabular, declared). waqt/core.py and waqt/solar.py
+are untouched by Sprint 3 — every new provider is just another object
+satisfying HijriProvider, injected the same way Stage 1 already
+injected ArithmeticTabularProvider. That's the whole point: the
+pluggability was already structurally there, Sprint 3 just proves it
+by adding providers that actually stress it (a real astronomical one,
+a registry, a demonstrably swappable custom one).
 
 IMPORTANT HONESTY NOTE (see SCOPE.md):
-The provider shipped here, `ArithmeticTabularProvider`, is the classical
-30-year-cycle tabular Islamic calendar (epoch JDN 1948440 = 1 Muharram,
-1 AH). It is a well-known, deterministic arithmetic approximation and is
-NOT the official Umm al-Qura calendar published by Saudi Arabia (which
-follows its own revised, non-arithmetic rule set and requires the
-official published tables to reproduce exactly). It will typically
-agree with Umm al-Qura to within 1 day, sometimes 2.
-
-It is labeled "arithmetic-tabular", not "tabular-uaq", specifically so
-that no caller mistakes it for the real thing. A true `tabular-uaq`
-provider is future work requiring the official dataset (see SCOPE.md).
+`ArithmeticTabularProvider` is the classical 30-year-cycle tabular
+Islamic calendar (epoch JDN 1948440 = 1 Muharram, 1 AH) — a
+deterministic arithmetic approximation, NOT the official Umm al-Qura
+calendar. It typically agrees with Umm al-Qura to within 1-2 days.
+It is named "arithmetic-tabular", not "umm-al-qura", specifically so
+no caller mistakes it for the real thing. The actual astronomical
+Umm al-Qura provider lives in waqt/calendar_providers/umm_al_qura.py
+— see that module for what it implements and its own honesty notes.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import date
-from typing import Protocol
+from typing import Optional, Protocol
 
 
 WEEKDAY_NAMES_AR = [
@@ -65,6 +76,8 @@ class HijriDate:
     month: int  # 1-12
     day: int    # 1-30
     provider: str
+    version: str = "unversioned"
+    source_note: Optional[str] = None  # e.g. which local observation this came from
 
     @property
     def month_name(self) -> str:
@@ -83,9 +96,14 @@ class HijriProvider(Protocol):
     Per the Core Time Model, this mapping is location-independent: one
     global label per Gregorian date, computed once (conceptually "at
     Makkah"), never re-derived per observer.
+
+    Every provider MUST set `name` and `version` as class/instance
+    attributes and return a HijriDate carrying both, per the sprint
+    brief's identification requirement.
     """
 
     name: str
+    version: str
 
     def from_gregorian(self, d: date) -> HijriDate: ...
 
@@ -99,11 +117,12 @@ class ArithmeticTabularProvider:
     """
 
     name = "arithmetic-tabular"
+    version = "30-year-cycle-epoch-1948440"
 
     def from_gregorian(self, d: date) -> HijriDate:
         jdn = _gregorian_to_jdn(d)
         year, month, day = self._jdn_to_hijri(jdn)
-        return HijriDate(year=year, month=month, day=day, provider=self.name)
+        return HijriDate(year=year, month=month, day=day, provider=self.name, version=self.version)
 
     @staticmethod
     def _jdn_to_hijri(jdn: int) -> tuple[int, int, int]:
@@ -132,6 +151,7 @@ class DeclaredProvider:
     """
 
     name = "declared"
+    version = "manual-v1"
 
     def __init__(self, overrides: dict[date, HijriDate], fallback: HijriProvider):
         self._overrides = overrides
@@ -140,7 +160,10 @@ class DeclaredProvider:
     def from_gregorian(self, d: date) -> HijriDate:
         if d in self._overrides:
             hd = self._overrides[d]
-            return HijriDate(hd.year, hd.month, hd.day, provider=self.name)
+            return HijriDate(
+                hd.year, hd.month, hd.day, provider=self.name, version=self.version,
+                source_note=hd.source_note,
+            )
         return self._fallback.from_gregorian(d)
 
 
