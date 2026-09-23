@@ -214,3 +214,14 @@ class UmmAlQuraProvider:
         month = offset % 12 + 1
 
         return HijriDate(year=year, month=month, day=day, provider=self.name, version=self.version)
+
+    def to_gregorian(self, year: int, month: int, day: int) -> date:
+        """Inverse of from_gregorian. Unlike ArithmeticTabularProvider's
+        closed-form inverse, this walks the (cached) real-conjunction
+        boundary chain to the requested month — exact given this
+        provider's own month boundaries, not a separate approximation
+        layered on top of them.
+        """
+        idx = (year - self.ANCHOR_YEAR) * 12 + (month - self.ANCHOR_MONTH)
+        label = self._boundary(idx).label_date
+        return label + timedelta(days=day - 1)

@@ -1,0 +1,138 @@
+# Waqt API v1 Reference
+
+Everything a caller needs to integrate Waqt without reading the Python source. If you want the *concepts* behind the numbers (why Maghrib is 00:00, why hours aren't always 60 minutes), read [`TIME-MODEL.md`](TIME-MODEL.md) first — this document is the wire contract.
+
+Base URL: wherever you deployed it (e.g. `https://waqt-api.onrender.com`). Interactive docs are always at `/docs`.
+
+---
+
+## 1. Versioning
+
+- The URL path carries the major version: every endpoint is under `/v1/`. A breaking change gets `/v2/`; `/v1/` never changes shape once released.
+- Every response also carries `meta.api_version` (currently `1.0.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
+
+## 2. The envelope
+
+Every response, success or failure, has exactly this shape:
+
+```json
+{
+  "meta": { "api_version": "1.0.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
+  "data": { ... or null on error ... },
+  "error": { "code": "...", "message": "...", "details": {...} } // or null on success
+}
+```
+
+`data` and `error` are mutually exclusive — exactly one is `null`. Never poll for success by checking HTTP status alone if you can check `error === null` instead; the shape is the same either way so your deserializer doesn't need two code paths.
+
+## 3. Error codes
+
+| Code | HTTP status | Meaning |
+|---|---|---|
+| `INVALID_INSTANT` | 400 | `instant` param isn't parseable ISO 8601 |
+| `INVALID_DATE` | 400 | `date` param isn't parseable `YYYY-MM-DD` |
+| `UNKNOWN_CALENDAR_PROVIDER` | 400 | `calendar_provider` isn't one of `GET /v1/calendar`'s list |
+| `UNSUPPORTED_OPERATION` | 400 | e.g. asking `declared` or `local-observation` to reverse-convert, which they structurally can't |
+| `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
+| `INTERNAL_ERROR` | 500 | anything unexpected. **Every** exception is caught here — you will never receive a raw stack trace or an empty connection reset. `details.exception_type` names the underlying Python exception for bug reports, nothing more. |
+
+Every code above is exercised by a real test in `tests/test_api.py` — none of this table is aspirational.
+
+## 4. Units, precision, null behavior
+
+- **Instants**: ISO 8601, UTC, explicit offset, rounded to the whole second at the response boundary (`2026-09-19T15:42:00+00:00`). Internal computation is not rounded until this point.
+- **Durations / clock readings** (the Waqt reading, event positions, countdowns): never a bare string. Always `{"display": "HH:MM:SS", "seconds": <float>}`. `seconds` can exceed 86400 for a day that ran long — see `TIME-MODEL.md`. Use `seconds` for any arithmetic; `display` is for showing a human.
+- **Angles**: degrees, floating point.
+- **Elevation**: metres, floating point, ≥ 0.
+- **Null-stable schema**: a given endpoint always returns the same top-level keys. When `status != "OK"` (e.g. `UNDEFINED` at a pole), fields that don't apply are `null`, never omitted. You can write one deserializer per endpoint and never check `if key in data`.
+
+## 5. Timezone representation
+
+Every block that has one:
+```json
+"timezone": { "name": "Africa/Addis_Ababa", "utc_offset_seconds": 10800 }
+```
+`name` is the real IANA zone (resolved from coordinates via `timezonefinder`, not guessed from longitude). `utc_offset_seconds` is the offset **actually in effect at the returned instant** — already resolved for DST, so you don't need your own timezone database just to render local time.
+
+## 6. Provider and profile identification
+
+Every Hijri date carries its source:
+```json
+"hijri": { "date": "1448-04-09", "provider": { "name": "umm-al-qura", "version": "astronomical-approx-2002-rules-v1" }, ... }
+```
+Every response using the solar engine carries:
+```json
+"computation": { "astronomy_engine": "waqt-noaa-low-precision", "accuracy_level": "B", "timescale_model": "espenak-meeus-2006", "delta_t_seconds": 75.5 }
+```
+`accuracy_level` is always `"B"` right now — see `ASTRONOMY.md` for what that means numerically and why Level A isn't implemented yet. A number without knowing which engine/profile produced it is not trustworthy; this block exists so you never have that problem.
+
+---
+
+## 7. Endpoints
+
+### `GET /v1/waqt` — the full result
+Everything: day boundary, clock reading, all six events, Hijri date, timezone.
+
+| Param | Required | Default | Notes |
+|---|---|---|---|
+| `lat`, `lon` | yes | — | WGS84 degrees |
+| `elevation_m` | no | `0` | metres |
+| `instant` | no | now | ISO 8601 UTC |
+| `timezone_override` | no | (looked up) | force an IANA zone, skip lookup |
+| `fajr_angle`, `isha_angle` | no | `18.0`, `17.0` | degrees below horizon |
+| `asr_ratio` | no | `1.0` | `1.0` standard, `2.0` Hanafi |
+| `calendar_provider` | no | `arithmetic-tabular` | see `GET /v1/calendar` |
+| `override_date`, `declared_year/month/day` | no | — | see §8 below — **only take effect if `override_date` exactly matches the label date** |
+| `sighting_year/month/day`, `observed_at` | no | — | same, for `local-observation` |
+
+### `GET /v1/day` — day boundary only
+Same location/instant/timezone params as above. No astronomy profile, no calendar — Maghrib doesn't depend on either. Returns `status`, `location`, `timezone`, `day`, `computation`.
+
+### `GET /v1/events` — the six events only
+Same location/instant/timezone/profile params as `/v1/waqt`. **No `calendar_provider` param at all** — deliberately: the calendar cannot influence solar astronomy, and this endpoint's shape proves it.
+
+### `GET /v1/hijri` — calendar lookup, no location
+```
+GET /v1/hijri?date=2026-09-20&calendar_provider=umm-al-qura
+```
+**Takes no `lat`/`lon`.** Per the Core Time Model, the Gregorian→Hijri mapping is location-independent — Makkah computes the date once, for everyone. See §8 for the one thing that trips people up here.
+
+### `GET /v1/calendar` — provider discovery
+No params. Lists every `calendar_provider` value, its description, whether it needs an override to do anything, and whether it supports reverse conversion.
+
+### `GET /v1/location` — timezone/date resolution only
+```
+GET /v1/location?lat=1.8721&lon=-157.4278&instant=2026-09-19T23:00:00Z
+```
+Isolates the timezone lookup from everything else — useful for debugging a date that looks wrong elsewhere.
+
+### `GET /v1/conversions` — Gregorian ↔ Hijri, standalone
+```
+GET /v1/conversions?direction=to-hijri&date=2026-09-20&calendar_provider=umm-al-qura
+GET /v1/conversions?direction=to-gregorian&year=1448&month=4&day=10&calendar_provider=umm-al-qura
+```
+Only `arithmetic-tabular` and `umm-al-qura` support `to-gregorian` (they have a fixed rule to invert). `declared` and `local-observation` return `UNSUPPORTED_OPERATION` for that direction — a sparse override table has no general inverse, and this says so rather than guessing.
+
+---
+
+## 8. The one gotcha: which Gregorian date is "the" date
+
+The Islamic day runs Maghrib-to-Maghrib, and per the Core Time Model, the Hijri label attached to a Waqt day is **the Gregorian date the *closing* Maghrib falls on** — not the date you'd naively read off the instant you queried.
+
+Concretely: querying `/v1/waqt` for `2026-09-19T15:42:00Z` at Addis Ababa returns a Hijri date computed against **2026-09-20**, because that instant is already past that evening's Maghrib, and the day it's inside of closes at the *next* evening's Maghrib — whose Gregorian date is the 20th.
+
+This matters directly for `override_date` on `/v1/waqt`, and for the `date` you pass to `/v1/hijri` if you're trying to match a specific `/v1/waqt` response: **use the date from that response's own `day.maghrib_close` (or, for `/v1/hijri`, whatever date you already know is the correct label)**, not the date of the instant you started from. If you don't already know it, call `/v1/day` or `/v1/waqt` first and read the label date off the result before calling `/v1/hijri` or setting `override_date`.
+
+## 9. A complete integration in under a minute
+
+```bash
+# 1. What calendars are available?
+curl "$BASE/v1/calendar"
+
+# 2. Where and when does today's Waqt day start/end?
+curl "$BASE/v1/waqt?lat=9.0192&lon=38.7525" | jq '.data.day, .data.hijri, .data.waqt'
+
+# 3. When's the next prayer, and how long until it?
+curl "$BASE/v1/waqt?lat=9.0192&lon=38.7525" | jq '.data.next_event'
+```
+That's the whole integration for a typical wall-display or timetable use case — one call, three fields.

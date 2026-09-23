@@ -70,6 +70,36 @@ def _gregorian_to_jdn(d: date) -> int:
     )
 
 
+def _hijri_to_jdn(year: int, month: int, day: int) -> int:
+    """Hijri (year, month, day) -> Julian Day Number.
+    Fliegel & Van Flandern / standard tabular Islamic calendar formula.
+    """
+    import math
+    return (
+        day
+        + math.ceil(29.5 * (month - 1))
+        + (year - 1) * 354
+        + (3 + 11 * year) // 30
+        + 1948440
+        - 1
+    )
+
+
+def _jdn_to_gregorian(jdn: int) -> date:
+    """Julian Day Number -> Gregorian date. Standard algorithm."""
+    l = jdn + 68569
+    n = (4 * l) // 146097
+    l = l - (146097 * n + 3) // 4
+    i = (4000 * (l + 1)) // 1461001
+    l = l - (1461 * i) // 4 + 31
+    j = (80 * l) // 2447
+    day = l - (2447 * j) // 80
+    l = j // 11
+    month = j + 2 - 12 * l
+    year = 100 * (n - 49) + i + l
+    return date(year, month, day)
+
+
 @dataclass(frozen=True)
 class HijriDate:
     year: int
@@ -142,6 +172,11 @@ class ArithmeticTabularProvider:
         day = l - (709 * month) // 24
         year = 30 * n + j - 30
         return year, month, day
+
+    def to_gregorian(self, year: int, month: int, day: int) -> date:
+        """Inverse of from_gregorian — exact, since the forward direction
+        is a pure closed-form arithmetic formula (no search needed)."""
+        return _jdn_to_gregorian(_hijri_to_jdn(year, month, day))
 
 
 class DeclaredProvider:
