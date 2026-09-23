@@ -119,6 +119,19 @@ class HijriDate:
     def iso_like(self) -> str:
         return f"{self.year:04d}-{self.month:02d}-{self.day:02d}"
 
+    def _sort_key(self) -> tuple[int, int, int]:
+        return (self.year, self.month, self.day)
+
+    def __lt__(self, other: "HijriDate") -> bool:
+        if not isinstance(other, HijriDate):
+            return NotImplemented
+        return self._sort_key() < other._sort_key()
+
+    def __le__(self, other: "HijriDate") -> bool:
+        if not isinstance(other, HijriDate):
+            return NotImplemented
+        return self._sort_key() <= other._sort_key()
+
 
 class HijriProvider(Protocol):
     """A calendar provider maps a Gregorian civil date to a Hijri date.

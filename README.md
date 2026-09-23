@@ -1,29 +1,41 @@
-# Waqt — reference implementation
+# Waqt API v1
 
-Reference implementation of the **Waqt Core Time Model v0.1**, now at
-Sprint 3: a pluggable calendar provider system on top of Sprint 2's
-location/astronomy corrections (real timezone-based day boundaries,
-elevation, ΔT).
+A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API — a stable, versioned, language-independent HTTP contract. You do not need to read any Python here to integrate it; start with [`docs/API.md`](docs/API.md).
 
 ```
 waqt/
-  solar.py               — solar event engine (sunrise, sunset, transit, Fajr, Asr, Isha)
-  hijri.py               — HijriProvider interface + ArithmeticTabular + Declared providers
-  core.py                — the Core Time Model itself (day boundary, hour, events)
-  timezone_provider.py   — Sprint 2: real IANA timezone -> local civil date
-  timescale.py           — Sprint 2: DeltaT (TT-UT1) provider
-  api.py                 — HTTP surface: GET /v1/waqt
-  calendar_providers/    — Sprint 3: pluggable calendar infrastructure
-    umm_al_qura.py       — astronomical approximation of the real UAQ rule (via ephem)
-    local_observation.py — moon-sighting reports as a Hijri calendar source
-    registry.py          — name-based provider lookup + ExampleRegionalOffsetProvider
-    __init__.py
+  solar.py                    — solar event engine (sunrise, sunset, transit, Fajr, Asr, Isha)
+  hijri.py                     — HijriProvider interface + arithmetic-tabular + declared providers
+  core.py                       — the Core Time Model (day boundary, hour, events) — untouched since Sprint 2
+  semantics.py                   — Sprint 5: formal temporal vocabulary (WaqtDay, WaqtPosition, EventPosition,
+                                    comparison rules, undefined-event handling) — built on core.py, doesn't touch it
+  timezone_provider.py         — real IANA timezone -> local civil date
+  timescale.py                  — DeltaT (TT-UT1) provider
+  calendar_providers/           — pluggable calendar system
+    umm_al_qura.py                — astronomical Umm al-Qura approximation (4/4 historical dates validated)
+    local_observation.py           — moon-sighting reports
+    registry.py                     — provider lookup + a worked "Custom provider" example
+  api/                           — Waqt API v1
+    common.py                       — shared envelope, error schema, unit/reading formatters
+    providers.py                     — calendar_provider resolution + catalog
+    waqt_endpoint.py, day_endpoint.py, events_endpoint.py, hijri_endpoint.py,
+    calendar_endpoint.py, location_endpoint.py, conversions_endpoint.py
+docs/
+  API.md            — the full HTTP contract: endpoints, schemas, errors, versioning, units
+  TIME-MODEL.md      — why the numbers look the way they do (Maghrib=00:00, variable day length, events-as-positions)
+  ASTRONOMY.md        — solar engine, accuracy levels (measured, not assumed), elevation, DeltaT, edge cases
+  CALENDARS.md         — every calendar provider's exact guarantees and limitations
+  SEMANTICS.md          — Sprint 5: formal spec for instants, days, positions, comparison, undefined-event rules
 tests/
-  test_core.py             — 32 tests: geographic matrix, elevation, date-line, ΔT, invariants
-  test_calendar_providers.py — 14 tests: all five provider categories, registry, pluggability
-SCOPE.md              — what's implemented, what isn't, and known limitations
-SPRINT-2-REPORT.md    — what Sprint 2 added, including a real bug it caught
-SPRINT-3-REPORT.md    — what Sprint 3 added: five calendar providers, UAQ astronomy, bug fixes
+  test_core.py               — astronomy, location, elevation, date-line, invariants
+  test_calendar_providers.py — provider identification, UAQ historical validation, pluggability
+  test_api.py                — the full v1 HTTP contract: envelope, every error code, all 7 endpoints
+  test_semantics.py           — Sprint 5: boundary rule, comparison enforcement, undefined-event handling
+  test_vectors.py              — loads tests/vectors/waqt_vectors.json, re-derives every value, asserts exact match
+  vectors/
+    waqt_vectors.json            — 10 portable, language-independent conformance vectors
+    generate_vectors.py           — regenerates the above from the reference implementation (never hand-edit the JSON)
+SCOPE.md, SPRINT-2-REPORT.md, SPRINT-3-REPORT.md, SPRINT-4-REPORT.md, SPRINT-5-REPORT.md — build history and honest limitations
 ```
 
 ## Quickstart
@@ -32,24 +44,23 @@ SPRINT-3-REPORT.md    — what Sprint 3 added: five calendar providers, UAQ astr
 pip install -r requirements.txt
 uvicorn waqt.api:app --reload --port 8000
 curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525"
-curl "http://localhost:8000/v1/waqt?lat=21.4225&lon=39.8262&calendar_provider=umm-al-qura"
 ```
 
-Or open `http://localhost:8000/docs` for the interactive test UI.
+Or open `http://localhost:8000/docs` for interactive testing (Swagger UI, generated automatically from the same code that serves requests).
 
-## Calendar Providers (Sprint 3)
+## The seven endpoints
 
-The `calendar_provider` query parameter accepts any of:
-
-| Value | Description |
+| Endpoint | What it returns |
 |---|---|
-| `arithmetic-tabular` | Classical 30-year arithmetic calendar (default) |
-| `umm-al-qura` | Astronomical approximation of the real UAQ calculation rule |
-| `declared` | Demo: empty override dict, falls back to arithmetic |
-| `local-observation` | Demo: empty sightings dict, falls back to arithmetic |
+| `GET /v1/waqt` | Everything — day boundary, clock reading, all six events, Hijri date |
+| `GET /v1/day` | Day boundary only |
+| `GET /v1/events` | The six prayer/solar events only (no calendar) |
+| `GET /v1/hijri` | Calendar lookup only, **no location needed** — see `docs/API.md` §8 for the one gotcha |
+| `GET /v1/calendar` | Discovery: what calendar providers exist |
+| `GET /v1/location` | Timezone + local civil date resolution, standalone |
+| `GET /v1/conversions` | Gregorian ↔ Hijri, either direction |
 
-Every response includes `hijri.provider` and `hijri.version` so callers always
-know which algorithm produced the date.
+Full request/response schemas, every error code, units, and versioning policy: [`docs/API.md`](docs/API.md).
 
 ## Verify
 
@@ -57,10 +68,6 @@ know which algorithm produced the date.
 python3 -m pytest tests/ -v
 ```
 
-46 tests covering the full geographic matrix, elevation monotonicity,
-the date-line fix, ΔT sanity, all five calendar provider categories,
-the registry, provider pluggability, UmmAlQura historical validation (4/4),
-and a regression test for the recursion bug fix.
+106 tests: the full geographic matrix, elevation, the date-line fix, ΔT, all five calendar provider categories (including 4/4 historical Umm al-Qura dates), the complete v1 HTTP contract, and Sprint 5's formal temporal semantics — the exact-Maghrib boundary rule, same-day-only comparison enforcement, undefined-event handling, and 10 portable conformance vectors an independent implementation in another language could check itself against.
 
-Read `SCOPE.md` and `SPRINT-3-REPORT.md` before using this for anything
-beyond development and review.
+Read `SCOPE.md` and the `SPRINT-*-REPORT.md` files before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.

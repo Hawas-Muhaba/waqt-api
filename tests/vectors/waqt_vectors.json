@@ -1,0 +1,649 @@
+{
+  "spec": "waqt-core/0.1",
+  "vector_format_version": "1.0",
+  "generated_by": "waqt-python-reference (tests/vectors/generate_vectors.py)",
+  "generated_at": "2026-09-23T19:25:49.637652+00:00",
+  "note": "Every 'expected' value here was computed by running the Waqt Python reference implementation itself, not hand-typed. An independent implementation in another language is expected to reproduce these values within the tolerances documented in docs/ASTRONOMY.md (Level B: ~20-120s depending on latitude for solar events; exact for Waqt-position arithmetic and day-boundary logic, which are pure calendar math with no astronomical uncertainty once Maghrib/Fajr/etc are known).",
+  "vectors": [
+    {
+      "id": "addis-normal-instant",
+      "description": "Ordinary instant, Addis Ababa, shortly after Maghrib.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T15:42:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
+          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
+          "length_si_seconds": 86363.858
+        },
+        "waqt_position": {
+          "hour": 0,
+          "minute": 19,
+          "second": 21,
+          "display": "00:19:21",
+          "total_seconds": 1161.083
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-20T02:04:50.089141+00:00",
+            "position_display": "10:42:11",
+            "position_total_seconds": 38531.172
+          },
+          "sunrise": {
+            "instant": "2026-09-20T03:14:25.740674+00:00",
+            "position_display": "11:51:46",
+            "position_total_seconds": 42706.824
+          },
+          "dhuhr": {
+            "instant": "2026-09-20T09:18:26.270104+00:00",
+            "position_display": "17:55:47",
+            "position_total_seconds": 64547.353
+          },
+          "asr": {
+            "instant": "2026-09-20T12:31:28.201255+00:00",
+            "position_display": "21:08:49",
+            "position_total_seconds": 76129.284
+          },
+          "maghrib": {
+            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.858
+          },
+          "isha": {
+            "instant": "2026-09-20T16:27:32.878961+00:00",
+            "position_display": "25:04:53",
+            "position_total_seconds": 90293.962
+          }
+        }
+      }
+    },
+    {
+      "id": "addis-exact-maghrib-boundary",
+      "description": "Instant equal to Maghrib itself -- must read exactly 00:00:00, per the half-open [Maghrib(D), Maghrib(D+1)) rule.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T15:22:38.916924+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
+          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
+          "length_si_seconds": 86363.858
+        },
+        "waqt_position": {
+          "hour": 0,
+          "minute": 0,
+          "second": 0,
+          "display": "00:00:00",
+          "total_seconds": 0.0
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-20T02:04:50.089141+00:00",
+            "position_display": "10:42:11",
+            "position_total_seconds": 38531.172
+          },
+          "sunrise": {
+            "instant": "2026-09-20T03:14:25.740674+00:00",
+            "position_display": "11:51:46",
+            "position_total_seconds": 42706.824
+          },
+          "dhuhr": {
+            "instant": "2026-09-20T09:18:26.270104+00:00",
+            "position_display": "17:55:47",
+            "position_total_seconds": 64547.353
+          },
+          "asr": {
+            "instant": "2026-09-20T12:31:28.201255+00:00",
+            "position_display": "21:08:49",
+            "position_total_seconds": 76129.284
+          },
+          "maghrib": {
+            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.858
+          },
+          "isha": {
+            "instant": "2026-09-20T16:27:32.878961+00:00",
+            "position_display": "25:04:53",
+            "position_total_seconds": 90293.962
+          }
+        }
+      },
+      "notes": "waqt_position.display MUST be '00:00:00' and total_seconds MUST be 0.0."
+    },
+    {
+      "id": "addis-one-second-before-maghrib",
+      "description": "One second before Maghrib -- belongs to the PREVIOUS Waqt day, reading near its own day length.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T15:22:37.916924+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-06",
+        "weekday": "as-Sabt",
+        "day": {
+          "maghrib_open": "2026-09-18T15:23:15.107063+00:00",
+          "maghrib_close": "2026-09-19T15:22:38.916924+00:00",
+          "length_si_seconds": 86363.81
+        },
+        "waqt_position": {
+          "hour": 23,
+          "minute": 59,
+          "second": 22,
+          "display": "23:59:22",
+          "total_seconds": 86362.81
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-19T02:04:55.253286+00:00",
+            "position_display": "10:41:40",
+            "position_total_seconds": 38500.146
+          },
+          "sunrise": {
+            "instant": "2026-09-19T03:14:32.280339+00:00",
+            "position_display": "11:51:17",
+            "position_total_seconds": 42677.173
+          },
+          "dhuhr": {
+            "instant": "2026-09-19T09:18:47.639296+00:00",
+            "position_display": "17:55:32",
+            "position_total_seconds": 64532.532
+          },
+          "asr": {
+            "instant": "2026-09-19T12:31:25.800176+00:00",
+            "position_display": "21:08:10",
+            "position_total_seconds": 76090.693
+          },
+          "maghrib": {
+            "instant": "2026-09-19T15:22:38.916924+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.81
+          },
+          "isha": {
+            "instant": "2026-09-19T16:28:10.156005+00:00",
+            "position_display": "25:04:55",
+            "position_total_seconds": 90295.049
+          }
+        }
+      },
+      "notes": "This instant's Waqt day is the one that CLOSES at addis-exact-maghrib-boundary's Maghrib."
+    },
+    {
+      "id": "makkah-equinox",
+      "description": "Makkah itself, near the September equinox.",
+      "input": {
+        "location": {
+          "lat": 21.4225,
+          "lon": 39.8262,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T12:00:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-06",
+        "weekday": "as-Sabt",
+        "day": {
+          "maghrib_open": "2026-09-18T15:20:34.104707+00:00",
+          "maghrib_close": "2026-09-19T15:19:36.166098+00:00",
+          "length_si_seconds": 86342.061
+        },
+        "waqt_position": {
+          "hour": 20,
+          "minute": 39,
+          "second": 25,
+          "display": "20:39:25",
+          "total_seconds": 74365.895
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-19T01:54:40.832587+00:00",
+            "position_display": "10:34:06",
+            "position_total_seconds": 38046.728
+          },
+          "sunrise": {
+            "instant": "2026-09-19T03:08:48.706065+00:00",
+            "position_display": "11:48:14",
+            "position_total_seconds": 42494.601
+          },
+          "dhuhr": {
+            "instant": "2026-09-19T09:14:29.951296+00:00",
+            "position_display": "17:53:55",
+            "position_total_seconds": 64435.847
+          },
+          "asr": {
+            "instant": "2026-09-19T12:38:59.861629+00:00",
+            "position_display": "21:18:25",
+            "position_total_seconds": 76705.757
+          },
+          "maghrib": {
+            "instant": "2026-09-19T15:19:36.166098+00:00",
+            "position_display": "23:59:02",
+            "position_total_seconds": 86342.061
+          },
+          "isha": {
+            "instant": "2026-09-19T16:29:18.067861+00:00",
+            "position_display": "25:08:43",
+            "position_total_seconds": 90523.963
+          }
+        }
+      }
+    },
+    {
+      "id": "london-long-day-near-24h-boundary",
+      "description": "London in February: this day runs slightly OVER 24:00:00. Instant chosen inside the (86400s, day_length) window so the reading is past 24:00:00.",
+      "input": {
+        "location": {
+          "lat": 51.5074,
+          "lon": -0.1278,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-02-15T17:15:28.950273+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1447-08-27",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-02-14T17:14:38.950273+00:00",
+          "maghrib_close": "2026-02-15T17:16:28.412984+00:00",
+          "length_si_seconds": 86509.463
+        },
+        "waqt_position": {
+          "hour": 24,
+          "minute": 0,
+          "second": 50,
+          "display": "24:00:50",
+          "total_seconds": 86450.0
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-02-15T05:21:28.633775+00:00",
+            "position_display": "12:06:49",
+            "position_total_seconds": 43609.684
+          },
+          "sunrise": {
+            "instant": "2026-02-15T07:13:30.890626+00:00",
+            "position_display": "13:58:51",
+            "position_total_seconds": 50331.94
+          },
+          "dhuhr": {
+            "instant": "2026-02-15T12:14:37.743909+00:00",
+            "position_display": "18:59:58",
+            "position_total_seconds": 68398.794
+          },
+          "asr": {
+            "instant": "2026-02-15T14:47:01.316510+00:00",
+            "position_display": "21:32:22",
+            "position_total_seconds": 77542.366
+          },
+          "maghrib": {
+            "instant": "2026-02-15T17:16:28.412984+00:00",
+            "position_display": "24:01:49",
+            "position_total_seconds": 86509.463
+          },
+          "isha": {
+            "instant": "2026-02-15T19:02:16.311807+00:00",
+            "position_display": "25:47:37",
+            "position_total_seconds": 92857.362
+          }
+        }
+      },
+      "notes": "day.length_si_seconds > 86400 and waqt_position.hour == 24, demonstrating a reading past the nominal 24-hour mark."
+    },
+    {
+      "id": "tromso-midsummer-undefined",
+      "description": "Tromso, Norway, midsummer: polar day. Maghrib does not occur. Must be UNDEFINED, never a guessed time.",
+      "input": {
+        "location": {
+          "lat": 69.6492,
+          "lon": 18.9553,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-06-21T12:00:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "UNDEFINED",
+        "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+      }
+    },
+    {
+      "id": "kiritimati-date-line",
+      "description": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case.",
+      "input": {
+        "location": {
+          "lat": 1.8721,
+          "lon": -157.4278,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T23:00:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-06",
+        "weekday": "as-Sabt",
+        "day": {
+          "maghrib_open": "2026-09-19T04:26:57.222133+00:00",
+          "maghrib_close": "2026-09-20T04:26:32.796878+00:00",
+          "length_si_seconds": 86375.575
+        },
+        "waqt_position": {
+          "hour": 18,
+          "minute": 33,
+          "second": 2,
+          "display": "18:33:02",
+          "total_seconds": 66782.778
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-19T15:11:04.933695+00:00",
+            "position_display": "10:44:07",
+            "position_total_seconds": 38647.712
+          },
+          "sunrise": {
+            "instant": "2026-09-19T16:19:47.611631+00:00",
+            "position_display": "11:52:50",
+            "position_total_seconds": 42770.389
+          },
+          "dhuhr": {
+            "instant": "2026-09-19T22:23:30.911296+00:00",
+            "position_display": "17:56:33",
+            "position_total_seconds": 64593.689
+          },
+          "asr": {
+            "instant": "2026-09-20T01:24:10.537953+00:00",
+            "position_display": "20:57:13",
+            "position_total_seconds": 75433.316
+          },
+          "maghrib": {
+            "instant": "2026-09-20T04:26:32.796878+00:00",
+            "position_display": "23:59:35",
+            "position_total_seconds": 86375.575
+          },
+          "isha": {
+            "instant": "2026-09-20T05:31:14.642550+00:00",
+            "position_display": "25:04:17",
+            "position_total_seconds": 90257.42
+          }
+        }
+      }
+    },
+    {
+      "id": "addis-asr-standard",
+      "description": "Addis Ababa, standard (Shafi'i) Asr convention, shadow ratio 1.0.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T15:42:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
+          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
+          "length_si_seconds": 86363.858
+        },
+        "waqt_position": {
+          "hour": 0,
+          "minute": 19,
+          "second": 21,
+          "display": "00:19:21",
+          "total_seconds": 1161.083
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-20T02:04:50.089141+00:00",
+            "position_display": "10:42:11",
+            "position_total_seconds": 38531.172
+          },
+          "sunrise": {
+            "instant": "2026-09-20T03:14:25.740674+00:00",
+            "position_display": "11:51:46",
+            "position_total_seconds": 42706.824
+          },
+          "dhuhr": {
+            "instant": "2026-09-20T09:18:26.270104+00:00",
+            "position_display": "17:55:47",
+            "position_total_seconds": 64547.353
+          },
+          "asr": {
+            "instant": "2026-09-20T12:31:28.201255+00:00",
+            "position_display": "21:08:49",
+            "position_total_seconds": 76129.284
+          },
+          "maghrib": {
+            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.858
+          },
+          "isha": {
+            "instant": "2026-09-20T16:27:32.878961+00:00",
+            "position_display": "25:04:53",
+            "position_total_seconds": 90293.962
+          }
+        }
+      },
+      "notes": "Compare against addis-asr-hanafi: every field must match except events.asr."
+    },
+    {
+      "id": "addis-asr-hanafi",
+      "description": "Addis Ababa, Hanafi Asr convention, shadow ratio 2.0.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 0.0
+        },
+        "instant": "2026-09-19T15:42:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 2.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
+          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
+          "length_si_seconds": 86363.858
+        },
+        "waqt_position": {
+          "hour": 0,
+          "minute": 19,
+          "second": 21,
+          "display": "00:19:21",
+          "total_seconds": 1161.083
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-20T02:04:50.089141+00:00",
+            "position_display": "10:42:11",
+            "position_total_seconds": 38531.172
+          },
+          "sunrise": {
+            "instant": "2026-09-20T03:14:25.740674+00:00",
+            "position_display": "11:51:46",
+            "position_total_seconds": 42706.824
+          },
+          "dhuhr": {
+            "instant": "2026-09-20T09:18:26.270104+00:00",
+            "position_display": "17:55:47",
+            "position_total_seconds": 64547.353
+          },
+          "asr": {
+            "instant": "2026-09-20T13:37:17.078966+00:00",
+            "position_display": "22:14:38",
+            "position_total_seconds": 80078.162
+          },
+          "maghrib": {
+            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.858
+          },
+          "isha": {
+            "instant": "2026-09-20T16:27:32.878961+00:00",
+            "position_display": "25:04:53",
+            "position_total_seconds": 90293.962
+          }
+        }
+      },
+      "notes": "Compare against addis-asr-standard: every field must match except events.asr."
+    },
+    {
+      "id": "addis-elevation-2400m",
+      "description": "Addis Ababa at its real elevation (~2400m) -- Maghrib should be several minutes later than sea level.",
+      "input": {
+        "location": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "elevation_m": 2400.0
+        },
+        "instant": "2026-09-19T15:42:00+00:00",
+        "calendar_provider": "arithmetic-tabular",
+        "astronomy_profile": {
+          "fajr_angle_deg": 18.0,
+          "isha_angle_deg": 17.0,
+          "asr_shadow_ratio": 1.0
+        }
+      },
+      "expected": {
+        "status": "OK",
+        "undefined_reason": null,
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
+        "day": {
+          "maghrib_open": "2026-09-19T15:28:28.077008+00:00",
+          "maghrib_close": "2026-09-20T15:27:51.886158+00:00",
+          "length_si_seconds": 86363.809
+        },
+        "waqt_position": {
+          "hour": 0,
+          "minute": 13,
+          "second": 31,
+          "display": "00:13:31",
+          "total_seconds": 811.923
+        },
+        "events": {
+          "fajr": {
+            "instant": "2026-09-20T02:04:50.089141+00:00",
+            "position_display": "10:36:22",
+            "position_total_seconds": 38182.012
+          },
+          "sunrise": {
+            "instant": "2026-09-20T03:08:36.486672+00:00",
+            "position_display": "11:40:08",
+            "position_total_seconds": 42008.41
+          },
+          "dhuhr": {
+            "instant": "2026-09-20T09:18:26.270104+00:00",
+            "position_display": "17:49:58",
+            "position_total_seconds": 64198.193
+          },
+          "asr": {
+            "instant": "2026-09-20T12:31:28.201255+00:00",
+            "position_display": "21:03:00",
+            "position_total_seconds": 75780.124
+          },
+          "maghrib": {
+            "instant": "2026-09-20T15:27:51.886158+00:00",
+            "position_display": "23:59:23",
+            "position_total_seconds": 86363.809
+          },
+          "isha": {
+            "instant": "2026-09-20T16:27:32.878961+00:00",
+            "position_display": "24:59:04",
+            "position_total_seconds": 89944.802
+          }
+        }
+      },
+      "notes": "Compare day.maghrib_close against addis-normal-instant (elevation 0) -- should differ by several minutes."
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Waqt — Stage 1 Scope
 
+**Sprint 4 note:** the API surface described below (`GET /v1/waqt` and its query params) has since grown into a full seven-endpoint, versioned HTTP contract. This file's job is now the honest engineering-limitations record; for the actual API reference, start with `docs/API.md`, `docs/TIME-MODEL.md`, `docs/ASTRONOMY.md`, and `docs/CALENDARS.md`. Everything below is still accurate as a limitations list.
+
 **Implements:** Core Time Model v0.1, §1–4 (Makkah reference, day boundary, hour, event positions), as a working HTTP API.
 **Does not implement:** anything outside those four sections. See §"Explicitly out" below.
 
@@ -14,6 +16,16 @@ Resolves lat/lon to an IANA timezone and derives the local civil date from it, r
 
 ### `waqt/timescale.py` — ΔT provider (Sprint 2)
 `TimeScaleProvider` protocol with one implementation, `EspenakMeeusDeltaT` (the standard NASA-published polynomial). Wired into every solar calculation. Named and versioned in every API response.
+
+### `waqt/hijri.py` + `waqt/calendar_providers/` — calendar provider system (Sprint 3)
+Five provider categories now exist, all satisfying the same `HijriProvider` protocol (`name`, `version`, `from_gregorian`):
+- `ArithmeticTabularProvider` — Stage 1's classical 30-year arithmetic calendar, unchanged.
+- **`UmmAlQuraProvider` (new)** — an astronomical approximation of the real current Umm al-Qura calculation rule (conjunction-before-Maghrib + moonset-after-Maghrib, both evaluated at Makkah). Validated against **four independently-known official Umm al-Qura New Year dates spanning 2016–2025, all four matching exactly**. See `SPRINT-3-REPORT.md` §3 for exactly what it does and doesn't guarantee — it has no channel for real UAQ's occasional sighting-based adjustments, and uses a high-quality-but-not-highest-precision lunar ephemeris (`ephem`/PyEphem).
+- `DeclaredProvider` — institutional override, now versioned.
+- **`LocalObservationProvider` (new)** — crowd-sourced sighting reports, distinct from Declared, carries the observation site via `source_note`.
+- **`ExampleRegionalOffsetProvider` (new, demo)** — a deliberately trivial third-party provider proving the pluggability claim: it's written with zero access to `core.py`/`solar.py` and plugs in through the identical injection point as every built-in.
+
+**Verified, not just designed:** swapping the calendar provider changes *only* the returned Hijri date — the Maghrib boundary, the Waqt clock reading, and every prayer event's instant are bit-for-bit identical regardless of which calendar is used. `waqt/core.py` and `waqt/solar.py` are md5-identical to their Sprint 2 state; no provider added this sprint touched either file.
 
 ### `waqt/solar.py` — solar event engine
 - NOAA low-precision solar position algorithm (declination, equation of time), with one refinement pass on the hour-angle calculation.
@@ -77,7 +89,7 @@ Per your instruction to hold the line on scope — none of the following exist i
 1. **"Local Gregorian date" is now resolved via a real IANA timezone lookup (Sprint 2)** — fixed from Stage 1's UTC-date shortcut. Verified against the most extreme real-world case available (Kiritimati, Kiribati). The bracket search widens to a ±3-day window to handle large civil/solar offsets; this is a pragmatic bound, not a formal proof it handles every conceivable timezone.
 2. **Elevation correction is now implemented (Sprint 2)**, applied to sunrise/sunset only, not Fajr/Isha/Asr — see `solar.py` for the reasoning. Off by default (elevation_m=0).
 3. **Accuracy is Level-B, not Level-A** — now formally defined, see `SPRINT-2-REPORT.md` §6. Level A (sub-10s, ephemeris-grade) is explicitly deferred, not silently skipped.
-4. **The Hijri dates are approximate**, per the honesty note above — do not use for determining the start of Ramadan or any matter of religious obligation. The interface is built to swap in an authoritative provider later without touching anything else.
+4. **The Hijri dates are approximate, on two different providers with two different caveats** — `arithmetic-tabular` is a pure arithmetic calendar (never claims to be UAQ); `umm-al-qura` is a real astronomical implementation of UAQ's rule, validated against four historical dates, but has no channel for real UAQ's occasional sighting-based overrides on the four liturgically significant months. **Do not use either for determining the start of Ramadan or any matter of religious obligation** without independent confirmation. The interface is built so an authoritative live-feed provider can be swapped in later without touching anything else.
 5. **Single ΔT/ time-scale model:** now implemented (Sprint 2) — see `waqt/timescale.py`. `EspenakMeeusDeltaT` is wired into every calculation and named in every response.
 
 ---
