@@ -32,6 +32,7 @@ Every response, success or failure, has exactly this shape:
 | `INVALID_INSTANT` | 400 | `instant` param isn't parseable ISO 8601 |
 | `INVALID_DATE` | 400 | `date` param isn't parseable `YYYY-MM-DD` |
 | `UNKNOWN_CALENDAR_PROVIDER` | 400 | `calendar_provider` isn't one of `GET /v1/calendar`'s list |
+| `INVALID_RULE` | 400 | a `/v1/schedule/resolve` rule or operation is malformed (unknown event, wrong type, bad nesting). A caller mistake — distinct from a well-formed rule whose astronomy is undefined, which is a `200` with a `status` |
 | `UNSUPPORTED_OPERATION` | 400 | e.g. asking `declared` or `local-observation` to reverse-convert, which they structurally can't |
 | `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
 | `INTERNAL_ERROR` | 500 | anything unexpected. **Every** exception is caught here — you will never receive a raw stack trace or an empty connection reset. `details.exception_type` names the underlying Python exception for bug reports, nothing more. |
@@ -114,6 +115,15 @@ GET /v1/conversions?direction=to-gregorian&year=1448&month=4&day=10&calendar_pro
 Only `arithmetic-tabular` and `umm-al-qura` support `to-gregorian` (they have a fixed rule to invert). `declared` and `local-observation` return `UNSUPPORTED_OPERATION` for that direction — a sparse override table has no general inverse, and this says so rather than guessing.
 
 ---
+
+### Scheduling (added in 1.1.0 — additive; nothing in 1.0.0 changed)
+Full semantics in [`SCHEDULING.md`](SCHEDULING.md).
+
+- `GET /v1/schedule/snapshot` — `lat`, `lon`, `elevation_m`, `instant`, profile params, `calendar_provider` (labels only), `precision` (`second`|`microsecond`). Returns the Waqt day's bounds and position, the next event, and for each of the six events the time *until* the next and *since* the last occurrence.
+- `GET /v1/schedule/span` — `start`, `end`, `end_inclusive`. Whether the span crosses a Maghrib boundary (every boundary listed), which Waqt days it touches, and, separately, whether it crosses civil midnight.
+- `POST /v1/schedule/resolve` — body `{location, anchor, operation, profile?, calendar_provider?, timezone_override?, precision?}`; `operation` is the JSON format in `SCHEDULING.md` §8.
+
+Undefined astronomy is a `200` with `status` `EVENT_UNDEFINED` / `WINDOW_UNDEFINED` / `NO_VALID_WINDOW`. Every response carries a `caveat`: Waqt provides temporal facts, not religious rulings. Durations are numeric SI seconds (`*_seconds`); positions are `{seconds, display}`.
 
 ## 8. The one gotcha: which Gregorian date is "the" date
 

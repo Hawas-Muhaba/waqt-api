@@ -107,3 +107,9 @@ Two distinct levels:
 `tests/vectors/waqt_vectors.json` — ten cases, every expected value computed by the reference implementation itself (`tests/vectors/generate_vectors.py`), never hand-typed. Covers: an ordinary instant, the exact-Maghrib boundary, one second before it, Makkah itself, a day that runs long enough to produce an `hour == 24` reading, a polar `UNDEFINED` case, the hardest available International Date Line case (Kiritimati), two Asr conventions on the same instant (differing only in the Asr event), and an elevation comparison.
 
 `tests/test_vectors.py` loads this file and re-derives every value through the live implementation, asserting an exact match — both a regression test and proof the file is actually reproducible, which is the property an independent implementation in another language would need it to have. If a vector needs to change, re-run the generator and review the diff; never hand-edit the JSON.
+
+---
+
+## Sprint 6 addendum
+
+Scheduling and deadlines are specified in [`SCHEDULING.md`](SCHEDULING.md). Two clarifications from it apply here: the closing Maghrib and Isha both fall in the *next* Waqt day under §2's half-open rule (so `EventPosition` for them reads at or beyond the listing day's length), and `crosses_maghrib()` is unchanged — it compares *instants*; interval semantics live in `waqt.scheduling.SchedulingEngine.classify_span`.

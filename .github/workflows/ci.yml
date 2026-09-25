@@ -21,5 +21,13 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Set up Node (independent consumer)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Independent JS consumer
+        run: cd consumers/js && npm test
+
       - name: Run tests
         run: pytest tests/ -v --tb=short

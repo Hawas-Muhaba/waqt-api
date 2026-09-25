@@ -1,0 +1,9 @@
+{
+  "name": "waqt-consumer-js",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Independent, zero-dependency JavaScript consumer of the Waqt conformance vectors. Shares no code with the Python reference implementation.",
+  "type": "module",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test test/waqt_vectors.test.mjs test/scheduling_vectors.test.mjs" }
+}

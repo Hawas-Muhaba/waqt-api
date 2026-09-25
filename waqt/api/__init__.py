@@ -2,7 +2,7 @@
 waqt.api — the Waqt API v1 app.
 
 Structured as a small package (not one file) because v1 has seven
-endpoints (see docs/API.md); each lives in its own module and shares
+endpoints (plus, since Sprint 6, three under /v1/schedule/) (see docs/API.md); each lives in its own module and shares
 the contract defined in waqt.api.common. Import path is unchanged from
 Sprint 1-3 — `waqt.api:app` and `from waqt.api import app` both still
 work, since `app` is defined right here in the package's __init__.
@@ -30,10 +30,11 @@ from .hijri_endpoint import router as hijri_router
 from .calendar_endpoint import router as calendar_router
 from .location_endpoint import router as location_router
 from .conversions_endpoint import router as conversions_router
+from .schedule_endpoint import router as schedule_router
 
 app = FastAPI(
     title="Waqt API",
-    version="1.0.0",
+    version="1.1.0",
     description=(
         "A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. "
         "See /docs for interactive testing, and the project's docs/API.md, "
@@ -41,7 +42,7 @@ app = FastAPI(
     ),
 )
 
-for r in (waqt_router, day_router, events_router, hijri_router, calendar_router, location_router, conversions_router):
+for r in (waqt_router, day_router, events_router, hijri_router, calendar_router, location_router, conversions_router, schedule_router):
     app.include_router(r)
 
 
@@ -89,4 +90,4 @@ def root():
 
 @app.get("/v1/health")
 def health():
-    return {"status": "ok", "spec": "waqt-core/0.1", "api_version": "1.0.0"}
+    return {"status": "ok", "spec": "waqt-core/0.1", "api_version": "1.1.0"}
