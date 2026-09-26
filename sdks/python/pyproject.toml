@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waqt-client"
+version = "0.1.0"
+description = "Official thin Python SDK for the Waqt API (Maghrib-to-Maghrib civil time and Hijri calendar)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Waqt project" }]
+dependencies = [
+    "httpx>=0.24",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-asyncio>=0.21"]
+
+[project.urls]
+Homepage = "https://github.com/waqt-project/waqt-api"
+Documentation = "https://github.com/waqt-project/waqt-api/blob/main/docs/SDK.md"
+
+[tool.setuptools.packages.find]
+include = ["waqt_client*"]
