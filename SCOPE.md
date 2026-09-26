@@ -2,6 +2,8 @@
 
 **Sprint 4 note:** the API surface described below (`GET /v1/waqt` and its query params) has since grown into a full seven-endpoint, versioned HTTP contract. This file's job is now the honest engineering-limitations record; for the actual API reference, start with `docs/API.md`, `docs/TIME-MODEL.md`, `docs/ASTRONOMY.md`, and `docs/CALENDARS.md`. Everything below is still accurate as a limitations list.
 
+**Sprint 7 note:** `waqt/institutional/` (week, fiscal year, academic year, calendar profiles) and `docs/INSTITUTIONAL.md` now exist on top of everything below; see `SPRINT-7-REPORT.md` for what changed and its own honest-limitations section. One item carried forward on the roadmap rather than resolved by Sprint 7: a **second, independent astronomy implementation** (an implementation that recomputes sunrise/Maghrib from coordinates rather than validating against `astral` or reusing this project's own `waqt/solar.py`). Sprint 6 named this gap; Sprint 7 did not need to close it (the institutional calendar layer needs no astronomy at all) but it remains open and should not be allowed to drift indefinitely.
+
 **Implements:** Core Time Model v0.1, §1–4 (Makkah reference, day boundary, hour, event positions), as a working HTTP API.
 **Does not implement:** anything outside those four sections. See §"Explicitly out" below.
 

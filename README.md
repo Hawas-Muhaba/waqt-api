@@ -11,6 +11,8 @@ waqt/
                                     comparison rules, undefined-event handling) — built on core.py, doesn't touch it
   scheduling/                    — Sprint 6: windows, deadlines, event-relative rules, Maghrib-crossing spans,
                                     explicit undefined-event statuses (model.py, context.py, engine.py, ops.py)
+  institutional/                 — Sprint 7: week, fiscal year, academic year, calendar profiles
+                                    (rules.py, week.py, fiscal_year.py, academic_year.py, binding.py, profile.py)
   timezone_provider.py         — real IANA timezone -> local civil date
   timescale.py                  — DeltaT (TT-UT1) provider
   calendar_providers/           — pluggable calendar system
@@ -21,26 +23,34 @@ waqt/
     common.py                       — shared envelope, error schema, unit/reading formatters
     providers.py                     — calendar_provider resolution + catalog
     waqt_endpoint.py, day_endpoint.py, events_endpoint.py, hijri_endpoint.py,
-    calendar_endpoint.py, location_endpoint.py, conversions_endpoint.py
+    calendar_endpoint.py, location_endpoint.py, conversions_endpoint.py,
+    schedule_endpoint.py, institutional_endpoint.py
 docs/
   API.md            — the full HTTP contract: endpoints, schemas, errors, versioning, units
   TIME-MODEL.md      — why the numbers look the way they do (Maghrib=00:00, variable day length, events-as-positions)
   ASTRONOMY.md        — solar engine, accuracy levels (measured, not assumed), elevation, DeltaT, edge cases
   CALENDARS.md         — every calendar provider's exact guarantees and limitations
   SEMANTICS.md          — Sprint 5: formal spec for instants, days, positions, comparison, undefined-event rules
+  SCHEDULING.md          — Sprint 6: windows, deadlines, event-relative rules, undefined-event statuses
+  INSTITUTIONAL.md        — Sprint 7: week, fiscal year, academic year, calendar profiles
 tests/
   test_core.py               — astronomy, location, elevation, date-line, invariants
   test_calendar_providers.py — provider identification, UAQ historical validation, pluggability
   test_api.py                — the full v1 HTTP contract: envelope, every error code, all 7 endpoints
   test_semantics.py           — Sprint 5: boundary rule, comparison enforcement, undefined-event handling
   test_vectors.py              — loads tests/vectors/waqt_vectors.json, re-derives every value, asserts exact match
+  test_institutional.py         — Sprint 7: week, fiscal year, academic year, profile, architecture separation
+  test_institutional_vectors.py  — Sprint 7: loads institutional_vectors.json, re-derives, invokes JS consumer
+  test_institutional_api.py       — Sprint 7: /v1/institutional/* HTTP surface
   vectors/
     scheduling_vectors.json      — Sprint 6: 116 vectors with embedded day tables (no astronomy needed to consume)
     generate_scheduling_vectors.py
+    institutional_vectors.json    — Sprint 7: 22 vectors with embedded Hijri calendar tables (no astronomy at all)
+    generate_institutional_vectors.py
     waqt_vectors.json            — 10 portable, language-independent conformance vectors
     generate_vectors.py           — regenerates the above from the reference implementation (never hand-edit the JSON)
-consumers/js/                — Sprint 6: independent zero-dependency Node consumer of BOTH vector files (`cd consumers/js && npm test`)
-SCOPE.md, SPRINT-6-REPORT.md, SPRINT-2-REPORT.md, SPRINT-3-REPORT.md, SPRINT-4-REPORT.md, SPRINT-5-REPORT.md — build history and honest limitations
+consumers/js/                — Sprint 6/7: independent zero-dependency Node consumer of all three vector files (`cd consumers/js && npm test`)
+SCOPE.md, SPRINT-7-REPORT.md, SPRINT-6-REPORT.md, SPRINT-2-REPORT.md, SPRINT-3-REPORT.md, SPRINT-4-REPORT.md, SPRINT-5-REPORT.md — build history and honest limitations
 ```
 
 ## Quickstart
@@ -77,12 +87,32 @@ Full request/response schemas, every error code, units, and versioning policy: [
 
 Waqt provides temporal facts, not religious rulings — see [`docs/SCHEDULING.md`](docs/SCHEDULING.md).
 
+## Institutional calendars (Sprint 7)
+
+| Endpoint | What it answers |
+|---|---|
+| `GET /v1/institutional/week` | The Islamic week containing an instant — first day, Jumu'ah slot, all configurable |
+| `GET`/`POST /v1/institutional/fiscal-year(/resolve)` | Muharram-1-to-Dhu-al-Hijjah by default, or any `start_rule`/`end_rule` you supply |
+| `GET`/`POST /v1/institutional/academic-year(/resolve)` | First-Ahad-of-Muharram-to-last-Khamis-of-Sha'ban by default, or your own opening/closing/terms/holidays |
+| `GET /v1/institutional/profile` | A demo `CalendarProfile` as pure JSON configuration |
+
+No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTITUTIONAL.md`](docs/INSTITUTIONAL.md).
+
 ## Verify
 
 ```bash
 python3 -m pytest tests/ -v
 ```
 
-Sprint 6 adds 200+ tests (scheduling engine, HTTP, 116 portable vectors, and the independent JS consumer, run from pytest when Node is installed). Sprint 5's baseline was 106 tests: the full geographic matrix, elevation, the date-line fix, ΔT, all five calendar provider categories (including 4/4 historical Umm al-Qura dates), the complete v1 HTTP contract, and Sprint 5's formal temporal semantics — the exact-Maghrib boundary rule, same-day-only comparison enforcement, undefined-event handling, and 10 portable conformance vectors an independent implementation in another language could check itself against.
+Sprint 7 adds 86 tests (institutional-layer unit tests, HTTP surface, 22 portable
+calendar-table vectors, and the independent JS consumer, run from pytest when Node
+is installed) on top of Sprint 6's 320. Sprint 6 added 200+ tests (scheduling
+engine, HTTP, 116 portable vectors, and the independent JS consumer). Sprint 5's
+baseline was 106 tests: the full geographic matrix, elevation, the date-line fix,
+ΔT, all five calendar provider categories (including 4/4 historical Umm al-Qura
+dates), the complete v1 HTTP contract, and Sprint 5's formal temporal semantics —
+the exact-Maghrib boundary rule, same-day-only comparison enforcement,
+undefined-event handling, and 10 portable conformance vectors an independent
+implementation in another language could check itself against.
 
 Read `SCOPE.md` and the `SPRINT-*-REPORT.md` files before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.

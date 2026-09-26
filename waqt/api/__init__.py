@@ -31,18 +31,21 @@ from .calendar_endpoint import router as calendar_router
 from .location_endpoint import router as location_router
 from .conversions_endpoint import router as conversions_router
 from .schedule_endpoint import router as schedule_router
+from .institutional_endpoint import router as institutional_router
 
 app = FastAPI(
     title="Waqt API",
-    version="1.1.0",
+    version="1.2.0",
     description=(
         "A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. "
         "See /docs for interactive testing, and the project's docs/API.md, "
-        "docs/TIME-MODEL.md, docs/ASTRONOMY.md, docs/CALENDARS.md for the full contract."
+        "docs/TIME-MODEL.md, docs/ASTRONOMY.md, docs/CALENDARS.md, docs/SCHEDULING.md, "
+        "docs/INSTITUTIONAL.md for the full contract."
     ),
 )
 
-for r in (waqt_router, day_router, events_router, hijri_router, calendar_router, location_router, conversions_router, schedule_router):
+for r in (waqt_router, day_router, events_router, hijri_router, calendar_router, location_router,
+          conversions_router, schedule_router, institutional_router):
     app.include_router(r)
 
 

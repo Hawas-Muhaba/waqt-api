@@ -20,7 +20,7 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.1.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/* endpoints)
+API_VERSION = "1.2.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*)
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
 ASTRONOMY_ENGINE_NAME = "waqt-noaa-low-precision"
 ACCURACY_LEVEL = "B"           # see docs/ASTRONOMY.md — Level A is not implemented
@@ -37,6 +37,7 @@ class ErrorCode:
     UNKNOWN_CALENDAR_PROVIDER = "UNKNOWN_CALENDAR_PROVIDER"
     UNSUPPORTED_OPERATION = "UNSUPPORTED_OPERATION"
     INVALID_RULE = "INVALID_RULE"              # Sprint 6: a scheduling rule/operation is malformed (a caller mistake, not undefined astronomy)
+    INVALID_CALENDAR_RULE = "INVALID_CALENDAR_RULE"  # Sprint 7: a week/fiscal-year/academic-year rule is malformed or unresolvable
     VALIDATION_ERROR = "VALIDATION_ERROR"      # request shape/range errors (lat/lon etc.)
     INTERNAL_ERROR = "INTERNAL_ERROR"          # anything unexpected — always caught, never a raw 500
 
