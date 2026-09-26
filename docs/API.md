@@ -125,6 +125,17 @@ Full semantics in [`SCHEDULING.md`](SCHEDULING.md).
 
 Undefined astronomy is a `200` with `status` `EVENT_UNDEFINED` / `WINDOW_UNDEFINED` / `NO_VALID_WINDOW`. Every response carries a `caveat`: Waqt provides temporal facts, not religious rulings. Durations are numeric SI seconds (`*_seconds`); positions are `{seconds, display}`.
 
+---
+
+### Calendar interoperability (added in 1.3.0 — additive; nothing earlier changed)
+Full semantics in [`CALENDAR-INTEROP.md`](CALENDAR-INTEROP.md).
+
+- `GET /v1/calendar/convert?direction=instant-to-calendars` (default) — `instant` (optional, defaults to now), `lat`/`lon`/`elevation_m` (optional), profile and `calendar_provider` params (all shared with `/v1/waqt`), `timezone_override`. Returns the instant rendered as UTC-Gregorian always, and — if a location was given — also as local civil-Gregorian and a Waqt day/position.
+- `GET /v1/calendar/convert?direction=gregorian-date-to-waqt` — `date` (required), `lat`/`lon` (required). Returns the Waqt day whose closing Maghrib falls on that Gregorian civil date at that place.
+- `GET /v1/calendar/boundary-crossing` — `start`, `end`, `lat`, `lon`, `elevation_m`, `timezone_override`. Whether the half-open span `[start, end)` crosses civil midnight and/or a Maghrib boundary, reported as two independent facts, plus the list of Maghrib instants strictly inside the span.
+
+Undefined astronomy near a requested date/span is a `200` with `status`/`waqt.status` `"UNDEFINED"`, matching the rest of the API. An empty or reversed span (`end <= start`) is a `400 INVALID_SPAN`.
+
 ## 8. The one gotcha: which Gregorian date is "the" date
 
 The Islamic day runs Maghrib-to-Maghrib, and per the Core Time Model, the Hijri label attached to a Waqt day is **the Gregorian date the *closing* Maghrib falls on** — not the date you'd naively read off the instant you queried.

@@ -33,7 +33,7 @@ def test_success_envelope_shape():
     body = r.json()
     assert set(body.keys()) == {"meta", "data", "error"}
     assert body["error"] is None
-    assert body["meta"]["api_version"] == "1.2.0"
+    assert body["meta"]["api_version"] == "1.3.0"
     assert body["meta"]["spec"] == "waqt-core/0.1"
     assert "generated_at" in body["meta"]
 

@@ -1,0 +1,815 @@
+{
+  "$schema_note": "Sprint 8 conformance vectors for waqt.calendar_interop. Every astronomy value (Maghrib instants, Hijri labels) here was computed once by the Python reference implementation. consumers/js/src/calendar_interop.mjs must reproduce every 'expected' field using only the 'context' given -- it never recomputes Maghrib from coordinates.",
+  "instant_representation": [
+    {
+      "id": "ordinary-conversion-addis",
+      "description": "An ordinary midday instant converts cleanly to both a UTC/civil Gregorian date and a Waqt day.",
+      "op": "represent_instant",
+      "instant": "2026-03-01T12:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2026-02-28T15:41:43.053455+00:00",
+          "maghrib_close": "2026-03-01T15:41:45.404576+00:00",
+          "hijri": {
+            "date": "1447-09-12",
+            "display": "12 Ramadan 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Ahad"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-03-01",
+          "time_of_day": "12:00:00",
+          "weekday_iso": 7,
+          "weekday_name_islamic": "al-Ahad",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-03-01",
+          "time_of_day": "15:00:00",
+          "weekday_iso": 7,
+          "weekday_name_islamic": "al-Ahad",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 73096.947
+      }
+    },
+    {
+      "id": "leap-year-feb-29",
+      "description": "2028 is a leap year; Feb 29 exists and is_leap_year is true for both Gregorian renderings.",
+      "op": "represent_instant",
+      "instant": "2028-02-29T10:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2028-02-28T15:41:41.590785+00:00",
+          "maghrib_close": "2028-02-29T15:41:44.158756+00:00",
+          "hijri": {
+            "date": "1449-10-03",
+            "display": "3 Shawwal 1449 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "ath-Thulatha"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2028-02-29",
+          "time_of_day": "10:00:00",
+          "weekday_iso": 2,
+          "weekday_name_islamic": "ath-Thulatha",
+          "is_leap_year": true,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2028-02-29",
+          "time_of_day": "13:00:00",
+          "weekday_iso": 2,
+          "weekday_name_islamic": "ath-Thulatha",
+          "is_leap_year": true,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 65898.409
+      }
+    },
+    {
+      "id": "non-leap-century-1900",
+      "description": "1900 is divisible by 100 but not 400: NOT a leap year, per the standard Gregorian rule.",
+      "op": "represent_instant",
+      "instant": "1900-02-28T10:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 8836,
+        "waqt_day": {
+          "maghrib_open": "1900-02-27T15:41:50.040818+00:00",
+          "maghrib_close": "1900-02-28T15:41:52.777270+00:00",
+          "hijri": {
+            "date": "1317-10-27",
+            "display": "27 Shawwal 1317 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Arbiaa"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "1900-02-28",
+          "time_of_day": "10:00:00",
+          "weekday_iso": 3,
+          "weekday_name_islamic": "al-Arbiaa",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "1900-02-28",
+          "time_of_day": "12:27:16",
+          "weekday_iso": 3,
+          "weekday_name_islamic": "al-Arbiaa",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 8836
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 65889.959
+      }
+    },
+    {
+      "id": "leap-century-2000",
+      "description": "2000 is divisible by 400: IS a leap year, per the standard Gregorian rule.",
+      "op": "represent_instant",
+      "instant": "2000-02-29T10:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2000-02-28T15:41:43.315955+00:00",
+          "maghrib_close": "2000-02-29T15:41:45.920898+00:00",
+          "hijri": {
+            "date": "1420-11-24",
+            "display": "24 Dhu al-Qadah 1420 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "ath-Thulatha"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2000-02-29",
+          "time_of_day": "10:00:00",
+          "weekday_iso": 2,
+          "weekday_name_islamic": "ath-Thulatha",
+          "is_leap_year": true,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2000-02-29",
+          "time_of_day": "13:00:00",
+          "weekday_iso": 2,
+          "weekday_name_islamic": "ath-Thulatha",
+          "is_leap_year": true,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 65896.684
+      }
+    },
+    {
+      "id": "date-line-kiritimati",
+      "description": "Kiritimati (UTC+14) civil date is far ahead of UTC; the Waqt day and Gregorian-civil date must both reflect the local, not UTC, calendar date.",
+      "op": "represent_instant",
+      "instant": "2026-06-15T20:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 1.87,
+          "lon": -157.4,
+          "elevation_m": 3
+        },
+        "timezone_name": "Pacific/Kiritimati",
+        "utc_offset_seconds": 50400,
+        "waqt_day": {
+          "maghrib_open": "2026-06-15T04:37:14.740930+00:00",
+          "maghrib_close": "2026-06-16T04:37:28.036919+00:00",
+          "hijri": {
+            "date": "1447-12-29",
+            "display": "29 Dhu al-Hijjah 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Ithnayn"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-06-15",
+          "time_of_day": "20:00:00",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-06-16",
+          "time_of_day": "10:00:00",
+          "weekday_iso": 2,
+          "weekday_name_islamic": "ath-Thulatha",
+          "is_leap_year": false,
+          "timezone_name": "Pacific/Kiritimati",
+          "utc_offset_seconds": 50400
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 55365.259
+      }
+    },
+    {
+      "id": "timezone-vs-solar-dibrugarh",
+      "description": "Dibrugarh (NE India) uses Asia/Kolkata (UTC+5:30) despite sitting near 95 deg E, where solar time runs roughly 50 minutes ahead of the civil clock; Waqt's Maghrib bracketing uses true solar geometry regardless of the political offset.",
+      "op": "represent_instant",
+      "instant": "2026-04-10T12:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 27.48,
+          "lon": 94.9,
+          "elevation_m": 108
+        },
+        "timezone_name": "Asia/Kolkata",
+        "utc_offset_seconds": 19800,
+        "waqt_day": {
+          "maghrib_open": "2026-04-09T12:03:31.306579+00:00",
+          "maghrib_close": "2026-04-10T12:04:02.874448+00:00",
+          "hijri": {
+            "date": "1447-10-22",
+            "display": "22 Shawwal 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Jumuah"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-04-10",
+          "time_of_day": "12:00:00",
+          "weekday_iso": 5,
+          "weekday_name_islamic": "al-Jumuah",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-04-10",
+          "time_of_day": "17:30:00",
+          "weekday_iso": 5,
+          "weekday_name_islamic": "al-Jumuah",
+          "is_leap_year": false,
+          "timezone_name": "Asia/Kolkata",
+          "utc_offset_seconds": 19800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 86188.693
+      }
+    },
+    {
+      "id": "waqt-date-differs-from-civil-date",
+      "description": "Shortly after local civil midnight but before Maghrib, the current Waqt day's Gregorian close-date is one day AHEAD of the Gregorian civil date the wall clock shows right now -- these are not the same 'today'.",
+      "op": "represent_instant",
+      "instant": "2026-03-01T21:41:45.404576+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2026-03-01T15:41:45.404576+00:00",
+          "maghrib_close": "2026-03-02T15:41:47.331193+00:00",
+          "hijri": {
+            "date": "1447-09-13",
+            "display": "13 Ramadan 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Ithnayn"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-03-01",
+          "time_of_day": "21:41:45",
+          "weekday_iso": 7,
+          "weekday_name_islamic": "al-Ahad",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-03-02",
+          "time_of_day": "00:41:45",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 21600.0
+      }
+    },
+    {
+      "id": "exact-maghrib",
+      "description": "The instant exactly AT Maghrib belongs to the NEW day it opens (half-open [open, close) convention): position_seconds == 0.",
+      "op": "represent_instant",
+      "instant": "2026-03-02T15:41:47.331193+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2026-03-02T15:41:47.331193+00:00",
+          "maghrib_close": "2026-03-03T15:41:48.849779+00:00",
+          "hijri": {
+            "date": "1447-09-14",
+            "display": "14 Ramadan 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "ath-Thulatha"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-03-02",
+          "time_of_day": "15:41:47",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-03-02",
+          "time_of_day": "18:41:47",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 0.0
+      }
+    },
+    {
+      "id": "one-second-before-maghrib",
+      "description": "One second before Maghrib still belongs to the OLD day, at its very last second.",
+      "op": "represent_instant",
+      "instant": "2026-03-02T15:41:46.331193+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2026-03-01T15:41:45.404576+00:00",
+          "maghrib_close": "2026-03-02T15:41:47.331193+00:00",
+          "hijri": {
+            "date": "1447-09-13",
+            "display": "13 Ramadan 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "al-Ithnayn"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-03-02",
+          "time_of_day": "15:41:46",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-03-02",
+          "time_of_day": "18:41:46",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 86400.927
+      }
+    },
+    {
+      "id": "one-second-after-maghrib",
+      "description": "One second after Maghrib belongs to the NEW day, one second into it.",
+      "op": "represent_instant",
+      "instant": "2026-03-02T15:41:48.331193+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "timezone_name": "Africa/Addis_Ababa",
+        "utc_offset_seconds": 10800,
+        "waqt_day": {
+          "maghrib_open": "2026-03-02T15:41:47.331193+00:00",
+          "maghrib_close": "2026-03-03T15:41:48.849779+00:00",
+          "hijri": {
+            "date": "1447-09-14",
+            "display": "14 Ramadan 1447 AH",
+            "provider": {
+              "name": "arithmetic-tabular",
+              "version": "30-year-cycle-epoch-1948440"
+            }
+          },
+          "weekday": "ath-Thulatha"
+        }
+      },
+      "expected": {
+        "gregorian_utc": {
+          "date": "2026-03-02",
+          "time_of_day": "15:41:48",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "gregorian_civil": {
+          "date": "2026-03-02",
+          "time_of_day": "18:41:48",
+          "weekday_iso": 1,
+          "weekday_name_islamic": "al-Ithnayn",
+          "is_leap_year": false,
+          "timezone_name": "Africa/Addis_Ababa",
+          "utc_offset_seconds": 10800
+        },
+        "waqt_status": "OK",
+        "waqt_position_seconds": 1.0
+      }
+    },
+    {
+      "id": "provider-change-affects-hijri-label-only",
+      "description": "Switching the Hijri calendar provider changes the reported Hijri label but MUST NOT change the underlying instant, the Gregorian date, or the Waqt day's Maghrib boundaries -- those come from astronomy, not the calendar provider.",
+      "op": "provider_invariance",
+      "instant": "2026-03-01T12:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        }
+      },
+      "expected": {
+        "gregorian_utc_same": true,
+        "maghrib_open_same": true,
+        "maghrib_close_same": true,
+        "hijri_arithmetic_tabular": {
+          "date": "1447-09-12",
+          "display": "12 Ramadan 1447 AH",
+          "provider": {
+            "name": "arithmetic-tabular",
+            "version": "30-year-cycle-epoch-1948440"
+          }
+        },
+        "hijri_declared": {
+          "date": "1447-09-13",
+          "display": "13 Ramadan 1447 AH",
+          "provider": {
+            "name": "declared",
+            "version": "manual-v1"
+          }
+        },
+        "gregorian_utc": {
+          "date": "2026-03-01",
+          "time_of_day": "12:00:00",
+          "weekday_iso": 7,
+          "weekday_name_islamic": "al-Ahad",
+          "is_leap_year": false,
+          "timezone_name": null,
+          "utc_offset_seconds": 0
+        },
+        "maghrib_open": "2026-02-28T15:41:43.053455+00:00",
+        "maghrib_close": "2026-03-01T15:41:45.404576+00:00"
+      }
+    }
+  ],
+  "gregorian_date_to_waqt_day": [
+    {
+      "id": "ordinary-date-addis",
+      "description": "An ordinary Gregorian civil date resolves to the Waqt day whose closing Maghrib falls on it.",
+      "op": "gregorian_date_to_waqt_day",
+      "date": "2026-03-01",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "candidate_day": {
+          "maghrib_open": "2026-02-28T15:41:43.053455+00:00",
+          "maghrib_close": "2026-03-01T15:41:45.404576+00:00",
+          "hijri": {
+            "display": "12 Ramadan 1447 AH",
+            "date": "1447-09-12"
+          },
+          "weekday": "al-Ahad"
+        }
+      },
+      "expected": {
+        "resolved": true,
+        "close_civil_date": "2026-03-01"
+      }
+    },
+    {
+      "id": "leap-year-date-addis",
+      "description": "Feb 29 of a leap year resolves to a Waqt day exactly as any other date does.",
+      "op": "gregorian_date_to_waqt_day",
+      "date": "2028-02-29",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "candidate_day": {
+          "maghrib_open": "2028-02-28T15:41:41.590785+00:00",
+          "maghrib_close": "2028-02-29T15:41:44.158756+00:00",
+          "hijri": {
+            "display": "3 Shawwal 1449 AH",
+            "date": "1449-10-03"
+          },
+          "weekday": "ath-Thulatha"
+        }
+      },
+      "expected": {
+        "resolved": true,
+        "close_civil_date": "2028-02-29"
+      }
+    },
+    {
+      "id": "date-line-date-kiritimati",
+      "description": "A civil date at a UTC+14 date-line location still resolves correctly using that location's own real offset.",
+      "op": "gregorian_date_to_waqt_day",
+      "date": "2026-06-15",
+      "context": {
+        "location": {
+          "lat": 1.87,
+          "lon": -157.4,
+          "elevation_m": 3
+        },
+        "utc_offset_seconds": 50400,
+        "candidate_day": {
+          "maghrib_open": "2026-06-14T04:37:01.470386+00:00",
+          "maghrib_close": "2026-06-15T04:37:14.740930+00:00",
+          "hijri": {
+            "display": "28 Dhu al-Hijjah 1447 AH",
+            "date": "1447-12-28"
+          },
+          "weekday": "al-Ahad"
+        }
+      },
+      "expected": {
+        "resolved": true,
+        "close_civil_date": "2026-06-15"
+      }
+    }
+  ],
+  "boundary_crossing": [
+    {
+      "id": "maghrib-only",
+      "description": "A short span straddling Maghrib but staying within the same civil calendar date crosses Maghrib but not civil midnight.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T14:41:45.404576+00:00",
+      "end": "2026-03-01T16:41:45.404576+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": [
+          "2026-03-01T15:41:45.404576+00:00"
+        ]
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": true,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-01"
+      }
+    },
+    {
+      "id": "civil-midnight-only",
+      "description": "A short span straddling civil midnight, well clear of Maghrib on both sides, crosses civil midnight but not Maghrib.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T20:00:00+00:00",
+      "end": "2026-03-01T22:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": true,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "both-boundaries",
+      "description": "A wide span covering both Maghrib and the following civil midnight crosses both boundaries.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T13:41:45.404576+00:00",
+      "end": "2026-03-01T23:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": [
+          "2026-03-01T15:41:45.404576+00:00"
+        ]
+      },
+      "expected": {
+        "crosses_civil_midnight": true,
+        "crosses_maghrib": true,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "neither-boundary",
+      "description": "A short span entirely between Maghrib and the next civil midnight (or vice versa) crosses neither boundary.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T17:41:45.404576+00:00",
+      "end": "2026-03-01T18:11:45.404576+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-01"
+      }
+    },
+    {
+      "id": "starts-exactly-at-civil-midnight",
+      "description": "A span that STARTS exactly at civil midnight lies wholly within the date midnight opens: half-open spans exclude their own start-adjacent boundary only from the 'crossed' count, per the interior (start < B < end) rule.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T21:00:00+00:00",
+      "end": "2026-03-01T22:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-02",
+        "end_civil_date": "2026-03-02"
+      }
+    },
+    {
+      "id": "ends-exactly-at-civil-midnight",
+      "description": "A span that ENDS exactly at civil midnight never reaches it (half-open exclusion of the end instant): does not count as crossing.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T20:00:00+00:00",
+      "end": "2026-03-01T21:00:00+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-01"
+      }
+    },
+    {
+      "id": "ends-exactly-at-maghrib",
+      "description": "A span that ENDS exactly at Maghrib never reaches it: does not count as crossing Maghrib.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T14:41:45.404576+00:00",
+      "end": "2026-03-01T15:41:45.404576+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-01"
+      }
+    },
+    {
+      "id": "starts-exactly-at-maghrib",
+      "description": "A span that STARTS exactly at Maghrib lies wholly within the day Maghrib opens: does not count as crossing.",
+      "op": "boundary_crossing",
+      "start": "2026-03-01T15:41:45.404576+00:00",
+      "end": "2026-03-01T16:41:45.404576+00:00",
+      "context": {
+        "location": {
+          "lat": 9.0084,
+          "lon": 38.7575,
+          "elevation_m": 2355
+        },
+        "utc_offset_seconds": 10800,
+        "maghrib_boundaries_near": []
+      },
+      "expected": {
+        "crosses_civil_midnight": false,
+        "crosses_maghrib": false,
+        "start_civil_date": "2026-03-01",
+        "end_civil_date": "2026-03-01"
+      }
+    }
+  ]
+}
