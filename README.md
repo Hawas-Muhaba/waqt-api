@@ -3,60 +3,36 @@
 A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API — a stable, versioned, language-independent HTTP contract. You do not need to read any Python here to integrate it; start with [`docs/API.md`](docs/API.md).
 
 ```
-waqt/
-  solar.py                    — solar event engine (sunrise, sunset, transit, Fajr, Asr, Isha)
-  hijri.py                     — HijriProvider interface + arithmetic-tabular + declared providers
-  core.py                       — the Core Time Model (day boundary, hour, events) — untouched since Sprint 2
-  semantics.py                   — Sprint 5: formal temporal vocabulary (WaqtDay, WaqtPosition, EventPosition,
-                                    comparison rules, undefined-event handling) — built on core.py, doesn't touch it
-  scheduling/                    — Sprint 6: windows, deadlines, event-relative rules, Maghrib-crossing spans,
-                                    explicit undefined-event statuses (model.py, context.py, engine.py, ops.py)
-  institutional/                 — Sprint 7: week, fiscal year, academic year, calendar profiles
-                                    (rules.py, week.py, fiscal_year.py, academic_year.py, binding.py, profile.py)
-  timezone_provider.py         — real IANA timezone -> local civil date
-  timescale.py                  — DeltaT (TT-UT1) provider
-  calendar_providers/           — pluggable calendar system
-    umm_al_qura.py                — astronomical Umm al-Qura approximation (4/4 historical dates validated)
-    local_observation.py           — moon-sighting reports
-    registry.py                     — provider lookup + a worked "Custom provider" example
-  api/                           — Waqt API v1
-    common.py                       — shared envelope, error schema, unit/reading formatters
-    providers.py                     — calendar_provider resolution + catalog
-    waqt_endpoint.py, day_endpoint.py, events_endpoint.py, hijri_endpoint.py,
-    calendar_endpoint.py, location_endpoint.py, conversions_endpoint.py,
-    schedule_endpoint.py, institutional_endpoint.py
+core/                          — Sprint 11: `waqt-core`, the independently installable computation layer
+  waqt_core/                     (import name waqt_core; deps: ephem, timezonefinder — no FastAPI)
+    core.py, solar.py, hijri.py, semantics.py, timescale.py, timezone_provider.py, calendar_interop.py
+    calendar_providers/           — Umm al-Qura, local observation, registry
+    scheduling/                   — Sprint 6: windows, deadlines, event-relative rules
+    institutional/                — Sprint 7: week, fiscal year, academic year, calendar profiles
+  tests/                         — standalone conformance vs all vector files, shim-identity, clean-install, solar regressions
+waqt/                          — `waqt-api` (repo root pyproject.toml): the HTTP layer only
+  __init__.py                    — aliases waqt.core/.hijri/.scheduling/... to the SAME objects as waqt_core.*
+  api/                           — Waqt API v1: common.py, providers.py and one *_endpoint.py per endpoint group
+local/                         — Sprint 10: `waqt-local`, embeddable no-server library (depends on waqt-core)
+sdks/                          — Sprint 9/10: remote HTTP clients (Python, JS) + shared conformance vectors
+consumers/js/                  — independent zero-dependency Node consumer of the shared vector files
+independent-astronomy/         — Sprint 9-11: Level-B (independent_solar) and Level-A (level_a, VSOP87) references,
+                                  comparison matrices, threshold-day truth scan
+tests/                         — waqt.api suite + vectors/ (portable conformance vectors + their generators)
 docs/
-  API.md            — the full HTTP contract: endpoints, schemas, errors, versioning, units
-  TIME-MODEL.md      — why the numbers look the way they do (Maghrib=00:00, variable day length, events-as-positions)
-  ASTRONOMY.md        — solar engine, accuracy levels (measured, not assumed), elevation, DeltaT, edge cases
-  CALENDARS.md         — every calendar provider's exact guarantees and limitations
-  SEMANTICS.md          — Sprint 5: formal spec for instants, days, positions, comparison, undefined-event rules
-  SCHEDULING.md          — Sprint 6: windows, deadlines, event-relative rules, undefined-event statuses
-  INSTITUTIONAL.md        — Sprint 7: week, fiscal year, academic year, calendar profiles
-tests/
-  test_core.py               — astronomy, location, elevation, date-line, invariants
-  test_calendar_providers.py — provider identification, UAQ historical validation, pluggability
-  test_api.py                — the full v1 HTTP contract: envelope, every error code, all 7 endpoints
-  test_semantics.py           — Sprint 5: boundary rule, comparison enforcement, undefined-event handling
-  test_vectors.py              — loads tests/vectors/waqt_vectors.json, re-derives every value, asserts exact match
-  test_institutional.py         — Sprint 7: week, fiscal year, academic year, profile, architecture separation
-  test_institutional_vectors.py  — Sprint 7: loads institutional_vectors.json, re-derives, invokes JS consumer
-  test_institutional_api.py       — Sprint 7: /v1/institutional/* HTTP surface
-  vectors/
-    scheduling_vectors.json      — Sprint 6: 116 vectors with embedded day tables (no astronomy needed to consume)
-    generate_scheduling_vectors.py
-    institutional_vectors.json    — Sprint 7: 22 vectors with embedded Hijri calendar tables (no astronomy at all)
-    generate_institutional_vectors.py
-    waqt_vectors.json            — 10 portable, language-independent conformance vectors
-    generate_vectors.py           — regenerates the above from the reference implementation (never hand-edit the JSON)
-consumers/js/                — Sprint 6/7: independent zero-dependency Node consumer of all three vector files (`cd consumers/js && npm test`)
-SCOPE.md, SPRINT-7-REPORT.md, SPRINT-6-REPORT.md, SPRINT-2-REPORT.md, SPRINT-3-REPORT.md, SPRINT-4-REPORT.md, SPRINT-5-REPORT.md — build history and honest limitations
+  API.md, TIME-MODEL.md, CALENDARS.md, SEMANTICS.md, SCHEDULING.md, INSTITUTIONAL.md, CALENDAR-INTEROP.md,
+  SDK.md, LOCAL.md, RELEASING.md
+  ASTRONOMY.md                   — solar engine, accuracy levels (measured), elevation, DeltaT, edge cases
+  ASTRONOMY-ENGINE-EVALUATION.md — Sprint 11: NOAA vs Level B vs Level A, the bugs found, the production-engine decision
+  PACKAGING.md                   — Sprint 11: package architecture, shim, install, gating tests
+SCOPE.md, SPRINT-*-REPORT.md     — build history and honest limitations
+```
 ```
 
 ## Quickstart
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt      # editable installs of core/, ., local/ + dev tools
 uvicorn waqt.api:app --reload --port 8000
 curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525"
 ```

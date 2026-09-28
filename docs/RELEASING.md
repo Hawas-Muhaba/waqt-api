@@ -112,3 +112,27 @@ Both are part of each package's normal test run (`pytest tests/` /
 `node --test`), not an opt-in extra — a change that breaks packaging
 (a missing file in `include`/`files`, an accidentally-required dev
 dependency, ...) fails the same test run a code change would.
+
+## `waqt-core`, `waqt-api`, `waqt-local` (Sprint 11)
+
+Three more distributions are now packageable (see `docs/PACKAGING.md`):
+`core/` → `waqt-core` 0.1.0, repo root → `waqt-api` 0.1.0, `local/` →
+`waqt-local` 0.2.0. Same policy as above: built and clean-install-tested,
+not uploaded (credentials).
+
+**Release order matters:** `waqt-core` first, then `waqt-api` and
+`waqt-local` (both declare `waqt-core>=0.1.0,<0.2`).
+
+**Versioning `waqt-core`.** SemVer. Unlike the SDKs, `waqt-core`'s version
+*is* about computed values: any change to `solar.py` that moves an output
+time is a behavior change and needs at least a minor bump plus a
+`CHANGELOG.md` entry stating the measured effect (Sprint 11's two epoch
+fixes are the template — before/after tables in
+`SPRINT-11-REPORT.md`). Pure refactors/packaging: patch.
+
+**Gate a `waqt-core` release on:** `pytest core/tests` (incl. both
+packaging smoke tests, run separately), `pytest tests/`, `pytest
+local/tests`, `cd independent-astronomy && pytest tests/`, `consumers/js`
+`npm test`, and — if `solar.py` changed — regenerated vectors
+(`tests/vectors/generate_*.py`, `sdks/vectors/generate_*.py`) reviewed as a
+diff, never hand-edited.

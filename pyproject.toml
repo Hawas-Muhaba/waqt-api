@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waqt-api"
+version = "0.1.0"
+description = "Waqt HTTP API v1 — a Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API, built on the waqt-core computation package."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Waqt project" }]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
+dependencies = [
+    "waqt-core>=0.1.0,<0.2",
+    "fastapi>=0.100",
+    "uvicorn>=0.23",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "httpx", "build", "astral"]
+
+[project.urls]
+Homepage = "https://github.com/waqt-project/waqt-api"
+Documentation = "https://github.com/waqt-project/waqt-api/blob/main/docs/API.md"
+
+[tool.setuptools.packages.find]
+include = ["waqt*"]
+exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+waqt = ["py.typed"]

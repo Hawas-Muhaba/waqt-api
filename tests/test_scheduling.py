@@ -681,7 +681,7 @@ def test_snapshot_answers_the_standard_questions_consistently():
     eng = engine()
     snap = eng.snapshot(T0)
     day = snap["day"]
-    assert day.status == Status.OK and day.position_display == "00:19:21"
+    assert day.status == Status.OK and day.position_display == "00:19:02"
     by = {e["name"]: e for e in snap["events"]}
     assert by["maghrib"]["next"].seconds == eng.until("maghrib", T0).seconds
     assert by["fajr"]["previous"].status == Status.OK

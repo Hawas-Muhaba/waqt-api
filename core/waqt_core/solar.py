@@ -106,6 +106,16 @@ def _jd_tt(jd_utc: float, d: date, timescale: TimeScaleProvider) -> float:
     return jd_utc + timescale.delta_t_seconds(d) / 86400.0
 
 
+def _params_at_instant(d: date, instant: datetime, timescale: TimeScaleProvider) -> SunParams:
+    """Solar parameters at a specific UTC instant on/around date `d`.
+
+    `_jdn(d)` is the Julian Day at NOON UT of `d`; midnight is `- 0.5`.
+    """
+    day_start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
+    jd = _jdn(d) - 0.5 + (instant - day_start).total_seconds() / 86400.0
+    return _sun_params(_jd_tt(jd, d, timescale))
+
+
 def _solar_noon_utc(d: date, lon: float, params: SunParams) -> datetime:
     """UTC instant of solar transit (Dhuhr) for the given date/longitude."""
     minutes_from_utc_midnight = 720.0 - 4.0 * lon - params.equation_of_time_min
@@ -138,12 +148,33 @@ def _event_time(
 ) -> datetime | None:
     """Instant the sun crosses `altitude_deg` on date `d` (morning=ascending)."""
     jd = _jdn(d)
-    params = _sun_params(_jd_tt(jd, d, timescale))
+
+    # Sprint 11: where the search STARTS decides whether a marginal event is
+    # found at all, because "does the sun reach this altitude?" is decided
+    # from the declination at the starting epoch. It used to start from
+    # declination at UT noon of `d`, which at extreme longitudes is up to
+    # 12 h from the local transit -- enough, near the polar-day/night
+    # threshold (where the sun's peak or trough altitude is only ~0.03 deg
+    # from the threshold), to flip defined <-> undefined. Start instead at
+    # the actual transit instant; only if the event does not exist there,
+    # probe the NADIR epoch (near the polar-day threshold the crossing, if
+    # any, happens at the trough, ~12 h before/after transit) before
+    # concluding it does not exist. The refinement loop then verifies the
+    # event at its own instant and returns None if it vanishes.
+    # See SPRINT-11-REPORT.md Sec 2.4.
+    t_transit = transit(d, lat, lon, timescale)
+    params = _params_at_instant(d, t_transit, timescale)
     noon = _solar_noon_utc(d, lon, params)
 
     ha = _hour_angle_for_altitude(lat, params.declination_deg, altitude_deg)
     if ha is None:
-        return None
+        nadir = t_transit - timedelta(hours=12) if morning else t_transit + timedelta(hours=12)
+        params_n = _params_at_instant(d, nadir, timescale)
+        ha = _hour_angle_for_altitude(lat, params_n.declination_deg, altitude_deg)
+        if ha is None:
+            return None
+        params = params_n
+        noon = _solar_noon_utc(d, lon, params)
 
     offset_min = ha * 4.0
     approx = noon - timedelta(minutes=offset_min) if morning else noon + timedelta(
@@ -153,18 +184,43 @@ def _event_time(
     # Iterative refinement: recompute solar params (declination/EoT drift
     # through the day) at each successive estimate. See tests/test_core.py
     # for measured agreement with an independent reference.
+    #
+    # Sprint 11: `jd` (`_jdn(d)`) is the Julian Day at NOON UT of `d` (the
+    # standard convention for a JDN), so converting a specific UTC instant
+    # on `d` into a Julian Day requires the `- 0.5` below (JD runs from
+    # noon to noon; midnight of `d` is jd - 0.5, not jd). This was
+    # previously missing, silently evaluating declination/equation-of-time
+    # 12 hours away from the instant actually being refined toward. Away
+    # from the equinoxes, or near the equator, declination barely changes
+    # in 12 hours and the resulting error was invisible; near an equinox
+    # at high latitude -- where both declination-vs-time and hour-angle-
+    # vs-declination are at their steepest -- it was the dominant cause of
+    # the large "high-latitude discrepancy" Sprint 10 measured. See
+    # SPRINT-11-REPORT.md Sec 2 and docs/independent-astronomy/LEVEL-A.md
+    # for the investigation and before/after measurements.
     day_start = datetime(d.year, d.month, d.day, tzinfo=timezone.utc)
     for _ in range(2):
-        jd_i = jd + (approx - day_start).total_seconds() / 86400.0
+        jd_i = jd - 0.5 + (approx - day_start).total_seconds() / 86400.0
         params_i = _sun_params(_jd_tt(jd_i, d, timescale))
         noon_i = _solar_noon_utc(d, lon, params_i)
         ha_i = _hour_angle_for_altitude(lat, params_i.declination_deg, altitude_deg)
         if ha_i is None:
-            return approx
+            # Sprint 11: refinement shows the event does not exist at its
+            # own instant. Previously this returned the unrefined `approx`,
+            # i.e. a time for an event Level A and Level B both call
+            # undefined (threshold-day disagreement, SPRINT-11-REPORT.md
+            # Sec 2.4).
+            return None
         offset_min_i = ha_i * 4.0
         approx = noon_i - timedelta(minutes=offset_min_i) if morning else noon_i + timedelta(
             minutes=offset_min_i
         )
+    # Sprint 11: the event must also exist at the instant we are about to
+    # return (the loop above only checks the instants it iterated from).
+    if _hour_angle_for_altitude(
+        lat, _params_at_instant(d, approx, timescale).declination_deg, altitude_deg
+    ) is None:
+        return None
     return approx
 
 
@@ -198,10 +254,22 @@ def _dip_of_horizon_deg(elevation_m: float) -> float:
 def transit(
     d: date, lat: float, lon: float, timescale: TimeScaleProvider = DEFAULT_TIMESCALE_PROVIDER
 ) -> datetime:
-    """Solar transit (Dhuhr) — always exists."""
+    """Solar transit (Dhuhr) — always exists.
+
+    Sprint 11: the equation of time is evaluated at the transit instant
+    itself (two fixed-point iterations, converged to well under a
+    millisecond), not at UT noon of `d`. Transit happens at 12:00 - lon/15
+    hours UT, up to 12 hours away from UT noon at extreme longitudes, and
+    the equation of time changes by up to ~30 s/day, so sampling it at UT
+    noon cost up to ~15 s at longitudes far from Greenwich (Suva,
+    Kiritimati, Anchorage in the Sprint 11 matrix). Same failure family
+    as the `- 0.5` fix in `_event_time`; see SPRINT-11-REPORT.md Sec 2.
+    """
     jd = _jdn(d)
-    params = _sun_params(_jd_tt(jd, d, timescale))
-    return _solar_noon_utc(d, lon, params)
+    t = _solar_noon_utc(d, lon, _sun_params(_jd_tt(jd, d, timescale)))
+    for _ in range(2):
+        t = _solar_noon_utc(d, lon, _params_at_instant(d, t, timescale))
+    return t
 
 
 def sunrise(
@@ -263,9 +331,9 @@ def asr(
     shadow_ratio = 1 -> Shafi'i/Maliki/Hanbali convention
     shadow_ratio = 2 -> Hanafi convention
     """
-    jd = _jdn(d)
-    params = _sun_params(_jd_tt(jd, d, timescale))
-    declin = params.declination_deg
+    # Sprint 11: declination at the actual transit instant (when the noon
+    # shadow that defines Asr is cast), not at UT noon -- see `transit`.
+    declin = _params_at_instant(d, transit(d, lat, lon, timescale), timescale).declination_deg
     noon_altitude = 90.0 - abs(lat - declin)
     if noon_altitude <= 0:
         return None  # sun never rises high enough (polar edge case)

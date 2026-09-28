@@ -44,6 +44,17 @@ Nothing in that file is hand-typed.
 
 ## Results
 
+> **Correction (Sprint 11).** The table below and the "Honest limitations" that
+> follow are the Sprint 9 record, kept for history. Two of its conclusions were
+> wrong: the ~430–500 s high-latitude disagreement was **not** "not a bug in
+> either engine" — it was mostly an epoch-sampling bug in `waqt/solar.py` (now
+> `waqt_core/solar.py`), fixed in Sprint 11 — and the reassurance that the
+> production engine's refinement "has years of production exposure" did not
+> catch it. Current tolerances are 4–8 s (`compare.py`) and the current numbers
+> are in [`ASTRONOMY-ENGINE-EVALUATION.md`](ASTRONOMY-ENGINE-EVALUATION.md).
+> The Level-A "gap" described in the limitation below is likewise closed in the
+> production engine's favour.
+
 | Latitude band | Tolerance | Max |diff| observed |
 |---|---|---|
 | Equator | 30s | 21.5s |

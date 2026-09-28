@@ -1,0 +1,3888 @@
+{
+  "sprint": "Sprint 11 - expanded geographic/seasonal Level-A comparison",
+  "label": "before",
+  "tolerance_seconds_waqt_vs_level_a_by_band": {
+    "equator": 25,
+    "tropics": 35,
+    "mid-lat-N": 45,
+    "mid-lat-S": 55,
+    "high-lat": 450
+  },
+  "tolerance_seconds_level_b_vs_level_a_by_band": {
+    "equator": 3,
+    "tropics": 3,
+    "mid-lat-N": 3,
+    "mid-lat-S": 3,
+    "high-lat": 6
+  },
+  "max_abs_diff_seconds_observed": {
+    "waqt_vs_level_a": {
+      "equator": 19.81,
+      "tropics": 31.688,
+      "mid-lat-N": 40.118,
+      "mid-lat-S": 47.811,
+      "high-lat": 432.115
+    },
+    "level_b_vs_level_a": {
+      "equator": 1.68,
+      "tropics": 1.694,
+      "mid-lat-N": 1.761,
+      "mid-lat-S": 1.884,
+      "high-lat": 4.323
+    }
+  },
+  "polar_agreement_failures": [],
+  "named_matrix": [
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -8.965,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -8.974,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.707,
+          "level_b_vs_level_a_diff_seconds": 1.403,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -19.81,
+          "level_b_vs_level_a_diff_seconds": 1.68,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -9.351,
+          "level_b_vs_level_a_diff_seconds": 1.383,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -9.301,
+          "level_b_vs_level_a_diff_seconds": 1.381,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.973,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.937,
+          "level_b_vs_level_a_diff_seconds": 0.888,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.456,
+          "level_b_vs_level_a_diff_seconds": 0.88,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 7.177,
+          "level_b_vs_level_a_diff_seconds": 0.877,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.899,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.796,
+          "level_b_vs_level_a_diff_seconds": 0.874,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -9.737,
+          "level_b_vs_level_a_diff_seconds": -0.614,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -10.054,
+          "level_b_vs_level_a_diff_seconds": -0.612,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 5.338,
+          "level_b_vs_level_a_diff_seconds": -0.611,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 1.023,
+          "level_b_vs_level_a_diff_seconds": -0.475,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -9.771,
+          "level_b_vs_level_a_diff_seconds": -0.61,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -10.013,
+          "level_b_vs_level_a_diff_seconds": -0.607,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -9.886,
+          "level_b_vs_level_a_diff_seconds": -0.481,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -9.81,
+          "level_b_vs_level_a_diff_seconds": -0.479,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 5.345,
+          "level_b_vs_level_a_diff_seconds": -0.464,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -19.776,
+          "level_b_vs_level_a_diff_seconds": -0.553,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -9.458,
+          "level_b_vs_level_a_diff_seconds": -0.448,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -9.331,
+          "level_b_vs_level_a_diff_seconds": -0.446,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.578,
+          "level_b_vs_level_a_diff_seconds": 0.285,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.624,
+          "level_b_vs_level_a_diff_seconds": 0.298,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -5.687,
+          "level_b_vs_level_a_diff_seconds": 0.324,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.681,
+          "level_b_vs_level_a_diff_seconds": 0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.64,
+          "level_b_vs_level_a_diff_seconds": 0.35,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.602,
+          "level_b_vs_level_a_diff_seconds": 0.363,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -7.898,
+          "level_b_vs_level_a_diff_seconds": 1.462,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -7.989,
+          "level_b_vs_level_a_diff_seconds": 1.457,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.95,
+          "level_b_vs_level_a_diff_seconds": 1.425,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -5.899,
+          "level_b_vs_level_a_diff_seconds": 1.689,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -10.235,
+          "level_b_vs_level_a_diff_seconds": 1.394,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -10.259,
+          "level_b_vs_level_a_diff_seconds": 1.391,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.958,
+          "level_b_vs_level_a_diff_seconds": 0.902,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.96,
+          "level_b_vs_level_a_diff_seconds": 0.901,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.738,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 7.065,
+          "level_b_vs_level_a_diff_seconds": 0.886,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.931,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.867,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -10.657,
+          "level_b_vs_level_a_diff_seconds": -0.608,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -10.959,
+          "level_b_vs_level_a_diff_seconds": -0.606,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.514,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -12.116,
+          "level_b_vs_level_a_diff_seconds": -0.487,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -8.887,
+          "level_b_vs_level_a_diff_seconds": -0.618,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -9.118,
+          "level_b_vs_level_a_diff_seconds": -0.616,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -10.831,
+          "level_b_vs_level_a_diff_seconds": -0.495,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -10.74,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.41,
+          "level_b_vs_level_a_diff_seconds": -0.483,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -13.25,
+          "level_b_vs_level_a_diff_seconds": -0.38,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -8.589,
+          "level_b_vs_level_a_diff_seconds": -0.472,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -8.451,
+          "level_b_vs_level_a_diff_seconds": -0.47,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.504,
+          "level_b_vs_level_a_diff_seconds": 0.253,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.597,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.833,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.656,
+          "level_b_vs_level_a_diff_seconds": 0.314,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.635,
+          "level_b_vs_level_a_diff_seconds": 0.319,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.638,
+          "level_b_vs_level_a_diff_seconds": 0.332,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -17.06,
+          "level_b_vs_level_a_diff_seconds": 1.347,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -16.694,
+          "level_b_vs_level_a_diff_seconds": 1.348,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.045,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -3.642,
+          "level_b_vs_level_a_diff_seconds": 1.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -1.532,
+          "level_b_vs_level_a_diff_seconds": 1.501,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -1.149,
+          "level_b_vs_level_a_diff_seconds": 1.502,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.958,
+          "level_b_vs_level_a_diff_seconds": 0.899,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.808,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 6.989,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.841,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.756,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -1.814,
+          "level_b_vs_level_a_diff_seconds": -0.665,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -2.573,
+          "level_b_vs_level_a_diff_seconds": -0.66,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.629,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -14.266,
+          "level_b_vs_level_a_diff_seconds": -0.69,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -17.276,
+          "level_b_vs_level_a_diff_seconds": -0.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -17.911,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -1.963,
+          "level_b_vs_level_a_diff_seconds": -0.537,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -2.314,
+          "level_b_vs_level_a_diff_seconds": -0.533,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.523,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -15.086,
+          "level_b_vs_level_a_diff_seconds": -0.525,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -17.02,
+          "level_b_vs_level_a_diff_seconds": -0.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -17.272,
+          "level_b_vs_level_a_diff_seconds": -0.433,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.639,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.714,
+          "level_b_vs_level_a_diff_seconds": 0.28,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.992,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.617,
+          "level_b_vs_level_a_diff_seconds": 0.305,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.632,
+          "level_b_vs_level_a_diff_seconds": 0.317,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -17.06,
+          "level_b_vs_level_a_diff_seconds": 1.347,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -16.697,
+          "level_b_vs_level_a_diff_seconds": 1.349,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.045,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -3.642,
+          "level_b_vs_level_a_diff_seconds": 1.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -1.525,
+          "level_b_vs_level_a_diff_seconds": 1.501,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -1.149,
+          "level_b_vs_level_a_diff_seconds": 1.502,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.957,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.808,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 6.989,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.835,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.756,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -1.814,
+          "level_b_vs_level_a_diff_seconds": -0.665,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -2.538,
+          "level_b_vs_level_a_diff_seconds": -0.66,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.629,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -14.266,
+          "level_b_vs_level_a_diff_seconds": -0.69,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -17.307,
+          "level_b_vs_level_a_diff_seconds": -0.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -17.911,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -1.963,
+          "level_b_vs_level_a_diff_seconds": -0.537,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -2.312,
+          "level_b_vs_level_a_diff_seconds": -0.533,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.523,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -15.086,
+          "level_b_vs_level_a_diff_seconds": -0.525,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -17.017,
+          "level_b_vs_level_a_diff_seconds": -0.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -17.272,
+          "level_b_vs_level_a_diff_seconds": -0.433,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.639,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.708,
+          "level_b_vs_level_a_diff_seconds": 0.279,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.992,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.619,
+          "level_b_vs_level_a_diff_seconds": 0.306,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.632,
+          "level_b_vs_level_a_diff_seconds": 0.317,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -28.994,
+          "level_b_vs_level_a_diff_seconds": 1.197,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -27.908,
+          "level_b_vs_level_a_diff_seconds": 1.207,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.098,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 10.317,
+          "level_b_vs_level_a_diff_seconds": 1.451,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 9.69,
+          "level_b_vs_level_a_diff_seconds": 1.638,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 10.724,
+          "level_b_vs_level_a_diff_seconds": 1.646,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.906,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.946,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.847,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 6.901,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.716,
+          "level_b_vs_level_a_diff_seconds": 0.887,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.579,
+          "level_b_vs_level_a_diff_seconds": 0.888,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 9.788,
+          "level_b_vs_level_a_diff_seconds": -0.74,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 8.243,
+          "level_b_vs_level_a_diff_seconds": -0.73,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.693,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -27.799,
+          "level_b_vs_level_a_diff_seconds": -0.6,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -28.085,
+          "level_b_vs_level_a_diff_seconds": -0.497,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -29.406,
+          "level_b_vs_level_a_diff_seconds": -0.488,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 9.599,
+          "level_b_vs_level_a_diff_seconds": -0.592,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 8.551,
+          "level_b_vs_level_a_diff_seconds": -0.583,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.586,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -28.601,
+          "level_b_vs_level_a_diff_seconds": -0.464,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -27.878,
+          "level_b_vs_level_a_diff_seconds": -0.391,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -28.735,
+          "level_b_vs_level_a_diff_seconds": -0.384,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.797,
+          "level_b_vs_level_a_diff_seconds": 0.283,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.862,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 4.081,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.55,
+          "level_b_vs_level_a_diff_seconds": 0.282,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.583,
+          "level_b_vs_level_a_diff_seconds": 0.287,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.616,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -35.6,
+          "level_b_vs_level_a_diff_seconds": 1.121,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -34.01,
+          "level_b_vs_level_a_diff_seconds": 1.138,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -4.796,
+          "level_b_vs_level_a_diff_seconds": 1.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 11.119,
+          "level_b_vs_level_a_diff_seconds": 1.545,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.85,
+          "level_b_vs_level_a_diff_seconds": 1.726,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 17.342,
+          "level_b_vs_level_a_diff_seconds": 1.74,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.762,
+          "level_b_vs_level_a_diff_seconds": 0.904,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.866,
+          "level_b_vs_level_a_diff_seconds": 0.903,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.854,
+          "level_b_vs_level_a_diff_seconds": 0.897,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 6.862,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.733,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.586,
+          "level_b_vs_level_a_diff_seconds": 0.895,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 16.316,
+          "level_b_vs_level_a_diff_seconds": -0.781,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 14.149,
+          "level_b_vs_level_a_diff_seconds": -0.767,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -4.968,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -28.341,
+          "level_b_vs_level_a_diff_seconds": -0.559,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -33.991,
+          "level_b_vs_level_a_diff_seconds": -0.459,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -35.85,
+          "level_b_vs_level_a_diff_seconds": -0.447,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 16.052,
+          "level_b_vs_level_a_diff_seconds": -0.634,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 14.471,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -4.818,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -29.161,
+          "level_b_vs_level_a_diff_seconds": -0.444,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -33.818,
+          "level_b_vs_level_a_diff_seconds": -0.372,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -35.133,
+          "level_b_vs_level_a_diff_seconds": -0.364,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.939,
+          "level_b_vs_level_a_diff_seconds": 0.278,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 16.025,
+          "level_b_vs_level_a_diff_seconds": 0.293,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 8.628,
+          "level_b_vs_level_a_diff_seconds": 0.277,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.441,
+          "level_b_vs_level_a_diff_seconds": 0.258,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.467,
+          "level_b_vs_level_a_diff_seconds": 0.262,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.533,
+          "level_b_vs_level_a_diff_seconds": 0.276,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -38.741,
+          "level_b_vs_level_a_diff_seconds": 1.073,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -36.838,
+          "level_b_vs_level_a_diff_seconds": 1.094,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.676,
+          "level_b_vs_level_a_diff_seconds": 1.424,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 22.16,
+          "level_b_vs_level_a_diff_seconds": 1.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 18.626,
+          "level_b_vs_level_a_diff_seconds": 1.745,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 20.404,
+          "level_b_vs_level_a_diff_seconds": 1.761,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.876,
+          "level_b_vs_level_a_diff_seconds": 0.894,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.943,
+          "level_b_vs_level_a_diff_seconds": 0.895,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.535,
+          "level_b_vs_level_a_diff_seconds": 0.89,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 6.777,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.589,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.365,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 19.335,
+          "level_b_vs_level_a_diff_seconds": -0.801,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 16.865,
+          "level_b_vs_level_a_diff_seconds": -0.785,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.182,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -39.176,
+          "level_b_vs_level_a_diff_seconds": -0.541,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -36.691,
+          "level_b_vs_level_a_diff_seconds": -0.442,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -38.809,
+          "level_b_vs_level_a_diff_seconds": -0.428,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 19.042,
+          "level_b_vs_level_a_diff_seconds": -0.635,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 17.209,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.082,
+          "level_b_vs_level_a_diff_seconds": -0.482,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -40.118,
+          "level_b_vs_level_a_diff_seconds": -0.423,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -36.519,
+          "level_b_vs_level_a_diff_seconds": -0.353,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -38.047,
+          "level_b_vs_level_a_diff_seconds": -0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.903,
+          "level_b_vs_level_a_diff_seconds": 0.298,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.963,
+          "level_b_vs_level_a_diff_seconds": 0.314,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.372,
+          "level_b_vs_level_a_diff_seconds": 0.294,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.508,
+          "level_b_vs_level_a_diff_seconds": 0.271,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.567,
+          "level_b_vs_level_a_diff_seconds": 0.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.29,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 25.807,
+          "level_b_vs_level_a_diff_seconds": 1.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 23.249,
+          "level_b_vs_level_a_diff_seconds": 1.846,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.048,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -47.811,
+          "level_b_vs_level_a_diff_seconds": 1.207,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -41.419,
+          "level_b_vs_level_a_diff_seconds": 1.012,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -43.557,
+          "level_b_vs_level_a_diff_seconds": 0.983,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.905,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.891,
+          "level_b_vs_level_a_diff_seconds": 0.905,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.068,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 7.491,
+          "level_b_vs_level_a_diff_seconds": 0.877,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 7.264,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 7.213,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -42.742,
+          "level_b_vs_level_a_diff_seconds": -0.403,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -40.997,
+          "level_b_vs_level_a_diff_seconds": -0.414,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -0.421,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 28.215,
+          "level_b_vs_level_a_diff_seconds": -0.72,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 21.217,
+          "level_b_vs_level_a_diff_seconds": -0.808,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 22.842,
+          "level_b_vs_level_a_diff_seconds": -0.818,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -43.418,
+          "level_b_vs_level_a_diff_seconds": -0.341,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -40.931,
+          "level_b_vs_level_a_diff_seconds": -0.351,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -0.331,
+          "level_b_vs_level_a_diff_seconds": -0.48,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 27.335,
+          "level_b_vs_level_a_diff_seconds": -0.539,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 21.678,
+          "level_b_vs_level_a_diff_seconds": -0.597,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 24.001,
+          "level_b_vs_level_a_diff_seconds": -0.602,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 14.783,
+          "level_b_vs_level_a_diff_seconds": 0.184,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.155,
+          "level_b_vs_level_a_diff_seconds": 0.22,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 2.314,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.617,
+          "level_b_vs_level_a_diff_seconds": 0.312,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.616,
+          "level_b_vs_level_a_diff_seconds": 0.375,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.524,
+          "level_b_vs_level_a_diff_seconds": 0.408,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Reykjavik (high-lat, N)",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -148.56,
+          "level_b_vs_level_a_diff_seconds": -0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -108.018,
+          "level_b_vs_level_a_diff_seconds": 0.2,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 0.932,
+          "level_b_vs_level_a_diff_seconds": 1.414,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 139.964,
+          "level_b_vs_level_a_diff_seconds": 2.195,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 90.152,
+          "level_b_vs_level_a_diff_seconds": 2.593,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 126.195,
+          "level_b_vs_level_a_diff_seconds": 3.001,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Reykjavik (high-lat, N)",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.787,
+          "level_b_vs_level_a_diff_seconds": 0.836,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -0.401,
+          "level_b_vs_level_a_diff_seconds": 0.885,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 5.832,
+          "level_b_vs_level_a_diff_seconds": 0.892,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 2.165,
+          "level_b_vs_level_a_diff_seconds": 0.956,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Reykjavik (high-lat, N)",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 138.403,
+          "level_b_vs_level_a_diff_seconds": -1.57,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 86.099,
+          "level_b_vs_level_a_diff_seconds": -1.227,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.979,
+          "level_b_vs_level_a_diff_seconds": -0.612,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -149.516,
+          "level_b_vs_level_a_diff_seconds": -0.22,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -105.507,
+          "level_b_vs_level_a_diff_seconds": -0.008,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -145.991,
+          "level_b_vs_level_a_diff_seconds": 0.25,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Reykjavik (high-lat, N)",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 125.402,
+          "level_b_vs_level_a_diff_seconds": -1.124,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 86.492,
+          "level_b_vs_level_a_diff_seconds": -0.925,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 2.035,
+          "level_b_vs_level_a_diff_seconds": -0.473,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -156.509,
+          "level_b_vs_level_a_diff_seconds": -0.203,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -105.405,
+          "level_b_vs_level_a_diff_seconds": -0.061,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -135.844,
+          "level_b_vs_level_a_diff_seconds": 0.063,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Reykjavik (high-lat, N)",
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 16.415,
+          "level_b_vs_level_a_diff_seconds": 0.408,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 16.744,
+          "level_b_vs_level_a_diff_seconds": 0.571,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.019,
+          "level_b_vs_level_a_diff_seconds": 0.308,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 13.399,
+          "level_b_vs_level_a_diff_seconds": 0.189,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.283,
+          "level_b_vs_level_a_diff_seconds": 0.046,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.759,
+          "level_b_vs_level_a_diff_seconds": 0.208,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Anchorage (high-lat, N)",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -123.15,
+          "level_b_vs_level_a_diff_seconds": 0.022,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -96.4,
+          "level_b_vs_level_a_diff_seconds": 0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 7.219,
+          "level_b_vs_level_a_diff_seconds": 1.389,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 162.079,
+          "level_b_vs_level_a_diff_seconds": 2.068,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 78.327,
+          "level_b_vs_level_a_diff_seconds": 2.404,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 102.39,
+          "level_b_vs_level_a_diff_seconds": 2.669,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Anchorage (high-lat, N)",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 8.072,
+          "level_b_vs_level_a_diff_seconds": 0.845,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -5.052,
+          "level_b_vs_level_a_diff_seconds": 0.874,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 5.242,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 3.196,
+          "level_b_vs_level_a_diff_seconds": 0.916,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Anchorage (high-lat, N)",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 106.387,
+          "level_b_vs_level_a_diff_seconds": -1.355,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 74.713,
+          "level_b_vs_level_a_diff_seconds": -1.148,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 9.581,
+          "level_b_vs_level_a_diff_seconds": -0.609,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -172.42,
+          "level_b_vs_level_a_diff_seconds": -0.263,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -94.204,
+          "level_b_vs_level_a_diff_seconds": -0.082,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -119.695,
+          "level_b_vs_level_a_diff_seconds": 0.077,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Anchorage (high-lat, N)",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 99.633,
+          "level_b_vs_level_a_diff_seconds": -0.95,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 75.186,
+          "level_b_vs_level_a_diff_seconds": -0.828,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 9.524,
+          "level_b_vs_level_a_diff_seconds": -0.451,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -180.62,
+          "level_b_vs_level_a_diff_seconds": -0.224,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -94.124,
+          "level_b_vs_level_a_diff_seconds": -0.109,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -113.766,
+          "level_b_vs_level_a_diff_seconds": -0.034,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Anchorage (high-lat, N)",
+      "lat": 61.2181,
+      "lon": -149.9003,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.711,
+          "level_b_vs_level_a_diff_seconds": 0.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.396,
+          "level_b_vs_level_a_diff_seconds": 0.518,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -11.588,
+          "level_b_vs_level_a_diff_seconds": 0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 17.902,
+          "level_b_vs_level_a_diff_seconds": 0.241,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 16.589,
+          "level_b_vs_level_a_diff_seconds": 0.172,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 16.399,
+          "level_b_vs_level_a_diff_seconds": 0.263,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -282.43,
+          "level_b_vs_level_a_diff_seconds": -1.949,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -138.265,
+          "level_b_vs_level_a_diff_seconds": -0.18,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -1.074,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 173.814,
+          "level_b_vs_level_a_diff_seconds": 2.411,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 120.761,
+          "level_b_vs_level_a_diff_seconds": 2.981,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 238.092,
+          "level_b_vs_level_a_diff_seconds": 4.323,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 1.088,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 5.754,
+          "level_b_vs_level_a_diff_seconds": 0.899,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 432.115,
+          "level_b_vs_level_a_diff_seconds": -3.619,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 115.893,
+          "level_b_vs_level_a_diff_seconds": -1.42,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -0.452,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -179.385,
+          "level_b_vs_level_a_diff_seconds": -0.119,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -134.949,
+          "level_b_vs_level_a_diff_seconds": 0.18,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -287.914,
+          "level_b_vs_level_a_diff_seconds": 1.176,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 259.542,
+          "level_b_vs_level_a_diff_seconds": -1.807,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 116.048,
+          "level_b_vs_level_a_diff_seconds": -1.076,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -0.362,
+          "level_b_vs_level_a_diff_seconds": -0.48,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -189.643,
+          "level_b_vs_level_a_diff_seconds": -0.137,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -134.678,
+          "level_b_vs_level_a_diff_seconds": 0.064,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -227.531,
+          "level_b_vs_level_a_diff_seconds": 0.45,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 16.944,
+          "level_b_vs_level_a_diff_seconds": 0.44,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 2.358,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.447,
+          "level_b_vs_level_a_diff_seconds": 0.153,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 65.814,
+          "level_b_vs_level_a_diff_seconds": 2.36,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 55.078,
+          "level_b_vs_level_a_diff_seconds": 2.215,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.336,
+          "level_b_vs_level_a_diff_seconds": 1.404,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -110.863,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -73.157,
+          "level_b_vs_level_a_diff_seconds": 0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -82.032,
+          "level_b_vs_level_a_diff_seconds": 0.513,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.607,
+          "level_b_vs_level_a_diff_seconds": 0.903,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.325,
+          "level_b_vs_level_a_diff_seconds": 0.906,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.182,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 9.567,
+          "level_b_vs_level_a_diff_seconds": 0.862,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 8.003,
+          "level_b_vs_level_a_diff_seconds": 0.854,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 7.785,
+          "level_b_vs_level_a_diff_seconds": 0.857,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -79.793,
+          "level_b_vs_level_a_diff_seconds": -0.168,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -71.57,
+          "level_b_vs_level_a_diff_seconds": -0.22,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 4.889,
+          "level_b_vs_level_a_diff_seconds": -0.611,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 90.609,
+          "level_b_vs_level_a_diff_seconds": -0.875,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 51.958,
+          "level_b_vs_level_a_diff_seconds": -0.997,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 59.461,
+          "level_b_vs_level_a_diff_seconds": -1.041,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -82.36,
+          "level_b_vs_level_a_diff_seconds": -0.16,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -71.671,
+          "level_b_vs_level_a_diff_seconds": -0.206,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 4.903,
+          "level_b_vs_level_a_diff_seconds": -0.465,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 87.623,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 52.629,
+          "level_b_vs_level_a_diff_seconds": -0.699,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 62.422,
+          "level_b_vs_level_a_diff_seconds": -0.728,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 14.902,
+          "level_b_vs_level_a_diff_seconds": 0.172,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -5.064,
+          "level_b_vs_level_a_diff_seconds": 0.322,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.451,
+          "level_b_vs_level_a_diff_seconds": 0.375,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.028,
+          "level_b_vs_level_a_diff_seconds": 0.47,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Ushuaia (high-lat, S)",
+      "lat": -54.8019,
+      "lon": -68.303,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 71.684,
+          "level_b_vs_level_a_diff_seconds": 2.435,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 59.066,
+          "level_b_vs_level_a_diff_seconds": 2.265,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 3.208,
+          "level_b_vs_level_a_diff_seconds": 1.405,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -117.414,
+          "level_b_vs_level_a_diff_seconds": 0.849,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -77.115,
+          "level_b_vs_level_a_diff_seconds": 0.574,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -87.506,
+          "level_b_vs_level_a_diff_seconds": 0.447,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Ushuaia (high-lat, S)",
+      "lat": -54.8019,
+      "lon": -68.303,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 6.592,
+          "level_b_vs_level_a_diff_seconds": 0.904,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.27,
+          "level_b_vs_level_a_diff_seconds": 0.908,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -2.087,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 9.918,
+          "level_b_vs_level_a_diff_seconds": 0.861,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 8.083,
+          "level_b_vs_level_a_diff_seconds": 0.852,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 7.833,
+          "level_b_vs_level_a_diff_seconds": 0.856,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Ushuaia (high-lat, S)",
+      "lat": -54.8019,
+      "lon": -68.303,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -85.036,
+          "level_b_vs_level_a_diff_seconds": -0.134,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -75.385,
+          "level_b_vs_level_a_diff_seconds": -0.195,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 4.734,
+          "level_b_vs_level_a_diff_seconds": -0.611,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 97.176,
+          "level_b_vs_level_a_diff_seconds": -0.892,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 55.797,
+          "level_b_vs_level_a_diff_seconds": -1.021,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 64.587,
+          "level_b_vs_level_a_diff_seconds": -1.073,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Ushuaia (high-lat, S)",
+      "lat": -54.8019,
+      "lon": -68.303,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -88.053,
+          "level_b_vs_level_a_diff_seconds": -0.134,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -75.51,
+          "level_b_vs_level_a_diff_seconds": -0.189,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 4.75,
+          "level_b_vs_level_a_diff_seconds": -0.466,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 93.827,
+          "level_b_vs_level_a_diff_seconds": -0.634,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 56.494,
+          "level_b_vs_level_a_diff_seconds": -0.716,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 67.961,
+          "level_b_vs_level_a_diff_seconds": -0.751,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Ushuaia (high-lat, S)",
+      "lat": -54.8019,
+      "lon": -68.303,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 14.797,
+          "level_b_vs_level_a_diff_seconds": 0.159,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -4.848,
+          "level_b_vs_level_a_diff_seconds": 0.321,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.442,
+          "level_b_vs_level_a_diff_seconds": 0.379,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 14.964,
+          "level_b_vs_level_a_diff_seconds": 0.481,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 7.743,
+          "level_b_vs_level_a_diff_seconds": 1.694,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.749,
+          "level_b_vs_level_a_diff_seconds": 1.676,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -8.881,
+          "level_b_vs_level_a_diff_seconds": 1.454,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -8.824,
+          "level_b_vs_level_a_diff_seconds": 1.455,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -24.822,
+          "level_b_vs_level_a_diff_seconds": 1.239,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -25.634,
+          "level_b_vs_level_a_diff_seconds": 1.226,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 7.079,
+          "level_b_vs_level_a_diff_seconds": 0.922,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 7.109,
+          "level_b_vs_level_a_diff_seconds": 0.921,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 6.898,
+          "level_b_vs_level_a_diff_seconds": 0.907,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 7.016,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.98,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.977,
+          "level_b_vs_level_a_diff_seconds": 0.892,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -25.466,
+          "level_b_vs_level_a_diff_seconds": -0.511,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -25.064,
+          "level_b_vs_level_a_diff_seconds": -0.514,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -9.936,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -9.515,
+          "level_b_vs_level_a_diff_seconds": -0.616,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 5.214,
+          "level_b_vs_level_a_diff_seconds": -0.71,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 5.616,
+          "level_b_vs_level_a_diff_seconds": -0.712,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -25.81,
+          "level_b_vs_level_a_diff_seconds": -0.442,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -24.941,
+          "level_b_vs_level_a_diff_seconds": -0.444,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -9.723,
+          "level_b_vs_level_a_diff_seconds": -0.506,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -10.385,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 5.56,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.4,
+          "level_b_vs_level_a_diff_seconds": -0.562,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 14.979,
+          "level_b_vs_level_a_diff_seconds": 0.191,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.225,
+          "level_b_vs_level_a_diff_seconds": 0.209,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 15.522,
+          "level_b_vs_level_a_diff_seconds": 0.256,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.993,
+          "level_b_vs_level_a_diff_seconds": 0.302,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.789,
+          "level_b_vs_level_a_diff_seconds": 0.304,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.847,
+          "level_b_vs_level_a_diff_seconds": 0.321,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -10.832,
+          "level_b_vs_level_a_diff_seconds": 1.388,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -10.73,
+          "level_b_vs_level_a_diff_seconds": 1.386,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 7.589,
+          "level_b_vs_level_a_diff_seconds": 1.387,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 12.814,
+          "level_b_vs_level_a_diff_seconds": 1.124,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -7.663,
+          "level_b_vs_level_a_diff_seconds": 1.389,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -7.513,
+          "level_b_vs_level_a_diff_seconds": 1.387,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 7.002,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 6.941,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -5.325,
+          "level_b_vs_level_a_diff_seconds": 0.874,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 7.266,
+          "level_b_vs_level_a_diff_seconds": 0.872,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 6.847,
+          "level_b_vs_level_a_diff_seconds": 0.869,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 6.714,
+          "level_b_vs_level_a_diff_seconds": 0.869,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -8.008,
+          "level_b_vs_level_a_diff_seconds": -0.624,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -8.389,
+          "level_b_vs_level_a_diff_seconds": -0.621,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 10.028,
+          "level_b_vs_level_a_diff_seconds": -0.609,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -31.287,
+          "level_b_vs_level_a_diff_seconds": -0.744,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -11.42,
+          "level_b_vs_level_a_diff_seconds": -0.596,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -11.718,
+          "level_b_vs_level_a_diff_seconds": -0.594,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": -8.136,
+          "level_b_vs_level_a_diff_seconds": -0.475,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": -8.123,
+          "level_b_vs_level_a_diff_seconds": -0.472,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": 9.964,
+          "level_b_vs_level_a_diff_seconds": -0.45,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": -31.688,
+          "level_b_vs_level_a_diff_seconds": -0.522,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": -11.103,
+          "level_b_vs_level_a_diff_seconds": -0.427,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": -11.032,
+          "level_b_vs_level_a_diff_seconds": -0.424,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "waqt_vs_level_a_diff_seconds": 15.623,
+          "level_b_vs_level_a_diff_seconds": 0.309,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt_vs_level_a_diff_seconds": 15.635,
+          "level_b_vs_level_a_diff_seconds": 0.323,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt_vs_level_a_diff_seconds": -12.209,
+          "level_b_vs_level_a_diff_seconds": 0.346,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt_vs_level_a_diff_seconds": 15.767,
+          "level_b_vs_level_a_diff_seconds": 0.364,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt_vs_level_a_diff_seconds": 15.662,
+          "level_b_vs_level_a_diff_seconds": 0.37,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt_vs_level_a_diff_seconds": 15.599,
+          "level_b_vs_level_a_diff_seconds": 0.383,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-03-20",
+      "events": {
+        "fajr": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "sunrise": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "dhuhr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "asr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "maghrib": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "isha": {
+          "all_defined": false,
+          "all_undefined": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-06-21",
+      "events": {
+        "fajr": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "sunrise": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "dhuhr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "asr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "maghrib": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "isha": {
+          "all_defined": false,
+          "all_undefined": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-09-19",
+      "events": {
+        "fajr": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "sunrise": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "dhuhr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "asr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "maghrib": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "isha": {
+          "all_defined": false,
+          "all_undefined": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-09-23",
+      "events": {
+        "fajr": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "sunrise": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "dhuhr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "asr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "maghrib": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "isha": {
+          "all_defined": false,
+          "all_undefined": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-12-21",
+      "events": {
+        "fajr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "sunrise": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "dhuhr": {
+          "all_defined": true,
+          "all_undefined": false
+        },
+        "asr": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "maghrib": {
+          "all_defined": false,
+          "all_undefined": true
+        },
+        "isha": {
+          "all_defined": true,
+          "all_undefined": false
+        }
+      }
+    }
+  ],
+  "latitude_sweep": {
+    "lon": 18.9553,
+    "date": "2026-09-19",
+    "rows": [
+      {
+        "lat": 0.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": -9.915,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.613,
+        "sunset_waqt_vs_level_a_diff_seconds": -9.929,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.611
+      },
+      {
+        "lat": 5.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": -5.868,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.639,
+        "sunset_waqt_vs_level_a_diff_seconds": -13.978,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.586
+      },
+      {
+        "lat": 10.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": -1.757,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.665,
+        "sunset_waqt_vs_level_a_diff_seconds": -18.089,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.56
+      },
+      {
+        "lat": 15.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 2.484,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.693,
+        "sunset_waqt_vs_level_a_diff_seconds": -22.328,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.533
+      },
+      {
+        "lat": 20.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 6.931,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.721,
+        "sunset_waqt_vs_level_a_diff_seconds": -26.771,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.505
+      },
+      {
+        "lat": 25.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 11.672,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.751,
+        "sunset_waqt_vs_level_a_diff_seconds": -31.506,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.475
+      },
+      {
+        "lat": 30.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 16.819,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.784,
+        "sunset_waqt_vs_level_a_diff_seconds": -36.643,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.442
+      },
+      {
+        "lat": 35.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 22.517,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.821,
+        "sunset_waqt_vs_level_a_diff_seconds": -42.328,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.406
+      },
+      {
+        "lat": 40.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 28.963,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.862,
+        "sunset_waqt_vs_level_a_diff_seconds": -48.754,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.365
+      },
+      {
+        "lat": 45.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 36.437,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.91,
+        "sunset_waqt_vs_level_a_diff_seconds": -56.201,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.318
+      },
+      {
+        "lat": 50.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 45.356,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.967,
+        "sunset_waqt_vs_level_a_diff_seconds": -65.078,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.262
+      },
+      {
+        "lat": 55.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 56.369,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.038,
+        "sunset_waqt_vs_level_a_diff_seconds": -76.027,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.193
+      },
+      {
+        "lat": 60.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 70.56,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.129,
+        "sunset_waqt_vs_level_a_diff_seconds": -90.116,
+        "sunset_level_b_vs_level_a_diff_seconds": -0.104
+      },
+      {
+        "lat": 65.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 89.892,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.253,
+        "sunset_waqt_vs_level_a_diff_seconds": -109.267,
+        "sunset_level_b_vs_level_a_diff_seconds": 0.018
+      },
+      {
+        "lat": 70.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 118.33,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.435,
+        "sunset_waqt_vs_level_a_diff_seconds": -137.352,
+        "sunset_level_b_vs_level_a_diff_seconds": 0.195
+      },
+      {
+        "lat": 75.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 165.34,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.738,
+        "sunset_waqt_vs_level_a_diff_seconds": -183.522,
+        "sunset_level_b_vs_level_a_diff_seconds": 0.488
+      },
+      {
+        "lat": 80.0,
+        "date": "2026-09-19",
+        "sunrise_waqt_vs_level_a_diff_seconds": 260.869,
+        "sunrise_level_b_vs_level_a_diff_seconds": -2.353,
+        "sunset_waqt_vs_level_a_diff_seconds": -276.208,
+        "sunset_level_b_vs_level_a_diff_seconds": 1.076
+      }
+    ]
+  },
+  "equinox_proximity_sweep": {
+    "location": [
+      "Tromso (high-lat, N)",
+      69.6492,
+      18.9553,
+      0.0
+    ],
+    "equinox": "2026-09-23",
+    "rows": [
+      {
+        "days_from_equinox": -60,
+        "date": "2026-07-25",
+        "sunrise_waqt_vs_level_a_diff_seconds": null,
+        "sunrise_level_b_vs_level_a_diff_seconds": null
+      },
+      {
+        "days_from_equinox": -30,
+        "date": "2026-08-24",
+        "sunrise_waqt_vs_level_a_diff_seconds": 131.75,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.73
+      },
+      {
+        "days_from_equinox": -14,
+        "date": "2026-09-09",
+        "sunrise_waqt_vs_level_a_diff_seconds": 119.787,
+        "sunrise_level_b_vs_level_a_diff_seconds": 0.046
+      },
+      {
+        "days_from_equinox": -7,
+        "date": "2026-09-16",
+        "sunrise_waqt_vs_level_a_diff_seconds": 116.46,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.28
+      },
+      {
+        "days_from_equinox": -3,
+        "date": "2026-09-20",
+        "sunrise_waqt_vs_level_a_diff_seconds": 115.836,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.387
+      },
+      {
+        "days_from_equinox": -1,
+        "date": "2026-09-22",
+        "sunrise_waqt_vs_level_a_diff_seconds": 115.917,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.212
+      },
+      {
+        "days_from_equinox": 0,
+        "date": "2026-09-23",
+        "sunrise_waqt_vs_level_a_diff_seconds": 116.048,
+        "sunrise_level_b_vs_level_a_diff_seconds": -1.076
+      },
+      {
+        "days_from_equinox": 1,
+        "date": "2026-09-24",
+        "sunrise_waqt_vs_level_a_diff_seconds": 116.234,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.914
+      },
+      {
+        "days_from_equinox": 3,
+        "date": "2026-09-26",
+        "sunrise_waqt_vs_level_a_diff_seconds": 116.738,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.535
+      },
+      {
+        "days_from_equinox": 7,
+        "date": "2026-09-30",
+        "sunrise_waqt_vs_level_a_diff_seconds": 117.99,
+        "sunrise_level_b_vs_level_a_diff_seconds": 0.187
+      },
+      {
+        "days_from_equinox": 14,
+        "date": "2026-10-07",
+        "sunrise_waqt_vs_level_a_diff_seconds": 119.75,
+        "sunrise_level_b_vs_level_a_diff_seconds": 0.114
+      },
+      {
+        "days_from_equinox": 30,
+        "date": "2026-10-23",
+        "sunrise_waqt_vs_level_a_diff_seconds": 129.346,
+        "sunrise_level_b_vs_level_a_diff_seconds": -0.722
+      },
+      {
+        "days_from_equinox": 60,
+        "date": "2026-11-22",
+        "sunrise_waqt_vs_level_a_diff_seconds": 253.88,
+        "sunrise_level_b_vs_level_a_diff_seconds": 0.532
+      }
+    ]
+  }
+}

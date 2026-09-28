@@ -1,14 +1,29 @@
-fastapi
-uvicorn
-timezonefinder
-ephem
+# Sprint 11: waqt-core (astronomy, Hijri calendars, scheduling,
+# institutional calendars) is now an independently distributable
+# package under core/, and this repo's root package (waqt.api) depends
+# on it formally (see pyproject.toml). Installing both in editable
+# mode reproduces the old "just works from a checkout" experience
+# while making the dependency real and testable -- `pip install -e
+# ./core` alone pulls in waqt-core's own dependencies (ephem,
+# timezonefinder), and `pip install -e .` pulls in fastapi/uvicorn per
+# the root pyproject.toml.
+-e ./core
+-e .
+
+# waqt_local (local/) similarly depends on waqt-core, not on this
+# repo's root package -- see local/pyproject.toml.
+-e ./local
+
 # astral is a dev/test-only dependency, used solely to cross-validate
 # the solar engine in tests/test_core.py. It is not imported by
-# anything in waqt/ itself.
+# anything in waqt/ or waqt_core/ itself.
 astral
 pytest
+httpx  # FastAPI's TestClient, used by tests/test_api.py and the packaging smoke tests
+build  # python -m build, used by the packaging smoke tests (core/, root, and the SDKs)
+
 # pymeeus is used solely by independent-astronomy/level_a/ (Sprint 10's
-# Level-A astronomical reference, VSOP87-based) to cross-validate the two
-# existing Level-B solar engines. It is not imported by anything in
-# waqt/ or waqt_local/ itself.
+# Level-A astronomical reference, VSOP87-based) to cross-validate the
+# Level-B solar engines. It is not imported by anything in waqt_core/
+# or waqt_local/ itself.
 pymeeus

@@ -1,0 +1,192 @@
+{
+ "configs": {
+  "N lat, lon 18.96E, May-Jul": {
+   "lon": 18.9553,
+   "checked": 7650,
+   "disagreements": [
+    {
+     "lat": 66.5,
+     "date": "2026-06-06",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    },
+    {
+     "lat": 71.5,
+     "date": "2026-05-10",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    }
+   ]
+  },
+  "N lat, lon 150W, May-Jul": {
+   "lon": -150.0,
+   "checked": 3825,
+   "disagreements": [
+    {
+     "lat": 66.0,
+     "date": "2026-06-12",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    },
+    {
+     "lat": 69.5,
+     "date": "2026-07-24",
+     "event": "maghrib",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    },
+    {
+     "lat": 74.0,
+     "date": "2026-05-01",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    }
+   ]
+  },
+  "N lat, lon 100E, Nov-Jan": {
+   "lon": 100.0,
+   "checked": 3825,
+   "disagreements": [
+    {
+     "lat": 67.0,
+     "date": "2026-12-10",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    },
+    {
+     "lat": 68.5,
+     "date": "2026-11-28",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    },
+    {
+     "lat": 70.0,
+     "date": "2027-01-21",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    },
+    {
+     "lat": 71.0,
+     "date": "2026-11-16",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    },
+    {
+     "lat": 72.5,
+     "date": "2026-11-10",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    },
+    {
+     "lat": 73.0,
+     "date": "2027-02-02",
+     "event": "asr",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     }
+    }
+   ]
+  },
+  "S lat, lon 70W, Nov-Jan": {
+   "lon": -70.0,
+   "checked": 3825,
+   "disagreements": [
+    {
+     "lat": -69.0,
+     "date": "2026-11-22",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    },
+    {
+     "lat": -72.0,
+     "date": "2026-11-10",
+     "event": "sunrise",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    },
+    {
+     "lat": -72.5,
+     "date": "2027-02-02",
+     "event": "maghrib",
+     "undefined": {
+      "waqt": false,
+      "level_b": true,
+      "level_a": true
+     },
+     "physical_crossing_exists": true,
+     "waqt_correct": true,
+     "references_correct": false
+    }
+   ]
+  }
+ }
+}

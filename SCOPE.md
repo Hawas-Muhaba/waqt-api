@@ -90,9 +90,9 @@ Per your instruction to hold the line on scope — none of the following exist i
 
 1. **"Local Gregorian date" is now resolved via a real IANA timezone lookup (Sprint 2)** — fixed from Stage 1's UTC-date shortcut. Verified against the most extreme real-world case available (Kiritimati, Kiribati). The bracket search widens to a ±3-day window to handle large civil/solar offsets; this is a pragmatic bound, not a formal proof it handles every conceivable timezone.
 2. **Elevation correction is now implemented (Sprint 2)**, applied to sunrise/sunset only, not Fajr/Isha/Asr — see `solar.py` for the reasoning. Off by default (elevation_m=0).
-3. **Accuracy is Level-B, not Level-A** — now formally defined, see `SPRINT-2-REPORT.md` §6. Level A (sub-10s, ephemeris-grade) is explicitly deferred, not silently skipped.
+3. **Accuracy is *labelled* Level-B; measured, it now meets the Level-A number on the tested matrix** — definition in `SPRINT-2-REPORT.md` §6; Sprint 11 fixed three solver bugs and measured ~1 s (3.6 s high-latitude) against a VSOP87 reference (`docs/ASTRONOMY-ENGINE-EVALUATION.md`). The label is deliberately unchanged pending a decision to promote it (one reference, essentially one year). **Times published before Sprint 11 can be off by up to ~7 min at high latitude near an equinox.**
 4. **The Hijri dates are approximate, on two different providers with two different caveats** — `arithmetic-tabular` is a pure arithmetic calendar (never claims to be UAQ); `umm-al-qura` is a real astronomical implementation of UAQ's rule, validated against four historical dates, but has no channel for real UAQ's occasional sighting-based overrides on the four liturgically significant months. **Do not use either for determining the start of Ramadan or any matter of religious obligation** without independent confirmation. The interface is built so an authoritative live-feed provider can be swapped in later without touching anything else.
-5. **Single ΔT/ time-scale model:** now implemented (Sprint 2) — see `waqt/timescale.py`. `EspenakMeeusDeltaT` is wired into every calculation and named in every response.
+5. **Single ΔT/ time-scale model:** now implemented (Sprint 2) — see `core/waqt_core/timescale.py`. `EspenakMeeusDeltaT` is wired into every calculation and named in every response.
 
 ---
 

@@ -23,8 +23,10 @@ a Waqt computation surface that works **without an HTTP server**.
 
 `waqt_local` and `waqt.api` are **siblings**, not one built on the
 other. Both call directly into the same computation package
-(`waqt.core`, `waqt.solar`, `waqt.semantics`, `waqt.hijri`,
-`waqt.scheduling`, `waqt.institutional`, `waqt.calendar_interop`);
+(`waqt_core.core`, `waqt_core.solar`, `waqt_core.semantics`,
+`waqt_core.hijri`, `waqt_core.scheduling`, `waqt_core.institutional`,
+`waqt_core.calendar_interop` — the `waqt-core` distribution since Sprint 11;
+`waqt.core` etc. remain as aliases to the same module objects);
 neither is layered on top of the other, and `waqt_local` has zero
 dependency on FastAPI or `waqt.api`. `waqt_client` (the remote SDKs)
 sits below the HTTP API only, and has zero dependency on `waqt` or
@@ -33,7 +35,7 @@ sits below the HTTP API only, and has zero dependency on `waqt` or
 ## What's genuinely shared, and what's deliberately duplicated
 
 **Shared (not duplicated):** every temporal/astronomical/calendar
-computation. `waqt_local.facade.waqt(...)` calls `waqt.core.compute_waqt`
+computation. `waqt_local.facade.waqt(...)` calls `waqt_core.core.compute_waqt` (== `waqt.core.compute_waqt`)
 directly — the exact function `waqt.api.waqt_endpoint` also calls. There
 is exactly one implementation of "what time is Waqt right now" in this
 codebase; `waqt_local` does not introduce a second one, and could not

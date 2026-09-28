@@ -81,11 +81,23 @@ EVENT_NAMES = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"]
 # tolerance: agreement there is checked as "all three engines call it
 # undefined together", not a diff-in-seconds number.
 TOLERANCE_SECONDS_WAQT_VS_LEVEL_A = {
-    "equator": 25,
-    "tropics": 35,
-    "mid-lat-N": 45,
-    "mid-lat-S": 55,
-    "high-lat": 450,
+    # Sprint 11 re-tightened these after fixing the half-day epoch-
+    # alignment bug in solar.py's event-time refinement (see
+    # SPRINT-11-REPORT.md Sec 2) -- the same "measure, then set the
+    # tolerance from what's observed" discipline as the original values,
+    # applied again now that the observed maxima are far smaller.
+    # high-lat in particular: 450 -> 25, since the dominant error source
+    # here used to be the bug (up to 432s) and is now just NOAA's
+    # inherent low-precision-formula accuracy, amplified by the same
+    # geometric sensitivity but starting from a ~30x smaller base error.
+    # Second tightening, after the transit/Asr epoch-sampling fix (bug 2,
+    # SPRINT-11-REPORT.md Sec 2): observed maxima are now 0.9-1.0 s for
+    # non-high-lat bands and 3.6 s at high latitude.
+    "equator": 3,
+    "tropics": 3,
+    "mid-lat-N": 3,
+    "mid-lat-S": 3,
+    "high-lat": 8,
 }
 TOLERANCE_SECONDS_LEVEL_B_VS_LEVEL_A = {
     "equator": 3,

@@ -13,17 +13,6 @@ import net from "node:net";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../..");
 
-import fs from "node:fs";
-
-function getPythonCmd() {
-  if (process.env.PYTHON) return process.env.PYTHON;
-  const venvPyWin = path.join(REPO_ROOT, ".venv", "Scripts", "python.exe");
-  if (fs.existsSync(venvPyWin)) return venvPyWin;
-  const venvPyNix = path.join(REPO_ROOT, ".venv", "bin", "python");
-  if (fs.existsSync(venvPyNix)) return venvPyNix;
-  return process.platform === "win32" ? "python" : "python3";
-}
-
 function findFreePort() {
   return new Promise((resolve, reject) => {
     const srv = net.createServer();
@@ -38,7 +27,7 @@ function findFreePort() {
 export async function startServer() {
   const port = await findFreePort();
   const child = spawn(
-    getPythonCmd(),
+    "python3",
     ["-m", "uvicorn", "waqt.api:app", "--host", "127.0.0.1", "--port", String(port), "--log-level", "warning"],
     { cwd: REPO_ROOT, stdio: "ignore" }
   );

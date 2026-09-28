@@ -18,39 +18,37 @@ Two levels are defined.
 | Level | Definition | Status |
 |---|---|---|
 | **B — Operational** | Agreement with an independent reference solar calculator (`astral`), within latitude-tiered tolerances (below) | **Implemented and tested.** This is what the API delivers today, always. |
-| **A — High-precision** | Sub-10-second agreement against a high-precision ephemeris (e.g. VSOP87 or a modern JPL ephemeris) across the full geographic matrix | **Measured, not implemented.** Sprint 10 built a Level-A reference (`independent-astronomy/level_a/`, full VSOP87 via `pymeeus`) purely to measure the two existing Level-B engines against it — see below. `waqt/solar.py` itself is still Level B; producing a genuinely Level-A production engine would be a different, larger project (see "What Level-A measurement actually found"). |
+| **A — High-precision** | Sub-10-second agreement against a high-precision ephemeris (e.g. VSOP87 or a modern JPL ephemeris) across the full geographic matrix | **Numerically met on the tested matrix, not yet claimed.** After Sprint 11's three fixes `core/waqt_core/solar.py` agrees with a full-VSOP87 reference within ~1.0 s (3.6 s at high latitude) on an 80-row matrix, a dense latitude sweep and an equinox sweep. The API still reports Level B / `waqt-noaa-low-precision`: promotion is an open decision (one reference, essentially one year) — see [`ASTRONOMY-ENGINE-EVALUATION.md`](ASTRONOMY-ENGINE-EVALUATION.md) §5. |
 
-### What Level-A measurement actually found (Sprint 10)
+### What Level-A measurement found (Sprint 10) — and what it turned out to mean (Sprint 11)
 
-`independent-astronomy/compare_level_a.py` checks both `waqt/solar.py`
-(production) and `independent_solar` (Sprint 9's Level-B cross-check)
-against the VSOP87 reference, across the same 13-location x 5-date
-matrix `docs/INDEPENDENT-ASTRONOMY.md` uses (plus one explicit polar
-row). The result was not "both are fine":
+Sprint 10's comparison of the production engine against a VSOP87 reference:
 
-| Latitude band | `waqt/solar.py` vs Level A (observed max) | `independent_solar` vs Level A (observed max) |
-|---|---|---|
-| equator | ~20s | ~1.7s |
-| tropics | ~32s | ~1.7s |
-| mid-latitude N | ~40s | ~1.8s |
-| mid-latitude S | ~48s | ~1.9s |
-| high-latitude | ~432s | ~4.3s |
+| Latitude band | production vs Level A, Sprint 10 | production vs Level A, after Sprint 11 | `independent_solar` (Level B) vs Level A |
+|---|---|---|---|
+| equator | ~20s | ~0.9s | ~1.7s |
+| tropics | ~32s | ~1.0s | ~1.7s |
+| mid-latitude N | ~40s | ~1.0s | ~1.8s |
+| mid-latitude S | ~48s | ~1.0s | ~1.9s |
+| high-latitude | ~432s | ~3.6s | ~4.3s |
 
-`independent_solar`'s Meeus low-accuracy method tracks full VSOP87
-roughly an order of magnitude more tightly than `waqt/solar.py`'s NOAA
-low-precision formulas do, at every band. Sprint 9's own comparison
-(`compare.py`, waqt vs `independent_solar`) had shown the two Level-B
-engines agreeing with *each other* reasonably well; this sprint's
-Level-A comparison shows that agreement was not evenly split — one of
-the two is measurably closer to the truth than the other. See
-`independent-astronomy/vectors/level_a_comparison.json` for every row
-and `SPRINT-10-REPORT.md` for the full discussion, including why
-`waqt/solar.py` is deliberately left unchanged despite this finding
-(this sprint's Definition of Done explicitly forbids "silently changing
-the production astronomical engine" on the basis of a comparison alone;
-a real fix is a validated, reviewed engine swap, not a quiet patch).
+Sprint 10 read the gap as NOAA low-precision formulas being an order of
+magnitude less accurate than Meeus-with-nutation, and (in the earlier version
+of this document) called the high-latitude figure "a real geometric effect".
+**That was wrong, or at best a third of the story.** Sprint 11 traced it to
+three defects in the event solver — a missing `− 0.5` in the Julian Day of the
+refinement loop (sampling the sun 12 h off), declination/equation-of-time
+sampled at UT noon instead of the transit instant, and the same UT-noon start
+deciding whether a marginal polar-threshold event exists. Geometry did amplify
+them at high latitude (hour angle is ~865× more sensitive to declination there
+than at the equator), but the input error was ours. With the fixes, the
+production engine is at or better than Level B in every band. Full
+investigation, before/after tables and reproduction commands:
+[`ASTRONOMY-ENGINE-EVALUATION.md`](ASTRONOMY-ENGINE-EVALUATION.md).
 
-### Measured Level-B accuracy, by latitude
+### Historical: agreement with `astral`, by latitude (not re-measured in Sprint 11)
+
+These figures are `tests/test_core.py`'s tolerances against the third-party `astral` calculator. The suite still passes against them after Sprint 11, so they stand as **upper bounds**; the Level-A numbers above are the current measurement.
 
 | Latitude band | Agreement with reference |
 |---|---|
@@ -60,7 +58,7 @@ a real fix is a validated, reviewed engine swap, not a quiet patch).
 
 This gets looser toward the poles for a real geometric reason, not sloppiness: near the equator the sun's altitude changes quickly around rise/set, so a small angle disagreement between two independent algorithms barely shifts the *time*; near high latitude the sun's path is shallow, so the same angle disagreement amplifies. `tests/test_core.py` encodes these tolerances directly, tiered by latitude, rather than hiding the spread behind one number.
 
-**Practical implication:** fine for a wall display, a timetable, or a scheduling system. Not yet verified precise enough for legal or liturgical use without independent confirmation, especially outside the tropics. The Level-A comparison above sharpens this: `waqt/solar.py`'s actual measured error against a high-precision reference is toward the higher end of what "agreement with `astral`" alone had suggested, particularly at high latitude.
+**Practical implication:** fine for a wall display, a timetable, or a scheduling system. Not yet verified precise enough for legal or liturgical use without independent confirmation, especially outside the tropics. The Level-A comparison above supersedes this for accuracy claims: after Sprint 11, measured error against a high-precision reference is about a second on the tested matrix. Not yet verified for legal or liturgical use — one reference, essentially one year.
 
 ## Elevation
 

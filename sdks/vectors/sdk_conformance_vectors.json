@@ -20,7 +20,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.175760+00:00"
+          "generated_at": "2026-09-28T10:02:54.629039+00:00"
         },
         "data": {
           "status": "OK",
@@ -36,9 +36,9 @@
           },
           "undefined_reason": null,
           "day": {
-            "maghrib_open": "2026-09-19T15:22:38+00:00",
-            "maghrib_close": "2026-09-20T15:22:02+00:00",
-            "length_si_seconds": 86363.858,
+            "maghrib_open": "2026-09-19T15:22:57+00:00",
+            "maghrib_close": "2026-09-20T15:22:20+00:00",
+            "length_si_seconds": 86363.831,
             "note": "Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would."
           },
           "hijri": {
@@ -56,68 +56,68 @@
           },
           "weekday": "al-Ahad",
           "waqt": {
-            "display": "Waqt 00:19:21",
+            "display": "Waqt 00:19:02",
             "reading": {
-              "display": "00:19:21",
-              "seconds": 1161.083
+              "display": "00:19:02",
+              "seconds": 1142.993
             }
           },
           "events": [
             {
               "name": "fajr",
-              "instant": "2026-09-20T02:04:50+00:00",
+              "instant": "2026-09-20T02:04:52+00:00",
               "reading": {
-                "display": "10:42:11",
-                "seconds": 38531.172
+                "display": "10:41:55",
+                "seconds": 38515.682
               }
             },
             {
               "name": "sunrise",
-              "instant": "2026-09-20T03:14:25+00:00",
+              "instant": "2026-09-20T03:14:29+00:00",
               "reading": {
-                "display": "11:51:46",
-                "seconds": 42706.824
+                "display": "11:51:31",
+                "seconds": 42691.996
               }
             },
             {
               "name": "dhuhr",
-              "instant": "2026-09-20T09:18:26+00:00",
+              "instant": "2026-09-20T09:18:28+00:00",
               "reading": {
-                "display": "17:55:47",
-                "seconds": 64547.353
+                "display": "17:55:31",
+                "seconds": 64531.657
               }
             },
             {
               "name": "asr",
-              "instant": "2026-09-20T12:31:28+00:00",
+              "instant": "2026-09-20T12:31:43+00:00",
               "reading": {
-                "display": "21:08:49",
-                "seconds": 76129.284
+                "display": "21:08:46",
+                "seconds": 76126.405
               }
             },
             {
               "name": "maghrib",
-              "instant": "2026-09-20T15:22:02+00:00",
+              "instant": "2026-09-20T15:22:20+00:00",
               "reading": {
                 "display": "23:59:23",
-                "seconds": 86363.858
+                "seconds": 86363.831
               }
             },
             {
               "name": "isha",
-              "instant": "2026-09-20T16:27:32+00:00",
+              "instant": "2026-09-20T16:27:51+00:00",
               "reading": {
-                "display": "25:04:53",
-                "seconds": 90293.962
+                "display": "25:04:54",
+                "seconds": 90294.479
               }
             }
           ],
           "next_event": {
             "name": "fajr",
-            "instant": "2026-09-20T02:04:50+00:00",
+            "instant": "2026-09-20T02:04:52+00:00",
             "countdown": {
-              "display": "10:22:50",
-              "seconds": 37370.089
+              "display": "10:22:52",
+              "seconds": 37372.689
             }
           },
           "profile": {
@@ -153,7 +153,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.180192+00:00"
+          "generated_at": "2026-09-28T10:02:54.634982+00:00"
         },
         "data": {
           "status": "UNDEFINED",
@@ -213,7 +213,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.183823+00:00"
+          "generated_at": "2026-09-28T10:02:54.641767+00:00"
         },
         "data": {
           "status": "OK",
@@ -229,9 +229,9 @@
           },
           "undefined_reason": null,
           "day": {
-            "maghrib_open": "2026-09-18T15:20:34+00:00",
-            "maghrib_close": "2026-09-19T15:19:36+00:00",
-            "length_si_seconds": 86342.061,
+            "maghrib_open": "2026-09-18T15:21:03+00:00",
+            "maghrib_close": "2026-09-19T15:20:05+00:00",
+            "length_si_seconds": 86342.056,
             "note": "Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would."
           },
           "hijri": {
@@ -249,68 +249,68 @@
           },
           "weekday": "as-Sabt",
           "waqt": {
-            "display": "Waqt 18:39:25",
+            "display": "Waqt 18:38:56",
             "reading": {
-              "display": "18:39:25",
-              "seconds": 67165.895
+              "display": "18:38:56",
+              "seconds": 67136.923
             }
           },
           "events": [
             {
               "name": "fajr",
-              "instant": "2026-09-19T01:54:40+00:00",
+              "instant": "2026-09-19T01:54:31+00:00",
               "reading": {
-                "display": "10:34:06",
-                "seconds": 38046.728
+                "display": "10:33:28",
+                "seconds": 38008.605
               }
             },
             {
               "name": "sunrise",
-              "instant": "2026-09-19T03:08:48+00:00",
+              "instant": "2026-09-19T03:08:41+00:00",
               "reading": {
-                "display": "11:48:14",
-                "seconds": 42494.601
+                "display": "11:47:38",
+                "seconds": 42458.034
               }
             },
             {
               "name": "dhuhr",
-              "instant": "2026-09-19T09:14:29+00:00",
+              "instant": "2026-09-19T09:14:32+00:00",
               "reading": {
-                "display": "17:53:55",
-                "seconds": 64435.847
+                "display": "17:53:29",
+                "seconds": 64409.333
               }
             },
             {
               "name": "asr",
-              "instant": "2026-09-19T13:37:19+00:00",
+              "instant": "2026-09-19T13:37:48+00:00",
               "reading": {
-                "display": "22:16:45",
-                "seconds": 80205.667
+                "display": "22:16:44",
+                "seconds": 80204.946
               }
             },
             {
               "name": "maghrib",
-              "instant": "2026-09-19T15:19:36+00:00",
+              "instant": "2026-09-19T15:20:05+00:00",
               "reading": {
                 "display": "23:59:02",
-                "seconds": 86342.061
+                "seconds": 86342.056
               }
             },
             {
               "name": "isha",
-              "instant": "2026-09-19T16:29:18+00:00",
+              "instant": "2026-09-19T16:29:48+00:00",
               "reading": {
-                "display": "25:08:43",
-                "seconds": 90523.963
+                "display": "25:08:45",
+                "seconds": 90525.287
               }
             }
           ],
           "next_event": {
             "name": "asr",
-            "instant": "2026-09-19T13:37:19+00:00",
+            "instant": "2026-09-19T13:37:48+00:00",
             "countdown": {
-              "display": "03:37:19",
-              "seconds": 13039.772
+              "display": "03:37:48",
+              "seconds": 13068.023
             }
           },
           "profile": {
@@ -346,7 +346,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.188799+00:00"
+          "generated_at": "2026-09-28T10:02:54.650960+00:00"
         },
         "data": {
           "status": "OK",
@@ -362,9 +362,9 @@
           },
           "undefined_reason": null,
           "day": {
-            "maghrib_open": "2026-09-19T15:22:38+00:00",
-            "maghrib_close": "2026-09-20T15:22:02+00:00",
-            "length_si_seconds": 86363.858,
+            "maghrib_open": "2026-09-19T15:22:57+00:00",
+            "maghrib_close": "2026-09-20T15:22:20+00:00",
+            "length_si_seconds": 86363.831,
             "note": "Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would."
           },
           "computation": {
@@ -394,7 +394,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.194280+00:00"
+          "generated_at": "2026-09-28T10:02:54.664662+00:00"
         },
         "data": {
           "status": "OK",
@@ -409,63 +409,63 @@
             "utc_offset_seconds": 10800
           },
           "undefined_reason": null,
-          "day_start_maghrib": "2026-09-19T15:22:38+00:00",
+          "day_start_maghrib": "2026-09-19T15:22:57+00:00",
           "events": [
             {
               "name": "fajr",
-              "instant": "2026-09-20T02:04:50+00:00",
+              "instant": "2026-09-20T02:04:52+00:00",
               "reading": {
-                "display": "10:42:11",
-                "seconds": 38531.172
+                "display": "10:41:55",
+                "seconds": 38515.682
               }
             },
             {
               "name": "sunrise",
-              "instant": "2026-09-20T03:14:25+00:00",
+              "instant": "2026-09-20T03:14:29+00:00",
               "reading": {
-                "display": "11:51:46",
-                "seconds": 42706.824
+                "display": "11:51:31",
+                "seconds": 42691.996
               }
             },
             {
               "name": "dhuhr",
-              "instant": "2026-09-20T09:18:26+00:00",
+              "instant": "2026-09-20T09:18:28+00:00",
               "reading": {
-                "display": "17:55:47",
-                "seconds": 64547.353
+                "display": "17:55:31",
+                "seconds": 64531.657
               }
             },
             {
               "name": "asr",
-              "instant": "2026-09-20T12:31:28+00:00",
+              "instant": "2026-09-20T12:31:43+00:00",
               "reading": {
-                "display": "21:08:49",
-                "seconds": 76129.284
+                "display": "21:08:46",
+                "seconds": 76126.405
               }
             },
             {
               "name": "maghrib",
-              "instant": "2026-09-20T15:22:02+00:00",
+              "instant": "2026-09-20T15:22:20+00:00",
               "reading": {
                 "display": "23:59:23",
-                "seconds": 86363.858
+                "seconds": 86363.831
               }
             },
             {
               "name": "isha",
-              "instant": "2026-09-20T16:27:32+00:00",
+              "instant": "2026-09-20T16:27:51+00:00",
               "reading": {
-                "display": "25:04:53",
-                "seconds": 90293.962
+                "display": "25:04:54",
+                "seconds": 90294.479
               }
             }
           ],
           "next_event": {
             "name": "fajr",
-            "instant": "2026-09-20T02:04:50+00:00",
+            "instant": "2026-09-20T02:04:52+00:00",
             "countdown": {
-              "display": "10:22:50",
-              "seconds": 37370.089
+              "display": "10:22:52",
+              "seconds": 37372.689
             }
           },
           "profile": {
@@ -499,7 +499,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.200546+00:00"
+          "generated_at": "2026-09-28T10:02:54.674874+00:00"
         },
         "data": {
           "gregorian_date": "2026-09-19",
@@ -537,7 +537,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.210831+00:00"
+          "generated_at": "2026-09-28T10:02:54.696971+00:00"
         },
         "data": {
           "gregorian_date": "2026-09-19",
@@ -572,7 +572,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.212921+00:00"
+          "generated_at": "2026-09-28T10:02:54.699911+00:00"
         },
         "data": {
           "providers": [
@@ -622,7 +622,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.216654+00:00"
+          "generated_at": "2026-09-28T10:02:54.707947+00:00"
         },
         "data": {
           "location": {
@@ -655,7 +655,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.221707+00:00"
+          "generated_at": "2026-09-28T10:02:54.716861+00:00"
         },
         "data": {
           "direction": "to-hijri",
@@ -699,7 +699,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.223693+00:00"
+          "generated_at": "2026-09-28T10:02:54.719958+00:00"
         },
         "data": {
           "direction": "to-gregorian",
@@ -736,7 +736,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.249562+00:00"
+          "generated_at": "2026-09-28T10:02:54.764749+00:00"
         },
         "data": {
           "direction": "instant-to-calendars",
@@ -786,9 +786,9 @@
                 }
               },
               "weekday": "al-Ahad",
-              "day_open_maghrib": "2026-09-19T15:22:38.916924+00:00",
-              "day_close_maghrib": "2026-09-20T15:22:02.775048+00:00",
-              "position_seconds": 1161.083
+              "day_open_maghrib": "2026-09-19T15:22:57.007342+00:00",
+              "day_close_maghrib": "2026-09-20T15:22:20.838566+00:00",
+              "position_seconds": 1142.993
             }
           },
           "profile": {
@@ -826,7 +826,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.252406+00:00"
+          "generated_at": "2026-09-28T10:02:54.770334+00:00"
         },
         "data": {
           "direction": "gregorian-date-to-waqt",
@@ -864,9 +864,9 @@
             },
             "weekday": "al-Ahad",
             "day": {
-              "maghrib_open": "2026-09-19T15:22:38+00:00",
-              "maghrib_close": "2026-09-20T15:22:02+00:00",
-              "length_si_seconds": 86363.858
+              "maghrib_open": "2026-09-19T15:22:57+00:00",
+              "maghrib_close": "2026-09-20T15:22:20+00:00",
+              "length_si_seconds": 86363.831
             }
           },
           "caveat": "Waqt states calendar facts (which civil date, which Hijri date, which Waqt day/position), not institutional or religious obligations."
@@ -892,7 +892,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.255422+00:00"
+          "generated_at": "2026-09-28T10:02:54.777206+00:00"
         },
         "data": {
           "start": "2026-09-19T00:00:00+00:00",
@@ -900,7 +900,7 @@
           "crosses_civil_midnight": true,
           "crosses_maghrib": true,
           "maghrib_boundaries": [
-            "2026-09-19T15:22:38.916924+00:00"
+            "2026-09-19T15:22:57.007342+00:00"
           ],
           "start_civil_date": "2026-09-19",
           "end_civil_date": "2026-09-20",
@@ -933,19 +933,19 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.259693+00:00"
+          "generated_at": "2026-09-28T10:02:54.783215+00:00"
         },
         "data": {
           "instant": "2026-09-19T15:42:00+00:00",
           "day": {
             "status": "OK",
             "instant": "2026-09-19T15:42:00+00:00",
-            "open": "2026-09-19T15:22:38+00:00",
-            "close": "2026-09-20T15:22:02+00:00",
-            "length_seconds": 86363.858124,
+            "open": "2026-09-19T15:22:57+00:00",
+            "close": "2026-09-20T15:22:20+00:00",
+            "length_seconds": 86363.831224,
             "position": {
-              "seconds": 1161.083076,
-              "display": "00:19:21"
+              "seconds": 1142.992658,
+              "display": "00:19:02"
             },
             "hijri_label": "1448-04-07",
             "reason": null
@@ -953,10 +953,10 @@
           "next_event": {
             "status": "OK",
             "name": "isha",
-            "instant": "2026-09-19T16:28:10+00:00",
-            "seconds_until": 2770.156005,
+            "instant": "2026-09-19T16:28:28+00:00",
+            "seconds_until": 2788.885934,
             "position": {
-              "seconds": 3931.239081,
+              "seconds": 3931.878592,
               "display": "01:05:31"
             },
             "undefined_events": [],
@@ -968,10 +968,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 37370.089141,
+                "seconds": 37372.68947,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-20T02:04:50+00:00",
+                  "instant": "2026-09-20T02:04:52+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -987,10 +987,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 49024.746714,
+                "seconds": 49022.221537,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T02:04:55+00:00",
+                  "instant": "2026-09-19T02:04:57+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1009,10 +1009,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 41545.740674,
+                "seconds": 41549.003215,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-20T03:14:25+00:00",
+                  "instant": "2026-09-20T03:14:29+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1028,10 +1028,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 44847.719661,
+                "seconds": 44844.430163,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T03:14:32+00:00",
+                  "instant": "2026-09-19T03:14:35+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1050,10 +1050,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 63386.270104,
+                "seconds": 63388.664402,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-20T09:18:26+00:00",
+                  "instant": "2026-09-20T09:18:28+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1069,10 +1069,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 22992.360704,
+                "seconds": 22989.966151,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T09:18:47+00:00",
+                  "instant": "2026-09-19T09:18:50+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1091,10 +1091,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 74968.201255,
+                "seconds": 74983.411901,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-20T12:31:28+00:00",
+                  "instant": "2026-09-20T12:31:43+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1110,10 +1110,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 11434.199824,
+                "seconds": 11419.243564,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T12:31:25+00:00",
+                  "instant": "2026-09-19T12:31:40+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1132,10 +1132,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 85202.775048,
+                "seconds": 85220.838566,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-20T15:22:02+00:00",
+                  "instant": "2026-09-20T15:22:20+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1151,10 +1151,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 1161.083076,
+                "seconds": 1142.992658,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T15:22:38+00:00",
+                  "instant": "2026-09-19T15:22:57+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1173,10 +1173,10 @@
               "next": {
                 "kind": "until",
                 "status": "OK",
-                "seconds": 2770.156005,
+                "seconds": 2788.885934,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-19T16:28:10+00:00",
+                  "instant": "2026-09-19T16:28:28+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1192,10 +1192,10 @@
               "previous": {
                 "kind": "since",
                 "status": "OK",
-                "seconds": 83592.326986,
+                "seconds": 83573.485613,
                 "target": {
                   "status": "OK",
-                  "instant": "2026-09-18T16:28:47+00:00",
+                  "instant": "2026-09-18T16:29:06+00:00",
                   "basis": "astronomical_event",
                   "depends_on": [
                     "astronomical_event"
@@ -1259,7 +1259,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.263985+00:00"
+          "generated_at": "2026-09-28T10:02:54.796419+00:00"
         },
         "data": {
           "status": "OK",
@@ -1270,18 +1270,18 @@
           "same_waqt_day": false,
           "crosses_maghrib": true,
           "maghrib_boundaries": [
-            "2026-09-19T15:22:38+00:00",
-            "2026-09-20T15:22:02+00:00"
+            "2026-09-19T15:22:57+00:00",
+            "2026-09-20T15:22:20+00:00"
           ],
           "waqt_days_touched": 3,
           "start_day": {
-            "open": "2026-09-18T15:23:15.107063+00:00",
-            "close": "2026-09-19T15:22:38.916924+00:00",
+            "open": "2026-09-18T15:23:33.213316+00:00",
+            "close": "2026-09-19T15:22:57.007342+00:00",
             "hijri_label": "1448-04-06"
           },
           "end_day": {
-            "open": "2026-09-20T15:22:02.775048+00:00",
-            "close": "2026-09-21T15:21:26.703640+00:00",
+            "open": "2026-09-20T15:22:20.838566+00:00",
+            "close": "2026-09-21T15:21:44.729141+00:00",
             "hijri_label": "1448-04-08"
           },
           "crosses_civil_midnight": true,
@@ -1332,7 +1332,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.268847+00:00"
+          "generated_at": "2026-09-28T10:02:54.808348+00:00"
         },
         "data": {
           "definition": {
@@ -1340,22 +1340,22 @@
             "jumuah_day": "al-Jumuah",
             "label": "default"
           },
-          "week_start": "2026-09-19T15:22:38.916924+00:00",
-          "week_end": "2026-09-26T15:18:28.187492+00:00",
+          "week_start": "2026-09-19T15:22:57.007342+00:00",
+          "week_end": "2026-09-26T15:18:45.854555+00:00",
           "jumuah_index": 5,
           "days": [
             {
               "weekday": "al-Ahad",
               "status": "OK",
-              "open": "2026-09-19T15:22:38.916924+00:00",
-              "close": "2026-09-20T15:22:02.775048+00:00",
+              "open": "2026-09-19T15:22:57.007342+00:00",
+              "close": "2026-09-20T15:22:20.838566+00:00",
               "events": {
-                "fajr": "2026-09-20T02:04:50.089141+00:00",
-                "sunrise": "2026-09-20T03:14:25.740674+00:00",
-                "dhuhr": "2026-09-20T09:18:26.270104+00:00",
-                "asr": "2026-09-20T12:31:28.201255+00:00",
-                "maghrib": "2026-09-20T15:22:02.775048+00:00",
-                "isha": "2026-09-20T16:27:32.878961+00:00"
+                "fajr": "2026-09-20T02:04:52.689470+00:00",
+                "sunrise": "2026-09-20T03:14:29.003215+00:00",
+                "dhuhr": "2026-09-20T09:18:28.664402+00:00",
+                "asr": "2026-09-20T12:31:43.411901+00:00",
+                "maghrib": "2026-09-20T15:22:20.838566+00:00",
+                "isha": "2026-09-20T16:27:51.486062+00:00"
               },
               "hijri_label": "1448-04-07",
               "undefined_reason": null
@@ -1363,15 +1363,15 @@
             {
               "weekday": "al-Ithnayn",
               "status": "OK",
-              "open": "2026-09-20T15:22:02.775048+00:00",
-              "close": "2026-09-21T15:21:26.703640+00:00",
+              "open": "2026-09-20T15:22:20.838566+00:00",
+              "close": "2026-09-21T15:21:44.729141+00:00",
               "events": {
-                "fajr": "2026-09-21T02:04:44.787527+00:00",
-                "sunrise": "2026-09-21T03:14:19.268221+00:00",
-                "dhuhr": "2026-09-21T09:18:04.961479+00:00",
-                "asr": "2026-09-21T12:31:30.001139+00:00",
-                "maghrib": "2026-09-21T15:21:26.703640+00:00",
-                "isha": "2026-09-21T16:26:55.864622+00:00"
+                "fajr": "2026-09-21T02:04:47.454441+00:00",
+                "sunrise": "2026-09-21T03:14:22.494934+00:00",
+                "dhuhr": "2026-09-21T09:18:07.353235+00:00",
+                "asr": "2026-09-21T12:31:45.453753+00:00",
+                "maghrib": "2026-09-21T15:21:44.729141+00:00",
+                "isha": "2026-09-21T16:27:14.337531+00:00"
               },
               "hijri_label": "1448-04-08",
               "undefined_reason": null
@@ -1379,15 +1379,15 @@
             {
               "weekday": "ath-Thulatha",
               "status": "OK",
-              "open": "2026-09-21T15:21:26.703640+00:00",
-              "close": "2026-09-22T15:20:50.725008+00:00",
+              "open": "2026-09-21T15:21:44.729141+00:00",
+              "close": "2026-09-22T15:21:08.701327+00:00",
               "events": {
-                "fajr": "2026-09-22T02:04:39.365768+00:00",
-                "sunrise": "2026-09-22T03:14:12.880809+00:00",
-                "dhuhr": "2026-09-22T09:17:43.733468+00:00",
-                "asr": "2026-09-22T12:31:31.222401+00:00",
-                "maghrib": "2026-09-22T15:20:50.725008+00:00",
-                "isha": "2026-09-22T16:26:19.135692+00:00"
+                "fajr": "2026-09-22T02:04:42.090573+00:00",
+                "sunrise": "2026-09-22T03:14:16.062766+00:00",
+                "dhuhr": "2026-09-22T09:17:46.120367+00:00",
+                "asr": "2026-09-22T12:31:46.904358+00:00",
+                "maghrib": "2026-09-22T15:21:08.701327+00:00",
+                "isha": "2026-09-22T16:26:37.463061+00:00"
               },
               "hijri_label": "1448-04-09",
               "undefined_reason": null
@@ -1395,15 +1395,15 @@
             {
               "weekday": "al-Arbiaa",
               "status": "OK",
-              "open": "2026-09-22T15:20:50.725008+00:00",
-              "close": "2026-09-23T15:20:14.861547+00:00",
+              "open": "2026-09-22T15:21:08.701327+00:00",
+              "close": "2026-09-23T15:20:32.777475+00:00",
               "events": {
-                "fajr": "2026-09-23T02:04:33.841437+00:00",
-                "sunrise": "2026-09-23T03:14:06.596364+00:00",
-                "dhuhr": "2026-09-23T09:17:22.606220+00:00",
-                "asr": "2026-09-23T12:31:31.888089+00:00",
-                "maghrib": "2026-09-23T15:20:14.861547+00:00",
-                "isha": "2026-09-23T16:25:42.714829+00:00"
+                "fajr": "2026-09-23T02:04:36.615317+00:00",
+                "sunrise": "2026-09-23T03:14:09.724591+00:00",
+                "dhuhr": "2026-09-23T09:17:24.985914+00:00",
+                "asr": "2026-09-23T12:31:47.786557+00:00",
+                "maghrib": "2026-09-23T15:20:32.777475+00:00",
+                "isha": "2026-09-23T16:26:00.885335+00:00"
               },
               "hijri_label": "1448-04-10",
               "undefined_reason": null
@@ -1411,15 +1411,15 @@
             {
               "weekday": "al-Khamis",
               "status": "OK",
-              "open": "2026-09-23T15:20:14.861547+00:00",
-              "close": "2026-09-24T15:19:39.135747+00:00",
+              "open": "2026-09-23T15:20:32.777475+00:00",
+              "close": "2026-09-24T15:19:56.980029+00:00",
               "events": {
-                "fajr": "2026-09-24T02:04:28.232341+00:00",
-                "sunrise": "2026-09-24T03:14:00.432899+00:00",
-                "dhuhr": "2026-09-24T09:17:01.599971+00:00",
-                "asr": "2026-09-24T12:31:32.021705+00:00",
-                "maghrib": "2026-09-24T15:19:39.135747+00:00",
-                "isha": "2026-09-24T16:25:06.624646+00:00"
+                "fajr": "2026-09-24T02:04:31.046364+00:00",
+                "sunrise": "2026-09-24T03:14:03.498380+00:00",
+                "dhuhr": "2026-09-24T09:17:03.970085+00:00",
+                "asr": "2026-09-24T12:31:48.123654+00:00",
+                "maghrib": "2026-09-24T15:19:56.980029+00:00",
+                "isha": "2026-09-24T16:25:24.626989+00:00"
               },
               "hijri_label": "1448-04-11",
               "undefined_reason": null
@@ -1427,15 +1427,15 @@
             {
               "weekday": "al-Jumuah",
               "status": "OK",
-              "open": "2026-09-24T15:19:39.135747+00:00",
-              "close": "2026-09-25T15:19:03.570179+00:00",
+              "open": "2026-09-24T15:19:56.980029+00:00",
+              "close": "2026-09-25T15:19:21.331518+00:00",
               "events": {
-                "fajr": "2026-09-25T02:04:22.556507+00:00",
-                "sunrise": "2026-09-25T03:13:54.408507+00:00",
-                "dhuhr": "2026-09-25T09:16:40.735044+00:00",
-                "asr": "2026-09-25T12:31:31.647182+00:00",
-                "maghrib": "2026-09-25T15:19:03.570179+00:00",
-                "isha": "2026-09-25T16:24:30.887703+00:00"
+                "fajr": "2026-09-25T02:04:25.401631+00:00",
+                "sunrise": "2026-09-25T03:13:57.402186+00:00",
+                "dhuhr": "2026-09-25T09:16:43.093173+00:00",
+                "asr": "2026-09-25T12:31:47.939385+00:00",
+                "maghrib": "2026-09-25T15:19:21.331518+00:00",
+                "isha": "2026-09-25T16:24:48.710610+00:00"
               },
               "hijri_label": "1448-04-12",
               "undefined_reason": null
@@ -1443,15 +1443,15 @@
             {
               "weekday": "as-Sabt",
               "status": "OK",
-              "open": "2026-09-25T15:19:03.570179+00:00",
-              "close": "2026-09-26T15:18:28.187492+00:00",
+              "open": "2026-09-25T15:19:21.331518+00:00",
+              "close": "2026-09-26T15:18:45.854555+00:00",
               "events": {
-                "fajr": "2026-09-26T02:04:16.832177+00:00",
-                "sunrise": "2026-09-26T03:13:48.541343+00:00",
-                "dhuhr": "2026-09-26T09:16:20.031832+00:00",
-                "asr": "2026-09-26T12:31:30.788868+00:00",
-                "maghrib": "2026-09-26T15:18:28.187492+00:00",
-                "isha": "2026-09-26T16:23:55.526497+00:00"
+                "fajr": "2026-09-26T02:04:19.699256+00:00",
+                "sunrise": "2026-09-26T03:13:51.454135+00:00",
+                "dhuhr": "2026-09-26T09:16:22.375545+00:00",
+                "asr": "2026-09-26T12:31:47.257907+00:00",
+                "maghrib": "2026-09-26T15:18:45.854555+00:00",
+                "isha": "2026-09-26T16:24:13.158727+00:00"
               },
               "hijri_label": "1448-04-13",
               "undefined_reason": null
@@ -1475,7 +1475,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.271168+00:00"
+          "generated_at": "2026-09-28T10:02:54.813699+00:00"
         },
         "data": {
           "profile": {
@@ -1543,7 +1543,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.273082+00:00"
+          "generated_at": "2026-09-28T10:02:54.817459+00:00"
         },
         "data": null,
         "error": {
@@ -1574,7 +1574,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.275091+00:00"
+          "generated_at": "2026-09-28T10:02:54.824051+00:00"
         },
         "data": null,
         "error": {
@@ -1603,7 +1603,7 @@
         "meta": {
           "api_version": "1.3.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-26T14:25:15.276658+00:00"
+          "generated_at": "2026-09-28T10:02:54.825828+00:00"
         },
         "data": null,
         "error": {

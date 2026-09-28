@@ -22,10 +22,10 @@ open ("What was intentionally not built" in `SPRINT-9-REPORT.md`).
 ## What this is — and is not
 
 - **Is**: a thin, in-process wrapper. Every function in `waqt_local`
-  calls straight into `waqt.core` / `waqt.solar` / `waqt.semantics` /
-  `waqt.hijri` / `waqt.scheduling` / `waqt.institutional` /
-  `waqt.calendar_interop` — the exact same computation the HTTP server
-  (`waqt.api`) is built on — and shapes the result into the same dict
+  calls straight into `waqt_core.core` / `waqt_core.solar` /
+  `waqt_core.semantics` / `waqt_core.hijri` / `waqt_core.scheduling` /
+  `waqt_core.institutional` / `waqt_core.calendar_interop` — the exact
+  same computation the HTTP server (`waqt.api`) is built on — and shapes the result into the same dict
   shape the matching `/v1/*` endpoint's `data` field has.
 - **Is not** `waqt_client` (the Sprint 9 remote SDKs). `waqt_client`'s
   every value comes from a live HTTP response; `waqt_local`'s every
@@ -39,25 +39,22 @@ open ("What was intentionally not built" in `SPRINT-9-REPORT.md`).
 
 ## Install
 
-This package is not yet published as a standalone PyPI distribution,
-because the `waqt` core package (`waqt/` at the repository root) is
-not itself split out as an independently installable distribution —
-today it is only ever run from a checkout of this repository (the
-HTTP server is also only ever run that way: `uvicorn waqt.api:app`
-from the repo root). `waqt-local` inherits that same constraint rather
-than duplicating `waqt`'s code into its own package. Splitting a
-`waqt-core` distribution out from the application/API layer so that
-both `waqt-local` and `waqt.api` depend on it as a normal PyPI
-dependency is a natural Sprint 11 candidate — see this sprint's report.
+Not yet published to PyPI (publishing is a credentialed human step; see
+`docs/RELEASING.md`). Since Sprint 11 the dependency structure is real:
+`waqt-local` declares `waqt-core` as a dependency, and `waqt-core` is its own
+independently installable distribution (`core/`) rather than the un-split
+`waqt/` package `waqt-local` used to reach into from a checkout. See
+`docs/PACKAGING.md`.
 
 For now:
 
 ```bash
 git clone https://github.com/waqt-project/waqt-api
 cd waqt-api
-pip install -e local/            # installs waqt_local
-# waqt_local imports `waqt` directly; run from the repo root, or put
-# the repo root on PYTHONPATH, exactly as waqt.api itself requires.
+pip install -e core/             # waqt-core: the computation layer (ephem, timezonefinder)
+pip install -e local/            # waqt_local; depends on waqt-core, NOT on waqt / FastAPI
+# (Sprint 11: waqt_local now imports `waqt_core` directly and declares the
+# dependency. It no longer needs the repo root on PYTHONPATH or `waqt.api`.)
 ```
 
 ## Use

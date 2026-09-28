@@ -1,0 +1,120 @@
+# waqt-core
+
+The independently installable **computation layer** of Waqt: the
+astronomical engine, Hijri calendar arithmetic and providers, time/
+calendar semantics, the scheduling engine, and institutional (fiscal
+year / academic year / week) calendars. No HTTP, no FastAPI, no
+knowledge of `waqt.api` or `waqt_local` — this package is what both of
+those are built *on top of*, not the other way around.
+
+```
+    Waqt Specification
+           │
+    ┌──────┴──────┐
+    │             │
+waqt-core (this package)
+    │             │
+    └──────┬──────┘
+     depended on by
+      ┌────┴────┐
+      │         │
+  waqt.api   waqt_local
+(HTTP server)  (embeddable)
+```
+
+## Why this package exists
+
+Sprint 10 built `waqt_local`, an embeddable in-process computation
+library sitting *beside* `waqt.api` rather than behind it, and named
+the gap that left open: `waqt_local` still imported `waqt.core` /
+`waqt.hijri` / etc. directly from the combined `waqt/` package, which
+had never itself been split into an independently installable
+distribution — both `waqt.api` and `waqt_local` only ever worked from
+a full repository checkout. Sprint 11 closes that gap: `waqt-core` is
+that computation layer, extracted unchanged (see
+`SPRINT-11-REPORT.md` §1 for the byte-for-byte verification that this
+was a pure move, not a rewrite) into its own distribution, which
+`waqt.api` and `waqt_local` now both formally depend on.
+
+## What's genuinely reused vs. what changed
+
+Every module under `waqt_core/` is the exact file that used to live at
+the equivalent path under `waqt/` (`waqt/core.py` → `waqt_core/core.py`,
+`waqt/scheduling/` → `waqt_core/scheduling/`, and so on), copied
+without a single line changed — internal imports were already relative
+(`from .hijri import ...`, `from ..scheduling.model import ...`), so
+none needed rewriting. `waqt.core`, `waqt.hijri`, `waqt.scheduling`,
+and the rest remain importable from the original `waqt` package too —
+`waqt/__init__.py` aliases them to *the same module objects* defined
+here via `sys.modules`, not copies, so `waqt.core.compute_waqt is
+waqt_core.core.compute_waqt` and there is exactly one implementation of
+every Waqt computation in this repository, reachable under two names.
+
+One exception, made deliberately and separately from the extraction
+itself: Sprint 11's astronomy evaluation found and fixed three real defects in
+`solar.py`'s event solver (a 12-hour epoch error in the refinement loop,
+declination/equation-of-time sampled at UT noon instead of the transit instant,
+and the same start point deciding whether polar-threshold events exist).
+Together they were the dominant cause of the "high-latitude discrepancy"
+Sprint 10 flagged: 432 s → 3.6 s at high latitude against a VSOP87 reference,
+and 20–48 s → ~1 s elsewhere. These fixes *are* behavior changes — computed
+times differ from earlier releases — made after the extraction was verified
+byte-identical; see `docs/ASTRONOMY-ENGINE-EVALUATION.md` for the full
+investigation and `CHANGELOG.md` for the summary.
+
+## Install
+
+```bash
+pip install waqt-core            # once published (see docs/RELEASING.md)
+# or, from a checkout, editable:
+pip install -e core/
+```
+
+No FastAPI, no `waqt`, no `waqt_local` — `waqt-core`'s only
+dependencies are `ephem` (real astronomical conjunction/moonset rules
+for `UmmAlQuraProvider`) and `timezonefinder` (coordinate → IANA
+timezone lookup for `DEFAULT_TIMEZONE_PROVIDER`).
+
+## Use
+
+```python
+from datetime import datetime, timezone
+from waqt_core.core import compute_waqt
+
+result = compute_waqt(
+    lat=9.0192, lon=38.7525,
+    instant=datetime(2026, 9, 19, 15, 42, tzinfo=timezone.utc),
+)
+print(result.waqt_time, result.hijri_date)
+```
+
+Deep imports work exactly as they do on `waqt.*`:
+
+```python
+from waqt_core.scheduling.model import DAY_SHIFT
+from waqt_core.institutional.rules import MonthDay
+from waqt_core.calendar_providers.registry import default_registry
+```
+
+## Tests
+
+```bash
+pip install -e "core/[dev]"
+pytest core/tests/ -v
+```
+
+`core/tests/` covers three things a plain "the root suite still
+passes" claim does not:
+
+1. **Standalone conformance** — the same public `tests/vectors/*.json`
+   fixtures the root suite, `waqt_local`, and both SDKs already run,
+   driven directly against `waqt_core` with *only* `waqt-core` (not
+   `waqt`, not FastAPI) importable, proving the extracted package
+   alone reproduces the committed vectors.
+2. **Shim identity** — `waqt.core.compute_waqt is
+   waqt_core.core.compute_waqt` and friends, the concrete "no
+   duplicated computation" check for every aliased module.
+3. **Clean-install / packaging smoke** — builds a real wheel and
+   sdist (`python -m build`), installs each into a throwaway `venv`
+   with no access to this checkout, and imports/exercises
+   `waqt_core` from there.

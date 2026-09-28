@@ -1,0 +1,65 @@
+{
+ "note": "Sprint 11: classify the Asr defined-vs-undefined disagreements found by\nthreshold_scan.py. Asr has no fixed horizon threshold: its target altitude\nis atan(1/(shadow_ratio + tan|lat - decl|)) with decl at transit, which near\nthe polar threshold is nearly identical to the sun's midday PEAK altitude,\nso the 'crossing' is a near-tangency. Reports margin = peak - asr_altitude\n(degrees): margins below ~0.003 deg (~10 arcsec) are below the accuracy of\nevery engine here and the existence question is ill-conditioned.",
+ "rows": [
+  {
+   "lat": 67.0,
+   "date": "2026-12-10",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.0907,
+   "peak_altitude_deg": 0.0908,
+   "margin_deg": 0.0001,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 0.7
+  },
+  {
+   "lat": 68.5,
+   "date": "2026-11-28",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.1976,
+   "peak_altitude_deg": 0.1983,
+   "margin_deg": 0.0007,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 1.6
+  },
+  {
+   "lat": 70.0,
+   "date": "2027-01-21",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.0516,
+   "peak_altitude_deg": 0.0516,
+   "margin_deg": 0.0,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 1.0
+  },
+  {
+   "lat": 71.0,
+   "date": "2026-11-16",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.2644,
+   "peak_altitude_deg": 0.2656,
+   "margin_deg": 0.0012,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 2.3
+  },
+  {
+   "lat": 72.5,
+   "date": "2026-11-10",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.3572,
+   "peak_altitude_deg": 0.3595,
+   "margin_deg": 0.0023,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 3.2
+  },
+  {
+   "lat": 73.0,
+   "date": "2027-02-02",
+   "lon": 100.0,
+   "asr_altitude_deg": 0.125,
+   "peak_altitude_deg": 0.1253,
+   "margin_deg": 0.0003,
+   "ill_conditioned": true,
+   "waqt_asr_minus_transit_min": 2.1
+  }
+ ]
+}

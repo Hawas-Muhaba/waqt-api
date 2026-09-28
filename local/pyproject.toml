@@ -4,13 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-local"
-version = "0.1.0"
+version = "0.2.0"
 description = "Embeddable, no-server local computation library for Waqt (Maghrib-to-Maghrib civil time and Hijri calendar)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Waqt project" }]
-dependencies = []
+dependencies = [
+    "waqt-core>=0.1.0,<0.2",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=7"]

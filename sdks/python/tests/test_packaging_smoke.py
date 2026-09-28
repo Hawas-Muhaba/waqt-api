@@ -15,7 +15,6 @@ is correct without requiring network egress to pypi.org's upload API.
 
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
 import sys
@@ -32,7 +31,7 @@ pytestmark = pytest.mark.slow
 def _build_artifacts(tmp_path: Path) -> Path:
     dist_dir = tmp_path / "dist"
     subprocess.run(
-        [sys.executable, "-m", "build", "--no-isolation", "--outdir", str(dist_dir), str(PKG_ROOT)],
+        [sys.executable, "-m", "build", "--outdir", str(dist_dir), str(PKG_ROOT)],
         check=True, capture_output=True, text=True,
     )
     artifacts = list(dist_dir.glob("*"))
@@ -44,19 +43,6 @@ def _build_artifacts(tmp_path: Path) -> Path:
 def _fresh_venv(tmp_path: Path) -> Path:
     venv_dir = tmp_path / "venv"
     venv.EnvBuilder(with_pip=True).create(venv_dir)
-    try:
-        import httpx
-        cur_sp = Path(httpx.__file__).resolve().parent.parent
-        target_sp = venv_dir / ("Lib/site-packages" if sys.platform == "win32" else f"lib/python{sys.version_info.major}.{sys.version_info.minor}/site-packages")
-        target_sp.mkdir(parents=True, exist_ok=True)
-        for pkg in ["httpx", "httpcore", "anyio", "certifi", "idna", "h11", "sniffio", "typing_extensions.py"]:
-            src = cur_sp / pkg
-            if src.is_dir():
-                shutil.copytree(src, target_sp / pkg, dirs_exist_ok=True)
-            elif src.is_file():
-                shutil.copy2(src, target_sp / pkg)
-    except Exception as e:
-        print(f"Warning copying dependencies: {e}")
     return venv_dir
 
 
@@ -99,13 +85,12 @@ def test_clean_install_from_built_artifact(tmp_path, artifact_kind):
 
     venv_dir = _fresh_venv(tmp_path)
     py = _venv_python(venv_dir)
-    env = {k: v for k, v in os.environ.items() if k != "PYTHONPATH"}
 
-    install = subprocess.run([py, "-m", "pip", "install", "--no-deps", "--quiet", str(artifact)], capture_output=True, text=True, env=env)
+    install = subprocess.run([py, "-m", "pip", "install", "--quiet", str(artifact)], capture_output=True, text=True)
     assert install.returncode == 0, install.stderr
 
     smoke_file = tmp_path / "smoke.py"
     smoke_file.write_text(SMOKE_SCRIPT)
-    result = subprocess.run([py, str(smoke_file)], capture_output=True, text=True, cwd=tmp_path, env=env)
+    result = subprocess.run([py, str(smoke_file)], capture_output=True, text=True, cwd=tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr
     assert "SMOKE OK" in result.stdout

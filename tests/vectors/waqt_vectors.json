@@ -2,7 +2,7 @@
   "spec": "waqt-core/0.1",
   "vector_format_version": "1.0",
   "generated_by": "waqt-python-reference (tests/vectors/generate_vectors.py)",
-  "generated_at": "2026-09-23T19:25:49.637652+00:00",
+  "generated_at": "2026-09-28T10:02:49.137427+00:00",
   "note": "Every 'expected' value here was computed by running the Waqt Python reference implementation itself, not hand-typed. An independent implementation in another language is expected to reproduce these values within the tolerances documented in docs/ASTRONOMY.md (Level B: ~20-120s depending on latitude for solar events; exact for Waqt-position arithmetic and day-boundary logic, which are pure calendar math with no astronomical uncertainty once Maghrib/Fajr/etc are known).",
   "vectors": [
     {
@@ -28,47 +28,47 @@
         "hijri_date": "1448-04-07",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
-          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
-          "length_si_seconds": 86363.858
+          "maghrib_open": "2026-09-19T15:22:57.007342+00:00",
+          "maghrib_close": "2026-09-20T15:22:20.838566+00:00",
+          "length_si_seconds": 86363.831
         },
         "waqt_position": {
           "hour": 0,
           "minute": 19,
-          "second": 21,
-          "display": "00:19:21",
-          "total_seconds": 1161.083
+          "second": 2,
+          "display": "00:19:02",
+          "total_seconds": 1142.993
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-20T02:04:50.089141+00:00",
-            "position_display": "10:42:11",
-            "position_total_seconds": 38531.172
+            "instant": "2026-09-20T02:04:52.689470+00:00",
+            "position_display": "10:41:55",
+            "position_total_seconds": 38515.682
           },
           "sunrise": {
-            "instant": "2026-09-20T03:14:25.740674+00:00",
-            "position_display": "11:51:46",
-            "position_total_seconds": 42706.824
+            "instant": "2026-09-20T03:14:29.003215+00:00",
+            "position_display": "11:51:31",
+            "position_total_seconds": 42691.996
           },
           "dhuhr": {
-            "instant": "2026-09-20T09:18:26.270104+00:00",
-            "position_display": "17:55:47",
-            "position_total_seconds": 64547.353
+            "instant": "2026-09-20T09:18:28.664402+00:00",
+            "position_display": "17:55:31",
+            "position_total_seconds": 64531.657
           },
           "asr": {
-            "instant": "2026-09-20T12:31:28.201255+00:00",
-            "position_display": "21:08:49",
-            "position_total_seconds": 76129.284
+            "instant": "2026-09-20T12:31:43.411901+00:00",
+            "position_display": "21:08:46",
+            "position_total_seconds": 76126.405
           },
           "maghrib": {
-            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "instant": "2026-09-20T15:22:20.838566+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.858
+            "position_total_seconds": 86363.831
           },
           "isha": {
-            "instant": "2026-09-20T16:27:32.878961+00:00",
-            "position_display": "25:04:53",
-            "position_total_seconds": 90293.962
+            "instant": "2026-09-20T16:27:51.486062+00:00",
+            "position_display": "25:04:54",
+            "position_total_seconds": 90294.479
           }
         }
       }
@@ -82,7 +82,7 @@
           "lon": 38.7525,
           "elevation_m": 0.0
         },
-        "instant": "2026-09-19T15:22:38.916924+00:00",
+        "instant": "2026-09-19T15:22:57.007342+00:00",
         "calendar_provider": "arithmetic-tabular",
         "astronomy_profile": {
           "fajr_angle_deg": 18.0,
@@ -96,9 +96,9 @@
         "hijri_date": "1448-04-07",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
-          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
-          "length_si_seconds": 86363.858
+          "maghrib_open": "2026-09-19T15:22:57.007342+00:00",
+          "maghrib_close": "2026-09-20T15:22:20.838566+00:00",
+          "length_si_seconds": 86363.831
         },
         "waqt_position": {
           "hour": 0,
@@ -109,34 +109,34 @@
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-20T02:04:50.089141+00:00",
-            "position_display": "10:42:11",
-            "position_total_seconds": 38531.172
+            "instant": "2026-09-20T02:04:52.689470+00:00",
+            "position_display": "10:41:55",
+            "position_total_seconds": 38515.682
           },
           "sunrise": {
-            "instant": "2026-09-20T03:14:25.740674+00:00",
-            "position_display": "11:51:46",
-            "position_total_seconds": 42706.824
+            "instant": "2026-09-20T03:14:29.003215+00:00",
+            "position_display": "11:51:31",
+            "position_total_seconds": 42691.996
           },
           "dhuhr": {
-            "instant": "2026-09-20T09:18:26.270104+00:00",
-            "position_display": "17:55:47",
-            "position_total_seconds": 64547.353
+            "instant": "2026-09-20T09:18:28.664402+00:00",
+            "position_display": "17:55:31",
+            "position_total_seconds": 64531.657
           },
           "asr": {
-            "instant": "2026-09-20T12:31:28.201255+00:00",
-            "position_display": "21:08:49",
-            "position_total_seconds": 76129.284
+            "instant": "2026-09-20T12:31:43.411901+00:00",
+            "position_display": "21:08:46",
+            "position_total_seconds": 76126.405
           },
           "maghrib": {
-            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "instant": "2026-09-20T15:22:20.838566+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.858
+            "position_total_seconds": 86363.831
           },
           "isha": {
-            "instant": "2026-09-20T16:27:32.878961+00:00",
-            "position_display": "25:04:53",
-            "position_total_seconds": 90293.962
+            "instant": "2026-09-20T16:27:51.486062+00:00",
+            "position_display": "25:04:54",
+            "position_total_seconds": 90294.479
           }
         }
       },
@@ -151,7 +151,7 @@
           "lon": 38.7525,
           "elevation_m": 0.0
         },
-        "instant": "2026-09-19T15:22:37.916924+00:00",
+        "instant": "2026-09-19T15:22:56.007342+00:00",
         "calendar_provider": "arithmetic-tabular",
         "astronomy_profile": {
           "fajr_angle_deg": 18.0,
@@ -165,47 +165,47 @@
         "hijri_date": "1448-04-06",
         "weekday": "as-Sabt",
         "day": {
-          "maghrib_open": "2026-09-18T15:23:15.107063+00:00",
-          "maghrib_close": "2026-09-19T15:22:38.916924+00:00",
-          "length_si_seconds": 86363.81
+          "maghrib_open": "2026-09-18T15:23:33.213316+00:00",
+          "maghrib_close": "2026-09-19T15:22:57.007342+00:00",
+          "length_si_seconds": 86363.794
         },
         "waqt_position": {
           "hour": 23,
           "minute": 59,
           "second": 22,
           "display": "23:59:22",
-          "total_seconds": 86362.81
+          "total_seconds": 86362.794
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-19T02:04:55.253286+00:00",
-            "position_display": "10:41:40",
-            "position_total_seconds": 38500.146
+            "instant": "2026-09-19T02:04:57.778463+00:00",
+            "position_display": "10:41:24",
+            "position_total_seconds": 38484.565
           },
           "sunrise": {
-            "instant": "2026-09-19T03:14:32.280339+00:00",
-            "position_display": "11:51:17",
-            "position_total_seconds": 42677.173
+            "instant": "2026-09-19T03:14:35.569837+00:00",
+            "position_display": "11:51:02",
+            "position_total_seconds": 42662.357
           },
           "dhuhr": {
-            "instant": "2026-09-19T09:18:47.639296+00:00",
-            "position_display": "17:55:32",
-            "position_total_seconds": 64532.532
+            "instant": "2026-09-19T09:18:50.033849+00:00",
+            "position_display": "17:55:16",
+            "position_total_seconds": 64516.821
           },
           "asr": {
-            "instant": "2026-09-19T12:31:25.800176+00:00",
-            "position_display": "21:08:10",
-            "position_total_seconds": 76090.693
+            "instant": "2026-09-19T12:31:40.756436+00:00",
+            "position_display": "21:08:07",
+            "position_total_seconds": 76087.543
           },
           "maghrib": {
-            "instant": "2026-09-19T15:22:38.916924+00:00",
+            "instant": "2026-09-19T15:22:57.007342+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.81
+            "position_total_seconds": 86363.794
           },
           "isha": {
-            "instant": "2026-09-19T16:28:10.156005+00:00",
+            "instant": "2026-09-19T16:28:28.885934+00:00",
             "position_display": "25:04:55",
-            "position_total_seconds": 90295.049
+            "position_total_seconds": 90295.673
           }
         }
       },
@@ -234,47 +234,47 @@
         "hijri_date": "1448-04-06",
         "weekday": "as-Sabt",
         "day": {
-          "maghrib_open": "2026-09-18T15:20:34.104707+00:00",
-          "maghrib_close": "2026-09-19T15:19:36.166098+00:00",
-          "length_si_seconds": 86342.061
+          "maghrib_open": "2026-09-18T15:21:03.077116+00:00",
+          "maghrib_close": "2026-09-19T15:20:05.133310+00:00",
+          "length_si_seconds": 86342.056
         },
         "waqt_position": {
           "hour": 20,
-          "minute": 39,
-          "second": 25,
-          "display": "20:39:25",
-          "total_seconds": 74365.895
+          "minute": 38,
+          "second": 56,
+          "display": "20:38:56",
+          "total_seconds": 74336.923
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-19T01:54:40.832587+00:00",
-            "position_display": "10:34:06",
-            "position_total_seconds": 38046.728
+            "instant": "2026-09-19T01:54:31.681829+00:00",
+            "position_display": "10:33:28",
+            "position_total_seconds": 38008.605
           },
           "sunrise": {
-            "instant": "2026-09-19T03:08:48.706065+00:00",
-            "position_display": "11:48:14",
-            "position_total_seconds": 42494.601
+            "instant": "2026-09-19T03:08:41.111160+00:00",
+            "position_display": "11:47:38",
+            "position_total_seconds": 42458.034
           },
           "dhuhr": {
-            "instant": "2026-09-19T09:14:29.951296+00:00",
-            "position_display": "17:53:55",
-            "position_total_seconds": 64435.847
+            "instant": "2026-09-19T09:14:32.409651+00:00",
+            "position_display": "17:53:29",
+            "position_total_seconds": 64409.333
           },
           "asr": {
-            "instant": "2026-09-19T12:38:59.861629+00:00",
+            "instant": "2026-09-19T12:39:28.439863+00:00",
             "position_display": "21:18:25",
-            "position_total_seconds": 76705.757
+            "position_total_seconds": 76705.363
           },
           "maghrib": {
-            "instant": "2026-09-19T15:19:36.166098+00:00",
+            "instant": "2026-09-19T15:20:05.133310+00:00",
             "position_display": "23:59:02",
-            "position_total_seconds": 86342.061
+            "position_total_seconds": 86342.056
           },
           "isha": {
-            "instant": "2026-09-19T16:29:18.067861+00:00",
-            "position_display": "25:08:43",
-            "position_total_seconds": 90523.963
+            "instant": "2026-09-19T16:29:48.364574+00:00",
+            "position_display": "25:08:45",
+            "position_total_seconds": 90525.287
           }
         }
       }
@@ -288,7 +288,7 @@
           "lon": -0.1278,
           "elevation_m": 0.0
         },
-        "instant": "2026-02-15T17:15:28.950273+00:00",
+        "instant": "2026-02-15T17:14:34.159299+00:00",
         "calendar_provider": "arithmetic-tabular",
         "astronomy_profile": {
           "fajr_angle_deg": 18.0,
@@ -302,9 +302,9 @@
         "hijri_date": "1447-08-27",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-02-14T17:14:38.950273+00:00",
-          "maghrib_close": "2026-02-15T17:16:28.412984+00:00",
-          "length_si_seconds": 86509.463
+          "maghrib_open": "2026-02-14T17:13:44.159299+00:00",
+          "maghrib_close": "2026-02-15T17:15:33.702488+00:00",
+          "length_si_seconds": 86509.543
         },
         "waqt_position": {
           "hour": 24,
@@ -315,34 +315,34 @@
         },
         "events": {
           "fajr": {
-            "instant": "2026-02-15T05:21:28.633775+00:00",
-            "position_display": "12:06:49",
-            "position_total_seconds": 43609.684
+            "instant": "2026-02-15T05:22:21.336177+00:00",
+            "position_display": "12:08:37",
+            "position_total_seconds": 43717.177
           },
           "sunrise": {
-            "instant": "2026-02-15T07:13:30.890626+00:00",
-            "position_display": "13:58:51",
-            "position_total_seconds": 50331.94
+            "instant": "2026-02-15T07:14:28.639674+00:00",
+            "position_display": "14:00:44",
+            "position_total_seconds": 50444.48
           },
           "dhuhr": {
-            "instant": "2026-02-15T12:14:37.743909+00:00",
-            "position_display": "18:59:58",
-            "position_total_seconds": 68398.794
+            "instant": "2026-02-15T12:14:37.712247+00:00",
+            "position_display": "19:00:53",
+            "position_total_seconds": 68453.553
           },
           "asr": {
-            "instant": "2026-02-15T14:47:01.316510+00:00",
-            "position_display": "21:32:22",
-            "position_total_seconds": 77542.366
+            "instant": "2026-02-15T14:45:25.020813+00:00",
+            "position_display": "21:31:40",
+            "position_total_seconds": 77500.862
           },
           "maghrib": {
-            "instant": "2026-02-15T17:16:28.412984+00:00",
+            "instant": "2026-02-15T17:15:33.702488+00:00",
             "position_display": "24:01:49",
-            "position_total_seconds": 86509.463
+            "position_total_seconds": 86509.543
           },
           "isha": {
-            "instant": "2026-02-15T19:02:16.311807+00:00",
-            "position_display": "25:47:37",
-            "position_total_seconds": 92857.362
+            "instant": "2026-02-15T19:01:26.524171+00:00",
+            "position_display": "25:47:42",
+            "position_total_seconds": 92862.365
           }
         }
       },
@@ -393,47 +393,47 @@
         "hijri_date": "1448-04-06",
         "weekday": "as-Sabt",
         "day": {
-          "maghrib_open": "2026-09-19T04:26:57.222133+00:00",
-          "maghrib_close": "2026-09-20T04:26:32.796878+00:00",
-          "length_si_seconds": 86375.575
+          "maghrib_open": "2026-09-19T04:27:09.454859+00:00",
+          "maghrib_close": "2026-09-20T04:26:45.001953+00:00",
+          "length_si_seconds": 86375.547
         },
         "waqt_position": {
           "hour": 18,
-          "minute": 33,
-          "second": 2,
-          "display": "18:33:02",
-          "total_seconds": 66782.778
+          "minute": 32,
+          "second": 50,
+          "display": "18:32:50",
+          "total_seconds": 66770.545
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-19T15:11:04.933695+00:00",
-            "position_display": "10:44:07",
-            "position_total_seconds": 38647.712
+            "instant": "2026-09-19T15:11:13.697163+00:00",
+            "position_display": "10:44:04",
+            "position_total_seconds": 38644.242
           },
           "sunrise": {
-            "instant": "2026-09-19T16:19:47.611631+00:00",
-            "position_display": "11:52:50",
-            "position_total_seconds": 42770.389
+            "instant": "2026-09-19T16:19:56.759206+00:00",
+            "position_display": "11:52:47",
+            "position_total_seconds": 42767.304
           },
           "dhuhr": {
-            "instant": "2026-09-19T22:23:30.911296+00:00",
-            "position_display": "17:56:33",
-            "position_total_seconds": 64593.689
+            "instant": "2026-09-19T22:23:21.654644+00:00",
+            "position_display": "17:56:12",
+            "position_total_seconds": 64572.2
           },
           "asr": {
-            "instant": "2026-09-20T01:24:10.537953+00:00",
-            "position_display": "20:57:13",
-            "position_total_seconds": 75433.316
+            "instant": "2026-09-20T01:24:42.463227+00:00",
+            "position_display": "20:57:33",
+            "position_total_seconds": 75453.008
           },
           "maghrib": {
-            "instant": "2026-09-20T04:26:32.796878+00:00",
+            "instant": "2026-09-20T04:26:45.001953+00:00",
             "position_display": "23:59:35",
-            "position_total_seconds": 86375.575
+            "position_total_seconds": 86375.547
           },
           "isha": {
-            "instant": "2026-09-20T05:31:14.642550+00:00",
+            "instant": "2026-09-20T05:31:27.148616+00:00",
             "position_display": "25:04:17",
-            "position_total_seconds": 90257.42
+            "position_total_seconds": 90257.694
           }
         }
       }
@@ -461,47 +461,47 @@
         "hijri_date": "1448-04-07",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
-          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
-          "length_si_seconds": 86363.858
+          "maghrib_open": "2026-09-19T15:22:57.007342+00:00",
+          "maghrib_close": "2026-09-20T15:22:20.838566+00:00",
+          "length_si_seconds": 86363.831
         },
         "waqt_position": {
           "hour": 0,
           "minute": 19,
-          "second": 21,
-          "display": "00:19:21",
-          "total_seconds": 1161.083
+          "second": 2,
+          "display": "00:19:02",
+          "total_seconds": 1142.993
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-20T02:04:50.089141+00:00",
-            "position_display": "10:42:11",
-            "position_total_seconds": 38531.172
+            "instant": "2026-09-20T02:04:52.689470+00:00",
+            "position_display": "10:41:55",
+            "position_total_seconds": 38515.682
           },
           "sunrise": {
-            "instant": "2026-09-20T03:14:25.740674+00:00",
-            "position_display": "11:51:46",
-            "position_total_seconds": 42706.824
+            "instant": "2026-09-20T03:14:29.003215+00:00",
+            "position_display": "11:51:31",
+            "position_total_seconds": 42691.996
           },
           "dhuhr": {
-            "instant": "2026-09-20T09:18:26.270104+00:00",
-            "position_display": "17:55:47",
-            "position_total_seconds": 64547.353
+            "instant": "2026-09-20T09:18:28.664402+00:00",
+            "position_display": "17:55:31",
+            "position_total_seconds": 64531.657
           },
           "asr": {
-            "instant": "2026-09-20T12:31:28.201255+00:00",
-            "position_display": "21:08:49",
-            "position_total_seconds": 76129.284
+            "instant": "2026-09-20T12:31:43.411901+00:00",
+            "position_display": "21:08:46",
+            "position_total_seconds": 76126.405
           },
           "maghrib": {
-            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "instant": "2026-09-20T15:22:20.838566+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.858
+            "position_total_seconds": 86363.831
           },
           "isha": {
-            "instant": "2026-09-20T16:27:32.878961+00:00",
-            "position_display": "25:04:53",
-            "position_total_seconds": 90293.962
+            "instant": "2026-09-20T16:27:51.486062+00:00",
+            "position_display": "25:04:54",
+            "position_total_seconds": 90294.479
           }
         }
       },
@@ -530,47 +530,47 @@
         "hijri_date": "1448-04-07",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-09-19T15:22:38.916924+00:00",
-          "maghrib_close": "2026-09-20T15:22:02.775048+00:00",
-          "length_si_seconds": 86363.858
+          "maghrib_open": "2026-09-19T15:22:57.007342+00:00",
+          "maghrib_close": "2026-09-20T15:22:20.838566+00:00",
+          "length_si_seconds": 86363.831
         },
         "waqt_position": {
           "hour": 0,
           "minute": 19,
-          "second": 21,
-          "display": "00:19:21",
-          "total_seconds": 1161.083
+          "second": 2,
+          "display": "00:19:02",
+          "total_seconds": 1142.993
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-20T02:04:50.089141+00:00",
-            "position_display": "10:42:11",
-            "position_total_seconds": 38531.172
+            "instant": "2026-09-20T02:04:52.689470+00:00",
+            "position_display": "10:41:55",
+            "position_total_seconds": 38515.682
           },
           "sunrise": {
-            "instant": "2026-09-20T03:14:25.740674+00:00",
-            "position_display": "11:51:46",
-            "position_total_seconds": 42706.824
+            "instant": "2026-09-20T03:14:29.003215+00:00",
+            "position_display": "11:51:31",
+            "position_total_seconds": 42691.996
           },
           "dhuhr": {
-            "instant": "2026-09-20T09:18:26.270104+00:00",
-            "position_display": "17:55:47",
-            "position_total_seconds": 64547.353
+            "instant": "2026-09-20T09:18:28.664402+00:00",
+            "position_display": "17:55:31",
+            "position_total_seconds": 64531.657
           },
           "asr": {
-            "instant": "2026-09-20T13:37:17.078966+00:00",
-            "position_display": "22:14:38",
-            "position_total_seconds": 80078.162
+            "instant": "2026-09-20T13:37:33.649692+00:00",
+            "position_display": "22:14:36",
+            "position_total_seconds": 80076.642
           },
           "maghrib": {
-            "instant": "2026-09-20T15:22:02.775048+00:00",
+            "instant": "2026-09-20T15:22:20.838566+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.858
+            "position_total_seconds": 86363.831
           },
           "isha": {
-            "instant": "2026-09-20T16:27:32.878961+00:00",
-            "position_display": "25:04:53",
-            "position_total_seconds": 90293.962
+            "instant": "2026-09-20T16:27:51.486062+00:00",
+            "position_display": "25:04:54",
+            "position_total_seconds": 90294.479
           }
         }
       },
@@ -599,47 +599,47 @@
         "hijri_date": "1448-04-07",
         "weekday": "al-Ahad",
         "day": {
-          "maghrib_open": "2026-09-19T15:28:28.077008+00:00",
-          "maghrib_close": "2026-09-20T15:27:51.886158+00:00",
-          "length_si_seconds": 86363.809
+          "maghrib_open": "2026-09-19T15:28:46.198093+00:00",
+          "maghrib_close": "2026-09-20T15:28:09.972099+00:00",
+          "length_si_seconds": 86363.774
         },
         "waqt_position": {
           "hour": 0,
           "minute": 13,
-          "second": 31,
-          "display": "00:13:31",
-          "total_seconds": 811.923
+          "second": 13,
+          "display": "00:13:13",
+          "total_seconds": 793.802
         },
         "events": {
           "fajr": {
-            "instant": "2026-09-20T02:04:50.089141+00:00",
-            "position_display": "10:36:22",
-            "position_total_seconds": 38182.012
+            "instant": "2026-09-20T02:04:52.689470+00:00",
+            "position_display": "10:36:06",
+            "position_total_seconds": 38166.491
           },
           "sunrise": {
-            "instant": "2026-09-20T03:08:36.486672+00:00",
-            "position_display": "11:40:08",
-            "position_total_seconds": 42008.41
+            "instant": "2026-09-20T03:08:39.722552+00:00",
+            "position_display": "11:39:53",
+            "position_total_seconds": 41993.524
           },
           "dhuhr": {
-            "instant": "2026-09-20T09:18:26.270104+00:00",
-            "position_display": "17:49:58",
-            "position_total_seconds": 64198.193
+            "instant": "2026-09-20T09:18:28.664402+00:00",
+            "position_display": "17:49:42",
+            "position_total_seconds": 64182.466
           },
           "asr": {
-            "instant": "2026-09-20T12:31:28.201255+00:00",
-            "position_display": "21:03:00",
-            "position_total_seconds": 75780.124
+            "instant": "2026-09-20T12:31:43.411901+00:00",
+            "position_display": "21:02:57",
+            "position_total_seconds": 75777.214
           },
           "maghrib": {
-            "instant": "2026-09-20T15:27:51.886158+00:00",
+            "instant": "2026-09-20T15:28:09.972099+00:00",
             "position_display": "23:59:23",
-            "position_total_seconds": 86363.809
+            "position_total_seconds": 86363.774
           },
           "isha": {
-            "instant": "2026-09-20T16:27:32.878961+00:00",
-            "position_display": "24:59:04",
-            "position_total_seconds": 89944.802
+            "instant": "2026-09-20T16:27:51.486062+00:00",
+            "position_display": "24:59:05",
+            "position_total_seconds": 89945.288
           }
         }
       },

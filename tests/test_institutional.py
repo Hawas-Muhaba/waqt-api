@@ -293,10 +293,18 @@ class TestProfile:
             CalendarProfile(name="bad", calendar_provider=TABULAR, fiscal_year_definition=fc)
 
     def test_profile_is_not_read_by_core_algorithms(self):
-        """Structural: nothing outside waqt/institutional and waqt/api
+        """Structural: nothing outside waqt_core/institutional and waqt/api
         imports CalendarProfile -- it's config an application holds, not
-        something the engine consults implicitly."""
-        for path in (ROOT / "waqt" / "core.py", ROOT / "waqt" / "solar.py", ROOT / "waqt" / "semantics.py"):
+        something the engine consults implicitly.
+
+        Sprint 11 moved the physical files this test reads from
+        waqt/{core,solar,semantics}.py to core/waqt_core/{core,solar,
+        semantics}.py (see SPRINT-11-REPORT.md Sec 1); `waqt.core` etc.
+        remain importable as aliases to the same module objects, but the
+        files themselves now live under core/waqt_core/.
+        """
+        CORE_DIR = ROOT / "core" / "waqt_core"
+        for path in (CORE_DIR / "core.py", CORE_DIR / "solar.py", CORE_DIR / "semantics.py"):
             text = path.read_text()
             assert "CalendarProfile" not in text and "institutional" not in text
 
@@ -305,32 +313,39 @@ class TestProfile:
 # 5. Architecture separation
 # ===========================================================================
 
-CORE_MD5 = {
-    "waqt/core.py": None,
-    "waqt/solar.py": None,
-}
-
 
 class TestArchitecture:
     def test_core_and_solar_unchanged(self):
         """Same discipline every sprint since Sprint 3 has kept: hash the
-        two files this sprint is not allowed to touch."""
-        for rel in ("waqt/core.py", "waqt/solar.py"):
-            text = (ROOT / rel).read_bytes()
+        two files this sprint is not allowed to touch.
+
+        Sprint 11 relocated these files to core/waqt_core/ as part of
+        the waqt-core extraction (a verified byte-for-byte move, not a
+        rewrite -- see SPRINT-11-REPORT.md Sec 1); this test now reads
+        them from their new home. `solar.py` DID change content in this
+        sprint -- a deliberate, separately-reviewed bug fix to the
+        event-time iterative refinement (SPRINT-11-REPORT.md Sec 2), not
+        a silent one -- so this test now checks readability/hashability
+        rather than a specific pinned hash, exactly as it did before
+        (see the original comment this replaces).
+        """
+        CORE_DIR = ROOT / "core" / "waqt_core"
+        for rel in ("core.py", "solar.py"):
+            text = (CORE_DIR / rel).read_bytes()
             h = hashlib.md5(text).hexdigest()
             assert len(h) == 32  # just proves the files are readable/hashable; see SPRINT-7-REPORT.md for the before/after values
 
     def test_scheduling_package_is_untouched_by_institutional_imports(self):
         """waqt.institutional imports FROM waqt.scheduling, never the
         reverse -- the dependency is one-way, exactly the brief's diagram."""
-        sched_dir = ROOT / "waqt" / "scheduling"
+        sched_dir = ROOT / "core" / "waqt_core" / "scheduling"
         for f in sched_dir.glob("*.py"):
             assert "institutional" not in f.read_text()
 
     def test_institutional_never_recomputes_astronomy(self):
-        """No file in waqt/institutional imports waqt.solar directly --
+        """No file in waqt.institutional imports waqt.solar directly --
         every boundary comes from SchedulingContext / compute_waqt."""
-        inst_dir = ROOT / "waqt" / "institutional"
+        inst_dir = ROOT / "core" / "waqt_core" / "institutional"
         for f in inst_dir.glob("*.py"):
             text = f.read_text()
             assert "from ..solar" not in text and "from waqt.solar" not in text and "import solar" not in text

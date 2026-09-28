@@ -31,10 +31,10 @@ from datetime import date as _date
 from datetime import datetime
 from typing import Any, Optional
 
-from waqt import calendar_interop as ci
-from waqt.core import AstronomyProfile, Location, compute_waqt
-from waqt.hijri import ArithmeticTabularProvider, weekday_name
-from waqt.institutional import (
+from waqt_core import calendar_interop as ci
+from waqt_core.core import AstronomyProfile, Location, compute_waqt
+from waqt_core.hijri import ArithmeticTabularProvider, weekday_name
+from waqt_core.institutional import (
     AcademicCalendar,
     FiscalCalendar,
     HolidayDefinition,
@@ -47,10 +47,10 @@ from waqt.institutional import (
     rule_from_dict,
     week_containing,
 )
-from waqt.scheduling import RuleError as SchedulingRuleError, SchedulingContext, SchedulingEngine, run_operation
-from waqt.semantics import waqt_day_from_result
-from waqt.timescale import DEFAULT_TIMESCALE_PROVIDER
-from waqt.timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
+from waqt_core.scheduling import RuleError as SchedulingRuleError, SchedulingContext, SchedulingEngine, run_operation
+from waqt_core.semantics import waqt_day_from_result
+from waqt_core.timescale import DEFAULT_TIMESCALE_PROVIDER
+from waqt_core.timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 
 from .errors import (
     CalendarDateUnresolvableError,
@@ -518,7 +518,7 @@ def schedule_resolve(request: Any) -> dict:
     profile = _profile(pr.get("fajr_angle_deg", 18.0), pr.get("isha_angle_deg", 17.0), pr.get("asr_shadow_ratio", 1.0))
     rs = _check_precision(body.get("precision", "second"))
 
-    from waqt.scheduling.model import parse_instant as parse_rule_instant
+    from waqt_core.scheduling.model import parse_instant as parse_rule_instant
 
     try:
         anchor = parse_rule_instant(body["anchor"]) if body.get("anchor") is not None else parse_instant(None)

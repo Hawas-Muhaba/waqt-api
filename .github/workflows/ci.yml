@@ -29,5 +29,32 @@ jobs:
       - name: Independent JS consumer
         run: cd consumers/js && npm test
 
-      - name: Run tests
-        run: pytest tests/ -v --tb=short
+      - name: Run tests (waqt.api)
+        run: pytest tests/ -v --tb=short --deselect tests/test_packaging_smoke.py
+
+      # Sprint 11: waqt-core is now its own distribution with its own
+      # test suite (conformance against the shared vectors, driven
+      # standalone with no FastAPI/waqt on the path; the shim-identity
+      # check; packaging). Run separately from tests/ -- neither
+      # directory has __init__.py, so pytest's basename-based module
+      # import collides on same-named files (e.g.
+      # test_waqt_vectors_conformance.py) if invoked in one command.
+      - name: Run tests (waqt-core)
+        run: pytest core/tests/ -v --tb=short --deselect core/tests/test_packaging_smoke.py
+
+      # Sprint 10: waqt_local, the embeddable no-server library.
+      - name: Run tests (waqt_local)
+        run: pytest local/tests/ -v --tb=short
+
+      # Sprint 10/11: independent astronomical references (Level A/B)
+      # used to evaluate the production solar engine.
+      - name: Run tests (independent-astronomy)
+        run: cd independent-astronomy && pytest tests/ -v --tb=short
+
+      # Packaging / clean-install smoke tests: slow (spawn a venv +
+      # build + pip install each), run last and separately so a
+      # failure here doesn't obscure a real regression above.
+      - name: Clean-install packaging smoke tests
+        run: |
+          pytest core/tests/test_packaging_smoke.py -v --tb=short
+          pytest tests/test_packaging_smoke.py -v --tb=short

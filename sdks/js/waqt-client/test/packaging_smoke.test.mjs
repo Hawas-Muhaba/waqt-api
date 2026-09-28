@@ -16,20 +16,18 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = path.resolve(__dirname, "..");
 
-const NPM_CMD = process.platform === "win32" ? "npm.cmd" : "npm";
-
 test("npm pack + clean install into a fresh directory works end to end", { timeout: 60_000 }, async () => {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "waqt-client-pack-"));
   try {
-    const packOut = execFileSync(NPM_CMD, ["pack", "--silent", "--pack-destination", tmp], {
-      cwd: PKG_ROOT, encoding: "utf8", shell: true,
+    const packOut = execFileSync("npm", ["pack", "--silent", "--pack-destination", tmp], {
+      cwd: PKG_ROOT, encoding: "utf8",
     }).trim();
     const tarball = path.join(tmp, packOut.split("\n").pop());
     assert.ok(fs.existsSync(tarball), `expected tarball at ${tarball}`);
 
     const installDir = fs.mkdtempSync(path.join(os.tmpdir(), "waqt-client-install-"));
     fs.writeFileSync(path.join(installDir, "package.json"), JSON.stringify({ name: "smoke-test", version: "0.0.0", type: "module" }));
-    execFileSync(NPM_CMD, ["install", "--silent", tarball], { cwd: installDir, encoding: "utf8", shell: true });
+    execFileSync("npm", ["install", "--silent", tarball], { cwd: installDir, encoding: "utf8" });
 
     const smokeScript = `
       import { WaqtClient, requests, VERSION } from "waqt-client";

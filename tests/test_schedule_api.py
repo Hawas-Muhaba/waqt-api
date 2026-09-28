@@ -17,7 +17,7 @@ def test_snapshot_answers_the_standard_questions_in_the_envelope():
     b = r.json()
     assert r.status_code == 200 and b["error"] is None
     d = b["data"]
-    assert d["day"]["status"] == "OK" and d["day"]["position"]["display"] == "00:19:21"
+    assert d["day"]["status"] == "OK" and d["day"]["position"]["display"] == "00:19:02"
     assert d["next_event"]["name"] == "isha"
     assert {e["name"] for e in d["events"]} == {"fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"}
     assert "religious" in d["caveat"]

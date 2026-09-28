@@ -12,14 +12,14 @@ from __future__ import annotations
 
 from typing import Optional
 
-from waqt.calendar_providers import (
+from waqt_core.calendar_providers import (
     ArithmeticTabularProvider,
     DeclaredProvider,
     LocalObservationProvider,
     Sighting,
     UmmAlQuraProvider,
 )
-from waqt.hijri import HijriDate, HijriProvider
+from waqt_core.hijri import HijriDate, HijriProvider
 
 from .errors import UnknownCalendarProviderError
 from .formatting import parse_date

@@ -76,11 +76,20 @@ DATES = [
 # and docs/INDEPENDENT-ASTRONOMY.md for the full discussion), not tuned to
 # force a pass.
 TOLERANCE_SECONDS = {
-    "equator": 30,
-    "tropics": 40,
-    "mid-lat-N": 80,
-    "mid-lat-S": 80,
-    "high-lat": 500,
+    # Sprint 11 re-tightened these (was 30/40/80/80/500) after fixing a
+    # half-day epoch-alignment bug in solar.py's event-time refinement
+    # that had been the dominant error source, especially at high
+    # latitude -- see SPRINT-11-REPORT.md Sec 2. Same "measure, then set
+    # the tolerance from what's observed" discipline as before.
+    # Second tightening after the transit/Asr fix; observed max ~1.7 s
+    # everywhere (this is the waqt-vs-independent_solar comparison, whose
+    # residual is now dominated by independent_solar's own ~1.7 s offset
+    # from Level A, not by waqt).
+    "equator": 4,
+    "tropics": 4,
+    "mid-lat-N": 4,
+    "mid-lat-S": 4,
+    "high-lat": 8,
 }
 
 EVENT_NAMES = ["fajr", "sunrise", "dhuhr", "asr", "maghrib", "isha"]

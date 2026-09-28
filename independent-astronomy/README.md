@@ -18,14 +18,13 @@ See `independent_solar/__init__.py` for the full side-by-side.
 (the equator through both poles' high latitudes, the date line, and a
 civil-timezone/solar-time divergence case) and 5 dates (both equinoxes,
 both solstices, one ordinary date) — 60 location/date rows, 6 events each.
-Every event agrees within the tolerance band for its latitude, with one
-honestly-reported exception: high-latitude events very close to the
-equinox disagree by up to ~7 minutes, a real geometric effect (shallow
-sun path amplifies small angle differences into large time differences
-near the terminator at high latitude) that `docs/ASTRONOMY.md` already
-predicted in prose; this milestone is the first time it's been measured
-against a second live implementation rather than just against `astral`.
-No case of one engine calling an event `UNDEFINED` (polar day/night)
+In Sprint 9 every event agreed within a (deliberately wide) tolerance band, with
+one exception reported honestly: high-latitude events near the equinox
+disagreed by up to ~7 minutes. Sprint 9 described that as a real geometric
+effect. **Sprint 11 found it was mostly a bug in `waqt/solar.py`'s event solver
+(sampling the sun 12 h off), amplified by geometry** — fixed, and the
+tolerances re-tightened to a few seconds; see
+`docs/ASTRONOMY-ENGINE-EVALUATION.md`. No case of one engine calling an event `UNDEFINED` (polar day/night)
 while the other found a numeric answer.
 
 **Commands:**

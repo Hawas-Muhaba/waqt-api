@@ -34,19 +34,24 @@ def test_regenerated_comparison_matches_committed_vectors_within_tolerance():
     assert not failures, f"Out-of-tolerance disagreements against Level A: {failures}"
 
 
-def test_level_b_agrees_with_level_a_much_more_tightly_than_waqt_does():
-    """The headline empirical finding this sprint's Level-A comparison
-    produced (see the report): independent_solar's Meeus low-accuracy
-    method tracks full VSOP87 far more tightly than waqt/solar.py's NOAA
-    low-precision formulas do, at every latitude band. This is a fact
-    about the comparison, asserted so a future change to either engine
-    that erases the gap gets noticed and discussed, not silently lost."""
+def test_production_engine_tracks_level_a_at_least_as_tightly_as_level_b():
+    """Sprint 10's headline finding was the opposite: independent_solar
+    (Level B) tracked Level A far more tightly than waqt/solar.py at every
+    band (up to ~100x at high latitude). Sprint 11 traced that gap to two
+    epoch-sampling bugs in the production engine, not to inherent
+    low-precision-formula error (SPRINT-11-REPORT.md Sec 2), and fixed
+    them; the gap has closed and reversed. The original assertion was
+    kept as a tripwire ("a change that erases the gap gets noticed and
+    discussed") and is inverted here, deliberately, to record the new
+    state. If this starts failing, the production engine has regressed
+    relative to the independent reference -- investigate before loosening.
+    """
     report = compare_level_a.run()
     observed = report["max_abs_diff_seconds_observed"]
     for band in compare_level_a.TOLERANCE_SECONDS_WAQT_VS_LEVEL_A:
         w = observed["waqt_vs_level_a"].get(band, 0.0)
         b = observed["level_b_vs_level_a"].get(band, 0.0)
-        assert b <= w, f"{band}: expected level_b ({b}s) to track Level A at least as tightly as waqt ({w}s)"
+        assert w <= b, f"{band}: production engine ({w}s) regressed behind Level B ({b}s)"
 
 
 def test_no_polar_undefined_status_disagreements():
