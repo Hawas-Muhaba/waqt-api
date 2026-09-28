@@ -155,8 +155,8 @@ class AsyncWaqtClient:
         params = R.span_params(lat, lon, start, end, **kwargs)
         return SchedulingResult.from_json(await self._get("/v1/schedule/span", params))
 
-    async def schedule_resolve(self, body: dict) -> SchedulingResult:
-        return SchedulingResult.from_json(await self.request("POST", "/v1/schedule/resolve", json=body))
+    async def schedule_resolve(self, body: Any) -> SchedulingResult:
+        return SchedulingResult.from_json(await self.request("POST", "/v1/schedule/resolve", json=R.body_json(body)))
 
     # -- institutional calendars (Sprint 7) ----------------------------------
 
@@ -174,14 +174,14 @@ class AsyncWaqtClient:
         params = R.institutional_profile_params(**kwargs)
         return InstitutionalCalendarResult.from_json(await self._get("/v1/institutional/profile", params))
 
-    async def institutional_fiscal_year_resolve(self, body: dict) -> InstitutionalCalendarResult:
+    async def institutional_fiscal_year_resolve(self, body: Any) -> InstitutionalCalendarResult:
         return InstitutionalCalendarResult.from_json(
-            await self.request("POST", "/v1/institutional/fiscal-year/resolve", json=body)
+            await self.request("POST", "/v1/institutional/fiscal-year/resolve", json=R.body_json(body))
         )
 
-    async def institutional_academic_year_resolve(self, body: dict) -> InstitutionalCalendarResult:
+    async def institutional_academic_year_resolve(self, body: Any) -> InstitutionalCalendarResult:
         return InstitutionalCalendarResult.from_json(
-            await self.request("POST", "/v1/institutional/academic-year/resolve", json=body)
+            await self.request("POST", "/v1/institutional/academic-year/resolve", json=R.body_json(body))
         )
 
     # -- misc -------------------------------------------------------------

@@ -1,6 +1,6 @@
 {
   "name": "waqt-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Official thin JavaScript/TypeScript SDK for the Waqt API (Maghrib-to-Maghrib civil time and Hijri calendar).",
   "type": "module",
   "main": "src/index.mjs",
@@ -10,6 +10,9 @@
     ".": {
       "types": "./index.d.ts",
       "import": "./src/index.mjs"
+    },
+    "./requests_types": {
+      "import": "./src/requests_types.mjs"
     }
   },
   "engines": {
@@ -18,7 +21,25 @@
   "scripts": {
     "test": "node --test"
   },
-  "keywords": ["waqt", "hijri", "islamic-calendar", "prayer-times", "maghrib"],
+  "keywords": [
+    "waqt",
+    "hijri",
+    "islamic-calendar",
+    "prayer-times",
+    "maghrib"
+  ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "files": [
+    "src/**/*.mjs",
+    "index.d.ts",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waqt-project/waqt-api",
+    "directory": "sdks/js/waqt-client"
+  }
 }

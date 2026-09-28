@@ -34,6 +34,14 @@ def _drop_none(params: dict) -> dict:
     return {k: v for k, v in params.items() if v is not None}
 
 
+def body_json(body: Any) -> dict:
+    """Accepts either a plain `dict` (the Sprint 9 wire-format contract,
+    unchanged) or any object exposing `.to_json()` -- what every class in
+    `waqt_client.requests` (Sprint 10's typed request builders) provides.
+    Never requires the typed classes; always accepts them."""
+    return body.to_json() if hasattr(body, "to_json") else body
+
+
 def waqt_params(
     lat: float, lon: float, *, elevation_m: float = 0.0, instant=None,
     timezone_override: Optional[str] = None, fajr_angle: Optional[float] = None,

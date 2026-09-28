@@ -98,6 +98,23 @@ Waqt provides temporal facts, not religious rulings — see [`docs/SCHEDULING.md
 
 No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTITUTIONAL.md`](docs/INSTITUTIONAL.md).
 
+## SDKs, local computation, and independent astronomy (Sprint 9-10)
+
+- **Official SDKs** — `sdks/python/waqt_client` and `sdks/js/waqt-client`,
+  remote HTTP clients with full read coverage plus typed request builders
+  for every `POST` endpoint. See [`docs/SDK.md`](docs/SDK.md) and each
+  package's `CHANGELOG.md`. Packaging/versioning/release procedure:
+  [`docs/RELEASING.md`](docs/RELEASING.md).
+- **Local computation library** — `local/waqt_local`, a no-HTTP, in-process
+  Python package computing the same facts the server does, straight from
+  `waqt.core`/`waqt.scheduling`/`waqt.institutional`. See
+  [`docs/LOCAL.md`](docs/LOCAL.md).
+- **Independent astronomy** — `independent-astronomy/independent_solar`
+  (a from-scratch Level-B solar engine) and `independent-astronomy/level_a`
+  (a VSOP87-based Level-A reference, Sprint 10, used to measure both
+  Level-B engines). See [`docs/INDEPENDENT-ASTRONOMY.md`](docs/INDEPENDENT-ASTRONOMY.md)
+  and [`docs/ASTRONOMY.md`](docs/ASTRONOMY.md)'s "Accuracy levels" section.
+
 ## Verify
 
 ```bash

@@ -5,7 +5,6 @@
 // socket -> real ASGI app), not a mock.
 
 import { spawn } from "node:child_process";
-import { existsSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -13,15 +12,17 @@ import net from "node:net";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../..");
-const VENV_PYTHON = path.join(
-  REPO_ROOT,
-  ".venv",
-  process.platform === "win32" ? "Scripts" : "bin",
-  process.platform === "win32" ? "python.exe" : "python"
-);
-const PYTHON = process.env.WAQT_TEST_PYTHON ?? (
-  existsSync(VENV_PYTHON) ? VENV_PYTHON : process.platform === "win32" ? "python" : "python3"
-);
+
+import fs from "node:fs";
+
+function getPythonCmd() {
+  if (process.env.PYTHON) return process.env.PYTHON;
+  const venvPyWin = path.join(REPO_ROOT, ".venv", "Scripts", "python.exe");
+  if (fs.existsSync(venvPyWin)) return venvPyWin;
+  const venvPyNix = path.join(REPO_ROOT, ".venv", "bin", "python");
+  if (fs.existsSync(venvPyNix)) return venvPyNix;
+  return process.platform === "win32" ? "python" : "python3";
+}
 
 function findFreePort() {
   return new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ function findFreePort() {
 export async function startServer() {
   const port = await findFreePort();
   const child = spawn(
-    PYTHON,
+    getPythonCmd(),
     ["-m", "uvicorn", "waqt.api:app", "--host", "127.0.0.1", "--port", String(port), "--log-level", "warning"],
     { cwd: REPO_ROOT, stdio: "ignore" }
   );

@@ -76,14 +76,36 @@ Both SDKs provide, per the Sprint 9 brief:
 ## Local vs server computation
 
 Both SDKs are **remote Waqt API clients**. Neither should be read as
-"Python/JS SDK = Waqt itself" — a **local Waqt computation library** (the
-astronomical/calendar engine embedded directly, no network round-trip) is
-a distinct, separately-specified component. The Sprint 9 brief is
-explicit that this can come later or be separately specified; nothing in
-either SDK here pretends to be that library. (Parallel Milestone A's
-`independent-astronomy/` — see docs/INDEPENDENT-ASTRONOMY.md — is a
-second *server-side reference implementation* used for cross-validation,
-not a client-embeddable library either; it is not wired into either SDK.)
+"Python/JS SDK = Waqt itself" — a **local Waqt computation library**
+now exists (Sprint 10): `local/waqt_local` (Python), embedding the
+astronomical/calendar engine directly, no network round-trip, no
+`httpx`. See `docs/LOCAL.md` for the full architecture note and
+`local/README.md` for usage. (Parallel Milestone A's
+`independent-astronomy/` — see docs/INDEPENDENT-ASTRONOMY.md — remains
+a *server-side reference implementation* used for cross-validation, not
+a client-embeddable library either; it is not wired into either SDK or
+into `waqt_local`.)
+
+## Typed requests (Sprint 10)
+
+`POST /v1/schedule/resolve`, `POST /v1/institutional/fiscal-year/resolve`,
+and `POST /v1/institutional/academic-year/resolve` took only a raw
+JSON body through Sprint 9. Both SDKs now additionally offer typed,
+serializable request builders for all three:
+
+- Python: `waqt_client.requests` (`ScheduleResolveRequest`, `Event`,
+  `Interval`, `ResolveInterval`, `FiscalYearResolveRequest`, `MonthDay`,
+  ...). `client.schedule_resolve(...)` accepts either a typed request
+  or a plain `dict`, unchanged from Sprint 9.
+- JavaScript/TypeScript: `requests_types.mjs`, exported as `requests`
+  from the package root (`requests.scheduleResolveRequest(...)`,
+  `requests.event(...)`, ...). `client.scheduleResolve(...)` accepts
+  either a typed request (anything with `toJSON()`) or a plain object.
+
+Every documented `v1.x` endpoint now has a typed representation in both
+official SDKs (this sprint's public-contract goal). See each SDK's
+`CHANGELOG.md` and `tests/test_requests_types.py` /
+`test/requests_types.test.mjs` for the full shape reference.
 
 ## Conformance
 

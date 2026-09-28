@@ -108,6 +108,24 @@ other returned polar-day/night `None`, or vice versa).
   astronomy*, not proof that astronomy is correct to sub-second precision.
   `docs/ASTRONOMY.md`'s Level A row is still "Not implemented" — this
   milestone doesn't change that.
+
+  **Update, Sprint 10:** this gap is now closed for measurement purposes
+  (not for production use) — see `independent-astronomy/level_a/` and
+  `docs/RELEASING.md`'s sibling doc for the local library, or read on:
+  `compare_level_a.py` checks both `waqt/solar.py` and `independent_solar`
+  against a genuine Level-A reference (full VSOP87, via the published,
+  independently-tested `pymeeus` library — not hand-derived coefficients).
+  The result was more interesting than "both engines are fine": across
+  every latitude band, `independent_solar` (Meeus low-accuracy, this
+  milestone) tracks the VSOP87 reference within 2-5 seconds, while
+  `waqt/solar.py` (NOAA low-precision, production) diverges considerably
+  more — up to ~40 seconds at mid-latitude and ~430 seconds at high
+  latitude. Two Level-B algorithms agreeing with each other, in other
+  words, was hiding the fact that they are not equally close to the
+  truth; `waqt/solar.py` is unchanged by this finding (Sprint 10's DoD
+  explicitly forbids "silently changing the production astronomical
+  engine" on this basis alone) — see the Sprint 10 report for the full
+  discussion and what a fix would look like if one is chosen later.
 - **`independent_solar`'s Newton-style iteration has a fixed 10-iteration
   cap and a 1e-7° tolerance**; it has not been stress-tested against
   contrived non-convergent cases the way `waqt/solar.py`'s two-pass

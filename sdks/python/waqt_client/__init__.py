@@ -13,10 +13,16 @@ This package is a REMOTE API CLIENT, not a local reimplementation of
 Waqt's astronomical/calendar rules. Every number it returns came from a
 live (or replayed, in tests) `/v1/*` HTTP response — nothing here
 computes a Maghrib instant, a Hijri date, or a scheduling result on its
-own. If you need Waqt computation without a server round-trip, that is a
-*local Waqt computation library*, a distinct, not-yet-built component
-this SDK deliberately does not pretend to be (see docs/SDK.md's "Local vs
-server computation" section).
+own. If you need Waqt computation without a server round-trip, see the
+sibling `waqt-local` package (Sprint 10) — a distinct, in-process
+library, not this one wearing a different hat (docs/SDK.md's "Local vs
+server computation" section, docs/LOCAL.md).
+
+Sprint 10 also added `waqt_client.requests`: typed, `.to_json()`-able
+request builders for the three endpoints that used to take only a raw
+`dict` (`POST /v1/schedule/resolve` and the two institutional
+`.../resolve` endpoints). Passing a plain `dict` still works exactly as
+it did in Sprint 9 — the typed builders are opt-in convenience.
 
     >>> from waqt_client import WaqtClient
     >>> with WaqtClient(base_url="http://localhost:8000") as client:
@@ -28,6 +34,7 @@ server computation" section).
     ...     resp = await client.get_waqt(lat=9.0192, lon=38.7525)
 """
 
+from . import requests
 from ._version import __version__
 from .async_client import AsyncWaqtClient
 from .client import WaqtClient
@@ -56,6 +63,7 @@ from .types import (
 
 __all__ = [
     "__version__",
+    "requests",
     "WaqtClient",
     "AsyncWaqtClient",
     "WaqtClientConfig",

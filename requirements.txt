@@ -7,3 +7,8 @@ ephem
 # anything in waqt/ itself.
 astral
 pytest
+# pymeeus is used solely by independent-astronomy/level_a/ (Sprint 10's
+# Level-A astronomical reference, VSOP87-based) to cross-validate the two
+# existing Level-B solar engines. It is not imported by anything in
+# waqt/ or waqt_local/ itself.
+pymeeus

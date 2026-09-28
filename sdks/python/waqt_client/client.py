@@ -197,13 +197,13 @@ class WaqtClient:
         params = R.span_params(lat, lon, start, end, **kwargs)
         return SchedulingResult.from_json(self._get("/v1/schedule/span", params))
 
-    def schedule_resolve(self, body: dict) -> SchedulingResult:
+    def schedule_resolve(self, body: Any) -> SchedulingResult:
         """`POST /v1/schedule/resolve` — resolve a scheduling operation
         (e.g. `resolve_interval`) against a location/anchor. `body` is the
         same JSON shape docs/SCHEDULING.md documents; this SDK does not
         model every operation type, since the endpoint's own request body
         already is the wire contract."""
-        return SchedulingResult.from_json(self.request("POST", "/v1/schedule/resolve", json=body))
+        return SchedulingResult.from_json(self.request("POST", "/v1/schedule/resolve", json=R.body_json(body)))
 
     # -- institutional calendars (Sprint 7) ----------------------------------
 
@@ -225,16 +225,16 @@ class WaqtClient:
         params = R.institutional_profile_params(**kwargs)
         return InstitutionalCalendarResult.from_json(self._get("/v1/institutional/profile", params))
 
-    def institutional_fiscal_year_resolve(self, body: dict) -> InstitutionalCalendarResult:
+    def institutional_fiscal_year_resolve(self, body: Any) -> InstitutionalCalendarResult:
         """`POST /v1/institutional/fiscal-year/resolve`."""
         return InstitutionalCalendarResult.from_json(
-            self.request("POST", "/v1/institutional/fiscal-year/resolve", json=body)
+            self.request("POST", "/v1/institutional/fiscal-year/resolve", json=R.body_json(body))
         )
 
-    def institutional_academic_year_resolve(self, body: dict) -> InstitutionalCalendarResult:
+    def institutional_academic_year_resolve(self, body: Any) -> InstitutionalCalendarResult:
         """`POST /v1/institutional/academic-year/resolve`."""
         return InstitutionalCalendarResult.from_json(
-            self.request("POST", "/v1/institutional/academic-year/resolve", json=body)
+            self.request("POST", "/v1/institutional/academic-year/resolve", json=R.body_json(body))
         )
 
     # -- misc -------------------------------------------------------------

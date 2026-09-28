@@ -1,0 +1,4272 @@
+{
+  "sprint": "Sprint 10 - Level-A astronomical reference comparison",
+  "reference": {
+    "name": "level_a",
+    "theory": "VSOP87 (full series) via pymeeus.Sun.apparent_geocentric_position + pymeeus nutation/obliquity/GAST",
+    "library": "pymeeus (independently published and tested; not written for this project)",
+    "note": "This is a comparison reference, not a production dependency: waqt/solar.py is unchanged, and independent_solar/ is unchanged. See level_a/sun.py's module docstring for why a real published library was used instead of hand-derived VSOP87 coefficients."
+  },
+  "tolerance_seconds_waqt_vs_level_a_by_band": {
+    "equator": 25,
+    "tropics": 35,
+    "mid-lat-N": 45,
+    "mid-lat-S": 55,
+    "high-lat": 450
+  },
+  "tolerance_seconds_level_b_vs_level_a_by_band": {
+    "equator": 3,
+    "tropics": 3,
+    "mid-lat-N": 3,
+    "mid-lat-S": 3,
+    "high-lat": 6
+  },
+  "max_abs_diff_seconds_observed": {
+    "waqt_vs_level_a": {
+      "equator": 19.81,
+      "tropics": 31.688,
+      "mid-lat-N": 40.118,
+      "mid-lat-S": 47.811,
+      "high-lat": 432.115
+    },
+    "level_b_vs_level_a": {
+      "equator": 1.68,
+      "tropics": 1.694,
+      "mid-lat-N": 1.761,
+      "mid-lat-S": 1.884,
+      "high-lat": 4.323
+    }
+  },
+  "polar_agreement_failures": [],
+  "vectors": [
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 25,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T10:09:10.777356+00:00",
+          "level_b": "2026-03-20T10:09:21.168678+00:00",
+          "level_a": "2026-03-20T10:09:19.742455+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.965,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T11:17:49.976607+00:00",
+          "level_b": "2026-03-20T11:18:00.373477+00:00",
+          "level_a": "2026-03-20T11:17:58.951049+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.974,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T17:21:18.235994+00:00",
+          "level_b": "2026-03-20T17:21:15.931566+00:00",
+          "level_a": "2026-03-20T17:21:14.528877+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.707,
+          "level_b_vs_level_a_diff_seconds": 1.403,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T20:21:19.080756+00:00",
+          "level_b": "2026-03-20T20:21:40.571236+00:00",
+          "level_a": "2026-03-20T20:21:38.890780+00:00",
+          "waqt_vs_level_a_diff_seconds": -19.81,
+          "level_b_vs_level_a_diff_seconds": 1.68,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T23:24:20.597150+00:00",
+          "level_b": "2026-03-20T23:24:31.331650+00:00",
+          "level_a": "2026-03-20T23:24:29.948188+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.351,
+          "level_b_vs_level_a_diff_seconds": 1.383,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-21T00:28:59.876318+00:00",
+          "level_b": "2026-03-21T00:29:10.557942+00:00",
+          "level_a": "2026-03-21T00:29:09.177182+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.301,
+          "level_b_vs_level_a_diff_seconds": 1.381,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 25,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T09:57:23.339688+00:00",
+          "level_b": "2026-06-21T09:57:17.255583+00:00",
+          "level_a": "2026-06-21T09:57:16.367005+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.973,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T11:12:28.653502+00:00",
+          "level_b": "2026-06-21T11:12:22.604714+00:00",
+          "level_a": "2026-06-21T11:12:21.716449+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.937,
+          "level_b_vs_level_a_diff_seconds": 0.888,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T17:15:41.740179+00:00",
+          "level_b": "2026-06-21T17:15:45.076601+00:00",
+          "level_a": "2026-06-21T17:15:44.196590+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.456,
+          "level_b_vs_level_a_diff_seconds": 0.88,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T20:41:29.701225+00:00",
+          "level_b": "2026-06-21T20:41:23.401434+00:00",
+          "level_a": "2026-06-21T20:41:22.524595+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.177,
+          "level_b_vs_level_a_diff_seconds": 0.877,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T23:19:13.570364+00:00",
+          "level_b": "2026-06-21T23:19:07.544874+00:00",
+          "level_a": "2026-06-21T23:19:06.671772+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.899,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-22T00:29:54.792020+00:00",
+          "level_b": "2026-06-22T00:29:48.869676+00:00",
+          "level_a": "2026-06-22T00:29:47.996085+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.796,
+          "level_b_vs_level_a_diff_seconds": 0.874,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 25,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T09:55:31.618966+00:00",
+          "level_b": "2026-09-19T09:55:40.742246+00:00",
+          "level_a": "2026-09-19T09:55:41.356367+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.737,
+          "level_b_vs_level_a_diff_seconds": -0.614,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T11:04:11.508971+00:00",
+          "level_b": "2026-09-19T11:04:20.951125+00:00",
+          "level_a": "2026-09-19T11:04:21.562906+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.054,
+          "level_b_vs_level_a_diff_seconds": -0.612,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T17:07:40.511296+00:00",
+          "level_b": "2026-09-19T17:07:34.562416+00:00",
+          "level_a": "2026-09-19T17:07:35.173586+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.338,
+          "level_b_vs_level_a_diff_seconds": -0.611,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T20:10:21.941217+00:00",
+          "level_b": "2026-09-19T20:10:20.443553+00:00",
+          "level_a": "2026-09-19T20:10:20.918271+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.023,
+          "level_b_vs_level_a_diff_seconds": -0.475,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T23:10:39.148529+00:00",
+          "level_b": "2026-09-19T23:10:48.309991+00:00",
+          "level_a": "2026-09-19T23:10:48.919618+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.771,
+          "level_b_vs_level_a_diff_seconds": -0.61,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-20T00:15:18.770873+00:00",
+          "level_b": "2026-09-20T00:15:28.176699+00:00",
+          "level_a": "2026-09-20T00:15:28.784141+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.013,
+          "level_b_vs_level_a_diff_seconds": -0.607,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 25,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T09:54:06.407856+00:00",
+          "level_b": "2026-09-23T09:54:15.813014+00:00",
+          "level_a": "2026-09-23T09:54:16.294267+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.886,
+          "level_b_vs_level_a_diff_seconds": -0.481,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T11:02:45.515419+00:00",
+          "level_b": "2026-09-23T11:02:54.846884+00:00",
+          "level_a": "2026-09-23T11:02:55.325517+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.81,
+          "level_b_vs_level_a_diff_seconds": -0.479,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T17:06:15.478220+00:00",
+          "level_b": "2026-09-23T17:06:09.669625+00:00",
+          "level_a": "2026-09-23T17:06:10.133399+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.345,
+          "level_b_vs_level_a_diff_seconds": -0.464,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T20:05:59.196242+00:00",
+          "level_b": "2026-09-23T20:06:18.419232+00:00",
+          "level_a": "2026-09-23T20:06:18.972662+00:00",
+          "waqt_vs_level_a_diff_seconds": -19.776,
+          "level_b_vs_level_a_diff_seconds": -0.553,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T23:09:15.642640+00:00",
+          "level_b": "2026-09-23T23:09:24.652801+00:00",
+          "level_a": "2026-09-23T23:09:25.101002+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.458,
+          "level_b_vs_level_a_diff_seconds": -0.448,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-24T00:13:54.973415+00:00",
+          "level_b": "2026-09-24T00:14:03.859203+00:00",
+          "level_a": "2026-09-24T00:14:04.304799+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.331,
+          "level_b_vs_level_a_diff_seconds": -0.446,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Quito (equator)",
+      "lat": -0.1807,
+      "lon": -78.4678,
+      "elevation_m": 0.0,
+      "latitude_band": "equator",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 25,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T09:53:05.393592+00:00",
+          "level_b": "2026-12-21T09:52:50.100067+00:00",
+          "level_a": "2026-12-21T09:52:49.815323+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.578,
+          "level_b_vs_level_a_diff_seconds": 0.285,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T11:08:13.937507+00:00",
+          "level_b": "2026-12-21T11:07:58.611675+00:00",
+          "level_a": "2026-12-21T11:07:58.313345+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.624,
+          "level_b_vs_level_a_diff_seconds": 0.298,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T17:11:56.919968+00:00",
+          "level_b": "2026-12-21T17:12:02.931114+00:00",
+          "level_a": "2026-12-21T17:12:02.607316+00:00",
+          "waqt_vs_level_a_diff_seconds": -5.687,
+          "level_b_vs_level_a_diff_seconds": 0.324,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T20:38:08.482053+00:00",
+          "level_b": "2026-12-21T20:37:53.145193+00:00",
+          "level_a": "2026-12-21T20:37:52.800958+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.681,
+          "level_b_vs_level_a_diff_seconds": 0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T23:16:22.544571+00:00",
+          "level_b": "2026-12-21T23:16:07.254762+00:00",
+          "level_a": "2026-12-21T23:16:06.904633+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.64,
+          "level_b_vs_level_a_diff_seconds": 0.35,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-22T00:27:06.745378+00:00",
+          "level_b": "2026-12-22T00:26:51.506208+00:00",
+          "level_a": "2026-12-22T00:26:51.143253+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.602,
+          "level_b_vs_level_a_diff_seconds": 0.363,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T02:28:05.731059+00:00",
+          "level_b": "2026-03-20T02:28:15.091630+00:00",
+          "level_a": "2026-03-20T02:28:13.629320+00:00",
+          "waqt_vs_level_a_diff_seconds": -7.898,
+          "level_b_vs_level_a_diff_seconds": 1.462,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T03:36:46.079446+00:00",
+          "level_b": "2026-03-20T03:36:55.525694+00:00",
+          "level_a": "2026-03-20T03:36:54.068267+00:00",
+          "waqt_vs_level_a_diff_seconds": -7.989,
+          "level_b_vs_level_a_diff_seconds": 1.457,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T09:40:08.707994+00:00",
+          "level_b": "2026-03-20T09:40:12.083689+00:00",
+          "level_a": "2026-03-20T09:40:10.658247+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.95,
+          "level_b_vs_level_a_diff_seconds": 1.425,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T12:42:22.846559+00:00",
+          "level_b": "2026-03-20T12:42:30.434544+00:00",
+          "level_a": "2026-03-20T12:42:28.745174+00:00",
+          "waqt_vs_level_a_diff_seconds": -5.899,
+          "level_b_vs_level_a_diff_seconds": 1.689,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T15:43:15.923356+00:00",
+          "level_b": "2026-03-20T15:43:27.553091+00:00",
+          "level_a": "2026-03-20T15:43:26.158851+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.235,
+          "level_b_vs_level_a_diff_seconds": 1.394,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T16:47:56.028470+00:00",
+          "level_b": "2026-03-20T16:48:07.678024+00:00",
+          "level_a": "2026-03-20T16:48:06.287354+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.259,
+          "level_b_vs_level_a_diff_seconds": 1.391,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T02:18:10.979315+00:00",
+          "level_b": "2026-06-21T02:18:04.922921+00:00",
+          "level_a": "2026-06-21T02:18:04.021292+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.958,
+          "level_b_vs_level_a_diff_seconds": 0.902,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T03:33:10.578066+00:00",
+          "level_b": "2026-06-21T03:33:04.518828+00:00",
+          "level_a": "2026-06-21T03:33:03.617993+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.96,
+          "level_b_vs_level_a_diff_seconds": 0.901,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T09:34:32.212179+00:00",
+          "level_b": "2026-06-21T09:34:31.364932+00:00",
+          "level_a": "2026-06-21T09:34:30.474204+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.738,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T12:59:43.817965+00:00",
+          "level_b": "2026-06-21T12:59:37.639335+00:00",
+          "level_a": "2026-06-21T12:59:36.753060+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.065,
+          "level_b_vs_level_a_diff_seconds": 0.886,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T15:36:04.259055+00:00",
+          "level_b": "2026-06-21T15:35:58.209773+00:00",
+          "level_a": "2026-06-21T15:35:57.327844+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.931,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T16:46:40.535560+00:00",
+          "level_b": "2026-06-21T16:46:34.550727+00:00",
+          "level_a": "2026-06-21T16:46:33.668762+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.867,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T02:14:34.199902+00:00",
+          "level_b": "2026-09-19T02:14:44.248865+00:00",
+          "level_a": "2026-09-19T02:14:44.857235+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.657,
+          "level_b_vs_level_a_diff_seconds": -0.608,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T03:23:14.949957+00:00",
+          "level_b": "2026-09-19T03:23:25.302849+00:00",
+          "level_a": "2026-09-19T03:23:25.909209+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.959,
+          "level_b_vs_level_a_diff_seconds": -0.606,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T09:26:30.983296+00:00",
+          "level_b": "2026-09-19T09:26:31.884894+00:00",
+          "level_a": "2026-09-19T09:26:32.497713+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.514,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T12:31:16.592046+00:00",
+          "level_b": "2026-09-19T12:31:28.220817+00:00",
+          "level_a": "2026-09-19T12:31:28.707688+00:00",
+          "waqt_vs_level_a_diff_seconds": -12.116,
+          "level_b_vs_level_a_diff_seconds": -0.487,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T15:29:31.243442+00:00",
+          "level_b": "2026-09-19T15:29:39.512328+00:00",
+          "level_a": "2026-09-19T15:29:40.130523+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.887,
+          "level_b_vs_level_a_diff_seconds": -0.618,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T16:34:11.864614+00:00",
+          "level_b": "2026-09-19T16:34:20.366202+00:00",
+          "level_a": "2026-09-19T16:34:20.982466+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.118,
+          "level_b_vs_level_a_diff_seconds": -0.616,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T02:13:01.532960+00:00",
+          "level_b": "2026-09-23T02:13:11.868711+00:00",
+          "level_a": "2026-09-23T02:13:12.364106+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.831,
+          "level_b_vs_level_a_diff_seconds": -0.495,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T03:21:41.619037+00:00",
+          "level_b": "2026-09-23T03:21:51.866128+00:00",
+          "level_a": "2026-09-23T03:21:52.359171+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.74,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T09:25:05.950220+00:00",
+          "level_b": "2026-09-23T09:25:06.876503+00:00",
+          "level_a": "2026-09-23T09:25:07.359851+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.41,
+          "level_b_vs_level_a_diff_seconds": -0.483,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T12:27:05.004336+00:00",
+          "level_b": "2026-09-23T12:27:17.874945+00:00",
+          "level_a": "2026-09-23T12:27:18.254594+00:00",
+          "waqt_vs_level_a_diff_seconds": -13.25,
+          "level_b_vs_level_a_diff_seconds": -0.38,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T15:28:14.842981+00:00",
+          "level_b": "2026-09-23T15:28:22.959825+00:00",
+          "level_a": "2026-09-23T15:28:23.432305+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.589,
+          "level_b_vs_level_a_diff_seconds": -0.472,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T16:32:55.265445+00:00",
+          "level_b": "2026-09-23T16:33:03.246060+00:00",
+          "level_a": "2026-09-23T16:33:03.716200+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.451,
+          "level_b_vs_level_a_diff_seconds": -0.47,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Nairobi (tropics, S)",
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T02:09:41.977611+00:00",
+          "level_b": "2026-12-21T02:09:26.726625+00:00",
+          "level_a": "2026-12-21T02:09:26.473452+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.504,
+          "level_b_vs_level_a_diff_seconds": 0.253,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T03:24:59.102911+00:00",
+          "level_b": "2026-12-21T03:24:43.772108+00:00",
+          "level_a": "2026-12-21T03:24:43.505494+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.597,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T09:30:47.391968+00:00",
+          "level_b": "2026-12-21T09:30:43.851464+00:00",
+          "level_a": "2026-12-21T09:30:43.559074+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.833,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T12:57:15.928407+00:00",
+          "level_b": "2026-12-21T12:57:00.586505+00:00",
+          "level_a": "2026-12-21T12:57:00.272832+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.656,
+          "level_b_vs_level_a_diff_seconds": 0.314,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T15:36:59.265337+00:00",
+          "level_b": "2026-12-21T15:36:43.949399+00:00",
+          "level_a": "2026-12-21T15:36:43.630246+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.635,
+          "level_b_vs_level_a_diff_seconds": 0.319,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T16:47:51.190637+00:00",
+          "level_b": "2026-12-21T16:47:35.884446+00:00",
+          "level_a": "2026-12-21T16:47:35.552427+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.638,
+          "level_b_vs_level_a_diff_seconds": 0.332,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T02:19:27.859176+00:00",
+          "level_b": "2026-03-20T02:19:46.266021+00:00",
+          "level_a": "2026-03-20T02:19:44.918964+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.06,
+          "level_b_vs_level_a_diff_seconds": 1.347,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T03:28:59.739726+00:00",
+          "level_b": "2026-03-20T03:29:17.781886+00:00",
+          "level_a": "2026-03-20T03:29:16.433688+00:00",
+          "waqt_vs_level_a_diff_seconds": -16.694,
+          "level_b_vs_level_a_diff_seconds": 1.348,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T09:32:25.363994+00:00",
+          "level_b": "2026-03-20T09:32:28.834700+00:00",
+          "level_a": "2026-03-20T09:32:27.408864+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.045,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T12:46:48.955993+00:00",
+          "level_b": "2026-03-20T12:46:53.872975+00:00",
+          "level_a": "2026-03-20T12:46:52.597582+00:00",
+          "waqt_vs_level_a_diff_seconds": -3.642,
+          "level_b_vs_level_a_diff_seconds": 1.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T15:35:44.442276+00:00",
+          "level_b": "2026-03-20T15:35:47.474742+00:00",
+          "level_a": "2026-03-20T15:35:45.974031+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.532,
+          "level_b_vs_level_a_diff_seconds": 1.501,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T16:41:14.929371+00:00",
+          "level_b": "2026-03-20T16:41:17.579800+00:00",
+          "level_a": "2026-03-20T16:41:16.078121+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.149,
+          "level_b_vs_level_a_diff_seconds": 1.502,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T01:50:03.185327+00:00",
+          "level_b": "2026-06-21T01:49:57.143344+00:00",
+          "level_a": "2026-06-21T01:49:56.243210+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T03:07:22.225826+00:00",
+          "level_b": "2026-06-21T03:07:16.167671+00:00",
+          "level_a": "2026-06-21T03:07:15.268177+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.958,
+          "level_b_vs_level_a_diff_seconds": 0.899,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T09:26:48.868179+00:00",
+          "level_b": "2026-06-21T09:26:47.950845+00:00",
+          "level_a": "2026-06-21T09:26:47.059927+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.808,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T12:54:11.576507+00:00",
+          "level_b": "2026-06-21T12:54:05.477022+00:00",
+          "level_a": "2026-06-21T12:54:04.587910+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.989,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T15:46:25.680507+00:00",
+          "level_b": "2026-06-21T15:46:19.723760+00:00",
+          "level_a": "2026-06-21T15:46:18.839602+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.841,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T16:59:08.870814+00:00",
+          "level_b": "2026-06-21T16:59:02.999668+00:00",
+          "level_a": "2026-06-21T16:59:02.115205+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.756,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T02:04:55.253286+00:00",
+          "level_b": "2026-09-19T02:04:56.402090+00:00",
+          "level_a": "2026-09-19T02:04:57.067253+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.814,
+          "level_b_vs_level_a_diff_seconds": -0.665,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T03:14:32.280339+00:00",
+          "level_b": "2026-09-19T03:14:34.193097+00:00",
+          "level_a": "2026-09-19T03:14:34.853254+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.573,
+          "level_b_vs_level_a_diff_seconds": -0.66,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T09:18:47.639296+00:00",
+          "level_b": "2026-09-19T09:18:48.655641+00:00",
+          "level_a": "2026-09-19T09:18:49.268474+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.629,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T12:31:25.800176+00:00",
+          "level_b": "2026-09-19T12:31:39.376411+00:00",
+          "level_a": "2026-09-19T12:31:40.066215+00:00",
+          "waqt_vs_level_a_diff_seconds": -14.266,
+          "level_b_vs_level_a_diff_seconds": -0.69,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T15:22:38.916924+00:00",
+          "level_b": "2026-09-19T15:22:55.628013+00:00",
+          "level_a": "2026-09-19T15:22:56.193066+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.276,
+          "level_b_vs_level_a_diff_seconds": -0.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T16:28:10.156005+00:00",
+          "level_b": "2026-09-19T16:28:27.506419+00:00",
+          "level_a": "2026-09-19T16:28:28.067027+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.911,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T02:04:33.841437+00:00",
+          "level_b": "2026-09-23T02:04:35.266976+00:00",
+          "level_a": "2026-09-23T02:04:35.804317+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.963,
+          "level_b_vs_level_a_diff_seconds": -0.537,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T03:14:06.596364+00:00",
+          "level_b": "2026-09-23T03:14:08.377431+00:00",
+          "level_a": "2026-09-23T03:14:08.910007+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.314,
+          "level_b_vs_level_a_diff_seconds": -0.533,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T09:17:22.606220+00:00",
+          "level_b": "2026-09-23T09:17:23.645402+00:00",
+          "level_a": "2026-09-23T09:17:24.129034+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.523,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T12:31:31.888089+00:00",
+          "level_b": "2026-09-23T12:31:46.449434+00:00",
+          "level_a": "2026-09-23T12:31:46.974206+00:00",
+          "waqt_vs_level_a_diff_seconds": -15.086,
+          "level_b_vs_level_a_diff_seconds": -0.525,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T15:20:14.861547+00:00",
+          "level_b": "2026-09-23T15:20:31.444354+00:00",
+          "level_a": "2026-09-23T15:20:31.881178+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.02,
+          "level_b_vs_level_a_diff_seconds": -0.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T16:25:42.714829+00:00",
+          "level_b": "2026-09-23T16:25:59.553561+00:00",
+          "level_a": "2026-09-23T16:25:59.986652+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.272,
+          "level_b_vs_level_a_diff_seconds": -0.433,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa (tropics, N)",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T02:19:55.932731+00:00",
+          "level_b": "2026-12-21T02:19:40.560343+00:00",
+          "level_a": "2026-12-21T02:19:40.293496+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.639,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T03:35:14.359250+00:00",
+          "level_b": "2026-12-21T03:34:58.924507+00:00",
+          "level_a": "2026-12-21T03:34:58.644850+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.714,
+          "level_b_vs_level_a_diff_seconds": 0.28,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T09:23:04.047968+00:00",
+          "level_b": "2026-12-21T09:23:00.347574+00:00",
+          "level_a": "2026-12-21T09:23:00.055683+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.992,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T12:42:51.528768+00:00",
+          "level_b": "2026-12-21T12:42:36.215968+00:00",
+          "level_a": "2026-12-21T12:42:35.916436+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T15:11:17.006741+00:00",
+          "level_b": "2026-12-21T15:11:01.695227+00:00",
+          "level_a": "2026-12-21T15:11:01.390151+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.617,
+          "level_b_vs_level_a_diff_seconds": 0.305,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T16:22:13.522324+00:00",
+          "level_b": "2026-12-21T16:21:58.208045+00:00",
+          "level_a": "2026-12-21T16:21:57.890555+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.632,
+          "level_b_vs_level_a_diff_seconds": 0.317,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T02:19:27.859176+00:00",
+          "level_b": "2026-03-20T02:19:46.266021+00:00",
+          "level_a": "2026-03-20T02:19:44.918964+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.06,
+          "level_b_vs_level_a_diff_seconds": 1.347,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T03:23:10.662810+00:00",
+          "level_b": "2026-03-20T03:23:28.707995+00:00",
+          "level_a": "2026-03-20T03:23:27.359487+00:00",
+          "waqt_vs_level_a_diff_seconds": -16.697,
+          "level_b_vs_level_a_diff_seconds": 1.349,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T09:32:25.363994+00:00",
+          "level_b": "2026-03-20T09:32:28.834700+00:00",
+          "level_a": "2026-03-20T09:32:27.408864+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.045,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T12:46:48.955993+00:00",
+          "level_b": "2026-03-20T12:46:53.872975+00:00",
+          "level_a": "2026-03-20T12:46:52.597582+00:00",
+          "waqt_vs_level_a_diff_seconds": -3.642,
+          "level_b_vs_level_a_diff_seconds": 1.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T15:41:33.648552+00:00",
+          "level_b": "2026-03-20T15:41:36.673616+00:00",
+          "level_a": "2026-03-20T15:41:35.173112+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.525,
+          "level_b_vs_level_a_diff_seconds": 1.501,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T16:41:14.929371+00:00",
+          "level_b": "2026-03-20T16:41:17.579800+00:00",
+          "level_a": "2026-03-20T16:41:16.078121+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.149,
+          "level_b_vs_level_a_diff_seconds": 1.502,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T01:50:03.185327+00:00",
+          "level_b": "2026-06-21T01:49:57.143344+00:00",
+          "level_a": "2026-06-21T01:49:56.243210+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T03:00:59.828844+00:00",
+          "level_b": "2026-06-21T03:00:53.771417+00:00",
+          "level_a": "2026-06-21T03:00:52.871894+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.957,
+          "level_b_vs_level_a_diff_seconds": 0.9,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T09:26:48.868179+00:00",
+          "level_b": "2026-06-21T09:26:47.950845+00:00",
+          "level_a": "2026-06-21T09:26:47.059927+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.808,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T12:54:11.576507+00:00",
+          "level_b": "2026-06-21T12:54:05.477022+00:00",
+          "level_a": "2026-06-21T12:54:04.587910+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.989,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T15:52:48.069694+00:00",
+          "level_b": "2026-06-21T15:52:42.119283+00:00",
+          "level_a": "2026-06-21T15:52:41.235126+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.835,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T16:59:08.870814+00:00",
+          "level_b": "2026-06-21T16:59:02.999668+00:00",
+          "level_a": "2026-06-21T16:59:02.115205+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.756,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T02:04:55.253286+00:00",
+          "level_b": "2026-09-19T02:04:56.402090+00:00",
+          "level_a": "2026-09-19T02:04:57.067253+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.814,
+          "level_b_vs_level_a_diff_seconds": -0.665,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T03:08:42.968897+00:00",
+          "level_b": "2026-09-19T03:08:44.846786+00:00",
+          "level_a": "2026-09-19T03:08:45.507175+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.538,
+          "level_b_vs_level_a_diff_seconds": -0.66,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T09:18:47.639296+00:00",
+          "level_b": "2026-09-19T09:18:48.655641+00:00",
+          "level_a": "2026-09-19T09:18:49.268474+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.629,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T12:31:25.800176+00:00",
+          "level_b": "2026-09-19T12:31:39.376411+00:00",
+          "level_a": "2026-09-19T12:31:40.066215+00:00",
+          "waqt_vs_level_a_diff_seconds": -14.266,
+          "level_b_vs_level_a_diff_seconds": -0.69,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T15:28:28.077008+00:00",
+          "level_b": "2026-09-19T15:28:44.818755+00:00",
+          "level_a": "2026-09-19T15:28:45.383568+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.307,
+          "level_b_vs_level_a_diff_seconds": -0.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T16:28:10.156005+00:00",
+          "level_b": "2026-09-19T16:28:27.506419+00:00",
+          "level_a": "2026-09-19T16:28:28.067027+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.911,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T02:04:33.841437+00:00",
+          "level_b": "2026-09-23T02:04:35.266976+00:00",
+          "level_a": "2026-09-23T02:04:35.804317+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.963,
+          "level_b_vs_level_a_diff_seconds": -0.537,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T03:08:17.415518+00:00",
+          "level_b": "2026-09-23T03:08:19.194635+00:00",
+          "level_a": "2026-09-23T03:08:19.727503+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.312,
+          "level_b_vs_level_a_diff_seconds": -0.533,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T09:17:22.606220+00:00",
+          "level_b": "2026-09-23T09:17:23.645402+00:00",
+          "level_a": "2026-09-23T09:17:24.129034+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.523,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T12:31:31.888089+00:00",
+          "level_b": "2026-09-23T12:31:46.449434+00:00",
+          "level_a": "2026-09-23T12:31:46.974206+00:00",
+          "waqt_vs_level_a_diff_seconds": -15.086,
+          "level_b_vs_level_a_diff_seconds": -0.525,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T15:26:03.925045+00:00",
+          "level_b": "2026-09-23T15:26:20.505536+00:00",
+          "level_a": "2026-09-23T15:26:20.942145+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.017,
+          "level_b_vs_level_a_diff_seconds": -0.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T16:25:42.714829+00:00",
+          "level_b": "2026-09-23T16:25:59.553561+00:00",
+          "level_a": "2026-09-23T16:25:59.986652+00:00",
+          "waqt_vs_level_a_diff_seconds": -17.272,
+          "level_b_vs_level_a_diff_seconds": -0.433,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Addis Ababa @ 2400m",
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 2400.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T02:19:55.932731+00:00",
+          "level_b": "2026-12-21T02:19:40.560343+00:00",
+          "level_a": "2026-12-21T02:19:40.293496+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.639,
+          "level_b_vs_level_a_diff_seconds": 0.267,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T03:28:53.468109+00:00",
+          "level_b": "2026-12-21T03:28:38.038317+00:00",
+          "level_a": "2026-12-21T03:28:37.759752+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.708,
+          "level_b_vs_level_a_diff_seconds": 0.279,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T09:23:04.047968+00:00",
+          "level_b": "2026-12-21T09:23:00.347574+00:00",
+          "level_a": "2026-12-21T09:23:00.055683+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.992,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T12:42:51.528768+00:00",
+          "level_b": "2026-12-21T12:42:36.215968+00:00",
+          "level_a": "2026-12-21T12:42:35.916436+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T15:17:37.897746+00:00",
+          "level_b": "2026-12-21T15:17:22.585457+00:00",
+          "level_a": "2026-12-21T15:17:22.279239+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.619,
+          "level_b_vs_level_a_diff_seconds": 0.306,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T16:22:13.522324+00:00",
+          "level_b": "2026-12-21T16:21:58.208045+00:00",
+          "level_a": "2026-12-21T16:21:57.890555+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.632,
+          "level_b_vs_level_a_diff_seconds": 0.317,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T02:10:33.843615+00:00",
+          "level_b": "2026-03-20T02:11:04.034884+00:00",
+          "level_a": "2026-03-20T02:11:02.838048+00:00",
+          "waqt_vs_level_a_diff_seconds": -28.994,
+          "level_b_vs_level_a_diff_seconds": 1.197,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T03:24:29.076127+00:00",
+          "level_b": "2026-03-20T03:24:58.191364+00:00",
+          "level_a": "2026-03-20T03:24:56.984119+00:00",
+          "waqt_vs_level_a_diff_seconds": -27.908,
+          "level_b_vs_level_a_diff_seconds": 1.207,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T09:28:07.675994+00:00",
+          "level_b": "2026-03-20T09:28:11.199506+00:00",
+          "level_a": "2026-03-20T09:28:09.773508+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.098,
+          "level_b_vs_level_a_diff_seconds": 1.426,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T12:53:10.394298+00:00",
+          "level_b": "2026-03-20T12:53:01.528658+00:00",
+          "level_a": "2026-03-20T12:53:00.077344+00:00",
+          "waqt_vs_level_a_diff_seconds": 10.317,
+          "level_b_vs_level_a_diff_seconds": 1.451,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T15:31:51.034248+00:00",
+          "level_b": "2026-03-20T15:31:42.982103+00:00",
+          "level_a": "2026-03-20T15:31:41.344383+00:00",
+          "waqt_vs_level_a_diff_seconds": 9.69,
+          "level_b_vs_level_a_diff_seconds": 1.638,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T16:41:31.462767+00:00",
+          "level_b": "2026-03-20T16:41:22.384224+00:00",
+          "level_a": "2026-03-20T16:41:20.738306+00:00",
+          "waqt_vs_level_a_diff_seconds": 10.724,
+          "level_b_vs_level_a_diff_seconds": 1.646,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T01:13:59.774788+00:00",
+          "level_b": "2026-06-21T01:13:53.766957+00:00",
+          "level_a": "2026-06-21T01:13:52.869165+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.906,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T02:39:24.279525+00:00",
+          "level_b": "2026-06-21T02:39:18.231083+00:00",
+          "level_a": "2026-06-21T02:39:17.333553+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.946,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T09:22:31.180179+00:00",
+          "level_b": "2026-06-21T09:22:30.223869+00:00",
+          "level_a": "2026-06-21T09:22:29.332821+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.847,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T12:42:27.712912+00:00",
+          "level_b": "2026-06-21T12:42:21.705061+00:00",
+          "level_a": "2026-06-21T12:42:20.811722+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.901,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T16:05:48.023382+00:00",
+          "level_b": "2026-06-21T16:05:42.194640+00:00",
+          "level_a": "2026-06-21T16:05:41.307675+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.716,
+          "level_b_vs_level_a_diff_seconds": 0.887,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T17:25:58.049482+00:00",
+          "level_b": "2026-06-21T17:25:52.358363+00:00",
+          "level_a": "2026-06-21T17:25:51.470342+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.579,
+          "level_b_vs_level_a_diff_seconds": 0.888,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T01:54:40.832587+00:00",
+          "level_b": "2026-09-19T01:54:30.304553+00:00",
+          "level_a": "2026-09-19T01:54:31.044192+00:00",
+          "waqt_vs_level_a_diff_seconds": 9.788,
+          "level_b_vs_level_a_diff_seconds": -0.74,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T03:08:48.706065+00:00",
+          "level_b": "2026-09-19T03:08:39.733580+00:00",
+          "level_a": "2026-09-19T03:08:40.463085+00:00",
+          "waqt_vs_level_a_diff_seconds": 8.243,
+          "level_b_vs_level_a_diff_seconds": -0.73,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T09:14:29.951296+00:00",
+          "level_b": "2026-09-19T09:14:31.031496+00:00",
+          "level_a": "2026-09-19T09:14:31.644298+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.693,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T12:38:59.861629+00:00",
+          "level_b": "2026-09-19T12:39:27.060733+00:00",
+          "level_a": "2026-09-19T12:39:27.660498+00:00",
+          "waqt_vs_level_a_diff_seconds": -27.799,
+          "level_b_vs_level_a_diff_seconds": -0.6,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T15:19:36.166098+00:00",
+          "level_b": "2026-09-19T15:20:03.754671+00:00",
+          "level_a": "2026-09-19T15:20:04.251205+00:00",
+          "waqt_vs_level_a_diff_seconds": -28.085,
+          "level_b_vs_level_a_diff_seconds": -0.497,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T16:29:18.067861+00:00",
+          "level_b": "2026-09-19T16:29:46.985734+00:00",
+          "level_a": "2026-09-19T16:29:47.473533+00:00",
+          "waqt_vs_level_a_diff_seconds": -29.406,
+          "level_b_vs_level_a_diff_seconds": -0.488,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T01:55:52.575051+00:00",
+          "level_b": "2026-09-23T01:55:42.383659+00:00",
+          "level_a": "2026-09-23T01:55:42.975717+00:00",
+          "waqt_vs_level_a_diff_seconds": 9.599,
+          "level_b_vs_level_a_diff_seconds": -0.592,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T03:09:50.250146+00:00",
+          "level_b": "2026-09-23T03:09:41.115974+00:00",
+          "level_a": "2026-09-23T03:09:41.699396+00:00",
+          "waqt_vs_level_a_diff_seconds": 8.551,
+          "level_b_vs_level_a_diff_seconds": -0.583,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T09:13:04.918220+00:00",
+          "level_b": "2026-09-23T09:13:06.020201+00:00",
+          "level_a": "2026-09-23T09:13:06.504001+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.586,
+          "level_b_vs_level_a_diff_seconds": -0.484,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T12:37:13.239700+00:00",
+          "level_b": "2026-09-23T12:37:41.376509+00:00",
+          "level_a": "2026-09-23T12:37:41.840514+00:00",
+          "waqt_vs_level_a_diff_seconds": -28.601,
+          "level_b_vs_level_a_diff_seconds": -0.464,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T15:15:44.956552+00:00",
+          "level_b": "2026-09-23T15:16:12.444111+00:00",
+          "level_a": "2026-09-23T15:16:12.834670+00:00",
+          "waqt_vs_level_a_diff_seconds": -27.878,
+          "level_b_vs_level_a_diff_seconds": -0.391,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T16:25:18.325785+00:00",
+          "level_b": "2026-09-23T16:25:46.676728+00:00",
+          "level_a": "2026-09-23T16:25:47.061219+00:00",
+          "waqt_vs_level_a_diff_seconds": -28.735,
+          "level_b_vs_level_a_diff_seconds": -0.384,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Makkah (tropics, N)",
+      "lat": 21.4225,
+      "lon": 39.8262,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T02:34:36.910194+00:00",
+          "level_b": "2026-12-21T02:34:21.396234+00:00",
+          "level_a": "2026-12-21T02:34:21.112787+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.797,
+          "level_b_vs_level_a_diff_seconds": 0.283,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T03:54:04.271608+00:00",
+          "level_b": "2026-12-21T03:53:48.706955+00:00",
+          "level_a": "2026-12-21T03:53:48.409882+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.862,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T09:18:46.359968+00:00",
+          "level_b": "2026-12-21T09:18:42.570648+00:00",
+          "level_a": "2026-12-21T09:18:42.279008+00:00",
+          "waqt_vs_level_a_diff_seconds": 4.081,
+          "level_b_vs_level_a_diff_seconds": 0.292,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T12:23:00.521036+00:00",
+          "level_b": "2026-12-21T12:22:45.252997+00:00",
+          "level_a": "2026-12-21T12:22:44.970827+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.55,
+          "level_b_vs_level_a_diff_seconds": 0.282,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T14:43:51.545151+00:00",
+          "level_b": "2026-12-21T14:43:36.248770+00:00",
+          "level_a": "2026-12-21T14:43:35.961687+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.583,
+          "level_b_vs_level_a_diff_seconds": 0.287,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T15:58:46.270157+00:00",
+          "level_b": "2026-12-21T15:58:30.954926+00:00",
+          "level_a": "2026-12-21T15:58:30.654541+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.616,
+          "level_b_vs_level_a_diff_seconds": 0.3,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-19T22:26:25.448086+00:00",
+          "level_b": "2026-03-19T22:27:02.168915+00:00",
+          "level_a": "2026-03-19T22:27:01.047641+00:00",
+          "waqt_vs_level_a_diff_seconds": -35.6,
+          "level_b_vs_level_a_diff_seconds": 1.121,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-19T23:44:07.770530+00:00",
+          "level_b": "2026-03-19T23:44:42.918633+00:00",
+          "level_a": "2026-03-19T23:44:41.780365+00:00",
+          "waqt_vs_level_a_diff_seconds": -34.01,
+          "level_b_vs_level_a_diff_seconds": 1.138,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T05:47:47.083994+00:00",
+          "level_b": "2026-03-20T05:47:53.316781+00:00",
+          "level_a": "2026-03-20T05:47:51.879659+00:00",
+          "waqt_vs_level_a_diff_seconds": -4.796,
+          "level_b_vs_level_a_diff_seconds": 1.437,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T09:14:55.477518+00:00",
+          "level_b": "2026-03-20T09:14:45.903487+00:00",
+          "level_a": "2026-03-20T09:14:44.358386+00:00",
+          "waqt_vs_level_a_diff_seconds": 11.119,
+          "level_b_vs_level_a_diff_seconds": 1.545,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T11:51:42.724181+00:00",
+          "level_b": "2026-03-20T11:51:28.600330+00:00",
+          "level_a": "2026-03-20T11:51:26.873961+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.85,
+          "level_b_vs_level_a_diff_seconds": 1.726,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T13:04:57.917039+00:00",
+          "level_b": "2026-03-20T13:04:42.314528+00:00",
+          "level_a": "2026-03-20T13:04:40.574822+00:00",
+          "waqt_vs_level_a_diff_seconds": 17.342,
+          "level_b_vs_level_a_diff_seconds": 1.74,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-20T21:13:13.540322+00:00",
+          "level_b": "2026-06-20T21:13:07.681683+00:00",
+          "level_a": "2026-06-20T21:13:06.778079+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.762,
+          "level_b_vs_level_a_diff_seconds": 0.904,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-20T22:45:50.595601+00:00",
+          "level_b": "2026-06-20T22:45:44.632656+00:00",
+          "level_a": "2026-06-20T22:45:43.729161+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.866,
+          "level_b_vs_level_a_diff_seconds": 0.903,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T05:42:10.588179+00:00",
+          "level_b": "2026-06-21T05:42:07.631567+00:00",
+          "level_a": "2026-06-21T05:42:06.734629+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.854,
+          "level_b_vs_level_a_diff_seconds": 0.897,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T09:10:59.148430+00:00",
+          "level_b": "2026-06-21T09:10:53.176127+00:00",
+          "level_a": "2026-06-21T09:10:52.286763+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.862,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T12:38:36.535459+00:00",
+          "level_b": "2026-06-21T12:38:30.695729+00:00",
+          "level_a": "2026-06-21T12:38:29.802465+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.733,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T14:05:23.533866+00:00",
+          "level_b": "2026-06-21T14:05:17.842495+00:00",
+          "level_a": "2026-06-21T14:05:16.947762+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.586,
+          "level_b_vs_level_a_diff_seconds": 0.895,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-18T22:09:31.716139+00:00",
+          "level_b": "2026-09-18T22:09:14.619307+00:00",
+          "level_a": "2026-09-18T22:09:15.400588+00:00",
+          "waqt_vs_level_a_diff_seconds": 16.316,
+          "level_b_vs_level_a_diff_seconds": -0.781,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-18T23:27:33.176248+00:00",
+          "level_b": "2026-09-18T23:27:18.260168+00:00",
+          "level_a": "2026-09-18T23:27:19.027444+00:00",
+          "waqt_vs_level_a_diff_seconds": 14.149,
+          "level_b_vs_level_a_diff_seconds": -0.767,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T05:34:09.359296+00:00",
+          "level_b": "2026-09-19T05:34:13.714428+00:00",
+          "level_a": "2026-09-19T05:34:14.327468+00:00",
+          "waqt_vs_level_a_diff_seconds": -4.968,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T09:01:35.047735+00:00",
+          "level_b": "2026-09-19T09:02:02.829952+00:00",
+          "level_a": "2026-09-19T09:02:03.389095+00:00",
+          "waqt_vs_level_a_diff_seconds": -28.341,
+          "level_b_vs_level_a_diff_seconds": -0.559,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T11:40:10.956233+00:00",
+          "level_b": "2026-09-19T11:40:44.488102+00:00",
+          "level_a": "2026-09-19T11:40:44.947363+00:00",
+          "waqt_vs_level_a_diff_seconds": -33.991,
+          "level_b_vs_level_a_diff_seconds": -0.459,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T12:53:29.409956+00:00",
+          "level_b": "2026-09-19T12:54:04.812649+00:00",
+          "level_a": "2026-09-19T12:54:05.259812+00:00",
+          "waqt_vs_level_a_diff_seconds": -35.85,
+          "level_b_vs_level_a_diff_seconds": -0.447,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-22T22:11:35.666177+00:00",
+          "level_b": "2026-09-22T22:11:18.980489+00:00",
+          "level_a": "2026-09-22T22:11:19.614371+00:00",
+          "waqt_vs_level_a_diff_seconds": 16.052,
+          "level_b_vs_level_a_diff_seconds": -0.634,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-22T23:29:22.330586+00:00",
+          "level_b": "2026-09-22T23:29:07.237831+00:00",
+          "level_a": "2026-09-22T23:29:07.860067+00:00",
+          "waqt_vs_level_a_diff_seconds": 14.471,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T05:32:44.326220+00:00",
+          "level_b": "2026-09-23T05:32:48.650990+00:00",
+          "level_a": "2026-09-23T05:32:49.143757+00:00",
+          "waqt_vs_level_a_diff_seconds": -4.818,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T08:58:56.895470+00:00",
+          "level_b": "2026-09-23T08:59:25.611829+00:00",
+          "level_a": "2026-09-23T08:59:26.056068+00:00",
+          "waqt_vs_level_a_diff_seconds": -29.161,
+          "level_b_vs_level_a_diff_seconds": -0.444,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T11:35:32.108724+00:00",
+          "level_b": "2026-09-23T11:36:05.555102+00:00",
+          "level_a": "2026-09-23T11:36:05.926815+00:00",
+          "waqt_vs_level_a_diff_seconds": -33.818,
+          "level_b_vs_level_a_diff_seconds": -0.372,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T12:48:38.066685+00:00",
+          "level_b": "2026-09-23T12:49:12.836319+00:00",
+          "level_a": "2026-09-23T12:49:13.200034+00:00",
+          "waqt_vs_level_a_diff_seconds": -35.133,
+          "level_b_vs_level_a_diff_seconds": -0.364,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Dibrugarh, NE India",
+      "lat": 27.4728,
+      "lon": 94.912,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-20T23:02:55.633838+00:00",
+          "level_b": "2026-12-20T23:02:39.973489+00:00",
+          "level_a": "2026-12-20T23:02:39.695090+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.939,
+          "level_b_vs_level_a_diff_seconds": 0.278,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T00:26:21.161213+00:00",
+          "level_b": "2026-12-21T00:26:05.428982+00:00",
+          "level_a": "2026-12-21T00:26:05.135874+00:00",
+          "waqt_vs_level_a_diff_seconds": 16.025,
+          "level_b_vs_level_a_diff_seconds": 0.293,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T05:38:25.767968+00:00",
+          "level_b": "2026-12-21T05:38:17.416768+00:00",
+          "level_a": "2026-12-21T05:38:17.139585+00:00",
+          "waqt_vs_level_a_diff_seconds": 8.628,
+          "level_b_vs_level_a_diff_seconds": 0.277,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T08:31:45.927842+00:00",
+          "level_b": "2026-12-21T08:31:30.744820+00:00",
+          "level_a": "2026-12-21T08:31:30.486733+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.441,
+          "level_b_vs_level_a_diff_seconds": 0.258,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T10:50:44.290995+00:00",
+          "level_b": "2026-12-21T10:50:29.086362+00:00",
+          "level_a": "2026-12-21T10:50:28.824307+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.467,
+          "level_b_vs_level_a_diff_seconds": 0.262,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T12:09:25.578615+00:00",
+          "level_b": "2026-12-21T12:09:10.322266+00:00",
+          "level_a": "2026-12-21T12:09:10.045846+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.533,
+          "level_b_vs_level_a_diff_seconds": 0.276,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T02:38:47.751800+00:00",
+          "level_b": "2026-03-20T02:39:27.565658+00:00",
+          "level_a": "2026-03-20T02:39:26.492767+00:00",
+          "waqt_vs_level_a_diff_seconds": -38.741,
+          "level_b_vs_level_a_diff_seconds": 1.073,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T03:58:32.288162+00:00",
+          "level_b": "2026-03-20T03:59:10.219579+00:00",
+          "level_a": "2026-03-20T03:59:09.125901+00:00",
+          "waqt_vs_level_a_diff_seconds": -36.838,
+          "level_b_vs_level_a_diff_seconds": 1.094,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T10:02:29.395994+00:00",
+          "level_b": "2026-03-20T10:02:32.496754+00:00",
+          "level_a": "2026-03-20T10:02:31.072445+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.676,
+          "level_b_vs_level_a_diff_seconds": 1.424,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T13:30:10.482628+00:00",
+          "level_b": "2026-03-20T13:29:49.887654+00:00",
+          "level_a": "2026-03-20T13:29:48.322343+00:00",
+          "waqt_vs_level_a_diff_seconds": 22.16,
+          "level_b_vs_level_a_diff_seconds": 1.565,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T16:06:39.353607+00:00",
+          "level_b": "2026-03-20T16:06:22.472372+00:00",
+          "level_a": "2026-03-20T16:06:20.727849+00:00",
+          "waqt_vs_level_a_diff_seconds": 18.626,
+          "level_b_vs_level_a_diff_seconds": 1.745,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T17:21:50.016535+00:00",
+          "level_b": "2026-03-20T17:21:31.373356+00:00",
+          "level_a": "2026-03-20T17:21:29.612451+00:00",
+          "waqt_vs_level_a_diff_seconds": 20.404,
+          "level_b_vs_level_a_diff_seconds": 1.761,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T01:17:46.622381+00:00",
+          "level_b": "2026-06-21T01:17:40.640356+00:00",
+          "level_a": "2026-06-21T01:17:39.746278+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.876,
+          "level_b_vs_level_a_diff_seconds": 0.894,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T02:54:28.555471+00:00",
+          "level_b": "2026-06-21T02:54:22.507211+00:00",
+          "level_a": "2026-06-21T02:54:21.612453+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.943,
+          "level_b_vs_level_a_diff_seconds": 0.895,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T09:56:52.900179+00:00",
+          "level_b": "2026-06-21T09:56:52.255721+00:00",
+          "level_a": "2026-06-21T09:56:51.365569+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.535,
+          "level_b_vs_level_a_diff_seconds": 0.89,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T13:32:29.491622+00:00",
+          "level_b": "2026-06-21T13:32:23.598330+00:00",
+          "level_a": "2026-06-21T13:32:22.714530+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.777,
+          "level_b_vs_level_a_diff_seconds": 0.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T16:59:27.654160+00:00",
+          "level_b": "2026-06-21T16:59:21.954275+00:00",
+          "level_a": "2026-06-21T16:59:21.065637+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.589,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T18:29:58.320967+00:00",
+          "level_b": "2026-06-21T18:29:52.846875+00:00",
+          "level_a": "2026-06-21T18:29:51.955824+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.365,
+          "level_b_vs_level_a_diff_seconds": 0.891,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T02:21:51.196088+00:00",
+          "level_b": "2026-09-19T02:21:31.060198+00:00",
+          "level_a": "2026-09-19T02:21:31.861151+00:00",
+          "waqt_vs_level_a_diff_seconds": 19.335,
+          "level_b_vs_level_a_diff_seconds": -0.801,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T03:41:56.373738+00:00",
+          "level_b": "2026-09-19T03:41:38.724004+00:00",
+          "level_a": "2026-09-19T03:41:39.508800+00:00",
+          "waqt_vs_level_a_diff_seconds": 16.865,
+          "level_b_vs_level_a_diff_seconds": -0.785,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T09:48:51.671296+00:00",
+          "level_b": "2026-09-19T09:48:52.240868+00:00",
+          "level_a": "2026-09-19T09:48:52.853610+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.182,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T13:16:40.081414+00:00",
+          "level_b": "2026-09-19T13:17:18.716689+00:00",
+          "level_a": "2026-09-19T13:17:19.257755+00:00",
+          "waqt_vs_level_a_diff_seconds": -39.176,
+          "level_b_vs_level_a_diff_seconds": -0.541,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T15:55:02.029960+00:00",
+          "level_b": "2026-09-19T15:55:38.279540+00:00",
+          "level_a": "2026-09-19T15:55:38.721414+00:00",
+          "waqt_vs_level_a_diff_seconds": -36.691,
+          "level_b_vs_level_a_diff_seconds": -0.442,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T17:10:15.216973+00:00",
+          "level_b": "2026-09-19T17:10:53.598088+00:00",
+          "level_a": "2026-09-19T17:10:54.026246+00:00",
+          "waqt_vs_level_a_diff_seconds": -38.809,
+          "level_b_vs_level_a_diff_seconds": -0.428,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T02:24:19.256990+00:00",
+          "level_b": "2026-09-23T02:23:59.579891+00:00",
+          "level_a": "2026-09-23T02:24:00.214812+00:00",
+          "waqt_vs_level_a_diff_seconds": 19.042,
+          "level_b_vs_level_a_diff_seconds": -0.635,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T03:44:07.434400+00:00",
+          "level_b": "2026-09-23T03:43:49.603068+00:00",
+          "level_a": "2026-09-23T03:43:50.224998+00:00",
+          "waqt_vs_level_a_diff_seconds": 17.209,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T09:47:26.638220+00:00",
+          "level_b": "2026-09-23T09:47:27.237873+00:00",
+          "level_a": "2026-09-23T09:47:27.720308+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.082,
+          "level_b_vs_level_a_diff_seconds": -0.482,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T13:13:39.360070+00:00",
+          "level_b": "2026-09-23T13:14:19.055471+00:00",
+          "level_a": "2026-09-23T13:14:19.478367+00:00",
+          "waqt_vs_level_a_diff_seconds": -40.118,
+          "level_b_vs_level_a_diff_seconds": -0.423,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T15:50:01.448019+00:00",
+          "level_b": "2026-09-23T15:50:37.614353+00:00",
+          "level_a": "2026-09-23T15:50:37.966976+00:00",
+          "waqt_vs_level_a_diff_seconds": -36.519,
+          "level_b_vs_level_a_diff_seconds": -0.353,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T17:05:00.269945+00:00",
+          "level_b": "2026-09-23T17:05:37.972593+00:00",
+          "level_a": "2026-09-23T17:05:38.316508+00:00",
+          "waqt_vs_level_a_diff_seconds": -38.047,
+          "level_b_vs_level_a_diff_seconds": -0.344,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cairo (mid-lat, N)",
+      "lat": 30.0444,
+      "lon": 31.2357,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-N",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 45,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T03:21:23.757084+00:00",
+          "level_b": "2026-12-21T03:21:08.152095+00:00",
+          "level_a": "2026-12-21T03:21:07.853667+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.903,
+          "level_b_vs_level_a_diff_seconds": 0.298,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T04:46:59.647042+00:00",
+          "level_b": "2026-12-21T04:46:43.998465+00:00",
+          "level_a": "2026-12-21T04:46:43.684495+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.963,
+          "level_b_vs_level_a_diff_seconds": 0.314,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T09:53:08.079968+00:00",
+          "level_b": "2026-12-21T09:53:05.002165+00:00",
+          "level_a": "2026-12-21T09:53:04.708256+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.372,
+          "level_b_vs_level_a_diff_seconds": 0.294,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T12:41:13.268014+00:00",
+          "level_b": "2026-12-21T12:40:58.031216+00:00",
+          "level_a": "2026-12-21T12:40:57.760045+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.508,
+          "level_b_vs_level_a_diff_seconds": 0.271,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T14:59:41.046532+00:00",
+          "level_b": "2026-12-21T14:59:25.754601+00:00",
+          "level_a": "2026-12-21T14:59:25.479722+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.567,
+          "level_b_vs_level_a_diff_seconds": 0.275,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T16:20:26.249937+00:00",
+          "level_b": "2026-12-21T16:20:10.927725+00:00",
+          "level_a": "2026-12-21T16:20:10.637723+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.612,
+          "level_b_vs_level_a_diff_seconds": 0.29,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 55,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T03:26:16.529928+00:00",
+          "level_b": "2026-03-20T03:25:52.606974+00:00",
+          "level_a": "2026-03-20T03:25:50.722962+00:00",
+          "waqt_vs_level_a_diff_seconds": 25.807,
+          "level_b_vs_level_a_diff_seconds": 1.884,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T04:49:45.484192+00:00",
+          "level_b": "2026-03-20T04:49:24.080585+00:00",
+          "level_a": "2026-03-20T04:49:22.235017+00:00",
+          "waqt_vs_level_a_diff_seconds": 23.249,
+          "level_b_vs_level_a_diff_seconds": 1.846,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T10:53:44.179994+00:00",
+          "level_b": "2026-03-20T10:53:46.650119+00:00",
+          "level_a": "2026-03-20T10:53:45.228356+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.048,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T14:20:00.275116+00:00",
+          "level_b": "2026-03-20T14:20:49.293777+00:00",
+          "level_a": "2026-03-20T14:20:48.086327+00:00",
+          "waqt_vs_level_a_diff_seconds": -47.811,
+          "level_b_vs_level_a_diff_seconds": 1.207,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T16:56:54.512665+00:00",
+          "level_b": "2026-03-20T16:57:36.944134+00:00",
+          "level_a": "2026-03-20T16:57:35.932136+00:00",
+          "waqt_vs_level_a_diff_seconds": -41.419,
+          "level_b_vs_level_a_diff_seconds": 1.012,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T18:15:17.786130+00:00",
+          "level_b": "2026-03-20T18:16:02.326033+00:00",
+          "level_a": "2026-03-20T18:16:01.342778+00:00",
+          "waqt_vs_level_a_diff_seconds": -43.557,
+          "level_b_vs_level_a_diff_seconds": 0.983,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 55,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T04:21:54.665141+00:00",
+          "level_b": "2026-06-21T04:21:48.628041+00:00",
+          "level_a": "2026-06-21T04:21:47.722663+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.942,
+          "level_b_vs_level_a_diff_seconds": 0.905,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T05:51:25.755300+00:00",
+          "level_b": "2026-06-21T05:51:19.769251+00:00",
+          "level_a": "2026-06-21T05:51:18.864297+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.891,
+          "level_b_vs_level_a_diff_seconds": 0.905,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T10:48:07.684179+00:00",
+          "level_b": "2026-06-21T10:48:07.504815+00:00",
+          "level_a": "2026-06-21T10:48:06.615940+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.068,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T13:27:05.991845+00:00",
+          "level_b": "2026-06-21T13:26:59.378056+00:00",
+          "level_a": "2026-06-21T13:26:58.501046+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.491,
+          "level_b_vs_level_a_diff_seconds": 0.877,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T15:45:01.687675+00:00",
+          "level_b": "2026-06-21T15:44:55.296464+00:00",
+          "level_a": "2026-06-21T15:44:54.423803+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.264,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T17:09:30.451243+00:00",
+          "level_b": "2026-06-21T17:09:24.111093+00:00",
+          "level_a": "2026-06-21T17:09:23.238279+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.213,
+          "level_b_vs_level_a_diff_seconds": 0.873,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 55,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T03:16:21.697792+00:00",
+          "level_b": "2026-09-19T03:17:04.036769+00:00",
+          "level_a": "2026-09-19T03:17:04.439645+00:00",
+          "waqt_vs_level_a_diff_seconds": -42.742,
+          "level_b_vs_level_a_diff_seconds": -0.403,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T04:39:29.041345+00:00",
+          "level_b": "2026-09-19T04:40:09.623915+00:00",
+          "level_a": "2026-09-19T04:40:10.037906+00:00",
+          "waqt_vs_level_a_diff_seconds": -40.997,
+          "level_b_vs_level_a_diff_seconds": -0.414,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T10:40:06.455296+00:00",
+          "level_b": "2026-09-19T10:40:06.263382+00:00",
+          "level_a": "2026-09-19T10:40:06.876047+00:00",
+          "waqt_vs_level_a_diff_seconds": -0.421,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T14:05:55.492208+00:00",
+          "level_b": "2026-09-19T14:05:26.557096+00:00",
+          "level_a": "2026-09-19T14:05:27.277117+00:00",
+          "waqt_vs_level_a_diff_seconds": 28.215,
+          "level_b_vs_level_a_diff_seconds": -0.72,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T16:40:56.241720+00:00",
+          "level_b": "2026-09-19T16:40:34.216632+00:00",
+          "level_a": "2026-09-19T16:40:35.024999+00:00",
+          "waqt_vs_level_a_diff_seconds": 21.217,
+          "level_b_vs_level_a_diff_seconds": -0.808,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T17:59:18.449856+00:00",
+          "level_b": "2026-09-19T17:58:54.790209+00:00",
+          "level_a": "2026-09-19T17:58:55.607792+00:00",
+          "waqt_vs_level_a_diff_seconds": 22.842,
+          "level_b_vs_level_a_diff_seconds": -0.818,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 55,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T03:10:28.667869+00:00",
+          "level_b": "2026-09-23T03:11:11.744719+00:00",
+          "level_a": "2026-09-23T03:11:12.086144+00:00",
+          "waqt_vs_level_a_diff_seconds": -43.418,
+          "level_b_vs_level_a_diff_seconds": -0.341,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T04:33:53.381179+00:00",
+          "level_b": "2026-09-23T04:34:33.961837+00:00",
+          "level_a": "2026-09-23T04:34:34.312651+00:00",
+          "waqt_vs_level_a_diff_seconds": -40.931,
+          "level_b_vs_level_a_diff_seconds": -0.351,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T10:38:41.422220+00:00",
+          "level_b": "2026-09-23T10:38:41.272875+00:00",
+          "level_a": "2026-09-23T10:38:41.753166+00:00",
+          "waqt_vs_level_a_diff_seconds": -0.331,
+          "level_b_vs_level_a_diff_seconds": -0.48,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T14:06:43.650485+00:00",
+          "level_b": "2026-09-23T14:06:15.776647+00:00",
+          "level_a": "2026-09-23T14:06:16.315701+00:00",
+          "waqt_vs_level_a_diff_seconds": 27.335,
+          "level_b_vs_level_a_diff_seconds": -0.539,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T16:43:42.669987+00:00",
+          "level_b": "2026-09-23T16:43:20.394416+00:00",
+          "level_a": "2026-09-23T16:43:20.991550+00:00",
+          "waqt_vs_level_a_diff_seconds": 21.678,
+          "level_b_vs_level_a_diff_seconds": -0.597,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T18:02:21.065815+00:00",
+          "level_b": "2026-09-23T18:01:56.462757+00:00",
+          "level_a": "2026-09-23T18:01:57.064611+00:00",
+          "waqt_vs_level_a_diff_seconds": 24.001,
+          "level_b_vs_level_a_diff_seconds": -0.602,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Cape Town (mid-lat, S)",
+      "lat": -33.9249,
+      "lon": 18.4241,
+      "elevation_m": 0.0,
+      "latitude_band": "mid-lat-S",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 55,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T01:47:30.921582+00:00",
+          "level_b": "2026-12-21T01:47:16.323178+00:00",
+          "level_a": "2026-12-21T01:47:16.139043+00:00",
+          "waqt_vs_level_a_diff_seconds": 14.783,
+          "level_b_vs_level_a_diff_seconds": 0.184,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T03:32:03.056088+00:00",
+          "level_b": "2026-12-21T03:31:48.121060+00:00",
+          "level_a": "2026-12-21T03:31:47.900866+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.155,
+          "level_b_vs_level_a_diff_seconds": 0.22,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T10:44:22.863968+00:00",
+          "level_b": "2026-12-21T10:44:20.847389+00:00",
+          "level_a": "2026-12-21T10:44:20.550055+00:00",
+          "waqt_vs_level_a_diff_seconds": 2.314,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T14:29:41.997183+00:00",
+          "level_b": "2026-12-21T14:29:26.692339+00:00",
+          "level_a": "2026-12-21T14:29:26.379909+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.617,
+          "level_b_vs_level_a_diff_seconds": 0.312,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T17:57:09.221066+00:00",
+          "level_b": "2026-12-21T17:56:53.979785+00:00",
+          "level_a": "2026-12-21T17:56:53.604672+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.616,
+          "level_b_vs_level_a_diff_seconds": 0.375,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T19:34:47.584237+00:00",
+          "level_b": "2026-12-21T19:34:32.467833+00:00",
+          "level_a": "2026-12-21T19:34:32.060052+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.524,
+          "level_b_vs_level_a_diff_seconds": 0.408,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T00:41:33.808882+00:00",
+          "level_b": "2026-03-20T00:46:14.289872+00:00",
+          "level_a": "2026-03-20T00:46:16.239295+00:00",
+          "waqt_vs_level_a_diff_seconds": -282.43,
+          "level_b_vs_level_a_diff_seconds": -1.949,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T04:41:35.755126+00:00",
+          "level_b": "2026-03-20T04:43:53.839752+00:00",
+          "level_a": "2026-03-20T04:43:54.019711+00:00",
+          "waqt_vs_level_a_diff_seconds": -138.265,
+          "level_b_vs_level_a_diff_seconds": -0.18,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T10:51:36.691994+00:00",
+          "level_b": "2026-03-20T10:51:39.188238+00:00",
+          "level_a": "2026-03-20T10:51:37.766402+00:00",
+          "waqt_vs_level_a_diff_seconds": -1.074,
+          "level_b_vs_level_a_diff_seconds": 1.422,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T13:40:05.293828+00:00",
+          "level_b": "2026-03-20T13:37:13.890602+00:00",
+          "level_a": "2026-03-20T13:37:11.479359+00:00",
+          "waqt_vs_level_a_diff_seconds": 173.814,
+          "level_b_vs_level_a_diff_seconds": 2.411,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T17:03:33.402780+00:00",
+          "level_b": "2026-03-20T17:01:35.622726+00:00",
+          "level_a": "2026-03-20T17:01:32.641657+00:00",
+          "waqt_vs_level_a_diff_seconds": 120.761,
+          "level_b_vs_level_a_diff_seconds": 2.981,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T20:46:18.169864+00:00",
+          "level_b": "2026-03-20T20:42:24.401714+00:00",
+          "level_a": "2026-03-20T20:42:20.078298+00:00",
+          "waqt_vs_level_a_diff_seconds": 238.092,
+          "level_b_vs_level_a_diff_seconds": 4.323,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T10:46:00.196179+00:00",
+          "level_b": "2026-06-21T10:45:59.997515+00:00",
+          "level_a": "2026-06-21T10:45:59.108603+00:00",
+          "waqt_vs_level_a_diff_seconds": 1.088,
+          "level_b_vs_level_a_diff_seconds": 0.889,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T15:57:52.765546+00:00",
+          "level_b": "2026-06-21T15:57:47.911183+00:00",
+          "level_a": "2026-06-21T15:57:47.011710+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.754,
+          "level_b_vs_level_a_diff_seconds": 0.899,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "isha": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-18T23:48:27.575147+00:00",
+          "level_b": "2026-09-18T23:41:11.841740+00:00",
+          "level_a": "2026-09-18T23:41:15.460309+00:00",
+          "waqt_vs_level_a_diff_seconds": 432.115,
+          "level_b_vs_level_a_diff_seconds": -3.619,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T04:14:20.136029+00:00",
+          "level_b": "2026-09-19T04:12:22.823102+00:00",
+          "level_a": "2026-09-19T04:12:24.242960+00:00",
+          "waqt_vs_level_a_diff_seconds": 115.893,
+          "level_b_vs_level_a_diff_seconds": -1.42,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T10:37:58.967296+00:00",
+          "level_b": "2026-09-19T10:37:58.806936+00:00",
+          "level_a": "2026-09-19T10:37:59.419600+00:00",
+          "waqt_vs_level_a_diff_seconds": -0.452,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T13:28:55.021610+00:00",
+          "level_b": "2026-09-19T13:31:54.287229+00:00",
+          "level_a": "2026-09-19T13:31:54.406637+00:00",
+          "waqt_vs_level_a_diff_seconds": -179.385,
+          "level_b_vs_level_a_diff_seconds": -0.119,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T16:59:04.795472+00:00",
+          "level_b": "2026-09-19T17:01:19.924956+00:00",
+          "level_a": "2026-09-19T17:01:19.744736+00:00",
+          "waqt_vs_level_a_diff_seconds": -134.949,
+          "level_b_vs_level_a_diff_seconds": 0.18,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T20:48:43.664492+00:00",
+          "level_b": "2026-09-19T20:53:32.754474+00:00",
+          "level_a": "2026-09-19T20:53:31.578159+00:00",
+          "waqt_vs_level_a_diff_seconds": -287.914,
+          "level_b_vs_level_a_diff_seconds": 1.176,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T00:30:24.085302+00:00",
+          "level_b": "2026-09-23T00:26:02.736370+00:00",
+          "level_a": "2026-09-23T00:26:04.542943+00:00",
+          "waqt_vs_level_a_diff_seconds": 259.542,
+          "level_b_vs_level_a_diff_seconds": -1.807,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T04:29:46.509324+00:00",
+          "level_b": "2026-09-23T04:27:49.384948+00:00",
+          "level_a": "2026-09-23T04:27:50.461216+00:00",
+          "waqt_vs_level_a_diff_seconds": 116.048,
+          "level_b_vs_level_a_diff_seconds": -1.076,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T10:36:33.934220+00:00",
+          "level_b": "2026-09-23T10:36:33.815943+00:00",
+          "level_a": "2026-09-23T10:36:34.296297+00:00",
+          "waqt_vs_level_a_diff_seconds": -0.362,
+          "level_b_vs_level_a_diff_seconds": -0.48,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T13:16:46.007906+00:00",
+          "level_b": "2026-09-23T13:19:55.513904+00:00",
+          "level_a": "2026-09-23T13:19:55.651115+00:00",
+          "waqt_vs_level_a_diff_seconds": -189.643,
+          "level_b_vs_level_a_diff_seconds": -0.137,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T16:40:54.858476+00:00",
+          "level_b": "2026-09-23T16:43:09.600387+00:00",
+          "level_a": "2026-09-23T16:43:09.536536+00:00",
+          "waqt_vs_level_a_diff_seconds": -134.678,
+          "level_b_vs_level_a_diff_seconds": 0.064,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T20:15:06.559910+00:00",
+          "level_b": "2026-09-23T20:18:54.541823+00:00",
+          "level_a": "2026-09-23T20:18:54.091364+00:00",
+          "waqt_vs_level_a_diff_seconds": -227.531,
+          "level_b_vs_level_a_diff_seconds": 0.45,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Tromso (high-lat, N)",
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T05:28:35.148612+00:00",
+          "level_b": "2026-12-21T05:28:18.644387+00:00",
+          "level_a": "2026-12-21T05:28:18.204689+00:00",
+          "waqt_vs_level_a_diff_seconds": 16.944,
+          "level_b_vs_level_a_diff_seconds": 0.44,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T10:42:15.375968+00:00",
+          "level_b": "2026-12-21T10:42:13.315378+00:00",
+          "level_a": "2026-12-21T10:42:13.018187+00:00",
+          "waqt_vs_level_a_diff_seconds": 2.358,
+          "level_b_vs_level_a_diff_seconds": 0.297,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "maghrib": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "isha": {
+          "waqt": "2026-12-21T15:44:05.487620+00:00",
+          "level_b": "2026-12-21T15:43:50.193634+00:00",
+          "level_a": "2026-12-21T15:43:50.040938+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.447,
+          "level_b_vs_level_a_diff_seconds": 0.153,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T08:47:31.252750+00:00",
+          "level_b": "2026-03-20T08:46:27.799014+00:00",
+          "level_a": "2026-03-20T08:46:25.438889+00:00",
+          "waqt_vs_level_a_diff_seconds": 65.814,
+          "level_b_vs_level_a_diff_seconds": 2.36,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T10:46:07.549436+00:00",
+          "level_b": "2026-03-20T10:45:14.686293+00:00",
+          "level_a": "2026-03-20T10:45:12.471406+00:00",
+          "waqt_vs_level_a_diff_seconds": 55.078,
+          "level_b_vs_level_a_diff_seconds": 2.215,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T16:51:06.067994+00:00",
+          "level_b": "2026-03-20T16:51:04.135969+00:00",
+          "level_a": "2026-03-20T16:51:02.731807+00:00",
+          "waqt_vs_level_a_diff_seconds": 3.336,
+          "level_b_vs_level_a_diff_seconds": 1.404,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T20:04:28.328431+00:00",
+          "level_b": "2026-03-20T20:06:20.073777+00:00",
+          "level_a": "2026-03-20T20:06:19.191591+00:00",
+          "waqt_vs_level_a_diff_seconds": -110.863,
+          "level_b_vs_level_a_diff_seconds": 0.882,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T22:54:35.551706+00:00",
+          "level_b": "2026-03-20T22:55:49.330680+00:00",
+          "level_a": "2026-03-20T22:55:48.708989+00:00",
+          "waqt_vs_level_a_diff_seconds": -73.157,
+          "level_b_vs_level_a_diff_seconds": 0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-21T00:45:19.374461+00:00",
+          "level_b": "2026-03-21T00:46:41.919102+00:00",
+          "level_a": "2026-03-21T00:46:41.406197+00:00",
+          "waqt_vs_level_a_diff_seconds": -82.032,
+          "level_b_vs_level_a_diff_seconds": 0.513,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T10:49:28.303287+00:00",
+          "level_b": "2026-06-21T10:49:22.599258+00:00",
+          "level_a": "2026-06-21T10:49:21.696052+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.607,
+          "level_b_vs_level_a_diff_seconds": 0.903,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T12:59:41.997722+00:00",
+          "level_b": "2026-06-21T12:59:36.578662+00:00",
+          "level_a": "2026-06-21T12:59:35.672251+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.325,
+          "level_b_vs_level_a_diff_seconds": 0.906,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T16:45:29.572179+00:00",
+          "level_b": "2026-06-21T16:45:32.634729+00:00",
+          "level_a": "2026-06-21T16:45:31.754059+00:00",
+          "waqt_vs_level_a_diff_seconds": -2.182,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T18:16:43.183580+00:00",
+          "level_b": "2026-06-21T18:16:34.478175+00:00",
+          "level_a": "2026-06-21T18:16:33.616500+00:00",
+          "waqt_vs_level_a_diff_seconds": 9.567,
+          "level_b_vs_level_a_diff_seconds": 0.862,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T20:31:36.183149+00:00",
+          "level_b": "2026-06-21T20:31:29.033925+00:00",
+          "level_a": "2026-06-21T20:31:28.180342+00:00",
+          "waqt_vs_level_a_diff_seconds": 8.003,
+          "level_b_vs_level_a_diff_seconds": 0.854,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T22:34:53.570885+00:00",
+          "level_b": "2026-06-21T22:34:46.643426+00:00",
+          "level_a": "2026-06-21T22:34:45.786150+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.785,
+          "level_b_vs_level_a_diff_seconds": 0.857,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T08:40:45.039323+00:00",
+          "level_b": "2026-09-19T08:42:04.664612+00:00",
+          "level_a": "2026-09-19T08:42:04.832237+00:00",
+          "waqt_vs_level_a_diff_seconds": -79.793,
+          "level_b_vs_level_a_diff_seconds": -0.168,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T10:38:06.708973+00:00",
+          "level_b": "2026-09-19T10:39:18.059335+00:00",
+          "level_a": "2026-09-19T10:39:18.279062+00:00",
+          "waqt_vs_level_a_diff_seconds": -71.57,
+          "level_b_vs_level_a_diff_seconds": -0.22,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T16:37:28.343296+00:00",
+          "level_b": "2026-09-19T16:37:22.842896+00:00",
+          "level_a": "2026-09-19T16:37:23.454251+00:00",
+          "waqt_vs_level_a_diff_seconds": 4.889,
+          "level_b_vs_level_a_diff_seconds": -0.611,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T19:50:24.069656+00:00",
+          "level_b": "2026-09-19T19:48:52.585305+00:00",
+          "level_a": "2026-09-19T19:48:53.460258+00:00",
+          "waqt_vs_level_a_diff_seconds": 90.609,
+          "level_b_vs_level_a_diff_seconds": -0.875,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T22:37:22.483637+00:00",
+          "level_b": "2026-09-19T22:36:29.528366+00:00",
+          "level_a": "2026-09-19T22:36:30.525576+00:00",
+          "waqt_vs_level_a_diff_seconds": 51.958,
+          "level_b_vs_level_a_diff_seconds": -0.997,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-20T00:28:00.285352+00:00",
+          "level_b": "2026-09-20T00:26:59.783039+00:00",
+          "level_a": "2026-09-20T00:27:00.824198+00:00",
+          "waqt_vs_level_a_diff_seconds": 59.461,
+          "level_b_vs_level_a_diff_seconds": -1.041,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T08:29:45.615734+00:00",
+          "level_b": "2026-09-23T08:31:07.816071+00:00",
+          "level_a": "2026-09-23T08:31:07.975771+00:00",
+          "waqt_vs_level_a_diff_seconds": -82.36,
+          "level_b_vs_level_a_diff_seconds": -0.16,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T10:28:24.413970+00:00",
+          "level_b": "2026-09-23T10:29:35.879029+00:00",
+          "level_a": "2026-09-23T10:29:36.085017+00:00",
+          "waqt_vs_level_a_diff_seconds": -71.671,
+          "level_b_vs_level_a_diff_seconds": -0.206,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T16:36:03.310220+00:00",
+          "level_b": "2026-09-23T16:35:57.942302+00:00",
+          "level_a": "2026-09-23T16:35:58.407389+00:00",
+          "waqt_vs_level_a_diff_seconds": 4.903,
+          "level_b_vs_level_a_diff_seconds": -0.465,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T19:54:31.978648+00:00",
+          "level_b": "2026-09-23T19:53:03.733178+00:00",
+          "level_a": "2026-09-23T19:53:04.355632+00:00",
+          "waqt_vs_level_a_diff_seconds": 87.623,
+          "level_b_vs_level_a_diff_seconds": -0.622,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T22:44:16.922733+00:00",
+          "level_b": "2026-09-23T22:43:23.594779+00:00",
+          "level_a": "2026-09-23T22:43:24.294031+00:00",
+          "waqt_vs_level_a_diff_seconds": 52.629,
+          "level_b_vs_level_a_diff_seconds": -0.699,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-24T00:36:05.219049+00:00",
+          "level_b": "2026-09-24T00:35:02.068637+00:00",
+          "level_a": "2026-09-24T00:35:02.797001+00:00",
+          "waqt_vs_level_a_diff_seconds": 62.422,
+          "level_b_vs_level_a_diff_seconds": -0.728,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Punta Arenas (high-lat, S)",
+      "lat": -53.1638,
+      "lon": -70.9171,
+      "elevation_m": 0.0,
+      "latitude_band": "high-lat",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 450,
+      "tolerance_seconds_level_b": 6,
+      "events": {
+        "fajr": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T08:12:56.923801+00:00",
+          "level_b": "2026-12-21T08:12:42.193846+00:00",
+          "level_a": "2026-12-21T08:12:42.021706+00:00",
+          "waqt_vs_level_a_diff_seconds": 14.902,
+          "level_b_vs_level_a_diff_seconds": 0.172,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T16:41:44.751968+00:00",
+          "level_b": "2026-12-21T16:41:50.137427+00:00",
+          "level_a": "2026-12-21T16:41:49.815696+00:00",
+          "waqt_vs_level_a_diff_seconds": -5.064,
+          "level_b_vs_level_a_diff_seconds": 0.322,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T21:08:29.760896+00:00",
+          "level_b": "2026-12-21T21:08:14.685634+00:00",
+          "level_a": "2026-12-21T21:08:14.310171+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.451,
+          "level_b_vs_level_a_diff_seconds": 0.375,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-22T01:11:13.097950+00:00",
+          "level_b": "2026-12-22T01:10:58.539369+00:00",
+          "level_a": "2026-12-22T01:10:58.069678+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.028,
+          "level_b_vs_level_a_diff_seconds": 0.47,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": null,
+          "level_b": null,
+          "level_a": null,
+          "waqt_vs_level_a_diff_seconds": null,
+          "level_b_vs_level_a_diff_seconds": null,
+          "waqt_within_tolerance": null,
+          "level_b_within_tolerance": null
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-19T16:57:37.497024+00:00",
+          "level_b": "2026-03-19T16:57:31.448212+00:00",
+          "level_a": "2026-03-19T16:57:29.754507+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.743,
+          "level_b_vs_level_a_diff_seconds": 1.694,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-19T18:10:02.832577+00:00",
+          "level_b": "2026-03-19T18:09:57.760137+00:00",
+          "level_a": "2026-03-19T18:09:56.083976+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.749,
+          "level_b_vs_level_a_diff_seconds": 1.676,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T00:13:39.907994+00:00",
+          "level_b": "2026-03-20T00:13:50.243166+00:00",
+          "level_a": "2026-03-20T00:13:48.789034+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.881,
+          "level_b_vs_level_a_diff_seconds": 1.454,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-20T03:36:23.876469+00:00",
+          "level_b": "2026-03-20T03:36:34.155101+00:00",
+          "level_a": "2026-03-20T03:36:32.699979+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.824,
+          "level_b_vs_level_a_diff_seconds": 1.455,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-20T06:17:00.947582+00:00",
+          "level_b": "2026-03-20T06:17:27.008792+00:00",
+          "level_a": "2026-03-20T06:17:25.769708+00:00",
+          "waqt_vs_level_a_diff_seconds": -24.822,
+          "level_b_vs_level_a_diff_seconds": 1.239,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-20T07:25:08.336604+00:00",
+          "level_b": "2026-03-20T07:25:35.196687+00:00",
+          "level_a": "2026-03-20T07:25:33.970818+00:00",
+          "waqt_vs_level_a_diff_seconds": -25.634,
+          "level_b_vs_level_a_diff_seconds": 1.226,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-20T17:18:56.957846+00:00",
+          "level_b": "2026-06-20T17:18:50.801007+00:00",
+          "level_a": "2026-06-20T17:18:49.878580+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.079,
+          "level_b_vs_level_a_diff_seconds": 0.922,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-20T18:36:48.952679+00:00",
+          "level_b": "2026-06-20T18:36:42.764626+00:00",
+          "level_a": "2026-06-20T18:36:41.843624+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.109,
+          "level_b_vs_level_a_diff_seconds": 0.921,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T00:08:03.412179+00:00",
+          "level_b": "2026-06-21T00:07:57.421058+00:00",
+          "level_a": "2026-06-21T00:07:56.514261+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.898,
+          "level_b_vs_level_a_diff_seconds": 0.907,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-21T03:17:00.353549+00:00",
+          "level_b": "2026-06-21T03:16:54.235342+00:00",
+          "level_a": "2026-06-21T03:16:53.337448+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.016,
+          "level_b_vs_level_a_diff_seconds": 0.898,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-21T05:39:18.062404+00:00",
+          "level_b": "2026-06-21T05:39:11.975937+00:00",
+          "level_a": "2026-06-21T05:39:11.082780+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.98,
+          "level_b_vs_level_a_diff_seconds": 0.893,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-21T06:52:41.905094+00:00",
+          "level_b": "2026-06-21T06:52:35.820624+00:00",
+          "level_a": "2026-06-21T06:52:34.928145+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.977,
+          "level_b_vs_level_a_diff_seconds": 0.892,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-18T16:46:15.522525+00:00",
+          "level_b": "2026-09-18T16:46:40.477742+00:00",
+          "level_a": "2026-09-18T16:46:40.988784+00:00",
+          "waqt_vs_level_a_diff_seconds": -25.466,
+          "level_b_vs_level_a_diff_seconds": -0.511,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-18T17:58:31.855438+00:00",
+          "level_b": "2026-09-18T17:58:56.405136+00:00",
+          "level_a": "2026-09-18T17:58:56.919005+00:00",
+          "waqt_vs_level_a_diff_seconds": -25.064,
+          "level_b_vs_level_a_diff_seconds": -0.514,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T00:00:02.183296+00:00",
+          "level_b": "2026-09-19T00:00:11.506340+00:00",
+          "level_a": "2026-09-19T00:00:12.118961+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.936,
+          "level_b_vs_level_a_diff_seconds": -0.613,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-19T03:22:58.354472+00:00",
+          "level_b": "2026-09-19T03:23:07.253363+00:00",
+          "level_a": "2026-09-19T03:23:07.869168+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.515,
+          "level_b_vs_level_a_diff_seconds": -0.616,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-19T06:01:47.819647+00:00",
+          "level_b": "2026-09-19T06:01:41.895456+00:00",
+          "level_a": "2026-09-19T06:01:42.605399+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.214,
+          "level_b_vs_level_a_diff_seconds": -0.71,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-19T07:09:54.396997+00:00",
+          "level_b": "2026-09-19T07:09:48.069128+00:00",
+          "level_a": "2026-09-19T07:09:48.781340+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.616,
+          "level_b_vs_level_a_diff_seconds": -0.712,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-22T16:42:43.003587+00:00",
+          "level_b": "2026-09-22T16:43:08.371129+00:00",
+          "level_a": "2026-09-22T16:43:08.813148+00:00",
+          "waqt_vs_level_a_diff_seconds": -25.81,
+          "level_b_vs_level_a_diff_seconds": -0.442,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-22T17:55:04.670559+00:00",
+          "level_b": "2026-09-22T17:55:29.167421+00:00",
+          "level_a": "2026-09-22T17:55:29.611574+00:00",
+          "waqt_vs_level_a_diff_seconds": -24.941,
+          "level_b_vs_level_a_diff_seconds": -0.444,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-22T23:58:37.150220+00:00",
+          "level_b": "2026-09-22T23:58:46.367453+00:00",
+          "level_a": "2026-09-22T23:58:46.873181+00:00",
+          "waqt_vs_level_a_diff_seconds": -9.723,
+          "level_b_vs_level_a_diff_seconds": -0.506,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-23T03:21:31.874887+00:00",
+          "level_b": "2026-09-23T03:21:41.766759+00:00",
+          "level_a": "2026-09-23T03:21:42.259890+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.385,
+          "level_b_vs_level_a_diff_seconds": -0.493,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-23T06:02:25.140847+00:00",
+          "level_b": "2026-09-23T06:02:19.020107+00:00",
+          "level_a": "2026-09-23T06:02:19.581332+00:00",
+          "waqt_vs_level_a_diff_seconds": 5.56,
+          "level_b_vs_level_a_diff_seconds": -0.561,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-23T07:10:36.912438+00:00",
+          "level_b": "2026-09-23T07:10:29.951221+00:00",
+          "level_a": "2026-09-23T07:10:30.512800+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.4,
+          "level_b_vs_level_a_diff_seconds": -0.562,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Suva, Fiji",
+      "lat": -18.1416,
+      "lon": 178.4419,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-20T16:05:05.055978+00:00",
+          "level_b": "2026-12-20T16:04:50.267623+00:00",
+          "level_a": "2026-12-20T16:04:50.076541+00:00",
+          "waqt_vs_level_a_diff_seconds": 14.979,
+          "level_b_vs_level_a_diff_seconds": 0.191,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-20T17:27:38.738750+00:00",
+          "level_b": "2026-12-20T17:27:23.722667+00:00",
+          "level_a": "2026-12-20T17:27:23.513939+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.225,
+          "level_b_vs_level_a_diff_seconds": 0.209,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T00:04:18.591968+00:00",
+          "level_b": "2026-12-21T00:04:03.325909+00:00",
+          "level_a": "2026-12-21T00:04:03.070057+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.522,
+          "level_b_vs_level_a_diff_seconds": 0.256,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-21T03:27:30.359394+00:00",
+          "level_b": "2026-12-21T03:27:14.667889+00:00",
+          "level_a": "2026-12-21T03:27:14.366349+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.993,
+          "level_b_vs_level_a_diff_seconds": 0.302,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-21T06:40:58.778047+00:00",
+          "level_b": "2026-12-21T06:40:43.293429+00:00",
+          "level_a": "2026-12-21T06:40:42.989147+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.789,
+          "level_b_vs_level_a_diff_seconds": 0.304,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-21T07:58:31.920342+00:00",
+          "level_b": "2026-12-21T07:58:16.394945+00:00",
+          "level_a": "2026-12-21T07:58:16.073722+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.847,
+          "level_b_vs_level_a_diff_seconds": 0.321,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-03-20T15:24:53.047731+00:00",
+          "level_b": "2026-03-20T15:25:05.268001+00:00",
+          "level_a": "2026-03-20T15:25:03.879803+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.832,
+          "level_b_vs_level_a_diff_seconds": 1.388,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-03-20T16:33:34.450105+00:00",
+          "level_b": "2026-03-20T16:33:46.566061+00:00",
+          "level_a": "2026-03-20T16:33:45.180155+00:00",
+          "waqt_vs_level_a_diff_seconds": -10.73,
+          "level_b_vs_level_a_diff_seconds": 1.386,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-03-20T22:37:08.635994+00:00",
+          "level_b": "2026-03-20T22:37:02.434199+00:00",
+          "level_a": "2026-03-20T22:37:01.046730+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.589,
+          "level_b_vs_level_a_diff_seconds": 1.387,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-03-21T01:40:32.407735+00:00",
+          "level_b": "2026-03-21T01:40:20.717734+00:00",
+          "level_a": "2026-03-21T01:40:19.593696+00:00",
+          "waqt_vs_level_a_diff_seconds": 12.814,
+          "level_b_vs_level_a_diff_seconds": 1.124,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-03-21T04:40:10.808957+00:00",
+          "level_b": "2026-03-21T04:40:19.860455+00:00",
+          "level_a": "2026-03-21T04:40:18.471509+00:00",
+          "waqt_vs_level_a_diff_seconds": -7.663,
+          "level_b_vs_level_a_diff_seconds": 1.389,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-03-21T05:44:52.573162+00:00",
+          "level_b": "2026-03-21T05:45:01.473179+00:00",
+          "level_a": "2026-03-21T05:45:00.085702+00:00",
+          "waqt_vs_level_a_diff_seconds": -7.513,
+          "level_b_vs_level_a_diff_seconds": 1.387,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-06-21T15:09:26.527914+00:00",
+          "level_b": "2026-06-21T15:09:20.406091+00:00",
+          "level_a": "2026-06-21T15:09:19.525552+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.002,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-06-21T16:24:48.076028+00:00",
+          "level_b": "2026-06-21T16:24:42.015917+00:00",
+          "level_a": "2026-06-21T16:24:41.135362+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.941,
+          "level_b_vs_level_a_diff_seconds": 0.881,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-06-21T22:31:32.140179+00:00",
+          "level_b": "2026-06-21T22:31:38.339485+00:00",
+          "level_a": "2026-06-21T22:31:37.465618+00:00",
+          "waqt_vs_level_a_diff_seconds": -5.325,
+          "level_b_vs_level_a_diff_seconds": 0.874,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-06-22T01:58:11.343549+00:00",
+          "level_b": "2026-06-22T01:58:04.949660+00:00",
+          "level_a": "2026-06-22T01:58:04.077654+00:00",
+          "waqt_vs_level_a_diff_seconds": 7.266,
+          "level_b_vs_level_a_diff_seconds": 0.872,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-06-22T04:38:40.615280+00:00",
+          "level_b": "2026-06-22T04:38:34.637222+00:00",
+          "level_a": "2026-06-22T04:38:33.768690+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.847,
+          "level_b_vs_level_a_diff_seconds": 0.869,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-06-22T05:49:36.324263+00:00",
+          "level_b": "2026-06-22T05:49:30.479813+00:00",
+          "level_a": "2026-06-22T05:49:29.610379+00:00",
+          "waqt_vs_level_a_diff_seconds": 6.714,
+          "level_b_vs_level_a_diff_seconds": 0.869,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-19T15:11:04.933695+00:00",
+          "level_b": "2026-09-19T15:11:12.317323+00:00",
+          "level_a": "2026-09-19T15:11:12.941356+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.008,
+          "level_b_vs_level_a_diff_seconds": -0.624,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-19T16:19:47.611631+00:00",
+          "level_b": "2026-09-19T16:19:55.379134+00:00",
+          "level_a": "2026-09-19T16:19:56.000267+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.389,
+          "level_b_vs_level_a_diff_seconds": -0.621,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-19T22:23:30.911296+00:00",
+          "level_b": "2026-09-19T22:23:20.273694+00:00",
+          "level_a": "2026-09-19T22:23:20.882892+00:00",
+          "waqt_vs_level_a_diff_seconds": 10.028,
+          "level_b_vs_level_a_diff_seconds": -0.609,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-20T01:24:10.537953+00:00",
+          "level_b": "2026-09-20T01:24:41.080911+00:00",
+          "level_a": "2026-09-20T01:24:41.824563+00:00",
+          "waqt_vs_level_a_diff_seconds": -31.287,
+          "level_b_vs_level_a_diff_seconds": -0.744,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-20T04:26:32.796878+00:00",
+          "level_b": "2026-09-20T04:26:43.620611+00:00",
+          "level_a": "2026-09-20T04:26:44.217042+00:00",
+          "waqt_vs_level_a_diff_seconds": -11.42,
+          "level_b_vs_level_a_diff_seconds": -0.596,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-20T05:31:14.642550+00:00",
+          "level_b": "2026-09-20T05:31:25.767248+00:00",
+          "level_a": "2026-09-20T05:31:26.361005+00:00",
+          "waqt_vs_level_a_diff_seconds": -11.718,
+          "level_b_vs_level_a_diff_seconds": -0.594,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-09-23T15:09:53.688322+00:00",
+          "level_b": "2026-09-23T15:10:01.348498+00:00",
+          "level_a": "2026-09-23T15:10:01.823840+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.136,
+          "level_b_vs_level_a_diff_seconds": -0.475,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-09-23T16:18:35.068118+00:00",
+          "level_b": "2026-09-23T16:18:42.718867+00:00",
+          "level_a": "2026-09-23T16:18:43.191108+00:00",
+          "waqt_vs_level_a_diff_seconds": -8.123,
+          "level_b_vs_level_a_diff_seconds": -0.472,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-09-23T22:22:05.878220+00:00",
+          "level_b": "2026-09-23T22:21:55.464885+00:00",
+          "level_a": "2026-09-23T22:21:55.914621+00:00",
+          "waqt_vs_level_a_diff_seconds": 9.964,
+          "level_b_vs_level_a_diff_seconds": -0.45,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-09-24T01:25:32.624684+00:00",
+          "level_b": "2026-09-24T01:26:03.790392+00:00",
+          "level_a": "2026-09-24T01:26:04.312692+00:00",
+          "waqt_vs_level_a_diff_seconds": -31.688,
+          "level_b_vs_level_a_diff_seconds": -0.522,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-09-24T04:24:56.007961+00:00",
+          "level_b": "2026-09-24T04:25:06.683556+00:00",
+          "level_a": "2026-09-24T04:25:07.110751+00:00",
+          "waqt_vs_level_a_diff_seconds": -11.103,
+          "level_b_vs_level_a_diff_seconds": -0.427,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-09-24T05:29:37.113298+00:00",
+          "level_b": "2026-09-24T05:29:47.720414+00:00",
+          "level_a": "2026-09-24T05:29:48.144817+00:00",
+          "waqt_vs_level_a_diff_seconds": -11.032,
+          "level_b_vs_level_a_diff_seconds": -0.424,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Kiritimati (UTC+14)",
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0,
+      "latitude_band": "tropics",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": 35,
+      "tolerance_seconds_level_b": 3,
+      "events": {
+        "fajr": {
+          "waqt": "2026-12-21T15:12:46.186836+00:00",
+          "level_b": "2026-12-21T15:12:30.873314+00:00",
+          "level_a": "2026-12-21T15:12:30.564208+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.623,
+          "level_b_vs_level_a_diff_seconds": 0.309,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "sunrise": {
+          "waqt": "2026-12-21T16:27:44.485724+00:00",
+          "level_b": "2026-12-21T16:27:29.173257+00:00",
+          "level_a": "2026-12-21T16:27:28.850720+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.635,
+          "level_b_vs_level_a_diff_seconds": 0.323,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "dhuhr": {
+          "waqt": "2026-12-21T22:27:47.319968+00:00",
+          "level_b": "2026-12-21T22:27:59.875424+00:00",
+          "level_a": "2026-12-21T22:27:59.529356+00:00",
+          "waqt_vs_level_a_diff_seconds": -12.209,
+          "level_b_vs_level_a_diff_seconds": 0.346,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "asr": {
+          "waqt": "2026-12-22T01:53:05.604950+00:00",
+          "level_b": "2026-12-22T01:52:50.202266+00:00",
+          "level_a": "2026-12-22T01:52:49.838097+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.767,
+          "level_b_vs_level_a_diff_seconds": 0.364,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "maghrib": {
+          "waqt": "2026-12-22T04:28:45.873858+00:00",
+          "level_b": "2026-12-22T04:28:30.581861+00:00",
+          "level_a": "2026-12-22T04:28:30.211452+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.662,
+          "level_b_vs_level_a_diff_seconds": 0.37,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        },
+        "isha": {
+          "waqt": "2026-12-22T05:39:21.114562+00:00",
+          "level_b": "2026-12-22T05:39:05.898312+00:00",
+          "level_a": "2026-12-22T05:39:05.515215+00:00",
+          "waqt_vs_level_a_diff_seconds": 15.599,
+          "level_b_vs_level_a_diff_seconds": 0.383,
+          "waqt_within_tolerance": true,
+          "level_b_within_tolerance": true
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-03-20",
+      "tolerance_seconds_waqt": null,
+      "tolerance_seconds_level_b": null,
+      "events": {
+        "fajr": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "sunrise": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "dhuhr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "asr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "maghrib": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "isha": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-06-21",
+      "tolerance_seconds_waqt": null,
+      "tolerance_seconds_level_b": null,
+      "events": {
+        "fajr": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "sunrise": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "dhuhr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "asr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "maghrib": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "isha": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-09-19",
+      "tolerance_seconds_waqt": null,
+      "tolerance_seconds_level_b": null,
+      "events": {
+        "fajr": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "sunrise": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "dhuhr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "asr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "maghrib": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "isha": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-09-23",
+      "tolerance_seconds_waqt": null,
+      "tolerance_seconds_level_b": null,
+      "events": {
+        "fajr": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "sunrise": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "dhuhr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "asr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "maghrib": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "isha": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        }
+      }
+    },
+    {
+      "location": "Longyearbyen, Svalbard (polar)",
+      "lat": 78.2232,
+      "lon": 15.6469,
+      "elevation_m": 0.0,
+      "latitude_band": "polar",
+      "date": "2026-12-21",
+      "tolerance_seconds_waqt": null,
+      "tolerance_seconds_level_b": null,
+      "events": {
+        "fajr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "sunrise": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "dhuhr": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        },
+        "asr": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "maghrib": {
+          "defined": {
+            "waqt": false,
+            "level_b": false,
+            "level_a": false
+          }
+        },
+        "isha": {
+          "defined": {
+            "waqt": true,
+            "level_b": true,
+            "level_a": true
+          }
+        }
+      }
+    }
+  ]
+}

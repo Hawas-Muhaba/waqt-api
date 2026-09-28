@@ -136,15 +136,13 @@ def test_independent_javascript_consumer_validates_all_vectors():
     js = ROOT / "consumers" / "js"
     r = subprocess.run(
         [NODE, "--test", "test/calendar_interop_vectors.test.mjs"],
-        cwd=js, capture_output=True, text=True, timeout=180,
+        cwd=js, capture_output=True, text=True, encoding="utf-8", timeout=180,
     )
     tail = "\n".join(r.stdout.splitlines()[-12:]) + r.stderr[-800:]
     assert r.returncode == 0, tail
-    output = r.stdout + r.stderr
-    summary = {
-        parts[1]: int(parts[2])
-        for line in output.splitlines()
-        for parts in [line.split()]
-        if len(parts) >= 3 and parts[1] in ("tests", "pass", "fail")
-    }
-    assert summary.get("fail", 0) == 0 and summary["pass"] == summary["tests"] >= 20, summary
+    summary = {}
+    for line in r.stdout.splitlines():
+        parts = line.strip().split()
+        if len(parts) >= 2 and parts[-2] in ("tests", "pass", "fail") and parts[-1].isdigit():
+            summary[parts[-2]] = int(parts[-1])
+    assert summary.get("fail", 0) == 0 and summary.get("pass", 0) == summary.get("tests", 0) >= 20, summary

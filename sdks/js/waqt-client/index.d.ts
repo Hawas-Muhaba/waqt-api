@@ -103,17 +103,81 @@ export declare class WaqtClient {
 
   scheduleSnapshot(lat: number, lon: number, opts?: Record<string, unknown>): Promise<SchedulingResult>;
   scheduleSpan(lat: number, lon: number, start: string, end: string, opts?: Record<string, unknown>): Promise<SchedulingResult>;
-  scheduleResolve(body: Record<string, unknown>): Promise<SchedulingResult>;
+  /** Accepts a plain JSON body (Sprint 9 wire format, unchanged) or any
+   * typed request from `./requests_types` (Sprint 10). */
+  scheduleResolve(body: JsonRequestBody): Promise<SchedulingResult>;
 
   institutionalWeek(lat: number, lon: number, opts?: Record<string, unknown>): Promise<InstitutionalResult>;
   institutionalFiscalYear(opts?: Record<string, unknown>): Promise<InstitutionalResult>;
   institutionalAcademicYear(opts?: Record<string, unknown>): Promise<InstitutionalResult>;
   institutionalDefaultProfile(opts?: Record<string, unknown>): Promise<InstitutionalResult>;
-  institutionalFiscalYearResolve(body: Record<string, unknown>): Promise<InstitutionalResult>;
-  institutionalAcademicYearResolve(body: Record<string, unknown>): Promise<InstitutionalResult>;
+  institutionalFiscalYearResolve(body: JsonRequestBody): Promise<InstitutionalResult>;
+  institutionalAcademicYearResolve(body: JsonRequestBody): Promise<InstitutionalResult>;
 
   health(): Promise<Record<string, unknown>>;
 }
 
+/** A plain JSON-shaped object, or anything exposing `toJSON()` -- what
+ * every builder in `./requests_types` returns. */
+export type JsonRequestBody = Record<string, unknown> | { toJSON(): Record<string, unknown> };
+
 export declare function makeConfig(overrides?: Partial<WaqtClientConfig>): Required<WaqtClientConfig>;
 export declare const VERSION: string;
+
+// ---------------------------------------------------------------------------
+// Sprint 10: typed request builders (./requests_types.mjs)
+// ---------------------------------------------------------------------------
+
+export declare namespace requests {
+  class RequestValidationError extends Error {}
+
+  interface JsonNode { toJSON(): Record<string, unknown>; }
+
+  function instant(value: string | Date): JsonNode;
+  function anchor(): JsonNode;
+  function event(name: string, day?: number): JsonNode;
+  function nextEvent(name: string, opts?: { inclusive?: boolean; onUndefined?: string }): JsonNode;
+  function prevEvent(name: string, opts?: { inclusive?: boolean; onUndefined?: string }): JsonNode;
+  function position(seconds: number, day?: number): JsonNode;
+  function offset(base: JsonNode, seconds: number): JsonNode;
+  function fraction(start: JsonNode, end: JsonNode, fraction: number): JsonNode;
+  function interval(start?: JsonNode | null, end?: JsonNode | null, opts?: { startInclusive?: boolean; endInclusive?: boolean }): JsonNode;
+  function before(point: JsonNode, inclusive?: boolean): JsonNode;
+  function after(point: JsonNode, inclusive?: boolean): JsonNode;
+  function between(a: JsonNode, b: JsonNode): JsonNode;
+  function within(point: JsonNode, seconds: number): JsonNode;
+  function withinDay(day?: number): JsonNode;
+
+  function resolvePoint(point: JsonNode): JsonNode;
+  function resolveInterval(interval: JsonNode): JsonNode;
+  function evaluate(interval: JsonNode, at: string | Date): JsonNode;
+  function checkDeadline(point: JsonNode, now?: string | Date | null): JsonNode;
+  function until(name: string, opts?: { onUndefined?: string; instant?: string | Date | null }): JsonNode;
+  function since(name: string, opts?: { onUndefined?: string; instant?: string | Date | null }): JsonNode;
+  function nextEventOp(opts?: { instant?: string | Date | null }): JsonNode;
+  function eventPosition(name: string, day?: number | null): JsonNode;
+  function dayBounds(opts?: { instant?: string | Date | null }): JsonNode;
+  function classifySpan(start: string | Date, end: string | Date, endInclusive?: boolean): JsonNode;
+
+  function profile(opts?: { fajrAngleDeg?: number; ishaAngleDeg?: number; asrShadowRatio?: number }): JsonNode;
+  function scheduleResolveRequest(opts: {
+    lat: number; lon: number; operation: JsonNode; elevationM?: number;
+    anchor?: string | Date | null; profile?: JsonNode | null; calendarProvider?: string | null;
+    timezoneOverride?: string | null; precision?: "second" | "microsecond" | null;
+  }): JsonNode;
+
+  function monthDay(month: number, day?: number): JsonNode;
+  function monthEnd(month: number): JsonNode;
+  function nthWeekdayOfMonth(weekday: string, n: number, month: number): JsonNode;
+  function location(lat: number, lon: number, elevationM?: number): JsonNode;
+  function fiscalYearResolveRequest(opts: {
+    hijriYear: number; startRule: JsonNode; endRule: JsonNode; label?: string | null;
+    calendarProvider?: string | null; location?: JsonNode | null;
+  }): JsonNode;
+  function termRule(label: string, startRule: JsonNode, endRule: JsonNode, yearOffset?: number): JsonNode;
+  function holidayRule(label: string, rule: JsonNode, yearOffset?: number): JsonNode;
+  function academicYearResolveRequest(opts: {
+    hijriYear: number; openingRule: JsonNode; closingRule: JsonNode; termRules?: JsonNode[]; holidays?: JsonNode[];
+    label?: string | null; calendarProvider?: string | null; location?: JsonNode | null;
+  }): JsonNode;
+}

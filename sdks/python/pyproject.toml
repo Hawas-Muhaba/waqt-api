@@ -4,12 +4,26 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-client"
-version = "0.1.0"
+version = "0.2.0"
 description = "Official thin Python SDK for the Waqt API (Maghrib-to-Maghrib civil time and Hijri calendar)."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Waqt project" }]
+keywords = ["waqt", "hijri", "islamic-calendar", "prayer-times", "maghrib"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
 dependencies = [
     "httpx>=0.24",
 ]
@@ -20,6 +34,10 @@ dev = ["pytest>=7", "pytest-asyncio>=0.21"]
 [project.urls]
 Homepage = "https://github.com/waqt-project/waqt-api"
 Documentation = "https://github.com/waqt-project/waqt-api/blob/main/docs/SDK.md"
+Changelog = "https://github.com/waqt-project/waqt-api/blob/main/sdks/python/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 include = ["waqt_client*"]
+
+[tool.setuptools.package-data]
+waqt_client = ["py.typed"]

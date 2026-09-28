@@ -20,6 +20,13 @@ import { WaqtTransportError } from "./errors.mjs";
 import * as R from "./requests.mjs";
 import * as T from "./types.mjs";
 
+// Accepts either a plain object (the Sprint 9 wire-format contract,
+// unchanged) or anything exposing `toJSON()` -- what every builder in
+// requests_types.mjs (Sprint 10's typed request builders) returns.
+function bodyJson(body) {
+  return typeof body?.toJSON === "function" ? body.toJSON() : body;
+}
+
 export class WaqtClient {
   /** @param {Partial<import("./config.mjs").WaqtClientConfig>} [config] */
   constructor(config = {}) {
@@ -190,7 +197,7 @@ export class WaqtClient {
    * operation type, since the request body itself is the wire
    * contract. */
   async scheduleResolve(body) {
-    const data = await this.request("POST", "/v1/schedule/resolve", { json: body });
+    const data = await this.request("POST", "/v1/schedule/resolve", { json: bodyJson(body) });
     return T.parseSchedulingResult(data);
   }
 
@@ -217,12 +224,12 @@ export class WaqtClient {
   }
 
   async institutionalFiscalYearResolve(body) {
-    const data = await this.request("POST", "/v1/institutional/fiscal-year/resolve", { json: body });
+    const data = await this.request("POST", "/v1/institutional/fiscal-year/resolve", { json: bodyJson(body) });
     return T.parseInstitutionalResult(data);
   }
 
   async institutionalAcademicYearResolve(body) {
-    const data = await this.request("POST", "/v1/institutional/academic-year/resolve", { json: body });
+    const data = await this.request("POST", "/v1/institutional/academic-year/resolve", { json: bodyJson(body) });
     return T.parseInstitutionalResult(data);
   }
 
