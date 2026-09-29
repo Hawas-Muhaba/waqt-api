@@ -67,6 +67,7 @@ from .facade import (
     schedule_resolve,
     schedule_snapshot,
     schedule_span,
+    version,
     waqt,
     waqt_day_for_gregorian_date,
 )
@@ -74,7 +75,7 @@ from .facade import (
 __all__ = [
     "__version__",
     "facade",
-    "waqt", "day", "events", "location_info", "hijri", "list_calendar_providers",
+    "waqt", "version", "day", "events", "location_info", "hijri", "list_calendar_providers",
     "convert", "represent_instant", "waqt_day_for_gregorian_date", "boundary_crossing",
     "schedule_snapshot", "schedule_span", "schedule_resolve",
     "institutional_week", "institutional_fiscal_year", "institutional_fiscal_year_resolve",

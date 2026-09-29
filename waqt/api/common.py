@@ -20,10 +20,13 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.3.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing)
+API_VERSION = "1.4.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version)
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
-ASTRONOMY_ENGINE_NAME = "waqt-noaa-low-precision"
-ACCURACY_LEVEL = "B"           # see docs/ASTRONOMY.md — Level A is not implemented
+# Sprint 12: computation identity is owned by waqt-core (one definition for the
+# API, waqt-local, the SDK vectors and the reference apps). These two names are
+# kept as read-only aliases for anything that imported them from here.
+from waqt_core.versioning import ACCURACY_LEVEL, ENGINE_NAME, ENGINE_REVISION, computation_identity  # noqa: E402
+ASTRONOMY_ENGINE_NAME = ENGINE_NAME
 
 
 # ---------------------------------------------------------------------------
@@ -147,13 +150,20 @@ def hijri_block(hd) -> Optional[dict]:
 
 
 def computation_block(timescale_model: Optional[str], delta_t_seconds: Optional[float]) -> dict:
-    """Astronomical-engine identification, per the sprint brief's
-    'astronomical profile identification' requirement — every response
-    that used the solar engine says exactly which one, at what
-    accuracy level, with what DeltaT."""
+    """Astronomical-engine identification. Every response that used the solar
+    engine says exactly which engine, at which revision, at what accuracy
+    level, with what DeltaT.
+
+    Sprint 12 (API 1.4.0, additive): `engine` and `revision` join
+    `accuracy_level` as the reproducibility triple (see docs/VERSIONING.md).
+    `astronomy_engine` is retained, with the same value as `engine`, so no
+    v1 client breaks; new code should read `engine`."""
+    ident = computation_identity()
     return {
-        "astronomy_engine": ASTRONOMY_ENGINE_NAME,
-        "accuracy_level": ACCURACY_LEVEL,
+        "engine": ident["engine"],
+        "revision": ident["revision"],
+        "accuracy_level": ident["accuracy_level"],
+        "astronomy_engine": ident["engine"],   # deprecated alias of `engine`
         "timescale_model": timescale_model,
         "delta_t_seconds": round(delta_t_seconds, 3) if delta_t_seconds is not None else None,
     }

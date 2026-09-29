@@ -99,20 +99,71 @@ class AstronomyProfile:
 
 @dataclass(frozen=True)
 class ComputationInfo:
+    """Which computation produced a response's numbers.
+
+    `(engine, revision)` is the reproducibility identity (Sprint 12, API
+    1.4.0): the same inputs give the same outputs for every server that
+    reports the same pair. `revision` is `None` against an API older than
+    1.4.0. `astronomy_engine` is the pre-1.4.0 name of `engine` and is kept
+    (same value) for compatibility.
+    """
+
     astronomy_engine: Optional[str]
     accuracy_level: Optional[str]
     timescale_model: Optional[str]
     delta_t_seconds: Optional[float]
+    engine: Optional[str] = None
+    revision: Optional[str] = None
 
     @classmethod
     def from_json(cls, d: Optional[dict]) -> Optional["ComputationInfo"]:
         if d is None:
             return None
+        engine = d.get("engine", d.get("astronomy_engine"))
         return cls(
-            astronomy_engine=d.get("astronomy_engine"),
+            astronomy_engine=d.get("astronomy_engine", engine),
             accuracy_level=d.get("accuracy_level"),
             timescale_model=d.get("timescale_model"),
             delta_t_seconds=d.get("delta_t_seconds"),
+            engine=engine,
+            revision=d.get("revision"),
+        )
+
+    @property
+    def identity(self) -> tuple:
+        """`(engine, revision, accuracy_level)`, the triple to compare or log
+        when reproducing a result."""
+        return (self.engine, self.revision, self.accuracy_level)
+
+
+@dataclass(frozen=True)
+class VersionInfo:
+    """`GET /v1/version` — every version axis of the server (Sprint 12)."""
+
+    waqt_core_version: Optional[str]
+    api_version: Optional[str]
+    spec: Optional[str]
+    engine: Optional[str]
+    revision: Optional[str]
+    accuracy_level: Optional[str]
+    vector_set_version: Optional[str]
+    engine_revision_history: dict
+    raw: dict
+
+    @classmethod
+    def from_json(cls, d: dict) -> "VersionInfo":
+        comp = d.get("computation") or {}
+        vecs = d.get("conformance_vectors") or {}
+        return cls(
+            waqt_core_version=d.get("waqt_core_version"),
+            api_version=d.get("api_version"),
+            spec=d.get("spec"),
+            engine=comp.get("engine"),
+            revision=comp.get("revision"),
+            accuracy_level=comp.get("accuracy_level"),
+            vector_set_version=vecs.get("vector_set_version"),
+            engine_revision_history=d.get("engine_revision_history") or {},
+            raw=d,
         )
 
 

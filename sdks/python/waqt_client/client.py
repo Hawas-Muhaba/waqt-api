@@ -35,6 +35,7 @@ from .types import (
     InstitutionalCalendarResult,
     LocationInfo,
     SchedulingResult,
+    VersionInfo,
     WaqtResponse,
 )
 
@@ -152,6 +153,13 @@ class WaqtClient:
         """`GET /v1/calendar` — every registered calendar provider."""
         data = self._get("/v1/calendar", {})
         return [CalendarProviderInfo.from_json(p) for p in data.get("providers", [])]
+
+    def get_version(self) -> VersionInfo:
+        """`GET /v1/version` (API >= 1.4.0) — waqt-core version, engine,
+        revision, accuracy level, vector-set version. Raises
+        `WaqtApiError`/`WaqtTransportError` like any other call; against an
+        older server the endpoint does not exist and the error says so."""
+        return VersionInfo.from_json(self._get("/v1/version", {}))
 
     def convert(self, direction: str, **kwargs: Any) -> ConversionResult:
         """`GET /v1/conversions` — bidirectional Gregorian <-> Hijri,

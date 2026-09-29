@@ -1,5 +1,12 @@
 {
  "spec": "waqt-scheduling/0.1",
+ "vector_set_version": "1.0",
+ "astronomy_dependent": true,
+ "generated_at_computation": {
+  "engine": "waqt-noaa-low-precision",
+  "revision": "2",
+  "accuracy_level": "B"
+ },
  "vector_format_version": "1.0",
  "generated_by": "waqt-python-reference (tests/vectors/generate_scheduling_vectors.py)",
  "note": "Each vector's context.days is a DAY TABLE: the solar engine's output for consecutive Waqt days, frozen as data, so a consumer needs no astronomy. Compare `expected` exactly, ignoring only the non-normative prose fields `description` and `reason`. Instants are ISO 8601 UTC with up to microsecond precision; derived instants use integer microseconds with floor(x + 0.5) rounding. See docs/SCHEDULING.md section 9.",

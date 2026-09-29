@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+api_consumer/__init__.py
+api_consumer/cli.py
+api_consumer/waqt_api.py
+tests/test_against_fake_server.py
+tests/test_no_internal_imports.py
+waqt_api_consumer.egg-info/PKG-INFO
+waqt_api_consumer.egg-info/SOURCES.txt
+waqt_api_consumer.egg-info/dependency_links.txt
+waqt_api_consumer.egg-info/entry_points.txt
+waqt_api_consumer.egg-info/top_level.txt

@@ -28,8 +28,10 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 from zoneinfo import ZoneInfo
 
-ASTRONOMY_ENGINE_NAME = "waqt-noaa-low-precision"
-ACCURACY_LEVEL = "B"
+# Sprint 12: computation identity is owned by waqt-core; waqt-local reports
+# exactly what the engine it calls reports (never a second copy of the strings).
+from waqt_core.versioning import ACCURACY_LEVEL, ENGINE_NAME, ENGINE_REVISION, computation_identity  # noqa: E402
+ASTRONOMY_ENGINE_NAME = ENGINE_NAME
 CORE_SPEC_VERSION = "waqt-core/0.1"
 
 
@@ -79,9 +81,12 @@ def hijri_block(hd) -> Optional[dict]:
 
 
 def computation_block(timescale_model: Optional[str], delta_t_seconds: Optional[float]) -> dict:
+    ident = computation_identity()
     return {
-        "astronomy_engine": ASTRONOMY_ENGINE_NAME,
-        "accuracy_level": ACCURACY_LEVEL,
+        "engine": ident["engine"],
+        "revision": ident["revision"],
+        "accuracy_level": ident["accuracy_level"],
+        "astronomy_engine": ident["engine"],   # deprecated alias of `engine` (kept identical to the API)
         "timescale_model": timescale_model,
         "delta_t_seconds": round(delta_t_seconds, 3) if delta_t_seconds is not None else None,
     }

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waqt-api-consumer"
+version = "0.1.0"
+description = "Reference program demonstrating an external application consuming the Waqt API over HTTP, no Waqt package imports required."
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+waqt-api-consumer = "api_consumer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["api_consumer*"]

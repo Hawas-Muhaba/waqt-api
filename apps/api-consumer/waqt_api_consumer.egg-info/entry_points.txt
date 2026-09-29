@@ -1,0 +1,2 @@
+[console_scripts]
+waqt-api-consumer = api_consumer.cli:main

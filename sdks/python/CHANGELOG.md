@@ -8,6 +8,22 @@ policy") — this sprint deliberately does not introduce automatic
 major-version synchronization between the two, since nothing in the
 Waqt specification requires it.
 
+## 0.3.0 — Sprint 12
+
+### Added
+- `ComputationInfo.engine` and `.revision` (+ `.identity`): the computation
+  reproducibility identity introduced in API 1.4.0. `astronomy_engine` is
+  kept with the same value. Against a pre-1.4.0 server `engine` falls back
+  to `astronomy_engine` and `revision` is `None` — the SDK never invents a
+  revision.
+- `WaqtClient.get_version()` / `AsyncWaqtClient.get_version()` → `VersionInfo`
+  (`GET /v1/version`).
+- `MAX_KNOWN_API_VERSION` is now `1.4.0`.
+
+### Changed
+- None. Existing signatures and return types are unchanged; the new
+  `ComputationInfo` fields have defaults, so direct construction is unaffected.
+
 ## 0.2.0 — Sprint 10
 
 ### Added

@@ -1,0 +1,157 @@
+Metadata-Version: 2.4
+Name: waqt-api
+Version: 0.2.0
+Summary: Waqt HTTP API v1 — a Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API, built on the waqt-core computation package.
+Author: Waqt project
+License: MIT
+Project-URL: Homepage, https://github.com/waqt-project/waqt-api
+Project-URL: Documentation, https://github.com/waqt-project/waqt-api/blob/main/docs/API.md
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: waqt-core<0.3,>=0.2.0
+Requires-Dist: fastapi>=0.100
+Requires-Dist: uvicorn>=0.23
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+Requires-Dist: httpx; extra == "dev"
+Requires-Dist: build; extra == "dev"
+Requires-Dist: astral; extra == "dev"
+Dynamic: license-file
+
+# Waqt API v1
+
+A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API — a stable, versioned, language-independent HTTP contract. You do not need to read any Python here to integrate it; start with [`docs/API.md`](docs/API.md).
+
+```
+core/                          — Sprint 11: `waqt-core`, the independently installable computation layer
+  waqt_core/                     (import name waqt_core; deps: ephem, timezonefinder — no FastAPI)
+    core.py, solar.py, hijri.py, semantics.py, timescale.py, timezone_provider.py, calendar_interop.py
+    calendar_providers/           — Umm al-Qura, local observation, registry
+    scheduling/                   — Sprint 6: windows, deadlines, event-relative rules
+    institutional/                — Sprint 7: week, fiscal year, academic year, calendar profiles
+  tests/                         — standalone conformance vs all vector files, shim-identity, clean-install, solar regressions
+waqt/                          — `waqt-api` (repo root pyproject.toml): the HTTP layer only
+  __init__.py                    — aliases waqt.core/.hijri/.scheduling/... to the SAME objects as waqt_core.*
+  api/                           — Waqt API v1: common.py, providers.py and one *_endpoint.py per endpoint group
+local/                         — Sprint 10: `waqt-local`, embeddable no-server library (depends on waqt-core)
+sdks/                          — Sprint 9/10: remote HTTP clients (Python, JS) + shared conformance vectors
+consumers/js/                  — independent zero-dependency Node consumer of the shared vector files
+independent-astronomy/         — Sprint 9-12: Level-B (independent_solar) and Level-A (level_a, VSOP87) references,
+                                  comparison matrices, threshold-day truth scan, multi-year evidence (Sprint 12)
+apps/                          — Sprint 12: reference applications, the first user-facing consumers of Waqt
+  cli/                            — waqt-cli: offline command-line app on waqt-local
+  web/                             — waqt-web: static, dependency-free page consuming the HTTP API
+  api-consumer/                    — stdlib-only HTTP client, demonstrates consuming the API with no Waqt import
+tests/                         — waqt.api suite + vectors/ (portable conformance vectors + their generators)
+docs/
+  API.md, TIME-MODEL.md, CALENDARS.md, SEMANTICS.md, SCHEDULING.md, INSTITUTIONAL.md, CALENDAR-INTEROP.md,
+  SDK.md, LOCAL.md, RELEASING.md, VERSIONING.md, ACCURACY-LEVEL-REVIEW.md
+  ASTRONOMY.md                   — solar engine, accuracy levels (measured), elevation, DeltaT, edge cases
+  ASTRONOMY-ENGINE-EVALUATION.md — Sprint 11: NOAA vs Level B vs Level A, the bugs found, the production-engine decision
+  PACKAGING.md                   — Sprint 11: package architecture, shim, install, gating tests
+  VERSIONING.md                  — Sprint 12: how waqt-core version / engine revision / API version / SDK
+                                    version / conformance-vector-set version relate
+  ACCURACY-LEVEL-REVIEW.md       — Sprint 12: promotion criteria for Level A, evidence so far, decision record
+SCOPE.md, SPRINT-*-REPORT.md     — build history and honest limitations
+```
+```
+
+## Quickstart
+
+```bash
+pip install -r requirements.txt      # editable installs of core/, ., local/ + dev tools
+uvicorn waqt.api:app --reload --port 8000
+curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525"
+```
+
+Or open `http://localhost:8000/docs` for interactive testing (Swagger UI, generated automatically from the same code that serves requests).
+
+## The seven endpoints
+
+| Endpoint | What it returns |
+|---|---|
+| `GET /v1/waqt` | Everything — day boundary, clock reading, all six events, Hijri date |
+| `GET /v1/day` | Day boundary only |
+| `GET /v1/events` | The six prayer/solar events only (no calendar) |
+| `GET /v1/hijri` | Calendar lookup only, **no location needed** — see `docs/API.md` §8 for the one gotcha |
+| `GET /v1/calendar` | Discovery: what calendar providers exist |
+| `GET /v1/location` | Timezone + local civil date resolution, standalone |
+| `GET /v1/conversions` | Gregorian ↔ Hijri, either direction |
+| `GET /v1/version` | Sprint 12: every version axis — `waqt-core` version, engine + revision + accuracy level, API version, conformance-vector-set version |
+
+Full request/response schemas, every error code, units, and versioning policy: [`docs/API.md`](docs/API.md) and [`docs/VERSIONING.md`](docs/VERSIONING.md).
+
+## Scheduling (Sprint 6)
+
+| Endpoint | What it answers |
+|---|---|
+| `GET /v1/schedule/snapshot` | Day begin/end, next event, time until/since every event |
+| `GET /v1/schedule/span` | Does `[start, end)` cross a Maghrib boundary? Civil midnight? |
+| `POST /v1/schedule/resolve` | Any rule: windows, deadlines, "30 min before Maghrib", `between(Fajr, Sunrise)` … |
+
+Waqt provides temporal facts, not religious rulings — see [`docs/SCHEDULING.md`](docs/SCHEDULING.md).
+
+## Institutional calendars (Sprint 7)
+
+| Endpoint | What it answers |
+|---|---|
+| `GET /v1/institutional/week` | The Islamic week containing an instant — first day, Jumu'ah slot, all configurable |
+| `GET`/`POST /v1/institutional/fiscal-year(/resolve)` | Muharram-1-to-Dhu-al-Hijjah by default, or any `start_rule`/`end_rule` you supply |
+| `GET`/`POST /v1/institutional/academic-year(/resolve)` | First-Ahad-of-Muharram-to-last-Khamis-of-Sha'ban by default, or your own opening/closing/terms/holidays |
+| `GET /v1/institutional/profile` | A demo `CalendarProfile` as pure JSON configuration |
+
+No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTITUTIONAL.md`](docs/INSTITUTIONAL.md).
+
+## SDKs, local computation, and independent astronomy (Sprint 9-10)
+
+- **Official SDKs** — `sdks/python/waqt_client` and `sdks/js/waqt-client`,
+  remote HTTP clients with full read coverage plus typed request builders
+  for every `POST` endpoint. See [`docs/SDK.md`](docs/SDK.md) and each
+  package's `CHANGELOG.md`. Packaging/versioning/release procedure:
+  [`docs/RELEASING.md`](docs/RELEASING.md).
+- **Local computation library** — `local/waqt_local`, a no-HTTP, in-process
+  Python package computing the same facts the server does, straight from
+  `waqt.core`/`waqt.scheduling`/`waqt.institutional`. See
+  [`docs/LOCAL.md`](docs/LOCAL.md).
+- **Independent astronomy** — `independent-astronomy/independent_solar`
+  (a from-scratch Level-B solar engine) and `independent-astronomy/level_a`
+  (a VSOP87-based Level-A reference, Sprint 10, used to measure both
+  Level-B engines). See [`docs/INDEPENDENT-ASTRONOMY.md`](docs/INDEPENDENT-ASTRONOMY.md)
+  and [`docs/ASTRONOMY.md`](docs/ASTRONOMY.md)'s "Accuracy levels" section.
+  Sprint 12 extended the comparison across 7 years; see
+  [`docs/ACCURACY-LEVEL-REVIEW.md`](docs/ACCURACY-LEVEL-REVIEW.md).
+- **Reference applications** (Sprint 12) — `apps/cli` (offline CLI on
+  `waqt-local`), `apps/web` (a static page on the HTTP API), and
+  `apps/api-consumer` (a stdlib-only HTTP client proving the API needs no
+  Waqt package to use). None compute Waqt semantics themselves — each has
+  a structural test enforcing that. See each package's own `README.md`.
+
+## Verify
+
+```bash
+python3 -m pytest tests/ -v
+```
+
+Sprint 7 adds 86 tests (institutional-layer unit tests, HTTP surface, 22 portable
+calendar-table vectors, and the independent JS consumer, run from pytest when Node
+is installed) on top of Sprint 6's 320. Sprint 6 added 200+ tests (scheduling
+engine, HTTP, 116 portable vectors, and the independent JS consumer). Sprint 5's
+baseline was 106 tests: the full geographic matrix, elevation, the date-line fix,
+ΔT, all five calendar provider categories (including 4/4 historical Umm al-Qura
+dates), the complete v1 HTTP contract, and Sprint 5's formal temporal semantics —
+the exact-Maghrib boundary rule, same-day-only comparison enforcement,
+undefined-event handling, and 10 portable conformance vectors an independent
+implementation in another language could check itself against.
+
+Read `SCOPE.md` and the `SPRINT-*-REPORT.md` files before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.

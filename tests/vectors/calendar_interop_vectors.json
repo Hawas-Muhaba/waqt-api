@@ -1,4 +1,11 @@
 {
+  "vector_set_version": "1.0",
+  "astronomy_dependent": true,
+  "generated_at_computation": {
+    "engine": "waqt-noaa-low-precision",
+    "revision": "2",
+    "accuracy_level": "B"
+  },
   "$schema_note": "Sprint 8 conformance vectors for waqt.calendar_interop. Every astronomy value (Maghrib instants, Hijri labels) here was computed once by the Python reference implementation. consumers/js/src/calendar_interop.mjs must reproduce every 'expected' field using only the 'context' given -- it never recomputes Maghrib from coordinates.",
   "instant_representation": [
     {
@@ -113,7 +120,7 @@
           "elevation_m": 2355
         },
         "timezone_name": "Africa/Addis_Ababa",
-        "utc_offset_seconds": 9320,
+        "utc_offset_seconds": 8836,
         "waqt_day": {
           "maghrib_open": "1900-02-27T15:41:48.498757+00:00",
           "maghrib_close": "1900-02-28T15:41:51.466335+00:00",
@@ -140,12 +147,12 @@
         },
         "gregorian_civil": {
           "date": "1900-02-28",
-          "time_of_day": "12:35:20",
+          "time_of_day": "12:27:16",
           "weekday_iso": 3,
           "weekday_name_islamic": "al-Arbiaa",
           "is_leap_year": false,
           "timezone_name": "Africa/Addis_Ababa",
-          "utc_offset_seconds": 9320
+          "utc_offset_seconds": 8836
         },
         "waqt_status": "OK",
         "waqt_position_seconds": 65891.501

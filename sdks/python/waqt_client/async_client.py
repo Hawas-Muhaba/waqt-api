@@ -26,6 +26,7 @@ from .types import (
     InstitutionalCalendarResult,
     LocationInfo,
     SchedulingResult,
+    VersionInfo,
     WaqtResponse,
 )
 
@@ -124,6 +125,10 @@ class AsyncWaqtClient:
     async def list_calendar_providers(self) -> list:
         data = await self._get("/v1/calendar", {})
         return [CalendarProviderInfo.from_json(p) for p in data.get("providers", [])]
+
+    async def get_version(self) -> VersionInfo:
+        """`GET /v1/version` (API >= 1.4.0). See `WaqtClient.get_version`."""
+        return VersionInfo.from_json(await self._get("/v1/version", {}))
 
     async def convert(self, direction: str, **kwargs: Any) -> ConversionResult:
         params = R.conversions_params(direction, **kwargs)

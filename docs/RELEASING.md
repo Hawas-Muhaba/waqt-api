@@ -19,7 +19,7 @@ rather than performing the upload itself.
 | | Python (`waqt-client`) | JS (`waqt-client`) |
 |---|---|---|
 | Manifest | `sdks/python/pyproject.toml` | `sdks/js/waqt-client/package.json` |
-| Version | `0.2.0` | `0.2.0` |
+| Version | `0.3.0` | `0.3.0` |
 | License | MIT (`LICENSE` in each package dir) | MIT |
 | Typed | `py.typed` marker, full type hints | `index.d.ts`, checked with `tsc --noEmit -p tsconfig.json` |
 | Changelog | `sdks/python/CHANGELOG.md` | `sdks/js/waqt-client/CHANGELOG.md` |
@@ -117,7 +117,7 @@ dependency, ...) fails the same test run a code change would.
 
 Three more distributions are now packageable (see `docs/PACKAGING.md`):
 `core/` → `waqt-core` 0.1.0, repo root → `waqt-api` 0.1.0, `local/` →
-`waqt-local` 0.2.0. Same policy as above: built and clean-install-tested,
+`waqt-local` 0.3.0 (Sprint 12: additive `computation.engine`/`.revision`, `version()`). Same policy as above: built and clean-install-tested,
 not uploaded (credentials).
 
 **Release order matters:** `waqt-core` first, then `waqt-api` and

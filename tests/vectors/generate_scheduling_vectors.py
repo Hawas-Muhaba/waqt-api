@@ -30,6 +30,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from vector_stamp import stamp  # noqa: E402  (Sprint 12: vector-set version + engine-revision stamp)
 
 from zoneinfo import ZoneInfo
 
@@ -370,6 +372,7 @@ def main():
         ),
         "vectors": VECTORS,
     }
+    out = stamp(out, astronomy_dependent=True)
     path = Path(__file__).parent / "scheduling_vectors.json"
     path.write_text(json.dumps(out, indent=1) + "\n")
     print(f"Wrote {len(VECTORS)} vectors to {path} ({path.stat().st_size // 1024} KiB)")

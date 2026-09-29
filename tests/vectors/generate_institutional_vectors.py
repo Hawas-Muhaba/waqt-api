@@ -26,6 +26,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from vector_stamp import stamp  # noqa: E402  (Sprint 12: vector-set version + engine-revision stamp)
 
 from waqt.calendar_providers import UmmAlQuraProvider
 from waqt.hijri import ArithmeticTabularProvider
@@ -193,6 +195,7 @@ doc = {
     "vectors": vectors,
 }
 
+doc = stamp(doc, astronomy_dependent=False)
 out = Path(__file__).resolve().parent / "institutional_vectors.json"
 out.write_text(json.dumps(doc, indent=2) + "\n")
 print(f"wrote {len(vectors)} vectors to {out}")

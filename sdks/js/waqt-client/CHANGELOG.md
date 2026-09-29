@@ -4,6 +4,19 @@
 independent of the Waqt HTTP API's `api_version` — see
 docs/RELEASING.md's "Compatibility policy".
 
+## 0.3.0 — Sprint 12
+
+### Added
+- `ComputationInfo.engine` / `.revision`: the reproducibility identity from
+  API 1.4.0. `astronomyEngine` is kept with the same value; against an older
+  server `engine` falls back to it and `revision` is `null`.
+- `client.getVersion()` → `VersionInfo` (`GET /v1/version`), with types in
+  `index.d.ts`.
+- `MAX_KNOWN_API_VERSION` is now `1.4.0`.
+
+### Changed
+- None; additive only.
+
 ## 0.2.0 — Sprint 10
 
 ### Added

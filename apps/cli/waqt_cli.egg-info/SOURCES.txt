@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+tests/test_cli.py
+tests/test_no_second_implementation.py
+waqt_cli/__init__.py
+waqt_cli/__main__.py
+waqt_cli/_version.py
+waqt_cli/backend.py
+waqt_cli/main.py
+waqt_cli/render.py
+waqt_cli.egg-info/PKG-INFO
+waqt_cli.egg-info/SOURCES.txt
+waqt_cli.egg-info/dependency_links.txt
+waqt_cli.egg-info/entry_points.txt
+waqt_cli.egg-info/requires.txt
+waqt_cli.egg-info/top_level.txt

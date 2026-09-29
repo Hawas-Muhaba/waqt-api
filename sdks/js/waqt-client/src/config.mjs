@@ -2,7 +2,7 @@
 
 export const SUPPORTED_API_MAJOR_VERSION = 1;
 export const MIN_SUPPORTED_API_VERSION = "1.0.0";
-export const MAX_KNOWN_API_VERSION = "1.3.0";
+export const MAX_KNOWN_API_VERSION = "1.4.0";
 
 export const DEFAULT_BASE_URL = "https://waqt-api.onrender.com";
 export const DEFAULT_TIMEOUT_MS = 10_000;

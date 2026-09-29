@@ -39,6 +39,9 @@ Modules:
   - `institutional`        — fiscal year / academic year / week calendars
                              built on top of scheduling + calendar rules.
   - `timescale`, `timezone_provider` — DeltaT and timezone lookup providers.
+  - `versioning`           — Sprint 12: engine identity + revision, the behavioural
+                             fingerprint that keeps the revision honest, and the
+                             machine-readable form of docs/VERSIONING.md.
 
 `waqt.core`, `waqt.hijri`, `waqt.semantics`, `waqt.solar`,
 `waqt.timescale`, `waqt.timezone_provider`, `waqt.calendar_interop`,
@@ -52,5 +55,16 @@ that imports from `waqt.*` (including deep imports like
 from __future__ import annotations
 
 from ._version import __version__
+from .versioning import (
+    ACCURACY_LEVEL,
+    ENGINE_NAME,
+    ENGINE_REVISION,
+    VECTOR_SET_VERSION,
+    computation_identity,
+)
 
-__all__ = ["__version__"]
+__all__ = [
+    "__version__",
+    "ENGINE_NAME", "ENGINE_REVISION", "ACCURACY_LEVEL", "VECTOR_SET_VERSION",
+    "computation_identity",
+]

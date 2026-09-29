@@ -18,11 +18,16 @@ documented shape, with a message a caller can actually branch on.
 
 from __future__ import annotations
 
+import os
+
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
-from .common import ApiError, ErrorCode, error_body
+from waqt_core.versioning import computation_identity
+
+from .common import API_VERSION, ApiError, ErrorCode, error_body
 from .waqt_endpoint import router as waqt_router
 from .day_endpoint import router as day_router
 from .events_endpoint import router as events_router
@@ -33,10 +38,11 @@ from .conversions_endpoint import router as conversions_router
 from .schedule_endpoint import router as schedule_router
 from .institutional_endpoint import router as institutional_router
 from .calendar_convert_endpoint import router as calendar_convert_router
+from .version_endpoint import router as version_router
 
 app = FastAPI(
     title="Waqt API",
-    version="1.3.0",
+    version=API_VERSION,
     description=(
         "A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. "
         "See /docs for interactive testing, and the project's docs/API.md, "
@@ -46,8 +52,21 @@ app = FastAPI(
 )
 
 for r in (waqt_router, day_router, events_router, hijri_router, calendar_router, location_router,
-          conversions_router, schedule_router, institutional_router, calendar_convert_router):
+          conversions_router, schedule_router, institutional_router, calendar_convert_router, version_router):
     app.include_router(r)
+
+# Sprint 12: OPT-IN cross-origin access. Off by default (no header is ever sent
+# unless the operator sets WAQT_CORS_ORIGINS), because a public time API should
+# not silently become embeddable from every origin. The reference web app
+# (apps/web) avoids needing this in development by serving /v1 same-origin.
+_cors_origins = [o.strip() for o in os.environ.get("WAQT_CORS_ORIGINS", "").split(",") if o.strip()]
+if _cors_origins:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_cors_origins,
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["*"],
+    )
 
 
 @app.exception_handler(ApiError)
@@ -94,4 +113,5 @@ def root():
 
 @app.get("/v1/health")
 def health():
-    return {"status": "ok", "spec": "waqt-core/0.1", "api_version": "1.3.0"}
+    return {"status": "ok", "spec": "waqt-core/0.1", "api_version": API_VERSION,
+            "computation": computation_identity()}

@@ -1,5 +1,8 @@
 {
   "spec": "waqt-institutional/0.1",
+  "vector_set_version": "1.0",
+  "astronomy_dependent": false,
+  "generated_at_computation": null,
   "vector_format_version": "1.0",
   "generated_by": "tests/vectors/generate_institutional_vectors.py",
   "note": "Each vector's context.month_table freezes every day of every Hijri month the operation touches, as (day, gregorian, weekday) triples. A consumer needs no Hijri arithmetic and no astronomy to reproduce `expected` -- only the rule semantics in docs/INSTITUTIONAL.md.",

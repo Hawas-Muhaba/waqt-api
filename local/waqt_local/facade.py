@@ -261,6 +261,19 @@ def hijri(date: Any = None, calendar_provider: str = "arithmetic-tabular", **pro
     return {"gregorian_date": d.isoformat(), "weekday": weekday_name(d), "hijri": hijri_block(hd)}
 
 
+def version() -> dict:
+    """Equivalent of `GET /v1/version` (Sprint 12): every version axis this
+    installation reports. Built by the same `waqt_core.versioning.version_report`
+    the server uses, so local and server cannot describe themselves differently.
+    `api_version` is None: there is no HTTP layer here to have one."""
+    from waqt_core.versioning import version_report
+
+    from ._version import __version__ as local_version
+    from .formatting import CORE_SPEC_VERSION
+
+    return version_report(api_version=None, spec_version=CORE_SPEC_VERSION, local_version=local_version)
+
+
 def list_calendar_providers() -> dict:
     """Equivalent of `GET /v1/calendar`."""
     return {

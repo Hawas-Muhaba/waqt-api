@@ -27,9 +27,11 @@ from pathlib import Path
 _HERE = Path(__file__).resolve().parent
 _ROOT = _HERE.parent.parent
 sys.path.insert(0, str(_ROOT))
+sys.path.insert(0, str(_ROOT / "tests" / "vectors"))
 
 from fastapi.testclient import TestClient  # noqa: E402
 
+from vector_stamp import stamp  # noqa: E402  (Sprint 12: vector-set version + engine-revision stamp)
 from waqt.api import app  # noqa: E402
 
 client = TestClient(app)
@@ -229,7 +231,7 @@ def run() -> dict:
 
 
 def main():
-    report = run()
+    report = stamp(run(), astronomy_dependent=True)
     out_path = _HERE / "sdk_conformance_vectors.json"
     out_path.write_text(json.dumps(report, indent=2) + "\n")
     print(f"Wrote {len(report['vectors'])} vectors to {out_path}")

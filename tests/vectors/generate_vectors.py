@@ -14,6 +14,9 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from vector_stamp import stamp  # noqa: E402  (Sprint 12: vector-set version + engine-revision stamp)
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from waqt.core import AstronomyProfile, Location, compute_waqt
@@ -179,6 +182,7 @@ def main():
         "vectors": vectors,
     }
 
+    out = stamp(out, astronomy_dependent=True)
     out_path = Path(__file__).parent / "waqt_vectors.json"
     out_path.write_text(json.dumps(out, indent=2) + "\n")
     print(f"Wrote {len(vectors)} vectors to {out_path}")

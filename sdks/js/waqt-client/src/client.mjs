@@ -138,6 +138,12 @@ export class WaqtClient {
     return (data.providers || []).map(T.parseCalendarProviderInfo);
   }
 
+  /** `GET /v1/version` (API >= 1.4.0) — waqt-core version, engine,
+   * revision, accuracy level, vector-set version. */
+  async getVersion() {
+    return T.parseVersionInfo(await this.#get("/v1/version", {}));
+  }
+
   /** `GET /v1/conversions` — bidirectional Gregorian <-> Hijri,
    * independent of instant/location/astronomy. `direction` is
    * `"to-hijri"` or `"to-gregorian"`. */

@@ -23,6 +23,8 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from vector_stamp import stamp  # noqa: E402  (Sprint 12: vector-set version + engine-revision stamp)
 
 from waqt import calendar_interop as ci
 from waqt.calendar_providers import ArithmeticTabularProvider, DeclaredProvider
@@ -362,6 +364,7 @@ def main():
         "gregorian_date_to_waqt_day": gregorian_date_to_waqt_vectors(),
         "boundary_crossing": boundary_crossing_vectors(),
     }
+    doc = stamp(doc, astronomy_dependent=True)
     with open(OUT_PATH, "w") as f:
         json.dump(doc, f, indent=2, default=str)
         f.write("\n")

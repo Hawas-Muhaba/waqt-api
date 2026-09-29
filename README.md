@@ -16,15 +16,22 @@ waqt/                          — `waqt-api` (repo root pyproject.toml): the HT
 local/                         — Sprint 10: `waqt-local`, embeddable no-server library (depends on waqt-core)
 sdks/                          — Sprint 9/10: remote HTTP clients (Python, JS) + shared conformance vectors
 consumers/js/                  — independent zero-dependency Node consumer of the shared vector files
-independent-astronomy/         — Sprint 9-11: Level-B (independent_solar) and Level-A (level_a, VSOP87) references,
-                                  comparison matrices, threshold-day truth scan
+independent-astronomy/         — Sprint 9-12: Level-B (independent_solar) and Level-A (level_a, VSOP87) references,
+                                  comparison matrices, threshold-day truth scan, multi-year evidence (Sprint 12)
+apps/                          — Sprint 12: reference applications, the first user-facing consumers of Waqt
+  cli/                            — waqt-cli: offline command-line app on waqt-local
+  web/                             — waqt-web: static, dependency-free page consuming the HTTP API
+  api-consumer/                    — stdlib-only HTTP client, demonstrates consuming the API with no Waqt import
 tests/                         — waqt.api suite + vectors/ (portable conformance vectors + their generators)
 docs/
   API.md, TIME-MODEL.md, CALENDARS.md, SEMANTICS.md, SCHEDULING.md, INSTITUTIONAL.md, CALENDAR-INTEROP.md,
-  SDK.md, LOCAL.md, RELEASING.md
+  SDK.md, LOCAL.md, RELEASING.md, VERSIONING.md, ACCURACY-LEVEL-REVIEW.md
   ASTRONOMY.md                   — solar engine, accuracy levels (measured), elevation, DeltaT, edge cases
   ASTRONOMY-ENGINE-EVALUATION.md — Sprint 11: NOAA vs Level B vs Level A, the bugs found, the production-engine decision
   PACKAGING.md                   — Sprint 11: package architecture, shim, install, gating tests
+  VERSIONING.md                  — Sprint 12: how waqt-core version / engine revision / API version / SDK
+                                    version / conformance-vector-set version relate
+  ACCURACY-LEVEL-REVIEW.md       — Sprint 12: promotion criteria for Level A, evidence so far, decision record
 SCOPE.md, SPRINT-*-REPORT.md     — build history and honest limitations
 ```
 ```
@@ -50,8 +57,9 @@ Or open `http://localhost:8000/docs` for interactive testing (Swagger UI, genera
 | `GET /v1/calendar` | Discovery: what calendar providers exist |
 | `GET /v1/location` | Timezone + local civil date resolution, standalone |
 | `GET /v1/conversions` | Gregorian ↔ Hijri, either direction |
+| `GET /v1/version` | Sprint 12: every version axis — `waqt-core` version, engine + revision + accuracy level, API version, conformance-vector-set version |
 
-Full request/response schemas, every error code, units, and versioning policy: [`docs/API.md`](docs/API.md).
+Full request/response schemas, every error code, units, and versioning policy: [`docs/API.md`](docs/API.md) and [`docs/VERSIONING.md`](docs/VERSIONING.md).
 
 ## Scheduling (Sprint 6)
 
@@ -90,6 +98,13 @@ No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTIT
   (a VSOP87-based Level-A reference, Sprint 10, used to measure both
   Level-B engines). See [`docs/INDEPENDENT-ASTRONOMY.md`](docs/INDEPENDENT-ASTRONOMY.md)
   and [`docs/ASTRONOMY.md`](docs/ASTRONOMY.md)'s "Accuracy levels" section.
+  Sprint 12 extended the comparison across 7 years; see
+  [`docs/ACCURACY-LEVEL-REVIEW.md`](docs/ACCURACY-LEVEL-REVIEW.md).
+- **Reference applications** (Sprint 12) — `apps/cli` (offline CLI on
+  `waqt-local`), `apps/web` (a static page on the HTTP API), and
+  `apps/api-consumer` (a stdlib-only HTTP client proving the API needs no
+  Waqt package to use). None compute Waqt semantics themselves — each has
+  a structural test enforcing that. See each package's own `README.md`.
 
 ## Verify
 

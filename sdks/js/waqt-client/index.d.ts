@@ -25,8 +25,19 @@ export interface AstronomyProfile {
   name: string; fajrAngleDeg: number; ishaAngleDeg: number; asrShadowRatio: number;
 }
 export interface ComputationInfo {
-  astronomyEngine: string | null; accuracyLevel: string | null;
+  /** Pre-1.4.0 name of `engine`; same value, kept for compatibility. */
+  astronomyEngine: string | null;
+  /** Sprint 12 (API 1.4.0): `(engine, revision, accuracyLevel)` is the reproducibility identity. */
+  engine: string | null; revision: string | null;
+  accuracyLevel: string | null;
   timescaleModel: string | null; deltaTSeconds: number | null;
+}
+export interface VersionInfo {
+  waqtCoreVersion: string | null; apiVersion: string | null; spec: string | null;
+  engine: string | null; revision: string | null; accuracyLevel: string | null;
+  vectorSetVersion: string | null;
+  engineRevisionHistory: Record<string, Record<string, unknown>>;
+  raw: Record<string, unknown>;
 }
 export interface HijriDate {
   date: string; display: string; year: number; month: number; monthName: string; day: number;
@@ -96,6 +107,7 @@ export declare class WaqtClient {
 
   getHijri(opts?: Record<string, unknown>): Promise<WaqtResponse>;
   listCalendarProviders(): Promise<CalendarProviderInfo[]>;
+  getVersion(): Promise<VersionInfo>;
   convert(direction: "to-hijri" | "to-gregorian", opts?: Record<string, unknown>): Promise<ConversionResult>;
   representInstant(opts?: Record<string, unknown>): Promise<InstantRepresentation>;
   waqtDayForGregorianDate(date: string, lat: number, lon: number, opts?: Record<string, unknown>): Promise<InstantRepresentation>;

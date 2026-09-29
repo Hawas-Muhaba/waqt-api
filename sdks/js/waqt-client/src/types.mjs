@@ -43,11 +43,34 @@ export function parseAstronomyProfile(d) {
 
 export function parseComputationInfo(d) {
   if (d == null) return null;
+  const engine = d.engine ?? d.astronomy_engine ?? null;
   return {
-    astronomyEngine: d.astronomy_engine ?? null,
+    // Pre-1.4.0 name of `engine`; kept (same value) for compatibility.
+    astronomyEngine: d.astronomy_engine ?? engine,
+    // Sprint 12 (API 1.4.0): the reproducibility identity. `revision` is
+    // null against an older server.
+    engine,
+    revision: d.revision ?? null,
     accuracyLevel: d.accuracy_level ?? null,
     timescaleModel: d.timescale_model ?? null,
     deltaTSeconds: d.delta_t_seconds ?? null,
+  };
+}
+
+/** `GET /v1/version` — every version axis of the server (Sprint 12). */
+export function parseVersionInfo(d) {
+  const comp = d.computation || {};
+  const vecs = d.conformance_vectors || {};
+  return {
+    waqtCoreVersion: d.waqt_core_version ?? null,
+    apiVersion: d.api_version ?? null,
+    spec: d.spec ?? null,
+    engine: comp.engine ?? null,
+    revision: comp.revision ?? null,
+    accuracyLevel: comp.accuracy_level ?? null,
+    vectorSetVersion: vecs.vector_set_version ?? null,
+    engineRevisionHistory: d.engine_revision_history || {},
+    raw: d,
   };
 }
 

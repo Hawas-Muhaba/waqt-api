@@ -1,0 +1,9 @@
+waqt-core<0.3,>=0.2.0
+fastapi>=0.100
+uvicorn>=0.23
+
+[dev]
+pytest>=7
+httpx
+build
+astral
