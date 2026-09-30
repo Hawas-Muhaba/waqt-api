@@ -89,3 +89,17 @@ def test_no_hardcoded_localStorage_of_waqt_state():
     # and no *other* localStorage key anywhere (a computed Waqt fact getting cached)
     other_literal_keys = [k for k in re.findall(r'localStorage\.(?:setItem|getItem)\(\s*"([^"]+)"', script)]
     assert other_literal_keys == []
+
+
+def test_boundary_refresh_re_asks_the_server_and_never_computes_the_next_day():
+    """Sprint 13: a real-browser run found the page never left a finished Waqt day (no re-request after
+    Maghrib). The fix must be a *re-request*: when the server-reported day length / next-event instant
+    passes, tick() calls the same loader again.  It must not derive the next day's numbers itself."""
+    script = _script()
+    tick = script[script.index("function tick()"):script.index("function localTime")]
+    assert "refreshPlace()" in tick, "tick() should re-ask the server when the day (or next event) has elapsed"
+    body = script[script.index("async function refreshPlace()"):script.index("async function loadPlace")]
+    assert "loadPlace(" in body and "getJSON" not in body  # goes through the normal loader
+    # nothing in the refresh path adds durations or builds a new instant client-side
+    for bad in ("86400", "setDate(", "setHours(", "+ 24", "* 24"):
+        assert bad not in tick and bad not in body, f"refresh path contains {bad!r}"

@@ -95,9 +95,14 @@ ENGINE_REVISIONS: dict = {
 #: Version of the *content* of the portable conformance vectors (distinct from
 #: each file's `vector_format_version`, which versions the JSON *schema*).
 #: MAJOR: some expected value changed for an unchanged input (an engine
-#: revision bump, or a semantic change). MINOR: cases added, none changed.
-#: The first versioned set is 1.0, generated at engine revision 2.
-VECTOR_SET_VERSION = "1.0"
+#: revision bump, or a semantic change). MINOR: cases added or replaced, with no
+#: expected value changed for an input that is still present.
+#: 1.0: first versioned set, generated at engine revision 2 (Sprint 12).
+#: 1.1: Sprint 13 -- calendar_interop case "non-leap-century-1900" moved from
+#:      Addis Ababa to London because its expected civil offset was a
+#:      local-mean-time value that differs between tz database versions (i.e. it
+#:      was not reproducible across environments). Engine revision unchanged (2).
+VECTOR_SET_VERSION = "1.1"
 
 
 def computation_identity() -> dict:

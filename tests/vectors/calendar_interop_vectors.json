@@ -1,5 +1,5 @@
 {
-  "vector_set_version": "1.0",
+  "vector_set_version": "1.1",
   "astronomy_dependent": true,
   "generated_at_computation": {
     "engine": "waqt-noaa-low-precision",
@@ -115,15 +115,15 @@
       "instant": "1900-02-28T10:00:00+00:00",
       "context": {
         "location": {
-          "lat": 9.0084,
-          "lon": 38.7575,
-          "elevation_m": 2355
+          "lat": 51.5074,
+          "lon": -0.1278,
+          "elevation_m": 11
         },
-        "timezone_name": "Africa/Addis_Ababa",
-        "utc_offset_seconds": 8836,
+        "timezone_name": "Europe/London",
+        "utc_offset_seconds": 0,
         "waqt_day": {
-          "maghrib_open": "1900-02-27T15:41:48.498757+00:00",
-          "maghrib_close": "1900-02-28T15:41:51.466335+00:00",
+          "maghrib_open": "1900-02-27T17:37:13.077215+00:00",
+          "maghrib_close": "1900-02-28T17:38:59.208398+00:00",
           "hijri": {
             "date": "1317-10-27",
             "display": "27 Shawwal 1317 AH",
@@ -147,15 +147,15 @@
         },
         "gregorian_civil": {
           "date": "1900-02-28",
-          "time_of_day": "12:27:16",
+          "time_of_day": "10:00:00",
           "weekday_iso": 3,
           "weekday_name_islamic": "al-Arbiaa",
           "is_leap_year": false,
-          "timezone_name": "Africa/Addis_Ababa",
-          "utc_offset_seconds": 8836
+          "timezone_name": "Europe/London",
+          "utc_offset_seconds": 0
         },
         "waqt_status": "OK",
-        "waqt_position_seconds": 65891.501
+        "waqt_position_seconds": 58966.923
       }
     },
     {

@@ -52,9 +52,9 @@ WAQT_FIXTURE = {
 }
 
 VERSION_FIXTURE = {
-    "waqt_core_version": "0.2.0", "spec": "waqt-core/0.1", "api_version": "1.4.0", "waqt_local_version": None,
+    "waqt_core_version": "0.2.1", "spec": "waqt-core/0.1", "api_version": "1.4.0", "waqt_local_version": None,
     "computation": {"engine": "waqt-noaa-low-precision", "revision": "2", "accuracy_level": "B"},
-    "engine_revision_history": {}, "conformance_vectors": {"vector_set_version": "1.0", "generated_at_engine_revision": "2"},
+    "engine_revision_history": {}, "conformance_vectors": {"vector_set_version": "1.1", "generated_at_engine_revision": "2"},
     "notes": "",
 }
 
@@ -128,7 +128,7 @@ def test_get_waqt_over_real_http(server):
 def test_get_version_over_real_http(server):
     client = WaqtApiClient(server)
     v = client.get_version()
-    assert v["api_version"] == "1.4.0" and v["waqt_core_version"] == "0.2.0"
+    assert v["api_version"] == "1.4.0" and v["waqt_core_version"] == "0.2.1"
 
 
 def test_get_health_is_read_unwrapped(server):

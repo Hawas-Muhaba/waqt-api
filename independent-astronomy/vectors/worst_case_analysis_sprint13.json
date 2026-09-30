@@ -1,0 +1,225 @@
+{
+ "dense_worst_cases": [
+  {
+   "location": "Tromso",
+   "date": "2019-01-19",
+   "event": "asr",
+   "time_diff_waqt_minus_jpl_s": -22.015,
+   "jpl_altitude_slope_arcsec_per_s": -0.009,
+   "angular_error_at_waqt_time_arcsec": 0.11,
+   "implied_time_error_s": -12.338
+  },
+  {
+   "location": "Tromso",
+   "date": "2019-09-18",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 12.529,
+   "jpl_altitude_slope_arcsec_per_s": 0.864,
+   "angular_error_at_waqt_time_arcsec": 10.858,
+   "implied_time_error_s": 12.564
+  },
+  {
+   "location": "Tromso",
+   "date": "2019-11-27",
+   "event": "sunrise",
+   "time_diff_waqt_minus_jpl_s": 11.0,
+   "jpl_altitude_slope_arcsec_per_s": 0.448,
+   "angular_error_at_waqt_time_arcsec": 4.909,
+   "implied_time_error_s": 10.953
+  },
+  {
+   "location": "Tromso",
+   "date": "2019-09-14",
+   "event": "isha",
+   "time_diff_waqt_minus_jpl_s": -9.549,
+   "jpl_altitude_slope_arcsec_per_s": -0.55,
+   "angular_error_at_waqt_time_arcsec": 5.275,
+   "implied_time_error_s": -9.582
+  },
+  {
+   "location": "Tromso",
+   "date": "2026-05-17",
+   "event": "maghrib",
+   "time_diff_waqt_minus_jpl_s": 24.577,
+   "jpl_altitude_slope_arcsec_per_s": -0.245,
+   "angular_error_at_waqt_time_arcsec": -5.908,
+   "implied_time_error_s": 24.136
+  },
+  {
+   "location": "Tromso",
+   "date": "2026-05-18",
+   "event": "sunrise",
+   "time_diff_waqt_minus_jpl_s": -22.435,
+   "jpl_altitude_slope_arcsec_per_s": 0.245,
+   "angular_error_at_waqt_time_arcsec": -5.402,
+   "implied_time_error_s": -22.067
+  },
+  {
+   "location": "Tromso",
+   "date": "2026-03-28",
+   "event": "isha",
+   "time_diff_waqt_minus_jpl_s": 16.798,
+   "jpl_altitude_slope_arcsec_per_s": -0.457,
+   "angular_error_at_waqt_time_arcsec": -7.62,
+   "implied_time_error_s": 16.676
+  },
+  {
+   "location": "Tromso",
+   "date": "2026-11-27",
+   "event": "sunrise",
+   "time_diff_waqt_minus_jpl_s": 13.124,
+   "jpl_altitude_slope_arcsec_per_s": 0.23,
+   "angular_error_at_waqt_time_arcsec": 2.993,
+   "implied_time_error_s": 12.992
+  },
+  {
+   "location": "Reykjavik",
+   "date": "2019-08-30",
+   "event": "isha",
+   "time_diff_waqt_minus_jpl_s": -9.483,
+   "jpl_altitude_slope_arcsec_per_s": -0.436,
+   "angular_error_at_waqt_time_arcsec": 4.155,
+   "implied_time_error_s": -9.533
+  },
+  {
+   "location": "Reykjavik",
+   "date": "2019-04-10",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 7.905,
+   "jpl_altitude_slope_arcsec_per_s": 0.504,
+   "angular_error_at_waqt_time_arcsec": 4.003,
+   "implied_time_error_s": 7.936
+  },
+  {
+   "location": "Reykjavik",
+   "date": "2019-04-11",
+   "event": "isha",
+   "time_diff_waqt_minus_jpl_s": -7.431,
+   "jpl_altitude_slope_arcsec_per_s": -1.084,
+   "angular_error_at_waqt_time_arcsec": 8.071,
+   "implied_time_error_s": -7.443
+  },
+  {
+   "location": "Reykjavik",
+   "date": "2019-09-03",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 6.612,
+   "jpl_altitude_slope_arcsec_per_s": 0.709,
+   "angular_error_at_waqt_time_arcsec": 4.701,
+   "implied_time_error_s": 6.627
+  },
+  {
+   "location": "Longyearbyen (Svalbard)",
+   "date": "2026-02-15",
+   "event": "maghrib",
+   "time_diff_waqt_minus_jpl_s": 43.499,
+   "jpl_altitude_slope_arcsec_per_s": -0.183,
+   "angular_error_at_waqt_time_arcsec": -8.169,
+   "implied_time_error_s": 44.62
+  },
+  {
+   "location": "Longyearbyen (Svalbard)",
+   "date": "2026-02-15",
+   "event": "sunrise",
+   "time_diff_waqt_minus_jpl_s": -38.637,
+   "jpl_altitude_slope_arcsec_per_s": 0.183,
+   "angular_error_at_waqt_time_arcsec": -7.237,
+   "implied_time_error_s": -39.521
+  },
+  {
+   "location": "Longyearbyen (Svalbard)",
+   "date": "2026-03-06",
+   "event": "isha",
+   "time_diff_waqt_minus_jpl_s": 22.596,
+   "jpl_altitude_slope_arcsec_per_s": -0.499,
+   "angular_error_at_waqt_time_arcsec": -11.225,
+   "implied_time_error_s": 22.479
+  },
+  {
+   "location": "Longyearbyen (Svalbard)",
+   "date": "2026-04-17",
+   "event": "maghrib",
+   "time_diff_waqt_minus_jpl_s": 17.695,
+   "jpl_altitude_slope_arcsec_per_s": -0.565,
+   "angular_error_at_waqt_time_arcsec": -9.962,
+   "implied_time_error_s": 17.635
+  }
+ ],
+ "matrix_worst_cases": [
+  {
+   "location": "Tromso",
+   "date": "2019-09-19",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 9.343,
+   "jpl_altitude_slope_arcsec_per_s": 1.353,
+   "angular_error_at_waqt_time_arcsec": 12.657,
+   "implied_time_error_s": 9.356
+  },
+  {
+   "location": "Tromso",
+   "date": "2030-09-19",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 7.716,
+   "jpl_altitude_slope_arcsec_per_s": 1.484,
+   "angular_error_at_waqt_time_arcsec": 11.466,
+   "implied_time_error_s": 7.724
+  },
+  {
+   "location": "Tromso",
+   "date": "2019-09-23",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 6.868,
+   "jpl_altitude_slope_arcsec_per_s": 2.439,
+   "angular_error_at_waqt_time_arcsec": 16.762,
+   "implied_time_error_s": 6.871
+  },
+  {
+   "location": "Tromso",
+   "date": "2027-09-19",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 6.71,
+   "jpl_altitude_slope_arcsec_per_s": 1.382,
+   "angular_error_at_waqt_time_arcsec": 9.282,
+   "implied_time_error_s": 6.716
+  },
+  {
+   "location": "Tromso",
+   "date": "2030-09-23",
+   "event": "fajr",
+   "time_diff_waqt_minus_jpl_s": 5.228,
+   "jpl_altitude_slope_arcsec_per_s": 2.509,
+   "angular_error_at_waqt_time_arcsec": 13.121,
+   "implied_time_error_s": 5.23
+  }
+ ],
+ "existence_adjudication": [
+  {
+   "location": "Tromso",
+   "date": "2019-11-23",
+   "event": "asr",
+   "engines_said": {
+    "jpl_skyfield": "2019-11-23T10:30:33.367586+00:00",
+    "waqt": null,
+    "level_a": null,
+    "level_b": null
+   },
+   "physical_margin_arcsec": 0.06,
+   "detail": "JPL geometric noon altitude 0.03109 deg vs Asr target altitude 0.03107 deg",
+   "reading": "margin > 0 means the event physically occurs per JPL; |margin| of a few arcsec is inside every engine's model error"
+  },
+  {
+   "location": "Tromso",
+   "date": "2026-09-17",
+   "event": "fajr",
+   "engines_said": {
+    "jpl_skyfield": "2026-09-16T22:40:25.927631+00:00",
+    "waqt": null,
+    "level_a": "2026-09-16T22:40:33.484690+00:00",
+    "level_b": null
+   },
+   "physical_margin_arcsec": 0.55,
+   "detail": "JPL minimum altitude on the twilight side of transit = -18.00015 deg vs threshold -18.0 deg",
+   "reading": "margin > 0 means the event physically occurs per JPL; |margin| of a few arcsec is inside every engine's model error"
+  }
+ ]
+}

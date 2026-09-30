@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: waqt-core
-Version: 0.2.0
+Version: 0.2.1
 Summary: Independently distributable computation layer for Waqt (Maghrib-to-Maghrib civil time and Hijri calendar): astronomy, Hijri calendars, scheduling, institutional calendars.
 Author: Waqt project
 License: MIT

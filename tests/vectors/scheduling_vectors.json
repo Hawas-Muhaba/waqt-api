@@ -1,6 +1,6 @@
 {
  "spec": "waqt-scheduling/0.1",
- "vector_set_version": "1.0",
+ "vector_set_version": "1.1",
  "astronomy_dependent": true,
  "generated_at_computation": {
   "engine": "waqt-noaa-low-precision",

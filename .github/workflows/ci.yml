@@ -48,8 +48,20 @@ jobs:
 
       # Sprint 10/11: independent astronomical references (Level A/B)
       # used to evaluate the production solar engine.
+      # Sprint 13: the JPL/Skyfield independent reference needs these; without them its tests
+      # importorskip and would silently not run.
+      - name: Install astronomy reference dependencies
+        run: pip install pymeeus skyfield jplephem de421 packaging
       - name: Run tests (independent-astronomy)
         run: cd independent-astronomy && pytest tests/ -v --tb=short
+
+      # Sprint 13: version-axis consistency + real-server live checks.
+      - name: Live stack check (real uvicorn, CORS, vectors)
+        run: python verification/live_stack_check.py
+      - name: Run tests (apps)
+        run: |
+          pip install -e ./core -e . -e ./local -e apps/cli -e apps/api-consumer
+          for d in apps/cli apps/api-consumer apps/web; do (cd $d && pytest tests -q); done
 
       # Packaging / clean-install smoke tests: slow (spawn a venv +
       # build + pip install each), run last and separately so a

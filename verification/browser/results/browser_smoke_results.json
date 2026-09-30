@@ -1,0 +1,210 @@
+{
+ "browser": "HeadlessChrome/153 via @sparticuz/chromium",
+ "results": [
+  {
+   "id": "1",
+   "name": "page boots, provider list loaded from /v1/calendar",
+   "ok": true,
+   "detail": "arithmetic-tabular,umm-al-qura,declared,local-observation"
+  },
+  {
+   "id": "1b",
+   "name": "CORS (enforced browser): cross-origin call from page origin succeeded (all 4 providers loaded, not the fallback)",
+   "ok": true,
+   "detail": "[200] providers=4"
+  },
+  {
+   "id": "1c",
+   "name": "no console errors on load",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "id": "1d",
+   "name": "CORS enforced (negative control): page on disallowed origin 127.0.0.1:8080 cannot read the API",
+   "ok": true,
+   "detail": "fetch blocked=true, provider options=1 (fallback single option expected)"
+  },
+  {
+   "id": "1e",
+   "name": "CORS allows the configured origin (positive control): /v1/version readable from localhost:8080",
+   "ok": true,
+   "detail": "1.4.0"
+  },
+  {
+   "id": "2a",
+   "name": "Addis Ababa: content shown, status reports place + tz",
+   "ok": true,
+   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
+  },
+  {
+   "id": "2b",
+   "name": "six-event timeline present, in order",
+   "ok": true,
+   "detail": "Fajr 05:03:56 | Sunrise 06:13:29 | Dhuhr 12:15:01 | Asr 15:31:40 | Maghrib 18:16:26 | Isha 19:21:55"
+  },
+  {
+   "id": "2c",
+   "name": "Gregorian + Hijri + Waqt representation cards",
+   "ok": true,
+   "detail": "[[\"Gregorian (local)\",\"08:29:53\",\"30/09/2026\"],[\"Gregorian (UTC)\",\"05:29:53\",\"2026-09-30\"],[\"Hijri\",\"17 Rabi al-Thani 1448 AH\",\"1448-04-17\"],[\"Waqt\",\"14:12:52\",\"al-Arbiaa\"]]"
+  },
+  {
+   "id": "2d",
+   "name": "metadata: engine/revision/accuracy/provider/versions",
+   "ok": true,
+   "detail": "{\"Hijri provider\":\"arithmetic-tabular (30-year-cycle-epoch-1948440)\",\"Astronomy engine\":\"waqt-noaa-low-precision, revision 2\",\"Accuracy level\":\"B\",\"Timescale model\":\"espenak-meeus-2006\",\"ΔT applied\":\"75.511 s\",\"waqt-core version\":\"0.2.1\",\"API version\":\"1.4.0\",\"Vector set\":\"1.1 (@ revision 2)\"}"
+  },
+  {
+   "id": "2e",
+   "name": "day-progress ring has a percentage in [0,100]",
+   "ok": true,
+   "detail": "59% dashoffset=143.37891710556832"
+  },
+  {
+   "id": "2f",
+   "name": "clock ticks (≥2 s advance in 2.3 s) with zero new API calls",
+   "ok": true,
+   "detail": "14:12:52 -> 14:12:55, calls 3->3"
+  },
+  {
+   "id": "2g",
+   "name": "no console errors",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "id": "3",
+   "name": "provider switch: Hijri card/provider change, event instants identical",
+   "ok": true,
+   "detail": "17 Rabi al-Thani 1448 AH -> 19 Rabi al-Thani 1448 AH; provider umm-al-qura (astronomical-approx-2002-rules-v1)"
+  },
+  {
+   "id": "4a",
+   "name": "Makkah (second normal-latitude) loads",
+   "ok": true,
+   "detail": "Showing 21.4225, 39.8262 · Asia/Riyadh."
+  },
+  {
+   "id": "4b",
+   "name": "Reykjavik (high latitude): loads or reports plainly; never blank",
+   "ok": true,
+   "detail": "Showing 64.1466, -21.9426 · Atlantic/Reykjavik. | Fajr 04:47:55 | Sunrise 07:33:41 | Dhuhr 13:17:45 | Asr 15:59:19 | Maghrib 19:00:16 | Isha 21:34:03"
+  },
+  {
+   "id": "4c",
+   "name": "Reykjavik events either times or 'does not occur' (no NaN/undefined text)",
+   "ok": true,
+   "detail": "[[\"Fajr\",\"04:47:55\",\"09:44:06\",\"\"],[\"Sunrise\",\"07:33:41\",\"12:29:52\",\"in 02:03:41\"],[\"Dhuhr\",\"13:17:45\",\"18:13:55\",\"\"],[\"Asr\",\"15:59:19\",\"20:55:30\",\"\"],[\"Maghrib\",\"19:00:16\",\"23:56:27\",\"\"],[\"Isha\",\"21:34:03\",\"26:30:14\",\"\"]]"
+  },
+  {
+   "id": "5a",
+   "name": "polar summer (lat 78, 21 Jun): reported plainly, content hidden, no stale data",
+   "ok": true,
+   "detail": "Waqt is undefined here right now: Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+  },
+  {
+   "id": "5b",
+   "name": "after an UNDEFINED place, a normal place renders fully again",
+   "ok": true,
+   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
+  },
+  {
+   "id": "5c",
+   "name": "lat 78 today (late Sept, sun rises/sets): shown normally, not falsely UNDEFINED",
+   "ok": true,
+   "detail": "Showing 78, 15 · Arctic/Longyearbyen."
+  },
+  {
+   "id": "6a",
+   "name": "API validation error (lat=200) surfaces code+message, content hidden",
+   "ok": true,
+   "detail": "VALIDATION_ERROR: One or more request parameters were invalid."
+  },
+  {
+   "id": "6b",
+   "name": "non-numeric input handled client-side",
+   "ok": true,
+   "detail": "Enter numeric latitude and longitude."
+  },
+  {
+   "id": "6c",
+   "name": "wrong API port: legible unreachable/CORS message",
+   "ok": true,
+   "detail": "Could not reach http://localhost:9999. Is the server running, and does it allow this origin (WAQT_CORS_ORIGINS)? (Failed to fetch)"
+  },
+  {
+   "id": "6d",
+   "name": "loading state: 'Loading…' shown and stale content hidden while request pending",
+   "ok": true,
+   "detail": "Loading…"
+  },
+  {
+   "id": "7a",
+   "name": "geolocation granted: coordinates filled and Waqt loaded",
+   "ok": true,
+   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
+  },
+  {
+   "id": "7b",
+   "name": "geolocation denied: clear message, manual entry hint, no crash",
+   "ok": true,
+   "detail": "Location denied or unavailable (User denied Geolocation). Enter coordinates manually."
+  },
+  {
+   "id": "7c",
+   "name": "after denial, manual coordinates still work",
+   "ok": true,
+   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
+  },
+  {
+   "id": "7d",
+   "name": "no uncaught page errors after denial",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "id": "8",
+   "name": "narrow (380px) viewport: no horizontal overflow",
+   "ok": true,
+   "detail": "scrollWidth=380 innerWidth=380"
+  },
+  {
+   "id": "9a",
+   "name": "before boundary: clock ≈ end of day (≥ 99%)",
+   "ok": true,
+   "detail": "23:59:18 100%"
+  },
+  {
+   "id": "9b",
+   "name": "after Maghrib the page starts a NEW Waqt day (clock resets to small value, ring reset, header day range advanced)",
+   "ok": true,
+   "detail": "after clock=00:00:06 pct=0%; Waqt day: 18:17:00 → 18:16:26 local  =>  Waqt day: 18:16:26 → 18:15:51 local"
+  },
+  {
+   "id": "9c",
+   "name": "after boundary the page never displays a clock beyond the day length",
+   "ok": true,
+   "detail": "00:00:06"
+  },
+  {
+   "id": "9d",
+   "name": "when the highlighted next event arrives the page re-asks the server and the highlight advances",
+   "ok": true,
+   "detail": "Dhuhr -> Asr"
+  },
+  {
+   "id": "9e",
+   "name": "no console errors across boundary refreshes",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "id": "10",
+   "name": "page calls only /v1/waqt, /v1/calendar, /v1/version",
+   "ok": true,
+   "detail": "/v1/calendar,/v1/waqt,/v1/version"
+  }
+ ],
+ "all_ok": true
+}

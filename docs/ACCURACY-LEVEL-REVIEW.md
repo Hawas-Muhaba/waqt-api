@@ -1,4 +1,4 @@
-# Accuracy-level review (Sprint 12 Goal C)
+# Accuracy-level review (Sprint 12 Goal C; updated with Sprint 13 evidence)
 
 `waqt_core.versioning.ACCURACY_LEVEL` is currently `"B"`. This document is
 the explicit review point Sprint 12's brief asked for: the criteria that
@@ -58,7 +58,7 @@ hold, and record the decision here when it happens:
 |---|---|
 | 1. Multi-year vs Level A | **Evaluated.** Multi-year run (`vectors/multi_year_comparison_sprint12.json`, 560 rows, 7 years × Sprint 11's full geographic matrix) evaluated against Level A (`pymeeus`). Non-polar bands stay tightly bound under 3.4 s (equator: 2.923 s, tropics: 3.215 s, mid-lat-N: 3.349 s, mid-lat-S: 3.387 s). However, the high-latitude band reaches **9.427 s** (Tromso Fajr on 2019-09-19) compared to Sprint 11's single-epoch 3.6 s. |
 | 1b. Tolerance calibration | **Stale baseline flagged.** `TOLERANCE_SECONDS_WAQT_VS_LEVEL_A["high-lat"]` is currently set to 450 s (a legacy artifact from Sprint 10's pre-fix 432 s error). This masked the 9.427 s high-lat divergence from triggering a script failure, indicating tolerances need deliberate recalibration. |
-| 2. Independent second reference | **Not delivered.** Attempted; not practical in this environment (no network, no additional astronomy package available). See `compare_sprint12.py`'s docstring. |
+| 2. Independent second reference | **Not delivered in Sprint 12** (no network / no package then). **Delivered in Sprint 13** — see §6. |
 | 3. Polar/high-latitude coverage | **Evaluated.** Polar row (Svalbard, `polar` band) showed 0 agreement failures across all 7 years × 5 dates. Defined high-latitude cases demonstrated the ~9.4 s equinox-drift variance described above. |
 | 4. Dedicated review | This document, Sprint 12. Decision: **do not promote**. |
 
@@ -82,3 +82,39 @@ hold, and record the decision here when it happens:
   in the normal way (`core/waqt_core/versioning.py`'s module docstring).
 - `docs/ASTRONOMY.md` and `docs/ASTRONOMY-ENGINE-EVALUATION.md` updated to
   reflect the new status and cite this document's decision record.
+
+## 6. Sprint 13 evidence (verification sprint; no behaviour changed)
+
+Full write-up, tables and reproduction commands: [`ASTRONOMY-SPRINT13.md`](ASTRONOMY-SPRINT13.md).
+Engine under test: `waqt-noaa-low-precision` revision `2`, accuracy level `B` (unchanged).
+
+| Criterion | Sprint 13 status |
+|---|---|
+| 1. Multi-year vs Level A | **Re-run, identical to Sprint 12** (560 rows, 0 of 16,170 fields differ). Non-polar max ≤ 3.39 s; high-lat max 9.427 s (Tromsø Fajr 2019-09-19). Mean \|diff\| 1.40 s, median 1.38 s, mean signed **+0.84 s** (Waqt is systematically late; cause not yet diagnosed). |
+| 1b. Tolerance calibration | **Still open.** `TOLERANCE_SECONDS_WAQT_VS_LEVEL_A["high-lat"]` is still the stale 450 s. Not changed here (would silently alter what "agreement" means); a recalibration proposal is in `ASTRONOMY-SPRINT13.md` §7. |
+| 2. Independent second reference | **Delivered.** JPL DE421 + Skyfield (own apparent place, IAU 2006/2000A sidereal time, own timescale, own root finder; the package imports nothing from waqt, Level A or Level B — enforced by test). **Level A agrees with it to ≤ 0.26 s** on the 560-row matrix, so Level A is genuinely corroborated. Waqt vs JPL: max 9.34 s (matrix), same conclusion as vs Level A. |
+| 3. Polar / high-latitude coverage | **Covered, and it changes the picture.** Polar row: 210 event-instances, all four engines agree on existence in every one. Dense daily scans (every day of a year) at Tromsø 2019 and 2026, Reykjavik 2019, Longyearbyen 2026 show Waqt-vs-JPL max **22.0 s, 24.6 s, 9.5 s and 43.5 s**. These are not larger *angular* errors — every worst case corresponds to at most ~17 arcsec of Sun-position error (most 3–12″) — but a shallow altitude curve (0.18–0.5 arcsec per second) turns that into tens of seconds. |
+| 4. Dedicated review | This section. **Decision: do not promote.** |
+
+Two event-existence disagreements were found and adjudicated against the JPL altitude curve:
+Tromsø 2026-09-17 Fajr (physical margin 0.55″ above threshold; Waqt and Level B say undefined,
+Level A and JPL say defined) and Tromsø 2019-11-23 Asr (margin 0.06″; Waqt, Level A and Level B
+say undefined, JPL says defined). Both are knife-edge days far below every engine's model error;
+Waqt errs on the fail-closed side (UNDEFINED rather than an invented time).
+
+### Decision record (addition)
+
+| Sprint | Decision | Basis |
+|---|---|---|
+| **13** | **Stay at B** | Criterion 2 is now met and it *confirms* the reference chain (Level A ≈ JPL to 0.26 s). But the literal Level-A definition in `ASTRONOMY.md` — "sub-10-second agreement … across the full geographic matrix" — is met only on the 5-dates-per-year matrix (9.34–9.43 s, with 0.6 s of headroom) and **fails under dense high-latitude sampling** (up to 43.5 s at 78°N). Tolerances (1b) remain uncalibrated. Promotion would be a claim the evidence does not support. |
+
+`ACCURACY_LEVEL` is unchanged and `core/tests/test_engine_revision.py` still pins it.
+`independent-astronomy/tests/test_skyfield_reference.py::test_accuracy_promotion_criterion_is_not_met_by_committed_evidence`
+records the reason; if the engine is later improved so that dense-scan error falls under 10 s,
+that test fails and forces this review to be reopened rather than silently passing.
+
+### What would justify reopening
+
+1. Diagnose the +0.84 s mean bias (UT1/ΔT handling vs the low-precision series) and either fix it (which is an engine revision bump) or document it as the model's floor.
+2. Define the Level-A claim as an **angular** tolerance (Sun position, arcsec) plus a stated latitude limit, rather than a time tolerance that geometry can amplify without bound, then recalibrate criterion 1b.
+3. Decide whether Level A is claimed poleward of ~64°, or only equatorward, and document the boundary.

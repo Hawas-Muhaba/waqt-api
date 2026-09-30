@@ -71,20 +71,13 @@ def test_convert_instant_to_all_calendars_needs_no_flags_beyond_instant():
 
 
 def test_umm_al_qura_provider_is_listed_and_selectable_by_name():
-    # Full umm-al-qura *output* needs `ephem`, unavailable in this sandbox (see
-    # SPRINT-12-REPORT.md); this checks the CLI wiring (provider selection reaches
-    # waqt_local) without depending on ephem's real conjunction/moonset math.
+    # Sprint 13: `ephem` is a real dependency of waqt-core, so umm-al-qura must now produce output.
     _, providers_out, _err = call("--json", "providers")
     names = [p["name"] for p in json.loads(providers_out)["providers"]]
     assert "umm-al-qura" in names
-    code, out, _err = call("convert", "--gregorian", "2026-09-28", "--provider", "umm-al-qura")
-    # This sandbox has no real `ephem` (see SPRINT-12-REPORT.md), so umm-al-qura's
-    # actual conjunction/moonset math cannot run here. What this test can prove
-    # without it: the CLI reaches waqt_local and reports the failure cleanly
-    # (exit 3, one-line stderr message) instead of an unhandled traceback.
-    assert code in (0, 3)
-    if code == 3:
-        assert _err.strip() and "Traceback" not in _err
+    code, out, err = call("--json", "convert", "--gregorian", "2026-09-28", "--provider", "umm-al-qura")
+    assert code == 0, err
+    assert "Traceback" not in err and "umm-al-qura" in out
 
 
 def test_schedule_reminder_before_and_after_are_mutually_exclusive():

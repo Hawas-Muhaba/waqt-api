@@ -30,7 +30,7 @@ Resolving a point always reports its `basis`:
 | `isha` | the **next** day (it follows that Maghrib) |
 | `day_start` | its listed day (the opening Maghrib) |
 
-Sprint 5's vectors already show this (Maghrib listed at `23:59:23`, Isha at `25:04:53` on a `23:59:23` day). It matters for scheduling because `[Maghrib, Isha)` straddles a Waqt-day boundary by construction. `event_position` therefore reports **both** readings: `listed` (Sprint 5's `EventPosition`) and `containing` (the day that holds the instant). At Addis, Isha is `25:04:55` listed and `01:05:31` containing.
+Sprint 5's vectors already show this (Maghrib listed at `23:59:23`, Isha at `25:04:53` on a `23:59:23` day — figures as captured in Sprint 5 under engine revision 1 and not re-measured since; the example pinned by a passing test today is the next sentence's `25:04:55` / `01:05:31`). It matters for scheduling because `[Maghrib, Isha)` straddles a Waqt-day boundary by construction. `event_position` therefore reports **both** readings: `listed` (Sprint 5's `EventPosition`) and `containing` (the day that holds the instant). At Addis, Isha is `25:04:55` listed and `01:05:31` containing.
 
 `next_event`/`prev_event` search occurrences (not slots) and are what you want for "the next Maghrib" — see §5.
 

@@ -1,6 +1,6 @@
 {
   "spec": "waqt-core/0.1",
-  "vector_set_version": "1.0",
+  "vector_set_version": "1.1",
   "astronomy_dependent": true,
   "generated_at_computation": {
     "engine": "waqt-noaa-low-precision",
@@ -9,7 +9,7 @@
   },
   "vector_format_version": "1.0",
   "generated_by": "waqt-python-reference (tests/vectors/generate_vectors.py)",
-  "generated_at": "2026-09-29T10:43:11.935723+00:00",
+  "generated_at": "2026-09-29T15:03:04.327201+00:00",
   "note": "Every 'expected' value here was computed by running the Waqt Python reference implementation itself, not hand-typed. An independent implementation in another language is expected to reproduce these values within the tolerances documented in docs/ASTRONOMY.md (Level B: ~20-120s depending on latitude for solar events; exact for Waqt-position arithmetic and day-boundary logic, which are pure calendar math with no astronomical uncertainty once Maghrib/Fajr/etc are known).",
   "vectors": [
     {

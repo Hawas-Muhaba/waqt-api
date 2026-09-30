@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-core"
-version = "0.2.0"
+version = "0.2.1"
 description = "Independently distributable computation layer for Waqt (Maghrib-to-Maghrib civil time and Hijri calendar): astronomy, Hijri calendars, scheduling, institutional calendars."
 readme = "README.md"
 requires-python = ">=3.9"

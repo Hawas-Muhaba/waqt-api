@@ -1,0 +1,90 @@
+{
+ "results": [
+  {
+   "check": "GET /v1/version 200 + envelope",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "/v1/version computation == waqt_core.versioning",
+   "ok": true,
+   "detail": "{\"engine\": \"waqt-noaa-low-precision\", \"revision\": \"2\", \"accuracy_level\": \"B\"}"
+  },
+  {
+   "check": "/v1/version axes independent (core/api/vectors/engine)",
+   "ok": true,
+   "detail": "core=0.2.1 api=1.4.0 rev=2 vec=1.1"
+  },
+  {
+   "check": "/v1/version waqt_local_version null from server",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "GET /v1/health",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "CORS default: no Access-Control-* header",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "error path /v1/waqt?lat=abc&lon=38",
+   "ok": true,
+   "detail": "HTTP 422 code=VALIDATION_ERROR"
+  },
+  {
+   "check": "error path /v1/waqt?lat=95&lon=38",
+   "ok": true,
+   "detail": "HTTP 422 code=VALIDATION_ERROR"
+  },
+  {
+   "check": "error path /v1/waqt?lat=9&lon=38&instant=nonsense",
+   "ok": true,
+   "detail": "HTTP 400 code=INVALID_INSTANT"
+  },
+  {
+   "check": "error path /v1/waqt",
+   "ok": true,
+   "detail": "HTTP 422 code=VALIDATION_ERROR"
+  },
+  {
+   "check": "unknown route -> 404",
+   "ok": true,
+   "detail": "HTTP 404"
+  },
+  {
+   "check": "waqt_vectors stamp == running engine",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "live API == sdk_conformance_vectors (21 vectors, real HTTP)",
+   "ok": true,
+   "detail": "all identical"
+  },
+  {
+   "check": "CORS opt-in: allowed origin echoed",
+   "ok": true,
+   "detail": "http://localhost:8080"
+  },
+  {
+   "check": "CORS opt-in: disallowed origin not echoed",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "CORS preflight OPTIONS 200",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "CORS headers present on error responses too",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "all_ok": true
+}

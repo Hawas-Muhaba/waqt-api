@@ -2,6 +2,34 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
+## 0.2.1 — Sprint 13
+
+**Changed**: `VECTOR_SET_VERSION` `"1.0"` → `"1.1"` (`waqt_core.versioning`; reported by
+`version_report()` and therefore by `GET /v1/version` and `waqt_local.version()`).
+The vector set moved because Sprint 13's first real regeneration (with `ephem`,
+`timezonefinder` and FastAPI present) found that the calendar-interop case
+`non-leap-century-1900` was not reproducible across environments: it used Addis Ababa, whose
+1900 civil offset is a local-mean-time value that differs between tz database releases
+(`9320 s` in tzdata 2026a, `8836 s` in the release the Sprint 12 vector was captured under).
+The case now uses London (offset 0 in 1900), which does not depend on the tz database version.
+No expected value changed for an input that is still present, so this is a MINOR vector-set
+bump; no vector for any solar-engine output changed.
+
+**Not changed**: `solar.py`, `timescale.py`, the engine revision (`"2"`, fingerprint unchanged),
+the accuracy level (`"B"`), and every public function signature. Sprint 13's astronomy work
+(`independent-astronomy/`) is evidence only; it altered no engine behaviour.
+
+## 0.2.0 — Sprint 12
+
+**Added**: `waqt_core.versioning` — the single source of the computation identity
+(`ENGINE_NAME`, `ENGINE_REVISION`, `ACCURACY_LEVEL`, `computation_identity()`), the revision
+history (`ENGINE_REVISIONS`), the reproducibility pin (`engine_fingerprint()`, enforced by
+`core/tests/test_engine_revision.py`), `VECTOR_SET_VERSION` and `version_report()`.
+`ENGINE_NAME`, `ENGINE_REVISION`, `ACCURACY_LEVEL`, `VECTOR_SET_VERSION`,
+`computation_identity` are re-exported from the package root.
+
+**Not changed**: any computed value. Engine revision stayed `"2"` (Sprint 11's).
+
 ## 0.1.0 — Sprint 11
 
 Initial release. Extracted, unchanged, from what had been the

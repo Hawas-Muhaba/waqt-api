@@ -27,3 +27,11 @@ build  # python -m build, used by the packaging smoke tests (core/, root, and th
 # Level-B solar engines. It is not imported by anything in waqt_core/
 # or waqt_local/ itself.
 pymeeus
+
+# Sprint 13: independent JPL DE421 + Skyfield reference (independent-astronomy/skyfield_reference/),
+# version-consistency test (packaging), SDK async tests. Tests that need these importorskip without them.
+skyfield
+jplephem
+de421
+packaging
+pytest-asyncio

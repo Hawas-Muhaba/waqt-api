@@ -102,4 +102,4 @@ def test_independent_javascript_consumer_validates_all_vectors():
     tail = "\n".join(r.stdout.splitlines()[-12:]) + r.stderr[-800:]
     assert r.returncode == 0, tail
     summary = {line.split()[1]: int(line.split()[2]) for line in r.stdout.splitlines() if line.startswith("# ") and line.split()[1] in ("tests", "pass", "fail")}
-    assert summary["fail"] == 0 and summary["pass"] == summary["tests"] >= 130, summary
+    assert summary.get("fail", 0) == 0 and summary["pass"] == summary["tests"] >= 130, summary

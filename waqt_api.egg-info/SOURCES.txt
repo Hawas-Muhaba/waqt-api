@@ -2,6 +2,7 @@ LICENSE
 README.md
 pyproject.toml
 tests/test_api.py
+tests/test_api_consumer_against_live_api.py
 tests/test_calendar_convert_api.py
 tests/test_calendar_interop.py
 tests/test_calendar_interop_vectors.py
@@ -16,6 +17,7 @@ tests/test_scheduling.py
 tests/test_scheduling_vectors.py
 tests/test_semantics.py
 tests/test_vectors.py
+tests/test_version_consistency.py
 waqt/__init__.py
 waqt/py.typed
 waqt/api/__init__.py

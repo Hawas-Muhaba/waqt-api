@@ -41,6 +41,9 @@ LOCATIONS = {
     "addis_ababa": Location(lat=9.0084, lon=38.7575, elevation_m=2355),
     "kiritimati": Location(lat=1.87, lon=-157.4, elevation_m=3),      # date-line, UTC+14
     "dibrugarh": Location(lat=27.48, lon=94.90, elevation_m=108),      # single-zone India, tz vs solar time diverge ~50 min
+    # Sprint 13: a location whose civil offset in 1900 (GMT, standardized 1847) does not depend on
+    # the host tz database version. See the non-leap-century-1900 vector below.
+    "london": Location(lat=51.5074, lon=-0.1278, elevation_m=11),
 }
 
 
@@ -110,7 +113,7 @@ def instant_representation_vectors():
     vectors.append(build_instant_vector(
         "non-leap-century-1900",
         "1900 is divisible by 100 but not 400: NOT a leap year, per the standard Gregorian rule.",
-        datetime(1900, 2, 28, 10, 0, 0, tzinfo=timezone.utc), "addis_ababa",
+        datetime(1900, 2, 28, 10, 0, 0, tzinfo=timezone.utc), "london",
     ))
     vectors.append(build_instant_vector(
         "leap-century-2000",

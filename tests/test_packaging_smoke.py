@@ -74,8 +74,12 @@ def test_clean_install_waqt_api_pulls_in_waqt_core(tmp_path):
         pytest.skip("no python interpreter available")
 
     dist_dir = tmp_path / "dist"
-    core_whl = _build_wheel(CORE_ROOT, dist_dir)
-    api_whl = _build_wheel(REPO_ROOT, dist_dir)
+    # Sprint 13: each wheel gets its own outdir. Previously both shared dist_dir and
+    # _build_wheel returned whls[0], so which file was "the api wheel" depended on
+    # directory listing order (it could be the core wheel, twice).
+    core_whl = _build_wheel(CORE_ROOT, dist_dir / "core")
+    api_whl = _build_wheel(REPO_ROOT, dist_dir / "api")
+    assert core_whl.name.startswith("waqt_core-") and api_whl.name.startswith("waqt_api-"), (core_whl, api_whl)
 
     venv_dir = _fresh_venv(tmp_path)
     py = _venv_python(venv_dir)

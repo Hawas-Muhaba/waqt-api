@@ -4,7 +4,7 @@ tests/vectors/vector_stamp.py — Sprint 12: version stamp for portable vectors.
 Every vector file records which *content version* it is and, if any expected
 value depends on the solar engine, which computation identity generated it:
 
-    "vector_set_version": "1.0",
+    "vector_set_version": "1.1",
     "astronomy_dependent": true,
     "generated_at_computation": {"engine": ..., "revision": ..., "accuracy_level": ...}
 

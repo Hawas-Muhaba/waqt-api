@@ -202,8 +202,10 @@ async function getJSON(path, params) {
 }
 
 // ---- clock: interpolate between polls, from server-reported values only --
-let clockAnchor = null; // { serverSeconds, wallClockMsAtFetch, dayLengthSeconds }
+let clockAnchor = null; // { serverSeconds, wallClockMsAtFetch, dayLengthSeconds, nextEventMs }
 let tickHandle = null;
+let currentPlace = null;   // { lat, lon } of the last place shown, so a boundary can trigger a re-ask
+let refreshing = false;
 
 function fmtHMS(totalSeconds) {
   const s = Math.max(0, Math.floor(totalSeconds));
@@ -217,6 +219,12 @@ function tick() {
   const elapsed = (Date.now() - clockAnchor.wallClockMsAtFetch) / 1000;
   const seconds = clockAnchor.serverSeconds + elapsed;
   $("clockDisplay").textContent = fmtHMS(seconds);
+  // Sprint 13 fix: when the server-reported Waqt day has run out (Maghrib), or the server-reported
+  // next event has arrived, this page's data is stale. It does not work out what comes next -- it
+  // asks the server again (same request, "now"). Event-driven: no polling between boundaries.
+  const pastDayEnd = clockAnchor.dayLengthSeconds && seconds >= clockAnchor.dayLengthSeconds;
+  const pastNextEvent = clockAnchor.nextEventMs && Date.now() >= clockAnchor.nextEventMs;
+  if ((pastDayEnd || pastNextEvent) && currentPlace && !refreshing) refreshPlace();
   if (clockAnchor.dayLengthSeconds) {
     const frac = Math.max(0, Math.min(1, seconds / clockAnchor.dayLengthSeconds));
     const circumference = 2 * Math.PI * 56;
@@ -293,9 +301,18 @@ async function loadProviders() {
   }
 }
 
-async function loadPlace(lat, lon) {
-  setStatus("Loading…");
-  $("content").hidden = true;
+async function refreshPlace() {
+  refreshing = true;
+  try { await loadPlace(currentPlace.lat, currentPlace.lon, { silent: true }); }
+  finally { refreshing = false; }
+}
+
+async function loadPlace(lat, lon, { silent = false } = {}) {
+  currentPlace = { lat, lon };
+  if (!silent) {            // a boundary refresh keeps the old view up until the new answer arrives
+    setStatus("Loading…");
+    $("content").hidden = true;
+  }
   try {
     const provider = $("provider").value || "arithmetic-tabular";
     const [waqt, version] = await Promise.all([
@@ -314,6 +331,7 @@ async function loadPlace(lat, lon) {
       serverSeconds: waqt.waqt.reading.seconds,
       wallClockMsAtFetch: Date.now(),
       dayLengthSeconds: waqt.day.length_si_seconds,
+      nextEventMs: waqt.next_event && waqt.next_event.instant ? Date.parse(waqt.next_event.instant) : null,
     };
     tick();
 
