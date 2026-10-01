@@ -60,5 +60,6 @@ class LocalObservationProvider:
                 provider=self.name,
                 version=self.version,
                 source_note=s.observed_at,
+                source="observation",
             )
         return self._fallback.from_gregorian(d)

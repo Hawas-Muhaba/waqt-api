@@ -16,6 +16,7 @@ tests/test_schedule_api.py
 tests/test_scheduling.py
 tests/test_scheduling_vectors.py
 tests/test_semantics.py
+tests/test_sprint14_live_integrations.py
 tests/test_vectors.py
 tests/test_version_consistency.py
 waqt/__init__.py
@@ -32,6 +33,7 @@ waqt/api/institutional_endpoint.py
 waqt/api/location_endpoint.py
 waqt/api/providers.py
 waqt/api/py.typed
+waqt/api/ratelimit.py
 waqt/api/schedule_endpoint.py
 waqt/api/version_endpoint.py
 waqt/api/waqt_endpoint.py

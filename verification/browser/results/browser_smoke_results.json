@@ -5,13 +5,13 @@
    "id": "1",
    "name": "page boots, provider list loaded from /v1/calendar",
    "ok": true,
-   "detail": "arithmetic-tabular,umm-al-qura,declared,local-observation"
+   "detail": "arithmetic-tabular,umm-al-qura,declared,local-observation,aladhan"
   },
   {
    "id": "1b",
-   "name": "CORS (enforced browser): cross-origin call from page origin succeeded (all 4 providers loaded, not the fallback)",
+   "name": "CORS (enforced browser): cross-origin call from page origin succeeded (all 5 providers loaded, not the fallback)",
    "ok": true,
-   "detail": "[200] providers=4"
+   "detail": "[200] providers=5"
   },
   {
    "id": "1c",
@@ -29,7 +29,7 @@
    "id": "1e",
    "name": "CORS allows the configured origin (positive control): /v1/version readable from localhost:8080",
    "ok": true,
-   "detail": "1.4.0"
+   "detail": "1.5.0"
   },
   {
    "id": "2a",
@@ -41,31 +41,31 @@
    "id": "2b",
    "name": "six-event timeline present, in order",
    "ok": true,
-   "detail": "Fajr 05:03:56 | Sunrise 06:13:29 | Dhuhr 12:15:01 | Asr 15:31:40 | Maghrib 18:16:26 | Isha 19:21:55"
+   "detail": "Fajr 05:03:50 | Sunrise 06:13:24 | Dhuhr 12:14:41 | Asr 15:31:37 | Maghrib 18:15:51 | Isha 19:21:21"
   },
   {
    "id": "2c",
    "name": "Gregorian + Hijri + Waqt representation cards",
    "ok": true,
-   "detail": "[[\"Gregorian (local)\",\"08:29:53\",\"30/09/2026\"],[\"Gregorian (UTC)\",\"05:29:53\",\"2026-09-30\"],[\"Hijri\",\"17 Rabi al-Thani 1448 AH\",\"1448-04-17\"],[\"Waqt\",\"14:12:52\",\"al-Arbiaa\"]]"
+   "detail": "[[\"Gregorian (local)\",\"07:47:24\",\"01/10/2026\"],[\"Gregorian (UTC)\",\"04:47:24\",\"2026-10-01\"],[\"Hijri\",\"18 Rabi al-Thani 1448 AH\",\"1448-04-18local\"],[\"Waqt\",\"13:30:58\",\"al-Khamis\"]]"
   },
   {
    "id": "2d",
    "name": "metadata: engine/revision/accuracy/provider/versions",
    "ok": true,
-   "detail": "{\"Hijri provider\":\"arithmetic-tabular (30-year-cycle-epoch-1948440)\",\"Astronomy engine\":\"waqt-noaa-low-precision, revision 2\",\"Accuracy level\":\"B\",\"Timescale model\":\"espenak-meeus-2006\",\"ΔT applied\":\"75.511 s\",\"waqt-core version\":\"0.2.1\",\"API version\":\"1.4.0\",\"Vector set\":\"1.1 (@ revision 2)\"}"
+   "detail": "{\"Hijri provider\":\"arithmetic-tabular (30-year-cycle-epoch-1948440)\",\"Hijri source\":\"local\",\"Astronomy engine\":\"waqt-noaa-low-precision, revision 2\",\"Accuracy level\":\"B\",\"Timescale model\":\"espenak-meeus-2006\",\"ΔT applied\":\"75.563 s\",\"waqt-core version\":\"0.3.0\",\"API version\":\"1.5.0\",\"Vector set\":\"1.1 (@ revision 2)\"}"
   },
   {
    "id": "2e",
    "name": "day-progress ring has a percentage in [0,100]",
    "ok": true,
-   "detail": "59% dashoffset=143.37891710556832"
+   "detail": "56% dashoffset=153.61918287747457"
   },
   {
    "id": "2f",
    "name": "clock ticks (≥2 s advance in 2.3 s) with zero new API calls",
    "ok": true,
-   "detail": "14:12:52 -> 14:12:55, calls 3->3"
+   "detail": "13:30:58 -> 13:31:01, calls 3->3"
   },
   {
    "id": "2g",
@@ -77,7 +77,7 @@
    "id": "3",
    "name": "provider switch: Hijri card/provider change, event instants identical",
    "ok": true,
-   "detail": "17 Rabi al-Thani 1448 AH -> 19 Rabi al-Thani 1448 AH; provider umm-al-qura (astronomical-approx-2002-rules-v1)"
+   "detail": "18 Rabi al-Thani 1448 AH -> 20 Rabi al-Thani 1448 AH; provider umm-al-qura (astronomical-approx-2002-rules-v1)"
   },
   {
    "id": "4a",
@@ -89,13 +89,13 @@
    "id": "4b",
    "name": "Reykjavik (high latitude): loads or reports plainly; never blank",
    "ok": true,
-   "detail": "Showing 64.1466, -21.9426 · Atlantic/Reykjavik. | Fajr 04:47:55 | Sunrise 07:33:41 | Dhuhr 13:17:45 | Asr 15:59:19 | Maghrib 19:00:16 | Isha 21:34:03"
+   "detail": "Showing 64.1466, -21.9426 · Atlantic/Reykjavik. | Fajr 04:51:33 | Sunrise 07:36:34 | Dhuhr 13:17:25 | Asr 15:56:47 | Maghrib 18:56:44 | Isha 21:29:57"
   },
   {
    "id": "4c",
    "name": "Reykjavik events either times or 'does not occur' (no NaN/undefined text)",
    "ok": true,
-   "detail": "[[\"Fajr\",\"04:47:55\",\"09:44:06\",\"\"],[\"Sunrise\",\"07:33:41\",\"12:29:52\",\"in 02:03:41\"],[\"Dhuhr\",\"13:17:45\",\"18:13:55\",\"\"],[\"Asr\",\"15:59:19\",\"20:55:30\",\"\"],[\"Maghrib\",\"19:00:16\",\"23:56:27\",\"\"],[\"Isha\",\"21:34:03\",\"26:30:14\",\"\"]]"
+   "detail": "[[\"Fajr\",\"04:51:33\",\"09:51:16\",\"in 00:04:01\"],[\"Sunrise\",\"07:36:34\",\"12:36:18\",\"\"],[\"Dhuhr\",\"13:17:25\",\"18:17:08\",\"\"],[\"Asr\",\"15:56:47\",\"20:56:30\",\"\"],[\"Maghrib\",\"18:56:44\",\"23:56:27\",\"\"],[\"Isha\",\"21:29:57\",\"26:29:41\",\"\"]]"
   },
   {
    "id": "5a",
@@ -179,7 +179,7 @@
    "id": "9b",
    "name": "after Maghrib the page starts a NEW Waqt day (clock resets to small value, ring reset, header day range advanced)",
    "ok": true,
-   "detail": "after clock=00:00:06 pct=0%; Waqt day: 18:17:00 → 18:16:26 local  =>  Waqt day: 18:16:26 → 18:15:51 local"
+   "detail": "after clock=00:00:06 pct=0%; Waqt day: 18:16:26 → 18:15:51 local  =>  Waqt day: 18:15:51 → 18:15:17 local"
   },
   {
    "id": "9c",

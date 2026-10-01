@@ -178,6 +178,17 @@ class HijriDate:
     provider_name: str
     provider_version: str
     source_note: Optional[str]
+    #: API 1.5.0: where this value came from -- "local", "declared", "observation", "remote",
+    #: "remote-stale" or "local-fallback". `None` against a pre-1.5.0 server.
+    source: Optional[str] = None
+    #: API 1.5.0: fallback reason / cache state / cross-check for providers that consult something
+    #: outside the server (a plain dict, exactly as returned). `None` for purely local providers.
+    provenance: Optional[dict] = None
+
+    @property
+    def is_fallback(self) -> bool:
+        """True when a provider other than the requested one answered (`source == "local-fallback"`)."""
+        return self.source == "local-fallback"
 
     @classmethod
     def from_json(cls, d: Optional[dict]) -> Optional["HijriDate"]:
@@ -194,6 +205,8 @@ class HijriDate:
             provider_name=provider.get("name"),
             provider_version=provider.get("version"),
             source_note=d.get("source_note"),
+            source=d.get("source"),
+            provenance=d.get("provenance"),
         )
 
 
@@ -308,6 +321,8 @@ class WaqtResponse:
     profile: Optional[AstronomyProfile]
     computation: Optional[ComputationInfo]
     raw: dict = field(default_factory=dict, repr=False, compare=False)
+    #: API 1.5.0: set (with `hijri` None) when the calendar provider failed; the astronomy is still valid.
+    calendar_error: Optional[dict] = None
 
     @classmethod
     def from_json(cls, d: dict) -> "WaqtResponse":
@@ -326,6 +341,7 @@ class WaqtResponse:
             profile=AstronomyProfile.from_json(d.get("profile")),
             computation=ComputationInfo.from_json(d.get("computation")),
             raw=d,
+            calendar_error=d.get("calendar_error"),
         )
 
     def event(self, name: str) -> Optional[AstronomicalEvent]:

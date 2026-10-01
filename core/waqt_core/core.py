@@ -101,6 +101,11 @@ class WaqtResult:
 
     undefined_reason: str | None = None
 
+    #: Sprint 14. If the calendar provider raised, the astronomy is still
+    #: computed and reported; the Hijri date is None and this says why.
+    #: A calendar provider can never take the prayer times down with it.
+    calendar_error: str | None = None
+
 
 def _format_hms(delta: timedelta) -> str:
     total_seconds = delta.total_seconds()
@@ -224,7 +229,17 @@ def compute_waqt(
             **common,
         )
 
-    hijri_date = calendar_provider.from_gregorian(close_date)
+    # Sprint 14: calendar failure isolation. The Hijri label is decoration on top
+    # of the astronomy, never an input to it (day_events below is computed from
+    # close_date and the profile alone), so a provider that raises -- a remote one
+    # having a bad day, or umm-al-qura outside its ephemeris range -- must not
+    # destroy the events. Failure becomes visible data instead of a 500.
+    calendar_error = None
+    try:
+        hijri_date = calendar_provider.from_gregorian(close_date)
+    except Exception as e:  # noqa: BLE001 - deliberately broad; see comment above
+        hijri_date = None
+        calendar_error = f"{type(e).__name__}: {str(e)[:200]}"
     weekday = weekday_name(close_date)
 
     day_length = (m_close - m_open).total_seconds()
@@ -281,5 +296,6 @@ def compute_waqt(
         events=events,
         next_event=next_event,
         next_event_countdown=next_countdown,
+        calendar_error=calendar_error,
         **common,
     )

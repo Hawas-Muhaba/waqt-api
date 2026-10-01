@@ -1,6 +1,6 @@
 {
   "name": "waqt-client",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Official thin JavaScript/TypeScript SDK for the Waqt API (Maghrib-to-Maghrib civil time and Hijri calendar).",
   "type": "module",
   "main": "src/index.mjs",

@@ -62,7 +62,7 @@ from waqt_core.core import AstronomyProfile, Location, compute_waqt
 from waqt_core.hijri import ArithmeticTabularProvider
 from datetime import datetime, timezone
 
-assert waqt_core.__version__ == "0.2.1", waqt_core.__version__
+assert waqt_core.__version__ == "0.3.0", waqt_core.__version__
 
 result = compute_waqt(
     datetime(2026, 9, 19, 15, 42, tzinfo=timezone.utc),
@@ -76,6 +76,16 @@ assert result.status == "OK", result.status
 from waqt_core.scheduling.model import DAY_SHIFT  # noqa: F401
 from waqt_core.institutional.rules import MonthDay  # noqa: F401
 from waqt_core.calendar_providers.registry import default_registry  # noqa: F401
+
+# Sprint 14: the live provider ships in the wheel, is constructible without I/O, and degrades
+# to a labelled local fallback when its transport fails (no network is used here).
+from waqt_core.calendar_providers import AlAdhanHijriProvider
+from waqt_core.calendar_providers.aladhan import TransportError
+from datetime import date
+def _down(url, timeout, max_bytes):
+    raise TransportError("offline")
+h = AlAdhanHijriProvider(transport=_down, fallback=ArithmeticTabularProvider()).from_gregorian(date(2026, 9, 30))
+assert h.source == "local-fallback" and h.provenance.fallback_reason == "network-error", h
 
 # waqt-core must not depend on the application layer or FastAPI.
 for forbidden in ("fastapi", "waqt", "waqt_local"):

@@ -8,6 +8,12 @@ policy") — this sprint deliberately does not introduce automatic
 major-version synchronization between the two, since nothing in the
 Waqt specification requires it.
 
+## 0.3.1 — Sprint 14
+
+**Added** (API 1.5.0, all optional/defaulted, so existing code is unaffected): `HijriDate.source`,
+`HijriDate.provenance`, `HijriDate.is_fallback`, `WaqtResponse.calendar_error`. Against a pre-1.5.0
+server they are `None`. `MAX_KNOWN_API_VERSION` → `1.5.0`.
+
 ## 0.3.0 — Sprint 12
 
 ### Added

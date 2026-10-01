@@ -54,7 +54,7 @@ SMOKE_SCRIPT = """
 import waqt_client
 from waqt_client import requests as R, WaqtClient, AsyncWaqtClient
 
-assert waqt_client.__version__ == "0.3.0", waqt_client.__version__
+assert waqt_client.__version__ == "0.3.1", waqt_client.__version__
 
 req = R.ScheduleResolveRequest(lat=9.0192, lon=38.7525, operation=R.NextEventOp())
 body = req.to_json()

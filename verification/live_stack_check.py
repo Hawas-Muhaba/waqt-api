@@ -44,6 +44,57 @@ def strip_volatile(o):
     if isinstance(o, list): return [strip_volatile(x) for x in o]
     return o
 
+def sprint14_checks(rec_fn):
+    """Sprint 14: live Hijri provider, provenance, fallback, health/version, rate limiting, CORS -- real uvicorn
+    + real HTTP to a local fake AlAdhan (the real service is not reachable from CI). The API's outbound
+    calls use the real urllib transport."""
+    sys.path.insert(0, str(ROOT / "verification"))
+    from fake_aladhan import FakeAlAdhan
+    fake = FakeAlAdhan().start()
+    p, port = start({"WAQT_CORS_ORIGINS": "http://localhost:8080", "WAQT_ALADHAN_BASE_URL": fake.base_url,
+                     "WAQT_RATE_LIMIT": "40/minute"})
+    q = "/v1/waqt?lat=9.0192&lon=38.7525&instant=2026-09-30T09:00:00Z&timezone_override=Africa/Addis_Ababa"
+    O = {"Origin": "http://localhost:8080"}
+    try:
+        st, h, b = get(port, q + "&calendar_provider=aladhan", O); hj = b["data"]["hijri"]
+        rec_fn("S14 aladhan remote: source=remote, provider identity + provenance", st == 200 and hj["source"] == "remote" and hj["provider"]["name"] == "aladhan"
+               and hj["provenance"]["cache"] == "miss" and hj["provenance"]["cross_check"] is not None, f"{hj['source']} {hj['provider']['version']}")
+        n = len(fake.calls)
+        st, h, b = get(port, q + "&calendar_provider=aladhan");
+        rec_fn("S14 second request served from the 12h cache (no extra upstream call)", b["data"]["hijri"]["provenance"]["cache"] == "hit" and len(fake.calls) == n, f"upstream calls={len(fake.calls)}")
+        base = get(port, q + "&calendar_provider=arithmetic-tabular")[2]["data"]
+        live = b["data"]
+        strip = lambda d: {k: v for k, v in d.items() if k not in ("hijri", "calendar_error", "event_representations")}
+        rec_fn("S14 astronomy identical: aladhan vs arithmetic-tabular (real HTTP)", strip(base) == strip(live))
+        fake.mode = "500"; q2 = q.replace("2026-09-30", "2026-10-02")
+        st, h, b = get(port, q2 + "&calendar_provider=aladhan", O); hj = b["data"]["hijri"]
+        rec_fn("S14 upstream 500 -> 200, source=local-fallback, provider=umm-al-qura, reason visible, CORS ok",
+               st == 200 and hj["source"] == "local-fallback" and hj["provider"]["name"] == "umm-al-qura"
+               and hj["provenance"]["fallback_reason"] == "upstream-server-error" and {k.lower(): v for k, v in h.items()}.get("access-control-allow-origin") == "http://localhost:8080")
+        st, h, b = get(port, "/v1/health")
+        i = b["integrations"]["hijri_aladhan"]
+        rec_fn("S14 /v1/health: status ok while degraded; circuit open; no network involved", st == 200 and b["status"] == "ok" and b["api_version"] == "1.5.0" and i["circuit"] == "open" and i["last_failure_reason"] == "upstream-server-error")
+        st, h, b = get(port, "/v1/version"); d = b["data"]
+        rec_fn("S14 /v1/version: API 1.5.0, integrations listed, affects_astronomy=false", d["api_version"] == "1.5.0" and "aladhan" in d["integrations"]["calendar_providers"] and d["integrations"]["affects_astronomy"] is False)
+        st, h, b = get(port, "/v1/waqt?lat=90&lon=0&instant=2026-06-21T12:00:00Z&calendar_provider=aladhan")
+        rec_fn("S14 polar: UNDEFINED, hijri null, no events, still HTTP 200", st == 200 and b["data"]["status"] == "UNDEFINED" and b["data"]["hijri"] is None and b["data"]["events"] == [])
+        st, h, b = get(port, "/v1/waqt?lat=64.15&lon=-21.94&instant=2026-06-21T12:00:00Z&timezone_override=Atlantic/Reykjavik&calendar_provider=arithmetic-tabular")
+        rec_fn("S14 high latitude: OK with Fajr/Isha instants null", st == 200 and b["data"]["status"] == "OK" and sorted(e["name"] for e in b["data"]["events"] if e["instant"] is None) == ["fajr", "isha"])
+        st, h, b = get(port, "/v1/waqt?lat=91&lon=0&calendar_provider=aladhan"); rec_fn("S14 invalid coordinates -> 422 envelope", st == 422 and b["error"]["code"] == "VALIDATION_ERROR")
+        st, h, b = get(port, "/v1/hijri?date=2026-02-30&calendar_provider=aladhan"); rec_fn("S14 invalid date -> 400 INVALID_DATE", st == 400 and b["error"]["code"] == "INVALID_DATE")
+        # rate limit: 40/min. Burn the budget, then expect 429 + Retry-After + CORS header; /v1/health stays exempt.
+        codes = []
+        for _ in range(60):
+            st, h, b = get(port, "/v1/version", O); codes.append(st)
+            if st == 429: break
+        hl = {k.lower(): v for k, v in h.items()}
+        rec_fn("S14 rate limit: 429 RATE_LIMITED with Retry-After and CORS headers", codes[-1] == 429 and b["error"]["code"] == "RATE_LIMITED"
+               and int(hl["retry-after"]) >= 1 and hl.get("access-control-allow-origin") == "http://localhost:8080", f"429 after {len(codes) - 1} requests")
+        st, h, b = get(port, "/v1/health"); rec_fn("S14 /v1/health exempt from rate limiting", st == 200)
+    finally:
+        p.terminate(); p.wait(); fake.stop()
+
+
 def main():
     sys.path.insert(0, str(ROOT / "core"))
     from waqt_core.versioning import version_report, computation_identity, VECTOR_SET_VERSION
@@ -103,6 +154,7 @@ def main():
         rec("CORS headers present on error responses too", st >= 400 and hl.get("access-control-allow-origin") == "http://localhost:8080")
     finally:
         p.terminate(); p.wait()
+    sprint14_checks(rec_fn=rec)
     out = ROOT / "verification/results/live_stack_check.json"; out.parent.mkdir(parents=True, exist_ok=True)
     json.dump({"results": RESULTS, "all_ok": all(r["ok"] for r in RESULTS)}, open(out, "w"), indent=1)
     print(f"\n{sum(r['ok'] for r in RESULTS)}/{len(RESULTS)} passed")

@@ -2,6 +2,22 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
+## 0.3.0 — Sprint 14
+
+**Added**: `waqt_core.calendar_providers.AlAdhanHijriProvider` — a live Gregorian→Hijri source behind
+the existing `HijriProvider` protocol (12-hour cache, stale-if-error, circuit breaker, outbound rate
+limit, bounded LRU, response validation, local `umm-al-qura` fallback, injectable transport). It never
+raises and is never an input to astronomical computation.
+**Added**: `HijriDate.source` (`local` | `declared` | `observation` | `remote` | `remote-stale` |
+`local-fallback`) and `HijriDate.provenance` (`HijriProvenance`); `DeclaredProvider` /
+`LocalObservationProvider` now stamp their own `source`. Both fields have defaults, so existing
+constructors and equality keep working.
+**Changed (behaviour)**: `compute_waqt` now contains calendar-provider failures. If
+`calendar_provider.from_gregorian` raises, the events are still computed, `hijri_date` is `None` and
+the new `WaqtResult.calendar_error` says why. Previously the exception propagated and the whole result
+was lost (e.g. `umm-al-qura` outside its ephemeris range).
+**Unchanged**: `solar.py`, `timescale.py`, `versioning.py` (engine revision `"2"`, vector set `"1.1"`).
+
 ## 0.2.1 — Sprint 13
 
 **Changed**: `VECTOR_SET_VERSION` `"1.0"` → `"1.1"` (`waqt_core.versioning`; reported by

@@ -51,8 +51,10 @@ def _check_precision(precision: str) -> bool:
     return precision == "second"
 
 
-def _engine(lat, lon, elevation_m, profile, calendar_provider, timezone_override):
-    provider = resolve_calendar_provider(calendar_provider)
+def _engine(lat, lon, elevation_m, profile, calendar_provider, timezone_override, batch=False):
+    # batch=True only for /resolve (recurrences can touch many dates); snapshot/span resolve
+    # a bounded handful of labels and may use a single-date live provider.
+    provider = resolve_calendar_provider(calendar_provider, batch=batch)
     tz = ManualTimezoneProvider(timezone_override) if timezone_override else DEFAULT_TIMEZONE_PROVIDER
     ctx = SchedulingContext(Location(lat, lon, elevation_m), profile, provider, tz_provider=tz)
     return ctx, SchedulingEngine(ctx)
@@ -162,7 +164,7 @@ def post_resolve(
     except RuleError as e:
         raise ApiError(400, ErrorCode.INVALID_INSTANT, str(e), {"received": body.get("anchor")})
 
-    ctx, eng = _engine(lat, lon, elev, profile, body.get("calendar_provider", "arithmetic-tabular"), body.get("timezone_override"))
+    ctx, eng = _engine(lat, lon, elev, profile, body.get("calendar_provider", "arithmetic-tabular"), body.get("timezone_override"), batch=True)
     op = body.get("operation")
     try:
         result = run_operation(eng, anchor, op, rs)

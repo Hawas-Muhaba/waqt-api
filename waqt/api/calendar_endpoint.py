@@ -26,6 +26,10 @@ def get_calendar_providers():
                 "description": entry["description"],
                 "requires_override": entry["requires_override"],
                 "supports_reverse_conversion": entry["supports_reverse"],
+                # Sprint 14 (additive): does answering need the outside world, and may it be
+                # used where one request resolves many dates (schedule / institutional)?
+                "network": entry.get("network", False),
+                "single_date_only": entry.get("single_date_only", False),
             }
             for name, entry in PROVIDER_CATALOG.items()
         ]

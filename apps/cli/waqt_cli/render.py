@@ -48,7 +48,10 @@ def metadata_lines(comp: Optional[dict], hijri: Optional[dict], core_version: st
         )
     if hijri and hijri.get("provider"):
         p = hijri["provider"]
-        lines.append(f"hijri       : provider {p.get('name')} ({p.get('version')})")
+        lines.append(f"hijri       : provider {p.get('name')} ({p.get('version')}) · source {hijri.get('source', 'local')}")
+        prov = hijri.get("provenance") or {}
+        if prov.get("fallback_reason"):   # Sprint 14: a degraded date is never silent
+            lines.append(f"hijri note  : requested {prov.get('requested_provider')}, fell back: {prov['fallback_reason']}")
     lines.append(f"waqt-core   : {core_version}")
     return lines
 

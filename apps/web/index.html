@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Waqt — reference viewer</title>
+<link rel="icon" href="data:,">
 <style>
   /* ---- Sprint 12 reference web app -------------------------------------
      Palette taken from the thing this page shows: a day bounded by two
@@ -49,6 +50,9 @@
 
   #status{font-size:.85rem;color:var(--parchment-dim);min-height:1.4em;margin-bottom:18px}
   #status.err{color:var(--danger)}
+  .badge{display:inline-block;font-size:.72rem;padding:1px 7px;border-radius:9px;border:1px solid var(--line);margin-left:6px;vertical-align:middle;color:var(--parchment-dim)}
+  .badge.live{border-color:#4f8f6a;color:#8fd0a8}
+  .badge.warn{border-color:var(--ember-dim);color:var(--ember)}
 
   .hero{display:flex;flex-wrap:wrap;gap:28px;align-items:center;margin-bottom:34px}
   .clock{font-family:var(--serif);font-size:3.4rem;font-weight:500;letter-spacing:.01em;line-height:1}
@@ -169,6 +173,30 @@ function apiBase() {
   return ($("apiBase").value || "http://localhost:8000").replace(/\/+$/, "");
 }
 
+function esc(v) {
+  return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// Sprint 14: where the Hijri date came from. Read from the response, never inferred.
+function hijriSourceBadge(h) {
+  if (!h) return "";
+  const prov = h.provenance || {};
+  if (h.source === "remote") return `<span class="badge live" title="fetched from ${esc(h.provider.name)}${prov.cache ? " (cache " + esc(prov.cache) + ")" : ""}">live · ${esc(h.provider.name)}</span>`;
+  if (h.source === "remote-stale") return `<span class="badge warn" title="${esc(prov.fallback_reason || "")}">stale live value · ${esc(h.provider.name)}</span>`;
+  if (h.source === "local-fallback") {
+    return `<span class="badge warn" title="${esc(prov.fallback_detail || "")}">fallback: ${esc(h.provider.name)} instead of ${esc(prov.requested_provider || "?")} (${esc(prov.fallback_reason || "unknown")})</span>`;
+  }
+  return `<span class="badge">${esc(h.source || "local")}</span>`;
+}
+
+function hijriHeadline(waqt) {
+  if (!waqt.hijri) {
+    const msg = waqt.calendar_error ? `${waqt.calendar_error.provider}: ${waqt.calendar_error.message}` : "no Hijri date";
+    return `<b>Hijri date unavailable</b><span class="badge warn">${esc(msg)}</span>`;
+  }
+  return `<b>${esc(waqt.hijri.display)}</b>${hijriSourceBadge(waqt.hijri)}`;
+}
+
 function setStatus(msg, isError) {
   const el = $("status");
   el.textContent = msg;
@@ -196,7 +224,10 @@ async function getJSON(path, params) {
     throw new Error(`HTTP ${res.status}: response did not match the documented envelope`);
   }
   if (body.error !== null && body.error !== undefined) {
-    throw new Error(`${body.error.code}: ${body.error.message}`);
+    const err = new Error(`${body.error.code}: ${body.error.message}`);
+    const ra = body.error.details && body.error.details.retry_after_seconds;
+    if (ra) err.retryAfter = ra;     // RATE_LIMITED: the server says when to come back
+    throw err;
   }
   return body.data;
 }
@@ -206,6 +237,7 @@ let clockAnchor = null; // { serverSeconds, wallClockMsAtFetch, dayLengthSeconds
 let tickHandle = null;
 let currentPlace = null;   // { lat, lon } of the last place shown, so a boundary can trigger a re-ask
 let refreshing = false;
+let refreshBackoffUntil = 0;   // after a failed boundary refresh, wait before asking again
 
 function fmtHMS(totalSeconds) {
   const s = Math.max(0, Math.floor(totalSeconds));
@@ -224,7 +256,7 @@ function tick() {
   // asks the server again (same request, "now"). Event-driven: no polling between boundaries.
   const pastDayEnd = clockAnchor.dayLengthSeconds && seconds >= clockAnchor.dayLengthSeconds;
   const pastNextEvent = clockAnchor.nextEventMs && Date.now() >= clockAnchor.nextEventMs;
-  if ((pastDayEnd || pastNextEvent) && currentPlace && !refreshing) refreshPlace();
+  if ((pastDayEnd || pastNextEvent) && currentPlace && !refreshing && Date.now() >= refreshBackoffUntil) refreshPlace();
   if (clockAnchor.dayLengthSeconds) {
     const frac = Math.max(0, Math.min(1, seconds / clockAnchor.dayLengthSeconds));
     const circumference = 2 * Math.PI * 56;
@@ -246,11 +278,27 @@ function localTime(iso, tzName) {
   }
 }
 
+function hijriProvenanceRows(waqtData) {
+  const rows = [];
+  const h = waqtData.hijri, prov = h && h.provenance;
+  if (waqtData.calendar_error) rows.push(["Calendar error", `${waqtData.calendar_error.provider}: ${waqtData.calendar_error.message}`]);
+  if (!prov) return rows;
+  if (prov.requested_provider && h.source !== "remote") rows.push(["Requested provider", prov.requested_provider]);
+  if (prov.fallback_reason) rows.push(["Fallback reason", prov.fallback_detail ? `${prov.fallback_reason} — ${prov.fallback_detail}` : prov.fallback_reason]);
+  if (prov.fetched_at) rows.push(["Fetched", `${prov.fetched_at} (cache ${prov.cache}, age ${prov.age_seconds} s, TTL ${prov.ttl_seconds} s)`]);
+  if (prov.upstream_method) rows.push(["Upstream method", prov.upstream_method]);
+  const cc = prov.cross_check;
+  if (cc && cc.agrees !== null) rows.push(["Local cross-check", `${cc.provider}: ${cc.date} — ${cc.agrees ? "agrees" : "DISAGREES by " + cc.delta_days + " day(s)"}`]);
+  return rows;
+}
+
 function renderMeta(waqtData, versionData) {
   const c = waqtData.computation || {};
   const rows = [
     ["Hijri provider", waqtData.hijri && waqtData.hijri.provider ?
       `${waqtData.hijri.provider.name} (${waqtData.hijri.provider.version})` : "—"],
+    ["Hijri source", waqtData.hijri ? waqtData.hijri.source : "—"],
+    ...hijriProvenanceRows(waqtData),
     ["Astronomy engine", `${c.engine || c.astronomy_engine || "—"}, revision ${c.revision || "—"}`],
     ["Accuracy level", c.accuracy_level || "—"],
     ["Timescale model", c.timescale_model || "—"],
@@ -260,7 +308,7 @@ function renderMeta(waqtData, versionData) {
     ["Vector set", versionData ? `${versionData.conformance_vectors.vector_set_version} (@ revision ${versionData.conformance_vectors.generated_at_engine_revision})` : "—"],
   ];
   $("metaGrid").innerHTML = rows.map(([k, v]) =>
-    `<dt>${k}</dt><dd>${String(v).replace(/</g, "&lt;")}</dd>`).join("");
+    `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
 }
 
 function renderReps(waqt) {
@@ -268,7 +316,7 @@ function renderReps(waqt) {
   const cards = [
     ["Gregorian (local)", localTime(waqt.instant, tz), new Date(waqt.instant).toLocaleDateString("en-GB", { timeZone: tz || undefined })],
     ["Gregorian (UTC)", waqt.instant.slice(11, 19), waqt.instant.slice(0, 10)],
-    ["Hijri", waqt.hijri.display, waqt.hijri.date],
+    ["Hijri", waqt.hijri ? esc(waqt.hijri.display) : "unavailable", waqt.hijri ? esc(waqt.hijri.date) + hijriSourceBadge(waqt.hijri) : "see metadata"],
     ["Waqt", waqt.waqt.reading.display, waqt.weekday],
   ];
   $("repsGrid").innerHTML = cards.map(([k, v, v2]) => `
@@ -336,7 +384,7 @@ async function loadPlace(lat, lon, { silent = false } = {}) {
     tick();
 
     $("heroSub").innerHTML =
-      `<b>${waqt.hijri.display}</b> · ${waqt.weekday}<br>` +
+      `${hijriHeadline(waqt)} · ${esc(waqt.weekday)}<br>` +
       `Waqt day: ${localTime(waqt.day.maghrib_open, waqt.timezone.name)} → ` +
       `${localTime(waqt.day.maghrib_close, waqt.timezone.name)} local` +
       (waqt.day.note ? `<br><span style="color:var(--ember-dim)">${waqt.day.note}</span>` : "");
@@ -348,6 +396,11 @@ async function loadPlace(lat, lon, { silent = false } = {}) {
     $("content").hidden = false;
     setStatus(`Showing ${lat}, ${lon}${waqt.timezone ? " · " + waqt.timezone.name : ""}.`);
   } catch (e) {
+    if (silent && clockAnchor) {      // boundary refresh failed: keep showing the last good answer
+      refreshBackoffUntil = Date.now() + (e.retryAfter || 15) * 1000;
+      setStatus(`Refresh failed (${e.message}); showing the last result, retrying in ${e.retryAfter || 15} s.`, true);
+      return;
+    }
     setStatus(e.message, true);
     $("content").hidden = true;
     clockAnchor = null;

@@ -27,7 +27,7 @@ def test_get_waqt_and_version_from_real_api(base):
     w = c.get_waqt(9.0192, 38.7525, instant="2026-09-28T12:00:00Z")
     assert w["status"] == "OK" and w["computation"]["revision"] == computation_identity()["revision"]
     v = c.get_version()
-    assert v["api_version"] == "1.4.0" and v["conformance_vectors"]["vector_set_version"] == VECTOR_SET_VERSION
+    assert v["api_version"] == "1.5.0" and v["conformance_vectors"]["vector_set_version"] == VECTOR_SET_VERSION
 
 def test_error_and_polar_from_real_api(base):
     c = api_consumer.WaqtApiClient(base)

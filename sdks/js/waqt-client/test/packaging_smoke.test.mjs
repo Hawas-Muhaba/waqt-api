@@ -31,7 +31,7 @@ test("npm pack + clean install into a fresh directory works end to end", { timeo
 
     const smokeScript = `
       import { WaqtClient, requests, VERSION } from "waqt-client";
-      if (VERSION !== "0.3.0") throw new Error("unexpected VERSION " + VERSION);
+      if (VERSION !== "0.3.1") throw new Error("unexpected VERSION " + VERSION);
       const req = requests.scheduleResolveRequest({ lat: 9.0192, lon: 38.7525, operation: requests.nextEventOp() });
       const body = req.toJSON();
       const expected = JSON.stringify({ location: { lat: 9.0192, lon: 38.7525, elevation_m: 0.0 }, operation: { op: "next_event" } });

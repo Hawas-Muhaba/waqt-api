@@ -17,4 +17,4 @@ export { makeConfig } from "./config.mjs";
 export { WaqtApiError, WaqtError, WaqtTransportError, WaqtVersionMismatch } from "./errors.mjs";
 export * as types from "./types.mjs";
 export * as requests from "./requests_types.mjs";
-export const VERSION = "0.3.0";
+export const VERSION = "0.3.1";

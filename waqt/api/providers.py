@@ -23,9 +23,11 @@ for a caller who doesn't care about this.
 
 from __future__ import annotations
 
+import os
 from typing import Optional
 
 from ..calendar_providers import (
+    AlAdhanHijriProvider,
     ArithmeticTabularProvider,
     DeclaredProvider,
     LocalObservationProvider,
@@ -76,9 +78,66 @@ PROVIDER_CATALOG = {
         "requires_override": True,
         "supports_reverse": False,
     },
+    "aladhan": {
+        "description": (
+            "LIVE Gregorian->Hijri lookup against AlAdhan's public API (default method: "
+            "Umm al-Qura), cached for 12 hours. When the service is unreachable, slow, "
+            "rate-limited, outside its date window or returns something implausible, the "
+            "date comes from the local umm-al-qura provider instead and the response says "
+            "so: hijri.source is 'remote' | 'remote-stale' | 'local-fallback', and "
+            "hijri.provenance names the reason. It is a Hijri DATE source only and never "
+            "affects prayer/solar event times."
+        ),
+        "requires_override": False,
+        "supports_reverse": False,
+        "network": True,
+        # One request resolving many dates (recurrences, fiscal/academic years) would spend the
+        # outbound budget and could mix remote and locally-fallen-back dates in one result.
+        "single_date_only": True,
+    },
 }
 
 _instance_cache: dict[str, HijriProvider] = {}
+
+
+def _env_float(name: str, default: float) -> float:
+    try:
+        return float(os.environ[name])
+    except (KeyError, ValueError):
+        return default
+
+
+def _build_aladhan() -> AlAdhanHijriProvider:
+    """Configured from the environment (all optional):
+    WAQT_ALADHAN_ENABLED=0 (never call out), WAQT_ALADHAN_BASE_URL, WAQT_ALADHAN_METHOD,
+    WAQT_ALADHAN_TIMEOUT (s), WAQT_ALADHAN_CACHE_TTL (s), WAQT_ALADHAN_RPM (outbound req/min)."""
+    kw = {}
+    if os.environ.get("WAQT_ALADHAN_BASE_URL"):
+        kw["base_url"] = os.environ["WAQT_ALADHAN_BASE_URL"]
+    return AlAdhanHijriProvider(
+        enabled=os.environ.get("WAQT_ALADHAN_ENABLED", "1").strip().lower() not in ("0", "false", "no", "off"),
+        method=os.environ.get("WAQT_ALADHAN_METHOD") or None,
+        timeout_seconds=_env_float("WAQT_ALADHAN_TIMEOUT", 3.0),
+        cache_ttl_seconds=int(_env_float("WAQT_ALADHAN_CACHE_TTL", 12 * 3600)),
+        max_requests_per_minute=int(_env_float("WAQT_ALADHAN_RPM", 30)),
+        fallback_factory=lambda: _cached_stateless("umm-al-qura"),
+        **kw,
+    )
+
+
+def configure_aladhan(provider: Optional[AlAdhanHijriProvider]) -> None:
+    """Install (or, with None, discard so it is rebuilt from the environment) the shared
+    AlAdhan provider. Used by tests and by embedders that want a custom transport."""
+    if provider is None:
+        _instance_cache.pop("aladhan", None)
+    else:
+        _instance_cache["aladhan"] = provider
+
+
+def aladhan_status() -> dict:
+    """Network-free snapshot for /v1/health and /v1/version. Builds the provider if needed
+    (construction does no I/O)."""
+    return _cached_stateless("aladhan").status()
 
 
 def _cached_stateless(name: str) -> HijriProvider:
@@ -87,6 +146,8 @@ def _cached_stateless(name: str) -> HijriProvider:
             _instance_cache[name] = ArithmeticTabularProvider()
         elif name == "umm-al-qura":
             _instance_cache[name] = UmmAlQuraProvider()
+        elif name == "aladhan":
+            _instance_cache[name] = _build_aladhan()
     return _instance_cache[name]
 
 
@@ -100,12 +161,24 @@ def resolve_calendar_provider(
     sighting_month: Optional[int] = None,
     sighting_day: Optional[int] = None,
     observed_at: Optional[str] = None,
+    batch: bool = False,
 ) -> HijriProvider:
+    """`batch=True` is passed by endpoints that resolve MANY dates from one request
+    (/v1/schedule/*, /v1/institutional/*); providers marked single_date_only are refused there."""
     if calendar_provider not in PROVIDER_CATALOG:
         raise ApiError(
             400, ErrorCode.UNKNOWN_CALENDAR_PROVIDER,
             f"Unknown calendar_provider {calendar_provider!r}.",
             {"received": calendar_provider, "available": sorted(PROVIDER_CATALOG)},
+        )
+
+    if batch and PROVIDER_CATALOG[calendar_provider].get("single_date_only"):
+        raise ApiError(
+            400, ErrorCode.UNSUPPORTED_OPERATION,
+            f"calendar_provider={calendar_provider!r} is a live single-date provider and cannot be used "
+            "where one request resolves many dates (schedules, institutional years).",
+            {"received": calendar_provider,
+             "available": sorted(n for n, e in PROVIDER_CATALOG.items() if not e.get("single_date_only"))},
         )
 
     fallback = _cached_stateless("arithmetic-tabular")

@@ -87,6 +87,10 @@ export function parseHijriDate(d) {
     providerName: provider.name ?? null,
     providerVersion: provider.version ?? null,
     sourceNote: d.source_note ?? null,
+    // API 1.5.0: where the value came from + fallback/cache/cross-check detail (null on older servers).
+    source: d.source ?? null,
+    provenance: d.provenance ?? null,
+    isFallback: d.source === "local-fallback",
   };
 }
 
@@ -151,6 +155,7 @@ export function parseWaqtResponse(d) {
     weekday: d.weekday ?? null,
     waqt: parseWaqtPosition(d.waqt),
     events: (d.events || []).map(parseAstronomicalEvent),
+    calendarError: d.calendar_error ?? null,   // API 1.5.0: set (with hijri null) when the calendar provider failed
     nextEvent: parseAstronomicalEvent(d.next_event),
     profile: parseAstronomyProfile(d.profile),
     computation: parseComputationInfo(d.computation),

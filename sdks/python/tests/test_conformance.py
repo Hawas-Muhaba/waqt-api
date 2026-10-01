@@ -192,3 +192,25 @@ def test_error_vectors_raise_waqt_api_error_with_matching_code(vector_id, expect
         unwrap(v["status_code"], v["response"], "ignore")
     assert excinfo.value.code == expected_code
     assert excinfo.value.status_code == v["status_code"]
+
+
+# ---- Sprint 14 (API 1.5.0): provenance survives SDK parsing ----------------------------------------
+def test_hijri_source_and_provenance_are_exposed_not_dropped():
+    from waqt_client.types import HijriDate, WaqtResponse
+    h = HijriDate.from_json({
+        "date": "1448-04-19", "display": "19 Rabi al-Thani 1448 AH", "year": 1448, "month": 4,
+        "month_name": "Rabi al-Thani", "day": 19, "provider": {"name": "umm-al-qura", "version": "v"},
+        "source_note": None, "source": "local-fallback",
+        "provenance": {"requested_provider": "aladhan", "fallback_reason": "timeout"}})
+    assert h.source == "local-fallback" and h.is_fallback and h.provenance["fallback_reason"] == "timeout"
+    old = HijriDate.from_json({"date": "1448-04-19", "display": "x", "year": 1448, "month": 4, "month_name": "m",
+                               "day": 19, "provider": {"name": "p", "version": "v"}})      # pre-1.5.0 server
+    assert old.source is None and old.provenance is None and not old.is_fallback
+
+
+def test_calendar_error_is_exposed_and_hijri_may_be_none():
+    from waqt_client.types import WaqtResponse
+    r = WaqtResponse.from_json({"status": "OK", "hijri": None, "events": [],
+                                "calendar_error": {"provider": "umm-al-qura", "message": "ValueError: x"}})
+    assert r.hijri is None and r.calendar_error["provider"] == "umm-al-qura"
+    assert WaqtResponse.from_json({"status": "OK"}).calendar_error is None

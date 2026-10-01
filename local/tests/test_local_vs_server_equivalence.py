@@ -86,7 +86,13 @@ def test_hijri_endpoint_matches_local_facade():
 def test_calendar_catalog_endpoint_matches_local_facade():
     server_data = run(_get("/v1/calendar", {}))
     local_data = waqt_local.list_calendar_providers()
-    assert local_data == server_data
+    # Sprint 14: the server additionally offers the live `aladhan` provider (network=True).
+    # waqt-local is an offline library and deliberately does not -- so equivalence holds for
+    # every provider that needs no network, and the only permitted difference is exactly that.
+    offline = {"providers": [p for p in server_data["providers"] if not p["network"]]}
+    assert local_data == offline
+    assert [p["name"] for p in server_data["providers"] if p["network"]] == ["aladhan"]
+    assert "aladhan" not in {p["name"] for p in local_data["providers"]}
 
 
 def test_conversions_endpoint_matches_local_facade():

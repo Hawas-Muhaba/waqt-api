@@ -4,6 +4,12 @@
 independent of the Waqt HTTP API's `api_version` — see
 docs/RELEASING.md's "Compatibility policy".
 
+## 0.3.1 — Sprint 14
+
+### Added
+- `HijriDate.source` / `.provenance` / `.isFallback` and `WaqtResponse.calendarError` (API 1.5.0);
+  `null`/`false` against an older server. `MAX_KNOWN_API_VERSION` → `1.5.0`.
+
 ## 0.3.0 — Sprint 12
 
 ### Added

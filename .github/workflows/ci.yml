@@ -58,6 +58,10 @@ jobs:
       # Sprint 13: version-axis consistency + real-server live checks.
       - name: Live stack check (real uvicorn, CORS, vectors)
         run: python verification/live_stack_check.py
+      # Sprint 14: an API change must be additive w.r.t. the committed conformance vectors.
+      # Run BEFORE regenerating vectors; fails if any recorded value changed or disappeared.
+      - name: Vector additivity (no regression in recorded responses)
+        run: python verification/vector_additivity_check.py
       - name: Run tests (apps)
         run: |
           pip install -e ./core -e . -e ./local -e apps/cli -e apps/api-consumer
@@ -70,3 +74,20 @@ jobs:
         run: |
           pytest core/tests/test_packaging_smoke.py -v --tb=short
           pytest tests/test_packaging_smoke.py -v --tb=short
+
+  # Sprint 14: real headless Chrome against the real API, AlAdhan replaced by a local fake
+  # (the live service is a third party; CI must not depend on it). CORS is genuinely enforced.
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install -r requirements.txt uvicorn
+      - run: cd verification/browser && npm install --no-audit --no-fund
+      - name: Sprint 14 browser verification
+        run: bash verification/browser/run_sprint14.sh

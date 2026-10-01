@@ -6,15 +6,23 @@
 import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import fs from "node:fs";
+import { fileURLToPath } from "node:url";
 
 const PAGE = "http://localhost:8080/index.html";
-const OUT = new URL("./results/", import.meta.url).pathname;
+const OUT = fileURLToPath(new URL("./results/", import.meta.url));
 fs.mkdirSync(OUT, { recursive: true });
 const results = [];
 const rec = (id, name, ok, detail = "") => { results.push({ id, name, ok: !!ok, detail }); console.log(`${ok ? "PASS" : "FAIL"} [${id}] ${name}${detail ? "  — " + detail : ""}`); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const browser = await puppeteer.launch({ args: chromium.args.filter((a) => !/single-process|no-zygote|disable-web-security|allow-running-insecure|disable-site-isolation|disable-features=/.test(a)).concat(["--no-sandbox"]), executablePath: await chromium.executablePath(), headless: "shell" });
+const executablePath = process.platform === "win32"
+  ? [process.env.CHROME_PATH, "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+      "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe"]
+      .filter(Boolean).find((path) => fs.existsSync(path))
+  : await chromium.executablePath();
+if (!executablePath) throw new Error("Set CHROME_PATH to a Windows Chrome or Edge executable.");
+const browser = await puppeteer.launch({ args: chromium.args.filter((a) => !/single-process|no-zygote|disable-web-security|allow-running-insecure|disable-site-isolation|disable-features=/.test(a)).concat(["--no-sandbox"]), executablePath, headless: process.platform === "win32" ? true : "shell" });
 console.log("Browser:", await browser.version());
 
 async function newPage({ geo = null, grant = false, viewport = { width: 1100, height: 900 }, clockOffsetMs = null } = {}) {
@@ -81,8 +89,8 @@ const errsOf = (page) => page.consoleMsgs.filter((m) => m.type === "error" || m.
 let p = await newPage();
 let s = await snapshot(p);
 rec("1", "page boots, provider list loaded from /v1/calendar", s.providers.length >= 2, s.providers.join(","));
-rec("1b", "CORS (enforced browser): cross-origin call from page origin succeeded (all 4 providers loaded, not the fallback)",
-  p.apiCalls.length > 0 && p.apiCalls.every((c) => c.status === 200) && s.providers.length === 4, JSON.stringify(p.apiCalls.map((c) => c.status)) + " providers=" + s.providers.length);
+rec("1b", "CORS (enforced browser): cross-origin call from page origin succeeded (all 5 providers loaded, not the fallback)",
+  p.apiCalls.length > 0 && p.apiCalls.every((c) => c.status === 200) && s.providers.length === 5, JSON.stringify(p.apiCalls.map((c) => c.status)) + " providers=" + s.providers.length);
 rec("1c", "no console errors on load", errsOf(p).length === 0, JSON.stringify(errsOf(p)));
 
 { // 1d negative control: same page from an origin NOT allowed by WAQT_CORS_ORIGINS must be blocked by the browser
@@ -97,7 +105,7 @@ rec("1c", "no console errors on load", errsOf(p).length === 0, JSON.stringify(er
   const ctx = await browser.createBrowserContext(); const np = await ctx.newPage();
   await np.goto("http://localhost:8080/index.html", { waitUntil: "networkidle0" });
   const ok = await np.evaluate(async () => { try { const r = await fetch("http://localhost:8000/v1/version"); return (await r.json()).data.api_version; } catch (e) { return String(e); } });
-  rec("1e", "CORS allows the configured origin (positive control): /v1/version readable from localhost:8080", ok === "1.4.0", String(ok));
+  rec("1e", "CORS allows the configured origin (positive control): /v1/version readable from localhost:8080", ok === "1.5.0", String(ok));
   await ctx.close();
 }
 
@@ -106,7 +114,7 @@ await enter(p, 9.0192, 38.7525); s = await snapshot(p);
 rec("2a", "Addis Ababa: content shown, status reports place + tz", !s.contentHidden && /Africa\/Addis_Ababa/.test(s.status), s.status);
 rec("2b", "six-event timeline present, in order", JSON.stringify(s.events.map((r) => r[0])) === JSON.stringify(["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"]), s.events.map((r) => r[0] + " " + r[1]).join(" | "));
 rec("2c", "Gregorian + Hijri + Waqt representation cards", s.reps.length === 4 && /AH/.test(s.reps[2][1]) && /^\d\d:\d\d:\d\d|Waqt/.test(s.reps[3][1]) || s.reps.length === 4, JSON.stringify(s.reps));
-rec("2d", "metadata: engine/revision/accuracy/provider/versions", /waqt-noaa-low-precision, revision 2/.test(s.meta["Astronomy engine"]) && s.meta["Accuracy level"] === "B" && /arithmetic-tabular/.test(s.meta["Hijri provider"]) && s.meta["waqt-core version"] === "0.2.1" && s.meta["API version"] === "1.4.0" && /1\.1 \(@ revision 2\)/.test(s.meta["Vector set"]), JSON.stringify(s.meta));
+rec("2d", "metadata: engine/revision/accuracy/provider/versions", /waqt-noaa-low-precision, revision 2/.test(s.meta["Astronomy engine"]) && s.meta["Accuracy level"] === "B" && /arithmetic-tabular/.test(s.meta["Hijri provider"]) && s.meta["waqt-core version"] === "0.3.0" && s.meta["API version"] === "1.5.0" && /1\.1 \(@ revision 2\)/.test(s.meta["Vector set"]), JSON.stringify(s.meta));
 rec("2e", "day-progress ring has a percentage in [0,100]", /^\d{1,3}%$/.test(s.pct) && +s.pct.slice(0, -1) <= 100, `${s.pct} dashoffset=${s.dashoffset}`);
 await p.screenshot({ path: OUT + "addis.png", fullPage: true });
 // clock ticks with no further network calls

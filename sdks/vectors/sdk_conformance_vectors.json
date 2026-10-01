@@ -25,9 +25,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.511303+00:00"
+          "generated_at": "2026-10-01T03:35:00.654436+00:00"
         },
         "data": {
           "status": "OK",
@@ -59,8 +59,11 @@
               "name": "arithmetic-tabular",
               "version": "30-year-cycle-epoch-1948440"
             },
-            "source_note": null
+            "source_note": null,
+            "source": "local",
+            "provenance": null
           },
+          "calendar_error": null,
           "weekday": "al-Ahad",
           "waqt": {
             "display": "Waqt 00:19:02",
@@ -119,6 +122,134 @@
               }
             }
           ],
+          "event_representations": [
+            {
+              "name": "fajr",
+              "gregorian": {
+                "utc": "2026-09-20T02:04:52+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T05:04:52+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "05:04:52"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 10:41:55",
+                "seconds": 38515.682
+              }
+            },
+            {
+              "name": "sunrise",
+              "gregorian": {
+                "utc": "2026-09-20T03:14:29+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T06:14:29+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "06:14:29"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 11:51:31",
+                "seconds": 42691.996
+              }
+            },
+            {
+              "name": "dhuhr",
+              "gregorian": {
+                "utc": "2026-09-20T09:18:28+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T12:18:28+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "12:18:28"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 17:55:31",
+                "seconds": 64531.657
+              }
+            },
+            {
+              "name": "asr",
+              "gregorian": {
+                "utc": "2026-09-20T12:31:43+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T15:31:43+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "15:31:43"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 21:08:46",
+                "seconds": 76126.405
+              }
+            },
+            {
+              "name": "maghrib",
+              "gregorian": {
+                "utc": "2026-09-20T15:22:20+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T18:22:20+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "18:22:20"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 23:59:23",
+                "seconds": 86363.831
+              }
+            },
+            {
+              "name": "isha",
+              "gregorian": {
+                "utc": "2026-09-20T16:27:51+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T19:27:51+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "19:27:51"
+              },
+              "hijri": {
+                "date": "1448-04-07",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 25:04:54",
+                "seconds": 90294.479
+              }
+            }
+          ],
           "next_event": {
             "name": "fajr",
             "instant": "2026-09-20T02:04:52+00:00",
@@ -160,9 +291,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.515132+00:00"
+          "generated_at": "2026-10-01T03:35:00.657774+00:00"
         },
         "data": {
           "status": "UNDEFINED",
@@ -184,9 +315,11 @@
             "note": null
           },
           "hijri": null,
+          "calendar_error": null,
           "weekday": null,
           "waqt": null,
           "events": [],
+          "event_representations": [],
           "next_event": null,
           "profile": {
             "name": "custom",
@@ -222,9 +355,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.518452+00:00"
+          "generated_at": "2026-10-01T03:35:00.660341+00:00"
         },
         "data": {
           "status": "OK",
@@ -256,8 +389,11 @@
               "name": "arithmetic-tabular",
               "version": "30-year-cycle-epoch-1948440"
             },
-            "source_note": null
+            "source_note": null,
+            "source": "local",
+            "provenance": null
           },
+          "calendar_error": null,
           "weekday": "as-Sabt",
           "waqt": {
             "display": "Waqt 18:38:56",
@@ -316,6 +452,134 @@
               }
             }
           ],
+          "event_representations": [
+            {
+              "name": "fajr",
+              "gregorian": {
+                "utc": "2026-09-19T01:54:31+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T04:54:31+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "04:54:31"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 10:33:28",
+                "seconds": 38008.605
+              }
+            },
+            {
+              "name": "sunrise",
+              "gregorian": {
+                "utc": "2026-09-19T03:08:41+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T06:08:41+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "06:08:41"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 11:47:38",
+                "seconds": 42458.034
+              }
+            },
+            {
+              "name": "dhuhr",
+              "gregorian": {
+                "utc": "2026-09-19T09:14:32+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T12:14:32+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "12:14:32"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 17:53:29",
+                "seconds": 64409.333
+              }
+            },
+            {
+              "name": "asr",
+              "gregorian": {
+                "utc": "2026-09-19T13:37:48+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T16:37:48+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "16:37:48"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 22:16:44",
+                "seconds": 80204.946
+              }
+            },
+            {
+              "name": "maghrib",
+              "gregorian": {
+                "utc": "2026-09-19T15:20:05+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T18:20:05+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "18:20:05"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 23:59:02",
+                "seconds": 86342.056
+              }
+            },
+            {
+              "name": "isha",
+              "gregorian": {
+                "utc": "2026-09-19T16:29:48+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T19:29:48+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "19:29:48"
+              },
+              "hijri": {
+                "date": "1448-04-06",
+                "provider": "arithmetic-tabular",
+                "version": "30-year-cycle-epoch-1948440",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 25:08:45",
+                "seconds": 90525.287
+              }
+            }
+          ],
           "next_event": {
             "name": "asr",
             "instant": "2026-09-19T13:37:48+00:00",
@@ -357,9 +621,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.524552+00:00"
+          "generated_at": "2026-10-01T03:35:00.665058+00:00"
         },
         "data": {
           "status": "OK",
@@ -407,9 +671,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.530241+00:00"
+          "generated_at": "2026-10-01T03:35:00.669973+00:00"
         },
         "data": {
           "status": "OK",
@@ -514,9 +778,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.535917+00:00"
+          "generated_at": "2026-10-01T03:35:00.675072+00:00"
         },
         "data": {
           "gregorian_date": "2026-09-19",
@@ -532,7 +796,9 @@
               "name": "arithmetic-tabular",
               "version": "30-year-cycle-epoch-1948440"
             },
-            "source_note": null
+            "source_note": null,
+            "source": "local",
+            "provenance": null
           }
         },
         "error": null
@@ -552,9 +818,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.546342+00:00"
+          "generated_at": "2026-10-01T03:35:00.685192+00:00"
         },
         "data": {
           "gregorian_date": "2026-09-19",
@@ -570,7 +836,9 @@
               "name": "umm-al-qura",
               "version": "astronomical-approx-2002-rules-v1"
             },
-            "source_note": null
+            "source_note": null,
+            "source": "local",
+            "provenance": null
           }
         },
         "error": null
@@ -587,9 +855,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.548722+00:00"
+          "generated_at": "2026-10-01T03:35:00.686988+00:00"
         },
         "data": {
           "providers": [
@@ -597,25 +865,41 @@
               "name": "arithmetic-tabular",
               "description": "Classical 30-year-cycle arithmetic Hijri calendar (epoch JDN 1948440). Deterministic, offline, no external data. NOT an approximation of the official Umm al-Qura calendar specifically \u2014 typically within 1-2 days of it.",
               "requires_override": false,
-              "supports_reverse_conversion": true
+              "supports_reverse_conversion": true,
+              "network": false,
+              "single_date_only": false
             },
             {
               "name": "umm-al-qura",
               "description": "Astronomical approximation of the real Umm al-Qura calculation rule (lunar conjunction before Makkah Maghrib AND moonset after Makkah Maghrib). Validated against 4 independently-known historical Umm al-Qura New Year dates (2016, 2018, 2019, 2025), all exact. Has no channel for the real-world sighting-based adjustments Umm al-Qura sometimes applies to 1 Muharram, 1 Ramadan, 1 Shawwal and 1 Dhu al-Hijjah. See docs/CALENDARS.md.",
               "requires_override": false,
-              "supports_reverse_conversion": true
+              "supports_reverse_conversion": true,
+              "network": false,
+              "single_date_only": false
             },
             {
               "name": "declared",
               "description": "An institution's adopted date for one specific Gregorian date, supplied via override_date + declared_year/month/day. Falls back to arithmetic-tabular for any other date, and if no override is supplied at all.",
               "requires_override": true,
-              "supports_reverse_conversion": false
+              "supports_reverse_conversion": false,
+              "network": false,
+              "single_date_only": false
             },
             {
               "name": "local-observation",
               "description": "A reported moon sighting for one specific Gregorian date, supplied via override_date + sighting_year/month/day (+ optional observed_at location). Falls back to arithmetic-tabular for any other date, and if no sighting is supplied at all.",
               "requires_override": true,
-              "supports_reverse_conversion": false
+              "supports_reverse_conversion": false,
+              "network": false,
+              "single_date_only": false
+            },
+            {
+              "name": "aladhan",
+              "description": "LIVE Gregorian->Hijri lookup against AlAdhan's public API (default method: Umm al-Qura), cached for 12 hours. When the service is unreachable, slow, rate-limited, outside its date window or returns something implausible, the date comes from the local umm-al-qura provider instead and the response says so: hijri.source is 'remote' | 'remote-stale' | 'local-fallback', and hijri.provenance names the reason. It is a Hijri DATE source only and never affects prayer/solar event times.",
+              "requires_override": false,
+              "supports_reverse_conversion": false,
+              "network": true,
+              "single_date_only": true
             }
           ]
         },
@@ -637,9 +921,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.552791+00:00"
+          "generated_at": "2026-10-01T03:35:00.690133+00:00"
         },
         "data": {
           "location": {
@@ -670,9 +954,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.557161+00:00"
+          "generated_at": "2026-10-01T03:35:00.694163+00:00"
         },
         "data": {
           "direction": "to-hijri",
@@ -691,7 +975,9 @@
                 "name": "arithmetic-tabular",
                 "version": "30-year-cycle-epoch-1948440"
               },
-              "source_note": null
+              "source_note": null,
+              "source": "local",
+              "provenance": null
             }
           }
         },
@@ -714,9 +1000,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.559148+00:00"
+          "generated_at": "2026-10-01T03:35:00.695807+00:00"
         },
         "data": {
           "direction": "to-gregorian",
@@ -751,9 +1037,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.581044+00:00"
+          "generated_at": "2026-10-01T03:35:00.716153+00:00"
         },
         "data": {
           "direction": "instant-to-calendars",
@@ -843,9 +1129,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.584143+00:00"
+          "generated_at": "2026-10-01T03:35:00.718865+00:00"
         },
         "data": {
           "direction": "gregorian-date-to-waqt",
@@ -879,7 +1165,9 @@
                 "name": "arithmetic-tabular",
                 "version": "30-year-cycle-epoch-1948440"
               },
-              "source_note": null
+              "source_note": null,
+              "source": "local",
+              "provenance": null
             },
             "weekday": "al-Ahad",
             "day": {
@@ -909,9 +1197,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.587710+00:00"
+          "generated_at": "2026-10-01T03:35:00.722178+00:00"
         },
         "data": {
           "start": "2026-09-19T00:00:00+00:00",
@@ -950,9 +1238,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.592353+00:00"
+          "generated_at": "2026-10-01T03:35:00.726568+00:00"
         },
         "data": {
           "instant": "2026-09-19T15:42:00+00:00",
@@ -1278,9 +1566,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.597064+00:00"
+          "generated_at": "2026-10-01T03:35:00.730869+00:00"
         },
         "data": {
           "status": "OK",
@@ -1353,9 +1641,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.603720+00:00"
+          "generated_at": "2026-10-01T03:35:00.737102+00:00"
         },
         "data": {
           "definition": {
@@ -1496,9 +1784,9 @@
       "status_code": 200,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.605975+00:00"
+          "generated_at": "2026-10-01T03:35:00.738947+00:00"
         },
         "data": {
           "profile": {
@@ -1564,9 +1852,9 @@
       "status_code": 400,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.608433+00:00"
+          "generated_at": "2026-10-01T03:35:00.740768+00:00"
         },
         "data": null,
         "error": {
@@ -1595,9 +1883,9 @@
       "status_code": 400,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.610353+00:00"
+          "generated_at": "2026-10-01T03:35:00.742277+00:00"
         },
         "data": null,
         "error": {
@@ -1624,9 +1912,9 @@
       "status_code": 422,
       "response": {
         "meta": {
-          "api_version": "1.4.0",
+          "api_version": "1.5.0",
           "spec": "waqt-core/0.1",
-          "generated_at": "2026-09-29T15:03:06.612251+00:00"
+          "generated_at": "2026-10-01T03:35:00.743984+00:00"
         },
         "data": null,
         "error": {

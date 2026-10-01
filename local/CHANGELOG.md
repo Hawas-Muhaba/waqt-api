@@ -1,5 +1,17 @@
 # Changelog — waqt-local
 
+## 0.4.0 — Sprint 14
+
+**Added** (mirrors API 1.5.0, so `waqt_local` and the server keep returning identical payloads):
+`hijri.source` / `hijri.provenance`, `data.calendar_error`, `data.event_representations[]`, and the
+`network` / `single_date_only` keys in `list_calendar_providers()`.
+**Changed**: requires `waqt-core>=0.3.0,<0.4` (was `>=0.2.0,<0.3`).
+**Deliberately not added**: the `aladhan` provider. An embedded, offline library should not make
+network calls on its own; its catalog stays at the four local providers, and the equivalence test
+(`local/tests/test_local_vs_server_equivalence.py`) states that one permitted difference explicitly.
+
+---
+
 Sprint 13 made **no change** to `waqt-local` (no release): its `computation` block and `version()`
 are thin readers of `waqt-core`, so the vector-set label change in `waqt-core` 0.2.1 flows through
 without any `waqt-local` edit. Its version therefore stays `0.3.0`.

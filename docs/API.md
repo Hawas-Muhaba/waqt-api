@@ -35,6 +35,7 @@ Every response, success or failure, has exactly this shape:
 | `INVALID_RULE` | 400 | a `/v1/schedule/resolve` rule or operation is malformed (unknown event, wrong type, bad nesting). A caller mistake — distinct from a well-formed rule whose astronomy is undefined, which is a `200` with a `status` |
 | `UNSUPPORTED_OPERATION` | 400 | e.g. asking `declared` or `local-observation` to reverse-convert, which they structurally can't |
 | `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
+| `RATE_LIMITED` | 429 | (1.5.0, only when the operator enabled `WAQT_RATE_LIMIT`) the caller exceeded its request budget. `Retry-After` and `details.retry_after_seconds` say when to retry. |
 | `INTERNAL_ERROR` | 500 | anything unexpected. **Every** exception is caught here — you will never receive a raw stack trace or an empty connection reset. `details.exception_type` names the underlying Python exception for bug reports, nothing more. |
 
 Every code above is exercised by a real test in `tests/test_api.py` — none of this table is aspirational.
@@ -135,6 +136,14 @@ Full semantics in [`CALENDAR-INTEROP.md`](CALENDAR-INTEROP.md).
 - `GET /v1/calendar/boundary-crossing` — `start`, `end`, `lat`, `lon`, `elevation_m`, `timezone_override`. Whether the half-open span `[start, end)` crosses civil midnight and/or a Maghrib boundary, reported as two independent facts, plus the list of Maghrib instants strictly inside the span.
 
 Undefined astronomy near a requested date/span is a `200` with `status`/`waqt.status` `"UNDEFINED"`, matching the rest of the API. An empty or reversed span (`end <= start`) is a `400 INVALID_SPAN`.
+
+### Live integrations (added in 1.5.0 — additive; nothing earlier changed)
+
+`calendar_provider=aladhan` (a live, cached Hijri date source with local fallback), `hijri.source` + `hijri.provenance` on
+**every** Hijri block, `data.calendar_error` and `data.event_representations[]` on `/v1/waqt`, `integrations` in `/v1/health`
+and `/v1/version`, `network` / `single_date_only` per provider in `/v1/calendar`, and `429 RATE_LIMITED`. A calendar
+provider failing no longer fails `/v1/waqt`: `hijri` is `null` and `calendar_error` says why. Full contract, fallback reasons
+and operations: **docs/LIVE-INTEGRATIONS.md**.
 
 ## 8. The one gotcha: which Gregorian date is "the" date
 

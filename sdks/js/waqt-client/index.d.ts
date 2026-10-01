@@ -42,6 +42,11 @@ export interface VersionInfo {
 export interface HijriDate {
   date: string; display: string; year: number; month: number; monthName: string; day: number;
   providerName: string | null; providerVersion: string | null; sourceNote: string | null;
+  /** API 1.5.0: "local" | "declared" | "observation" | "remote" | "remote-stale" | "local-fallback"; null on older servers. */
+  source: string | null;
+  /** API 1.5.0: fallback reason, cache state, cross-check -- as returned. null for purely local providers. */
+  provenance: Record<string, unknown> | null;
+  isFallback: boolean;
 }
 export interface GregorianRepresentation {
   date: string; timeOfDay: string; weekdayIso: number; weekdayNameIslamic: string;
@@ -59,6 +64,8 @@ export interface WaqtResponse {
   status: string; instant: Date | null; location: Location | null; timezone: TimezoneInfo | null;
   undefinedReason: string | null; day: DayBoundary | null; hijri: HijriDate | null;
   weekday: string | null; waqt: WaqtPosition | null; events: AstronomicalEvent[];
+  /** API 1.5.0: set (with hijri null) when the calendar provider failed; the astronomy is still valid. */
+  calendarError: { provider: string; message: string } | null;
   nextEvent: AstronomicalEvent | null; profile: AstronomyProfile | null;
   computation: ComputationInfo | null; raw: Record<string, unknown>;
 }

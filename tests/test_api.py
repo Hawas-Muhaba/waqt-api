@@ -33,7 +33,7 @@ def test_success_envelope_shape():
     body = r.json()
     assert set(body.keys()) == {"meta", "data", "error"}
     assert body["error"] is None
-    assert body["meta"]["api_version"] == "1.4.0"
+    assert body["meta"]["api_version"] == "1.5.0"
     assert body["meta"]["spec"] == "waqt-core/0.1"
     assert "generated_at" in body["meta"]
 
@@ -86,10 +86,14 @@ def test_unsupported_operation_error_on_declared_reverse():
 
 
 def test_internal_error_never_leaks_a_raw_traceback():
-    # A date far enough back to hit UmmAlQuraProvider's known ephem
-    # limitation (see SCOPE.md) — must come back structured, not as an
-    # unhandled exception.
-    r = client.get("/v1/waqt", params={**ADDIS, "instant": "1500-01-01T12:00:00Z", "calendar_provider": "umm-al-qura"})
+    # Sprint 14 changed what this test used to exercise: a date far enough back to hit
+    # UmmAlQuraProvider's ephem limit (SCOPE.md) no longer produces a 500 on /v1/waqt --
+    # calendar failures are contained, the events are still returned and the failure is
+    # visible in data.calendar_error (see test_sprint14_live_integrations.py). The
+    # original guarantee -- an unexpected error is STRUCTURED, never a raw traceback --
+    # is exercised here with an error that is genuinely internal, and on /v1/hijri where
+    # the calendar is the whole answer and so cannot be contained.
+    r = client.get("/v1/hijri", params={"date": "1500-01-01", "calendar_provider": "umm-al-qura"})
     assert r.status_code == 500
     body = r.json()
     assert body["error"]["code"] == "INTERNAL_ERROR"
@@ -200,10 +204,10 @@ def test_hijri_endpoint_matches_waqt_endpoint_for_same_label_date():
 # ---------------------------------------------------------------------------
 
 
-def test_calendar_catalog_lists_all_four_providers():
+def test_calendar_catalog_lists_all_five_providers():
     r = client.get("/v1/calendar")
     names = {p["name"] for p in r.json()["data"]["providers"]}
-    assert names == {"arithmetic-tabular", "umm-al-qura", "declared", "local-observation"}
+    assert names == {"arithmetic-tabular", "umm-al-qura", "declared", "local-observation", "aladhan"}
 
 
 # ---------------------------------------------------------------------------

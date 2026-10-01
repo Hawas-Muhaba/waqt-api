@@ -13,7 +13,7 @@
   {
    "check": "/v1/version axes independent (core/api/vectors/engine)",
    "ok": true,
-   "detail": "core=0.2.1 api=1.4.0 rev=2 vec=1.1"
+   "detail": "core=0.3.0 api=1.5.0 rev=2 vec=1.1"
   },
   {
    "check": "/v1/version waqt_local_version null from server",
@@ -82,6 +82,66 @@
   },
   {
    "check": "CORS headers present on error responses too",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 aladhan remote: source=remote, provider identity + provenance",
+   "ok": true,
+   "detail": "remote aladhan-gToH-v1"
+  },
+  {
+   "check": "S14 second request served from the 12h cache (no extra upstream call)",
+   "ok": true,
+   "detail": "upstream calls=1"
+  },
+  {
+   "check": "S14 astronomy identical: aladhan vs arithmetic-tabular (real HTTP)",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 upstream 500 -> 200, source=local-fallback, provider=umm-al-qura, reason visible, CORS ok",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 /v1/health: status ok while degraded; circuit open; no network involved",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 /v1/version: API 1.5.0, integrations listed, affects_astronomy=false",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 polar: UNDEFINED, hijri null, no events, still HTTP 200",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 high latitude: OK with Fajr/Isha instants null",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 invalid coordinates -> 422 envelope",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 invalid date -> 400 INVALID_DATE",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "S14 rate limit: 429 RATE_LIMITED with Retry-After and CORS headers",
+   "ok": true,
+   "detail": "429 after 31 requests"
+  },
+  {
+   "check": "S14 /v1/health exempt from rate limiting",
    "ok": true,
    "detail": ""
   }

@@ -169,3 +169,17 @@ for (const [id, expectedCode] of [
     );
   });
 }
+
+// ---- Sprint 14 (API 1.5.0): provenance survives SDK parsing ----
+import { parseHijriDate as _parseHijri14 } from "../src/types.mjs";
+import _test14 from "node:test";
+import _assert14 from "node:assert/strict";
+_test14("hijri source/provenance are exposed, not dropped; older servers give null", () => {
+  const h = _parseHijri14({ date: "1448-04-19", display: "x", year: 1448, month: 4, month_name: "m", day: 19,
+    provider: { name: "umm-al-qura", version: "v" }, source: "local-fallback",
+    provenance: { requested_provider: "aladhan", fallback_reason: "timeout" } });
+  _assert14.equal(h.source, "local-fallback"); _assert14.equal(h.isFallback, true);
+  _assert14.equal(h.provenance.fallback_reason, "timeout");
+  const old = _parseHijri14({ date: "d", display: "x", year: 1, month: 1, month_name: "m", day: 1, provider: {} });
+  _assert14.equal(old.source, null); _assert14.equal(old.provenance, null); _assert14.equal(old.isFallback, false);
+});

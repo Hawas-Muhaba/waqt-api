@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: waqt-api
-Version: 0.2.0
+Version: 0.3.0
 Summary: Waqt HTTP API v1 — a Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API, built on the waqt-core computation package.
 Author: Waqt project
 License: MIT
@@ -19,7 +19,7 @@ Classifier: Topic :: Internet :: WWW/HTTP :: HTTP Servers
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: waqt-core<0.3,>=0.2.0
+Requires-Dist: waqt-core<0.4,>=0.3.0
 Requires-Dist: fastapi>=0.100
 Requires-Dist: uvicorn>=0.23
 Provides-Extra: dev

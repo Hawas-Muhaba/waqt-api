@@ -57,7 +57,7 @@ CAVEAT = (
 
 
 def _provider(name: str):
-    return resolve_calendar_provider(name)
+    return resolve_calendar_provider(name, batch=True)
 
 
 def _optional_location(loc: Optional[dict]) -> Optional[Location]:

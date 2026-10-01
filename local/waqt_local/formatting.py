@@ -65,6 +65,24 @@ def timezone_block(tz_name: Optional[str], at_instant: Optional[datetime]) -> Op
     return {"name": tz_name, "utc_offset_seconds": offset_seconds}
 
 
+def provenance_block(hd) -> Optional[dict]:
+    """Sprint 14 mirror of waqt.api.common.provenance_block (kept identical to the API)."""
+    p = getattr(hd, "provenance", None)
+    if p is None:
+        return None
+    return {
+        "requested_provider": p.requested_provider,
+        "cache": p.cache,
+        "fetched_at": p.fetched_at,
+        "age_seconds": p.age_seconds,
+        "ttl_seconds": p.ttl_seconds,
+        "upstream_method": p.upstream_method,
+        "fallback_reason": p.fallback_reason,
+        "fallback_detail": p.fallback_detail,
+        "cross_check": p.cross_check,
+    }
+
+
 def hijri_block(hd) -> Optional[dict]:
     if hd is None:
         return None
@@ -77,6 +95,8 @@ def hijri_block(hd) -> Optional[dict]:
         "day": hd.day,
         "provider": {"name": hd.provider, "version": hd.version},
         "source_note": hd.source_note,
+        "source": hd.source,
+        "provenance": provenance_block(hd),
     }
 
 

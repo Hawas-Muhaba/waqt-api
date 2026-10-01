@@ -1,0 +1,101 @@
+{
+  "browser": "HeadlessChrome/153",
+  "results": [
+    {
+      "id": "S14-1a",
+      "name": "aladhan is offered in the provider picker (from /v1/calendar)",
+      "ok": true,
+      "detail": "arithmetic-tabular,umm-al-qura,declared,local-observation,aladhan"
+    },
+    {
+      "id": "S14-1b",
+      "name": "live date shows a 'live · aladhan' badge and source=remote in metadata",
+      "ok": true,
+      "detail": "live · aladhan / remote"
+    },
+    {
+      "id": "S14-1c",
+      "name": "metadata shows provider version, fetch time, cache state and local cross-check",
+      "ok": true,
+      "detail": "[\"2026-10-01T04:42:52+00:00 (cache hit, age 110 s, TTL 43200 s)\",\"umm-al-qura: 1448-04-20 — DISAGREES by -2 day(s)\"]"
+    },
+    {
+      "id": "S14-1d",
+      "name": "no page errors / CORS failures on the live path",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "S14-3a",
+      "name": "hijri:null: page still renders, says Hijri unavailable and why",
+      "ok": true,
+      "detail": "Hijri date unavailableumm-al-qura: ValueError: ephemeris range exceeded · al-Khamis / Waqt day: 18:16:26 → 18:15:51 local / Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would. errs="
+    },
+    {
+      "id": "S14-3b",
+      "name": "hijri:null: Representations card says unavailable instead of throwing",
+      "ok": true,
+      "detail": "[\"Gregorian (local) | 07:44:46 | 01/10/2026\",\"Gregorian (UTC) | 04:44:46 | 2026-10-01\",\"Hijri | unavailable | see metadata\",\"Waqt | 13:28:20 | al-Khamis\"]"
+    },
+    {
+      "id": "S14-4",
+      "name": "markup inside fallback_detail is escaped, not executed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "S14-5a",
+      "name": "page refreshed itself across Maghrib (extra /v1/waqt call, no polling storm)",
+      "ok": true,
+      "detail": "calls 1 -> 3"
+    },
+    {
+      "id": "S14-5b",
+      "name": "Hijri day label stepped at Maghrib and is still a live (remote) value",
+      "ok": true,
+      "detail": "18 -> 19; live · aladhan"
+    },
+    {
+      "id": "S14-5c",
+      "name": "clock restarted near 00:00 in the new Waqt day",
+      "ok": true,
+      "detail": "00:00:05"
+    },
+    {
+      "id": "S14-6a",
+      "name": "429 on boundary refresh: last good view stays visible with a retry message",
+      "ok": true,
+      "detail": "Refresh failed (RATE_LIMITED: Rate limit exceeded.); showing the last result, retrying in 20 s."
+    },
+    {
+      "id": "S14-6b",
+      "name": "429 backoff: no request storm (<=2 retries in 14 s)",
+      "ok": true,
+      "detail": "calls after load: 1"
+    },
+    {
+      "id": "S14-2a",
+      "name": "upstream 500: fallback is VISIBLE in the headline badge",
+      "ok": true,
+      "detail": "fallback: umm-al-qura instead of aladhan (upstream-server-error)"
+    },
+    {
+      "id": "S14-2b",
+      "name": "page still renders events and clock (astronomy unaffected)",
+      "ok": true,
+      "detail": "13:30:40"
+    },
+    {
+      "id": "S14-2c",
+      "name": "metadata names the fallback reason and requested provider",
+      "ok": true,
+      "detail": "[\"upstream-server-error — HTTP 500\",\"aladhan\"]"
+    },
+    {
+      "id": "S14-2d",
+      "name": "provider switching: event table identical for aladhan(fallback) vs umm-al-qura",
+      "ok": true,
+      "detail": ""
+    }
+  ]
+}

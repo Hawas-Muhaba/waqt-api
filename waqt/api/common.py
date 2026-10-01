@@ -20,7 +20,7 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.4.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version)
+API_VERSION = "1.5.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version; 1.5.0: additive hijri.source/provenance, calendar_provider=aladhan, data.calendar_error, per-event representations, integrations in /v1/health + /v1/version, 429 RATE_LIMITED)
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
 # Sprint 12: computation identity is owned by waqt-core (one definition for the
 # API, waqt-local, the SDK vectors and the reference apps). These two names are
@@ -44,6 +44,7 @@ class ErrorCode:
     CALENDAR_DATE_UNRESOLVABLE = "CALENDAR_DATE_UNRESOLVABLE"  # Sprint 8: a Gregorian civil date could not be matched to a Waqt day (extreme-offset search exhausted)
     INVALID_SPAN = "INVALID_SPAN"               # Sprint 8: a boundary-crossing span's end is not strictly after its start
     VALIDATION_ERROR = "VALIDATION_ERROR"      # request shape/range errors (lat/lon etc.)
+    RATE_LIMITED = "RATE_LIMITED"              # Sprint 14: inbound rate limit exceeded (HTTP 429, Retry-After set)
     INTERNAL_ERROR = "INTERNAL_ERROR"          # anything unexpected — always caught, never a raw 500
 
 
@@ -134,6 +135,25 @@ def timezone_block(tz_name: Optional[str], at_instant: Optional[datetime]) -> Op
     return {"name": tz_name, "utc_offset_seconds": offset_seconds}
 
 
+def provenance_block(hd) -> Optional[dict]:
+    """Sprint 14: extra provenance for providers that consult something outside the
+    process. None for purely local providers (their `source` says everything)."""
+    p = getattr(hd, "provenance", None)
+    if p is None:
+        return None
+    return {
+        "requested_provider": p.requested_provider,
+        "cache": p.cache,
+        "fetched_at": p.fetched_at,
+        "age_seconds": p.age_seconds,
+        "ttl_seconds": p.ttl_seconds,
+        "upstream_method": p.upstream_method,
+        "fallback_reason": p.fallback_reason,
+        "fallback_detail": p.fallback_detail,
+        "cross_check": p.cross_check,
+    }
+
+
 def hijri_block(hd) -> Optional[dict]:
     if hd is None:
         return None
@@ -146,6 +166,9 @@ def hijri_block(hd) -> Optional[dict]:
         "day": hd.day,
         "provider": {"name": hd.provider, "version": hd.version},
         "source_note": hd.source_note,
+        # Sprint 14 (additive): where this value came from. See waqt_core.hijri.HIJRI_SOURCES.
+        "source": hd.source,
+        "provenance": provenance_block(hd),
     }
 
 

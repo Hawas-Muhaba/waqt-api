@@ -5,7 +5,22 @@ services:
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn waqt.api:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /v1/health
+    healthCheckPath: /v1/health          # network-free and exempt from rate limiting by design
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.2
+      # --- Sprint 14: production hardening (all optional; see docs/LIVE-INTEGRATIONS.md) ---
+      # Inbound rate limit, per client, in-memory per process (this plan runs one process).
+      - key: WAQT_RATE_LIMIT
+        value: 120/minute
+      # Render terminates TLS in a proxy that appends the client address to X-Forwarded-For;
+      # exactly one trusted hop. Remove both lines if you ever expose the app without a proxy.
+      - key: WAQT_TRUST_PROXY
+        value: "1"
+      - key: WAQT_TRUSTED_PROXY_HOPS
+        value: "1"
+      # Live Hijri provider (calendar_provider=aladhan). Hijri DATE only -- never prayer times.
+      # Set WAQT_ALADHAN_ENABLED=0 to make it always answer from the local fallback (no outbound calls).
+      - key: WAQT_ALADHAN_ENABLED
+        value: "1"
+      # CORS stays OFF unless you set WAQT_CORS_ORIGINS=https://your.app (comma separated).

@@ -60,6 +60,8 @@ from .errors import (
     ValidationError,
     validation_error,
 )
+from zoneinfo import ZoneInfo
+
 from .formatting import computation_block, hijri_block, iso, parse_date, parse_instant, profile_block, reading, timezone_block
 from .providers import PROVIDER_CATALOG, resolve_calendar_provider
 
@@ -100,6 +102,29 @@ def _profile(fajr_angle: float = 18.0, isha_angle: float = 17.0, asr_ratio: floa
 # ---------------------------------------------------------------------------
 
 
+def _gregorian_repr(instant, tz_name):
+    """Mirror of waqt.api.waqt_endpoint._gregorian_repr."""
+    if instant is None:
+        return None
+    out = {"utc": iso(instant), "timezone": tz_name, "local": None, "local_date": None, "local_time": None}
+    if tz_name:
+        try:
+            loc = instant.astimezone(ZoneInfo(tz_name))
+            out.update(local=loc.isoformat(timespec="seconds"), local_date=loc.date().isoformat(),
+                       local_time=loc.time().isoformat(timespec="seconds"))
+        except Exception:
+            pass
+    return out
+
+
+def _hijri_repr(hd):
+    """Mirror of waqt.api.waqt_endpoint._hijri_repr."""
+    if hd is None:
+        return None
+    return {"date": hd.iso_like(), "provider": hd.provider, "version": hd.version,
+            "source": hd.source, "basis": "waqt-day-label"}
+
+
 def waqt(
     lat: float,
     lon: float,
@@ -134,6 +159,16 @@ def waqt(
         for e in r.events
     ]
 
+    event_representations = []
+    for e, ev in zip(r.events, events_field):
+        event_representations.append({
+            "name": ev["name"],
+            "gregorian": _gregorian_repr(e.instant, r.timezone_name),
+            "hijri": _hijri_repr(r.hijri_date),
+            "waqt": ({"display": f"Waqt {ev['reading']['display']}", "seconds": ev["reading"]["seconds"]}
+                     if ev["reading"] is not None else None),
+        })
+
     next_event_field = None
     if r.next_event is not None:
         next_event_field = {
@@ -155,9 +190,12 @@ def waqt(
             "note": r.hour_length_note,
         },
         "hijri": hijri_block(r.hijri_date),
+        "calendar_error": ({"provider": provider.name, "message": r.calendar_error}
+                           if r.calendar_error else None),
         "weekday": r.weekday,
         "waqt": waqt_field,
         "events": events_field,
+        "event_representations": event_representations,
         "next_event": next_event_field,
         "profile": profile_block(r.profile),
         "computation": computation_block(r.timescale_model, r.delta_t_seconds),
@@ -283,6 +321,10 @@ def list_calendar_providers() -> dict:
                 "description": entry["description"],
                 "requires_override": entry["requires_override"],
                 "supports_reverse_conversion": entry["supports_reverse"],
+                # Sprint 14: same keys as the server. waqt-local offers only offline providers,
+                # so these are constant here; the server's `aladhan` entry is the only True.
+                "network": False,
+                "single_date_only": False,
             }
             for name, entry in PROVIDER_CATALOG.items()
         ]

@@ -16,6 +16,7 @@ can write one deserializer and rely on the shape never changing.
 from __future__ import annotations
 
 from typing import Optional
+from zoneinfo import ZoneInfo
 
 from fastapi import APIRouter, Query
 
@@ -26,6 +27,34 @@ from .common import computation_block, hijri_block, iso, parse_instant, profile_
 from .providers import PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
+
+
+def _gregorian_repr(instant, tz_name: Optional[str]) -> Optional[dict]:
+    """Civil (Gregorian) representation of an instant: UTC plus local wall time in the
+    resolved zone. `local_date` can differ from the Waqt day label -- Isha frequently falls
+    on the next civil date -- which is exactly why both are shown."""
+    if instant is None:
+        return None
+    out = {"utc": iso(instant), "timezone": tz_name, "local": None, "local_date": None, "local_time": None}
+    if tz_name:
+        try:
+            loc = instant.astimezone(ZoneInfo(tz_name))
+            out.update(local=loc.isoformat(timespec="seconds"), local_date=loc.date().isoformat(),
+                       local_time=loc.time().isoformat(timespec="seconds"))
+        except Exception:
+            pass
+    return out
+
+
+def _hijri_repr(hd) -> Optional[dict]:
+    """The Hijri label of the Waqt day an event belongs to (Waqt places every event of a
+    Maghrib-to-Maghrib day on that day's clock -- Maghrib and Isha read >= the day length
+    rather than rolling to the next label). Decoration only: derived AFTER, and never an
+    input to, the event instant."""
+    if hd is None:
+        return None
+    return {"date": hd.iso_like(), "provider": hd.provider, "version": hd.version,
+            "source": hd.source, "basis": "waqt-day-label"}
 
 
 @router.get("/v1/waqt")
@@ -84,6 +113,19 @@ def get_waqt(
             "reading": reading(e.instant - r.day_start_maghrib) if (e.instant and r.day_start_maghrib) else None,
         })
 
+    # Sprint 14 (additive): every event in all three vocabularies. A SIBLING of `events`, not
+    # nested in it, so `events[]` stays byte-identical to /v1/events (the "never a separately
+    # derived answer" contract). Same order as `events`; join on `name`.
+    event_representations = []
+    for ev in events_field:
+        event_representations.append({
+            "name": ev["name"],
+            "gregorian": _gregorian_repr(next(x.instant for x in r.events if x.name == ev["name"]), r.timezone_name),
+            "hijri": _hijri_repr(r.hijri_date),
+            "waqt": ({"display": f"Waqt {ev['reading']['display']}", "seconds": ev["reading"]["seconds"]}
+                     if ev["reading"] is not None else None),
+        })
+
     next_event_field = None
     if r.next_event is not None:
         next_event_field = {
@@ -105,9 +147,14 @@ def get_waqt(
             "note": r.hour_length_note,
         },
         "hijri": hijri_block(r.hijri_date),
+        # Sprint 14: null unless the calendar provider raised. When set, `hijri` is null but
+        # every astronomical field above/below is still fully computed.
+        "calendar_error": ({"provider": provider.name, "message": r.calendar_error}
+                           if r.calendar_error else None),
         "weekday": r.weekday,
         "waqt": waqt_field,
         "events": events_field,
+        "event_representations": event_representations,
         "next_event": next_event_field,
         "profile": profile_block(r.profile),
         "computation": computation_block(r.timescale_model, r.delta_t_seconds),

@@ -1,4 +1,5 @@
 from ..hijri import ArithmeticTabularProvider, DeclaredProvider, HijriDate, HijriProvider
+from .aladhan import AlAdhanHijriProvider
 from .local_observation import LocalObservationProvider, Sighting
 from .registry import CalendarProviderRegistry, DEFAULT_REGISTRY, ExampleRegionalOffsetProvider
 from .umm_al_qura import UmmAlQuraProvider
@@ -11,6 +12,7 @@ __all__ = [
     "LocalObservationProvider",
     "Sighting",
     "UmmAlQuraProvider",
+    "AlAdhanHijriProvider",
     "CalendarProviderRegistry",
     "DEFAULT_REGISTRY",
     "ExampleRegionalOffsetProvider",

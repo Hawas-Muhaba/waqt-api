@@ -37,6 +37,12 @@ Structurally identical to `declared`, but semantically distinct on purpose: it r
 
 Same override-date gotcha as `declared` applies. Same non-invertibility.
 
+## `aladhan` (live, Sprint 14)
+
+A *remote* provider: asks AlAdhan for the date, caches it 12 h, and falls back to `umm-al-qura` when it cannot deliver — always
+saying which happened (`hijri.source`: `remote` / `remote-stale` / `local-fallback`). It is a Hijri **date** source only and never
+affects event times. Single-date endpoints only. See **LIVE-INTEGRATIONS.md**.
+
 ## Writing your own provider
 
 Anything satisfying the `HijriProvider` shape works, with zero changes to `waqt/core.py` or `waqt/solar.py`:

@@ -100,6 +100,36 @@ def _jdn_to_gregorian(jdn: int) -> date:
     return date(year, month, day)
 
 
+#: Where a Hijri date physically came from (Sprint 14). Orthogonal to `provider`:
+#: `provider` says WHICH algorithm/authority produced the date; `source` says
+#: HOW this particular value reached us.
+#:   "local"          computed in-process (arithmetic-tabular, umm-al-qura, ...)
+#:   "declared"       an institution's override (DeclaredProvider)
+#:   "observation"    a reported sighting (LocalObservationProvider)
+#:   "remote"         fetched from an external service (fresh or within its cache TTL)
+#:   "remote-stale"   last-known-good remote value served after the TTL because the
+#:                    service could not be reached
+#:   "local-fallback" a remote provider was asked for, could not deliver, and a local
+#:                    provider answered instead (`provider` names the one that did)
+HIJRI_SOURCES = ("local", "declared", "observation", "remote", "remote-stale", "local-fallback")
+
+
+@dataclass(frozen=True)
+class HijriProvenance:
+    """Extra provenance carried only by providers that talk to something outside
+    the process. All fields optional: absent means "not applicable"."""
+
+    requested_provider: Optional[str] = None   # what the caller asked for (differs from `provider` on fallback)
+    cache: Optional[str] = None                # "miss" | "hit" | "stale"
+    fetched_at: Optional[str] = None           # ISO-8601 UTC time the remote value was obtained
+    age_seconds: Optional[float] = None
+    ttl_seconds: Optional[int] = None
+    upstream_method: Optional[str] = None      # calendar method the remote service reported using
+    fallback_reason: Optional[str] = None      # machine-readable code, see aladhan.FALLBACK_REASONS
+    fallback_detail: Optional[str] = None      # human-readable detail (never contains secrets/URLs)
+    cross_check: Optional[dict] = None         # local reference value + whether it agrees
+
+
 @dataclass(frozen=True)
 class HijriDate:
     year: int
@@ -108,6 +138,8 @@ class HijriDate:
     provider: str
     version: str = "unversioned"
     source_note: Optional[str] = None  # e.g. which local observation this came from
+    source: str = "local"              # Sprint 14: see HIJRI_SOURCES
+    provenance: Optional[HijriProvenance] = None
 
     @property
     def month_name(self) -> str:
@@ -210,7 +242,7 @@ class DeclaredProvider:
             hd = self._overrides[d]
             return HijriDate(
                 hd.year, hd.month, hd.day, provider=self.name, version=self.version,
-                source_note=hd.source_note,
+                source_note=hd.source_note, source="declared",
             )
         return self._fallback.from_gregorian(d)
 
