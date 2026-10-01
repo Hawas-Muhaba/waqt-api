@@ -8,10 +8,22 @@
    "detail": "arithmetic-tabular,umm-al-qura,declared,local-observation,aladhan"
   },
   {
+   "id": "1a",
+   "name": "first view loads the disclosed Makkah demo from the local API",
+   "ok": true,
+   "detail": "Showing 21.4225, 39.8262 · Asia/Riyadh. API=http://localhost:8000"
+  },
+  {
+   "id": "1f",
+   "name": "About computation shows engine, revision, level, Hijri provenance and local meridian",
+   "ok": true,
+   "detail": "{\"Engine\":\"waqt-noaa-low-precision\",\"Revision\":\"2\",\"Accuracy level\":\"B\",\"Hijri provider\":\"arithmetic-tabular\",\"Hijri source\":\"local\",\"Provider version\":\"30-year-cycle-epoch-1948440\",\"Waqt day boundary\":\"Local Maghrib\",\"Reference meridian\":\"Local location\",\"Reference location\":\"21.4225, 39.8262 · Asia/Riyadh\"}"
+  },
+  {
    "id": "1b",
    "name": "CORS (enforced browser): cross-origin call from page origin succeeded (all 5 providers loaded, not the fallback)",
    "ok": true,
-   "detail": "[200] providers=5"
+   "detail": "[200,200,200] providers=5"
   },
   {
    "id": "1c",
@@ -47,7 +59,7 @@
    "id": "2c",
    "name": "Gregorian + Hijri + Waqt representation cards",
    "ok": true,
-   "detail": "[[\"Gregorian (local)\",\"07:47:24\",\"01/10/2026\"],[\"Gregorian (UTC)\",\"04:47:24\",\"2026-10-01\"],[\"Hijri\",\"18 Rabi al-Thani 1448 AH\",\"1448-04-18local\"],[\"Waqt\",\"13:30:58\",\"al-Khamis\"]]"
+   "detail": "[[\"Gregorian (local)\",\"10:51:38\",\"01/10/2026\"],[\"Gregorian (UTC)\",\"07:51:38\",\"2026-10-01\"],[\"Hijri\",\"18 Rabi al-Thani 1448 AH\",\"1448-04-18local\"],[\"Waqt\",\"16:35:12\",\"al-Khamis\"]]"
   },
   {
    "id": "2d",
@@ -59,13 +71,13 @@
    "id": "2e",
    "name": "day-progress ring has a percentage in [0,100]",
    "ok": true,
-   "detail": "56% dashoffset=153.61918287747457"
+   "detail": "69% dashoffset=108.58712188749138"
   },
   {
    "id": "2f",
    "name": "clock ticks (≥2 s advance in 2.3 s) with zero new API calls",
    "ok": true,
-   "detail": "13:30:58 -> 13:31:01, calls 3->3"
+   "detail": "16:35:12 -> 16:35:15, calls 5->5"
   },
   {
    "id": "2g",
@@ -83,7 +95,7 @@
    "id": "4a",
    "name": "Makkah (second normal-latitude) loads",
    "ok": true,
-   "detail": "Showing 21.4225, 39.8262 · Asia/Riyadh."
+   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
   },
   {
    "id": "4b",
@@ -95,7 +107,7 @@
    "id": "4c",
    "name": "Reykjavik events either times or 'does not occur' (no NaN/undefined text)",
    "ok": true,
-   "detail": "[[\"Fajr\",\"04:51:33\",\"09:51:16\",\"in 00:04:01\"],[\"Sunrise\",\"07:36:34\",\"12:36:18\",\"\"],[\"Dhuhr\",\"13:17:25\",\"18:17:08\",\"\"],[\"Asr\",\"15:56:47\",\"20:56:30\",\"\"],[\"Maghrib\",\"18:56:44\",\"23:56:27\",\"\"],[\"Isha\",\"21:29:57\",\"26:29:41\",\"\"]]"
+   "detail": "[[\"Fajr\",\"04:51:33\",\"09:51:16\",\"\"],[\"Sunrise\",\"07:36:34\",\"12:36:18\",\"\"],[\"Dhuhr\",\"13:17:25\",\"18:17:08\",\"in 05:25:37\"],[\"Asr\",\"15:56:47\",\"20:56:30\",\"\"],[\"Maghrib\",\"18:56:44\",\"23:56:27\",\"\"],[\"Isha\",\"21:29:57\",\"26:29:41\",\"\"]]"
   },
   {
    "id": "5a",

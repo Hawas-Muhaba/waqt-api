@@ -79,6 +79,8 @@ async function snapshot(page) {
     nextRow: (document.querySelector("#eventsBody tr.next") || { children: [{ textContent: null }] }).children[0].textContent,
     reps: [...document.querySelectorAll("#repsGrid .rep-card")].map((c) => [...c.children].map((x) => x.textContent.trim())),
     meta: Object.fromEntries([...document.querySelectorAll("#metaGrid dt")].map((dt) => [dt.textContent, dt.nextElementSibling.textContent])),
+    computation: Object.fromEntries([...document.querySelectorAll("#computationGrid dt")].map((dt) => [dt.textContent, dt.nextElementSibling.textContent])),
+    apiBase: document.getElementById("apiBase").value,
     scrollW: document.documentElement.scrollWidth, innerW: window.innerWidth,
     providers: [...document.querySelectorAll("#provider option")].map((o) => o.value),
   }));
@@ -89,6 +91,8 @@ const errsOf = (page) => page.consoleMsgs.filter((m) => m.type === "error" || m.
 let p = await newPage();
 let s = await snapshot(p);
 rec("1", "page boots, provider list loaded from /v1/calendar", s.providers.length >= 2, s.providers.join(","));
+rec("1a", "first view loads the disclosed Makkah demo from the local API", !s.contentHidden && /Showing 21\.4225, 39\.8262/.test(s.status) && s.apiBase === "http://localhost:8000", s.status + " API=" + s.apiBase);
+rec("1f", "About computation shows engine, revision, level, Hijri provenance and local meridian", s.computation.Engine === "waqt-noaa-low-precision" && s.computation.Revision === "2" && s.computation["Accuracy level"] === "B" && s.computation["Hijri source"] === "local" && s.computation["Reference meridian"] === "Local location", JSON.stringify(s.computation));
 rec("1b", "CORS (enforced browser): cross-origin call from page origin succeeded (all 5 providers loaded, not the fallback)",
   p.apiCalls.length > 0 && p.apiCalls.every((c) => c.status === 200) && s.providers.length === 5, JSON.stringify(p.apiCalls.map((c) => c.status)) + " providers=" + s.providers.length);
 rec("1c", "no console errors on load", errsOf(p).length === 0, JSON.stringify(errsOf(p)));

@@ -1,5 +1,15 @@
 services:
   - type: web
+    name: waqt-web
+    runtime: static
+    buildCommand: "true"
+    staticPublishPath: ./apps/web
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+
+  - type: web
     name: waqt-api
     runtime: python
     plan: free
@@ -19,8 +29,11 @@ services:
         value: "1"
       - key: WAQT_TRUSTED_PROXY_HOPS
         value: "1"
+      # Set this in Render to the actual static-site origin after the site is
+      # created; add custom web domains as comma-separated exact origins.
+      - key: WAQT_CORS_ORIGINS
+        sync: false
       # Live Hijri provider (calendar_provider=aladhan). Hijri DATE only -- never prayer times.
       # Set WAQT_ALADHAN_ENABLED=0 to make it always answer from the local fallback (no outbound calls).
       - key: WAQT_ALADHAN_ENABLED
         value: "1"
-      # CORS stays OFF unless you set WAQT_CORS_ORIGINS=https://your.app (comma separated).

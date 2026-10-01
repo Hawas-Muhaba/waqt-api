@@ -101,8 +101,11 @@ worker processes each keep their own budget. Rejections are ordinary envelopes (
 `X-RateLimit-Limit/Remaining/Reset`) and carry CORS headers so browser apps can read them.
 
 **`GET /v1/health`** never performs network I/O. It returns `status:"ok"` whenever the engine can serve, plus
-`integrations.hijri_aladhan` (circuit state, cache size, counters, last failure reason). A degraded integration is reported,
-not treated as downtime. **`GET /v1/version`** gains `integrations` (`calendar_providers`, the provider's identity,
+`components.application`, `components.computation`, and `components.optional_providers.aladhan` (`unknown`, `available`,
+`degraded`, or `disabled`) and `integrations.hijri_aladhan` (circuit state, cache size, counters, last failure reason).
+A degraded integration is reported, not treated as downtime. Health is `no-store`; `/v1/version` is cached for 30 seconds,
+the provider catalog for 5 minutes, and `/v1/waqt` only for explicit instants (private, 30 seconds). Current-time Waqt
+responses are `no-store`. **`GET /v1/version`** gains `integrations` (`calendar_providers`, the provider's identity,
 `affects_astronomy: false`).
 
 ## 3. What was and was not verified
@@ -111,9 +114,12 @@ Verified (no internet needed): provider behaviour with injected transports and a
 transport against a local fake AlAdhan on real sockets (`verification/fake_aladhan.py`); the API end to end over real HTTP
 (`verification/live_stack_check.py`); a real headless Chrome with CORS enforced (`verification/browser/run_sprint14.sh`).
 
-**Not verified: the real `api.aladhan.com`.** It was unreachable from the build environment. The response shape that is
-parsed comes from AlAdhan's public documentation and is exercised only against the fake. The 1900–2076 window is a
-conservative choice, not a documented AlAdhan limit. Run once against the real service before relying on it:
+**Live-service smoke check performed 2026-10-01:** the real `GET https://api.aladhan.com/v1/gToH/01-10-2026` returned
+HTTP 200 with Hijri `20-04-1448`, method `HJCoSA`. The project's default `AlAdhanHijriProvider` also returned
+`source=remote`, parsed that method, and reported an agreeing Umm al-Qura cross-check (`delta_days=0`) after one request.
+This verifies one live response shape and date only; it does not establish ongoing availability, behavior across all dates,
+or every optional calendar method. The build environment itself could not reach AlAdhan. The 1900–2076 window remains a
+conservative choice, not a documented AlAdhan limit. Repeat the check when deploying or changing the adapter:
 
 ```bash
 curl -s https://api.aladhan.com/v1/gToH/30-09-2026

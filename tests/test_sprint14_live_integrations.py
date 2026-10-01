@@ -364,6 +364,7 @@ def test_health_is_network_free_and_reports_integration_state(up):
     assert r.status_code == 200 and len(up.calls) == n
     b = r.json()
     assert b["status"] == "ok" and b["api_version"] == "1.5.0"
+    assert b["components"]["optional_providers"]["aladhan"]["status"] == "degraded"
     i = b["integrations"]["hijri_aladhan"]
     assert i["provider"] == "aladhan" and i["circuit"] == "open" and i["last_failure_reason"] == "network-error"
     assert i["enabled"] is True and i["fallback_provider"]
@@ -380,13 +381,27 @@ def test_health_does_not_construct_a_network_request_on_a_cold_provider():
 
 
 def test_version_reports_api_engine_and_integrations():
-    d = client.get("/v1/version").json()["data"]
+    response = client.get("/v1/version")
+    d = response.json()["data"]
+    assert response.headers["cache-control"] == "public, max-age=30"
     assert d["api_version"] == "1.5.0"
     assert d["integrations"]["affects_astronomy"] is False
     assert "aladhan" in d["integrations"]["calendar_providers"]
     a = d["integrations"]["hijri_aladhan"]
     assert a["provider"] == "aladhan" and a["version"].startswith("aladhan-gToH-v1") and a["cache_ttl_seconds"] == 43200
     assert str(d["engine"]["revision"]) == "2" if isinstance(d.get("engine"), dict) else True
+
+
+def test_cache_headers_respect_time_and_provider_semantics():
+    current = client.get("/v1/waqt", params={"lat": 9.0192, "lon": 38.7525})
+    fixed = client.get("/v1/waqt", params={
+        "lat": 9.0192, "lon": 38.7525, "instant": "2026-10-01T12:00:00Z",
+        "calendar_provider": "arithmetic-tabular",
+    })
+    catalog = client.get("/v1/calendar")
+    assert current.headers["cache-control"] == "no-store"
+    assert fixed.headers["cache-control"] == "private, max-age=30"
+    assert catalog.headers["cache-control"] == "public, max-age=300"
 
 
 def test_engine_identity_is_identical_in_health_version_and_every_waqt_response(up):

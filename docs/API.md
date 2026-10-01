@@ -145,6 +145,14 @@ and `/v1/version`, `network` / `single_date_only` per provider in `/v1/calendar`
 provider failing no longer fails `/v1/waqt`: `hijri` is `null` and `calendar_error` says why. Full contract, fallback reasons
 and operations: **docs/LIVE-INTEGRATIONS.md**.
 
+`GET /v1/health` remains `status:"ok"` when computation is available and reports separate `components.application`,
+`components.computation`, and `components.optional_providers.aladhan` states (`unknown`, `available`, `degraded`, or
+`disabled`). It performs no upstream request and returns `Cache-Control: no-store`. Cache policy is intentionally
+bounded: `/v1/version` for 30 seconds, `/v1/calendar` for 5 minutes, and `/v1/waqt` for 30 seconds in a private cache
+only when the request supplies an explicit `instant`; requests for the moving current time are `no-store`. The AlAdhan
+provider separately caches Hijri answers by Gregorian date and method for 12 hours. Other computation results are not
+shared-cached.
+
 ## 8. The one gotcha: which Gregorian date is "the" date
 
 The Islamic day runs Maghrib-to-Maghrib, and per the Core Time Model, the Hijri label attached to a Waqt day is **the Gregorian date the *closing* Maghrib falls on** — not the date you'd naively read off the instant you queried.

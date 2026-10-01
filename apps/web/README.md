@@ -26,7 +26,8 @@ from the API's own static-file mount if you add one, or via a reverse proxy.
 ## What it shows
 
 - **Location**: browser geolocation (`navigator.geolocation`), or manual
-  lat/lon entry — the app makes no claim about location without one of these.
+  lat/lon entry. The first view uses a clearly labeled Makkah demo location;
+  it does not request geolocation without an explicit click.
 - **Local Waqt day**: Maghrib-to-Maghrib boundary and length, from `/v1/waqt`.
 - **Current Waqt clock**: the `HH:MM:SS` reading, live-ticking client-side
   between polls (interpolated from the last server reading + elapsed time —
@@ -43,7 +44,18 @@ from the API's own static-file mount if you add one, or via a reverse proxy.
 
 Stored in `localStorage` under `waqt:apiBase` (a per-browser UI preference,
 not Waqt state — nothing about a computation is cached across sessions).
-Defaults to `http://localhost:8000`; editable in the header.
+Localhost pages default to `http://localhost:8000`; public hosts default to
+`https://waqt-api-r6e0.onrender.com`. The header remains editable, and `?api=`
+can override the API base for a deployment or preview.
+
+## Render deployment
+
+The root `render.yaml` defines both the API and this static site. After the
+first Blueprint deployment, copy the static site's actual HTTPS URL from Render
+and set the API service's `WAQT_CORS_ORIGINS` to that exact origin in the Render
+Dashboard, then redeploy the API. Add any custom web domains as additional,
+comma-separated exact origins. CORS remains disabled until this is configured.
+The client targets the supplied public API URL.
 
 ## Tests
 

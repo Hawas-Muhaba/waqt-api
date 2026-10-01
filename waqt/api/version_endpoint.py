@@ -15,7 +15,7 @@ describe themselves differently. See docs/VERSIONING.md.
 
 from __future__ import annotations
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
 from waqt_core.versioning import version_report
 
 from .common import API_VERSION, CORE_SPEC_VERSION, success
@@ -25,7 +25,8 @@ router = APIRouter()
 
 
 @router.get("/v1/version")
-def get_version():
+def get_version(response: Response):
+    response.headers["Cache-Control"] = "public, max-age=30"
     data = version_report(api_version=API_VERSION, spec_version=CORE_SPEC_VERSION)
     # Sprint 14: which *calendar* providers this server offers, and the identity of the one
     # that talks to the outside world. Added here, not in version_report, because it is a

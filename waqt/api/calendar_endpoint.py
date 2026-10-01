@@ -9,7 +9,7 @@ provider picker without hardcoding the list from documentation.
 
 from __future__ import annotations
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
 
 from .common import success
 from .providers import PROVIDER_CATALOG
@@ -18,7 +18,8 @@ router = APIRouter()
 
 
 @router.get("/v1/calendar")
-def get_calendar_providers():
+def get_calendar_providers(response: Response):
+    response.headers["Cache-Control"] = "public, max-age=300"
     data = {
         "providers": [
             {

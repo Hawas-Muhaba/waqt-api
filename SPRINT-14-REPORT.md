@@ -31,7 +31,7 @@ pytest 9.1.1, headless Chrome 153. Sandbox clock: 2026-09-30/10-01.
 | independent-astronomy (JPL DE421 reference) | 36 | **36 passed** |
 | `verification/live_stack_check.py` (real uvicorn, real sockets) | 17/17 | **29/29** (12 new Sprint 14 checks) |
 | `verification/browser/run_sprint14.sh` (real Chrome, new) | — | **16/16** |
-| `verification/browser/run_smoke.mjs` (Sprint 13 browser suite) | 34/34 | **34/34** (3 stale expectations updated, §2) |
+| `verification/browser/run_smoke.mjs` (Sprint 13 browser suite) | 34/34 | **36/36** (3 stale expectations and 2 production-demo assertions updated) |
 | `verification/vector_additivity_check.py` (new) | — | **OK: 21/21 recorded responses preserved** |
 | `pip check` | — | no broken requirements |
 

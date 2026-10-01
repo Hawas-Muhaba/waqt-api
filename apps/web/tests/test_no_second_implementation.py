@@ -103,3 +103,30 @@ def test_boundary_refresh_re_asks_the_server_and_never_computes_the_next_day():
     # nothing in the refresh path adds durations or builds a new instant client-side
     for bad in ("86400", "setDate(", "setHours(", "+ 24", "* 24"):
         assert bad not in tick and bad not in body, f"refresh path contains {bad!r}"
+
+
+def test_public_default_targets_render_and_localhost_stays_local():
+    html = PAGE.read_text()
+    script = _script()
+    assert 'const PUBLIC_API_BASE = "https://waqt-api-r6e0.onrender.com"' in script
+    assert 'const LOCAL_API_BASE = "http://localhost:8000"' in script
+    assert 'new URLSearchParams(location.search).get("api")' in script
+    assert 'value="https://waqt-api-r6e0.onrender.com"' in html
+    assert 'value="21.4225"' in html and 'value="39.8262"' in html
+    assert 'loadPlace(parseFloat($("lat").value), parseFloat($("lon").value))' in script
+
+
+def test_about_computation_panel_displays_server_provenance():
+    html = PAGE.read_text()
+    script = _script()
+    assert 'id="computationGrid"' in html
+    for field in ("computation.engine", "computation.revision", "computation.accuracy_level",
+                  "hijri.provider.name", "hijri.source", "hijri.provider.version", "Local Maghrib"):
+        assert field in script
+
+
+def test_render_blueprint_hosts_web_and_allowlists_its_origin():
+    blueprint = (PAGE.parents[2] / "render.yaml").read_text()
+    assert "name: waqt-web" in blueprint and "runtime: static" in blueprint
+    assert "name: waqt-api" in blueprint
+    assert "key: WAQT_CORS_ORIGINS" in blueprint and "sync: false" in blueprint

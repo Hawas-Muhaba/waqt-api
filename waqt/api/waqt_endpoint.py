@@ -18,7 +18,7 @@ from __future__ import annotations
 from typing import Optional
 from zoneinfo import ZoneInfo
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Response
 
 from ..core import AstronomyProfile, Location, compute_waqt
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
@@ -59,6 +59,7 @@ def _hijri_repr(hd) -> Optional[dict]:
 
 @router.get("/v1/waqt")
 def get_waqt(
+    response: Response,
     lat: float = Query(..., ge=-90, le=90, description="Latitude, WGS84 degrees"),
     lon: float = Query(..., ge=-180, le=180, description="Longitude, WGS84 degrees"),
     elevation_m: float = Query(0.0, ge=0, description="Elevation, metres above sea level"),
@@ -83,6 +84,7 @@ def get_waqt(
     sighting_day: Optional[int] = Query(None, ge=1, le=30, description="local-observation provider: Hijri day (1-30)"),
     observed_at: Optional[str] = Query(None, description="local-observation provider: where the sighting was reported from"),
 ):
+    response.headers["Cache-Control"] = "private, max-age=30" if instant else "no-store"
     t = parse_instant(instant)
     provider = resolve_calendar_provider(
         calendar_provider, override_date,

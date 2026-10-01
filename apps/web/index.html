@@ -99,15 +99,15 @@
     <h1>Waqt<small>reference web application — reads a running Waqt API, computes nothing itself</small></h1>
     <div class="apibase">
       <label for="apiBase">API base</label>
-      <input id="apiBase" value="http://localhost:8000" autocomplete="off" spellcheck="false">
+      <input id="apiBase" value="https://waqt-api-r6e0.onrender.com" autocomplete="off" spellcheck="false">
       <button id="apiBaseSave" type="button">Use</button>
     </div>
   </header>
 
   <div class="locbar">
     <span class="label">Location</span>
-    <input id="lat" placeholder="lat" inputmode="decimal">
-    <input id="lon" placeholder="lon" inputmode="decimal">
+    <input id="lat" value="21.4225" placeholder="lat" inputmode="decimal" aria-label="Latitude">
+    <input id="lon" value="39.8262" placeholder="lon" inputmode="decimal" aria-label="Longitude">
     <button id="goBtn" type="button">Show this place</button>
     <button id="geoBtn" type="button" class="secondary">Use my location</button>
     <label class="label" for="provider" style="margin-left:8px">Hijri provider</label>
@@ -129,6 +129,11 @@
         <div class="hero-sub" id="heroSub"></div>
       </div>
     </div>
+
+    <section aria-labelledby="computation-h">
+      <h2 id="computation-h">About computation</h2>
+      <dl class="meta-grid" id="computationGrid"></dl>
+    </section>
 
     <section aria-labelledby="events-h">
       <h2 id="events-h">Today's events</h2>
@@ -154,7 +159,7 @@
   <footer>
     Consumes <code>GET /v1/waqt</code>, <code>/v1/events</code>, <code>/v1/calendar</code>, <code>/v1/version</code>.
     No astronomy or calendar computation happens in this page — see
-    <code>tests/test_no_second_implementation.py</code>. Reference implementation, Sprint 12.
+    <code>tests/test_no_second_implementation.py</code>. Public reference, Sprint 14.
   </footer>
 </div>
 
@@ -168,9 +173,17 @@
 
 const $ = (id) => document.getElementById(id);
 const LS_KEY = "waqt:apiBase";
+const LOCAL_API_BASE = "http://localhost:8000";
+const PUBLIC_API_BASE = "https://waqt-api-r6e0.onrender.com";
+
+function defaultApiBase() {
+  const override = new URLSearchParams(location.search).get("api");
+  if (override) return override;
+  return ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) ? LOCAL_API_BASE : PUBLIC_API_BASE;
+}
 
 function apiBase() {
-  return ($("apiBase").value || "http://localhost:8000").replace(/\/+$/, "");
+  return ($("apiBase").value || defaultApiBase()).replace(/\/+$/, "");
 }
 
 function esc(v) {
@@ -311,6 +324,26 @@ function renderMeta(waqtData, versionData) {
     `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
 }
 
+function renderComputation(waqt) {
+  const computation = waqt.computation || {};
+  const hijri = waqt.hijri;
+  const location = waqt.location || {};
+  const timezone = waqt.timezone ? waqt.timezone.name : "timezone unavailable";
+  const rows = [
+    ["Engine", computation.engine || "—"],
+    ["Revision", computation.revision || "—"],
+    ["Accuracy level", computation.accuracy_level || "—"],
+    ["Hijri provider", hijri && hijri.provider ? hijri.provider.name : "unavailable"],
+    ["Hijri source", hijri ? hijri.source : "unavailable"],
+    ["Provider version", hijri && hijri.provider ? hijri.provider.version : "—"],
+    ["Waqt day boundary", "Local Maghrib"],
+    ["Reference meridian", "Local location"],
+    ["Reference location", `${location.lat ?? "—"}, ${location.lon ?? "—"} · ${timezone}`],
+  ];
+  $("computationGrid").innerHTML = rows.map(([key, value]) =>
+    `<dt>${esc(key)}</dt><dd>${esc(value)}</dd>`).join("");
+}
+
 function renderReps(waqt) {
   const tz = waqt.timezone ? waqt.timezone.name : null;
   const cards = [
@@ -391,6 +424,7 @@ async function loadPlace(lat, lon, { silent = false } = {}) {
 
     renderEvents(waqt);
     renderReps(waqt);
+    renderComputation(waqt);
     renderMeta(waqt, version);
 
     $("content").hidden = false;
@@ -426,7 +460,7 @@ function useLocation() {
 
 function init() {
   const saved = localStorage.getItem(LS_KEY);
-  if (saved) $("apiBase").value = saved;
+  $("apiBase").value = saved || defaultApiBase();
   $("apiBaseSave").addEventListener("click", () => {
     localStorage.setItem(LS_KEY, apiBase());
     setStatus(`API base set to ${apiBase()}.`);
@@ -442,6 +476,7 @@ function init() {
     if (!Number.isNaN(lat) && !Number.isNaN(lon)) loadPlace(lat, lon);
   });
   loadProviders();
+  loadPlace(parseFloat($("lat").value), parseFloat($("lon").value));
   tickHandle = setInterval(tick, 1000);
 }
 

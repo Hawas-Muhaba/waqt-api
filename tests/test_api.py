@@ -263,4 +263,11 @@ def test_conversions_bad_direction():
 def test_health_check():
     r = client.get("/v1/health")
     assert r.status_code == 200
-    assert r.json()["status"] == "ok"
+    body = r.json()
+    assert body["status"] == "ok"
+    assert body["components"]["application"]["status"] == "available"
+    assert body["components"]["computation"]["status"] == "available"
+    assert body["components"]["optional_providers"]["aladhan"]["status"] in {
+        "unknown", "available", "degraded", "disabled"
+    }
+    assert r.headers["cache-control"] == "no-store"

@@ -20,7 +20,7 @@ from __future__ import annotations
 
 import os
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
@@ -128,15 +128,38 @@ def create_app(cors_origins=None, rate_limit=None, trust_proxy=None) -> FastAPI:
         return RedirectResponse(url="/docs")
 
     @application.get("/v1/health")
-    def health():
+    def health(response: Response):
         # Sprint 14: no network I/O here, ever. `integrations` is an in-memory snapshot
         # of the live Hijri provider's circuit/cache state, so a load balancer probing
         # this endpoint can never be slowed down (or rate limited) by an upstream outage.
         # Status stays "ok" while the astronomy engine can serve: a degraded Hijri
         # integration falls back locally and is reported here, not treated as downtime.
-        return {"status": "ok", "spec": "waqt-core/0.1", "api_version": API_VERSION,
-                "computation": computation_identity(),
-                "integrations": {"hijri_aladhan": aladhan_status()}}
+        response.headers["Cache-Control"] = "no-store"
+        computation = computation_identity()
+        integration = aladhan_status()
+        if not integration["enabled"]:
+            provider_health = "disabled"
+        elif integration["circuit"] == "open" or (
+            integration["last_failure"] and
+            (not integration["last_success"] or integration["last_failure"] > integration["last_success"])
+        ):
+            provider_health = "degraded"
+        elif integration["last_success"]:
+            provider_health = "available"
+        else:
+            provider_health = "unknown"
+        return {
+            "status": "ok",
+            "spec": "waqt-core/0.1",
+            "api_version": API_VERSION,
+            "computation": computation,
+            "components": {
+                "application": {"status": "available"},
+                "computation": {"status": "available", **computation},
+                "optional_providers": {"aladhan": {"status": provider_health}},
+            },
+            "integrations": {"hijri_aladhan": integration},
+        }
 
     return application
 
