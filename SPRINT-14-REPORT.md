@@ -32,6 +32,7 @@ pytest 9.1.1, headless Chrome 153. Sandbox clock: 2026-09-30/10-01.
 | `verification/live_stack_check.py` (real uvicorn, real sockets) | 17/17 | **29/29** (12 new Sprint 14 checks) |
 | `verification/browser/run_sprint14.sh` (real Chrome, new) | — | **16/16** |
 | `verification/browser/run_smoke.mjs` (Sprint 13 browser suite) | 34/34 | **36/36** (3 stale expectations and 2 production-demo assertions updated) |
+| Public Render browser → HTTPS API → waqt-core | — | **PASS (2026-10-01)**; see §9 |
 | `verification/vector_additivity_check.py` (new) | — | **OK: 21/21 recorded responses preserved** |
 | `pip check` | — | no broken requirements |
 
@@ -157,7 +158,7 @@ The checker was validated with a mutated file (it flags a changed value and a re
 2. The circuit breaker is global: three consecutive *soft* failures (e.g. upstream rejecting three unsupported dates) open it for **all** dates for 30 s. Fails safe (to local) but coarse.
 3. Rate limiter and cache are in-process; multi-worker deployments multiply budgets. No shared store.
 4. **No logging/metrics** of fallbacks yet — they are visible in responses and `/v1/health` counters, but nothing is emitted for an operator to alert on.
-5. Tested on Python 3.12; `render.yaml` pins 3.13.2 (not exercised here). The Render deployment itself was not performed.
+5. Render production deployment was exercised on 2026-10-01 through `https://waqt-web.onrender.com` and `https://waqt-api-r6e0.onrender.com`; a custom `api.<waqt-domain>` hostname is not configured. Render reports Python 3.13.2; the full suite was not rerun on that exact hosted runtime.
 6. `aladhan` provider's `version` is our adapter label (see §4).
 
 ## 9. Definition of Done
@@ -166,7 +167,8 @@ The checker was validated with a mutated file (it flags a changed value and a re
 |---|---|
 | **Hijri** | ☑ AlAdhanHijriProvider ☑ Cache (12 h) ☑ Local fallback ☑ Provider provenance ☑ Failure tests (17 failure modes, parametrised; real-socket) ☑ No effect on astronomical computation (§3) |
 | **Events** | ☑ Gregorian/Hijri/Waqt representations ☑ Computation metadata (unchanged block, identical across endpoints) ☑ Provider metadata ☑ Error/fallback visibility (`source`, `provenance`, `calendar_error`, `/v1/health`) |
-| **Verification** | ☑ High-latitude test ☑ Polar test ☑ No regression in existing vectors (§7) ☑ Full suite passes (§0) ☑ **Live AlAdhan smoke check** (one date, 2026-10-01; broader uptime/coverage not claimed) |
+| **Verification** | ☑ High-latitude test ☑ Polar test ☑ No regression in existing vectors (§7) ☑ Full suite passes (§0) ☑ **Live AlAdhan smoke check** (one date, 2026-10-01; broader uptime/coverage not claimed) ☑ **Public Render browser → HTTPS API → waqt-core** |
+| **Public deployment check (2026-10-01)** | `https://waqt-web.onrender.com/` returned HTTP 200; from a headless browser it loaded the Makkah demo, showed six events and the About computation panel, and switched to `aladhan` with `source=remote` / `live · aladhan`. Requests to `https://waqt-api-r6e0.onrender.com` returned API 1.5.0, core 0.3.0, engine revision 2 / accuracy B; `/v1/health`, `/v1/version`, `/v1/calendar`, and `/v1/waqt` allowed the exact web origin. One cold health request timed out, then succeeded on retry; free-tier cold start. |
 | **Your test list** | normal location ☑ · high latitude ☑ · polar/undefined ☑ · provider switching ☑ · provider failure/fallback ☑ · invalid coordinates ☑ · invalid dates ☑ · rate limiting ☑ · CORS ☑ · API health ☑ · version reporting ☑ · browser day transition ☑ |
 
 ### Repeatable live check
