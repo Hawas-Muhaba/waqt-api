@@ -1,0 +1,837 @@
+{
+ "suite": "legacy-waqt",
+ "tier": "tolerance",
+ "description": "Sprint 5 vectors as live computations (tolerance 3 s: the reference is ~1 s from DE421).",
+ "vectors": [
+  {
+   "id": "waqt/addis-normal-instant",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "length_seconds": 86363.831
+     },
+     "position": {
+      "seconds": 1142.993
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-20T02:04:52.689470+00:00",
+       "reading_seconds": 38515.682
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-20T03:14:29.003215+00:00",
+       "reading_seconds": 42691.996
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-20T09:18:28.664402+00:00",
+       "reading_seconds": 64531.657
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T12:31:43.411901+00:00",
+       "reading_seconds": 76126.405
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T15:22:20.838566+00:00",
+       "reading_seconds": 86363.831
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T16:27:51.486062+00:00",
+       "reading_seconds": 90294.479
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Ordinary instant, Addis Ababa, shortly after Maghrib."
+  },
+  {
+   "id": "waqt/addis-exact-maghrib-boundary",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "informative",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:22:57.007342+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "length_seconds": 86363.831
+     },
+     "position": {
+      "seconds": 0.0
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-20T02:04:52.689470+00:00",
+       "reading_seconds": 38515.682
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-20T03:14:29.003215+00:00",
+       "reading_seconds": 42691.996
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-20T09:18:28.664402+00:00",
+       "reading_seconds": 64531.657
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T12:31:43.411901+00:00",
+       "reading_seconds": 76126.405
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T15:22:20.838566+00:00",
+       "reading_seconds": 86363.831
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T16:27:51.486062+00:00",
+       "reading_seconds": 90294.479
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Instant equal to Maghrib itself -- must read exactly 00:00:00, per the half-open [Maghrib(D), Maghrib(D+1)) rule. [boundary-sensitive: instants placed at the REFERENCE's Maghrib cannot be compared across engines; see metamorphic DAY-002/003 instead]"
+  },
+  {
+   "id": "waqt/addis-one-second-before-maghrib",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "informative",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:22:56.007342+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-06"
+     },
+     "weekday": "as-Sabt",
+     "day": {
+      "open": "2026-09-18T15:23:33.213316+00:00",
+      "close": "2026-09-19T15:22:57.007342+00:00",
+      "length_seconds": 86363.794
+     },
+     "position": {
+      "seconds": 86362.794
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-19T02:04:57.778463+00:00",
+       "reading_seconds": 38484.565
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-19T03:14:35.569837+00:00",
+       "reading_seconds": 42662.357
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-19T09:18:50.033849+00:00",
+       "reading_seconds": 64516.821
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-19T12:31:40.756436+00:00",
+       "reading_seconds": 76087.543
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-19T15:22:57.007342+00:00",
+       "reading_seconds": 86363.794
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-19T16:28:28.885934+00:00",
+       "reading_seconds": 90295.673
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "One second before Maghrib -- belongs to the PREVIOUS Waqt day, reading near its own day length. [boundary-sensitive: instants placed at the REFERENCE's Maghrib cannot be compared across engines; see metamorphic DAY-002/003 instead]"
+  },
+  {
+   "id": "waqt/makkah-equinox",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-06"
+     },
+     "weekday": "as-Sabt",
+     "day": {
+      "open": "2026-09-18T15:21:03.077116+00:00",
+      "close": "2026-09-19T15:20:05.133310+00:00",
+      "length_seconds": 86342.056
+     },
+     "position": {
+      "seconds": 74336.923
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-19T01:54:31.681829+00:00",
+       "reading_seconds": 38008.605
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-19T03:08:41.111160+00:00",
+       "reading_seconds": 42458.034
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-19T09:14:32.409651+00:00",
+       "reading_seconds": 64409.333
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-19T12:39:28.439863+00:00",
+       "reading_seconds": 76705.363
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-19T15:20:05.133310+00:00",
+       "reading_seconds": 86342.056
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-19T16:29:48.364574+00:00",
+       "reading_seconds": 90525.287
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Makkah itself, near the September equinox."
+  },
+  {
+   "id": "waqt/london-long-day-near-24h-boundary",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "informative",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-02-15T17:14:34.159299+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1447-08-27"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-02-14T17:13:44.159299+00:00",
+      "close": "2026-02-15T17:15:33.702488+00:00",
+      "length_seconds": 86509.543
+     },
+     "position": {
+      "seconds": 86450.0
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-02-15T05:22:21.336177+00:00",
+       "reading_seconds": 43717.177
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-02-15T07:14:28.639674+00:00",
+       "reading_seconds": 50444.48
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-02-15T12:14:37.712247+00:00",
+       "reading_seconds": 68453.553
+      },
+      {
+       "name": "asr",
+       "instant": "2026-02-15T14:45:25.020813+00:00",
+       "reading_seconds": 77500.862
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-02-15T17:15:33.702488+00:00",
+       "reading_seconds": 86509.543
+      },
+      {
+       "name": "isha",
+       "instant": "2026-02-15T19:01:26.524171+00:00",
+       "reading_seconds": 92862.365
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "London in February: this day runs slightly OVER 24:00:00. Instant chosen inside the (86400s, day_length) window so the reading is past 24:00:00. [boundary-sensitive: instants placed at the REFERENCE's Maghrib cannot be compared across engines; see metamorphic DAY-002/003 instead]"
+  },
+  {
+   "id": "waqt/tromso-midsummer-undefined",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "UND-001"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 69.6492,
+     "lon": 18.9553,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/Oslo",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "UNDEFINED"
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Tromso, Norway, midsummer: polar day. Maghrib does not occur. Must be UNDEFINED, never a guessed time."
+  },
+  {
+   "id": "waqt/kiritimati-date-line",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "day": {
+      "open": "2026-09-19T04:27:09.454859+00:00",
+      "close": "2026-09-20T04:26:45.001953+00:00",
+      "length_seconds": 86375.547
+     },
+     "position": {
+      "seconds": 66770.545
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-19T15:11:13.697163+00:00",
+       "reading_seconds": 38644.242
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-19T16:19:56.759206+00:00",
+       "reading_seconds": 42767.304
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-19T22:23:21.654644+00:00",
+       "reading_seconds": 64572.2
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T01:24:42.463227+00:00",
+       "reading_seconds": 75453.008
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T04:26:45.001953+00:00",
+       "reading_seconds": 86375.547
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T05:31:27.148616+00:00",
+       "reading_seconds": 90257.694
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case. [label fields removed: disputed, see DIS-001 and the label/* vectors]"
+  },
+  {
+   "id": "waqt/addis-asr-standard",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "length_seconds": 86363.831
+     },
+     "position": {
+      "seconds": 1142.993
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-20T02:04:52.689470+00:00",
+       "reading_seconds": 38515.682
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-20T03:14:29.003215+00:00",
+       "reading_seconds": 42691.996
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-20T09:18:28.664402+00:00",
+       "reading_seconds": 64531.657
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T12:31:43.411901+00:00",
+       "reading_seconds": 76126.405
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T15:22:20.838566+00:00",
+       "reading_seconds": 86363.831
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T16:27:51.486062+00:00",
+       "reading_seconds": 90294.479
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Addis Ababa, standard (Shafi'i) Asr convention, shadow ratio 1.0."
+  },
+  {
+   "id": "waqt/addis-asr-hanafi",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 2.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "length_seconds": 86363.831
+     },
+     "position": {
+      "seconds": 1142.993
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-20T02:04:52.689470+00:00",
+       "reading_seconds": 38515.682
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-20T03:14:29.003215+00:00",
+       "reading_seconds": 42691.996
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-20T09:18:28.664402+00:00",
+       "reading_seconds": 64531.657
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T13:37:33.649692+00:00",
+       "reading_seconds": 80076.642
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T15:22:20.838566+00:00",
+       "reading_seconds": 86363.831
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T16:27:51.486062+00:00",
+       "reading_seconds": 90294.479
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Addis Ababa, Hanafi Asr convention, shadow ratio 2.0."
+  },
+  {
+   "id": "waqt/addis-elevation-2400m",
+   "requirements": [
+    "DAY-001",
+    "EVT-001",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 2400.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad",
+     "day": {
+      "open": "2026-09-19T15:28:46.198093+00:00",
+      "close": "2026-09-20T15:28:09.972099+00:00",
+      "length_seconds": 86363.774
+     },
+     "position": {
+      "seconds": 793.802
+     },
+     "events": [
+      {
+       "name": "fajr",
+       "instant": "2026-09-20T02:04:52.689470+00:00",
+       "reading_seconds": 38166.491
+      },
+      {
+       "name": "sunrise",
+       "instant": "2026-09-20T03:08:39.722552+00:00",
+       "reading_seconds": 41993.524
+      },
+      {
+       "name": "dhuhr",
+       "instant": "2026-09-20T09:18:28.664402+00:00",
+       "reading_seconds": 64182.466
+      },
+      {
+       "name": "asr",
+       "instant": "2026-09-20T12:31:43.411901+00:00",
+       "reading_seconds": 75777.214
+      },
+      {
+       "name": "maghrib",
+       "instant": "2026-09-20T15:28:09.972099+00:00",
+       "reading_seconds": 86363.774
+      },
+      {
+       "name": "isha",
+       "instant": "2026-09-20T16:27:51.486062+00:00",
+       "reading_seconds": 89945.288
+      }
+     ]
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   },
+   "ignore": [
+    "display"
+   ],
+   "note": "Addis Ababa at its real elevation (~2400m) -- Maghrib should be several minutes later than sea level."
+  }
+ ]
+}

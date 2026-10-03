@@ -1,0 +1,383 @@
+{
+ "cop_version": "1.0",
+ "requirements": [
+  {
+   "id": "TIME-001",
+   "kind": "MUST",
+   "title": "Instants carry an explicit UTC offset; non-UTC offsets are normalised to UTC",
+   "section": "SEMANTICS 1; CALENDAR-INTEROP 4"
+  },
+  {
+   "id": "TIME-002",
+   "kind": "OPEN",
+   "title": "Offset-less ('naive') instants: rejected, or assumed to be UTC",
+   "section": "API 7 (instant: 'ISO 8601 UTC')"
+  },
+  {
+   "id": "TIME-003",
+   "kind": "MUST",
+   "title": "Malformed or non-existent instants/dates are rejected with INVALID_INSTANT / INVALID_DATE",
+   "section": "API errors"
+  },
+  {
+   "id": "GREG-001",
+   "kind": "MUST",
+   "title": "Proleptic Gregorian leap-year rule (4 / 100 / 400)",
+   "section": "CALENDAR-INTEROP 3"
+  },
+  {
+   "id": "GREG-002",
+   "kind": "MUST",
+   "title": "Weekday naming: ISO number and Sunday-first Islamic names",
+   "section": "CALENDAR-INTEROP 3"
+  },
+  {
+   "id": "GREG-003",
+   "kind": "MUST",
+   "title": "Days in month",
+   "section": "CALENDAR-INTEROP 3"
+  },
+  {
+   "id": "DAY-001",
+   "kind": "MUST",
+   "title": "A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1))",
+   "section": "SEMANTICS 2"
+  },
+  {
+   "id": "DAY-002",
+   "kind": "MUST",
+   "title": "At the exact opening Maghrib the new day has begun (position 00:00:00)",
+   "section": "SEMANTICS 2"
+  },
+  {
+   "id": "DAY-003",
+   "kind": "MUST",
+   "title": "One microsecond before a Maghrib belongs to the previous day; days tile without gap or overlap",
+   "section": "SEMANTICS 2"
+  },
+  {
+   "id": "DAY-004",
+   "kind": "MUST",
+   "title": "The day label (Hijri date, weekday) is that of the civil date on which the CLOSING Maghrib falls",
+   "section": "SEMANTICS 3; TIME-MODEL"
+  },
+  {
+   "id": "DAY-005",
+   "kind": "MUST",
+   "title": "Position is elapsed SI time since the opening Maghrib and is not clamped at 24:00:00",
+   "section": "SEMANTICS 4"
+  },
+  {
+   "id": "DAY-006",
+   "kind": "MUST",
+   "title": "Day length is the real interval, not 86400 s",
+   "section": "SEMANTICS 4; TIME-MODEL"
+  },
+  {
+   "id": "DAY-007",
+   "kind": "MUST",
+   "title": "Civil dates use the location's IANA zone (date line, DST) \u2014 not UTC and not solar time",
+   "section": "CALENDAR-INTEROP 1"
+  },
+  {
+   "id": "DAY-008",
+   "kind": "MUST",
+   "title": "The Waqt day depends only on the instant: all instants inside a day give the same day and events",
+   "section": "TIME-MODEL"
+  },
+  {
+   "id": "EVT-001",
+   "kind": "MUST",
+   "title": "Event definitions: Fajr/Isha angles, sunrise/Maghrib -0.8333 deg, Dhuhr transit, Asr shadow ratio (accuracy bands in CONFORMANCE 5)",
+   "section": "ASTRONOMY"
+  },
+  {
+   "id": "EVT-002",
+   "kind": "MUST",
+   "title": "An event's reading is its instant minus the day's opening Maghrib",
+   "section": "TIME-MODEL; SEMANTICS 5"
+  },
+  {
+   "id": "EVT-003",
+   "kind": "MUST",
+   "title": "The closing Maghrib is listed at the day length; Isha is listed beyond the day length",
+   "section": "SCHEDULING 3"
+  },
+  {
+   "id": "EVT-004",
+   "kind": "MUST",
+   "title": "Events after local midnight stay in the day of their transit (never move to the next civil date)",
+   "section": "TASK Sprint 15 (4); SEMANTICS 5"
+  },
+  {
+   "id": "EVT-005",
+   "kind": "MUST",
+   "title": "Fajr/Isha angle and Asr ratio change only their own event, never the day boundary",
+   "section": "TIME-MODEL"
+  },
+  {
+   "id": "EVT-006",
+   "kind": "MUST",
+   "title": "Elevation (dip) shifts sunrise and Maghrib only",
+   "section": "ASTRONOMY (Elevation)"
+  },
+  {
+   "id": "EVT-007",
+   "kind": "OPEN",
+   "title": "waqt.compute next_event: by OCCURRENCE (includes tonight's Isha) or only among the listed events",
+   "section": "SCHEDULING 5 vs API"
+  },
+  {
+   "id": "UND-001",
+   "kind": "MUST",
+   "title": "Polar day/night (no Maghrib): status UNDEFINED with a reason, never a guessed time",
+   "section": "SEMANTICS 8; ASTRONOMY"
+  },
+  {
+   "id": "UND-002",
+   "kind": "MUST",
+   "title": "An event that does not occur is omitted, never approximated; other events remain defined",
+   "section": "SEMANTICS 8"
+  },
+  {
+   "id": "UND-003",
+   "kind": "MUST",
+   "title": "Both implementations must agree on WHICH events exist away from the transition latitude",
+   "section": "ASTRONOMY (Edge cases)"
+  },
+  {
+   "id": "UND-004",
+   "kind": "OPEN",
+   "title": "Existence of grazing events within a few arc-minutes of their threshold",
+   "section": "ASTRONOMY (Edge cases)"
+  },
+  {
+   "id": "CAL-001",
+   "kind": "MUST",
+   "title": "arithmetic-tabular conversion Gregorian -> Hijri (epoch JDN 1948440)",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-002",
+   "kind": "OPEN",
+   "title": "arithmetic-tabular leap-year pattern within the 30-year cycle",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-003",
+   "kind": "MUST",
+   "title": "arithmetic-tabular reverse conversion is exact and round-trips",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-004",
+   "kind": "MUST",
+   "title": "Non-existent Hijri dates are rejected (INVALID_HIJRI_DATE), never silently normalised",
+   "section": "CALENDARS; INSTITUTIONAL 2"
+  },
+  {
+   "id": "CAL-005",
+   "kind": "MUST",
+   "title": "umm-al-qura reproduces the validated New Year dates (1438, 1440, 1441, 1447)",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-006",
+   "kind": "MUST",
+   "title": "umm-al-qura months have 29 or 30 days and Gregorian<->Hijri round-trips",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-007",
+   "kind": "OPEN",
+   "title": "umm-al-qura month boundaries away from the validated anchors (threshold-sensitive months)",
+   "section": "CALENDARS (What this is not)"
+  },
+  {
+   "id": "CAL-008",
+   "kind": "MUST",
+   "title": "declared / local-observation override applies only on the exact label date; otherwise tabular",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-009",
+   "kind": "MUST",
+   "title": "Providers without a fixed rule reject reverse conversion (UNSUPPORTED_OPERATION)",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "CAL-010",
+   "kind": "MUST",
+   "title": "Swapping the calendar provider changes only the label, never an instant or position",
+   "section": "TIME-MODEL; SCHEDULING 10"
+  },
+  {
+   "id": "CAL-011",
+   "kind": "OPEN",
+   "title": "umm-al-qura supported range and the error returned outside it",
+   "section": "CALENDARS"
+  },
+  {
+   "id": "PRV-001",
+   "kind": "MUST",
+   "title": "Hard remote failures (timeout, network error, 429, 5xx) fall back to local umm-al-qura with the stable reason code",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-002",
+   "kind": "MUST",
+   "title": "Soft failures (4xx, malformed, date-mismatch, implausible) fall back with the stable reason code",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-003",
+   "kind": "MUST",
+   "title": "Dates outside 1900-01-01..2076-12-31 and a disabled provider never leave the process",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-004",
+   "kind": "MUST",
+   "title": "Cache hit within the TTL; stale-if-error up to 7 days, labelled remote-stale",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-005",
+   "kind": "MUST",
+   "title": "Circuit breaker after a hard failure; Retry-After honoured and capped",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-006",
+   "kind": "MUST",
+   "title": "The fallback result names the provider that actually produced it",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "PRV-007",
+   "kind": "OPEN",
+   "title": "Soft-failure counting and outbound budget details",
+   "section": "LIVE-INTEGRATIONS"
+  },
+  {
+   "id": "SCH-001",
+   "kind": "MUST",
+   "title": "Point resolution: instant, anchor, event slots, next/prev occurrence, position, offset, fraction",
+   "section": "SCHEDULING 2-4"
+  },
+  {
+   "id": "SCH-002",
+   "kind": "MUST",
+   "title": "Windows are half-open; unbounded ends; inside/before/after relation",
+   "section": "SCHEDULING 4"
+  },
+  {
+   "id": "SCH-003",
+   "kind": "MUST",
+   "title": "Deadlines: pending / reached / passed with signed remaining seconds",
+   "section": "SCHEDULING 5"
+  },
+  {
+   "id": "SCH-004",
+   "kind": "MUST",
+   "title": "Three undefined statuses; strict vs skip policy; evaluate reports unknown, not false",
+   "section": "SCHEDULING 6"
+  },
+  {
+   "id": "SCH-005",
+   "kind": "MUST",
+   "title": "Span classification: strict-interior Maghrib crossing, civil midnight independent",
+   "section": "SCHEDULING 7"
+  },
+  {
+   "id": "SCH-006",
+   "kind": "MUST",
+   "title": "event_position reports listed and containing positions; next_event/until/since",
+   "section": "SCHEDULING 3, 5"
+  },
+  {
+   "id": "SCH-007",
+   "kind": "MUST",
+   "title": "Derived instants use integer microseconds with half-up rounding",
+   "section": "SCHEDULING 9"
+  },
+  {
+   "id": "SCH-008",
+   "kind": "MUST",
+   "title": "Scheduling over LIVE astronomy agrees with the table-driven result within astronomy tolerance",
+   "section": "SCHEDULING 9"
+  },
+  {
+   "id": "INS-001",
+   "kind": "MUST",
+   "title": "Calendar rules: month_day, month_end, nth_weekday_of_month",
+   "section": "INSTITUTIONAL 2"
+  },
+  {
+   "id": "INS-002",
+   "kind": "MUST",
+   "title": "Islamic week: seven consecutive days from a configurable first day",
+   "section": "INSTITUTIONAL 3"
+  },
+  {
+   "id": "INS-003",
+   "kind": "MUST",
+   "title": "Fiscal year resolves start/end rules; end before start is rejected",
+   "section": "INSTITUTIONAL 4"
+  },
+  {
+   "id": "INS-004",
+   "kind": "MUST",
+   "title": "Academic year: opening, closing, terms, holidays",
+   "section": "INSTITUTIONAL 5"
+  },
+  {
+   "id": "INS-005",
+   "kind": "MUST",
+   "title": "Unresolvable rules fail with INVALID_CALENDAR_RULE",
+   "section": "INSTITUTIONAL 8"
+  },
+  {
+   "id": "INT-001",
+   "kind": "MUST",
+   "title": "Instant representation: UTC and civil Gregorian views of one instant, plus Waqt position",
+   "section": "CALENDAR-INTEROP 1, 4"
+  },
+  {
+   "id": "INT-002",
+   "kind": "MUST",
+   "title": "Gregorian date + place -> the Waqt day whose closing Maghrib falls on that date",
+   "section": "CALENDAR-INTEROP 1"
+  },
+  {
+   "id": "INT-003",
+   "kind": "MUST",
+   "title": "Boundary crossing: civil midnight and Maghrib independent; strictly-interior rule",
+   "section": "CALENDAR-INTEROP 2"
+  },
+  {
+   "id": "ERR-001",
+   "kind": "MUST",
+   "title": "Out-of-range latitude/longitude is rejected",
+   "section": "API errors"
+  },
+  {
+   "id": "ERR-002",
+   "kind": "MUST",
+   "title": "Unknown IANA time zone is rejected",
+   "section": "API errors"
+  },
+  {
+   "id": "ERR-003",
+   "kind": "MUST",
+   "title": "Unknown calendar provider is rejected",
+   "section": "API errors"
+  },
+  {
+   "id": "ERR-004",
+   "kind": "MUST",
+   "title": "Non-physical astronomy profile parameters are rejected",
+   "section": "API errors"
+  }
+ ]
+}

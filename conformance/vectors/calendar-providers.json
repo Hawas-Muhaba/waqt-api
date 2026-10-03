@@ -1,0 +1,222 @@
+{
+ "suite": "calendar-providers",
+ "tier": "exact",
+ "vectors": [
+  {
+   "id": "reverse-unsupported/declared",
+   "requirements": [
+    "CAL-009"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 4,
+    "day": 7,
+    "provider": "declared"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNSUPPORTED_OPERATION"
+     ]
+    }
+   }
+  },
+  {
+   "id": "reverse-unsupported/local-observation",
+   "requirements": [
+    "CAL-009"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 4,
+    "day": 7,
+    "provider": "local-observation"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNSUPPORTED_OPERATION"
+     ]
+    }
+   }
+  },
+  {
+   "id": "reverse-unsupported/aladhan",
+   "requirements": [
+    "CAL-009"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 4,
+    "day": 7,
+    "provider": "aladhan"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNSUPPORTED_OPERATION"
+     ]
+    }
+   }
+  },
+  {
+   "id": "unknown-provider",
+   "requirements": [
+    "ERR-003"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-20",
+    "provider": "nope"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNKNOWN_CALENDAR_PROVIDER"
+     ]
+    }
+   }
+  },
+  {
+   "id": "declared/fires-on-exact-date",
+   "requirements": [
+    "CAL-008"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-20",
+    "provider": "declared",
+    "params": {
+     "override_date": "2026-09-20",
+     "declared": {
+      "year": 1448,
+      "month": 4,
+      "day": 10
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "date": "1448-04-10",
+     "provider": "declared"
+    }
+   }
+  },
+  {
+   "id": "declared/other-date-falls-back",
+   "requirements": [
+    "CAL-008"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-21",
+    "provider": "declared",
+    "params": {
+     "override_date": "2026-09-20",
+     "declared": {
+      "year": 1448,
+      "month": 4,
+      "day": 10
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "date": "1448-04-08",
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "note": "override applies to ONE date only; every other date is tabular"
+  },
+  {
+   "id": "declared/no-override-falls-back",
+   "requirements": [
+    "CAL-008"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-20",
+    "provider": "declared"
+   },
+   "expect": {
+    "output": {
+     "date": "1448-04-07",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "local-observation/fires-on-exact-date",
+   "requirements": [
+    "CAL-008"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-20",
+    "provider": "local-observation",
+    "params": {
+     "override_date": "2026-09-20",
+     "sighting": {
+      "year": 1448,
+      "month": 4,
+      "day": 9
+     },
+     "observed_at": "Addis Ababa"
+    }
+   },
+   "expect": {
+    "output": {
+     "date": "1448-04-09",
+     "provider": "local-observation"
+    }
+   }
+  },
+  {
+   "id": "local-observation/other-date-falls-back",
+   "requirements": [
+    "CAL-008"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-19",
+    "provider": "local-observation",
+    "params": {
+     "override_date": "2026-09-20",
+     "sighting": {
+      "year": 1448,
+      "month": 4,
+      "day": 9
+     },
+     "observed_at": "Addis Ababa"
+    }
+   },
+   "expect": {
+    "output": {
+     "date": "1448-04-06",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,218 @@
+{
+ "suite": "open-questions",
+ "tier": "open",
+ "vectors": [
+  {
+   "id": "date/basic-format-20260101",
+   "requirements": [
+    "TIME-003"
+   ],
+   "op": "gregorian.weekday",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "date": "20260101"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_DATE",
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject. The wire format is stated as YYYY-MM-DD; whether ISO-8601 basic format is tolerated is not stated. The reference accepts it (Python fromisoformat)."
+  },
+  {
+   "id": "instant/fraction-echo",
+   "requirements": [
+    "TIME-001"
+   ],
+   "op": "instant.parse",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "value": "2026-09-19T15:42:00.123456Z"
+   },
+   "expect": {
+    "output": {
+     "instant": "2026-09-19T15:42:00.123456+00:00"
+    }
+   },
+   "note": "PROPOSED: sub-second input is preserved. The reference /v1/waqt response echoes the instant truncated to whole seconds."
+  },
+  {
+   "id": "instant/naive",
+   "requirements": [
+    "TIME-002"
+   ],
+   "op": "instant.parse",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "value": "2026-09-19T15:42:00"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_INSTANT",
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
+  },
+  {
+   "id": "uaq/range/1650-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "open",
+   "basis": "recorded",
+   "input": {
+    "date": "1650-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1059-12-28"
+    }
+   },
+   "note": "Supported range of umm-al-qura is stated only as 'reliable roughly 1900-2100'; what happens outside is unspecified."
+  },
+  {
+   "id": "uaq/range/1699-12-31",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "open",
+   "basis": "recorded",
+   "input": {
+    "date": "1699-12-31",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1111-07-10"
+    }
+   },
+   "note": "Supported range of umm-al-qura is stated only as 'reliable roughly 1900-2100'; what happens outside is unspecified."
+  },
+  {
+   "id": "uaq/range/2301-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "open",
+   "basis": "recorded",
+   "input": {
+    "date": "2301-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1730-12-20"
+    }
+   },
+   "note": "Supported range of umm-al-qura is stated only as 'reliable roughly 1900-2100'; what happens outside is unspecified."
+  },
+  {
+   "id": "uaq/range/2500-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "open",
+   "basis": "recorded",
+   "input": {
+    "date": "2500-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1936-01-29"
+    }
+   },
+   "note": "Supported range of umm-al-qura is stated only as 'reliable roughly 1900-2100'; what happens outside is unspecified."
+  },
+  {
+   "id": "next-event/tonights-isha",
+   "requirements": [
+    "EVT-007"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "next_event": {
+      "name": "isha",
+      "instant": "2026-09-19T16:28:28+00:00"
+     }
+    }
+   },
+   "note": "Right after Maghrib the next event by OCCURRENCE is tonight's Isha (SCHEDULING.md 5 says exactly this for the scheduling layer). The waqt.compute response lists only the new day's events, so a listing-based next_event skips it and returns tomorrow's Fajr.",
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   }
+  },
+  {
+   "id": "asr/degenerate-67N-solstice",
+   "requirements": [
+    "UND-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "oracle",
+   "input": {
+    "location": {
+     "lat": 67.0,
+     "lon": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "undefined_events": [
+      {
+       "name": "asr"
+      }
+     ]
+    }
+   },
+   "note": "Sun's noon altitude is -0.44 deg, equal to the (degenerate, negative) Asr target. PROPOSED: Asr is undefined when the Sun is not above the geometric horizon at transit. The independent implementation first returned an Asr here and was changed AFTER the latitude sweep exposed it."
+  }
+ ]
+}

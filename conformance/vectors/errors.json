@@ -1,0 +1,383 @@
+{
+ "suite": "errors",
+ "tier": "mixed",
+ "vectors": [
+  {
+   "id": "err/lat-91",
+   "requirements": [
+    "ERR-001"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 91,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/lat--91",
+   "requirements": [
+    "ERR-001"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": -91,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/lon-181",
+   "requirements": [
+    "ERR-001"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 181
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/lon--181",
+   "requirements": [
+    "ERR-001"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": -181
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/tz-unknown",
+   "requirements": [
+    "ERR-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Mars/Base",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR",
+      "UNKNOWN_TIMEZONE",
+      "INVALID_TIMEZONE"
+     ]
+    }
+   },
+   "note": "a bad time zone must be a client error, not INTERNAL_ERROR"
+  },
+  {
+   "id": "err/provider-unknown",
+   "requirements": [
+    "ERR-003"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "nope"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNKNOWN_CALENDAR_PROVIDER"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/instant-garbage",
+   "requirements": [
+    "TIME-003"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "garbage",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_INSTANT"
+     ]
+    }
+   }
+  },
+  {
+   "id": "err/profile/fajr-95",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 95,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  },
+  {
+   "id": "err/profile/fajr-negative",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": -5,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  },
+  {
+   "id": "err/profile/isha-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  },
+  {
+   "id": "err/profile/asr-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  },
+  {
+   "id": "err/profile/asr-negative",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": -1
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  }
+ ]
+}

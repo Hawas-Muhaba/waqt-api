@@ -1,0 +1,9102 @@
+{
+ "suite": "legacy-institutional",
+ "tier": "exact",
+ "description": "Sprint 7 institutional vectors; each is run with a frozen month table and again with the calendar computed.",
+ "vectors": [
+  {
+   "id": "ins/rule-month-day-muharram-1-arithmetic-tabular",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_day",
+     "month": 1,
+     "day": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-01",
+     "gregorian": "2026-06-17"
+    }
+   },
+   "note": "1 Muharram (month start)"
+  },
+  {
+   "id": "ins/rule-month-day-muharram-1-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_day",
+     "month": 1,
+     "day": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-01",
+     "gregorian": "2026-06-17"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. 1 Muharram (month start)"
+  },
+  {
+   "id": "ins/rule-month-end-dhul-hijjah-arithmetic-tabular",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_end",
+     "month": 12
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-12-29",
+     "gregorian": "2027-06-05"
+    }
+   },
+   "note": "End of Dhu al-Hijjah (29 or 30)"
+  },
+  {
+   "id": "ins/rule-month-end-dhul-hijjah-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_end",
+     "month": 12
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-12-29",
+     "gregorian": "2027-06-05"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. End of Dhu al-Hijjah (29 or 30)"
+  },
+  {
+   "id": "ins/rule-first-ahad-muharram-arithmetic-tabular",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 1,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-05",
+     "gregorian": "2026-06-21"
+    }
+   },
+   "note": "First Ahad of Muharram"
+  },
+  {
+   "id": "ins/rule-first-ahad-muharram-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 1,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-05",
+     "gregorian": "2026-06-21"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. First Ahad of Muharram"
+  },
+  {
+   "id": "ins/rule-last-khamis-shaban-arithmetic-tabular",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Khamis",
+     "n": -1,
+     "month": 8
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-08-26",
+     "gregorian": "2027-02-04"
+    }
+   },
+   "note": "Last Khamis of Sha'ban"
+  },
+  {
+   "id": "ins/rule-last-khamis-shaban-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Khamis",
+     "n": -1,
+     "month": 8
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-08-26",
+     "gregorian": "2027-02-04"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Last Khamis of Sha'ban"
+  },
+  {
+   "id": "ins/rule-second-jumuah-muharram-arithmetic-tabular",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Jumuah",
+     "n": 2,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-10",
+     "gregorian": "2026-06-26"
+    }
+   },
+   "note": "2nd Jumu'ah of Muharram (arbitrary positive n)"
+  },
+  {
+   "id": "ins/rule-second-jumuah-muharram-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Jumuah",
+     "n": 2,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-10",
+     "gregorian": "2026-06-26"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. 2nd Jumu'ah of Muharram (arbitrary positive n)"
+  },
+  {
+   "id": "ins/rule-month-day-muharram-1-umm-al-qura",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_day",
+     "month": 1,
+     "day": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-01",
+     "gregorian": "2026-06-16"
+    }
+   },
+   "note": "1 Muharram (month start)"
+  },
+  {
+   "id": "ins/rule-month-day-muharram-1-umm-al-qura/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "month_day",
+     "month": 1,
+     "day": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-01",
+     "gregorian": "2026-06-16"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. 1 Muharram (month start)"
+  },
+  {
+   "id": "ins/rule-month-end-dhul-hijjah-umm-al-qura",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "month_end",
+     "month": 12
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-12-30",
+     "gregorian": "2027-06-05"
+    }
+   },
+   "note": "End of Dhu al-Hijjah (29 or 30)"
+  },
+  {
+   "id": "ins/rule-month-end-dhul-hijjah-umm-al-qura/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "month_end",
+     "month": 12
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-12-30",
+     "gregorian": "2027-06-05"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. End of Dhu al-Hijjah (29 or 30)"
+  },
+  {
+   "id": "ins/rule-first-ahad-muharram-umm-al-qura",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 1,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-06",
+     "gregorian": "2026-06-21"
+    }
+   },
+   "note": "First Ahad of Muharram"
+  },
+  {
+   "id": "ins/rule-first-ahad-muharram-umm-al-qura/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 1,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-06",
+     "gregorian": "2026-06-21"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. First Ahad of Muharram"
+  },
+  {
+   "id": "ins/rule-last-khamis-shaban-umm-al-qura",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Khamis",
+     "n": -1,
+     "month": 8
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-08-27",
+     "gregorian": "2027-02-04"
+    }
+   },
+   "note": "Last Khamis of Sha'ban"
+  },
+  {
+   "id": "ins/rule-last-khamis-shaban-umm-al-qura/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Khamis",
+     "n": -1,
+     "month": 8
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-08-27",
+     "gregorian": "2027-02-04"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Last Khamis of Sha'ban"
+  },
+  {
+   "id": "ins/rule-second-jumuah-muharram-umm-al-qura",
+   "requirements": [
+    "INS-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Jumuah",
+     "n": 2,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-11",
+     "gregorian": "2026-06-26"
+    }
+   },
+   "note": "2nd Jumu'ah of Muharram (arbitrary positive n)"
+  },
+  {
+   "id": "ins/rule-second-jumuah-muharram-umm-al-qura/computed",
+   "requirements": [
+    "INS-001",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Jumuah",
+     "n": 2,
+     "month": 1
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "hijri": "1448-01-11",
+     "gregorian": "2026-06-26"
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. 2nd Jumu'ah of Muharram (arbitrary positive n)"
+  },
+  {
+   "id": "ins/week-dates-0",
+   "requirements": [
+    "INS-002"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "week_dates",
+     "date": "2026-09-19",
+     "first_day": "al-Ahad"
+    },
+    "context": {}
+   },
+   "expect": {
+    "output": {
+     "week_dates": [
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19"
+     ],
+     "weekdays": [
+      "al-Ahad",
+      "al-Ithnayn",
+      "ath-Thulatha",
+      "al-Arbiaa",
+      "al-Khamis",
+      "al-Jumuah",
+      "as-Sabt"
+     ]
+    }
+   },
+   "note": "Week containing 2026-09-19, first_day=al-Ahad"
+  },
+  {
+   "id": "ins/week-dates-1",
+   "requirements": [
+    "INS-002"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "week_dates",
+     "date": "2026-09-13",
+     "first_day": "al-Ahad"
+    },
+    "context": {}
+   },
+   "expect": {
+    "output": {
+     "week_dates": [
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19"
+     ],
+     "weekdays": [
+      "al-Ahad",
+      "al-Ithnayn",
+      "ath-Thulatha",
+      "al-Arbiaa",
+      "al-Khamis",
+      "al-Jumuah",
+      "as-Sabt"
+     ]
+    }
+   },
+   "note": "Week containing 2026-09-13, first_day=al-Ahad"
+  },
+  {
+   "id": "ins/week-dates-2",
+   "requirements": [
+    "INS-002"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "week_dates",
+     "date": "2026-09-18",
+     "first_day": "al-Ahad"
+    },
+    "context": {}
+   },
+   "expect": {
+    "output": {
+     "week_dates": [
+      "2026-09-13",
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19"
+     ],
+     "weekdays": [
+      "al-Ahad",
+      "al-Ithnayn",
+      "ath-Thulatha",
+      "al-Arbiaa",
+      "al-Khamis",
+      "al-Jumuah",
+      "as-Sabt"
+     ]
+    }
+   },
+   "note": "Week containing 2026-09-18, first_day=al-Ahad"
+  },
+  {
+   "id": "ins/week-dates-3",
+   "requirements": [
+    "INS-002"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "week_dates",
+     "date": "2026-09-19",
+     "first_day": "al-Ithnayn"
+    },
+    "context": {}
+   },
+   "expect": {
+    "output": {
+     "week_dates": [
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20"
+     ],
+     "weekdays": [
+      "al-Ithnayn",
+      "ath-Thulatha",
+      "al-Arbiaa",
+      "al-Khamis",
+      "al-Jumuah",
+      "as-Sabt",
+      "al-Ahad"
+     ]
+    }
+   },
+   "note": "Week containing 2026-09-19, first_day=al-Ithnayn"
+  },
+  {
+   "id": "ins/fiscal-year-default-arithmetic-tabular-1447",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1447
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1447,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2025-06-27",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2025-06-28",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2025-06-29",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2025-06-30",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2025-07-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2025-07-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2025-07-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2025-07-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2025-07-05",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2025-07-06",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2025-07-07",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2025-07-08",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2025-07-09",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2025-07-10",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2025-07-11",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2025-07-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2025-07-13",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2025-07-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2025-07-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2025-07-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2025-07-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2025-07-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2025-07-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2025-07-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2025-07-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2025-07-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2025-07-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2025-07-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2025-07-25",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2025-07-26",
+        "weekday": "as-Sabt"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2026-05-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-05-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-05-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-05-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-05-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-05-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-05-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-05-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-05-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-05-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-05-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-05-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-05-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-05-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-06-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-06-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-06-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-06-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-06-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-06-07",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-06-08",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-06-09",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-06-10",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-06-11",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-06-12",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-06-13",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-06-14",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-06-15",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1447-01-01",
+      "gregorian": "2025-06-27"
+     },
+     "end": {
+      "hijri": "1447-12-30",
+      "gregorian": "2026-06-16"
+     }
+    }
+   },
+   "note": "Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-arithmetic-tabular-1447/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1447
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1447
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1447-01-01",
+      "gregorian": "2025-06-27"
+     },
+     "end": {
+      "hijri": "1447-12-30",
+      "gregorian": "2026-06-16"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-arithmetic-tabular-1448",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-01-01",
+      "gregorian": "2026-06-17"
+     },
+     "end": {
+      "hijri": "1448-12-29",
+      "gregorian": "2027-06-05"
+     }
+    }
+   },
+   "note": "Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-arithmetic-tabular-1448/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-01-01",
+      "gregorian": "2026-06-17"
+     },
+     "end": {
+      "hijri": "1448-12-29",
+      "gregorian": "2027-06-05"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-custom-arithmetic-tabular",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 7
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 9
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "7": [
+       {
+        "day": 1,
+        "gregorian": "2026-12-11",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-12-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-12-13",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-12-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-12-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-12-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-12-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-12-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-12-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-12-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-12-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-12-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-12-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-12-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-12-25",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-12-26",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-12-27",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-12-28",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-12-29",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-12-30",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-12-31",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-01",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-02",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-01-03",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-01-04",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-01-05",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-01-06",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-01-07",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-01-08",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       }
+      ],
+      "9": [
+       {
+        "day": 1,
+        "gregorian": "2027-02-08",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-02-09",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-02-10",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-02-11",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-02-12",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-02-13",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-02-14",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-02-15",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-02-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-02-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-02-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-02-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-02-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-02-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-02-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-02-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-02-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-02-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-02-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-02-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-02-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-03-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-03-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-03-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-03-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-03-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-03-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-03-07",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-03-08",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-03-09",
+        "weekday": "ath-Thulatha"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-07-03",
+      "gregorian": "2026-12-13"
+     },
+     "end": {
+      "hijri": "1448-09-30",
+      "gregorian": "2027-03-09"
+     }
+    }
+   },
+   "note": "Custom: first Ahad of Rajab -> end of Ramadan"
+  },
+  {
+   "id": "ins/fiscal-year-custom-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 7
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 9
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-07-03",
+      "gregorian": "2026-12-13"
+     },
+     "end": {
+      "hijri": "1448-09-30",
+      "gregorian": "2027-03-09"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Custom: first Ahad of Rajab -> end of Ramadan"
+  },
+  {
+   "id": "ins/fiscal-year-default-umm-al-qura-1447",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1447
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1447,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2025-06-26",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 2,
+        "gregorian": "2025-06-27",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 3,
+        "gregorian": "2025-06-28",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 4,
+        "gregorian": "2025-06-29",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 5,
+        "gregorian": "2025-06-30",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 6,
+        "gregorian": "2025-07-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 7,
+        "gregorian": "2025-07-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 8,
+        "gregorian": "2025-07-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 9,
+        "gregorian": "2025-07-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 10,
+        "gregorian": "2025-07-05",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 11,
+        "gregorian": "2025-07-06",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 12,
+        "gregorian": "2025-07-07",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 13,
+        "gregorian": "2025-07-08",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 14,
+        "gregorian": "2025-07-09",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 15,
+        "gregorian": "2025-07-10",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 16,
+        "gregorian": "2025-07-11",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 17,
+        "gregorian": "2025-07-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 18,
+        "gregorian": "2025-07-13",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 19,
+        "gregorian": "2025-07-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 20,
+        "gregorian": "2025-07-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 21,
+        "gregorian": "2025-07-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 22,
+        "gregorian": "2025-07-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 23,
+        "gregorian": "2025-07-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 24,
+        "gregorian": "2025-07-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 25,
+        "gregorian": "2025-07-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 26,
+        "gregorian": "2025-07-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 27,
+        "gregorian": "2025-07-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 28,
+        "gregorian": "2025-07-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 29,
+        "gregorian": "2025-07-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 30,
+        "gregorian": "2025-07-25",
+        "weekday": "al-Jumuah"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2026-05-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-05-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-05-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-05-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-05-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-05-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-05-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-05-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-05-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-05-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-05-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-05-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-05-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-05-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-06-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-06-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-06-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-06-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-06-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-06-07",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-06-08",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-06-09",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-06-10",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-06-11",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-06-12",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-06-13",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-06-14",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-06-15",
+        "weekday": "al-Ithnayn"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1447-01-01",
+      "gregorian": "2025-06-26"
+     },
+     "end": {
+      "hijri": "1447-12-29",
+      "gregorian": "2026-06-15"
+     }
+    }
+   },
+   "note": "Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-umm-al-qura-1447/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1447
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1447
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1447-01-01",
+      "gregorian": "2025-06-26"
+     },
+     "end": {
+      "hijri": "1447-12-29",
+      "gregorian": "2026-06-15"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-umm-al-qura-1448",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "12": [
+       {
+        "day": 1,
+        "gregorian": "2027-05-07",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-05-08",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-05-09",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-05-10",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-05-11",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-05-12",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-05-13",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-05-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-05-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-05-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-05-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-05-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-05-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-05-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-05-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-05-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-05-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-05-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-05-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-05-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-05-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-05-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-05-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-05-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-05-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-06-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-06-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-06-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-06-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-06-05",
+        "weekday": "as-Sabt"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-01-01",
+      "gregorian": "2026-06-16"
+     },
+     "end": {
+      "hijri": "1448-12-30",
+      "gregorian": "2027-06-05"
+     }
+    }
+   },
+   "note": "Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-default-umm-al-qura-1448/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-01-01",
+      "gregorian": "2026-06-16"
+     },
+     "end": {
+      "hijri": "1448-12-30",
+      "gregorian": "2027-06-05"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Muharram 1 -> end of Dhu al-Hijjah"
+  },
+  {
+   "id": "ins/fiscal-year-custom-umm-al-qura",
+   "requirements": [
+    "INS-003"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 7
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 9
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "7": [
+       {
+        "day": 1,
+        "gregorian": "2026-12-10",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-12-11",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-12-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-12-13",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-12-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-12-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-12-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-12-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-12-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-12-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-12-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-12-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-12-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-12-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-12-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-12-25",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-12-26",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-12-27",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-12-28",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-12-29",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-12-30",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-12-31",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-01",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-01-02",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-01-03",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-01-04",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-01-05",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-01-06",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-01-07",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-01-08",
+        "weekday": "al-Jumuah"
+       }
+      ],
+      "9": [
+       {
+        "day": 1,
+        "gregorian": "2027-02-08",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-02-09",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-02-10",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-02-11",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-02-12",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-02-13",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-02-14",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-02-15",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-02-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-02-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-02-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-02-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-02-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-02-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-02-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-02-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-02-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-02-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-02-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-02-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-02-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-03-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-03-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-03-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-03-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-03-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-03-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-03-07",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-03-08",
+        "weekday": "al-Ithnayn"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-07-04",
+      "gregorian": "2026-12-13"
+     },
+     "end": {
+      "hijri": "1448-09-29",
+      "gregorian": "2027-03-08"
+     }
+    }
+   },
+   "note": "Custom: first Ahad of Rajab -> end of Ramadan"
+  },
+  {
+   "id": "ins/fiscal-year-custom-umm-al-qura/computed",
+   "requirements": [
+    "INS-003",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 7
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 9
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-07-04",
+      "gregorian": "2026-12-13"
+     },
+     "end": {
+      "hijri": "1448-09-29",
+      "gregorian": "2027-03-08"
+     }
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. Custom: first Ahad of Rajab -> end of Ramadan"
+  },
+  {
+   "id": "ins/academic-year-arithmetic-tabular",
+   "requirements": [
+    "INS-004"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "academic_year",
+     "opening_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 1
+     },
+     "closing_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Khamis",
+      "n": -1,
+      "month": 8
+     },
+     "term_rules": [
+      {
+       "label": "Term 1",
+       "start_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Ahad",
+        "n": 1,
+        "month": 1
+       },
+       "end_rule": {
+        "type": "month_day",
+        "month": 3,
+        "day": 29
+       }
+      },
+      {
+       "label": "Term 2",
+       "start_rule": {
+        "type": "month_day",
+        "month": 4,
+        "day": 1
+       },
+       "end_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Khamis",
+        "n": -1,
+        "month": 8
+       }
+      }
+     ],
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-15",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-07-16",
+        "weekday": "al-Khamis"
+       }
+      ],
+      "3": [
+       {
+        "day": 1,
+        "gregorian": "2026-08-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-08-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-08-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-08-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-08-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-08-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-08-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-08-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-08-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-08-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-08-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-08-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-08-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-08-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-08-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-08-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-08-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-09-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-09-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-09-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-09-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-09-05",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-09-06",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-09-07",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-09-08",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-09-09",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-09-10",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-09-11",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-09-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-09-13",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "4": [
+       {
+        "day": 1,
+        "gregorian": "2026-09-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-09-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-09-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-09-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-09-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-09-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-09-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-09-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-09-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-09-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-09-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-09-25",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-09-26",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-09-27",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-09-28",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-09-29",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-09-30",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-10-01",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-10-02",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-10-03",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-10-04",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-10-05",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-10-06",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-10-07",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-10-08",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-10-09",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-10-10",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-10-11",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-10-12",
+        "weekday": "al-Ithnayn"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "opening": {
+      "hijri": "1448-01-05",
+      "gregorian": "2026-06-21"
+     },
+     "closing": {
+      "hijri": "1448-08-26",
+      "gregorian": "2027-02-04"
+     },
+     "terms": [
+      {
+       "label": "Term 1",
+       "start": {
+        "hijri": "1448-01-05",
+        "gregorian": "2026-06-21"
+       },
+       "end": {
+        "hijri": "1448-03-29",
+        "gregorian": "2026-09-12"
+       }
+      },
+      {
+       "label": "Term 2",
+       "start": {
+        "hijri": "1448-04-01",
+        "gregorian": "2026-09-14"
+       },
+       "end": {
+        "hijri": "1448-08-26",
+        "gregorian": "2027-02-04"
+       }
+      }
+     ]
+    }
+   },
+   "note": "First Ahad of Muharram -> last Khamis of Sha'ban, 2 terms"
+  },
+  {
+   "id": "ins/academic-year-arithmetic-tabular/computed",
+   "requirements": [
+    "INS-004",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "academic_year",
+     "opening_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 1
+     },
+     "closing_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Khamis",
+      "n": -1,
+      "month": 8
+     },
+     "term_rules": [
+      {
+       "label": "Term 1",
+       "start_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Ahad",
+        "n": 1,
+        "month": 1
+       },
+       "end_rule": {
+        "type": "month_day",
+        "month": 3,
+        "day": 29
+       }
+      },
+      {
+       "label": "Term 2",
+       "start_rule": {
+        "type": "month_day",
+        "month": 4,
+        "day": 1
+       },
+       "end_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Khamis",
+        "n": -1,
+        "month": 8
+       }
+      }
+     ],
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "opening": {
+      "hijri": "1448-01-05",
+      "gregorian": "2026-06-21"
+     },
+     "closing": {
+      "hijri": "1448-08-26",
+      "gregorian": "2027-02-04"
+     },
+     "terms": [
+      {
+       "label": "Term 1",
+       "start": {
+        "hijri": "1448-01-05",
+        "gregorian": "2026-06-21"
+       },
+       "end": {
+        "hijri": "1448-03-29",
+        "gregorian": "2026-09-12"
+       }
+      },
+      {
+       "label": "Term 2",
+       "start": {
+        "hijri": "1448-04-01",
+        "gregorian": "2026-09-14"
+       },
+       "end": {
+        "hijri": "1448-08-26",
+        "gregorian": "2027-02-04"
+       }
+      }
+     ]
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. First Ahad of Muharram -> last Khamis of Sha'ban, 2 terms"
+  },
+  {
+   "id": "ins/academic-year-umm-al-qura",
+   "requirements": [
+    "INS-004"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "input": {
+    "operation": {
+     "op": "academic_year",
+     "opening_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 1
+     },
+     "closing_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Khamis",
+      "n": -1,
+      "month": 8
+     },
+     "term_rules": [
+      {
+       "label": "Term 1",
+       "start_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Ahad",
+        "n": 1,
+        "month": 1
+       },
+       "end_rule": {
+        "type": "month_day",
+        "month": 3,
+        "day": 29
+       }
+      },
+      {
+       "label": "Term 2",
+       "start_rule": {
+        "type": "month_day",
+        "month": 4,
+        "day": 1
+       },
+       "end_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Khamis",
+        "n": -1,
+        "month": 8
+       }
+      }
+     ],
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448,
+     "month_table": {
+      "1": [
+       {
+        "day": 1,
+        "gregorian": "2026-06-16",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-06-17",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-06-18",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-06-19",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-06-20",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-06-21",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-06-22",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-06-23",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-06-24",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-06-25",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-06-26",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-06-27",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-06-28",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-06-29",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-06-30",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-07-01",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-07-02",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-07-03",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-07-04",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-07-05",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-07-06",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-07-07",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-07-08",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-07-09",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-07-10",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-07-11",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-07-12",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-07-13",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-07-14",
+        "weekday": "ath-Thulatha"
+       }
+      ],
+      "3": [
+       {
+        "day": 1,
+        "gregorian": "2026-08-14",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-08-15",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-08-16",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-08-17",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-08-18",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-08-19",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-08-20",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-08-21",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-08-22",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-08-23",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-08-24",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-08-25",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-08-26",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-08-27",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-08-28",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-08-29",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-08-30",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-08-31",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-09-01",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-09-02",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-09-03",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-09-04",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-09-05",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-09-06",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-09-07",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-09-08",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-09-09",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-09-10",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-09-11",
+        "weekday": "al-Jumuah"
+       }
+      ],
+      "4": [
+       {
+        "day": 1,
+        "gregorian": "2026-09-12",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2026-09-13",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2026-09-14",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2026-09-15",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2026-09-16",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2026-09-17",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2026-09-18",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2026-09-19",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2026-09-20",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2026-09-21",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2026-09-22",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2026-09-23",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2026-09-24",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2026-09-25",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2026-09-26",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2026-09-27",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2026-09-28",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2026-09-29",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2026-09-30",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2026-10-01",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2026-10-02",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2026-10-03",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2026-10-04",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2026-10-05",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2026-10-06",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2026-10-07",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2026-10-08",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2026-10-09",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2026-10-10",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2026-10-11",
+        "weekday": "al-Ahad"
+       }
+      ],
+      "8": [
+       {
+        "day": 1,
+        "gregorian": "2027-01-09",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 2,
+        "gregorian": "2027-01-10",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 3,
+        "gregorian": "2027-01-11",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 4,
+        "gregorian": "2027-01-12",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 5,
+        "gregorian": "2027-01-13",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 6,
+        "gregorian": "2027-01-14",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 7,
+        "gregorian": "2027-01-15",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 8,
+        "gregorian": "2027-01-16",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 9,
+        "gregorian": "2027-01-17",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 10,
+        "gregorian": "2027-01-18",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 11,
+        "gregorian": "2027-01-19",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 12,
+        "gregorian": "2027-01-20",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 13,
+        "gregorian": "2027-01-21",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 14,
+        "gregorian": "2027-01-22",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 15,
+        "gregorian": "2027-01-23",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 16,
+        "gregorian": "2027-01-24",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 17,
+        "gregorian": "2027-01-25",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 18,
+        "gregorian": "2027-01-26",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 19,
+        "gregorian": "2027-01-27",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 20,
+        "gregorian": "2027-01-28",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 21,
+        "gregorian": "2027-01-29",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 22,
+        "gregorian": "2027-01-30",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 23,
+        "gregorian": "2027-01-31",
+        "weekday": "al-Ahad"
+       },
+       {
+        "day": 24,
+        "gregorian": "2027-02-01",
+        "weekday": "al-Ithnayn"
+       },
+       {
+        "day": 25,
+        "gregorian": "2027-02-02",
+        "weekday": "ath-Thulatha"
+       },
+       {
+        "day": 26,
+        "gregorian": "2027-02-03",
+        "weekday": "al-Arbiaa"
+       },
+       {
+        "day": 27,
+        "gregorian": "2027-02-04",
+        "weekday": "al-Khamis"
+       },
+       {
+        "day": 28,
+        "gregorian": "2027-02-05",
+        "weekday": "al-Jumuah"
+       },
+       {
+        "day": 29,
+        "gregorian": "2027-02-06",
+        "weekday": "as-Sabt"
+       },
+       {
+        "day": 30,
+        "gregorian": "2027-02-07",
+        "weekday": "al-Ahad"
+       }
+      ]
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "opening": {
+      "hijri": "1448-01-06",
+      "gregorian": "2026-06-21"
+     },
+     "closing": {
+      "hijri": "1448-08-27",
+      "gregorian": "2027-02-04"
+     },
+     "terms": [
+      {
+       "label": "Term 1",
+       "start": {
+        "hijri": "1448-01-06",
+        "gregorian": "2026-06-21"
+       },
+       "end": {
+        "hijri": "1448-03-29",
+        "gregorian": "2026-09-11"
+       }
+      },
+      {
+       "label": "Term 2",
+       "start": {
+        "hijri": "1448-04-01",
+        "gregorian": "2026-09-12"
+       },
+       "end": {
+        "hijri": "1448-08-27",
+        "gregorian": "2027-02-04"
+       }
+      }
+     ]
+    }
+   },
+   "note": "First Ahad of Muharram -> last Khamis of Sha'ban, 2 terms"
+  },
+  {
+   "id": "ins/academic-year-umm-al-qura/computed",
+   "requirements": [
+    "INS-004",
+    "CAL-007"
+   ],
+   "op": "institutional.run",
+   "tier": "informative",
+   "input": {
+    "operation": {
+     "op": "academic_year",
+     "opening_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Ahad",
+      "n": 1,
+      "month": 1
+     },
+     "closing_rule": {
+      "type": "nth_weekday_of_month",
+      "weekday": "al-Khamis",
+      "n": -1,
+      "month": 8
+     },
+     "term_rules": [
+      {
+       "label": "Term 1",
+       "start_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Ahad",
+        "n": 1,
+        "month": 1
+       },
+       "end_rule": {
+        "type": "month_day",
+        "month": 3,
+        "day": 29
+       }
+      },
+      {
+       "label": "Term 2",
+       "start_rule": {
+        "type": "month_day",
+        "month": 4,
+        "day": 1
+       },
+       "end_rule": {
+        "type": "nth_weekday_of_month",
+        "weekday": "al-Khamis",
+        "n": -1,
+        "month": 8
+       }
+      }
+     ],
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "umm-al-qura",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "opening": {
+      "hijri": "1448-01-06",
+      "gregorian": "2026-06-21"
+     },
+     "closing": {
+      "hijri": "1448-08-27",
+      "gregorian": "2027-02-04"
+     },
+     "terms": [
+      {
+       "label": "Term 1",
+       "start": {
+        "hijri": "1448-01-06",
+        "gregorian": "2026-06-21"
+       },
+       "end": {
+        "hijri": "1448-03-29",
+        "gregorian": "2026-09-11"
+       }
+      },
+      {
+       "label": "Term 2",
+       "start": {
+        "hijri": "1448-04-01",
+        "gregorian": "2026-09-12"
+       },
+       "end": {
+        "hijri": "1448-08-27",
+        "gregorian": "2027-02-04"
+       }
+      }
+     ]
+    }
+   },
+   "note": "no month_table supplied: the implementation computes its own calendar. First Ahad of Muharram -> last Khamis of Sha'ban, 2 terms"
+  }
+ ]
+}

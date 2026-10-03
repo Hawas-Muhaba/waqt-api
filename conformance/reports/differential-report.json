@@ -1,0 +1,133 @@
+{
+ "seed": 15,
+ "n": 200,
+ "errors": {
+  "reference": [],
+  "independent": []
+ },
+ "categories": {
+  "reference: weekday label differs from civil date of closing Maghrib": [
+   [
+    "r0006",
+    "kiritimati",
+    "got al-Arbiaa want al-Khamis"
+   ],
+   [
+    "r0023",
+    "chatham",
+    "got al-Jumuah want as-Sabt"
+   ],
+   [
+    "r0027",
+    "reykjavik",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0030",
+    "kiritimati",
+    "got as-Sabt want al-Ahad"
+   ],
+   [
+    "r0046",
+    "kiritimati",
+    "got as-Sabt want al-Ahad"
+   ],
+   [
+    "r0062",
+    "chatham",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0063",
+    "kiritimati",
+    "got al-Jumuah want as-Sabt"
+   ],
+   [
+    "r0074",
+    "chatham",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0082",
+    "apia",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0096",
+    "chatham",
+    "got al-Arbiaa want al-Khamis"
+   ],
+   [
+    "r0107",
+    "apia",
+    "got al-Ahad want al-Ithnayn"
+   ],
+   [
+    "r0122",
+    "chatham",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0129",
+    "chatham",
+    "got al-Jumuah want as-Sabt"
+   ],
+   [
+    "r0132",
+    "apia",
+    "got al-Arbiaa want al-Khamis"
+   ],
+   [
+    "r0135",
+    "chatham",
+    "got al-Arbiaa want al-Khamis"
+   ],
+   [
+    "r0164",
+    "apia",
+    "got al-Jumuah want as-Sabt"
+   ],
+   [
+    "r0170",
+    "kiritimati",
+    "got al-Arbiaa want al-Khamis"
+   ],
+   [
+    "r0172",
+    "kiritimati",
+    "got al-Ithnayn want ath-Thulatha"
+   ],
+   [
+    "r0179",
+    "apia",
+    "got al-Ahad want al-Ithnayn"
+   ],
+   [
+    "r0188",
+    "chatham",
+    "got al-Khamis want al-Jumuah"
+   ],
+   [
+    "r0193",
+    "apia",
+    "got ath-Thulatha want al-Arbiaa"
+   ]
+  ]
+ },
+ "boundary_error_seconds": {
+  "reference": {
+   "n": 200,
+   "median": 1.096834,
+   "p95": 3.20457,
+   "max": 4.262408
+  },
+  "independent": {
+   "n": 200,
+   "median": 0.094376,
+   "p95": 0.133052,
+   "max": 0.171601
+  }
+ },
+ "sweep_total": 141,
+ "sweep_disagreements": []
+}

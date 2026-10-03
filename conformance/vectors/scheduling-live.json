@@ -1,0 +1,1149 @@
+{
+ "suite": "scheduling-live",
+ "tier": "mixed",
+ "vectors": [
+  {
+   "id": "live/00-addis-resolve_point",
+   "requirements": [
+    "SCH-001",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "event",
+      "name": "fajr",
+      "day": 0
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "instant": "2026-09-20T02:04:52.689470+00:00",
+     "basis": "astronomical_event",
+     "depends_on": [
+      "astronomical_event"
+     ],
+     "description": "event(fajr, day=+0)",
+     "within_day": null,
+     "reason": null,
+     "cause": null,
+     "undefined_ref": null,
+     "skipped": []
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/01-addis-resolve_point",
+   "requirements": [
+    "SCH-001",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "offset",
+      "base": {
+       "type": "next_event",
+       "name": "maghrib"
+      },
+      "minutes": -30
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "instant": "2026-09-20T14:52:20.838566+00:00",
+     "basis": "rule_derived",
+     "depends_on": [
+      "astronomical_event"
+     ],
+     "description": "next(maghrib) - 1800s",
+     "within_day": null,
+     "reason": null,
+     "cause": null,
+     "undefined_ref": null,
+     "skipped": []
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/02-addis-resolve_interval",
+   "requirements": [
+    "SCH-002",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_interval",
+     "interval": {
+      "type": "interval",
+      "start": {
+       "type": "event",
+       "name": "fajr",
+       "day": 0
+      },
+      "end": {
+       "type": "event",
+       "name": "sunrise",
+       "day": 0
+      },
+      "start_inclusive": true,
+      "end_inclusive": false
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "start": {
+      "status": "OK",
+      "instant": "2026-09-20T02:04:52.689470+00:00",
+      "basis": "astronomical_event",
+      "depends_on": [
+       "astronomical_event"
+      ],
+      "description": "event(fajr, day=+0)",
+      "within_day": null,
+      "reason": null,
+      "cause": null,
+      "undefined_ref": null,
+      "skipped": []
+     },
+     "end": {
+      "status": "OK",
+      "instant": "2026-09-20T03:14:29.003215+00:00",
+      "basis": "astronomical_event",
+      "depends_on": [
+       "astronomical_event"
+      ],
+      "description": "event(sunrise, day=+0)",
+      "within_day": null,
+      "reason": null,
+      "cause": null,
+      "undefined_ref": null,
+      "skipped": []
+     },
+     "start_inclusive": true,
+     "end_inclusive": false,
+     "duration_seconds": 4176.313745,
+     "reason": null,
+     "causes": []
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/03-addis-event_position",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "event_position",
+     "name": "isha"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "name": "isha",
+     "instant": "2026-09-19T16:28:28.885934+00:00",
+     "listed": {
+      "seconds": 90295.672618,
+      "display": "25:04:55"
+     },
+     "containing": {
+      "day_relative_to_listed": 1,
+      "seconds": 3931.878592,
+      "display": "01:05:31"
+     },
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/04-addis-day_bounds",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "day_bounds"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "instant": "2026-09-19T15:42:00+00:00",
+     "open": "2026-09-19T15:22:57.007342+00:00",
+     "close": "2026-09-20T15:22:20.838566+00:00",
+     "length_seconds": 86363.831224,
+     "position": {
+      "seconds": 1142.992658,
+      "display": "00:19:02"
+     },
+     "hijri_label": "1448-04-07",
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/05-addis-next_event",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "next_event"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "name": "isha",
+     "instant": "2026-09-19T16:28:28.885934+00:00",
+     "seconds_until": 2788.885934,
+     "position": {
+      "seconds": 3931.878592,
+      "display": "01:05:31"
+     },
+     "undefined_events": [],
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/06-addis-until",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-20T20:00:00+00:00",
+    "operation": {
+     "op": "until",
+     "name": "fajr"
+    }
+   },
+   "expect": {
+    "output": {
+     "kind": "until",
+     "status": "OK",
+     "seconds": 21887.454441,
+     "target": {
+      "status": "OK",
+      "instant": "2026-09-21T02:04:47.454441+00:00",
+      "basis": "astronomical_event",
+      "depends_on": [
+       "astronomical_event"
+      ],
+      "description": "next(fajr)",
+      "within_day": null,
+      "reason": null,
+      "cause": null,
+      "undefined_ref": null,
+      "skipped": []
+     }
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/07-addis-since",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-20T20:00:00+00:00",
+    "operation": {
+     "op": "since",
+     "name": "isha"
+    }
+   },
+   "expect": {
+    "output": {
+     "kind": "since",
+     "status": "OK",
+     "seconds": 12728.513938,
+     "target": {
+      "status": "OK",
+      "instant": "2026-09-20T16:27:51.486062+00:00",
+      "basis": "astronomical_event",
+      "depends_on": [
+       "astronomical_event"
+      ],
+      "description": "prev(isha)",
+      "within_day": null,
+      "reason": null,
+      "cause": null,
+      "undefined_ref": null,
+      "skipped": []
+     }
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/08-addis-classify_span",
+   "requirements": [
+    "SCH-005",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "classify_span",
+     "start": "2026-09-19T14:00:00+00:00",
+     "end": "2026-09-19T17:00:00+00:00"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "start": "2026-09-19T14:00:00+00:00",
+     "end": "2026-09-19T17:00:00+00:00",
+     "end_inclusive": false,
+     "duration_seconds": 10800.0,
+     "same_waqt_day": false,
+     "crosses_maghrib": true,
+     "maghrib_boundaries": [
+      "2026-09-19T15:22:57.007342+00:00"
+     ],
+     "waqt_days_touched": 2,
+     "start_day": {
+      "open": "2026-09-18T15:23:33.213316+00:00",
+      "close": "2026-09-19T15:22:57.007342+00:00",
+      "hijri_label": "1448-04-06"
+     },
+     "end_day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "hijri_label": "1448-04-07"
+     },
+     "crosses_civil_midnight": false,
+     "start_civil_date": "2026-09-19",
+     "end_civil_date": "2026-09-19",
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/09-addis-classify_span",
+   "requirements": [
+    "SCH-005",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "classify_span",
+     "start": "2026-09-19T20:30:00+00:00",
+     "end": "2026-09-19T22:30:00+00:00"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "start": "2026-09-19T20:30:00+00:00",
+     "end": "2026-09-19T22:30:00+00:00",
+     "end_inclusive": false,
+     "duration_seconds": 7200.0,
+     "same_waqt_day": true,
+     "crosses_maghrib": false,
+     "maghrib_boundaries": [],
+     "waqt_days_touched": 1,
+     "start_day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "hijri_label": "1448-04-07"
+     },
+     "end_day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "hijri_label": "1448-04-07"
+     },
+     "crosses_civil_midnight": true,
+     "start_civil_date": "2026-09-19",
+     "end_civil_date": "2026-09-20",
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/10-addis-classify_span",
+   "requirements": [
+    "SCH-005",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "classify_span",
+     "start": "2026-09-19T20:30:00+00:00",
+     "end": "2026-09-20T01:00:00+00:00"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "start": "2026-09-19T20:30:00+00:00",
+     "end": "2026-09-20T01:00:00+00:00",
+     "end_inclusive": false,
+     "duration_seconds": 16200.0,
+     "same_waqt_day": true,
+     "crosses_maghrib": false,
+     "maghrib_boundaries": [],
+     "waqt_days_touched": 1,
+     "start_day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "hijri_label": "1448-04-07"
+     },
+     "end_day": {
+      "open": "2026-09-19T15:22:57.007342+00:00",
+      "close": "2026-09-20T15:22:20.838566+00:00",
+      "hijri_label": "1448-04-07"
+     },
+     "crosses_civil_midnight": true,
+     "start_civil_date": "2026-09-19",
+     "end_civil_date": "2026-09-20",
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/11-london-resolve_point",
+   "requirements": [
+    "SCH-004",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "elevation_m": 0.0
+     },
+     "timezone": "Europe/London",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-06-21T12:00:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "event",
+      "name": "fajr",
+      "day": 0
+     }
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "EVENT_UNDEFINED",
+     "instant": null,
+     "basis": null,
+     "depends_on": [],
+     "description": "event(fajr, day=+0)",
+     "within_day": null,
+     "reason": "Event 'fajr' does not occur on this Waqt day.",
+     "cause": "EVENT_UNDEFINED_ON_DAY",
+     "undefined_ref": "fajr@day+0",
+     "skipped": []
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/12-london-until",
+   "requirements": [
+    "SCH-004",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "elevation_m": 0.0
+     },
+     "timezone": "Europe/London",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-06-21T12:00:00+00:00",
+    "operation": {
+     "op": "until",
+     "name": "fajr",
+     "on_undefined": "skip"
+    }
+   },
+   "expect": {
+    "output": {
+     "kind": "until",
+     "status": "EVENT_UNDEFINED",
+     "seconds": null,
+     "target": {
+      "status": "EVENT_UNDEFINED",
+      "instant": null,
+      "basis": null,
+      "depends_on": [],
+      "description": "next(fajr)",
+      "within_day": null,
+      "reason": "No next fajr found within 8 day-slots (skipped undefined: fajr@day+0, fajr@day+1, fajr@day+2, fajr@day+3, fajr@day+4, fajr@day+5, fajr@day+6, fajr@day+7).",
+      "cause": "NO_OCCURRENCE_IN_RANGE",
+      "undefined_ref": "fajr@day+0",
+      "skipped": []
+     }
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/13-tromso-day_bounds",
+   "requirements": [
+    "SCH-004",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 69.6492,
+      "lon": 18.9553,
+      "elevation_m": 0.0
+     },
+     "timezone": "Europe/Oslo",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-06-21T12:00:00+00:00",
+    "operation": {
+     "op": "day_bounds"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "EVENT_UNDEFINED",
+     "instant": "2026-06-21T12:00:00+00:00",
+     "open": null,
+     "close": null,
+     "length_seconds": null,
+     "position": null,
+     "hijri_label": null,
+     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/14-london-next_event",
+   "requirements": [
+    "SCH-004",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 51.5074,
+      "lon": -0.1278,
+      "elevation_m": 0.0
+     },
+     "timezone": "Europe/London",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-06-21T12:00:00+00:00",
+    "operation": {
+     "op": "next_event"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "name": "dhuhr",
+     "instant": "2026-06-21T12:02:20.161344+00:00",
+     "seconds_until": 140.161344,
+     "position": {
+      "seconds": 56458.265966,
+      "display": "15:40:58"
+     },
+     "undefined_events": [
+      {
+       "name": "fajr",
+       "reason": "Event 'fajr' does not occur on this Waqt day.",
+       "cause": "EVENT_UNDEFINED_ON_DAY"
+      },
+      {
+       "name": "isha",
+       "reason": "Event 'isha' does not occur on this Waqt day.",
+       "cause": "EVENT_UNDEFINED_ON_DAY"
+      }
+     ],
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/15-kiritimati-day_bounds",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "informative",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 1.8721,
+      "lon": -157.4278,
+      "elevation_m": 0.0
+     },
+     "timezone": "Pacific/Kiritimati",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-09-19T23:00:00+00:00",
+    "operation": {
+     "op": "day_bounds"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "instant": "2026-09-19T23:00:00+00:00",
+     "open": "2026-09-19T04:27:09.454859+00:00",
+     "close": "2026-09-20T04:26:45.001953+00:00",
+     "length_seconds": 86375.547094,
+     "position": {
+      "seconds": 66770.545141,
+      "display": "18:32:50"
+     },
+     "hijri_label": "1448-04-06",
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  },
+  {
+   "id": "live/16-reykjavik-next_event",
+   "requirements": [
+    "SCH-006",
+    "SCH-008"
+   ],
+   "op": "schedule.run",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 64.1466,
+      "lon": -21.9426,
+      "elevation_m": 0.0
+     },
+     "timezone": "Atlantic/Reykjavik",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     },
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     }
+    },
+    "anchor": "2026-06-21T12:00:00+00:00",
+    "operation": {
+     "op": "next_event"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "name": "dhuhr",
+     "instant": "2026-06-21T13:29:36.503994+00:00",
+     "seconds_until": 5376.503994,
+     "position": {
+      "seconds": 48345.350671,
+      "display": "13:25:45"
+     },
+     "undefined_events": [
+      {
+       "name": "fajr",
+       "reason": "Event 'fajr' does not occur on this Waqt day.",
+       "cause": "EVENT_UNDEFINED_ON_DAY"
+      },
+      {
+       "name": "isha",
+       "reason": "Event 'isha' does not occur on this Waqt day.",
+       "cause": "EVENT_UNDEFINED_ON_DAY"
+      }
+     ],
+     "reason": null
+    }
+   },
+   "note": "recorded from the reference (tolerance 5 s absorbs the ~1 s reference/DE421 offset)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "ignore": [
+    "description",
+    "reason",
+    "display"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1008 @@
+{
+ "suite": "metamorphic",
+ "tier": "mixed",
+ "vectors": [],
+ "metamorphic": [
+  {
+   "id": "mm/tiling/addis",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/addis",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/profile-isolation/addis",
+   "requirements": [
+    "EVT-005"
+   ],
+   "kind": "profile-isolation",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "change": {
+    "fajr_angle_deg": 15.0,
+    "isha_angle_deg": 15.0,
+    "asr_shadow_ratio": 2.0
+   }
+  },
+  {
+   "id": "mm/provider-isolation/addis",
+   "requirements": [
+    "CAL-010"
+   ],
+   "kind": "provider-isolation",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "providers": [
+    "umm-al-qura",
+    "declared",
+    "local-observation"
+   ]
+  },
+  {
+   "id": "mm/elevation/addis",
+   "requirements": [
+    "EVT-006"
+   ],
+   "kind": "elevation-isolation",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "elevation_m": 2400.0
+  },
+  {
+   "id": "mm/tiling/london",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/london",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/profile-isolation/london",
+   "requirements": [
+    "EVT-005"
+   ],
+   "kind": "profile-isolation",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "change": {
+    "fajr_angle_deg": 15.0,
+    "isha_angle_deg": 15.0,
+    "asr_shadow_ratio": 2.0
+   }
+  },
+  {
+   "id": "mm/provider-isolation/london",
+   "requirements": [
+    "CAL-010"
+   ],
+   "kind": "provider-isolation",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "providers": [
+    "umm-al-qura",
+    "declared",
+    "local-observation"
+   ]
+  },
+  {
+   "id": "mm/elevation/london",
+   "requirements": [
+    "EVT-006"
+   ],
+   "kind": "elevation-isolation",
+   "input": {
+    "location": {
+     "lat": 51.5074,
+     "lon": -0.1278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Europe/London",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "elevation_m": 2400.0
+  },
+  {
+   "id": "mm/tiling/kiritimati",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/kiritimati",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/profile-isolation/kiritimati",
+   "requirements": [
+    "EVT-005"
+   ],
+   "kind": "profile-isolation",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "change": {
+    "fajr_angle_deg": 15.0,
+    "isha_angle_deg": 15.0,
+    "asr_shadow_ratio": 2.0
+   }
+  },
+  {
+   "id": "mm/provider-isolation/kiritimati",
+   "requirements": [
+    "CAL-010"
+   ],
+   "kind": "provider-isolation",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "providers": [
+    "umm-al-qura",
+    "declared",
+    "local-observation"
+   ]
+  },
+  {
+   "id": "mm/elevation/kiritimati",
+   "requirements": [
+    "EVT-006"
+   ],
+   "kind": "elevation-isolation",
+   "input": {
+    "location": {
+     "lat": 1.8721,
+     "lon": -157.4278,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-09-19T23:00:00+00:00",
+    "timezone": "Pacific/Kiritimati",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "elevation_m": 2400.0
+  },
+  {
+   "id": "mm/tiling/reykjavik",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 64.1466,
+     "lon": -21.9426,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Atlantic/Reykjavik",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/reykjavik",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 64.1466,
+     "lon": -21.9426,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-06-21T12:00:00+00:00",
+    "timezone": "Atlantic/Reykjavik",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/tiling/newyork-dst",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 40.7128,
+     "lon": -74.006,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-03-08T12:00:00+00:00",
+    "timezone": "America/New_York",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/newyork-dst",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 40.7128,
+     "lon": -74.006,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-03-08T12:00:00+00:00",
+    "timezone": "America/New_York",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/tiling/makkah",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/makkah",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/profile-isolation/makkah",
+   "requirements": [
+    "EVT-005"
+   ],
+   "kind": "profile-isolation",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "change": {
+    "fajr_angle_deg": 15.0,
+    "isha_angle_deg": 15.0,
+    "asr_shadow_ratio": 2.0
+   }
+  },
+  {
+   "id": "mm/provider-isolation/makkah",
+   "requirements": [
+    "CAL-010"
+   ],
+   "kind": "provider-isolation",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "providers": [
+    "umm-al-qura",
+    "declared",
+    "local-observation"
+   ]
+  },
+  {
+   "id": "mm/elevation/makkah",
+   "requirements": [
+    "EVT-006"
+   ],
+   "kind": "elevation-isolation",
+   "input": {
+    "location": {
+     "lat": 21.4225,
+     "lon": 39.8262,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "Asia/Riyadh",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "elevation_m": 2400.0
+  },
+  {
+   "id": "mm/tiling/sydney-dst",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": -33.8688,
+     "lon": 151.2093,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-04-05T02:00:00+00:00",
+    "timezone": "Australia/Sydney",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/sydney-dst",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": -33.8688,
+     "lon": 151.2093,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-04-05T02:00:00+00:00",
+    "timezone": "Australia/Sydney",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/tiling/punta-arenas",
+   "requirements": [
+    "DAY-001",
+    "DAY-002",
+    "DAY-003",
+    "DAY-004",
+    "DAY-005",
+    "EVT-002",
+    "EVT-003"
+   ],
+   "kind": "tiling",
+   "input": {
+    "location": {
+     "lat": -53.1638,
+     "lon": -70.9171,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "America/Punta_Arenas",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "tolerance_s": 0.001,
+   "position_tol_s": 0.001
+  },
+  {
+   "id": "mm/invariance/punta-arenas",
+   "requirements": [
+    "DAY-008"
+   ],
+   "kind": "instant-invariance",
+   "input": {
+    "location": {
+     "lat": -53.1638,
+     "lon": -70.9171,
+     "elevation_m": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "America/Punta_Arenas",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "fractions": [
+    0.0005,
+    0.3,
+    0.6,
+    0.9995
+   ]
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1438",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1438,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1440",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1440,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1441",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1441,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1445",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1445,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1446",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1446,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1447",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1447,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1448",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1448,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/umm-al-qura/1450",
+   "requirements": [
+    "CAL-006",
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1450,
+    "provider": "umm-al-qura"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/1",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/2",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 2,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/29",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 29,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/30",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 30,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/1400",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1400,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/1448",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1448,
+    "provider": "arithmetic-tabular"
+   }
+  },
+  {
+   "id": "mm/calendar-consistency/arithmetic-tabular/1500",
+   "requirements": [
+    "CAL-003"
+   ],
+   "kind": "calendar-consistency",
+   "input": {
+    "year": 1500,
+    "provider": "arithmetic-tabular"
+   }
+  }
+ ]
+}

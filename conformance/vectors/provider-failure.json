@@ -1,0 +1,1123 @@
+{
+ "suite": "provider-failure",
+ "tier": "mixed",
+ "vectors": [
+  {
+   "id": "aladhan/single/timeout",
+   "requirements": [
+    "PRV-001",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "timeout"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "timeout"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/network-error",
+   "requirements": [
+    "PRV-001",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "network-error"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "network-error"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/http429",
+   "requirements": [
+    "PRV-001",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 429
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rate-limited"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/http500",
+   "requirements": [
+    "PRV-001",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 500
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-server-error"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/http503",
+   "requirements": [
+    "PRV-001",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 503
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-server-error"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/http404",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 404
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rejected"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/http400",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 400
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rejected"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/malformed",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "malformed"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "malformed-response"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/oversize",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "oversize"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "malformed-response"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/echo-mismatch",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "echo-mismatch",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "date-mismatch"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/single/ok",
+   "requirements": [
+    "PRV-002",
+    "PRV-006"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 20
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "implausible-response"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/ok",
+   "requirements": [
+    "PRV-004"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/ok-within-3-days-is-plausible",
+   "requirements": [
+    "PRV-002"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   },
+   "note": "remote 1448-04-10 is +3 days from tabular 1448-04-07: the limit is inclusive"
+  },
+  {
+   "id": "aladhan/window-low",
+   "requirements": [
+    "PRV-003"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "1899-12-31",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1317,
+        "month": 8,
+        "day": 28
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "1899-12-31",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "date-outside-remote-window"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/window-high",
+   "requirements": [
+    "PRV-003"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2077-01-01",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1498,
+        "month": 6,
+        "day": 1
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2077-01-01",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "date-outside-remote-window"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/window-edge-low-inside",
+   "requirements": [
+    "PRV-003"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "1900-01-01",
+      "remote": {
+       "kind": "timeout"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "1900-01-01",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "timeout"
+      }
+     ]
+    }
+   },
+   "note": "1900-01-01 is inside the window, so a remote call is attempted (and fails)"
+  },
+  {
+   "id": "aladhan/disabled",
+   "requirements": [
+    "PRV-003"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "config": {
+     "enabled": false
+    },
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "disabled"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/cache-hit-within-ttl",
+   "requirements": [
+    "PRV-004"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     },
+     {
+      "at_seconds": 3600,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "timeout"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      },
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/stale-if-error",
+   "requirements": [
+    "PRV-004"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     },
+     {
+      "at_seconds": 46800,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "timeout"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      },
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote-stale",
+       "fallback_reason": "timeout"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/stale-expires-after-7-days",
+   "requirements": [
+    "PRV-004"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     },
+     {
+      "at_seconds": 691200,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "timeout"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      },
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "timeout"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/circuit-open-after-hard-failure",
+   "requirements": [
+    "PRV-005"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "timeout"
+      }
+     },
+     {
+      "at_seconds": 10,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     },
+     {
+      "at_seconds": 31,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "timeout"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "circuit-open"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "aladhan/retry-after-honoured-and-capped",
+   "requirements": [
+    "PRV-005"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 429,
+       "retry_after": 3600
+      }
+     },
+     {
+      "at_seconds": 599,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     },
+     {
+      "at_seconds": 601,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rate-limited"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "circuit-open"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   },
+   "note": "Retry-After 3600 s is capped at 600 s"
+  },
+  {
+   "id": "aladhan/retry-after-short",
+   "requirements": [
+    "PRV-005"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 429,
+       "retry_after": 5
+      }
+     },
+     {
+      "at_seconds": 4,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     },
+     {
+      "at_seconds": 6,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rate-limited"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "circuit-open"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      }
+     ]
+    }
+   },
+   "note": "LIVE-INTEGRATIONS says 'no request for 30 s (or AlAdhan's Retry-After, capped at 10 min)'. Whether a SHORT Retry-After shortens the 30 s cooldown is not stated. Proposed: Retry-After replaces it."
+  },
+  {
+   "id": "aladhan/three-soft-failures-open-circuit",
+   "requirements": [
+    "PRV-007"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "http",
+       "status": 404
+      }
+     },
+     {
+      "at_seconds": 1,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "http",
+       "status": 404
+      }
+     },
+     {
+      "at_seconds": 2,
+      "date": "2026-09-22",
+      "remote": {
+       "kind": "http",
+       "status": 404
+      }
+     },
+     {
+      "at_seconds": 3,
+      "date": "2026-09-23",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 12
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rejected"
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rejected"
+      },
+      {
+       "date": "2026-09-22",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "upstream-rejected"
+      },
+      {
+       "date": "2026-09-23",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "circuit-open"
+      }
+     ]
+    }
+   },
+   "note": "Spec: 'three consecutive soft failures also open it'. Whether the third failure itself opens it for the NEXT call (proposed) is implied but not exact."
+  },
+  {
+   "id": "aladhan/outbound-budget",
+   "requirements": [
+    "PRV-007"
+   ],
+   "op": "hijri.provider_scenario",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "config": {
+     "requests_per_minute": 2
+    },
+    "steps": [
+     {
+      "at_seconds": 0,
+      "date": "2026-09-20",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 9
+       }
+      }
+     },
+     {
+      "at_seconds": 1,
+      "date": "2026-09-21",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 10
+       }
+      }
+     },
+     {
+      "at_seconds": 2,
+      "date": "2026-09-22",
+      "remote": {
+       "kind": "ok",
+       "hijri": {
+        "year": 1448,
+        "month": 4,
+        "day": 11
+       }
+      }
+     }
+    ]
+   },
+   "expect": {
+    "output": {
+     "steps": [
+      {
+       "date": "2026-09-20",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      },
+      {
+       "date": "2026-09-21",
+       "provider": "aladhan",
+       "source": "remote",
+       "fallback_reason": null
+      },
+      {
+       "date": "2026-09-22",
+       "provider": "umm-al-qura",
+       "source": "local-fallback",
+       "fallback_reason": "outbound-rate-limited"
+      }
+     ]
+    }
+   },
+   "note": "token-bucket details (refill granularity) are not specified"
+  }
+ ]
+}

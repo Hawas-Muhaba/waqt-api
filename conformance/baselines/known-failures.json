@@ -1,0 +1,38 @@
+{
+ "description": "Normative conformance failures of the REFERENCE at the time of Sprint 15. Every entry is explained in conformance/DISAGREEMENTS.md. The pytest wrapper fails if a NEW failure appears and reports entries that have been FIXED.",
+ "cop_version": "1.0",
+ "reference": {
+  "vectors": [
+   "tab/invalid/1448-2-30",
+   "tab/invalid/0-1-1",
+   "label/reykjavik/2026-06-21/after-midnight",
+   "label/reykjavik/2026-06-21/midday",
+   "label/reykjavik/2026-06-21/late-evening",
+   "label/kiritimati/2026-09-19/after-midnight",
+   "label/kiritimati/2026-09-19/midday",
+   "label/kiritimati/2026-09-19/late-evening",
+   "label/kiritimati/2026-06-21/after-midnight",
+   "label/kiritimati/2026-06-21/midday",
+   "label/kiritimati/2026-06-21/late-evening",
+   "label/apia/2026-03-20/after-midnight",
+   "label/apia/2026-03-20/midday",
+   "label/apia/2026-03-20/late-evening",
+   "label/apia/2026-12-30/after-midnight",
+   "label/apia/2026-12-30/midday",
+   "label/apia/2026-12-30/late-evening",
+   "label/chatham/2026-09-27/after-midnight",
+   "label/chatham/2026-09-27/midday",
+   "label/chatham/2026-09-27/late-evening",
+   "label/date-to-waqt-day/kiritimati/2026-09-20",
+   "label/compute-midday/kiritimati/2026-09-20",
+   "label/date-to-waqt-day/kiritimati/2026-06-15",
+   "label/compute-midday/kiritimati/2026-06-15",
+   "label/date-to-waqt-day/apia/2026-03-21",
+   "label/compute-midday/apia/2026-03-21",
+   "label/after-midnight-maghrib/reykjavik",
+   "err/tz-unknown"
+  ],
+  "metamorphic": []
+ },
+ "independent": []
+}

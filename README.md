@@ -106,6 +106,14 @@ No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTIT
   Waqt package to use). None compute Waqt semantics themselves — each has
   a structural test enforcing that. See each package's own `README.md`.
 
+## Formal conformance and an independent implementation (Sprint 15)
+
+`conformance/` holds a portable conformance specification (protocol, 63 requirement IDs, accuracy bands), a
+language-neutral harness, 600+ vectors (DE421-oracle, closed-form, metamorphic, provider-failure), and a clean-room
+second implementation in Node.js that shares no code with `waqt-core`. Run `conformance/run.sh`; read
+`conformance/DISAGREEMENTS.md` for what it found and `conformance/spec/OPEN-QUESTIONS.md` for where the written
+specification is ambiguous. Report: `SPRINT-15-REPORT.md`.
+
 ## Verify
 
 ```bash

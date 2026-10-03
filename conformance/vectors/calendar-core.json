@@ -1,0 +1,1805 @@
+{
+ "suite": "calendar-core",
+ "tier": "mixed",
+ "vectors": [
+  {
+   "id": "tab/from/2026-09-20",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2026-09-20",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1448,
+     "month": 4,
+     "day": 7,
+     "date": "1448-04-07",
+     "month_name": "Rabi al-Thani",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2026-09-20",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1448,
+    "month": 4,
+    "day": 7,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2026-09-20"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2026-06-17",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2026-06-17",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1448,
+     "month": 1,
+     "day": 1,
+     "date": "1448-01-01",
+     "month_name": "Muharram",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2026-06-17",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1448,
+    "month": 1,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2026-06-17"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2026-06-16",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2026-06-16",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1447,
+     "month": 12,
+     "day": 30,
+     "date": "1447-12-30",
+     "month_name": "Dhu al-Hijjah",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2026-06-16",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1447,
+    "month": 12,
+    "day": 30,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2026-06-16"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2027-06-05",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2027-06-05",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1448,
+     "month": 12,
+     "day": 29,
+     "date": "1448-12-29",
+     "month_name": "Dhu al-Hijjah",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2027-06-05",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1448,
+    "month": 12,
+    "day": 29,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2027-06-05"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2000-01-01",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2000-01-01",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1420,
+     "month": 9,
+     "day": 24,
+     "date": "1420-09-24",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2000-01-01",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1420,
+    "month": 9,
+    "day": 24,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2000-01-01"
+    }
+   }
+  },
+  {
+   "id": "tab/from/1970-01-01",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "1970-01-01",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1389,
+     "month": 10,
+     "day": 22,
+     "date": "1389-10-22",
+     "month_name": "Shawwal",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/1970-01-01",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1389,
+    "month": 10,
+    "day": 22,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "1970-01-01"
+    }
+   }
+  },
+  {
+   "id": "tab/from/1900-01-01",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "1900-01-01",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1317,
+     "month": 8,
+     "day": 28,
+     "date": "1317-08-28",
+     "month_name": "Shaban",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/1900-01-01",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1317,
+    "month": 8,
+    "day": 28,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "1900-01-01"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2100-12-31",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2100-12-31",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1524,
+     "month": 10,
+     "day": 29,
+     "date": "1524-10-29",
+     "month_name": "Shawwal",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2100-12-31",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1524,
+    "month": 10,
+    "day": 29,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2100-12-31"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2024-03-11",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2024-03-11",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1445,
+     "month": 9,
+     "day": 1,
+     "date": "1445-09-01",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2024-03-11",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1445,
+    "month": 9,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2024-03-11"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2025-03-01",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2025-03-01",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1446,
+     "month": 9,
+     "day": 1,
+     "date": "1446-09-01",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2025-03-01",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1446,
+    "month": 9,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2025-03-01"
+    }
+   }
+  },
+  {
+   "id": "tab/from/0622-07-19",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "0622-07-19",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1,
+     "month": 1,
+     "day": 1,
+     "date": "0001-01-01",
+     "month_name": "Muharram",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/0622-07-19",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1,
+    "month": 1,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "0622-07-19"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2026-02-28",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2026-02-28",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1447,
+     "month": 9,
+     "day": 11,
+     "date": "1447-09-11",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2026-02-28",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1447,
+    "month": 9,
+    "day": 11,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2026-02-28"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2026-03-01",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2026-03-01",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1447,
+     "month": 9,
+     "day": 12,
+     "date": "1447-09-12",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2026-03-01",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1447,
+    "month": 9,
+    "day": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2026-03-01"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2029-12-31",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2029-12-31",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1451,
+     "month": 8,
+     "day": 24,
+     "date": "1451-08-24",
+     "month_name": "Shaban",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2029-12-31",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1451,
+    "month": 8,
+    "day": 24,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2029-12-31"
+    }
+   }
+  },
+  {
+   "id": "tab/from/1999-12-31",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "1999-12-31",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1420,
+     "month": 9,
+     "day": 23,
+     "date": "1420-09-23",
+     "month_name": "Ramadan",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/1999-12-31",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1420,
+    "month": 9,
+    "day": 23,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "1999-12-31"
+    }
+   }
+  },
+  {
+   "id": "tab/from/2050-07-04",
+   "requirements": [
+    "CAL-001"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "date": "2050-07-04",
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "year": 1472,
+     "month": 10,
+     "day": 14,
+     "date": "1472-10-14",
+     "month_name": "Shawwal",
+     "provider": "arithmetic-tabular"
+    }
+   }
+  },
+  {
+   "id": "tab/roundtrip/2050-07-04",
+   "requirements": [
+    "CAL-003"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "year": 1472,
+    "month": 10,
+    "day": 14,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "date": "2050-07-04"
+    }
+   }
+  },
+  {
+   "id": "tab/month12-length/1",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 1,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/2",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 2,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/3",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 3,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/4",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 4,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/5",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 5,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/6",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 6,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/7",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 7,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/8",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 8,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/9",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 9,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/10",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 10,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/11",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 11,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/12",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 12,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/13",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 13,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/14",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 14,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/15",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 15,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/16",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 16,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/17",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 17,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/18",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 18,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/19",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 19,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/20",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 20,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/21",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 21,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/22",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 22,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/23",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 23,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/24",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 24,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/25",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 25,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/26",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 26,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/27",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 27,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/28",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 28,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/29",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 29,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 30
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/month12-length/30",
+   "requirements": [
+    "CAL-002"
+   ],
+   "op": "hijri.month_length",
+   "tier": "open",
+   "basis": "closed-form",
+   "input": {
+    "year": 30,
+    "month": 12,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "output": {
+     "days": 29
+    }
+   },
+   "note": "PROPOSED leap pattern 2,5,7,10,13,16,18,21,24,26,29. CALENDARS.md says only 'classical 30-year-cycle'; several patterns exist."
+  },
+  {
+   "id": "tab/invalid/1448-2-30",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 2,
+    "day": 30,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   },
+   "note": "(1448,2,30): Safar 1448 has 29 days; the day must be rejected, not normalised into Rabi al-Awwal."
+  },
+  {
+   "id": "tab/invalid/1448-13-1",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 13,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "tab/invalid/1448-0-1",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 0,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "tab/invalid/1448-1-31",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 1,
+    "day": 31,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "tab/invalid/1448-1-0",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 1,
+    "day": 0,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "tab/invalid/0-1-1",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 0,
+    "month": 1,
+    "day": 1,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "tab/invalid/1448-4-0",
+   "requirements": [
+    "CAL-004"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1448,
+    "month": 4,
+    "day": 0,
+    "provider": "arithmetic-tabular"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_HIJRI_DATE",
+      "VALIDATION_ERROR",
+      "INVALID_DATE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/fiscal/tabular/1446",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1446
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1446
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1446-01-01",
+      "gregorian": "2024-07-08"
+     },
+     "end": {
+      "hijri": "1446-12-29",
+      "gregorian": "2025-06-26"
+     }
+    }
+   }
+  },
+  {
+   "id": "inst/fiscal/tabular/1447",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1447
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1447
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1447-01-01",
+      "gregorian": "2025-06-27"
+     },
+     "end": {
+      "hijri": "1447-12-30",
+      "gregorian": "2026-06-16"
+     }
+    }
+   }
+  },
+  {
+   "id": "inst/fiscal/tabular/1448",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1448-01-01",
+      "gregorian": "2026-06-17"
+     },
+     "end": {
+      "hijri": "1448-12-29",
+      "gregorian": "2027-06-05"
+     }
+    }
+   }
+  },
+  {
+   "id": "inst/fiscal/tabular/1449",
+   "requirements": [
+    "INS-003",
+    "CAL-001"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "closed-form",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "end_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "year": 1449
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1449
+    }
+   },
+   "expect": {
+    "output": {
+     "start": {
+      "hijri": "1449-01-01",
+      "gregorian": "2027-06-06"
+     },
+     "end": {
+      "hijri": "1449-12-29",
+      "gregorian": "2028-05-24"
+     }
+    }
+   }
+  },
+  {
+   "id": "inst/error/end-before-start",
+   "requirements": [
+    "INS-005"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "fiscal_year",
+     "start_rule": {
+      "type": "month_end",
+      "month": 12
+     },
+     "end_rule": {
+      "type": "month_day",
+      "month": 1,
+      "day": 1
+     },
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/error/day-30-in-29-day-month",
+   "requirements": [
+    "INS-005",
+    "CAL-004"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "month_day",
+     "month": 2,
+     "day": 30,
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/error/no-fifth-weekday",
+   "requirements": [
+    "INS-005"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 6,
+     "month": 1,
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/error/n-zero",
+   "requirements": [
+    "INS-005"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "al-Ahad",
+     "n": 0,
+     "month": 1,
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/error/bad-weekday",
+   "requirements": [
+    "INS-005"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "nth_weekday_of_month",
+     "weekday": "Sunday",
+     "n": 1,
+     "month": 1,
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  },
+  {
+   "id": "inst/error/bad-month",
+   "requirements": [
+    "INS-005"
+   ],
+   "op": "institutional.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "operation": {
+     "op": "month_end",
+     "month": 13,
+     "year": 1448
+    },
+    "context": {
+     "calendar_provider": "arithmetic-tabular",
+     "hijri_year": 1448
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "INVALID_CALENDAR_RULE"
+     ]
+    }
+   }
+  }
+ ]
+}

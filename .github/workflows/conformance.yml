@@ -1,0 +1,25 @@
+name: conformance
+on:
+  push:
+    paths: ["conformance/**", "core/**", "waqt/**", ".github/workflows/conformance.yml"]
+  pull_request:
+    paths: ["conformance/**", "core/**", "waqt/**"]
+  workflow_dispatch: {}
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - run: pip install -r requirements.txt pytest
+      - name: independent implementation unit tests
+        run: cd conformance/independent && npm test
+      - name: portable conformance suite (reference vs independent)
+        run: WAQT_RUN_CONFORMANCE=1 python -m pytest tests/test_conformance_suite.py -q
+      - name: upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: conformance-reports, path: conformance/reports/_pytest }
