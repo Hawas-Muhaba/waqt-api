@@ -38,6 +38,16 @@ class UnknownCalendarProviderError(WaqtLocalError):
     code = "UNKNOWN_CALENDAR_PROVIDER"
 
 
+class InvalidHijriDateError(WaqtLocalError):
+    """Sprint 16 (DIS-002): the Hijri (year, month, day) does not exist."""
+    code = "INVALID_HIJRI_DATE"
+
+
+class UnknownTimezoneError(WaqtLocalError):
+    """Sprint 16 (DIS-003): timezone_override is not an IANA zone name."""
+    code = "UNKNOWN_TIMEZONE"
+
+
 class UnsupportedOperationError(WaqtLocalError):
     code = "UNSUPPORTED_OPERATION"
 
@@ -64,3 +74,8 @@ class ValidationError(WaqtLocalError):
 
 def validation_error(message: str, **details: Any) -> ValidationError:
     return ValidationError(message, details)
+
+
+class OutOfRangeError(WaqtLocalError):
+    """Sprint 16 (CAL-011): the date is outside the calendar provider's supported range."""
+    code = "OUT_OF_RANGE"

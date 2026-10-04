@@ -33,7 +33,7 @@ from typing import Any, Optional
 
 from waqt_core import calendar_interop as ci
 from waqt_core.core import AstronomyProfile, Location, compute_waqt
-from waqt_core.hijri import ArithmeticTabularProvider, weekday_name
+from waqt_core.hijri import ArithmeticTabularProvider, CalendarOutOfRange, InvalidHijriDate, checked_to_gregorian, weekday_name
 from waqt_core.institutional import (
     AcademicCalendar,
     FiscalCalendar,
@@ -50,13 +50,16 @@ from waqt_core.institutional import (
 from waqt_core.scheduling import RuleError as SchedulingRuleError, SchedulingContext, SchedulingEngine, run_operation
 from waqt_core.semantics import waqt_day_from_result
 from waqt_core.timescale import DEFAULT_TIMESCALE_PROVIDER
-from waqt_core.timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
+from waqt_core.timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider, UnknownTimezoneError as _CoreUnknownTimezone
 
 from .errors import (
     CalendarDateUnresolvableError,
     InvalidCalendarRuleError,
+    InvalidHijriDateError,
     InvalidRuleError,
     InvalidSpanError,
+    OutOfRangeError,
+    UnknownTimezoneError,
     ValidationError,
     validation_error,
 )
@@ -89,8 +92,19 @@ def _location(lat: float, lon: float, elevation_m: float = 0.0) -> Location:
     return Location(lat=lat, lon=lon, elevation_m=elevation_m)
 
 
+def _out_of_range(e: CalendarOutOfRange) -> OutOfRangeError:
+    return OutOfRangeError(str(e), {"calendar_provider": e.provider, "supported_range": e.supported, "received": e.received})
+
+
 def _tz_provider(timezone_override: Optional[str]):
-    return ManualTimezoneProvider(timezone_override) if timezone_override else DEFAULT_TIMEZONE_PROVIDER
+    if not timezone_override:
+        return DEFAULT_TIMEZONE_PROVIDER
+    try:
+        return ManualTimezoneProvider(timezone_override)
+    except _CoreUnknownTimezone as e:  # Sprint 16 (DIS-003): same code as the HTTP API
+        raise UnknownTimezoneError(
+            str(e), {"parameter": "timezone_override", "received": e.timezone,
+                     "expected": "an IANA time zone name, e.g. 'Africa/Addis_Ababa'"}) from e
 
 
 def _profile(fajr_angle: float = 18.0, isha_angle: float = 17.0, asr_ratio: float = 1.0) -> AstronomyProfile:
@@ -295,7 +309,10 @@ def hijri(date: Any = None, calendar_provider: str = "arithmetic-tabular", **pro
     """Equivalent of `GET /v1/hijri`."""
     d = parse_date(date)
     provider = resolve_calendar_provider(calendar_provider, **provider_overrides)
-    hd = provider.from_gregorian(d)
+    try:
+        hd = provider.from_gregorian(d)
+    except CalendarOutOfRange as e:
+        raise _out_of_range(e) from e
     return {"gregorian_date": d.isoformat(), "weekday": weekday_name(d), "hijri": hijri_block(hd)}
 
 
@@ -347,7 +364,10 @@ def convert(
 
     if direction == "to-hijri":
         g = parse_date(date)
-        hd = provider.from_gregorian(g)
+        try:
+            hd = provider.from_gregorian(g)
+        except CalendarOutOfRange as e:
+            raise _out_of_range(e) from e
         return {"direction": "to-hijri", "input": {"gregorian_date": g.isoformat()}, "output": {"hijri": hijri_block(hd)}}
 
     if year is None or month is None or day is None:
@@ -359,7 +379,14 @@ def convert(
             f"calendar_provider={calendar_provider!r} cannot convert Hijri -> Gregorian.",
             {"calendar_provider": calendar_provider},
         )
-    g = provider.to_gregorian(year, month, day)
+    try:
+        g = checked_to_gregorian(provider, year, month, day)
+    except CalendarOutOfRange as e:
+        raise _out_of_range(e) from e
+    except InvalidHijriDate as e:  # Sprint 16 (DIS-002): same code as the HTTP API
+        raise InvalidHijriDateError(
+            str(e), {"received": {"year": year, "month": month, "day": day},
+                     "calendar_provider": calendar_provider, "reason": e.reason}) from e
     return {
         "direction": "to-gregorian",
         "input": {"hijri": {"year": year, "month": month, "day": day}},

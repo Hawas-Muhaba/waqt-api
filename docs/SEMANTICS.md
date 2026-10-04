@@ -30,9 +30,21 @@ A `WaqtDay`'s length is not guaranteed to be 86,400 seconds (see §4).
 
 ## 3. Waqt Date
 
-The Hijri date attached to `WaqtDay(L, D)` is the calendar provider's date for the Gregorian civil date `D`'s **closing** Maghrib falls on — i.e. before Maghrib → today's label; at/after Maghrib → tomorrow's label. This is not recomputed by the semantics layer; it's read directly from `core.compute_waqt`'s own day-bracketing, which already implements this join rule (Core Time Model Sec 2).
+The Hijri date and the weekday attached to `WaqtDay(L, D)` are those of the **label date**: the Gregorian *civil* date, in the IANA time zone of location `L`, on which the day's **closing** Maghrib *instant* falls. **[DAY-004, decision DR-0001]** The Hijri date is the calendar provider's date for the label date; the weekday is that date's weekday name. Before Maghrib the label is today's, at or after Maghrib it is tomorrow's. `core.compute_waqt` computes exactly `label_date = tz.local_date(closing_maghrib_instant)` and exposes it as `WaqtResult.label_date`.
+
+Normative details:
+
+1. **The zone is the location's IANA zone** (or the caller's `timezone_override`), never a longitude-derived "solar" zone. At Kiritimati (UTC+14) or Apia (UTC+13) the civil date at Maghrib differs from the mean-solar date; the civil date is the label.
+2. **The label date is a civil date; the solar-date key used to compute events is not**, and the second must never be used to label a day. Events stay keyed by their own upper transit (EVT-004, DR-0002).
+3. **Consequence: labels are not one-to-one with civil dates near local midnight (DAY-009).** Where the closing Maghrib itself crosses civil midnight (high latitude in summer; a UTC-offset change), one civil date may be the label of **no** Waqt day and another of **two**. Real instances, Reykjavik 2026: Maghrib closes at 23:58:53 on 14 June and next at 00:00:09 on 16 June, so *15 June labels no day*; it closes at 00:00:16 and again at 23:59:04 on 29 June, so *29 June labels two days*. The rules are:
+   - labels never decrease from one Waqt day to the next;
+   - `gregorian_date_to_waqt_day(g)` when no day closes on `g` is **unresolved** (`resolved = false`; the `reason` text is not normative);
+   - when two days close on `g` it returns the one that contains `g`'s local noon (here the later);
+   - the weekday and Hijri date of both days that share a label are equal.
+4. **What this section does not decide.** It fixes the *default* labelling rule. It does not claim that no regional convention could label differently; none is provided. A different rule would be a new configurable profile option proposed through `conformance/GOVERNANCE.md`, never a silent change to this one.
 
 - `test_hijri_date_before_and_after_maghrib_differ`
+- conformance vectors `label/*`, `label/skip/*`, `label/repeat/*` (requirements DAY-004, DAY-009)
 
 ## 4. Waqt Clock Time
 

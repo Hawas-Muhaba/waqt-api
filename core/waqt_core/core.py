@@ -106,6 +106,13 @@ class WaqtResult:
     #: A calendar provider can never take the prayer times down with it.
     calendar_error: str | None = None
 
+    #: Sprint 16 (DIS-001 ruling). The civil (IANA-zone) Gregorian date on which
+    #: this Waqt day's CLOSING Maghrib falls. `hijri_date` and `weekday` are the
+    #: calendar provider's date and the weekday name of exactly this date
+    #: (docs/SEMANTICS.md section 3, conformance requirement DAY-004). None when
+    #: the day is not OK. Additive: not part of the HTTP envelope.
+    label_date: date | None = None
+
 
 def _format_hms(delta: timedelta) -> str:
     total_seconds = delta.total_seconds()
@@ -128,6 +135,14 @@ def _bracket_maghrib(
     Gregorian date (Sprint 2), not Stage 1's UTC-date shortcut.
 
     Returns (open_date, M_D, close_date, M_D1, tz_name).
+
+    Sprint 16 clarification: `open_date` / `close_date` are the *solar-date
+    keys* handed to the solar solver (the date whose upper transit anchors the
+    day's events), NOT civil dates. They differ from the civil date of the
+    corresponding Maghrib instant wherever the zone's offset is far from the
+    longitude's mean-solar offset (Kiritimati, Apia, Chatham) or Maghrib falls
+    after local midnight (high latitude in summer). Never use them to label a
+    day; `compute_waqt` labels with `tz_provider.local_date(M_D1, ...)`.
 
     Implementation note: a naive "civil date g, try g and g+/-1" search
     (Stage 1's approach, just swapping UTC date for civil date) breaks
@@ -231,16 +246,26 @@ def compute_waqt(
 
     # Sprint 14: calendar failure isolation. The Hijri label is decoration on top
     # of the astronomy, never an input to it (day_events below is computed from
-    # close_date and the profile alone), so a provider that raises -- a remote one
+    # the solar-date key and the profile alone), so a provider that raises -- a remote one
     # having a bad day, or umm-al-qura outside its ephemeris range -- must not
     # destroy the events. Failure becomes visible data instead of a 500.
+    #
+    # Sprint 16 (DIS-001): the label is that of the CIVIL date, in the location's
+    # IANA zone, on which the closing Maghrib INSTANT falls -- not `close_date`,
+    # which is the solar-date key given to the solver. Before this fix the label
+    # was taken from `close_date`, which is off by a day wherever civil and
+    # mean-solar dates disagree at Maghrib (SPRINT-15-REPORT.md section 3.1).
+    # The events below stay keyed by `close_date` on purpose: an event belongs to
+    # the day of its own transit, even when it falls after local midnight
+    # (requirement EVT-004).
+    label_date = tz_provider.local_date(m_close, location.lat, location.lon)
     calendar_error = None
     try:
-        hijri_date = calendar_provider.from_gregorian(close_date)
+        hijri_date = calendar_provider.from_gregorian(label_date)
     except Exception as e:  # noqa: BLE001 - deliberately broad; see comment above
         hijri_date = None
         calendar_error = f"{type(e).__name__}: {str(e)[:200]}"
-    weekday = weekday_name(close_date)
+    weekday = weekday_name(label_date)
 
     day_length = (m_close - m_open).total_seconds()
 
@@ -276,13 +301,31 @@ def compute_waqt(
         EventReading("isha", day_events.isha, reading_for(day_events.isha)),
     ]
 
+    # Sprint 16 (OQ-EVT-1 ruling, requirement EVT-007): `next_event` is the next event
+    # by OCCURRENCE -- the chronologically earliest event strictly after `instant`.
+    # Two defects of the earlier list-order loop are removed: (1) after Maghrib, the
+    # previous solar day's Isha was invisible because it belongs to that day's listing,
+    # so "tonight's Isha" was skipped; (2) list order was used, not time order.
+    # `events` (the listing of this Waqt day) is unchanged.
+    candidates = list(events)
+    prev_events = solar.compute_day_events(
+        open_date,
+        location.lat,
+        location.lon,
+        elevation_m=location.elevation_m,
+        fajr_angle_deg=profile.fajr_angle_deg,
+        isha_angle_deg=profile.isha_angle_deg,
+        asr_shadow_ratio=profile.asr_shadow_ratio,
+        timescale=timescale,
+    )
+    if prev_events.isha is not None:
+        candidates.append(EventReading("isha", prev_events.isha, reading_for(prev_events.isha)))
     next_event = None
     next_countdown = None
-    for ev in events:
-        if ev.instant is not None and ev.instant > instant:
-            next_event = ev
-            next_countdown = _format_hms(ev.instant - instant)
-            break
+    upcoming = [ev for ev in candidates if ev.instant is not None and ev.instant > instant]
+    if upcoming:
+        next_event = min(upcoming, key=lambda ev: ev.instant)
+        next_countdown = _format_hms(next_event.instant - instant)
 
     return WaqtResult(
         status="OK",
@@ -297,5 +340,6 @@ def compute_waqt(
         next_event=next_event,
         next_event_countdown=next_countdown,
         calendar_error=calendar_error,
+        label_date=label_date,
         **common,
     )

@@ -26,6 +26,8 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
+from waqt_core.hijri import CalendarOutOfRange
+from waqt_core.timezone_provider import UnknownTimezoneError
 from waqt_core.versioning import computation_identity
 
 from .common import API_VERSION, ApiError, ErrorCode, error_body
@@ -100,6 +102,28 @@ def create_app(cors_origins=None, rate_limit=None, trust_proxy=None) -> FastAPI:
     @application.exception_handler(ApiError)
     async def handle_api_error(request: Request, exc: ApiError):
         return JSONResponse(status_code=exc.status_code, content=error_body(exc.code, exc.message, exc.details))
+
+    @application.exception_handler(UnknownTimezoneError)
+    async def handle_unknown_timezone(request: Request, exc: UnknownTimezoneError):
+        # Sprint 16 (DIS-003): ManualTimezoneProvider validates at construction, so every
+        # endpoint (and the batch/POST paths) that accepts timezone_override gets this one
+        # structured 4xx instead of a 500 INTERNAL_ERROR from zoneinfo.
+        return JSONResponse(
+            status_code=400,
+            content=error_body(ErrorCode.UNKNOWN_TIMEZONE, str(exc),
+                               {"parameter": "timezone_override", "received": exc.timezone,
+                                "expected": "an IANA time zone name, e.g. 'Africa/Addis_Ababa'"}),
+        )
+
+    @application.exception_handler(CalendarOutOfRange)
+    async def handle_calendar_out_of_range(request: Request, exc: CalendarOutOfRange):
+        # Sprint 16 (CAL-011): a provider refuses dates outside its supported range.
+        return JSONResponse(
+            status_code=400,
+            content=error_body(ErrorCode.OUT_OF_RANGE, str(exc),
+                               {"calendar_provider": exc.provider, "supported_range": exc.supported,
+                                "received": exc.received}),
+        )
 
     @application.exception_handler(RequestValidationError)
     async def handle_validation_error(request: Request, exc: RequestValidationError):

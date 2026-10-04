@@ -216,7 +216,14 @@ def op_represent(i):
 
 def op_date_to_waqt(i):
     p = common_params(i)
-    d = http("/v1/calendar/convert", dict(p, direction="gregorian-date-to-waqt", date=i["date"]))
+    try:
+        d = http("/v1/calendar/convert", dict(p, direction="gregorian-date-to-waqt", date=i["date"]))
+    except CopError as e:
+        # Sprint 16 (DAY-009): the HTTP API reports a civil date on which no Waqt day closes as HTTP 422
+        # CALENDAR_DATE_UNRESOLVABLE; the COP models that as a successful answer with resolved=false.
+        if getattr(e, "code", None) == "CALENDAR_DATE_UNRESOLVABLE":
+            return {"resolved": False, "close_civil_date": None, "open": None, "close": None, "reason": str(e)[:200]}
+        raise
     w = d["waqt"]
     if w.get("status") != "OK" or not w.get("day"):
         return {"resolved": False, "close_civil_date": None, "open": None, "close": None, "reason": w.get("undefined_reason")}
@@ -310,7 +317,7 @@ OPS = {"gregorian.weekday": op_weekday, "hijri.from_gregorian": op_h_from, "hijr
        "calendar.boundary_crossing": op_boundary, "schedule.run": op_schedule, "institutional.run": op_inst,
        "instant.parse": op_instant_parse}
 
-DESCRIPTOR = {"name": "waqt-reference", "version": "waqt-core 0.3.0 / waqt-api 0.3.0", "language": "Python", "cop_version": "1.0", "instant_precision_us": 1000000,
+DESCRIPTOR = {"name": "waqt-reference", "version": "waqt-core 0.4.0 / waqt-api 0.4.0", "language": "Python", "cop_version": "1.1", "instant_precision_us": 1000000,
               "astronomy": {"sun": "NOAA low-precision", "moon": "PyEphem (umm-al-qura)"},
               "timezone_source": "IANA via Python zoneinfo + timezonefinder", "shares_code_with_reference": "n/a (this is the reference)"}
 

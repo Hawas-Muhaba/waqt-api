@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-api"
-version = "0.3.0"
+version = "0.4.0"
 description = "Waqt HTTP API v1 — a Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API, built on the waqt-core computation package."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
 ]
 dependencies = [
-    "waqt-core>=0.3.0,<0.4",
+    "waqt-core>=0.4.0,<0.5",
     "fastapi>=0.100",
     "uvicorn>=0.23",
 ]

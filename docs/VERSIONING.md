@@ -11,21 +11,21 @@ means.
 
 | Axis | Lives in | Current value | Changes when |
 |---|---|---|---|
-| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.3.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
+| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.4.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
-| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.5.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract, additive-only within `/v1/`. |
+| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.6.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract, additive-only within `/v1/`. |
 | **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.5.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
-| **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `1.1` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
+| **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `2.0` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
 
 Two more things look like versions and are easy to conflate with the axes
 above (Sprint 13 audit):
 
 - The **`waqt-api` distribution version** (`pyproject.toml` at the repo root,
-  currently `0.3.0`) is *not* the **API version** (`1.5.0`, the HTTP
+  currently `0.4.0`) is *not* the **API version** (`1.6.0`, the HTTP
   contract). The package can ship a fix without the contract moving, and the
   contract can gain an additive field in the same release as any package
   version. `GET /v1/version` reports the contract (`api_version`), never the
-  package version. `waqt-local` (`0.4.0`) likewise has its own version,
+  package version. `waqt-local` (`0.5.0`) likewise has its own version,
   reported as `waqt_local_version` only by `waqt_local.version()`.
 - `tests/test_version_consistency.py` enforces, mechanically, that each of
   these has its own literal source (nothing is computed from another), that
@@ -98,6 +98,19 @@ waqt-core 0.3.0 ── engine revision "2" (unchanged: solar.py/timescale.py byt
      ├── waqt-local 0.3.0 → 0.4.0   (mirrors the API additions; requires waqt-core>=0.3.0,<0.4)
      └── SDKs 0.3.0 → 0.3.1 / 0.3.0 → 0.3.1   (HijriDate.source/.provenance, WaqtResponse.calendar_error; MAX_KNOWN_API_VERSION → 1.5.0)
 ```
+Sprint 16 (conformance contract 2.0.0; defects DIS-001/002/003 resolved):
+
+```
+waqt-core 0.3.0 → 0.4.0 ── engine revision "2" (unchanged: the fingerprint covers solar.compute_day_events only)
+     ├── waqt-api package 0.3.0 → 0.4.0, API contract 1.5.0 → 1.6.0
+     │        (additive: INVALID_HIJRI_DATE, UNKNOWN_TIMEZONE, OUT_OF_RANGE;
+     │         corrected behaviour: day label = civil date of the closing Maghrib instant, next_event by occurrence)
+     ├── waqt-local 0.4.0 → 0.5.0   (mirrors the three error codes; requires waqt-core>=0.4.0,<0.5)
+     ├── SDKs 0.3.1 / 0.3.1         (unchanged; MAX_KNOWN_API_VERSION stays 1.5.0 <= 1.6.0)
+     ├── vector set 1.1 → 2.0       (MAJOR: expected values changed for unchanged inputs --
+     │                               frozen kiritimati-date-line label, two recorded next_event values)
+     └── conformance contract 1.0.0 → 2.0.0   (conformance/VERSIONING.md: a narrowed accepted-code set is breaking)
+```
 Sprint 13 is the example of the *smallest* movement: a value that `waqt-core`
 reports changed (patch bump), while the engine revision, the HTTP contract and every
 other package stayed put. Nothing is inferred from anything else.
@@ -120,13 +133,13 @@ SDK work, for instance, could bump the API without touching the engine).
 
 ```json
 {
-  "waqt_core_version": "0.3.0",
+  "waqt_core_version": "0.4.0",
   "spec": "waqt-core/0.1",
-  "api_version": "1.5.0",
+  "api_version": "1.6.0",
   "waqt_local_version": null,
   "computation": {"engine": "waqt-noaa-low-precision", "revision": "2", "accuracy_level": "B"},
   "engine_revision_history": {"1": {...}, "2": {...}},
-  "conformance_vectors": {"vector_set_version": "1.1", "generated_at_engine_revision": "2"}
+  "conformance_vectors": {"vector_set_version": "2.0", "generated_at_engine_revision": "2"}
 }
 ```
 
@@ -150,7 +163,7 @@ Every vector file (`tests/vectors/*.json`, `sdks/vectors/sdk_conformance_vectors
 carries:
 
 ```json
-"vector_set_version": "1.1",
+"vector_set_version": "2.0",
 "astronomy_dependent": true,
 "generated_at_computation": {"engine": "waqt-noaa-low-precision", "revision": "2", "accuracy_level": "B"}
 ```

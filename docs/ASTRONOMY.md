@@ -62,6 +62,14 @@ This gets looser toward the poles for a real geometric reason, not sloppiness: n
 
 **Practical implication:** fine for a wall display, a timetable, or a scheduling system. Not yet verified precise enough for legal or liturgical use without independent confirmation, especially outside the tropics. The Level-A comparison above supersedes this for accuracy claims: after Sprint 11, measured error against a high-precision reference is about a second on the tested matrix. Not yet verified for legal or liturgical use — one reference, essentially one year.
 
+## Asr: the declination convention (normative, DR-0004)
+
+The Asr altitude is defined by the shadow rule: Asr begins when an object's shadow equals its **noon shadow** plus `n` times its height (`n` = `asr_shadow_ratio`).
+
+- **AST-001.** The noon shadow is evaluated with the Sun's declination at the **upper transit** of the date, because that is when the noon shadow occurs. That fixes the target altitude `a = atan(1 / (n + tan(z_noon)))`, with `z_noon = |latitude - declination_at_transit|`. The instant at which the Sun descends through `a` is then solved with the Sun's position at that instant. Evaluating the declination at the Asr instant instead would change the *definition*, not merely the precision; Sprint 15 estimated the difference at up to 5.9 s (Makkah, 20 March), which is why the Asr accuracy band stays 5 s and the convention is fixed rather than the band widened. (The 5.9 s figure was measured in Sprint 15 and was not re-measured in Sprint 16.)
+- **AST-002.** Asr is **undefined** (omitted, UND-002) exactly when the Sun's *geometric* altitude at upper transit is <= 0 degrees (no atmospheric refraction in this test). It is never replaced by a guessed time.
+- **Not decided here:** the shadow ratio itself. `asr_shadow_ratio` is a jurisprudential choice (commonly 1, and 2 in the Hanafi school); both are valid parameters and **neither is a conformance question**. Any positive finite ratio is a legitimate input; the defaults are conventions, not rulings.
+
 ## Elevation
 
 `elevation_m` applies to **sunrise/sunset only**, via the standard dip-of-horizon formula (`dip ≈ 1.76′ × √h`). It does **not** apply to Fajr, Isha, or Asr. Reasoning: elevation changes where the physical horizon sits relative to an observer, which is what sunrise/sunset are defined against; Fajr/Isha are twilight-*angle* events, and no mainstream prayer-time convention elevation-corrects them.

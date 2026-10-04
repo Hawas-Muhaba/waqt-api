@@ -20,7 +20,7 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.5.0"          # this HTTP contract's own version (1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version; 1.5.0: additive hijri.source/provenance, calendar_provider=aladhan, data.calendar_error, per-event representations, integrations in /v1/health + /v1/version, 429 RATE_LIMITED)
+API_VERSION = "1.6.0"          # this HTTP contract's own version (1.6.0: additive INVALID_HIJRI_DATE / UNKNOWN_TIMEZONE / OUT_OF_RANGE errors; behaviour corrections DIS-001 and OQ-EVT-1, see conformance/CHANGELOG.md; 1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version; 1.5.0: additive hijri.source/provenance, calendar_provider=aladhan, data.calendar_error, per-event representations, integrations in /v1/health + /v1/version, 429 RATE_LIMITED)
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
 # Sprint 12: computation identity is owned by waqt-core (one definition for the
 # API, waqt-local, the SDK vectors and the reference apps). These two names are
@@ -43,6 +43,9 @@ class ErrorCode:
     INVALID_CALENDAR_RULE = "INVALID_CALENDAR_RULE"  # Sprint 7: a week/fiscal-year/academic-year rule is malformed or unresolvable
     CALENDAR_DATE_UNRESOLVABLE = "CALENDAR_DATE_UNRESOLVABLE"  # Sprint 8: a Gregorian civil date could not be matched to a Waqt day (extreme-offset search exhausted)
     INVALID_SPAN = "INVALID_SPAN"               # Sprint 8: a boundary-crossing span's end is not strictly after its start
+    INVALID_HIJRI_DATE = "INVALID_HIJRI_DATE"  # Sprint 16: a (year, month, day) that does not exist in the requested calendar (DIS-002)
+    OUT_OF_RANGE = "OUT_OF_RANGE"              # Sprint 16: a date outside a calendar provider's supported range (CAL-011)
+    UNKNOWN_TIMEZONE = "UNKNOWN_TIMEZONE"      # Sprint 16: timezone_override is not an IANA zone name (DIS-003)
     VALIDATION_ERROR = "VALIDATION_ERROR"      # request shape/range errors (lat/lon etc.)
     RATE_LIMITED = "RATE_LIMITED"              # Sprint 14: inbound rate limit exceeded (HTTP 429, Retry-After set)
     INTERNAL_ERROR = "INTERNAL_ERROR"          # anything unexpected — always caught, never a raw 500

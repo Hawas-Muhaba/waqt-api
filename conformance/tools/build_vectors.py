@@ -1,3 +1,13 @@
+"""SUPERSEDED in contract 2.0.0 (Sprint 16): this script produced the contract 1.0.0 baseline only.
+
+Re-running it would silently overwrite the 2.0.0 vectors (corrected labels, tightened error codes, promoted tiers)
+with their 1.0.0 content. Vectors are now changed through GOVERNANCE.md (proposal -> decision record -> CHANGELOG)
+and `tools/migrate_contract_2_0.py` is the audit trail for 2.0.0. Pass --rebuild-1.0-baseline to regenerate the
+historical 1.0.0 files (into a scratch --out directory, never over conformance/vectors/)."""
+import sys
+if "--rebuild-1.0-baseline" not in sys.argv:
+    sys.exit(f"{sys.argv[0]} is superseded (contract 2.0.0): see conformance/GOVERNANCE.md. "
+             "Pass --rebuild-1.0-baseline to regenerate the historical 1.0.0 baseline.")
 #!/usr/bin/env python3
 """Build the Sprint 15 conformance vectors.
 

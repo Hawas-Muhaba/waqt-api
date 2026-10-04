@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: "22" }
       - run: pip install -r requirements.txt pytest
+      - name: contract manifest, cross-references and process guards (GOVERNANCE.md)
+        run: |
+          python conformance/tools/contract.py verify
+          python -m pytest tests/test_conformance_contract.py tests/test_sprint16_api.py -q
       - name: independent implementation unit tests
         run: cd conformance/independent && npm test
       - name: portable conformance suite (reference vs independent)

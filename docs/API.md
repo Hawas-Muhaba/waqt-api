@@ -11,6 +11,8 @@ Base URL: wherever you deployed it (e.g. `https://waqt-api.onrender.com`). Inter
 - The URL path carries the major version: every endpoint is under `/v1/`. A breaking change gets `/v2/`; `/v1/` never changes shape once released.
 - Every response also carries `meta.api_version` (currently `1.0.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
 
+- **1.6.0 (Sprint 16, conformance contract 2.0.0).** Additive: error codes `INVALID_HIJRI_DATE`, `UNKNOWN_TIMEZONE`, `OUT_OF_RANGE` (section 3). Two *corrections* to behaviour that contradicted the written specification, both recorded in `conformance/CHANGELOG.md`: the Hijri date / weekday of a Waqt day are those of the **civil** date of its closing Maghrib instant (SEMANTICS section 3, DAY-004), and `next_event` is the next event **by occurrence** (see `GET /v1/waqt`). No field was added, removed or renamed.
+
 ## 2. The envelope
 
 Every response, success or failure, has exactly this shape:
@@ -33,12 +35,15 @@ Every response, success or failure, has exactly this shape:
 | `INVALID_DATE` | 400 | `date` param isn't parseable `YYYY-MM-DD` |
 | `UNKNOWN_CALENDAR_PROVIDER` | 400 | `calendar_provider` isn't one of `GET /v1/calendar`'s list |
 | `INVALID_RULE` | 400 | a `/v1/schedule/resolve` rule or operation is malformed (unknown event, wrong type, bad nesting). A caller mistake — distinct from a well-formed rule whose astronomy is undefined, which is a `200` with a `status` |
+| `INVALID_HIJRI_DATE` | 400 | (1.6.0) a Hijri `year`/`month`/`day` that does not exist in the requested calendar: year < 1, or a day beyond that month's length (`1448-02-30` under `arithmetic-tabular`). It is never normalised into a neighbouring month. Month/day numerals outside 1-12 / 1-30 may instead be `VALIDATION_ERROR` (CAL-004). `details` carries `received`, `calendar_provider`, `reason`. |
+| `UNKNOWN_TIMEZONE` | 400 | (1.6.0) `timezone_override` (query or body) is not an IANA zone name. Applies to every endpoint that accepts it. `details` carries `parameter`, `received`, `expected`. Before 1.6.0 this was an HTTP 500 `INTERNAL_ERROR`. |
+| `OUT_OF_RANGE` | 400 | (1.6.0) a date outside the chosen calendar provider's supported range; `umm-al-qura` supports 1700-01-01..2300-12-31 only (CAL-011). `details` carries `calendar_provider`, `supported_range`, `received`. |
 | `UNSUPPORTED_OPERATION` | 400 | e.g. asking `declared` or `local-observation` to reverse-convert, which they structurally can't |
-| `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
+| `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12; an unknown time zone is `UNKNOWN_TIMEZONE`, not this) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
 | `RATE_LIMITED` | 429 | (1.5.0, only when the operator enabled `WAQT_RATE_LIMIT`) the caller exceeded its request budget. `Retry-After` and `details.retry_after_seconds` say when to retry. |
 | `INTERNAL_ERROR` | 500 | anything unexpected. **Every** exception is caught here — you will never receive a raw stack trace or an empty connection reset. `details.exception_type` names the underlying Python exception for bug reports, nothing more. |
 
-Every code above is exercised by a real test in `tests/test_api.py` — none of this table is aspirational.
+Every code above is exercised by a real test in `tests/test_api.py` (the three codes added in 1.6.0 in `tests/test_sprint16_api.py`) — none of this table is aspirational.
 
 ## 4. Units, precision, null behavior
 
@@ -86,6 +91,8 @@ Everything: day boundary, clock reading, all six events, Hijri date, timezone.
 | `calendar_provider` | no | `arithmetic-tabular` | see `GET /v1/calendar` |
 | `override_date`, `declared_year/month/day` | no | — | see §8 below — **only take effect if `override_date` exactly matches the label date** |
 | `sighting_year/month/day`, `observed_at` | no | — | same, for `local-observation` |
+
+**`next_event` (clarified in 1.6.0, EVT-007).** `data.next_event` is the chronologically earliest event strictly after `instant`, taken over this day's listed events **and the previous solar day's Isha**. Right after Maghrib it is therefore tonight's Isha, not tomorrow's Fajr. `data.events` is unchanged: it is the listing of the current Waqt day. If no event after `instant` is defined, `next_event` is `null`.
 
 ### `GET /v1/day` — day boundary only
 Same location/instant/timezone params as above. No astronomy profile, no calendar — Maghrib doesn't depend on either. Returns `status`, `location`, `timezone`, `day`, `computation`.
@@ -160,6 +167,8 @@ The Islamic day runs Maghrib-to-Maghrib, and per the Core Time Model, the Hijri 
 Concretely: querying `/v1/waqt` for `2026-09-19T15:42:00Z` at Addis Ababa returns a Hijri date computed against **2026-09-20**, because that instant is already past that evening's Maghrib, and the day it's inside of closes at the *next* evening's Maghrib — whose Gregorian date is the 20th.
 
 This matters directly for `override_date` on `/v1/waqt`, and for the `date` you pass to `/v1/hijri` if you're trying to match a specific `/v1/waqt` response: **use the date from that response's own `day.maghrib_close` (or, for `/v1/hijri`, whatever date you already know is the correct label)**, not the date of the instant you started from. If you don't already know it, call `/v1/day` or `/v1/waqt` first and read the label date off the result before calling `/v1/hijri` or setting `override_date`.
+
+**Which date, exactly (1.6.0).** "The Gregorian date the closing Maghrib falls on" means the **civil date in the location's IANA zone** (or `timezone_override`), evaluated at the closing Maghrib *instant*. It does not mean the date in longitude-based solar time. Near local midnight this makes a few civil dates label no day or two days; see SEMANTICS section 3 (DAY-009).
 
 ## 9. A complete integration in under a minute
 

@@ -17,7 +17,7 @@ from fastapi import APIRouter, Query
 
 from .common import ApiError, ErrorCode, hijri_block, parse_date, success
 from .providers import PROVIDER_CATALOG, resolve_calendar_provider
-from ..hijri import weekday_name
+from ..hijri import InvalidHijriDate, checked_to_gregorian, weekday_name
 
 router = APIRouter()
 
@@ -63,7 +63,14 @@ def convert(
             f"(it has no fixed rule to invert — see GET /v1/calendar).",
             {"calendar_provider": calendar_provider},
         )
-    g = provider.to_gregorian(year, month, day)
+    try:
+        g = checked_to_gregorian(provider, year, month, day)
+    except InvalidHijriDate as e:
+        raise ApiError(
+            400, ErrorCode.INVALID_HIJRI_DATE, str(e),
+            {"received": {"year": year, "month": month, "day": day},
+             "calendar_provider": calendar_provider, "reason": e.reason},
+        ) from e
     return success({
         "direction": "to-gregorian",
         "input": {"hijri": {"year": year, "month": month, "day": day}},

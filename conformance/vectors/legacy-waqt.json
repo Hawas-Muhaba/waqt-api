@@ -555,7 +555,11 @@
        "instant": "2026-09-20T05:31:27.148616+00:00",
        "reading_seconds": 90257.694
       }
-     ]
+     ],
+     "hijri": {
+      "date": "1448-04-07"
+     },
+     "weekday": "al-Ahad"
     }
    },
    "tolerance": {
@@ -567,7 +571,7 @@
    "ignore": [
     "display"
    ],
-   "note": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case. [label fields removed: disputed, see DIS-001 and the label/* vectors]"
+   "note": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case. Label restored in contract 2.0.0 (DIS-001 resolved, DR-0001): the day closes on civil 2026-09-20, an al-Ahad, 1448-04-07. The frozen Sprint 5 value (1448-04-06 / as-Sabt) was the defect."
   },
   {
    "id": "waqt/addis-asr-standard",

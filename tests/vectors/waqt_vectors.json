@@ -1,6 +1,6 @@
 {
   "spec": "waqt-core/0.1",
-  "vector_set_version": "1.1",
+  "vector_set_version": "2.0",
   "astronomy_dependent": true,
   "generated_at_computation": {
     "engine": "waqt-noaa-low-precision",
@@ -379,7 +379,7 @@
     },
     {
       "id": "kiritimati-date-line",
-      "description": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case.",
+      "description": "Kiritimati, Kiribati: civil offset UTC+14 is ~24.5h from natural solar time -- the hardest real-world date-line case. Label corrected in vector set 2.0 (DIS-001): the day closes on civil 2026-09-20, an al-Ahad (1448-04-07); the Sprint 5 value 1448-04-06 / as-Sabt was the defect.",
       "input": {
         "location": {
           "lat": 1.8721,
@@ -397,8 +397,8 @@
       "expected": {
         "status": "OK",
         "undefined_reason": null,
-        "hijri_date": "1448-04-06",
-        "weekday": "as-Sabt",
+        "hijri_date": "1448-04-07",
+        "weekday": "al-Ahad",
         "day": {
           "maghrib_open": "2026-09-19T04:27:09.454859+00:00",
           "maghrib_close": "2026-09-20T04:26:45.001953+00:00",

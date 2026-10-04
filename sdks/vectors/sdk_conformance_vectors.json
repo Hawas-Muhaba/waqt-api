@@ -1,6 +1,6 @@
 {
   "spec": "waqt-api-sdk-conformance/1.0",
-  "vector_set_version": "1.1",
+  "vector_set_version": "2.0",
   "astronomy_dependent": true,
   "generated_at_computation": {
     "engine": "waqt-noaa-low-precision",
@@ -251,11 +251,11 @@
             }
           ],
           "next_event": {
-            "name": "fajr",
-            "instant": "2026-09-20T02:04:52+00:00",
+            "name": "isha",
+            "instant": "2026-09-19T16:28:28+00:00",
             "countdown": {
-              "display": "10:22:52",
-              "seconds": 37372.689
+              "display": "00:46:28",
+              "seconds": 2788.886
             }
           },
           "profile": {
@@ -740,11 +740,11 @@
             }
           ],
           "next_event": {
-            "name": "fajr",
-            "instant": "2026-09-20T02:04:52+00:00",
+            "name": "isha",
+            "instant": "2026-09-19T16:28:28+00:00",
             "countdown": {
-              "display": "10:22:52",
-              "seconds": 37372.689
+              "display": "00:46:28",
+              "seconds": 2788.886
             }
           },
           "profile": {

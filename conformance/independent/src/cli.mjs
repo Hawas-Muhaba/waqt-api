@@ -6,7 +6,7 @@ import { runCase, CAPABILITIES } from './ops.mjs';
 
 const DESCRIPTOR = {
   name: 'waqt-independent', version: '0.1.0', language: 'JavaScript (Node.js, zero dependencies)',
-  cop_version: '1.0',
+  cop_version: '1.1',
   astronomy: { sun: 'truncated VSOP87D (Earth) + FK5 + nutation + aberration', timescale: 'Espenak-Meeus 2006 DeltaT', events: 'scan-and-bisect on the true altitude function', moon: 'truncated ELP2000-82 / Meeus ch.47' },
   timezone_source: 'ICU (Intl.DateTimeFormat) tz database',
   shares_code_with_reference: false,

@@ -12,6 +12,20 @@ the specification. Each entry is classified:
 | **CONFIG** | intentionally configurable / convention-dependent behaviour | no |
 | **NUMERIC** | inherent numerical sensitivity; no tolerance can remove it | no — tier `informative` |
 
+> **Status at contract 2.0.0 (Sprint 16): DIS-001, DIS-002 and DIS-003 are RESOLVED in the reference** (`waqt-core` 0.4.0,
+> API 1.6.0). `baselines/known-failures.json` is empty. The text below is the Sprint 15 finding, kept for the
+> record; its "documented, not fixed" statements describe Sprint 15.
+>
+> | Defect | Ruling | Fix |
+> |---|---|---|
+> | DIS-001 label | `decisions/DR-0001.md`: option (A), civil date of the closing Maghrib instant | `core.py`: label from `tz.local_date(closing_maghrib)`; frozen vector corrected |
+> | DIS-002 Hijri normalisation | `decisions/DR-0006.md`: `INVALID_HIJRI_DATE` | `hijri.py` validation + `checked_to_gregorian`; API/local mapping |
+> | DIS-003 unknown zone | `decisions/DR-0006.md`: `UNKNOWN_TIMEZONE`, HTTP 400 | validation in `ManualTimezoneProvider`; global handler |
+>
+> Not a defect, still a disagreement (kept visible): **OQ-UAQ-2** - the reference and the independent implementation differ
+> on 2 of 492 Umm al-Qura month starts (Moon sets 3.7 s and 6.8 s before the Sun). Class NUMERIC/CONFIG; deliberately unresolved.
+> Verification caveat: the Sprint 16 sandbox could not execute the Umm al-Qura provider, so this has not been re-measured.
+
 Evidence for every entry is reproducible: the vector IDs name entries in `vectors/*.json` and the numbers
 come from `reports/conformance-report.*` and `reports/differential-report.*`.
 

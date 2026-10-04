@@ -1,5 +1,17 @@
 # Open specification questions found by independent implementation
 
+> **Status at contract 2.0.0 (Sprint 16).** The machine-readable registry is `open-questions.json`; the table below is
+> Sprint 15's *evidence*, kept unchanged for traceability. Of 28 questions: **16 resolved** (decision records
+> `../decisions/`), **11 deferred**, **1 unresolved by design (OQ-UAQ-2)**.
+>
+> | Status | Questions |
+> |---|---|
+> | resolved | OQ-TAB-1, OQ-ASR-1, OQ-ASR-2, OQ-DAY-1, OQ-DAY-2, OQ-DAY-3, OQ-EVT-1, OQ-UAQ-1, OQ-UAQ-3, OQ-ERR-2, OQ-ERR-3, OQ-SCH-1..5 |
+> | **unresolved by design** | **OQ-UAQ-2** (Umm al-Qura computational conventions: institutional, not technical) |
+> | deferred | OQ-TIME-1..3, OQ-TAB-2, OQ-TAB-3, OQ-DT-1, OQ-UND-1, OQ-ERR-1, OQ-PRV-1..3 |
+>
+> A resolved question's "Proposal" column below is what was *proposed*; the ruling is in its decision record and may differ.
+
 These are places where a developer working **only from the written specification** had to make a choice the
 text does not determine. Each entry says what the independent implementation chose, what the reference does,
 what the measured consequence is, and a **proposed** resolution. None of these is counted as a failure by the

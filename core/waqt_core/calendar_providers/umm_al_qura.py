@@ -71,7 +71,7 @@ from typing import Optional
 import ephem
 
 from .. import solar
-from ..hijri import HijriDate
+from ..hijri import CalendarOutOfRange, HijriDate
 
 MAKKAH_LAT = 21.4225
 MAKKAH_LON = 39.8262
@@ -204,7 +204,16 @@ class UmmAlQuraProvider:
             idx += -1 if target < label else 1
         raise RuntimeError(f"Could not bracket {target} within 24 month-steps of the anchor.")
 
+    #: Sprint 16 (CAL-011): the SUPPORTED range. Accuracy is only characterised for
+    #: roughly 1900-2100 (docs/CALENDARS.md); inside 1700..2300 the provider answers, outside
+    #: it refuses with OUT_OF_RANGE rather than guess.
+    SUPPORTED_MIN = date(1700, 1, 1)
+    SUPPORTED_MAX = date(2300, 12, 31)
+    _SUPPORTED_TEXT = "1700-01-01..2300-12-31"
+
     def from_gregorian(self, d: date) -> HijriDate:
+        if not (self.SUPPORTED_MIN <= d <= self.SUPPORTED_MAX):
+            raise CalendarOutOfRange(self.name, self._SUPPORTED_TEXT, d.isoformat())
         idx = self._index_for_date(d)
         label = self._boundary(idx).label_date
         day = (d - label).days + 1
@@ -222,6 +231,11 @@ class UmmAlQuraProvider:
         provider's own month boundaries, not a separate approximation
         layered on top of them.
         """
+        if not (1100 <= year <= 1730):  # cheap pre-check before walking the boundary chain
+            raise CalendarOutOfRange(self.name, self._SUPPORTED_TEXT, f"Hijri year {year}")
         idx = (year - self.ANCHOR_YEAR) * 12 + (month - self.ANCHOR_MONTH)
         label = self._boundary(idx).label_date
-        return label + timedelta(days=day - 1)
+        g = label + timedelta(days=day - 1)
+        if not (self.SUPPORTED_MIN <= g <= self.SUPPORTED_MAX):
+            raise CalendarOutOfRange(self.name, self._SUPPORTED_TEXT, g.isoformat())
+        return g

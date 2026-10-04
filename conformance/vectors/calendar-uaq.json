@@ -3506,6 +3506,128 @@
     }
    },
    "note": "reference-recorded: month starts and lengths. Disagreement is expected only in threshold-sensitive months (CALENDARS.md 'What this is not' 2)."
+  },
+  {
+   "id": "uaq/range/1650-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1650-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "umm-al-qura is supported for 1700-01-01..2300-12-31 only (DR-0007). Before 2.0.0 the reference answered for 1650..2300."
+  },
+  {
+   "id": "uaq/range/1699-12-31",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1699-12-31",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "umm-al-qura is supported for 1700-01-01..2300-12-31 only (DR-0007). Before 2.0.0 the reference answered for 1650..2300."
+  },
+  {
+   "id": "uaq/range/2301-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2301-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "umm-al-qura is supported for 1700-01-01..2300-12-31 only (DR-0007). Before 2.0.0 the reference answered for 1650..2300."
+  },
+  {
+   "id": "uaq/range/2500-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2500-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "umm-al-qura is supported for 1700-01-01..2300-12-31 only (DR-0007). Before 2.0.0 the reference answered for 1650..2300."
+  },
+  {
+   "id": "uaq/range/1700-01-01",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "informative",
+   "basis": "recorded",
+   "input": {
+    "date": "1700-01-01",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1111-07-11"
+    }
+   },
+   "note": "Boundary of the supported range (DR-0007): must answer. Value recorded from the independent implementation; informative because month starts away from anchors are CAL-007 (unresolved)."
+  },
+  {
+   "id": "uaq/range/2300-12-31",
+   "requirements": [
+    "CAL-011"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "informative",
+   "basis": "recorded",
+   "input": {
+    "date": "2300-12-31",
+    "provider": "umm-al-qura"
+   },
+   "expect": {
+    "output": {
+     "date": "1730-12-19"
+    }
+   },
+   "note": "Boundary of the supported range (DR-0007): must answer. Value recorded from the independent implementation; informative because month starts away from anchors are CAL-007 (unresolved)."
   }
  ]
 }

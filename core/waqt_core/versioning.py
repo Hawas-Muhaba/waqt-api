@@ -102,7 +102,7 @@ ENGINE_REVISIONS: dict = {
 #:      Addis Ababa to London because its expected civil offset was a
 #:      local-mean-time value that differs between tz database versions (i.e. it
 #:      was not reproducible across environments). Engine revision unchanged (2).
-VECTOR_SET_VERSION = "1.1"
+VECTOR_SET_VERSION = "2.0"
 
 
 def computation_identity() -> dict:

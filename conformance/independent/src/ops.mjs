@@ -8,7 +8,7 @@ import { representInstant, gregorianDateToWaqtDay, boundaryCrossing } from './in
 
 function needZone(input) {
   if (!input.timezone) throw new WaqtError('VALIDATION_ERROR', 'timezone (IANA name) is required');
-  if (!isKnownZone(input.timezone)) throw new WaqtError('VALIDATION_ERROR', `unknown IANA time zone: ${input.timezone}`);
+  if (!isKnownZone(input.timezone)) throw new WaqtError('UNKNOWN_TIMEZONE', `unknown IANA time zone: ${input.timezone}`);
   return input.timezone;
 }
 

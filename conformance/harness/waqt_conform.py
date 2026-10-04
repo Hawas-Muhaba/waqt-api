@@ -27,6 +27,16 @@ import sys
 import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def contract_summary():
+    """Contract version, hash and unresolved questions (Sprint 16, GOVERNANCE.md section 5): printed in EVERY
+    report, never filtered, so a clean-looking table cannot hide an unresolved question."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("waqt_contract", os.path.join(ROOT, "tools", "contract.py"))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.summary()
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$")
 
 
@@ -433,6 +443,20 @@ def markdown(runs, reqs, vecs, mms, meta):
     w(f"# Waqt conformance report\n")
     w(f"Generated {meta['generated']} by `harness/waqt_conform.py` · COP {meta['cop']} · {len(vecs)} vectors + {len(mms)} metamorphic checks.\n")
     w("Reproduce: `python3 conformance/harness/waqt_conform.py --adapter \"python3 conformance/adapters/reference_adapter.py\" --label reference --adapter \"node conformance/independent/src/cli.mjs\" --label independent`\n")
+    c = meta.get("contract") or {}
+    if c:
+        w("## 0. Contract and unresolved questions\n")
+        w(f"Contract **{c['contract_version']}** ({'released' if c['released'] else 'DRAFT - not yet released/ratified'}) - sha256 `{c['contract_sha256'][:16]}` - "
+          f"manifest {'matches' if c['manifest_matches_files'] else '**DOES NOT MATCH** the files on disk'} - COP {c['cop_version']}.\n")
+        q = c["questions"]
+        w(f"**Unresolved specification questions: {q['deferred'] + q['unresolved-by-design']}** of {q['total']} "
+          f"({q['unresolved-by-design']} unresolved by design, {q['deferred']} deferred; {q['resolved']} resolved). "
+          "A passing table below does not mean these are settled.\n")
+        for u in c["unresolved"]:
+            w(f"- `{u['id']}` [{u['status']}] {u['topic']}")
+        if c["unenforced_musts"]:
+            w("\nDeclared MUST but not enforced by any normative vector: " + ", ".join(f"`{x}`" for x in c["unenforced_musts"]) + ".")
+        w("")
     w("## 1. Implementations\n")
     w("| label | implementation | language | shares code with reference | run time |")
     w("|---|---|---|---|---|")
@@ -507,7 +531,7 @@ def main():
     for cmd, label in zip(args.adapter, labels):
         print(f"[waqt-conform] running {label}: {len(vecs)} vectors, {len(mms)} metamorphic ...", file=sys.stderr)
         runs.append(run_one(label, cmd, vecs, mms, None))
-    meta = {"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "cop": "1.0"}
+    meta = {"generated": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "cop": contract_summary()["cop_version"], "contract": contract_summary()}
     os.makedirs(args.out, exist_ok=True)
     slim = []
     for r in runs:

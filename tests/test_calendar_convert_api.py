@@ -11,7 +11,7 @@ KIRITIMATI = dict(lat=1.87, lon=-157.4)
 
 def test_health_reports_new_api_version():
     r = c.get("/v1/health")
-    assert r.json()["api_version"] == "1.5.0"
+    assert r.json()["api_version"] == "1.6.0"
 
 
 # ---------------------------------------------------------------------------

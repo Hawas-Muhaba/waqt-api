@@ -140,7 +140,7 @@ function formatterFor(zone) {
         hour: '2-digit', minute: '2-digit', second: '2-digit',
       });
     } catch (e) {
-      throw new WaqtError('VALIDATION_ERROR', `unknown IANA time zone: ${zone}`);
+      throw new WaqtError('UNKNOWN_TIMEZONE', `unknown IANA time zone: ${zone}`);
     }
     fmtCache.set(zone, f);
   }

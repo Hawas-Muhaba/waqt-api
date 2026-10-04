@@ -2262,7 +2262,8 @@
   {
    "id": "sch-table/point-next-maghrib-at-exact-maghrib-inclusive",
    "requirements": [
-    "SCH-001"
+    "SCH-001",
+    "SCH-009"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -2512,7 +2513,8 @@
   {
    "id": "sch-table/point-next-maghrib-at-exact-maghrib-exclusive",
    "requirements": [
-    "SCH-001"
+    "SCH-001",
+    "SCH-009"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -2763,7 +2765,8 @@
   {
    "id": "sch-table/point-prev-maghrib-at-exact-maghrib-inclusive",
    "requirements": [
-    "SCH-001"
+    "SCH-001",
+    "SCH-009"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -7533,7 +7536,8 @@
   {
    "id": "sch-table/window-inverted-is-no-valid-window",
    "requirements": [
-    "SCH-002"
+    "SCH-002",
+    "SCH-011"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -7816,7 +7820,8 @@
   {
    "id": "sch-table/window-empty-half-open-is-no-valid-window",
    "requirements": [
-    "SCH-002"
+    "SCH-002",
+    "SCH-011"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -12041,7 +12046,7 @@
     "description",
     "reason"
    ],
-   "note": "(Fajr, Sunrise] tested at Fajr (excluded) \u2014 start_inclusive=false."
+   "note": "(Fajr, Sunrise] tested at Fajr (excluded) — start_inclusive=false."
   },
   {
    "id": "sch-table/eval-maghrib-isha-at-maghrib-with-fixed-anchor",
@@ -15899,7 +15904,8 @@
   {
    "id": "sch-table/event-position-isha-next",
    "requirements": [
-    "SCH-006"
+    "SCH-006",
+    "SCH-010"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -16147,7 +16153,8 @@
   {
    "id": "sch-table/event-position-isha-listed-day-0",
    "requirements": [
-    "SCH-006"
+    "SCH-006",
+    "SCH-010"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -16396,7 +16403,8 @@
   {
    "id": "sch-table/event-position-fajr",
    "requirements": [
-    "SCH-006"
+    "SCH-006",
+    "SCH-010"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -16644,7 +16652,8 @@
   {
    "id": "sch-table/event-position-maghrib",
    "requirements": [
-    "SCH-006"
+    "SCH-006",
+    "SCH-010"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -19709,7 +19718,8 @@
   {
    "id": "sch-table/span-inverted-no-valid-window",
    "requirements": [
-    "SCH-005"
+    "SCH-005",
+    "SCH-011"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -19960,7 +19970,8 @@
   {
    "id": "sch-table/span-empty-half-open-no-valid-window",
    "requirements": [
-    "SCH-005"
+    "SCH-005",
+    "SCH-011"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -22676,7 +22687,8 @@
   {
    "id": "sch-table/undef-london-strict-until-fajr",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-012"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -22926,7 +22938,8 @@
   {
    "id": "sch-table/undef-london-skip-until-fajr-finds-nothing",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-012"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -23177,7 +23190,8 @@
   {
    "id": "sch-table/undef-london-strict-until-fajr-late-july",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-012"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -23427,7 +23441,8 @@
   {
    "id": "sch-table/undef-london-skip-until-fajr-late-july",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-012"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -23685,7 +23700,8 @@
   {
    "id": "sch-table/undef-london-next-event-lists-undefined",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-012"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -23940,7 +23956,8 @@
   {
    "id": "sch-table/undef-london-event-position-fajr",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-010"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -24212,7 +24229,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 0
@@ -24235,7 +24252,7 @@
      "depends_on": [],
      "description": "event(maghrib, day=+0)",
      "within_day": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
      "cause": "DAY_UNDEFINED",
      "undefined_ref": "maghrib@day+0",
      "skipped": []
@@ -24274,7 +24291,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 0
@@ -24368,7 +24385,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 0
@@ -24387,7 +24404,7 @@
      "length_seconds": null,
      "position": null,
      "hijri_label": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
     }
    },
    "ignore": [
@@ -24423,7 +24440,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 0
@@ -24451,7 +24468,7 @@
      "crosses_civil_midnight": null,
      "start_civil_date": null,
      "end_civil_date": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
     }
    },
    "ignore": [
@@ -24463,7 +24480,8 @@
   {
    "id": "sch-table/undef-tromso-step-into-undefined-day",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-013"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -24547,7 +24565,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 3
@@ -24570,7 +24588,7 @@
      "depends_on": [],
      "description": "event(maghrib, day=+1)",
      "within_day": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
      "cause": "DAY_UNDEFINED",
      "undefined_ref": "maghrib@day+1",
      "skipped": []
@@ -24585,7 +24603,8 @@
   {
    "id": "sch-table/undef-tromso-step-across-undefined-day",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-013"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -24669,7 +24688,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 3
@@ -24692,7 +24711,7 @@
      "depends_on": [],
      "description": "event(maghrib, day=+2)",
      "within_day": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.",
      "cause": "DAY_UNDEFINED",
      "undefined_ref": "maghrib@day+2",
      "skipped": []
@@ -24707,7 +24726,8 @@
   {
    "id": "sch-table/undef-tromso-span-into-undefined-day",
    "requirements": [
-    "SCH-004"
+    "SCH-004",
+    "SCH-011"
    ],
    "op": "schedule.run",
    "tier": "exact",
@@ -24791,7 +24811,7 @@
        "close": null,
        "events": null,
        "hijri_label": null,
-       "undefined_reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+       "undefined_reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
       }
      ],
      "anchor_index": 3
@@ -24819,7 +24839,7 @@
      "crosses_civil_midnight": null,
      "start_civil_date": null,
      "end_civil_date": null,
-     "reason": "Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
+     "reason": "Maghrib (sunset) does not occur for this date/location — polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md."
     }
    },
    "ignore": [

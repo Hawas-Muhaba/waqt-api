@@ -73,9 +73,9 @@ def sprint14_checks(rec_fn):
                and hj["provenance"]["fallback_reason"] == "upstream-server-error" and {k.lower(): v for k, v in h.items()}.get("access-control-allow-origin") == "http://localhost:8080")
         st, h, b = get(port, "/v1/health")
         i = b["integrations"]["hijri_aladhan"]
-        rec_fn("S14 /v1/health: status ok while degraded; circuit open; no network involved", st == 200 and b["status"] == "ok" and b["api_version"] == "1.5.0" and i["circuit"] == "open" and i["last_failure_reason"] == "upstream-server-error")
+        rec_fn("S14 /v1/health: status ok while degraded; circuit open; no network involved", st == 200 and b["status"] == "ok" and b["api_version"] == "1.6.0" and i["circuit"] == "open" and i["last_failure_reason"] == "upstream-server-error")
         st, h, b = get(port, "/v1/version"); d = b["data"]
-        rec_fn("S14 /v1/version: API 1.5.0, integrations listed, affects_astronomy=false", d["api_version"] == "1.5.0" and "aladhan" in d["integrations"]["calendar_providers"] and d["integrations"]["affects_astronomy"] is False)
+        rec_fn("S14 /v1/version: API 1.6.0, integrations listed, affects_astronomy=false", d["api_version"] == "1.6.0" and "aladhan" in d["integrations"]["calendar_providers"] and d["integrations"]["affects_astronomy"] is False)
         st, h, b = get(port, "/v1/waqt?lat=90&lon=0&instant=2026-06-21T12:00:00Z&calendar_provider=aladhan")
         rec_fn("S14 polar: UNDEFINED, hijri null, no events, still HTTP 200", st == 200 and b["data"]["status"] == "UNDEFINED" and b["data"]["hijri"] is None and b["data"]["events"] == [])
         st, h, b = get(port, "/v1/waqt?lat=64.15&lon=-21.94&instant=2026-06-21T12:00:00Z&timezone_override=Atlantic/Reykjavik&calendar_provider=arithmetic-tabular")

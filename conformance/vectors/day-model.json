@@ -47,7 +47,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -225,7 +226,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -403,7 +405,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -581,7 +584,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -759,7 +763,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -937,7 +942,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -1115,7 +1121,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -1293,7 +1300,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -1471,7 +1479,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -1649,7 +1658,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -1827,7 +1837,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2005,7 +2016,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2183,7 +2195,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2361,7 +2374,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2539,7 +2553,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2717,7 +2732,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -2895,7 +2911,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3073,7 +3090,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3251,7 +3269,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3429,7 +3448,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3607,7 +3627,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3785,7 +3806,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -3963,7 +3985,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4141,7 +4164,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4320,7 +4344,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4482,7 +4507,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4644,7 +4670,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4805,7 +4832,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -4983,7 +5011,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -5161,7 +5190,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -5339,7 +5369,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -5517,7 +5548,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -5695,7 +5727,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -5873,7 +5906,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6051,7 +6085,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6229,7 +6264,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6407,7 +6443,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6585,7 +6622,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6763,7 +6801,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -6941,7 +6980,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -7119,7 +7159,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -7297,7 +7338,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -7475,7 +7517,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -7653,7 +7696,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -7831,7 +7875,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8009,7 +8054,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8187,7 +8233,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8365,7 +8412,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8544,7 +8592,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8706,7 +8755,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -8868,7 +8918,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9031,7 +9082,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9194,7 +9246,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9357,7 +9410,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9519,7 +9573,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9698,7 +9753,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -9877,7 +9933,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "EVT-004"
+    "EVT-004",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -10253,7 +10310,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -10431,7 +10489,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -10609,7 +10668,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -10787,7 +10847,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -10965,7 +11026,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -11143,7 +11205,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -11321,7 +11384,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -11499,7 +11563,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -11677,7 +11742,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -11855,7 +11921,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12033,7 +12100,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12211,7 +12279,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12389,7 +12458,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12567,7 +12637,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12745,7 +12816,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -12923,7 +12995,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13101,7 +13174,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13279,7 +13353,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13457,7 +13532,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13635,7 +13711,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13813,7 +13890,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -13992,7 +14070,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -14154,7 +14233,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -14316,7 +14396,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-002"
+    "UND-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -14477,7 +14558,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -14655,7 +14737,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -14833,7 +14916,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15011,7 +15095,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15189,7 +15274,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15367,7 +15453,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15545,7 +15632,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15723,7 +15811,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -15901,7 +15990,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16079,7 +16169,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16257,7 +16348,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16435,7 +16527,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16613,7 +16706,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16791,7 +16885,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -16969,7 +17064,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -17149,7 +17245,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -17311,7 +17408,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -17490,7 +17588,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -17670,7 +17769,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -17832,7 +17932,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18011,7 +18112,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18191,7 +18293,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18353,7 +18456,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18532,7 +18636,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18712,7 +18817,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -18874,7 +18980,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19053,7 +19160,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19233,7 +19341,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19395,7 +19504,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19574,7 +19684,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19754,7 +19865,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -19916,7 +20028,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -20095,7 +20208,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -20275,7 +20389,8 @@
     "EVT-001",
     "EVT-002",
     "UND-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -20437,7 +20552,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -20616,7 +20732,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -20828,7 +20945,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -21007,7 +21125,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -21252,7 +21371,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -21497,7 +21617,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -21742,7 +21863,8 @@
     "DAY-007",
     "EVT-001",
     "EVT-002",
-    "UND-003"
+    "UND-003",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -21920,7 +22042,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22098,7 +22221,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22276,7 +22400,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22454,7 +22579,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22632,7 +22758,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22810,7 +22937,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -22988,7 +23116,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -23166,7 +23295,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -23344,7 +23474,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -23522,7 +23653,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -23700,7 +23832,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -23878,7 +24011,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -24056,7 +24190,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -24234,7 +24369,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -24412,7 +24548,8 @@
     "DAY-006",
     "DAY-007",
     "EVT-001",
-    "EVT-002"
+    "EVT-002",
+    "AST-001"
    ],
    "op": "waqt.compute",
    "tier": "tolerance",
@@ -24927,6 +25064,141 @@
     }
    },
    "note": "Maghrib 2026-06-22T00:04:01.673828+00:00 is AFTER local midnight; the label is the civil date of that instant (2026-06-22), not the date of the day's transit"
+  },
+  {
+   "id": "next-event/tonights-isha",
+   "requirements": [
+    "EVT-007"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "next_event": {
+      "name": "isha",
+      "instant": "2026-09-19T16:28:28+00:00"
+     }
+    }
+   },
+   "note": "Right after Maghrib the next event by OCCURRENCE is tonight's Isha (SCHEDULING.md 5 says exactly this for the scheduling layer). The waqt.compute response lists only the new day's events, so a listing-based next_event skips it and returns tomorrow's Fajr. Promoted from open-questions in contract 2.0.0.",
+   "tolerance": {
+    "default": {
+     "instant_s": 3,
+     "abs": 3
+    }
+   }
+  },
+  {
+   "id": "asr/degenerate-67N-solstice",
+   "requirements": [
+    "AST-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 67.0,
+     "lon": 0.0
+    },
+    "instant": "2026-12-21T12:00:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "undefined_events": [
+      {
+       "name": "asr"
+      }
+     ]
+    }
+   },
+   "note": "Sun's noon altitude is -0.44 deg, equal to the (degenerate, negative) Asr target. RULED (contract 2.0.0): Asr is undefined when the Sun is not above the geometric horizon at transit. The independent implementation first returned an Asr here and was changed AFTER the latitude sweep exposed it. Promoted from open-questions in contract 2.0.0."
+  },
+  {
+   "id": "label/skip/reykjavik/2026-06-15",
+   "requirements": [
+    "DAY-004",
+    "DAY-009"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-06-15",
+    "location": {
+     "lat": 64.1466,
+     "lon": -21.9426
+    },
+    "timezone": "Atlantic/Reykjavik"
+   },
+   "expect": {
+    "output": {
+     "resolved": false
+    }
+   },
+   "note": "Maghrib closes the previous day at 23:58:53 on 14 June and the next at 00:00:09 on 16 June: NO Waqt day closes on civil date 2026-06-15, so that date resolves to nothing (DR-0001). The `reason` text is not normative."
+  },
+  {
+   "id": "label/repeat/reykjavik/2026-06-29",
+   "requirements": [
+    "DAY-004",
+    "DAY-009"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "tolerance",
+   "basis": "spec",
+   "input": {
+    "date": "2026-06-29",
+    "location": {
+     "lat": 64.1466,
+     "lon": -21.9426
+    },
+    "timezone": "Atlantic/Reykjavik"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "close_civil_date": "2026-06-29",
+     "hijri_date": "1448-01-13",
+     "weekday": "al-Ithnayn",
+     "open": "2026-06-29T00:00:16+00:00",
+     "close": "2026-06-29T23:59:04+00:00"
+    }
+   },
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   },
+   "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001)."
   }
  ]
 }

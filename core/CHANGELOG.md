@@ -2,6 +2,22 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
+## 0.4.0 — Sprint 16
+
+**Fixed (behaviour change)**: the Waqt-day label (`hijri_date`, `weekday`) is now that of the *civil* date, in the
+location's IANA zone, on which the closing Maghrib instant falls (DIS-001; requirement DAY-004). It was derived
+from the solar-date key given to the solver, which is a day off at Kiritimati, Apia and for after-midnight
+Maghribs. Added `WaqtResult.label_date`.
+**Fixed (behaviour change)**: `next_event` is the next event by occurrence, including the previous solar day's
+Isha (EVT-007). It used to skip tonight's Isha after Maghrib and relied on list order.
+**Added**: `InvalidHijriDate` (code `INVALID_HIJRI_DATE`), `checked_to_gregorian`, `tabular_is_leap_year`,
+`tabular_month_length`; `ArithmeticTabularProvider.to_gregorian` rejects non-existent dates instead of
+normalising them (DIS-002; CAL-004).
+**Added**: `UnknownTimezoneError` (code `UNKNOWN_TIMEZONE`); `ManualTimezoneProvider` validates its zone at
+construction (DIS-003; ERR-002).
+**Added**: `CalendarOutOfRange` (code `OUT_OF_RANGE`); `UmmAlQuraProvider` supports 1700-01-01..2300-12-31 only (CAL-011).
+**Vector set 1.1 → 2.0** (MAJOR: expected values changed). Engine revision unchanged (`2`).
+
 ## 0.3.0 — Sprint 14
 
 **Added**: `waqt_core.calendar_providers.AlAdhanHijriProvider` — a live Gregorian→Hijri source behind

@@ -1,5 +1,11 @@
 # Changelog — waqt-local
 
+## 0.5.0 — Sprint 16
+
+**Added** (mirrors API 1.6.0): `UnknownTimezoneError` (`UNKNOWN_TIMEZONE`), `InvalidHijriDateError`
+(`INVALID_HIJRI_DATE`), `OutOfRangeError` (`OUT_OF_RANGE`). Requires `waqt-core` 0.4.x, which also corrects the
+day label (DIS-001) and `next_event` (EVT-007), so local and server keep returning identical payloads.
+
 ## 0.4.0 — Sprint 14
 
 **Added** (mirrors API 1.5.0, so `waqt_local` and the server keep returning identical payloads):

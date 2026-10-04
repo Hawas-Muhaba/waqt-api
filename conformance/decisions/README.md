@@ -1,0 +1,16 @@
+# Decision records
+
+One file per ruling on the conformance contract. A decision record is created whenever a requirement, vector tier or
+known failure changes meaning (GOVERNANCE.md section 3). Records are append-only: a later record supersedes an
+earlier one, it does not edit it.
+
+| Record | Ruling | Closes |
+|---|---|---|
+| [DR-0001](DR-0001.md) | Day label: civil date of the closing Maghrib instant | OQ-DAY-1 (resolved), DIS-001 (fixed), consequence rule DAY-009 |
+| [DR-0002](DR-0002.md) | Event assignment and undefined bounding Maghribs | OQ-DAY-2, OQ-DAY-3 (resolved) |
+| [DR-0003](DR-0003.md) | `next_event` is by occurrence | OQ-EVT-1 (resolved) |
+| [DR-0004](DR-0004.md) | Asr: declination convention and undefined rule | OQ-ASR-1, OQ-ASR-2 (resolved) |
+| [DR-0005](DR-0005.md) | `arithmetic-tabular`: leap pattern and identity | OQ-TAB-1 (resolved), OQ-TAB-2 and OQ-TAB-3 (open) |
+| [DR-0006](DR-0006.md) | Errors for non-existent Hijri dates and unknown time zones | OQ-ERR-2, OQ-ERR-3 (resolved), DIS-002 and DIS-003 (fixed) |
+| [DR-0007](DR-0007.md) | Umm al-Qura: range, chain, and what stays unresolved | OQ-UAQ-1 and OQ-UAQ-3 (resolved), OQ-UAQ-2 (UNRESOLVED BY DESIGN) |
+| [DR-0008](DR-0008.md) | Scheduling rules that lived only in vectors | OQ-SCH-1 to OQ-SCH-5 (resolved) |

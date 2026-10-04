@@ -1,4 +1,4 @@
-# Conformance Operation Protocol (COP) v1.0
+# Conformance Operation Protocol (COP) v1.1
 
 COP is how an implementation of Waqt is exercised without sharing any code, language, or HTTP surface with
 any other implementation. An implementation provides one **adapter**: a command-line program that is given
@@ -47,10 +47,11 @@ a list) where the written specification does not choose one.
 | code | meaning |
 |---|---|
 | `INVALID_INSTANT`, `INVALID_DATE` | malformed or non-existent instant / date |
-| `VALIDATION_ERROR` | parameter outside its allowed range (latitude, longitude, unknown IANA zone, …) |
+| `VALIDATION_ERROR` | parameter outside its allowed range (latitude, longitude, …) |
 | `UNKNOWN_CALENDAR_PROVIDER` | provider name not recognised |
 | `UNSUPPORTED_OPERATION` | the provider/adapter cannot do this (reverse conversion for override providers; operation not implemented) |
-| `INVALID_HIJRI_DATE` | no such day in that Hijri month |
+| `UNKNOWN_TIMEZONE` | the named IANA zone does not exist (contract 2.0.0; no other code is acceptable) |
+| `INVALID_HIJRI_DATE` | no such day in that Hijri month, or year < 1 (contract 2.0.0: required for well-formed non-existent dates) |
 | `INVALID_CALENDAR_RULE` | an institutional rule cannot be resolved |
 | `OUT_OF_RANGE` | outside a provider's supported range |
 | `INTERNAL_ERROR` | **never** an acceptable answer to bad input |
@@ -101,7 +102,7 @@ Operations: `resolve_point, resolve_interval, evaluate, check_deadline, until, s
 ### `institutional.run` — `{operation, context}` → rule/week/fiscal/academic results
 `context.calendar_provider` + `hijri_year`; an optional `month_table` freezes the calendar content (then it is authoritative).
 ### `calendar.represent_instant`, `calendar.gregorian_date_to_waqt_day`, `calendar.boundary_crossing`
-As in `docs/CALENDAR-INTEROP.md`. `gregorian_date_to_waqt_day` additionally returns `hijri_date` and `weekday` of the resolved day.
+As in `docs/CALENDAR-INTEROP.md`. `gregorian_date_to_waqt_day` additionally returns `hijri_date` and `weekday` of the resolved day. A civil date on which no Waqt day closes (DAY-009) is **not an error in the COP**: the operation succeeds with `resolved = false` (`reason` is free text). An HTTP implementation may report the same situation as an error response (the reference uses 422 `CALENDAR_DATE_UNRESOLVABLE`); its adapter must translate it.
 
 ## 6. Versioning
 

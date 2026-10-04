@@ -24,7 +24,35 @@ from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from typing import Optional, Protocol
 
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
+
+class UnknownTimezoneError(ValueError):
+    """Sprint 16 (DIS-003). A caller named an IANA zone that does not exist.
+
+    A client mistake, never a server fault: the HTTP layer maps it to a 4xx
+    `UNKNOWN_TIMEZONE` envelope (it used to escape as `ZoneInfoNotFoundError`
+    and surface as HTTP 500 `INTERNAL_ERROR`). Requirement ERR-002.
+    """
+
+    code = "UNKNOWN_TIMEZONE"
+
+    def __init__(self, timezone_name, reason: str | None = None):
+        self.timezone = timezone_name
+        self.reason = reason
+        super().__init__(f"Unknown IANA time zone {timezone_name!r}." + (f" ({reason})" if reason else ""))
+
+
+def validate_timezone_name(name) -> str:
+    """Return `name` if `zoneinfo` can load it, else raise UnknownTimezoneError.
+    Malformed keys (empty, absolute, containing '..') are also unknown zones."""
+    if not isinstance(name, str) or not name.strip():
+        raise UnknownTimezoneError(name, "must be a non-empty IANA zone name")
+    try:
+        ZoneInfo(name)
+    except (ZoneInfoNotFoundError, ValueError, OSError) as e:
+        raise UnknownTimezoneError(name, type(e).__name__) from e
+    return name
 
 
 class TimezoneProvider(Protocol):
@@ -43,6 +71,10 @@ class ManualTimezoneProvider:
     who already knows the zone and wants to skip the lookup."""
 
     tz_name: str
+
+    def __post_init__(self):
+        # Sprint 16: fail at construction, with a structured error, not later inside zoneinfo.
+        validate_timezone_name(self.tz_name)
 
     def timezone_name_for(self, lat: float, lon: float) -> str:
         return self.tz_name

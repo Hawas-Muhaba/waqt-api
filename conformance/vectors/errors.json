@@ -157,13 +157,11 @@
    "expect": {
     "error": {
      "code": [
-      "VALIDATION_ERROR",
-      "UNKNOWN_TIMEZONE",
-      "INVALID_TIMEZONE"
+      "UNKNOWN_TIMEZONE"
      ]
     }
    },
-   "note": "a bad time zone must be a client error, not INTERNAL_ERROR"
+   "note": "Contract 2.0.0 (DR-0006): UNKNOWN_TIMEZONE only. Before 2.0.0 VALIDATION_ERROR was also accepted."
   },
   {
    "id": "err/provider-unknown",
@@ -378,6 +376,39 @@
     }
    },
    "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
+  },
+  {
+   "id": "err/tz-malformed",
+   "requirements": [
+    "ERR-002"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "../etc/passwd",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    },
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "UNKNOWN_TIMEZONE"
+     ]
+    }
+   },
+   "note": "A path-like zone name is an unknown zone, not a file lookup and not a server fault."
   }
  ]
 }

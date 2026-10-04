@@ -34,7 +34,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Optional
 
-from ..hijri import HIJRI_MONTH_NAMES, HijriDate, HijriProvider, WEEKDAY_NAMES_AR, weekday_name
+from ..hijri import HIJRI_MONTH_NAMES, HijriDate, HijriProvider, InvalidHijriDate, WEEKDAY_NAMES_AR, weekday_name
 
 ISLAMIC_WEEKDAY_NAMES = tuple(WEEKDAY_NAMES_AR)  # al-Ahad .. as-Sabt, Sunday-first (index == Waqt's own convention)
 
@@ -74,7 +74,12 @@ def month_days(provider: HijriProvider, year: int, month: int) -> list[HijriDate
         )
     out = []
     for day in range(1, 31):
-        g = provider.to_gregorian(year, month, day)
+        try:
+            g = provider.to_gregorian(year, month, day)
+        except InvalidHijriDate:
+            # Sprint 16 (DIS-002): a provider that rejects a non-existent day
+            # (tabular: day 30 of a 29-day month) ends the month here.
+            break
         back = provider.from_gregorian(g)
         if (back.year, back.month, back.day) != (year, month, day):
             break

@@ -108,3 +108,16 @@ Exactness rules: instants are ISO 8601 UTC with ≤ microsecond precision. Deriv
 ## 10. Calendar independence
 
 The Hijri provider is passed through to `compute_waqt` only because it labels each Waqt day. Nothing in `waqt/scheduling` reads that label to decide anything; it is copied into results for display. Tests swap `arithmetic-tabular`, `umm-al-qura` and a shifted custom provider: labels change, no instant, window, span or status does — in Python, over HTTP, and in the JavaScript consumer. A structural test fails if scheduling code ever branches on a label.
+
+## 11. Rules that previously lived only in the vectors (contract 2.0.0, DR-0008)
+
+Sprint 15 measured that a clean-room implementation written from this document alone passed 108 of 116 scheduling vectors; the other 8 failures were rules stated nowhere in prose. They are now written down, each as a requirement bound to the existing vectors:
+
+- **SCH-009 `inclusive`.** `next_event` and `prev_event` points carry `inclusive` (default `true`). At an anchor exactly equal to the event instant, inclusive resolves to that event; exclusive resolves to the next (for `prev_event`, the previous) one.
+- **SCH-010 default slot of `event_position`.** For `isha` and `maghrib` the default slot is the *previous* listing; for every other event it is day 0. The result reports both the `listed` position and the `containing` position (`day_relative_to_listed`).
+- **SCH-011 empty windows.** An empty or inverted window or span has status `NO_VALID_WINDOW` and `duration_seconds = null`. A window that touches an undefined day is `WINDOW_UNDEFINED` with `maghrib_boundaries = []`.
+- **SCH-012 undefined slots.** A *strict* resolution (the default) that meets an undefined event slot ends as `EVENT_UNDEFINED` with cause `EVENT_UNDEFINED_ON_DAY` and names the slot in `undefined_ref`. With `on_undefined: "skip"` the slot is recorded in `skipped` and the scan continues over at most 8 day-slots, ending in `NO_OCCURRENCE_IN_RANGE` if nothing is found.
+- **SCH-013 stepping through an undefined day.** An event point at a day offset whose Waqt day, or a day stepped across to reach it, has an undefined bounding Maghrib is `EVENT_UNDEFINED` with cause `DAY_UNDEFINED`, even when the target lies outside the context's day table.
+
+`next_event` of `/v1/waqt` follows the same *occurrence* model as the scheduling layer (EVT-007, DR-0003): the earliest event strictly after the instant, including the previous solar day's Isha.
+

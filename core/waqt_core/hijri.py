@@ -100,6 +100,76 @@ def _jdn_to_gregorian(jdn: int) -> date:
     return date(year, month, day)
 
 
+class InvalidHijriDate(ValueError):
+    """Sprint 16 (DIS-002). The (year, month, day) triple does not exist in the calendar
+    that was asked. Requirement CAL-004: such a date is rejected, never silently
+    normalised into a neighbouring month (1448-02-30 used to become 1 Rabi al-Awwal)."""
+
+    code = "INVALID_HIJRI_DATE"
+
+    def __init__(self, year, month, day, reason: str):
+        self.year, self.month, self.day, self.reason = year, month, day, reason
+        super().__init__(f"No such Hijri date {year}-{month}-{day}: {reason}")
+
+
+class CalendarOutOfRange(ValueError):
+    """Sprint 16 (OQ-UAQ-3 ruling). The date lies outside the range a calendar provider
+    supports. Maps to the COP/HTTP code OUT_OF_RANGE (requirement CAL-011). A provider must
+    refuse, not guess, outside its supported range."""
+
+    code = "OUT_OF_RANGE"
+
+    def __init__(self, provider: str, supported: str, received: str):
+        self.provider, self.supported, self.received = provider, supported, received
+        super().__init__(f"{provider} supports {supported} only; got {received}.")
+
+
+#: Tabular calendar domain: AH years start at 1 (no year zero, no negative years).
+TABULAR_MIN_YEAR = 1
+
+
+def tabular_is_leap_year(year: int) -> bool:
+    """Leap years of the 30-year cycle are the positions 2,5,7,10,13,16,18,21,24,26,29
+    (the civil/'Kuwaiti' pattern): (11*year + 14) mod 30 < 11. Named in CALENDARS.md; a
+    different pattern is a different provider, never a silent substitution."""
+    return (11 * year + 14) % 30 < 11
+
+
+def tabular_month_length(year: int, month: int) -> int:
+    return 30 if (month % 2 == 1 or (month == 12 and tabular_is_leap_year(year))) else 29
+
+
+def _validate_hijri_triple(year, month, day, max_day_of=None) -> None:
+    for v in (year, month, day):
+        if isinstance(v, bool) or not isinstance(v, int):
+            raise InvalidHijriDate(year, month, day, "year, month and day must be integers")
+    if year < TABULAR_MIN_YEAR:
+        raise InvalidHijriDate(year, month, day, f"year must be >= {TABULAR_MIN_YEAR} (there is no year zero)")
+    if not 1 <= month <= 12:
+        raise InvalidHijriDate(year, month, day, "month must be 1..12")
+    longest = max_day_of(year, month) if max_day_of else 30
+    if not 1 <= day <= longest:
+        raise InvalidHijriDate(year, month, day, f"month {month} of {year} has {longest} days")
+
+
+def checked_to_gregorian(provider, year: int, month: int, day: int) -> date:
+    """Provider-independent Hijri -> Gregorian with existence checking (CAL-004).
+
+    Domain check first (integers, year >= 1, month 1..12, day 1..30), then the
+    provider's own conversion, then a round trip: if `from_gregorian` does not
+    return the same (year, month, day) the date does not exist in that provider's
+    calendar (e.g. day 30 of a 29-day Umm al-Qura month, which the provider's
+    inverse would otherwise normalise into the next month)."""
+    _validate_hijri_triple(year, month, day)
+    g = provider.to_gregorian(year, month, day)
+    back = provider.from_gregorian(g)
+    if (back.year, back.month, back.day) != (year, month, day):
+        raise InvalidHijriDate(year, month, day,
+                               f"provider {getattr(provider, 'name', '?')!r} has no such day "
+                               f"(it resolves to {back.year}-{back.month}-{back.day})")
+    return g
+
+
 #: Where a Hijri date physically came from (Sprint 14). Orthogonal to `provider`:
 #: `provider` says WHICH algorithm/authority produced the date; `source` says
 #: HOW this particular value reached us.
@@ -220,7 +290,11 @@ class ArithmeticTabularProvider:
 
     def to_gregorian(self, year: int, month: int, day: int) -> date:
         """Inverse of from_gregorian — exact, since the forward direction
-        is a pure closed-form arithmetic formula (no search needed)."""
+        is a pure closed-form arithmetic formula (no search needed).
+
+        Sprint 16 (DIS-002): a date that does not exist raises InvalidHijriDate
+        instead of being normalised by the arithmetic."""
+        _validate_hijri_triple(year, month, day, tabular_month_length)
         return _jdn_to_gregorian(_hijri_to_jdn(year, month, day))
 
 

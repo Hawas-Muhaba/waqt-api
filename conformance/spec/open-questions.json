@@ -1,0 +1,202 @@
+{
+ "registry_version": "2.0.0",
+ "note": "Every question ever raised stays here. Status values: resolved | deferred | unresolved-by-design. See GOVERNANCE.md section 5.",
+ "questions": [
+  {
+   "id": "OQ-TIME-1",
+   "topic": "Offset-less instant: reject or assume UTC",
+   "status": "deferred",
+   "requirement": "TIME-002",
+   "decision": null
+  },
+  {
+   "id": "OQ-TIME-2",
+   "topic": "ISO basic date accepted?",
+   "status": "deferred",
+   "requirement": null,
+   "decision": null
+  },
+  {
+   "id": "OQ-TIME-3",
+   "topic": "Sub-second precision of output instants",
+   "status": "deferred",
+   "requirement": null,
+   "decision": null
+  },
+  {
+   "id": "OQ-TAB-1",
+   "topic": "Leap pattern of arithmetic-tabular",
+   "status": "resolved",
+   "requirement": "CAL-002",
+   "decision": "DR-0005"
+  },
+  {
+   "id": "OQ-TAB-2",
+   "topic": "Gregorian dates before the tabular epoch convert to AH year <= 0",
+   "status": "deferred",
+   "requirement": null,
+   "decision": "DR-0005"
+  },
+  {
+   "id": "OQ-TAB-3",
+   "topic": "Tabular variants (other leap patterns, astronomical epoch) are not provided",
+   "status": "deferred",
+   "requirement": null,
+   "decision": "DR-0005"
+  },
+  {
+   "id": "OQ-ASR-1",
+   "topic": "Declination used for Asr altitude",
+   "status": "resolved",
+   "requirement": "AST-001",
+   "decision": "DR-0004"
+  },
+  {
+   "id": "OQ-ASR-2",
+   "topic": "Asr when the Sun is below the horizon at noon",
+   "status": "resolved",
+   "requirement": "AST-002",
+   "decision": "DR-0004"
+  },
+  {
+   "id": "OQ-DT-1",
+   "topic": "Delta-T model and decimal-year convention",
+   "status": "deferred",
+   "requirement": null,
+   "decision": null
+  },
+  {
+   "id": "OQ-DAY-1",
+   "topic": "Which date labels a Waqt day",
+   "status": "resolved",
+   "requirement": "DAY-004",
+   "decision": "DR-0001"
+  },
+  {
+   "id": "OQ-DAY-2",
+   "topic": "Event-to-date assignment",
+   "status": "resolved",
+   "requirement": "EVT-004",
+   "decision": "DR-0002"
+  },
+  {
+   "id": "OQ-DAY-3",
+   "topic": "Day with exactly one undefined bounding Maghrib",
+   "status": "resolved",
+   "requirement": "UND-001",
+   "decision": "DR-0002"
+  },
+  {
+   "id": "OQ-EVT-1",
+   "topic": "next_event: occurrence or listing",
+   "status": "resolved",
+   "requirement": "EVT-007",
+   "decision": "DR-0003"
+  },
+  {
+   "id": "OQ-UND-1",
+   "topic": "Existence of grazing events",
+   "status": "deferred",
+   "requirement": "UND-004",
+   "decision": null
+  },
+  {
+   "id": "OQ-UAQ-1",
+   "topic": "Origin of the Umm al-Qura chain",
+   "status": "resolved",
+   "requirement": null,
+   "decision": "DR-0007"
+  },
+  {
+   "id": "OQ-UAQ-2",
+   "topic": "Umm al-Qura computational conventions (limb, refraction, elevation, algorithms)",
+   "status": "unresolved-by-design",
+   "requirement": "CAL-007",
+   "decision": "DR-0007"
+  },
+  {
+   "id": "OQ-UAQ-3",
+   "topic": "Supported range of umm-al-qura and the error outside it",
+   "status": "resolved",
+   "requirement": "CAL-011",
+   "decision": "DR-0007"
+  },
+  {
+   "id": "OQ-ERR-1",
+   "topic": "Valid ranges of fajr_angle, isha_angle, asr_ratio (ERR-004 is MUST but its vectors are open)",
+   "status": "deferred",
+   "requirement": "ERR-004",
+   "decision": null
+  },
+  {
+   "id": "OQ-ERR-2",
+   "topic": "Error code for a non-existent Hijri day",
+   "status": "resolved",
+   "requirement": "CAL-004",
+   "decision": "DR-0006"
+  },
+  {
+   "id": "OQ-ERR-3",
+   "topic": "Error for an unknown IANA zone",
+   "status": "resolved",
+   "requirement": "ERR-002",
+   "decision": "DR-0006"
+  },
+  {
+   "id": "OQ-PRV-1",
+   "topic": "Does a short Retry-After shorten the 30 s cooldown",
+   "status": "deferred",
+   "requirement": "PRV-007",
+   "decision": null
+  },
+  {
+   "id": "OQ-PRV-2",
+   "topic": "Circuit-breaker: does the 3rd soft failure open it for the next call",
+   "status": "deferred",
+   "requirement": "PRV-007",
+   "decision": null
+  },
+  {
+   "id": "OQ-PRV-3",
+   "topic": "Outbound budget refill granularity",
+   "status": "deferred",
+   "requirement": "PRV-007",
+   "decision": null
+  },
+  {
+   "id": "OQ-SCH-1",
+   "topic": "inclusive flag of next/prev points",
+   "status": "resolved",
+   "requirement": "SCH-009",
+   "decision": "DR-0008"
+  },
+  {
+   "id": "OQ-SCH-2",
+   "topic": "Default slot of event_position",
+   "status": "resolved",
+   "requirement": "SCH-010",
+   "decision": "DR-0008"
+  },
+  {
+   "id": "OQ-SCH-3",
+   "topic": "NO_VALID_WINDOW / WINDOW_UNDEFINED shapes",
+   "status": "resolved",
+   "requirement": "SCH-011",
+   "decision": "DR-0008"
+  },
+  {
+   "id": "OQ-SCH-4",
+   "topic": "Which undefined slots are relevant",
+   "status": "resolved",
+   "requirement": "SCH-012",
+   "decision": "DR-0008"
+  },
+  {
+   "id": "OQ-SCH-5",
+   "topic": "Stepping through an undefined day",
+   "status": "resolved",
+   "requirement": "SCH-013",
+   "decision": "DR-0008"
+  }
+ ]
+}

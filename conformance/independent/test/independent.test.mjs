@@ -101,5 +101,5 @@ test('all 116 frozen scheduling vectors (Sprint 6) pass in table mode', () => {
 test('errors never escape as exceptions', () => {
   const r = runCase({ id: 'x', op: 'waqt.compute', input: { location: { lat: 95, lon: 0 }, instant: '2026-09-19T15:42:00Z', timezone: 'UTC' } });
   assert.equal(r.ok, false); assert.equal(r.error.code, 'VALIDATION_ERROR');
-  assert.equal(runCase({ id: 'y', op: 'waqt.compute', input: { location: { lat: 0, lon: 0 }, instant: '2026-09-19T15:42:00Z', timezone: 'Mars/Base' } }).error.code, 'VALIDATION_ERROR');
+  assert.equal(runCase({ id: 'y', op: 'waqt.compute', input: { location: { lat: 0, lon: 0 }, instant: '2026-09-19T15:42:00Z', timezone: 'Mars/Base' } }).error.code, 'UNKNOWN_TIMEZONE');
 });

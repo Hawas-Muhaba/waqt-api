@@ -21,9 +21,9 @@ declared dependency (`dependencies = []`), and nothing in the repo could be
 
 | Distribution | Import name | Directory | Depends on |
 |---|---|---|---|
-| `waqt-core` 0.3.0 | `waqt_core` | `core/` | `ephem`, `timezonefinder` (the live Hijri provider uses only the standard library) |
-| `waqt-api` 0.3.0 | `waqt` (only `waqt.api` is real code) | repo root | `waqt-core`, `fastapi`, `uvicorn` |
-| `waqt-local` 0.4.0 | `waqt_local` | `local/` | `waqt-core` |
+| `waqt-core` 0.4.0 | `waqt_core` | `core/` | `ephem`, `timezonefinder` (the live Hijri provider uses only the standard library) |
+| `waqt-api` 0.4.0 | `waqt` (only `waqt.api` is real code) | repo root | `waqt-core`, `fastapi`, `uvicorn` |
+| `waqt-local` 0.5.0 | `waqt_local` | `local/` | `waqt-core` |
 | `waqt-client` (SDKs) | `waqt_client` / npm | `sdks/` | unchanged (HTTP only) |
 
 ## What moved, and how it was verified

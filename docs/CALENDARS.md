@@ -10,6 +10,17 @@ The classical 30-year-cycle tabular Islamic calendar (epoch JDN 1948440 = 1 Muha
 
 **Important:** this is *not* an approximation of the official Umm al-Qura calendar specifically. It typically agrees with Umm al-Qura to within 1–2 days, sometimes more. Use `umm-al-qura` (below) if you specifically want to approximate the Saudi civil calendar.
 
+**Normative definition (contract 2.0.0, DR-0005).** The provider named `arithmetic-tabular`, version `30-year-cycle-epoch-1948440`, is exactly this:
+
+- Epoch: JDN 1948440 = 1 Muharram 1 AH = Friday, proleptic Gregorian 0622-07-19.
+- Months alternate 30 and 29 days (odd months 30); Dhu al-Hijjah has 30 days in a leap year.
+- **Leap years are positions 2, 5, 7, 10, 13, 16, 18, 21, 24, 26, 29 of the 30-year cycle**, i.e. `(11 * year + 14) mod 30 < 11` (CAL-002). All 30 year-lengths are conformance vectors.
+- Domain: AH years start at 1. A date that does not exist (year < 1, or a day beyond the month's length) is `INVALID_HIJRI_DATE`, never normalised (CAL-004).
+
+This pins the *identity* of the provider so results are reproducible. It does not say the pattern is the correct Islamic calendar: other published tabular patterns (for example a variant with leap positions 2, 5, 7, 10, 13, 15, 18, 21, 24, 26, 29) differ from this one by a day in some years, and an astronomical epoch (Thursday) is also in use. **Which calendar to follow is the caller's choice via `calendar_provider`**; a variant would be a *new provider* with its own name and version, never a silent substitution (GOVERNANCE.md section 6). No variant is provided today.
+
+Not decided here (OQ-TAB-2): a Gregorian date before the epoch currently converts to an AH year <= 0 that cannot be converted back. This is outside the supported domain and stays open.
+
 ## `umm-al-qura`
 
 An astronomical implementation of the *actual current Umm al-Qura calculation rule* (in force since 1423 AH / 2002 CE): a lunar month is 29 days if the astronomical conjunction occurs before Maghrib at Makkah **and** the moon sets after the sun that same evening at Makkah; otherwise it's 30 days. Built from Waqt's own validated solar engine (for Maghrib at Makkah) plus `ephem`/PyEphem (for the lunar conjunction and moonset — the one piece of astronomy nothing else in Waqt needs).
@@ -19,9 +30,15 @@ An astronomical implementation of the *actual current Umm al-Qura calculation ru
 **What this is not**, stated as plainly as the validation above:
 1. **No channel for real-world sighting overrides.** The actual Umm al-Qura calendar occasionally adjusts 1 Muharram, 1 Ramadan, 1 Shawwal, and 1 Dhu al-Hijjah specifically after real crescent-sighting reports, layered on top of the calculation. This provider always returns the pure calculation — it cannot know about or apply such an adjustment. For exactly those four liturgically significant months, that's a real, unresolved gap.
 2. **Not the highest-precision lunar ephemeris available.** PyEphem's built-in lunar theory is solid but not a modern high-precision ephemeris. For a conjunction or moonset within a few seconds of Maghrib, a better ephemeris could in principle flip a single month's 29/30 decision. None of the four validated months happened to be that close — future months could be.
-3. **Bounded date range.** Reliable roughly 1900–2100. Dates before approximately 1700 CE can raise an internal error inside `ephem`'s own date handling (caught and returned as a structured `INTERNAL_ERROR`, never a raw crash — but still not a usable answer for that date). If you need historical Islamic dates from before this range, this provider is the wrong tool.
+3. **Bounded date range (CAL-011, DR-0007).** The provider is supported for civil dates **1700-01-01 through 2300-12-31 only**; outside that range it refuses with `OUT_OF_RANGE` instead of guessing (HTTP 400). Accuracy is only characterised for roughly 1900-2100; between 1700 and 1900 and between 2100 and 2300 the provider answers but no accuracy claim is made.
 
-Given all three, treat this as "a rigorous, honestly-labeled astronomical approximation of Umm al-Qura" — a real improvement over `arithmetic-tabular` for this specific purpose, not a certified reproduction of the official calendar.
+**Conventions and what is, and is not, settled (contract 2.0.0).**
+
+- *Settled (OQ-UAQ-1, DR-0007):* the month chain ("29 days iff the criterion holds, else 30") is self-synchronising. Measured in Sprint 15 with two independent implementations: a 6-month burn-in gives identical month starts to a 96-month burn-in for all 492 months of 1420-1460 AH. That is evidence over that range, not a proof for all years.
+- *Settled (OQ-UAQ-3, DR-0007):* the supported range and the `OUT_OF_RANGE` error (above).
+- **Unresolved by design (OQ-UAQ-2, CAL-007):** which Moon and Sun algorithms, which limb, how much refraction, and which observer elevation define "the Moon sets after the Sun" at Makkah. The reference uses PyEphem's defaults; the independent implementation uses elevation 0 and an upper-limb convention. They disagree on 2 of 492 month starts, both evenings on which the Moon sets 3.7 s and 6.8 s *before* the Sun. The official table is an institutional product; this document does not pick a winner. Those vectors stay `informative`. Callers who need the official table should use a `declared` provider fed from it.
+
+Given all of the above, treat this as "a rigorous, honestly-labeled astronomical approximation of Umm al-Qura" — a real improvement over `arithmetic-tabular` for this specific purpose, not a certified reproduction of the official calendar.
 
 ## `declared`
 
@@ -62,5 +79,7 @@ class MyProvider:
 ## Reverse conversion (`GET /v1/conversions?direction=to-gregorian`)
 
 Only providers with a fixed, invertible rule support this: `arithmetic-tabular` (exact, closed-form) and `umm-al-qura` (exact against *this provider's own* computed boundaries — walks its cached real-conjunction chain to the requested month rather than approximating). Both directions round-trip exactly for every date tested — see `tests/test_api.py::test_conversions_round_trip_*`.
+
+**Existence is checked (CAL-004).** After converting, the result is converted back; if it does not return the requested year, month and day, the date does not exist in that provider's calendar and `INVALID_HIJRI_DATE` is returned (for example day 30 of a 29-day Umm al-Qura month). Year < 1 is rejected before any conversion.
 
 `declared` and `local-observation` return `UNSUPPORTED_OPERATION` for this direction, honestly, rather than guessing at an inverse a sparse override table doesn't have.
