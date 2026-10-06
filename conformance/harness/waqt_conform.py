@@ -44,7 +44,7 @@ ISO = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2
 def call_adapter(cmd, cases, timeout=1800):
     req = json.dumps({"cases": cases})
     t0 = time.time()
-    p = subprocess.run(cmd, input=req, capture_output=True, text=True, shell=True, cwd=ROOT, timeout=timeout)
+    p = subprocess.run(cmd, input=req, capture_output=True, text=True, shell=True, cwd=ROOT, timeout=timeout, encoding="utf-8")
     if p.returncode != 0:
         raise RuntimeError(f"adapter failed ({p.returncode}): {p.stderr[-800:]}")
     out = json.loads(p.stdout)
@@ -53,7 +53,7 @@ def call_adapter(cmd, cases, timeout=1800):
 
 
 def describe(cmd):
-    p = subprocess.run(cmd + " --describe", capture_output=True, text=True, shell=True, cwd=ROOT)
+    p = subprocess.run(cmd + " --describe", capture_output=True, text=True, shell=True, cwd=ROOT, encoding="utf-8")
     return json.loads(p.stdout)
 
 
@@ -368,7 +368,7 @@ def load_vectors(vdir, suites):
         name = os.path.basename(f)[:-5]
         if suites and name not in suites:
             continue
-        d = json.load(open(f))
+        d = json.load(open(f, encoding="utf-8"))
         for v in d.get("vectors", []):
             v.setdefault("suite", name)
             v.setdefault("tier", d.get("tier", "exact"))
@@ -521,7 +521,7 @@ def main():
     ap.add_argument("--name", default="conformance-report")
     args = ap.parse_args()
     labels = args.label or [f"impl{i}" for i in range(len(args.adapter))]
-    reqs = json.load(open(os.path.join(ROOT, "spec", "requirements.json")))["requirements"]
+    reqs = json.load(open(os.path.join(ROOT, "spec", "requirements.json"), encoding="utf-8"))["requirements"]
     reqs = {r["id"]: r for r in reqs}
     vecs, mms = load_vectors(args.vectors, args.suite)
     unknown = {rid for v in vecs + mms for rid in v["requirements"]} - set(reqs)
@@ -538,13 +538,13 @@ def main():
         rr = dict(r)
         rr["vectors"] = [{k: v for k, v in x.items() if k != "result"} for x in r["vectors"]]
         slim.append(rr)
-    json.dump({"meta": meta, "runs": slim}, open(os.path.join(args.out, args.name + ".json"), "w"), indent=1)
-    open(os.path.join(args.out, args.name + ".md"), "w").write(markdown(runs, reqs, vecs, mms, meta))
+    json.dump({"meta": meta, "runs": slim}, open(os.path.join(args.out, args.name + ".json"), "w", encoding="utf-8"), indent=1)
+    open(os.path.join(args.out, args.name + ".md"), "w", encoding="utf-8").write(markdown(runs, reqs, vecs, mms, meta))
     # cross-implementation agreement on every shared vector
     if len(runs) > 1:
         a, b = runs[0], runs[1]
         dis = [(x["id"], x["tier"], x["verdict"], y["verdict"]) for x, y in zip(a["vectors"], b["vectors"]) if x["verdict"] != y["verdict"]]
-        json.dump(dis, open(os.path.join(args.out, args.name + "-verdict-differences.json"), "w"), indent=1)
+        json.dump(dis, open(os.path.join(args.out, args.name + "-verdict-differences.json"), "w", encoding="utf-8"), indent=1)
         print(f"[waqt-conform] verdict differences between {a['label']} and {b['label']}: {len(dis)}", file=sys.stderr)
     for r, s in zip(runs, [summarize(r, reqs) for r in runs]):
         norm = {k: v for k, v in s[0].items() if k in ("exact", "tolerance")}

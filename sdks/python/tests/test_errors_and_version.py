@@ -24,6 +24,18 @@ def test_unwrap_error_envelope_raises_waqt_api_error():
     assert excinfo.value.details == {"received": "x"}
 
 
+@pytest.mark.parametrize("code", ["INVALID_HIJRI_DATE", "UNKNOWN_TIMEZONE", "OUT_OF_RANGE"])
+def test_unwrap_preserves_sprint16_error_codes_and_details(code):
+    body = {
+        "meta": {"api_version": "1.6.0"}, "data": None,
+        "error": {"code": code, "message": "bad input", "details": {"received": "x"}},
+    }
+    with pytest.raises(WaqtApiError) as excinfo:
+        unwrap(400, body, "ignore")
+    assert excinfo.value.code == code
+    assert excinfo.value.details == {"received": "x"}
+
+
 def test_unwrap_malformed_body_raises_transport_error():
     with pytest.raises(WaqtTransportError):
         unwrap(200, {"not": "an envelope"}, "ignore")

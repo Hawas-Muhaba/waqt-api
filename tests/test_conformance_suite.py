@@ -47,7 +47,8 @@ def test_independent_implementation_unit_tests():
 
 
 def test_independent_implementation_conforms_and_reference_failures_are_the_known_ones():
-    runs = _run([("reference", f"{sys.executable} adapters/reference_adapter.py"), ("independent", "node independent/src/cli.mjs")], "pytest-run")
+    reference_adapter = subprocess.list2cmdline([sys.executable, "adapters/reference_adapter.py"])
+    runs = _run([("reference", reference_adapter), ("independent", "node independent/src/cli.mjs")], "pytest-run")
     by = {r["label"]: r for r in runs}
     # 1. clean-room implementation: no normative failure at all
     iv, im = _failures(by["independent"])

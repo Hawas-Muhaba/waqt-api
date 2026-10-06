@@ -29,8 +29,27 @@ jobs:
       - name: Independent JS consumer
         run: cd consumers/js && npm test
 
+      - name: Independent implementation unit tests
+        run: cd conformance/independent && node --test test/*.test.mjs
+
+      - name: Contract integrity verification
+        run: |
+          python conformance/tools/contract.py verify
+          python conformance/tools/migrate_contract_2_0.py --check
+
+      - name: Full Conformance Suite
+        run: WAQT_RUN_CONFORMANCE=1 pytest tests/test_conformance_suite.py -v --tb=short
+
+      - name: Python SDK
+        run: |
+          pip install -e ./sdks/python
+          pytest sdks/python/tests/ -v --tb=short
+
+      - name: JavaScript SDK
+        run: cd sdks/js/waqt-client && npm test
+
       - name: Run tests (waqt.api)
-        run: pytest tests/ -v --tb=short --deselect tests/test_packaging_smoke.py
+        run: pytest tests/ -v --tb=short --deselect tests/test_packaging_smoke.py --deselect tests/test_conformance_suite.py
 
       # Sprint 11: waqt-core is now its own distribution with its own
       # test suite (conformance against the shared vectors, driven

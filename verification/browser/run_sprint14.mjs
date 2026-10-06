@@ -41,7 +41,7 @@ async function newPage({ clockOffsetMs = null, intercept = null } = {}) {
     const u = new URL(req.url());
     if (u.pathname === "/v1/waqt") {
       page.waqtCalls.push(Date.now());
-      if (clockOffsetMs !== null && !u.searchParams.has("instant")) u.searchParams.set("instant", new Date(Date.now() + clockOffsetMs).toISOString().replace(".000Z", "Z"));
+      if (clockOffsetMs !== null && !u.searchParams.has("instant")) u.searchParams.set("instant", new Date().toISOString().replace(".000Z", "Z"));
       if (intercept) { const r = await intercept(req, page.waqtCalls.length); if (r) return req.respond(r); }
       return req.continue({ url: u.toString() });
     }
@@ -51,8 +51,8 @@ async function newPage({ clockOffsetMs = null, intercept = null } = {}) {
   return page;
 }
 async function go(page, lat, lon, provider) {
-  if (provider) await page.select("#provider", provider);
   await page.$eval("#lat", (e) => (e.value = "")); await page.$eval("#lon", (e) => (e.value = ""));
+  if (provider) await page.select("#provider", provider);
   await page.type("#lat", String(lat)); await page.type("#lon", String(lon)); await page.click("#goBtn");
   await page.waitForFunction(() => { const s = document.getElementById("status").textContent; return s && !s.startsWith("Loading") && !s.startsWith("Enter coordinates, or"); }, { timeout: 15000 });
   await sleep(400);
@@ -118,7 +118,7 @@ await p.screenshot({ path: OUT + "s14-5-transition.png" }); await p.close();
 // ---- 6. day transition while the API rate-limits the refresh: keep last view, back off ----
 const off2 = close - 9000 - Date.now();
 p = await newPage({ clockOffsetMs: off2, intercept: async (req, n) => {
-  if (n >= 2) return { status: 429, contentType: "application/json", headers: { "access-control-allow-origin": "http://localhost:8080", "retry-after": "20" },
+  if (n >= 3) return { status: 429, contentType: "application/json", headers: { "access-control-allow-origin": "http://localhost:8080", "retry-after": "20" },
     body: JSON.stringify({ meta: {}, data: null, error: { code: "RATE_LIMITED", message: "Rate limit exceeded.", details: { retry_after_seconds: 20 } } }) };
   return null; } });
 await go(p, 9.0192, 38.7525, "aladhan"); const c0 = p.waqtCalls.length;

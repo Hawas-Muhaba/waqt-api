@@ -170,6 +170,22 @@ for (const [id, expectedCode] of [
   });
 }
 
+for (const code of ["INVALID_HIJRI_DATE", "UNKNOWN_TIMEZONE", "OUT_OF_RANGE"]) {
+  test(`Sprint 16 error ${code} preserves code and details`, () => {
+    const body = { meta: { api_version: "1.6.0" }, data: null,
+      error: { code, message: "bad input", details: { received: "x" } } };
+    assert.throws(
+      () => unwrap(400, body, "ignore"),
+      (err) => {
+        assert.ok(err instanceof WaqtApiError);
+        assert.equal(err.code, code);
+        assert.deepEqual(err.details, { received: "x" });
+        return true;
+      }
+    );
+  });
+}
+
 // ---- Sprint 14 (API 1.5.0): provenance survives SDK parsing ----
 import { parseHijriDate as _parseHijri14 } from "../src/types.mjs";
 import _test14 from "node:test";

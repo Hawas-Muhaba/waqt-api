@@ -128,7 +128,7 @@ def test_independent_javascript_consumer_validates_all_vectors():
     vector from its own frozen month_table."""
     js = ROOT / "consumers" / "js"
     r = subprocess.run(
-        [NODE, "--test", "test/institutional_vectors.test.mjs"],
+        [NODE, "--test", "--test-reporter=tap", "test/institutional_vectors.test.mjs"],
         cwd=js, capture_output=True, text=True, timeout=180,
     )
     tail = "\n".join(r.stdout.splitlines()[-12:]) + r.stderr[-800:]

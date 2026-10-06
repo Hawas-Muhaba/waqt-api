@@ -82,14 +82,22 @@ try {
 ```
 
 `WaqtApiError.code` is exactly the `error.code` value documented in
-docs/API.md — never a generic status-only exception.
+docs/API.md — never a generic status-only exception. Codes are opaque
+strings rather than a closed enum, including `INVALID_HIJRI_DATE`,
+`UNKNOWN_TIMEZONE`, and `OUT_OF_RANGE` from API 1.6.0.
 
 ## What's covered
 
-Methods for every `/v1/*` endpoint as of API version 1.3.0 — see
+Methods for every `/v1/*` endpoint as of API version 1.6.0 — see
 `src/client.mjs`. For anything not yet wrapped,
 `client.request(method, path, { params, json })` is the same
 envelope-aware call every typed method is built on.
+
+API 1.6.0 / conformance contract 2.0.0 corrects the Waqt-day label to
+the civil date of its closing Maghrib and defines `next_event` by
+occurrence, including the previous solar day's Isha. The vector set is
+2.0; the SDK preserves the responses and new error codes without a
+closed enum.
 
 ## What this SDK is / is not
 

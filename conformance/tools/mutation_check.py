@@ -20,23 +20,23 @@ MUT = [
  ("fixed 86400 s day length reported", "src/waqtday.mjs", "length_seconds: len }", "length_seconds: 86400 }", "DAY-006"),
 ]
 def run(adapter_dir):
-    cmd = ["python3", os.path.join(ROOT, "harness", "waqt_conform.py"), "--adapter", f"node {adapter_dir}/src/cli.mjs", "--label", "mut",
+    cmd = [sys.executable, os.path.join(ROOT, "harness", "waqt_conform.py"), "--adapter", f"node {adapter_dir}/src/cli.mjs", "--label", "mut",
            "--out", tempfile.mkdtemp(), "--name", "m", "--suite", "day-model", "--suite", "metamorphic", "--suite", "calendar-core", "--suite", "calendar-providers",
            "--suite", "provider-failure", "--suite", "legacy-scheduling", "--suite", "gregorian-time", "--suite", "scheduling-defaults"]
-    p = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=900)
+    p = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=900, encoding="utf-8")
     m = re.search(r"normative pass=(\d+) fail=(\d+)", p.stderr)
     out = os.path.join(cmd[cmd.index("--out") + 1], "m.json")
-    d = json.load(open(out))["runs"][0]
+    d = json.load(open(out, encoding="utf-8"))["runs"][0]
     reqs = sorted({r for v in d["vectors"] if v["verdict"] == "FAIL" and v["tier"] in ("exact", "tolerance") for r in v["requirements"]} |
                   {r for v in d["metamorphic"] if v["verdict"] == "FAIL" for r in v["requirements"]})
     return int(m.group(2)), reqs
 rows = []
 for name, f, old, new, expect in MUT:
-    tmp = tempfile.mkdtemp(); d = os.path.join(tmp, "independent"); shutil.copytree(os.path.join(ROOT, "independent"), d, ignore=shutil.ignore_patterns("node_modules"))
-    s = open(os.path.join(d, f)).read()
+    tmp = tempfile.mkdtemp(); d = os.path.join(tmp, "independent"); shutil.copytree(os.path.join(ROOT, "independent"), d, ignore=shutil.ignorePatterns("node_modules") if hasattr(shutil, "ignorePatterns") else shutil.ignore_patterns("node_modules"))
+    s = open(os.path.join(d, f), encoding="utf-8").read()
     if old not in s:
         rows.append((name, expect, "MUTATION NOT APPLICABLE (pattern missing)", [])); continue
-    open(os.path.join(d, f), "w").write(s.replace(old, new, 1))
+    open(os.path.join(d, f), "w", encoding="utf-8").write(s.replace(old, new, 1))
     n, reqs = run(d)
     rows.append((name, expect, "CAUGHT" if n and expect in reqs else ("caught, different requirement" if n else "SURVIVED"), [n, reqs]))
     print(rows[-1][:3], rows[-1][3][:1], file=sys.stderr)
@@ -44,5 +44,5 @@ L = ["# Mutation check of the conformance suite\n", "Each row breaks one rule in
      "| mutation | expected to violate | outcome | failing normative vectors | requirements reported failing |", "|---|---|---|---|---|"]
 for name, expect, out, extra in rows:
     L.append(f"| {name} | {expect} | **{out}** | {extra[0] if extra else '-'} | {', '.join(extra[1][:8]) if extra else '-'} |")
-open(os.path.join(ROOT, "reports", "mutation-check.md"), "w").write("\n".join(L) + "\n")
+open(os.path.join(ROOT, "reports", "mutation-check.md"), "w", encoding="utf-8").write("\n".join(L) + "\n")
 print("\n".join(L))

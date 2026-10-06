@@ -137,7 +137,7 @@ NODE = shutil.which("node")
 def test_independent_javascript_consumer_validates_all_vectors():
     js = ROOT / "consumers" / "js"
     r = subprocess.run(
-        [NODE, "--test", "test/calendar_interop_vectors.test.mjs"],
+        [NODE, "--test", "--test-reporter=tap", "test/calendar_interop_vectors.test.mjs"],
         cwd=js, capture_output=True, text=True, timeout=180,
     )
     tail = "\n".join(r.stdout.splitlines()[-12:]) + r.stderr[-800:]

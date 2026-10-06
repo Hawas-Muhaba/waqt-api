@@ -1,6 +1,9 @@
 ephem>=4.1
 timezonefinder>=6.0
 
+[:platform_system == "Windows"]
+tzdata>=2024.1
+
 [dev]
 pytest>=7
 build

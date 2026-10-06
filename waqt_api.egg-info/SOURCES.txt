@@ -7,6 +7,7 @@ tests/test_calendar_convert_api.py
 tests/test_calendar_interop.py
 tests/test_calendar_interop_vectors.py
 tests/test_calendar_providers.py
+tests/test_conformance_contract.py
 tests/test_conformance_suite.py
 tests/test_core.py
 tests/test_institutional.py
@@ -18,6 +19,7 @@ tests/test_scheduling.py
 tests/test_scheduling_vectors.py
 tests/test_semantics.py
 tests/test_sprint14_live_integrations.py
+tests/test_sprint16_api.py
 tests/test_vectors.py
 tests/test_version_consistency.py
 waqt/__init__.py

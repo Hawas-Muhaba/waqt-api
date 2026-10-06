@@ -62,7 +62,7 @@ from waqt_core.core import AstronomyProfile, Location, compute_waqt
 from waqt_core.hijri import ArithmeticTabularProvider
 from datetime import datetime, timezone
 
-assert waqt_core.__version__ == "0.3.0", waqt_core.__version__
+assert waqt_core.__version__ == "0.4.0", waqt_core.__version__
 
 result = compute_waqt(
     datetime(2026, 9, 19, 15, 42, tzinfo=timezone.utc),

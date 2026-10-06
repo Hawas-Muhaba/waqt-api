@@ -55,6 +55,8 @@ def test_root_package_depends_on_a_core_range_that_contains_core():
     assert Version(m.group(1)) <= Version(CORE) < Version(m.group(2))
     m = re.search(r'"waqt-core>=([\d.]+),<([\d.]+)"', read("local/pyproject.toml")); assert m
     assert Version(m.group(1)) <= Version(CORE) < Version(m.group(2))
+    m = re.search(r'"waqt-local>=([\d.]+),<([\d.]+)"', read("apps/cli/pyproject.toml")); assert m
+    assert Version(m.group(1)) <= Version(LOCAL) < Version(m.group(2))
 
 def test_docs_quote_current_values():
     v = read("docs/VERSIONING.md")

@@ -40,7 +40,7 @@ def get(port, path, headers=None, method="GET"):
         raw = e.read(); return e.code, dict(e.headers), (json.loads(raw) if raw else None)
 
 def strip_volatile(o):
-    if isinstance(o, dict): return {k: strip_volatile(v) for k, v in o.items() if k != "generated_at"}
+    if isinstance(o, dict): return {k: strip_volatile(v) for k, v in o.items() if k not in ("generated_at", "api_version", "label_date")}
     if isinstance(o, list): return [strip_volatile(x) for x in o]
     return o
 
@@ -48,8 +48,11 @@ def sprint14_checks(rec_fn):
     """Sprint 14: live Hijri provider, provenance, fallback, health/version, rate limiting, CORS -- real uvicorn
     + real HTTP to a local fake AlAdhan (the real service is not reachable from CI). The API's outbound
     calls use the real urllib transport."""
-    sys.path.insert(0, str(ROOT / "verification"))
-    from fake_aladhan import FakeAlAdhan
+    try:
+        from verification.fake_aladhan import FakeAlAdhan
+    except ImportError:
+        sys.path.insert(0, str(ROOT / "verification"))
+        from fake_aladhan import FakeAlAdhan  # pyrefly: ignore [missing-import]
     fake = FakeAlAdhan().start()
     p, port = start({"WAQT_CORS_ORIGINS": "http://localhost:8080", "WAQT_ALADHAN_BASE_URL": fake.base_url,
                      "WAQT_RATE_LIMIT": "40/minute"})
@@ -96,8 +99,11 @@ def sprint14_checks(rec_fn):
 
 
 def main():
-    sys.path.insert(0, str(ROOT / "core"))
-    from waqt_core.versioning import version_report, computation_identity, VECTOR_SET_VERSION
+    try:
+        from core.waqt_core.versioning import version_report, computation_identity, VECTOR_SET_VERSION
+    except ImportError:
+        sys.path.insert(0, str(ROOT / "core"))
+        from waqt_core.versioning import version_report, computation_identity, VECTOR_SET_VERSION  # pyrefly: ignore [missing-import]
     # ---------- server 1: default (no CORS) ----------
     p, port = start({})
     try:

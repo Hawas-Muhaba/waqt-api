@@ -16,6 +16,7 @@ normalising them (DIS-002; CAL-004).
 **Added**: `UnknownTimezoneError` (code `UNKNOWN_TIMEZONE`); `ManualTimezoneProvider` validates its zone at
 construction (DIS-003; ERR-002).
 **Added**: `CalendarOutOfRange` (code `OUT_OF_RANGE`); `UmmAlQuraProvider` supports 1700-01-01..2300-12-31 only (CAL-011).
+**Packaging**: declare `tzdata` on Windows so `zoneinfo` can resolve IANA zones in clean installations.
 **Vector set 1.1 → 2.0** (MAJOR: expected values changed). Engine revision unchanged (`2`).
 
 ## 0.3.0 — Sprint 14

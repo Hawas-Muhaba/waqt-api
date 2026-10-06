@@ -9,7 +9,7 @@ Base URL: wherever you deployed it (e.g. `https://waqt-api.onrender.com`). Inter
 ## 1. Versioning
 
 - The URL path carries the major version: every endpoint is under `/v1/`. A breaking change gets `/v2/`; `/v1/` never changes shape once released.
-- Every response also carries `meta.api_version` (currently `1.0.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
+- Every response also carries `meta.api_version` (currently `1.6.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
 
 - **1.6.0 (Sprint 16, conformance contract 2.0.0).** Additive: error codes `INVALID_HIJRI_DATE`, `UNKNOWN_TIMEZONE`, `OUT_OF_RANGE` (section 3). Two *corrections* to behaviour that contradicted the written specification, both recorded in `conformance/CHANGELOG.md`: the Hijri date / weekday of a Waqt day are those of the **civil** date of its closing Maghrib instant (SEMANTICS section 3, DAY-004), and `next_event` is the next event **by occurrence** (see `GET /v1/waqt`). No field was added, removed or renamed.
 
@@ -19,7 +19,7 @@ Every response, success or failure, has exactly this shape:
 
 ```json
 {
-  "meta": { "api_version": "1.0.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
+  "meta": { "api_version": "1.6.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
   "data": { ... or null on error ... },
   "error": { "code": "...", "message": "...", "details": {...} } // or null on success
 }

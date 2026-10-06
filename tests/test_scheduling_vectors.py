@@ -94,7 +94,7 @@ def test_independent_javascript_consumer_validates_all_vectors():
     code with the reference validates the Sprint 5 vectors AND the Sprint 6 vectors."""
     js = ROOT / "consumers" / "js"
     r = subprocess.run(
-        [NODE, "--test", "test/waqt_vectors.test.mjs", "test/scheduling_vectors.test.mjs"],
+        [NODE, "--test", "--test-reporter=tap", "test/waqt_vectors.test.mjs", "test/scheduling_vectors.test.mjs"],
         cwd=js, capture_output=True, text=True, timeout=180,
     )
     tail = "\n".join(r.stdout.splitlines()[-12:]) + r.stderr[-800:]

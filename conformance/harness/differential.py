@@ -14,6 +14,7 @@ from zoneinfo import ZoneInfo
 warnings.filterwarnings("ignore")
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "..", "independent-astronomy"))
+# pyrefly: ignore [missing-import]
 from skyfield_reference.events import compute_day_events  # noqa: E402
 
 UTC = dt.timezone.utc
@@ -31,7 +32,7 @@ PLACES = {
 
 
 def run(cmd, cases):
-    p = subprocess.run(cmd, input=json.dumps({"cases": cases}), capture_output=True, text=True, shell=True, cwd=ROOT)
+    p = subprocess.run(cmd, input=json.dumps({"cases": cases}), capture_output=True, text=True, shell=True, cwd=ROOT, encoding="utf-8")
     return {r["id"]: r for r in json.loads(p.stdout)["results"]}
 
 
@@ -168,7 +169,7 @@ def main():
     out = {"seed": a.seed, "n": a.n, "errors": err, "categories": {k: v for k, v in cats.items()},
            "boundary_error_seconds": {lab: {"n": len(v), "median": pct(v, .5), "p95": pct(v, .95), "max": max(v) if v else None} for lab, v in stats.items()},
            "sweep_total": len(swdiff), "sweep_disagreements": bad}
-    json.dump(out, open(os.path.join(ROOT, "reports", "differential-report.json"), "w"), indent=1)
+    json.dump(out, open(os.path.join(ROOT, "reports", "differential-report.json"), "w", encoding="utf-8"), indent=1)
     L = [f"# Differential run (seed {a.seed}, {a.n} random cases + {len(swdiff)}-point latitude sweep)\n",
          "Truth source: JPL DE421 via Skyfield. Cases drawn uniformly from 24 places x 3 years x all times of day.\n",
          "## Day-boundary error vs DE421 (|open|,|close| worst of the two, seconds)\n", "| implementation | n | median | p95 | max |", "|---|---|---|---|---|"]
@@ -188,7 +189,7 @@ def main():
     for r in bad:
         f = lambda x: "UNDEFINED day" if x is None else ",".join(x) if x != "error" else "error"
         L.append(f"| {r['date']} | {r['lat']} | {f(r['oracle'])} | {f(r['reference'])}{'' if r['agree']['reference'] else ' ✗'} | {f(r['independent'])}{'' if r['agree']['independent'] else ' ✗'} |")
-    open(os.path.join(ROOT, "reports", "differential-report.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(ROOT, "reports", "differential-report.md"), "w", encoding="utf-8").write("\n".join(L) + "\n")
     print("\n".join(L[:30]))
 
 

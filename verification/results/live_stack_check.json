@@ -13,7 +13,7 @@
   {
    "check": "/v1/version axes independent (core/api/vectors/engine)",
    "ok": true,
-   "detail": "core=0.3.0 api=1.5.0 rev=2 vec=1.1"
+   "detail": "core=0.4.0 api=1.6.0 rev=2 vec=2.0"
   },
   {
    "check": "/v1/version waqt_local_version null from server",
@@ -111,7 +111,7 @@
    "detail": ""
   },
   {
-   "check": "S14 /v1/version: API 1.5.0, integrations listed, affects_astronomy=false",
+   "check": "S14 /v1/version: API 1.6.0, integrations listed, affects_astronomy=false",
    "ok": true,
    "detail": ""
   },

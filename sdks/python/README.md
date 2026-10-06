@@ -88,11 +88,14 @@ except WaqtTransportError as e:
 
 `WaqtApiError.code` is exactly the `error.code` value documented in
 docs/API.md (`INVALID_INSTANT`, `CALENDAR_DATE_UNRESOLVABLE`,
+`INVALID_HIJRI_DATE`, `UNKNOWN_TIMEZONE`, `OUT_OF_RANGE`,
 `VALIDATION_ERROR`, ...) — never a generic HTTP-status-only exception.
+Codes are strings, not a closed enum, so new server codes remain
+available without an SDK release.
 
 ## What's covered
 
-Typed methods for every `/v1/*` endpoint as of API version 1.3.0:
+Typed methods for every `/v1/*` endpoint as of API version 1.6.0:
 `/v1/waqt`, `/v1/day`, `/v1/events`, `/v1/hijri`, `/v1/calendar`,
 `/v1/location`, `/v1/conversions`, `/v1/calendar/convert`,
 `/v1/calendar/boundary-crossing`, `/v1/schedule/{snapshot,span,resolve}`,
@@ -102,6 +105,11 @@ For anything not yet wrapped, `client.request(method, path, params=...,
 json=...)` is the same envelope-aware call every typed method is built
 on — it raises the same `WaqtApiError`, returns the same unwrapped `data`
 dict, and is never blocked on a new SDK release.
+
+API 1.6.0 / conformance contract 2.0.0 corrects the Waqt-day label to
+the civil date of its closing Maghrib and defines `next_event` by
+occurrence, including the previous solar day's Isha. The vector set is
+2.0; the SDK preserves these responses and new error codes as-is.
 
 ## Local vs server computation
 

@@ -1,7 +1,9 @@
 """Fake AlAdhan + a tiny control port so the browser script can flip failure modes: GET :8099/mode/<mode>"""
 import sys, threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-sys.path.insert(0, __file__.rsplit("/", 3)[0] + "/verification")
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fake_aladhan import FakeAlAdhan
 import fake_aladhan
 s = FakeAlAdhan()

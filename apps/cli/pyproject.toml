@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Waqt project" }]
-dependencies = ["waqt-local>=0.4.0,<0.5"]
+dependencies = ["waqt-local>=0.5.0,<0.6"]
 
 [project.scripts]
 waqt = "waqt_cli.main:entrypoint"

@@ -85,18 +85,11 @@ def test_unsupported_operation_error_on_declared_reverse():
     assert r.json()["error"]["code"] == "UNSUPPORTED_OPERATION"
 
 
-def test_internal_error_never_leaks_a_raw_traceback():
-    # Sprint 14 changed what this test used to exercise: a date far enough back to hit
-    # UmmAlQuraProvider's ephem limit (SCOPE.md) no longer produces a 500 on /v1/waqt --
-    # calendar failures are contained, the events are still returned and the failure is
-    # visible in data.calendar_error (see test_sprint14_live_integrations.py). The
-    # original guarantee -- an unexpected error is STRUCTURED, never a raw traceback --
-    # is exercised here with an error that is genuinely internal, and on /v1/hijri where
-    # the calendar is the whole answer and so cannot be contained.
+def test_umm_al_qura_date_outside_supported_range_is_a_structured_client_error():
     r = client.get("/v1/hijri", params={"date": "1500-01-01", "calendar_provider": "umm-al-qura"})
-    assert r.status_code == 500
+    assert r.status_code == 400
     body = r.json()
-    assert body["error"]["code"] == "INTERNAL_ERROR"
+    assert body["error"]["code"] == "OUT_OF_RANGE"
     assert body["data"] is None
 
 
