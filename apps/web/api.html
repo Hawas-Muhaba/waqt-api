@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API — Waqt</title>
+<meta name="description" content="The Waqt HTTP API: endpoints, response model and a complete example.">
+<meta name="theme-color" content="#0d1224">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">Waqt<small>time infrastructure</small></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav aria-label="Primary">
+      <ul class="nav-list" id="site-nav">
+        <li><a href="index.html#overview">Overview</a></li>
+        <li><a href="index.html#problem">The Problem</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="live-demo.html">Live Demo</a></li>
+        <li><a href="api.html" aria-current="page">API</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="governance.html">Governance</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a data-link="github" href="#">GitHub</a></li>
+        <li class="nav-cta"><a data-link="docs" href="resources.html#specifications">Read Spec / Docs</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="block" aria-labelledby="h-api">
+  <div class="wrap">
+    <p class="eyebrow">API</p>
+    <h1 id="h-api">Build with the Waqt API</h1>
+    <p class="lead">A stable, versioned, language-independent HTTP contract. You do not need to read any Python to integrate it. Every response is an envelope: <code>{meta, data, error}</code>, with exactly one of <code>data</code> and <code>error</code> non-null.</p>
+    <div class="btn-row"><a class="btn" data-api-docs href="#">Interactive API docs</a><a class="btn ghost" data-openapi href="#">OpenAPI JSON</a><a class="btn ghost" href="live-demo.html">Live demo</a></div>
+    <div class="panel" style="margin-top:22px" aria-labelledby="h-status">
+      <h2 id="h-status" style="font-size:1.1rem">API status</h2>
+      <div id="api-status" class="muted" role="status">Checking…</div>
+    </div>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-ep">
+  <div class="wrap">
+    <h2 id="h-ep">Endpoints</h2>
+    <div class="table-scroll"><table class="data"><caption class="vh">Waqt API endpoints</caption>
+      <thead><tr><th scope="col">Endpoint</th><th scope="col">What it returns</th></tr></thead><tbody>
+      <tr><td><code>GET /v1/waqt</code></td><td>Everything: day boundary, clock reading, all six events, next event, Hijri date. <em>Powers every live component on this site.</em></td></tr>
+      <tr><td><code>GET /v1/day</code></td><td>Day boundary only.</td></tr>
+      <tr><td><code>GET /v1/events</code></td><td>The six prayer/solar events only (no calendar).</td></tr>
+      <tr><td><code>GET /v1/hijri</code></td><td>Calendar lookup, no location needed.</td></tr>
+      <tr><td><code>GET /v1/calendar</code></td><td>Discovery: which calendar providers exist.</td></tr>
+      <tr><td><code>GET /v1/location</code></td><td>Timezone and local civil-date resolution.</td></tr>
+      <tr><td><code>GET /v1/conversions</code></td><td>Gregorian ↔ Hijri, either direction.</td></tr>
+      <tr><td><code>GET /v1/version</code></td><td>Every version axis: <code>waqt-core</code>, engine and revision, API, conformance vectors.</td></tr>
+      <tr><td><code>/v1/schedule/*</code></td><td>Snapshot, span and rule resolution (windows, deadlines, “30 minutes before Maghrib”).</td></tr>
+      <tr><td><code>/v1/institutional/*</code></td><td>Islamic week, fiscal year, academic year.</td></tr>
+    </tbody></table></div>
+    <p class="muted" style="margin-top:10px">Full request and response schemas, error codes, units and versioning policy are in the repository’s <code>docs/API.md</code> (see <a href="resources.html#documentation">Resources</a>).</p>
+  </div>
+</section>
+<section class="block" aria-labelledby="h-qs">
+  <div class="wrap">
+    <h2 id="h-qs">A complete call</h2>
+    <div class="tabs" role="tablist" aria-label="Language"><button role="tab" aria-selected="true" data-tab="curl">curl</button><button role="tab" aria-selected="false" data-tab="js">JavaScript</button><button role="tab" aria-selected="false" data-tab="py">Python (stdlib)</button></div>
+    <pre class="code" id="api-snippet" tabindex="0" aria-label="Code example"></pre>
+    <h3 style="margin-top:28px">Reading the response</h3>
+    <dl class="kv">
+      <dt><code>day.maghrib_open</code> / <code>maghrib_close</code></dt><dd>Exact instants bounding the Waqt day; <code>length_si_seconds</code> is its real length.</dd>
+      <dt><code>waqt.reading</code></dt><dd>Seconds and <code>HH:MM:SS</code> since the opening Maghrib. May pass <code>24:00:00</code> on a long day.</dd>
+      <dt><code>events[]</code></dt><dd>Fajr, sunrise, Dhuhr, Asr, Maghrib, Isha, each an instant plus its reading. An event after the closing Maghrib reads past the day length (Isha often does).</dd>
+      <dt><code>next_event</code></dt><dd>Earliest event strictly after <code>instant</code>, including the previous solar day’s Isha — with a ready-made countdown.</dd>
+      <dt><code>status</code></dt><dd><code>OK</code> or an explicit <em>undefined</em> with a reason (e.g. polar regions). Never silently defaulted.</dd>
+    </dl>
+    <p class="notice info" style="margin-top:18px">Rule of the house: <b>consume Waqt, do not reimplement it.</b> This website follows it — it contains no astronomy or calendar computation.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>Waqt</h2>
+        <p>A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Waqt provides temporal facts, not religious rulings.</p>
+        <p class="muted">Applications shown on this site are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> or <span class="badge future">FUTURE</span>.</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="lab.html">Waqt Experience Lab</a></li>
+          <li><a href="applications.html">Applications</a></li>
+          <li><a href="resources.html">Resources &amp; downloads</a></li>
+          <li><a href="governance.html">Governance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a data-link="github" href="#">GitHub</a></li>
+          <li><a data-link="docs" href="resources.html#specifications">Specification &amp; docs</a></li>
+          <li><a data-email href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a></li>
+          <li><a data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support Waqt</h2>
+        <div class="support">
+          <p>Waqt is open work. If it is useful to you, you can help keep it going — entirely optional.</p>
+          <a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© Waqt project. Concept images are design renders (“concept art”), not photographs of deployed products.</p>
+  </div>
+</footer>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/waqt-api.js"></script>
+<script defer src="assets/js/site.js"></script>
+<script defer src="assets/js/pages/api.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resources — Waqt</title>
+<meta name="description" content="Waqt specifications, documentation, SDKs, conformance material and applications.">
+<meta name="theme-color" content="#0d1224">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">Waqt<small>time infrastructure</small></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav aria-label="Primary">
+      <ul class="nav-list" id="site-nav">
+        <li><a href="index.html#overview">Overview</a></li>
+        <li><a href="index.html#problem">The Problem</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="live-demo.html">Live Demo</a></li>
+        <li><a href="api.html">API</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="governance.html">Governance</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a data-link="github" href="#">GitHub</a></li>
+        <li class="nav-cta"><a data-link="docs" href="resources.html#specifications">Read Spec / Docs</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="block" aria-labelledby="h-res">
+  <div class="wrap">
+    <p class="eyebrow">Resources</p>
+    <h1 id="h-res">Specifications, SDKs and downloads</h1>
+    <p class="lead">This page points to canonical locations; it does not host copies of packages. What exists in the project today is listed with its repository path. Download and registry links appear here once the real URLs are configured.</p>
+    <div class="notice" style="margin-top:14px"><b>Repository and registry URLs are not configured yet.</b> Paths are shown as repository paths. Set <code>links.github</code>, <code>links.docs</code>, <code>links.sdkRepos</code> and <code>links.packageRegistries</code> in <code>assets/js/config.js</code> to turn them into links.</div>
+  </div>
+</section>
+<section class="block" id="specifications" aria-labelledby="h-spec"><div class="wrap">
+  <h2 id="h-spec">Specifications</h2>
+  <div class="table-scroll"><table class="data"><caption class="vh">Specification documents</caption><thead><tr><th scope="col">Document</th><th scope="col">Repository path</th><th scope="col">Covers</th></tr></thead><tbody>
+    <tr><td>The Waqt Time Model</td><td><code>docs/TIME-MODEL.md</code></td><td>Why the numbers look the way they do: Maghrib boundary, SI hour, events as positions.</td></tr>
+    <tr><td>Time &amp; calendar semantics</td><td><code>docs/SEMANTICS.md</code></td><td>Instants, days, dates, positions, durations, comparison rules.</td></tr>
+    <tr><td>Calendars</td><td><code>docs/CALENDARS.md</code></td><td>Hijri providers (arithmetic-tabular, Umm al-Qura, declared, local observation).</td></tr>
+    <tr><td>Conformance contract</td><td><code>conformance/</code></td><td>Requirements, vectors, governance — draft, not yet released.</td></tr>
+  </tbody></table></div></div></section>
+<section class="block" id="documentation" aria-labelledby="h-docs"><div class="wrap">
+  <h2 id="h-docs">Documentation</h2>
+  <div class="table-scroll"><table class="data"><caption class="vh">Documentation</caption><thead><tr><th scope="col">Document</th><th scope="col">Where</th></tr></thead><tbody>
+    <tr><td>API reference</td><td><code>docs/API.md</code> · live: <a data-api-docs href="#">interactive docs</a></td></tr>
+    <tr><td>Astronomy &amp; accuracy levels</td><td><code>docs/ASTRONOMY.md</code></td></tr>
+    <tr><td>Scheduling &amp; institutional calendars</td><td><code>docs/SCHEDULING.md</code>, <code>docs/INSTITUTIONAL.md</code></td></tr>
+    <tr><td>Versioning &amp; releasing</td><td><code>docs/VERSIONING.md</code>, <code>docs/RELEASING.md</code></td></tr>
+  </tbody></table></div></div></section>
+<section class="block" id="sdks" aria-labelledby="h-sdk"><div class="wrap">
+  <h2 id="h-sdk">SDKs</h2>
+  <div class="table-scroll"><table class="data"><caption class="vh">SDKs and libraries</caption><thead><tr><th scope="col">Package</th><th scope="col">Repository path</th><th scope="col">Status</th></tr></thead><tbody>
+    <tr><td><code>waqt-client</code> (Python)</td><td><code>sdks/python</code></td><td>Packaged and release-ready; registry publication not confirmed.</td></tr>
+    <tr><td><code>waqt-client</code> (JavaScript)</td><td><code>sdks/js/waqt-client</code></td><td>Packaged and release-ready; registry publication not confirmed.</td></tr>
+    <tr><td><code>waqt-core</code></td><td><code>core/</code></td><td>Independently installable computation layer.</td></tr>
+    <tr><td><code>waqt-local</code></td><td><code>local/</code></td><td>Embeddable, no-server library.</td></tr>
+  </tbody></table></div></div></section>
+<section class="block" id="conformance" aria-labelledby="h-conf"><div class="wrap">
+  <h2 id="h-conf">Conformance</h2>
+  <p>Portable test vectors and a harness let an independent implementation prove it agrees with the reference: <code>conformance/vectors</code>, <code>conformance/harness</code>.</p></div></section>
+<section class="block" id="applications" aria-labelledby="h-rapps"><div class="wrap">
+  <h2 id="h-rapps">Applications</h2>
+  <ul><li><b>Reference web viewer</b> — <a href="live-demo.html">this site’s Live Demo</a> <span class="badge real">REAL</span></li><li><b>CLI</b> — <code>apps/cli</code> (offline, built on <code>waqt-local</code>) <span class="badge real">REAL</span></li></ul>
+  <p class="muted">Release artifacts: none are linked until canonical release locations are configured.</p>
+</div></section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>Waqt</h2>
+        <p>A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Waqt provides temporal facts, not religious rulings.</p>
+        <p class="muted">Applications shown on this site are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> or <span class="badge future">FUTURE</span>.</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="lab.html">Waqt Experience Lab</a></li>
+          <li><a href="applications.html">Applications</a></li>
+          <li><a href="resources.html">Resources &amp; downloads</a></li>
+          <li><a href="governance.html">Governance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a data-link="github" href="#">GitHub</a></li>
+          <li><a data-link="docs" href="resources.html#specifications">Specification &amp; docs</a></li>
+          <li><a data-email href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a></li>
+          <li><a data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support Waqt</h2>
+        <div class="support">
+          <p>Waqt is open work. If it is useful to you, you can help keep it going — entirely optional.</p>
+          <a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© Waqt project. Concept images are design renders (“concept art”), not photographs of deployed products.</p>
+  </div>
+</footer>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/waqt-api.js"></script>
+<script defer src="assets/js/site.js"></script>
+</body>
+</html>

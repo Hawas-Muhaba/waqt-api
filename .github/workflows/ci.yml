@@ -45,6 +45,11 @@ jobs:
           pip install -e ./sdks/python
           pytest sdks/python/tests/ -v --tb=short
 
+      - name: Web site (structure guards + jsdom behaviour tests)
+        run: |
+          pytest apps/web/tests -v --tb=short
+          cd apps/web/tests/js && npm install --no-audit --no-fund && npm test
+
       - name: JavaScript SDK
         run: cd sdks/js/waqt-client && npm test
 

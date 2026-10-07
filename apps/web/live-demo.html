@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live Demo — Waqt</title>
+<meta name="description" content="Waqt reference viewer: reads the public Waqt API and computes nothing itself.">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="icon" href="data:,">
+<style>
+  /* ---- Sprint 12 reference web app -------------------------------------
+     Palette taken from the thing this page shows: a day bounded by two
+     Maghribs. Dusk navy for "now", a warm ember for the moving marker
+     (sunset light, not a brand accent), a low teal for secondary facts. */
+  :root{
+    --dusk-900:#141a2e; --dusk-800:#1c2440; --dusk-700:#262f52;
+    --parchment:#eee7d6; --parchment-dim:#b9b3a2;
+    --ember:#e2953f; --ember-dim:#9c6a34;
+    --teal:#4a8f83; --line:#333d63;
+    --danger:#c96a5a;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:radial-gradient(ellipse at 50% -10%, var(--dusk-700), var(--dusk-900) 60%);
+    color:var(--parchment); font-family:var(--sans); min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--ember)}
+  .viewer-wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+  .viewer-head{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
+  h1{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:0;letter-spacing:.01em}
+  h1 small{display:block;font-family:var(--sans);font-size:.72rem;color:var(--parchment-dim);margin-top:3px;font-weight:400}
+  .apibase{display:flex;gap:6px;align-items:center;font-size:.78rem;color:var(--parchment-dim)}
+  .apibase input{background:var(--dusk-800);border:1px solid var(--line);color:var(--parchment);
+    border-radius:5px;padding:5px 8px;font-size:.78rem;width:190px;font-family:var(--sans)}
+  .apibase button{background:none;border:1px solid var(--line);color:var(--parchment-dim);border-radius:5px;
+    padding:5px 9px;font-size:.75rem;cursor:pointer}
+  .apibase button:hover{border-color:var(--ember);color:var(--ember)}
+
+  .locbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:26px;font-size:.85rem}
+  .locbar input{background:var(--dusk-800);border:1px solid var(--line);color:var(--parchment);
+    border-radius:5px;padding:6px 8px;width:90px;font-family:var(--sans);font-size:.85rem}
+  .locbar button{background:var(--teal);border:none;color:var(--dusk-900);font-weight:600;
+    border-radius:5px;padding:7px 14px;cursor:pointer;font-size:.82rem}
+  .locbar button.secondary{background:none;border:1px solid var(--teal);color:var(--teal);font-weight:500}
+  .locbar button:hover{filter:brightness(1.1)}
+  .locbar .label{color:var(--parchment-dim)}
+
+  #status{font-size:.85rem;color:var(--parchment-dim);min-height:1.4em;margin-bottom:18px}
+  #status.err{color:var(--danger)}
+  .badge{display:inline-block;font-size:.72rem;padding:1px 7px;border-radius:9px;border:1px solid var(--line);margin-left:6px;vertical-align:middle;color:var(--parchment-dim)}
+  .badge.live{border-color:#4f8f6a;color:#8fd0a8}
+  .badge.warn{border-color:var(--ember-dim);color:var(--ember)}
+
+  .viewer-hero{display:flex;flex-wrap:wrap;gap:28px;align-items:center;margin-bottom:34px}
+  .clock{font-family:var(--serif);font-size:3.4rem;font-weight:500;letter-spacing:.01em;line-height:1}
+  .clock .unit{font-size:1.1rem;color:var(--parchment-dim);margin-left:8px;font-family:var(--sans)}
+  .hero-sub{color:var(--parchment-dim);font-size:.92rem;line-height:1.7}
+  .hero-sub b{color:var(--parchment);font-weight:600}
+
+  .arc-wrap{flex-shrink:0}
+
+  section{margin-bottom:34px}
+  h2{font-family:var(--serif);font-weight:500;font-size:1.05rem;margin:0 0 12px;color:var(--parchment)}
+
+  table.events{width:100%;border-collapse:collapse;font-size:.9rem}
+  table.events th{text-align:left;font-weight:500;color:var(--parchment-dim);font-size:.76rem;
+    padding:4px 8px;border-bottom:1px solid var(--line)}
+  table.events td{padding:8px 8px;border-bottom:1px solid var(--dusk-700)}
+  table.events tr.next td{color:var(--ember)}
+  table.events tr.next td:first-child::before{content:"› ";color:var(--ember)}
+  table.events td.mono{font-variant-numeric:tabular-nums}
+
+  .reps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .rep-card{background:var(--dusk-800);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .rep-card .k{font-size:.74rem;color:var(--parchment-dim);margin-bottom:6px}
+  .rep-card .v{font-size:1.02rem}
+  .rep-card .v2{font-size:.82rem;color:var(--parchment-dim);margin-top:2px}
+
+  details{background:var(--dusk-800);border:1px solid var(--line);border-radius:8px;padding:12px 16px}
+  details summary{cursor:pointer;font-size:.85rem;color:var(--parchment-dim);list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary::before{content:"▸ ";color:var(--teal)}
+  details[open] summary::before{content:"▾ "}
+  .meta-grid{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.82rem;margin-top:12px}
+  .meta-grid dt{color:var(--parchment-dim)}
+  .meta-grid dd{margin:0;font-variant-numeric:tabular-nums}
+
+  .viewer-foot{margin-top:40px;font-size:.76rem;color:var(--parchment-dim);border-top:1px solid var(--line);padding-top:14px}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media (prefers-reduced-motion: reduce){ * { transition:none !important; animation:none !important } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header" role="banner">
+  <div class="wrap bar">
+    <a class="brand" href="index.html">Waqt<small>time infrastructure</small></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav aria-label="Primary">
+      <ul class="nav-list" id="site-nav">
+        <li><a href="index.html#overview">Overview</a></li>
+        <li><a href="index.html#problem">The Problem</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="live-demo.html" aria-current="page">Live Demo</a></li>
+        <li><a href="api.html">API</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a href="governance.html">Governance</a></li>
+        <li><a href="community.html">Community</a></li>
+        <li><a data-link="github" href="#">GitHub</a></li>
+        <li class="nav-cta"><a data-link="docs" href="resources.html#specifications">Read Spec / Docs</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<div class="viewer-wrap">
+  <div class="viewer-head">
+    <h1>Waqt<small>reference web application — reads a running Waqt API, computes nothing itself</small></h1>
+    <div class="apibase">
+      <label for="apiBase">API base</label>
+      <input id="apiBase" value="https://waqt-api-r6e0.onrender.com" autocomplete="off" spellcheck="false">
+      <button id="apiBaseSave" type="button">Use</button>
+    </div>
+  </div>
+
+  <div class="locbar">
+    <span class="label">Location</span>
+    <input id="lat" value="21.4225" placeholder="lat" inputmode="decimal" aria-label="Latitude">
+    <input id="lon" value="39.8262" placeholder="lon" inputmode="decimal" aria-label="Longitude">
+    <button id="goBtn" type="button">Show this place</button>
+    <button id="geoBtn" type="button" class="secondary">Use my location</button>
+    <label class="label" for="provider" style="margin-left:8px">Hijri provider</label>
+    <select id="provider" style="background:var(--dusk-800);border:1px solid var(--line);color:var(--parchment);border-radius:5px;padding:6px 8px;font-size:.85rem"></select>
+  </div>
+
+  <div id="status" role="status" aria-live="polite">Enter coordinates, or use your location, to begin.</div>
+
+  <div id="content" hidden>
+    <div class="viewer-hero">
+      <svg class="arc-wrap" id="arcSvg" width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="Position within the Waqt day">
+        <circle cx="66" cy="66" r="56" fill="none" stroke="#262f52" stroke-width="10"/>
+        <circle id="arcProgress" cx="66" cy="66" r="56" fill="none" stroke="#e2953f" stroke-width="10"
+                stroke-linecap="round" transform="rotate(-90 66 66)"/>
+        <text id="arcPct" x="66" y="71" text-anchor="middle" font-family="var(--sans)" font-size="18" fill="#eee7d6">–</text>
+      </svg>
+      <div>
+        <div class="clock"><span id="clockDisplay">–</span></div>
+        <div class="hero-sub" id="heroSub"></div>
+      </div>
+    </div>
+
+    <section aria-labelledby="computation-h">
+      <h2 id="computation-h">About computation</h2>
+      <dl class="meta-grid" id="computationGrid"></dl>
+    </section>
+
+    <section aria-labelledby="events-h">
+      <h2 id="events-h">Today's events</h2>
+      <table class="events">
+        <thead><tr><th>Event</th><th>Local time</th><th>Waqt reading</th><th></th></tr></thead>
+        <tbody id="eventsBody"></tbody>
+      </table>
+    </section>
+
+    <section aria-labelledby="reps-h">
+      <h2 id="reps-h">Representations</h2>
+      <div class="reps" id="repsGrid"></div>
+    </section>
+
+    <section aria-labelledby="meta-h">
+      <details id="metaDetails">
+        <summary id="meta-h">Provider &amp; computation metadata</summary>
+        <dl class="meta-grid" id="metaGrid"></dl>
+      </details>
+    </section>
+  </div>
+
+  <div class="viewer-foot">
+    Consumes <code>GET /v1/waqt</code>, <code>/v1/events</code>, <code>/v1/calendar</code>, <code>/v1/version</code>.
+    No astronomy or calendar computation happens in this page — see
+    <code>tests/test_no_second_implementation.py</code>. Public reference, Sprint 14.
+  </div>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h2>Waqt</h2>
+        <p>A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Waqt provides temporal facts, not religious rulings.</p>
+        <p class="muted">Applications shown on this site are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> or <span class="badge future">FUTURE</span>.</p>
+      </div>
+      <div>
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="lab.html">Waqt Experience Lab</a></li>
+          <li><a href="applications.html">Applications</a></li>
+          <li><a href="resources.html">Resources &amp; downloads</a></li>
+          <li><a href="governance.html">Governance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Project</h2>
+        <ul>
+          <li><a data-link="github" href="#">GitHub</a></li>
+          <li><a data-link="docs" href="resources.html#specifications">Specification &amp; docs</a></li>
+          <li><a data-email href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a></li>
+          <li><a data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support Waqt</h2>
+        <div class="support">
+          <p>Waqt is open work. If it is useful to you, you can help keep it going — entirely optional.</p>
+          <a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© Waqt project. Concept images are design renders (“concept art”), not photographs of deployed products.</p>
+  </div>
+</footer>
+<script defer src="assets/js/config.js"></script>
+<script defer src="assets/js/site.js"></script>
+<script>
+"use strict";
+/* This file computes nothing about Waqt. Every number shown is read from a
+ * JSON response returned by the API named in #apiBase. The only "derived"
+ * value is the client-side clock tick below, which interpolates from the
+ * last server reading using elapsed wall-clock time — it never recomputes
+ * from an instant, angle, or timezone. */
+
+const $ = (id) => document.getElementById(id);
+const LS_KEY = "waqt:apiBase";
+const LOCAL_API_BASE = "http://localhost:8000";
+const PUBLIC_API_BASE = "https://waqt-api-r6e0.onrender.com";
+
+function defaultApiBase() {
+  const override = new URLSearchParams(location.search).get("api");
+  if (override) return override;
+  return ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname) ? LOCAL_API_BASE : PUBLIC_API_BASE;
+}
+
+function apiBase() {
+  return ($("apiBase").value || defaultApiBase()).replace(/\/+$/, "");
+}
+
+function esc(v) {
+  return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+// Sprint 14: where the Hijri date came from. Read from the response, never inferred.
+function hijriSourceBadge(h) {
+  if (!h) return "";
+  const prov = h.provenance || {};
+  if (h.source === "remote") return `<span class="badge live" title="fetched from ${esc(h.provider.name)}${prov.cache ? " (cache " + esc(prov.cache) + ")" : ""}">live · ${esc(h.provider.name)}</span>`;
+  if (h.source === "remote-stale") return `<span class="badge warn" title="${esc(prov.fallback_reason || "")}">stale live value · ${esc(h.provider.name)}</span>`;
+  if (h.source === "local-fallback") {
+    return `<span class="badge warn" title="${esc(prov.fallback_detail || "")}">fallback: ${esc(h.provider.name)} instead of ${esc(prov.requested_provider || "?")} (${esc(prov.fallback_reason || "unknown")})</span>`;
+  }
+  return `<span class="badge">${esc(h.source || "local")}</span>`;
+}
+
+function hijriHeadline(waqt) {
+  if (!waqt.hijri) {
+    const msg = waqt.calendar_error ? `${waqt.calendar_error.provider}: ${waqt.calendar_error.message}` : "no Hijri date";
+    return `<b>Hijri date unavailable</b><span class="badge warn">${esc(msg)}</span>`;
+  }
+  return `<b>${esc(waqt.hijri.display)}</b>${hijriSourceBadge(waqt.hijri)}`;
+}
+
+function setStatus(msg, isError) {
+  const el = $("status");
+  el.textContent = msg;
+  el.className = isError ? "err" : "";
+}
+
+async function getJSON(path, params) {
+  const url = new URL(apiBase() + path);
+  Object.entries(params || {}).forEach(([k, v]) => {
+    if (v !== undefined && v !== null && v !== "") url.searchParams.set(k, v);
+  });
+  let res;
+  try {
+    res = await fetch(url.toString());
+  } catch (e) {
+    throw new Error(
+      `Could not reach ${apiBase()}. Is the server running, and does it allow this ` +
+      `origin (WAQT_CORS_ORIGINS)? (${e.message})`
+    );
+  }
+  // The API's envelope (docs/API.md §2) is always {meta, data, error}, with
+  // exactly one of data/error null — never a "status" field at this level.
+  const body = await res.json().catch(() => null);
+  if (!body || (body.error === undefined && body.data === undefined)) {
+    throw new Error(`HTTP ${res.status}: response did not match the documented envelope`);
+  }
+  if (body.error !== null && body.error !== undefined) {
+    const err = new Error(`${body.error.code}: ${body.error.message}`);
+    const ra = body.error.details && body.error.details.retry_after_seconds;
+    if (ra) err.retryAfter = ra;     // RATE_LIMITED: the server says when to come back
+    throw err;
+  }
+  return body.data;
+}
+
+// ---- clock: interpolate between polls, from server-reported values only --
+let clockAnchor = null; // { serverSeconds, wallClockMsAtFetch, dayLengthSeconds, nextEventMs }
+let tickHandle = null;
+let currentPlace = null;   // { lat, lon } of the last place shown, so a boundary can trigger a re-ask
+let refreshing = false;
+let refreshBackoffUntil = 0;   // after a failed boundary refresh, wait before asking again
+
+function fmtHMS(totalSeconds) {
+  const s = Math.max(0, Math.floor(totalSeconds));
+  const hh = Math.floor(s / 3600), mm = Math.floor((s % 3600) / 60), ss = s % 60;
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+}
+
+function tick() {
+  if (!clockAnchor) return;
+  const elapsed = (Date.now() - clockAnchor.wallClockMsAtFetch) / 1000;
+  const seconds = clockAnchor.serverSeconds + elapsed;
+  $("clockDisplay").textContent = fmtHMS(seconds);
+  // Sprint 13 fix: when the server-reported Waqt day has run out (Maghrib), or the server-reported
+  // next event has arrived, this page's data is stale. It does not work out what comes next -- it
+  // asks the server again (same request, "now"). Event-driven: no polling between boundaries.
+  const pastDayEnd = clockAnchor.dayLengthSeconds && seconds >= clockAnchor.dayLengthSeconds;
+  const pastNextEvent = clockAnchor.nextEventMs && Date.now() >= clockAnchor.nextEventMs;
+  if ((pastDayEnd || pastNextEvent) && currentPlace && !refreshing && Date.now() >= refreshBackoffUntil) refreshPlace();
+  if (clockAnchor.dayLengthSeconds) {
+    const frac = Math.max(0, Math.min(1, seconds / clockAnchor.dayLengthSeconds));
+    const circumference = 2 * Math.PI * 56;
+    $("arcProgress").setAttribute("stroke-dasharray", `${circumference}`);
+    $("arcProgress").setAttribute("stroke-dashoffset", `${circumference * (1 - frac)}`);
+    $("arcPct").textContent = Math.round(frac * 100) + "%";
+  }
+}
+
+function localTime(iso, tzName) {
+  if (!iso) return "—";
+  try {
+    return new Intl.DateTimeFormat("en-GB", {
+      hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+      timeZone: tzName || undefined,
+    }).format(new Date(iso));
+  } catch {
+    return new Date(iso).toISOString().slice(11, 19) + " UTC";
+  }
+}
+
+function hijriProvenanceRows(waqtData) {
+  const rows = [];
+  const h = waqtData.hijri, prov = h && h.provenance;
+  if (waqtData.calendar_error) rows.push(["Calendar error", `${waqtData.calendar_error.provider}: ${waqtData.calendar_error.message}`]);
+  if (!prov) return rows;
+  if (prov.requested_provider && h.source !== "remote") rows.push(["Requested provider", prov.requested_provider]);
+  if (prov.fallback_reason) rows.push(["Fallback reason", prov.fallback_detail ? `${prov.fallback_reason} — ${prov.fallback_detail}` : prov.fallback_reason]);
+  if (prov.fetched_at) rows.push(["Fetched", `${prov.fetched_at} (cache ${prov.cache}, age ${prov.age_seconds} s, TTL ${prov.ttl_seconds} s)`]);
+  if (prov.upstream_method) rows.push(["Upstream method", prov.upstream_method]);
+  const cc = prov.cross_check;
+  if (cc && cc.agrees !== null) rows.push(["Local cross-check", `${cc.provider}: ${cc.date} — ${cc.agrees ? "agrees" : "DISAGREES by " + cc.delta_days + " day(s)"}`]);
+  return rows;
+}
+
+function renderMeta(waqtData, versionData) {
+  const c = waqtData.computation || {};
+  const rows = [
+    ["Hijri provider", waqtData.hijri && waqtData.hijri.provider ?
+      `${waqtData.hijri.provider.name} (${waqtData.hijri.provider.version})` : "—"],
+    ["Hijri source", waqtData.hijri ? waqtData.hijri.source : "—"],
+    ...hijriProvenanceRows(waqtData),
+    ["Astronomy engine", `${c.engine || c.astronomy_engine || "—"}, revision ${c.revision || "—"}`],
+    ["Accuracy level", c.accuracy_level || "—"],
+    ["Timescale model", c.timescale_model || "—"],
+    ["ΔT applied", c.delta_t_seconds != null ? `${c.delta_t_seconds.toFixed(3)} s` : "—"],
+    ["waqt-core version", versionData ? versionData.waqt_core_version : "—"],
+    ["API version", versionData ? versionData.api_version : "—"],
+    ["Vector set", versionData ? `${versionData.conformance_vectors.vector_set_version} (@ revision ${versionData.conformance_vectors.generated_at_engine_revision})` : "—"],
+  ];
+  $("metaGrid").innerHTML = rows.map(([k, v]) =>
+    `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+}
+
+function renderComputation(waqt) {
+  const computation = waqt.computation || {};
+  const hijri = waqt.hijri;
+  const location = waqt.location || {};
+  const timezone = waqt.timezone ? waqt.timezone.name : "timezone unavailable";
+  const rows = [
+    ["Engine", computation.engine || "—"],
+    ["Revision", computation.revision || "—"],
+    ["Accuracy level", computation.accuracy_level || "—"],
+    ["Hijri provider", hijri && hijri.provider ? hijri.provider.name : "unavailable"],
+    ["Hijri source", hijri ? hijri.source : "unavailable"],
+    ["Provider version", hijri && hijri.provider ? hijri.provider.version : "—"],
+    ["Waqt day boundary", "Local Maghrib"],
+    ["Reference meridian", "Local location"],
+    ["Reference location", `${location.lat ?? "—"}, ${location.lon ?? "—"} · ${timezone}`],
+  ];
+  $("computationGrid").innerHTML = rows.map(([key, value]) =>
+    `<dt>${esc(key)}</dt><dd>${esc(value)}</dd>`).join("");
+}
+
+function renderReps(waqt) {
+  const tz = waqt.timezone ? waqt.timezone.name : null;
+  const cards = [
+    ["Gregorian (local)", localTime(waqt.instant, tz), new Date(waqt.instant).toLocaleDateString("en-GB", { timeZone: tz || undefined })],
+    ["Gregorian (UTC)", waqt.instant.slice(11, 19), waqt.instant.slice(0, 10)],
+    ["Hijri", waqt.hijri ? esc(waqt.hijri.display) : "unavailable", waqt.hijri ? esc(waqt.hijri.date) + hijriSourceBadge(waqt.hijri) : "see metadata"],
+    ["Waqt", waqt.waqt.reading.display, waqt.weekday],
+  ];
+  $("repsGrid").innerHTML = cards.map(([k, v, v2]) => `
+    <div class="rep-card"><div class="k">${k}</div><div class="v">${v}</div><div class="v2">${v2}</div></div>
+  `).join("");
+}
+
+function renderEvents(waqt) {
+  const tz = waqt.timezone ? waqt.timezone.name : null;
+  const nextName = waqt.next_event ? waqt.next_event.name : null;
+  const labels = { fajr: "Fajr", sunrise: "Sunrise", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" };
+  $("eventsBody").innerHTML = (waqt.events || []).map((e) => `
+    <tr class="${e.name === nextName ? "next" : ""}">
+      <td>${labels[e.name] || e.name}</td>
+      <td class="mono">${e.instant ? localTime(e.instant, tz) : "does not occur"}</td>
+      <td class="mono">${e.reading ? e.reading.display : "—"}</td>
+      <td>${e.name === nextName ? `in ${waqt.next_event.countdown.display}` : ""}</td>
+    </tr>
+  `).join("");
+}
+
+async function loadProviders() {
+  try {
+    const data = await getJSON("/v1/calendar", {});
+    $("provider").innerHTML = data.providers.map(
+      (p) => `<option value="${p.name}">${p.name}</option>`
+    ).join("");
+  } catch {
+    $("provider").innerHTML = `<option value="arithmetic-tabular">arithmetic-tabular</option>`;
+  }
+}
+
+async function refreshPlace() {
+  refreshing = true;
+  try { await loadPlace(currentPlace.lat, currentPlace.lon, { silent: true }); }
+  finally { refreshing = false; }
+}
+
+async function loadPlace(lat, lon, { silent = false } = {}) {
+  currentPlace = { lat, lon };
+  if (!silent) {            // a boundary refresh keeps the old view up until the new answer arrives
+    setStatus("Loading…");
+    $("content").hidden = true;
+  }
+  try {
+    const provider = $("provider").value || "arithmetic-tabular";
+    const [waqt, version] = await Promise.all([
+      getJSON("/v1/waqt", { lat, lon, calendar_provider: provider }),
+      getJSON("/v1/version", {}).catch(() => null), // 1.4.0+ only; older servers omit it gracefully
+    ]);
+
+    if (waqt.status !== "OK") {
+      setStatus(`Waqt is undefined here right now: ${waqt.undefined_reason}`, true);
+      $("content").hidden = true;
+      clockAnchor = null;
+      return;
+    }
+
+    clockAnchor = {
+      serverSeconds: waqt.waqt.reading.seconds,
+      wallClockMsAtFetch: Date.now(),
+      dayLengthSeconds: waqt.day.length_si_seconds,
+      nextEventMs: waqt.next_event && waqt.next_event.instant ? Date.parse(waqt.next_event.instant) : null,
+    };
+    tick();
+
+    $("heroSub").innerHTML =
+      `${hijriHeadline(waqt)} · ${esc(waqt.weekday)}<br>` +
+      `Waqt day: ${localTime(waqt.day.maghrib_open, waqt.timezone.name)} → ` +
+      `${localTime(waqt.day.maghrib_close, waqt.timezone.name)} local` +
+      (waqt.day.note ? `<br><span style="color:var(--ember-dim)">${waqt.day.note}</span>` : "");
+
+    renderEvents(waqt);
+    renderReps(waqt);
+    renderComputation(waqt);
+    renderMeta(waqt, version);
+
+    $("content").hidden = false;
+    setStatus(`Showing ${lat}, ${lon}${waqt.timezone ? " · " + waqt.timezone.name : ""}.`);
+  } catch (e) {
+    if (silent && clockAnchor) {      // boundary refresh failed: keep showing the last good answer
+      refreshBackoffUntil = Date.now() + (e.retryAfter || 15) * 1000;
+      setStatus(`Refresh failed (${e.message}); showing the last result, retrying in ${e.retryAfter || 15} s.`, true);
+      return;
+    }
+    setStatus(e.message, true);
+    $("content").hidden = true;
+    clockAnchor = null;
+  }
+}
+
+function useLocation() {
+  if (!navigator.geolocation) {
+    setStatus("This browser has no geolocation support; enter coordinates manually.", true);
+    return;
+  }
+  setStatus("Requesting location…");
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      $("lat").value = pos.coords.latitude.toFixed(4);
+      $("lon").value = pos.coords.longitude.toFixed(4);
+      loadPlace(pos.coords.latitude, pos.coords.longitude);
+    },
+    (err) => setStatus(`Location denied or unavailable (${err.message}). Enter coordinates manually.`, true),
+    { timeout: 10000 }
+  );
+}
+
+function init() {
+  const saved = localStorage.getItem(LS_KEY);
+  $("apiBase").value = saved || defaultApiBase();
+  $("apiBaseSave").addEventListener("click", () => {
+    localStorage.setItem(LS_KEY, apiBase());
+    setStatus(`API base set to ${apiBase()}.`);
+  });
+  $("geoBtn").addEventListener("click", useLocation);
+  $("goBtn").addEventListener("click", () => {
+    const lat = parseFloat($("lat").value), lon = parseFloat($("lon").value);
+    if (Number.isNaN(lat) || Number.isNaN(lon)) { setStatus("Enter numeric latitude and longitude.", true); return; }
+    loadPlace(lat, lon);
+  });
+  $("provider").addEventListener("change", () => {
+    const lat = parseFloat($("lat").value), lon = parseFloat($("lon").value);
+    if (!Number.isNaN(lat) && !Number.isNaN(lon)) loadPlace(lat, lon);
+  });
+  loadProviders();
+  loadPlace(parseFloat($("lat").value), parseFloat($("lon").value));
+  tickHandle = setInterval(tick, 1000);
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>

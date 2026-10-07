@@ -1,5 +1,14 @@
 # waqt-web
 
+> **Site layout (Stitch implementation).** `apps/web` is now a small multi-page static site (still no framework, no build
+> step, `render.yaml` unchanged). The original reference viewer lives at **`live-demo.html`** (its script is untouched);
+> `index.html` is the new Overview/home page. Pages: `index` (Overview, The Problem, How It Works), `live-demo`, `api`,
+> `applications`, `lab` (Experience Lab), `governance`, `community`, `resources`. Shared code is in `assets/js/`
+> (`waqt-api.js` client + presentation model, `waqt-live.js` state machine, `waqt-clock.js` circular clock,
+> `waqt-widgets.js` mosque clock / watch / day length / midnight comparison). **All external URLs are configuration**
+> in `assets/js/config.js` and are `null` until supplied. Tests: `pytest apps/web/tests` and
+> `cd apps/web/tests/js && npm install && npm test`. Full details: `WAQT-WEB-REPORT.md` at the repo root.
+
 Reference web application for Waqt (Sprint 12, Goal A.2). A single static,
 dependency-free `index.html` that **only** talks to the Waqt HTTP API
 (`GET /v1/waqt`, `/v1/events`, `/v1/calendar`, `/v1/version`) — it computes
@@ -17,7 +26,7 @@ The API needs CORS enabled for the origin serving this page (Sprint 12's
 ```
 WAQT_CORS_ORIGINS=http://localhost:8080 uvicorn waqt.api:app --port 8000
 python -m http.server 8080 --directory apps/web
-# open http://localhost:8080, set the API base URL to http://localhost:8000 (default)
+# open http://localhost:8080/live-demo.html (or index.html for the site), set the API base URL to http://localhost:8000 (default)
 ```
 
 Same-origin also works with no CORS setup: serve `apps/web/index.html`
@@ -59,7 +68,7 @@ The client targets the supplied public API URL.
 
 ## Tests
 
-`tests/test_no_second_implementation.py` (plain Python, no browser needed)
+`tests/test_no_second_implementation.py` (now pointed at `live-demo.html`; plain Python, no browser needed)
 parses `index.html`'s inline `<script>` and fails if it defines any of the
 astronomy/calendar constants `waqt-core` owns (a Fajr/Isha default angle,
 the Hijri epoch JDN, a `waqt-noaa` string, ...), or if it computes a Waqt
