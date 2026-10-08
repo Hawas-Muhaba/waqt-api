@@ -1,0 +1,13 @@
+{
+  "name": "waqt-web-tools",
+  "private": true,
+  "description": "Dev-only: compiles apps/web/assets/css/stitch.css from the Stitch design tokens (the deployed site itself has no build step).",
+  "scripts": { "build:css": "tailwindcss -c tailwind.config.cjs -i input.css -o ../assets/css/stitch.css --minify" },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "@fontsource-variable/space-grotesk": "^5.1.0",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/jetbrains-mono": "^5.1.0",
+    "@material-design-icons/svg": "^0.14.13"
+  }
+}

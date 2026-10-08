@@ -1,0 +1,121 @@
+/* Waqt Web — component styles for the JS-rendered widgets (clock, mosque clock, watch, banners…).
+   Tokens mirror the Stitch design system "Precision Astrometric Infrastructure" (see tools/tailwind.config.cjs).
+   Page layout is Tailwind (stitch.css); this file only styles markup that assets/js/*.js emits. */
+:root{
+  --bg:#10131b; --lowest:#0a0e16; --low:#181c23; --cont:#1c2027; --high:#262a32; --highest:#31353d;
+  --cyan:#00f0ff; --cyan-dim:#00dbe9; --amber:#ffb95f; --teal:#71f8e4; --text:#e0e2ed; --text2:#b9cacb; --line:#3b494b; --err:#ffb4ab;
+  --sans:"Inter",system-ui,sans-serif; --head:"Space Grotesk","Inter",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@font-face{font-family:"Space Grotesk";src:url("../fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:"Inter";src:url("../fonts/inter-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("../fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");font-weight:100 800;font-display:swap}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:8px;background:var(--cyan);color:#00363a;padding:8px 12px;z-index:100;font:600 12px var(--mono)}
+.skip:focus{left:8px}
+.ic{width:1.15em;height:1.15em;fill:currentColor;display:inline-block;vertical-align:-.2em;flex:none}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--text2)}
+.link-pending{opacity:.55;border-bottom:1px dashed var(--text2);cursor:help}
+.btn.pending,[aria-disabled="true"].btn{opacity:.5;cursor:not-allowed;pointer-events:none}
+a[data-link].pending{opacity:.5;cursor:not-allowed;pointer-events:none}
+
+/* ---- mobile navigation (progressive enhancement; without JS the nav simply wraps) ---- */
+.nav-toggle{display:none}
+@media (max-width:1100px){
+  .js .nav-toggle{display:inline-flex}
+  .js #site-nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--lowest);border-bottom:1px solid var(--line);padding:12px 16px 18px;flex-direction:column;align-items:stretch;gap:2px;max-height:calc(100vh - 64px);overflow:auto}
+  .js #site-nav.open{display:flex}
+  .js #site-nav a,.js #site-nav .nav-pending{padding:12px 10px;font-size:14px}
+}
+
+/* ---- badges, buttons, notices used by JS-rendered banners ---- */
+.badge{display:inline-flex;align-items:center;gap:6px;font:600 10px var(--mono);letter-spacing:.08em;padding:2px 8px;border:1px solid var(--line);color:var(--text2);text-transform:uppercase;border-radius:2px;white-space:nowrap}
+.badge.real,.badge.live{border-color:#1f7a72;color:var(--teal);background:rgba(113,248,228,.07)}
+.badge.concept,.badge.demo{border-color:#8a5a14;color:var(--amber);background:rgba(255,185,95,.08)}
+.badge.future{border-color:#4a5a8a;color:#aab8f0;background:rgba(120,140,220,.1)}
+.btn{display:inline-block;font:600 12px var(--mono);letter-spacing:.05em;padding:10px 16px;border:1px solid var(--cyan);color:#00363a;background:var(--cyan);cursor:pointer;text-decoration:none;border-radius:2px;text-transform:uppercase}
+.btn.ghost{background:transparent;color:var(--cyan)} .btn.ghost:hover{background:rgba(0,240,255,.08)}
+.btn.small{padding:6px 10px;font-size:11px}
+.notice{border-left:2px solid var(--amber);background:rgba(255,185,95,.07);padding:10px 14px;font-size:13px;color:var(--text2);line-height:1.55}
+.notice.info{border-color:var(--cyan);background:rgba(0,240,255,.05)} .notice.err{border-color:var(--err);background:rgba(255,180,171,.07)}
+.notice b{color:var(--text)}
+.live-strip{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font:500 11px var(--mono);color:var(--text2)}
+.state-box{display:grid;place-items:center;min-height:200px;text-align:center;color:var(--text2);padding:24px;font-size:13px}
+.spinner{width:22px;height:22px;border:2px solid var(--line);border-top-color:var(--cyan);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+[data-state="success"]{color:var(--teal)} [data-state="demo"],[data-state="error"],[data-state="offline"]{color:var(--amber)} [data-state="empty"]{color:var(--err)}
+
+/* ---- circular Waqt clock ---- */
+.wc{margin:0;display:grid;gap:12px;justify-items:center}
+.wc svg{width:100%;max-width:440px;height:auto;display:block;overflow:visible}
+.wc .ring-track{fill:none;stroke:var(--high);stroke-width:12}
+.wc .ring-elapsed{fill:none;stroke:var(--amber);stroke-width:12;stroke-linecap:butt}
+.wc .ring-glow{fill:none;stroke:var(--cyan);stroke-width:1;opacity:.28}
+.wc .tick{stroke:var(--line);stroke-width:1}
+.wc .mk{cursor:pointer} .wc .mk circle{fill:var(--bg);stroke:var(--cyan);stroke-width:2.5}
+.wc .mk.next circle{stroke:var(--amber);stroke-width:4;fill:var(--cont)}
+.wc .mk.overflow circle{stroke-dasharray:3 3;stroke:#aab8f0}
+.wc .mk.passed circle{opacity:.5}
+.wc .mk text{fill:var(--text2);font:500 11px var(--mono);letter-spacing:.03em} .wc .mk.next text{fill:var(--amber)}
+.wc .mk:focus{outline:none} .wc .mk:focus-visible circle{stroke:#fff;stroke-width:4}
+.wc .now-dot{fill:var(--amber);stroke:#fff;stroke-width:2}
+.wc .c-label{fill:var(--text2);font:600 10px var(--mono);letter-spacing:.22em;text-anchor:middle}
+.wc .c-time{fill:var(--text);font:500 42px var(--mono);text-anchor:middle;font-variant-numeric:tabular-nums}
+.wc .c-next{fill:var(--text2);font:500 12px var(--mono);text-anchor:middle;letter-spacing:.04em}
+.wc .c-count{fill:var(--cyan);font:500 20px var(--mono);text-anchor:middle;font-variant-numeric:tabular-nums}
+.wc .c-chip{fill:var(--amber);font:700 10px var(--mono);letter-spacing:.12em;text-anchor:middle}
+.wc .detail{min-height:1.5em;font:500 12px var(--mono);color:var(--text2);text-align:center}
+.wc-events{width:100%;max-width:560px;margin:0;padding:0;list-style:none;font-size:12px;display:grid;gap:1px;font-family:var(--mono)}
+.wc-events li{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:8px 10px;background:var(--low)}
+.wc-events li.next{background:rgba(0,240,255,.07);color:var(--cyan)} .wc-events li.next b::before{content:"› "}
+.wc-events .t{font-variant-numeric:tabular-nums;color:var(--text2)} .wc-events li.next .t{color:var(--cyan)} .wc-events b{font-weight:500;color:var(--text)}
+
+/* ---- mosque clock (concept) ---- */
+.mosque{position:relative;border:1px solid #6b5a30;padding:26px 20px 18px;max-width:560px;margin:0 auto;background:linear-gradient(180deg,#0e1420,#080b12);box-shadow:0 0 0 5px rgba(255,185,95,.06),0 20px 60px rgba(0,0,0,.5);border-radius:14px 14px 4px 4px}
+.mosque .m-brand{font:600 10px var(--mono);letter-spacing:.3em;text-align:center;color:var(--text2);margin-bottom:10px}
+.mosque .m-row{display:grid;gap:4px;text-align:center;padding:12px 8px;border-top:1px solid rgba(107,90,48,.4)} .mosque .m-row:first-of-type{border-top:0}
+.mosque .k{font:600 10px var(--mono);letter-spacing:.24em;color:var(--cyan)}
+.mosque .v{font:500 clamp(2.1rem,9vw,3.4rem) var(--mono);color:var(--amber);text-shadow:0 0 14px rgba(255,185,95,.4);font-variant-numeric:tabular-nums;line-height:1.1}
+.mosque .v.sm{font-size:clamp(1.2rem,5vw,1.8rem);color:var(--text);text-shadow:none} .mosque .sub{font-size:12px;color:var(--text2)}
+.mosque .m-split{display:grid;grid-template-columns:1fr 1fr;gap:8px} .mosque .state-tag{position:absolute;right:10px;top:8px}
+
+/* ---- smartwatch (concept) ---- */
+.watch-wrap{display:grid;place-items:center;padding:12px}
+.watch{width:min(280px,76vw);aspect-ratio:1/1.12;border-radius:20%/18%;background:#06080d;border:7px solid #2a2f3a;box-shadow:0 0 0 2px #0a0c12,0 18px 50px rgba(0,0,0,.6);padding:10px;position:relative;display:grid;place-items:center}
+.watch::after{content:"";position:absolute;right:-13px;top:34%;width:7px;height:22%;border-radius:4px;background:#3a4150}
+.wc.watch{} .watch .wc{width:100%} .wc.watch .ring-track,.wc.watch .ring-elapsed{stroke-width:16}
+
+/* ---- day length ---- */
+.daybar{position:relative;height:12px;background:var(--high);margin:34px 0 44px}
+.daybar .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1f7a72,var(--amber))}
+.daybar .pin{position:absolute;top:-8px;width:3px;height:28px;background:#fff;transform:translateX(-1px)}
+.daybar .lab{position:absolute;top:22px;font:500 11px var(--mono);color:var(--text2);white-space:nowrap} .daybar .lab.end{right:0}
+.daybar .now{position:absolute;top:-28px;font:600 11px var(--mono);color:#fff;transform:translateX(-50%);white-space:nowrap}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:8px}
+.stat{background:var(--cont);padding:12px 14px} .stat .k{font:500 10px var(--mono);letter-spacing:.06em;color:var(--text2);text-transform:uppercase} .stat .v{font:500 1.1rem var(--mono);font-variant-numeric:tabular-nums;color:var(--text)}
+.rings{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px} .rings figure{margin:0;text-align:center} .rings figcaption{font-size:12px;color:var(--text2)}
+
+/* ---- tables / forms / code used by JS-rendered markup ---- */
+table.data{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--mono)}
+table.data th{text-align:left;font-weight:500;color:var(--text2);font-size:11px;padding:8px 10px;border-bottom:1px solid var(--line);letter-spacing:.05em;text-transform:uppercase}
+table.data td,table.data tbody th{padding:9px 10px;border-bottom:1px solid rgba(59,73,75,.5);vertical-align:top;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text)}
+.table-scroll{overflow-x:auto}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:13px} dl.kv dt{color:var(--text2);font-family:var(--mono);font-size:12px} dl.kv dd{margin:0}
+label{font:500 11px var(--mono);color:var(--text2);letter-spacing:.05em;text-transform:uppercase}
+input[type=text],input[type=number],input[type=date],select{background:var(--lowest);border:1px solid var(--line);color:var(--text);padding:8px 10px;font:13px var(--mono);border-radius:2px;max-width:100%}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+.field{display:grid;gap:4px} .field-row{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+pre.code{background:var(--lowest);border:1px solid var(--line);padding:14px;overflow:auto;font:12px/1.6 var(--mono);margin:0;color:var(--text2);white-space:pre}
+.tabs{display:flex;gap:6px;margin-bottom:8px} .tabs button{background:none;border:1px solid var(--line);color:var(--text2);padding:5px 12px;cursor:pointer;font:500 11px var(--mono);letter-spacing:.05em;border-radius:2px}
+.tabs button[aria-selected="true"]{color:var(--cyan);border-color:var(--cyan)}
+.panel{background:var(--low);padding:16px}
+.eco{display:grid;gap:10px;justify-items:center;text-align:center}
+.eco .core{background:var(--cont);border:1px solid var(--cyan);padding:12px 24px;font:600 14px var(--mono);color:var(--cyan);box-shadow:0 0 30px rgba(0,240,255,.15)}
+.eco .arrow{color:var(--text2);font-size:1.3rem;line-height:1}
+.eco .leaf{background:var(--low);border:1px solid var(--line);padding:10px 14px;font-size:13px;display:grid;gap:6px;justify-items:center;width:100%}
+.art-tag{position:absolute;left:8px;bottom:8px;background:rgba(10,14,22,.88);border:1px solid var(--line);color:var(--text2);font:600 9px var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:2px 7px}
+.lab-step{scroll-margin-top:84px}

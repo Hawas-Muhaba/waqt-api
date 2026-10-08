@@ -27,4 +27,17 @@
     }
   }
   check();
+
+  /* request tester: a real call to the chosen endpoint; shows URL, status, latency and the raw envelope data */
+  const run = document.getElementById("t-run");
+  if (run) run.addEventListener("click", async () => {
+    const ep = document.getElementById("t-ep").value, meta = document.getElementById("t-meta"), out = document.getElementById("t-out");
+    const params = ["/v1/calendar", "/v1/version", "/v1/health"].includes(ep) ? {} : { lat: 9.0192, lon: 38.7525 };
+    meta.textContent = `GET ${ep} …`; const t0 = Date.now();
+    try {
+      const data = await W.getJSON(ep, params);
+      meta.innerHTML = `<span class="badge live">200 OK</span> ${Date.now() - t0} ms · ${esc(base + ep)}${Object.keys(params).length ? "?" + new URLSearchParams(params) : ""}`;
+      out.textContent = JSON.stringify(data, null, 2);
+    } catch (e) { meta.innerHTML = `<span class="badge demo">FAILED</span> ${esc(e.message)}`; out.textContent = "—"; }
+  });
 })();
