@@ -1,168 +1,70 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Experience Lab — Waqt</title>
-<meta name="description" content="Interactive Waqt demonstrations driven by the real API: drag through the day, move Maghrib, watch the next event, compare models, build an application.">
-<meta name="theme-color" content="#0d1224">
+<meta name="description" content="Interactive Waqt demonstrations driven by the real API.">
+<meta name="theme-color" content="#10131b">
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/stitch.css">
+<link rel="stylesheet" href="assets/css/components.css">
 </head>
-<body>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen pt-16">
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header" role="banner">
-  <div class="wrap bar">
-    <a class="brand" href="index.html">Waqt<small>time infrastructure</small></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav aria-label="Primary">
-      <ul class="nav-list" id="site-nav">
-        <li><a href="index.html#overview">Overview</a></li>
-        <li><a href="index.html#problem">The Problem</a></li>
-        <li><a href="index.html#how-it-works">How It Works</a></li>
-        <li><a href="live-demo.html">Live Demo</a></li>
-        <li><a href="api.html">API</a></li>
-        <li><a href="applications.html" aria-current="page">Applications</a></li>
-        <li><a href="governance.html">Governance</a></li>
-        <li><a href="community.html">Community</a></li>
-        <li><a data-link="github" href="#">GitHub</a></li>
-        <li class="nav-cta"><a data-link="docs" href="resources.html#specifications">Read Spec / Docs</a></li>
+<header class="fixed top-0 inset-x-0 z-50 h-16 bg-background/90 backdrop-blur border-b border-outline-variant/50" role="banner">
+  <div class="max-w-[1400px] mx-auto h-full flex items-center gap-4 px-4 lg:px-8">
+    <a href="index.html" class="flex items-center gap-3 mr-auto" aria-label="Waqt — home">
+      <span class="relative grid place-items-center w-9 h-9 border border-primary-container/60 rounded-full" aria-hidden="true"><span class="w-3 h-3 rounded-full bg-primary-container"></span></span>
+      <span class="leading-none"><span class="block font-headline-md text-[18px] tracking-wide text-on-surface">WAQT</span><span class="block font-label-sm text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">Time API</span></span>
+    </a>
+    <button class="nav-toggle items-center gap-2 border border-outline-variant px-3 py-2 font-label-md text-[12px] uppercase tracking-wider text-on-surface" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav aria-label="Primary" class="contents">
+      <ul id="site-nav" class="nav-list flex flex-wrap items-center gap-1 list-none m-0 p-0">
+        <li><a href="index.html" data-nav="overview" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Overview</a></li>
+        <li><a href="problem.html" data-nav="problem" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">The Problem</a></li>
+        <li><a href="how-it-works.html" data-nav="how" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">How It Works</a></li>
+        <li><a href="live-demo.html" data-nav="demo" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Live Demo</a></li>
+        <li><a href="api.html" data-nav="api" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">API</a></li>
+        <li><a href="applications.html" data-nav="apps" aria-current="page" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Applications</a></li>
+        <li><a href="governance.html" data-nav="gov" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Governance</a></li>
+        <li><a href="community.html" data-nav="community" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Community</a></li>
+        <li class="lg:ml-2"><a data-link="github" href="#" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container flex items-center gap-2 border border-outline-variant"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>GitHub</a></li>
+        <li><a data-link="docs" href="resources.html#specifications" class="flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider bg-primary-container text-on-primary rounded-sm hover:brightness-110 whitespace-nowrap"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Read Spec / Docs</a></li>
       </ul>
     </nav>
   </div>
 </header>
 <main id="main">
-
-<section class="block" aria-labelledby="h-lab">
-  <div class="wrap">
-    <p class="eyebrow">Experience Lab</p>
-    <h1 id="h-lab">Waqt, experienced — not just explained</h1>
-    <p class="lead">Five short demonstrations. Each one is driven by the real Waqt API; if the API cannot be reached, they switch to a frozen, clearly labelled sample. Nothing here calculates Waqt in your browser.</p>
-    <div id="lab-banner" class="live-banner" style="margin-top:14px"></div>
-    <nav aria-label="Lab steps" class="btn-row" style="margin-top:6px">
-      <a class="btn ghost small" href="#clock">01 The Waqt Clock</a><a class="btn ghost small" href="#reset">02 Maghrib Reset</a><a class="btn ghost small" href="#next">03 Next Event</a><a class="btn ghost small" href="#compare">04 Waqt vs Midnight</a><a class="btn ghost small" href="#build">05 Build an Application</a>
-    </nav>
-  </div>
-</section>
-
-<section class="wrap lab-step" id="clock" aria-labelledby="h-l1">
-  <div class="num" aria-hidden="true">01</div>
-  <div>
-    <h2 id="h-l1">The Waqt Clock — drag through the day</h2>
-    <p class="muted">Move the slider from one Maghrib to the next. The markers are the events the API returned for this Waqt day.</p>
-    <div class="lab-grid">
-      <div id="lab-clock"></div>
-      <div>
-        <div class="field"><label for="scrub">Position in the Waqt day</label><input id="scrub" type="range" min="0" max="1000" value="0" aria-describedby="scrub-out"></div>
-        <div class="panel" id="scrub-out" aria-live="polite" style="margin-top:14px"></div>
-        <p class="muted" style="font-size:.82rem;margin-top:10px"><span class="badge demo">SCRUB PREVIEW</span> The slider chooses a position on the day; the reading shown is that position’s elapsed time since Maghrib, not a live reading.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wrap lab-step" id="reset" aria-labelledby="h-l2">
-  <div class="num" aria-hidden="true">02</div>
-  <div>
-    <h2 id="h-l2">Maghrib Reset — move the place and the date</h2>
-    <p class="muted">Pick a place and a date; the API tells you where that day’s Maghrib boundary falls. Watch it move.</p>
-    <form id="reset-form" class="field-row" onsubmit="return false">
-      <div class="field"><label for="reset-place">Place</label>
-        <select id="reset-place"><option value="9.0192,38.7525">Addis Ababa</option><option value="21.4225,39.8262">Makkah</option><option value="51.5074,-0.1278">London</option><option value="-6.2088,106.8456">Jakarta</option><option value="64.1466,-21.9426">Reykjavík</option></select></div>
-      <div class="field"><label for="reset-date">Date (UTC, taken at 12:00)</label><input id="reset-date" type="date"></div>
-      <button class="btn" id="reset-go" type="button">Ask the API</button>
-    </form>
-    <div id="reset-status" class="muted" role="status" style="margin:12px 0"></div>
-    <div class="table-scroll"><table class="data" id="reset-table" hidden><caption class="vh">Maghrib boundaries returned by the API</caption>
-      <thead><tr><th scope="col">Place</th><th scope="col">Date</th><th scope="col">Maghrib opens (local)</th><th scope="col">Next Maghrib (local)</th><th scope="col">Day length</th></tr></thead><tbody id="reset-rows"></tbody></table></div>
-  </div>
-</section>
-
-<section class="wrap lab-step" id="next" aria-labelledby="h-l3">
-  <div class="num" aria-hidden="true">03</div>
-  <div>
-    <h2 id="h-l3">Next Event — watch the countdown move</h2>
-    <p class="muted">Real time moves slowly, so this plays the day back faster. The events are the API’s; only the passage of time is accelerated.</p>
-    <div class="lab-grid">
-      <div class="panel" aria-live="off">
-        <div class="eyebrow" id="pb-chip">SIMULATED PLAYBACK</div>
-        <div class="mono" style="font-size:2.4rem" id="pb-reading">–</div>
-        <div id="pb-next" style="font-size:1.1rem;margin-top:6px">–</div>
-        <div class="mono" style="font-size:1.8rem;color:var(--ember)" id="pb-count">–</div>
-        <div class="sr-only vh" id="pb-sr" role="status"></div>
-      </div>
-      <div>
-        <div class="field-row"><button class="btn" id="pb-play" type="button">Play</button><button class="btn ghost" id="pb-reset" type="button">Restart</button>
-          <div class="field"><label for="pb-speed">Speed</label><select id="pb-speed"><option value="600">600× (10 min per second)</option><option value="1800" selected>1800×</option><option value="3600">3600× (1 hour per second)</option></select></div></div>
-        <p class="muted" style="font-size:.82rem;margin-top:10px">Playback starts only when you press Play. It does not move on its own.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="wrap lab-step" id="compare" aria-labelledby="h-l4">
-  <div class="num" aria-hidden="true">04</div>
-  <div>
-    <h2 id="h-l4">Waqt vs Midnight — two temporal models</h2>
-    <p class="muted">Same events, same moment — different day boundaries.</p>
-    <div id="lab-compare"></div>
-    <h3 style="margin-top:28px">How long is the Waqt day?</h3>
-    <div id="lab-day"></div>
-  </div>
-</section>
-
-<section class="wrap lab-step" id="build" aria-labelledby="h-l5">
-  <div class="num" aria-hidden="true">05</div>
-  <div>
-    <h2 id="h-l5">Build an Application</h2>
-    <div class="eco" role="img" aria-label="Flow: Location, then the Waqt API, then your application">
-      <div class="leaf" style="max-width:240px">Location<br><span class="muted mono" id="build-loc">lat, lon</span></div><div class="arrow" aria-hidden="true">↓</div>
-      <div class="core">WAQT API</div><div class="arrow" aria-hidden="true">↓</div>
-      <div class="leaf" style="max-width:240px">Your application</div>
-    </div>
-    <div class="tabs" role="tablist" aria-label="Language" style="margin-top:20px"><button role="tab" aria-selected="true" data-tab="curl">curl</button><button role="tab" aria-selected="false" data-tab="js">JavaScript</button><button role="tab" aria-selected="false" data-tab="py">Python (stdlib)</button></div>
-    <pre class="code" id="build-snippet" tabindex="0" aria-label="Code example"></pre>
-    <div class="btn-row"><button class="btn" id="build-run" type="button">Run this request</button><a class="btn ghost" href="api.html">API reference</a></div>
-    <div id="build-out" class="panel" style="margin-top:14px" hidden aria-live="polite"></div>
-  </div>
-</section>
-
+<section class="pt-16 pb-8"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><p class="inline-flex border border-outline-variant/60 bg-surface-container-low px-3 py-1 font-label-sm text-[11px] tracking-[0.14em] uppercase text-on-surface-variant">Experience Lab</p><h1 class="mt-5 font-headline-xl text-headline-xl-mobile md:text-headline-xl max-w-4xl">Waqt, experienced — not just explained</h1><p class="mt-5 text-body-lg text-on-surface-variant max-w-3xl">Five short demonstrations. Each is driven by the real Waqt API; if it cannot be reached they switch to a frozen, labelled sample. Nothing here calculates Waqt in your browser.</p></div></section><section class="pb-6"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div id="lab-banner" class="mb-4"></div><nav aria-label="Lab steps" class="flex flex-wrap gap-2"><a class="btn ghost small" href="#clock">01 The Waqt Clock</a><a class="btn ghost small" href="#reset">02 Maghrib Reset</a><a class="btn ghost small" href="#next">03 Next Event</a><a class="btn ghost small" href="#compare">04 Waqt vs Midnight</a><a class="btn ghost small" href="#build">05 Build an Application</a></nav></div></section><section id="clock" class="lab-step border-t border-outline-variant/30 py-12" aria-labelledby="h-clock"><div class="max-w-[1400px] mx-auto px-4 lg:px-8 grid md:grid-cols-[72px_1fr] gap-4"><div class="font-headline-lg text-[40px] text-secondary/60" aria-hidden="true">01</div><div><h2 id="h-clock" class="font-headline-md text-[24px]">The Waqt Clock — drag through the day</h2><p class="mt-1 mb-6 text-body-md text-on-surface-variant">Move the slider from one Maghrib to the next; markers are the events the API returned for this Waqt day.</p><div class="grid lg:grid-cols-2 gap-8 items-start"><div id="lab-clock"></div><div><div class="field"><label for="scrub">Position in the Waqt day</label><input id="scrub" type="range" min="0" max="1000" value="0" aria-describedby="scrub-out"></div><div class="bg-surface-container-low p-6 mt-4" id="scrub-out" aria-live="polite"></div><p class="mt-3 text-[12px] text-on-surface-variant"><span class="badge demo">SCRUB PREVIEW</span> The slider picks a position on the day; the reading shown is that position’s elapsed time since Maghrib, not a live reading.</p></div></div></div></div></section><section id="reset" class="lab-step border-t border-outline-variant/30 py-12" aria-labelledby="h-reset"><div class="max-w-[1400px] mx-auto px-4 lg:px-8 grid md:grid-cols-[72px_1fr] gap-4"><div class="font-headline-lg text-[40px] text-secondary/60" aria-hidden="true">02</div><div><h2 id="h-reset" class="font-headline-md text-[24px]">Maghrib Reset — move the place and the date</h2><p class="mt-1 mb-6 text-body-md text-on-surface-variant">Pick a place and a date; the API says where that day’s Maghrib boundary falls. Watch it move.</p><form id="reset-form" class="field-row" onsubmit="return false"><div class="field"><label for="reset-place">Place</label><select id="reset-place"><option value="9.0192,38.7525">Addis Ababa</option><option value="21.4225,39.8262">Makkah</option><option value="51.5074,-0.1278">London</option><option value="-6.2088,106.8456">Jakarta</option><option value="64.1466,-21.9426">Reykjavík</option></select></div><div class="field"><label for="reset-date">Date (UTC, taken at 12:00)</label><input id="reset-date" type="date"></div><button class="btn" id="reset-go" type="button">Ask the API</button></form><div id="reset-status" class="my-3 text-[13px] text-on-surface-variant" role="status"></div><div class="table-scroll bg-surface-container-low"><table class="data" id="reset-table" hidden><caption class="vh">Maghrib boundaries returned by the API</caption><thead><tr><th scope="col">Place</th><th scope="col">Date</th><th scope="col">Maghrib opens (local)</th><th scope="col">Next Maghrib (local)</th><th scope="col">Day length</th></tr></thead><tbody id="reset-rows"></tbody></table></div></div></div></section><section id="next" class="lab-step border-t border-outline-variant/30 py-12" aria-labelledby="h-next"><div class="max-w-[1400px] mx-auto px-4 lg:px-8 grid md:grid-cols-[72px_1fr] gap-4"><div class="font-headline-lg text-[40px] text-secondary/60" aria-hidden="true">03</div><div><h2 id="h-next" class="font-headline-md text-[24px]">Next Event — watch the countdown move</h2><p class="mt-1 mb-6 text-body-md text-on-surface-variant">Real time is slow, so this plays the day back faster. The events are the API’s; only the passage of time is accelerated.</p><div class="grid lg:grid-cols-2 gap-8 items-start"><div class="bg-surface-container-low p-6"><div class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant" id="pb-chip">SIMULATED PLAYBACK</div><div class="mono text-[40px] mt-2" id="pb-reading">–</div><div class="text-[18px] mt-1" id="pb-next">–</div><div class="mono text-[28px] text-primary-container" id="pb-count">–</div><div class="vh" id="pb-sr" role="status"></div></div><div><div class="field-row"><button class="btn" id="pb-play" type="button">Play</button><button class="btn ghost" id="pb-reset" type="button">Restart</button><div class="field"><label for="pb-speed">Speed</label><select id="pb-speed"><option value="600">600× (10 min per second)</option><option value="1800" selected>1800×</option><option value="3600">3600× (1 hour per second)</option></select></div></div><p class="mt-3 text-[12px] text-on-surface-variant">Playback starts only when you press Play. It never moves on its own.</p></div></div></div></div></section><section id="compare" class="lab-step border-t border-outline-variant/30 py-12" aria-labelledby="h-compare"><div class="max-w-[1400px] mx-auto px-4 lg:px-8 grid md:grid-cols-[72px_1fr] gap-4"><div class="font-headline-lg text-[40px] text-secondary/60" aria-hidden="true">04</div><div><h2 id="h-compare" class="font-headline-md text-[24px]">Waqt vs Midnight — two temporal models</h2><p class="mt-1 mb-6 text-body-md text-on-surface-variant">Same events, same moment, different day boundaries.</p><div id="lab-compare"></div><h3 class="mt-10 mb-2 font-headline-sm text-[16px]">How long is the Waqt day?</h3><div id="lab-day"></div></div></div></section><section id="build" class="lab-step border-t border-outline-variant/30 py-12" aria-labelledby="h-build"><div class="max-w-[1400px] mx-auto px-4 lg:px-8 grid md:grid-cols-[72px_1fr] gap-4"><div class="font-headline-lg text-[40px] text-secondary/60" aria-hidden="true">05</div><div><h2 id="h-build" class="font-headline-md text-[24px]">Build an Application</h2><p class="mt-1 mb-6 text-body-md text-on-surface-variant">Location → Waqt API → your application.</p><div class="eco" role="img" aria-label="Flow: Location, then the Waqt API, then your application"><div class="leaf" style="max-width:260px">Location<br><span class="muted mono" id="build-loc">lat, lon</span></div><div class="arrow" aria-hidden="true">↓</div><div class="core">WAQT API</div><div class="arrow" aria-hidden="true">↓</div><div class="leaf" style="max-width:260px">Your application</div></div><div class="tabs mt-6" role="tablist" aria-label="Language"><button role="tab" aria-selected="true" data-tab="curl">curl</button><button role="tab" aria-selected="false" data-tab="js">JavaScript</button><button role="tab" aria-selected="false" data-tab="py">Python (stdlib)</button></div><pre class="code" id="build-snippet" tabindex="0" aria-label="Code example"></pre><div class="mt-4 flex flex-wrap gap-3"><button class="btn" id="build-run" type="button">Run this request</button><a class="btn ghost" href="api.html">API reference</a></div><div id="build-out" class="bg-surface-container-low p-6 mt-4" hidden aria-live="polite"></div></div></div></section>
 </main>
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h2>Waqt</h2>
-        <p>A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Waqt provides temporal facts, not religious rulings.</p>
-        <p class="muted">Applications shown on this site are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> or <span class="badge future">FUTURE</span>.</p>
+<footer class="mt-24 border-t border-outline-variant/50 bg-surface-container-lowest">
+  <div class="max-w-[1400px] mx-auto px-4 lg:px-8 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
+      <div class="lg:col-span-2">
+        <div class="font-headline-md text-[18px] tracking-wide mb-3">WAQT</div>
+        <p class="text-[13px] text-on-surface-variant max-w-sm">A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Open temporal infrastructure — it provides temporal facts, not religious rulings.</p>
+        <p class="mt-4 text-[12px] text-on-surface-variant font-label-sm">Applications are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> <span class="badge future">FUTURE</span></p>
       </div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Platform</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="index.html">Overview</a></li><li><a class="hover:text-primary-container" href="problem.html">The problem</a></li><li><a class="hover:text-primary-container" href="how-it-works.html">How it works</a></li><li><a class="hover:text-primary-container" href="live-demo.html">Live demo</a></li><li><a class="hover:text-primary-container" href="lab.html">Experience Lab</a></li></ul></div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Developers</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="api.html">API reference</a></li><li><a class="hover:text-primary-container" data-api-docs href="#">Interactive API docs</a></li><li><a class="hover:text-primary-container" href="resources.html#sdks">SDKs</a></li><li><a class="hover:text-primary-container" href="resources.html#conformance">Conformance</a></li><li><a class="hover:text-primary-container" href="reference-viewer.html">Reference viewer</a></li></ul></div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Project</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="applications.html">Applications</a></li><li><a class="hover:text-primary-container" href="governance.html">Governance</a></li><li><a class="hover:text-primary-container" href="community.html">Community</a></li><li><a class="hover:text-primary-container" href="resources.html">Resources</a></li><li><a class="hover:text-primary-container" data-link="github" href="#">GitHub</a></li></ul></div>
       <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="lab.html">Waqt Experience Lab</a></li>
-          <li><a href="applications.html">Applications</a></li>
-          <li><a href="resources.html">Resources &amp; downloads</a></li>
-          <li><a href="governance.html">Governance</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Project</h2>
-        <ul>
-          <li><a data-link="github" href="#">GitHub</a></li>
-          <li><a data-link="docs" href="resources.html#specifications">Specification &amp; docs</a></li>
-          <li><a data-email href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a></li>
-          <li><a data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Support Waqt</h2>
-        <div class="support">
-          <p>Waqt is open work. If it is useful to you, you can help keep it going — entirely optional.</p>
-          <a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a>
+        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Support Waqt</h2>
+        <div class="border border-outline-variant/60 p-4 bg-surface-container-low">
+          <p class="text-[12px] text-on-surface-variant mb-3">Open work, kept going by contributors. Entirely optional.</p>
+          <a data-link="buyMeACoffee" href="#" class="inline-flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider border border-secondary text-secondary hover:bg-secondary/10">☕️ Buy Me a Coffee</a>
         </div>
+        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mt-6 mb-2">Contact</h2>
+        <a data-email class="text-[13px] text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>
       </div>
     </div>
-    <p class="fine">© Waqt project. Concept images are design renders (“concept art”), not photographs of deployed products.</p>
+    <div class="mt-10 pt-6 border-t border-outline-variant/40 flex flex-wrap gap-x-8 gap-y-2 justify-between text-[11px] font-label-sm text-on-surface-variant">
+      <span>© Waqt project contributors · MIT License</span>
+      <span>Idea / Logical Owner: Dr. Salim Muhammed Redi · Technical Developer / Maintainer: Mr. Hawas Muhaba Hussein</span>
+      <span>Concept images are design renders, not photographs of deployed products.</span>
+    </div>
   </div>
 </footer>
 <script defer src="assets/js/config.js"></script>

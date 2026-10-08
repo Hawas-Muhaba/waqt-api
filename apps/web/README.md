@@ -1,13 +1,16 @@
 # waqt-web
 
-> **Site layout (Stitch implementation).** `apps/web` is now a small multi-page static site (still no framework, no build
-> step, `render.yaml` unchanged). The original reference viewer lives at **`live-demo.html`** (its script is untouched);
-> `index.html` is the new Overview/home page. Pages: `index` (Overview, The Problem, How It Works), `live-demo`, `api`,
-> `applications`, `lab` (Experience Lab), `governance`, `community`, `resources`. Shared code is in `assets/js/`
-> (`waqt-api.js` client + presentation model, `waqt-live.js` state machine, `waqt-clock.js` circular clock,
-> `waqt-widgets.js` mosque clock / watch / day length / midnight comparison). **All external URLs are configuration**
-> in `assets/js/config.js` and are `null` until supplied. Tests: `pytest apps/web/tests` and
-> `cd apps/web/tests/js && npm install && npm test`. Full details: `WAQT-WEB-REPORT.md` at the repo root.
+> **Site layout (Stitch implementation).** `apps/web` is a multi-page static site (no framework, `render.yaml` unchanged,
+> no build step on the server). Design: the "Precision Astrometric Infrastructure" system from the Stitch export
+> (Space Grotesk / Inter / JetBrains Mono, obsidian palette), compiled to `assets/css/stitch.css` with Tailwind and
+> self-hosted fonts and inline-SVG icons — no CDN at runtime. Pages: `index`, `problem`, `how-it-works`, `live-demo`,
+> `api`, `applications`, `lab`, `governance`, `community`, `resources`, plus `reference-viewer.html` (the original
+> minimal API proof page, script unchanged). Shared JS is in `assets/js/`; **all external URLs are configuration** in
+> `assets/js/config.js` (null until supplied).
+>
+> **Editing:** pages are generated so the shared header/footer cannot drift:
+> `cd apps/web/tools && npm install && python3 build_pages.py && npm run build:css` (commit the generated files).
+> Tests: `pytest apps/web/tests` and `cd apps/web/tests/js && npm install && npm test`. Details: `WAQT-WEB-REPORT.md`.
 
 Reference web application for Waqt (Sprint 12, Goal A.2). A single static,
 dependency-free `index.html` that **only** talks to the Waqt HTTP API

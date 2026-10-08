@@ -265,7 +265,7 @@ test("contact: Send an Idea is a mailto to waqtapi@gmail.com (no fake backend fo
 });
 
 test("responsive: pages declare a viewport and the stylesheet has the mobile nav breakpoint and reduced-motion rule", () => {
-  const html = read("index.html"), css = read("assets/css/site.css");
+  const html = read("index.html"), css = read("assets/css/components.css");
   assert.match(html, /name="viewport" content="width=device-width, initial-scale=1"/);
   assert.match(css, /@media \(max-width:1100px\)/); assert.match(css, /prefers-reduced-motion:reduce/);
 });

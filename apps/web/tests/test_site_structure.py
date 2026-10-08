@@ -20,15 +20,16 @@ def read(p): return p.read_text(encoding="utf-8")
 
 def test_expected_pages_exist():
     names = {p.name for p in PAGES}
-    assert {"index.html", "live-demo.html", "api.html", "applications.html", "lab.html", "governance.html", "community.html", "resources.html"} <= names
+    assert {"index.html", "problem.html", "how-it-works.html", "live-demo.html", "reference-viewer.html", "api.html", "applications.html", "lab.html", "governance.html", "community.html", "resources.html"} <= names
 
 
 def test_navigation_identical_on_every_page_and_in_spec_order():
     navs = []
     for p in PAGES:
-        m = re.search(r'<ul class="nav-list" id="site-nav">(.*?)</ul>', read(p), re.S)
+        m = re.search(r'<ul id="site-nav"[^>]*>(.*?)</ul>', read(p), re.S)
         assert m, f"{p.name}: no primary nav"
         navs.append(re.sub(r' aria-current="page"', "", m.group(1)))
+        assert m.group(1).count('aria-current="page"') <= 1, p.name
         labels = re.findall(r">([^<>]+)</a>", m.group(1))
         assert labels == NAV_LABELS, f"{p.name}: nav labels {labels}"
     assert len(set(navs)) == 1, "navigation markup differs between pages"
@@ -37,13 +38,13 @@ def test_navigation_identical_on_every_page_and_in_spec_order():
 def test_each_page_has_one_h1_skip_link_main_and_lang():
     for p in PAGES:
         h = read(p)
-        assert '<html lang="en">' in h and 'class="skip"' in h and '<main id="main">' in h, p.name
+        assert '<html lang="en"' in h and 'class="skip"' in h and '<main id="main">' in h, p.name
         assert len(re.findall(r"<h1[ >]", h)) == 1, f"{p.name}: expected exactly one h1"
 
 
 def test_mobile_nav_toggle_is_accessible():
     h = read(WEB / "index.html")
-    assert 'class="nav-toggle"' in h and 'aria-expanded="false"' in h and 'aria-controls="site-nav"' in h
+    assert "nav-toggle" in h and 'aria-expanded="false"' in h and 'aria-controls="site-nav"' in h
 
 
 def test_no_second_implementation_in_any_site_script():
@@ -87,7 +88,7 @@ def test_external_urls_are_configuration_not_hardcoded():
 def test_buy_me_a_coffee_is_footer_and_community_not_primary_cta():
     for name in ("index.html", "applications.html", "community.html"):
         assert 'data-link="buyMeACoffee"' in read(WEB / name), name
-    hero = re.search(r'id="overview".*?</section>', read(WEB / "index.html"), re.S).group(0)
+    hero = re.search(r"<main id=\"main\">.*?</section>", read(WEB / "index.html"), re.S).group(0)
     assert "buyMeACoffee" not in hero
 
 
@@ -114,7 +115,7 @@ def test_applications_page_labels_every_card_real_concept_or_future():
                   "API → Applications", "Institutional Calendar", "Developer Dashboard", "Location / Travel", "Future concepts"]:
         assert title in h, title
     gallery = h[h.index('id="h-gallery"'):h.index('id="h-future"')]
-    cards = re.findall(r'<article class="card">.*?</article>', gallery, re.S)
+    cards = re.findall(r"<article data-app-card.*?</article>", gallery, re.S)
     assert len(cards) == 9
     for art in cards:
         assert re.search(r'class="badge (real|concept|future)"', art), art[:120]
@@ -142,7 +143,7 @@ def test_live_components_ship_textual_equivalents_and_demo_labels():
     for needle in ('role="img"', "<title", "<desc", 'role="list"', 'tabindex="0"', "ArrowRight", "DEMO · NOT LIVE",
                    "Live Waqt data unavailable", "demonstration mode", "wc-events"):
         assert needle in clock, needle
-    assert "prefers-reduced-motion" in read(WEB / "assets/css/site.css")
+    assert "prefers-reduced-motion" in read(WEB / "assets/css/components.css")
 
 
 def test_demo_fixture_is_recorded_and_labelled_not_live():
@@ -153,3 +154,58 @@ def test_demo_fixture_is_recorded_and_labelled_not_live():
 def test_render_blueprint_still_publishes_apps_web():
     bp = (WEB.parents[1] / "render.yaml").read_text()
     assert "staticPublishPath: ./apps/web" in bp and 'buildCommand: "true"' in bp
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# Stitch implementation guards: the design was ported faithfully, but its invented content was NOT.
+UNSUPPORTED = ["VSOP87D", "RFC-0024", "ld+json", "/v1/telemetry", "GraphQL", "protobuf", "WebSocket", "wss://", "Aqrab", "Rust",
+               "watchOS", "Wear OS", "Diyanet", "RS-485", "MQTT", "0.12ms", "99.9", "SLA", "Steward", "Working Group", "waqt-project/rfcs"]
+
+
+def test_no_unsupported_stitch_claims_survive():
+    for p in PAGES:
+        h = read(p)
+        for bad in UNSUPPORTED:
+            assert bad not in h, f"{p.name} contains unsupported claim {bad!r}"
+
+
+def test_design_system_assets_are_self_hosted():
+    css = WEB / "assets" / "css"
+    assert (css / "stitch.css").stat().st_size > 8_000 and (css / "components.css").exists()
+    fonts = list((WEB / "assets" / "fonts").glob("*.woff2"))
+    assert len(fonts) == 3 and sum(f.stat().st_size for f in fonts) < 200_000
+    for p in PAGES:
+        h = read(p)
+        assert "cdn.tailwindcss.com" not in h and "fonts.googleapis.com" not in h and "material-symbols" not in h.lower(), p.name
+        assert 'href="assets/css/stitch.css"' in h and 'href="assets/css/components.css"' in h, p.name
+
+
+def test_decision_records_page_matches_the_repository():
+    repo = WEB.parents[1] / "conformance" / "decisions"
+    drs = sorted(repo.glob("DR-*.md"))
+    g = read(WEB / "governance.html")
+    assert g.count("data-dr") == len(drs) >= 8
+    for p in drs:
+        assert p.stem in g, p.stem
+    for dr_text in (p.read_text(encoding="utf-8") for p in drs):
+        if "PENDING" in dr_text.split("## Context")[0]:
+            assert "RATIFICATION PENDING" in g
+
+
+def test_open_questions_listed_are_the_real_unresolved_ones():
+    import json
+    q = json.loads((WEB.parents[1] / "conformance" / "spec" / "open-questions.json").read_text(encoding="utf-8"))["questions"]
+    c = read(WEB / "community.html")
+    for item in q:
+        if item["status"] != "resolved":
+            assert item["id"] in c, item["id"]
+
+
+def test_reference_viewer_script_is_the_original_proof_viewer():
+    import subprocess
+    pat = re.compile(r'<script>\s*"use strict";.*?</script>', re.S)
+    try:
+        old = subprocess.run(["git", "show", "1766ff3:apps/web/index.html"], cwd=WEB, capture_output=True, text=True, check=True).stdout
+    except Exception:  # shallow clone / no history: the structural guards in test_no_second_implementation still apply
+        return
+    assert pat.search(read(WEB / "reference-viewer.html")).group(0) == pat.search(old).group(0)

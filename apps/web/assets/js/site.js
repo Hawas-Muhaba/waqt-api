@@ -30,8 +30,9 @@
     const mail = `mailto:${CFG.contactEmail}?subject=${encodeURIComponent(CFG.ideaSubject || "Waqt idea")}`;
     doc.querySelectorAll("[data-idea]").forEach((a) => a.setAttribute("href", mail));
     doc.querySelectorAll("[data-email]").forEach((a) => { a.textContent = CFG.contactEmail; a.setAttribute("href", "mailto:" + CFG.contactEmail); });
-    doc.querySelectorAll("[data-api-docs]").forEach((a) => { a.setAttribute("href", W.apiBase() + "/docs"); });
-    doc.querySelectorAll("[data-openapi]").forEach((a) => { a.setAttribute("href", W.apiBase() + "/openapi.json"); });
+    const base = W.apiBase ? W.apiBase() : null;   // pages without the API client (e.g. the reference viewer) leave these links as-is
+    if (base) doc.querySelectorAll("[data-api-docs]").forEach((a) => { a.setAttribute("href", base + "/docs"); });
+    if (base) doc.querySelectorAll("[data-openapi]").forEach((a) => { a.setAttribute("href", base + "/openapi.json"); });
   }
 
   function navToggle() {
@@ -53,6 +54,31 @@
       }
     };
     store.subscribe(render); render("state"); return store;
+  };
+
+
+  /* Generic field binder: any element with data-bind="key" shows a live value from the store. Used by the Tailwind
+     pages so telemetry panels need no bespoke JS. Values are read from the API model; nothing is computed here. */
+  W.bindFields = function (rootEl) {
+    const set = (k, v) => rootEl.querySelectorAll(`[data-bind="${k}"]`).forEach((el) => { el.textContent = v == null ? "—" : v; });
+    return { update(store) {
+      const m = store.model, s = m ? store.snapshot() : null, c = m && m.computation ? m.computation : {};
+      const badge = store.state === "success" ? "LIVE" : store.state === "loading" ? "LOADING" : store.state === "empty" ? "UNDEFINED" : store.isDemo ? "DEMO · NOT LIVE" : "NO DATA";
+      set("state", badge);
+      rootEl.querySelectorAll("[data-bind-state]").forEach((el) => el.setAttribute("data-state", store.isDemo ? "demo" : store.state));
+      set("latency", store.latencyMs != null && !store.isDemo ? store.latencyMs + " ms" : "—");
+      if (!m) return;
+      set("reading", s.readingDisplay); set("readingSeconds", Math.floor(s.readingSeconds).toLocaleString("en-US") + " s");
+      set("next", m.next ? m.next.label : "—"); set("countdown", s.countdownDisplay || "—");
+      set("progress", (s.dayFraction * 100).toFixed(1) + "%");
+      set("open", W.localClock(m.day.openIso, m.tzName)); set("close", W.localClock(m.day.closeIso, m.tzName));
+      set("length", W.fmtHMS(m.day.lengthSeconds)); set("lengthSeconds", m.day.lengthSeconds + " s");
+      set("hijri", m.hijri ? m.hijri.display : "unavailable"); set("weekday", m.weekday);
+      set("tz", m.tzName); set("lat", m.location && m.location.lat); set("lon", m.location && m.location.lon);
+      set("elevation", m.location && m.location.elevation_m != null ? m.location.elevation_m + " m" : "—");
+      set("engine", c.engine); set("accuracy", c.accuracy_level); set("deltaT", c.delta_t_seconds != null ? c.delta_t_seconds + " s" : "—");
+      set("timescale", c.timescale_model); set("provider", m.hijri ? m.hijri.provider : "—");
+    } };
   };
 
   function init() { applyLinks(); navToggle(); }

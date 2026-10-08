@@ -16,13 +16,14 @@
     const now = o.now || (() => Date.now());
     const listeners = new Set();
     const store = {
-      state: "loading", model: null, anchor: null, isDemo: false, error: null, place: { lat: o.lat, lon: o.lon }, lastOkAt: null,
+      state: "loading", model: null, anchor: null, isDemo: false, error: null, place: { lat: o.lat, lon: o.lon }, params: {}, latencyMs: null, requestUrl: null, lastOkAt: null,
       subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
       snapshot() { return store.model && store.anchor ? W.snapshotAt(store.anchor, store.isDemo ? store.anchor.fetchedAtMs : now()) : null; },
       start() { load(false); tickHandle = setInterval(tick, o.tickMs); return store; },
       stop() { clearInterval(tickHandle); clearTimeout(retryHandle); },
       retryNow() { clearTimeout(retryHandle); return load(false); },
       setPlace(lat, lon) { store.place = { lat, lon }; return load(false); },
+      setQuery(place, params) { store.place = place; store.params = params || {}; return load(false); },
       forceDemo() { useDemo("error", new W.WaqtApiError("network", "Demonstration requested.")); }
     };
     let tickHandle = null, retryHandle = null, refreshing = false, backoffUntil = 0, retryDelay = 30000;
@@ -33,7 +34,7 @@
       const demo = root.WAQT_DEMO;
       store.error = err;
       if (!demo) { store.state = state; store.model = null; store.anchor = null; store.isDemo = false; emit("state"); return; }
-      store.model = W.fromWaqtData(demo.data);
+      store.model = W.fromWaqtData(demo.data); store.raw = demo.data; store.requestUrl = demo.source;
       store.anchor = W.makeAnchor(store.model, store.model.instantMs);      // frozen at the recorded instant
       store.isDemo = true; store.state = state;
       emit("state");
@@ -43,7 +44,10 @@
       if (!silent) { store.state = "loading"; emit("state"); }
       if (root.navigator && root.navigator.onLine === false) { useDemo("offline", new W.WaqtApiError("network", "This browser reports it is offline.")); scheduleRetry(); return; }
       try {
-        const data = await W.getJSON("/v1/waqt", { lat: store.place.lat, lon: store.place.lon, calendar_provider: o.provider }, { fetchImpl: o.fetchImpl, base: o.base });
+        const query = Object.assign({ lat: store.place.lat, lon: store.place.lon, calendar_provider: o.provider }, store.params);
+        const t0 = Date.now();
+        const data = await W.getJSON("/v1/waqt", query, { fetchImpl: o.fetchImpl, base: o.base });
+        store.latencyMs = Date.now() - t0; store.raw = data; store.requestUrl = (o.base || W.apiBase()).replace(/\/+$/, "") + "/v1/waqt?" + new URLSearchParams(Object.fromEntries(Object.entries(query).filter(([, v]) => v !== undefined && v !== null && v !== ""))).toString();
         const model = W.fromWaqtData(data);
         store.error = null; retryDelay = 30000;
         if (model.state !== "ok") { store.state = "empty"; store.model = null; store.anchor = null; store.isDemo = false; store.emptyReason = model.reason; emit("state"); return; }

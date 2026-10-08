@@ -1,104 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Community — Waqt</title>
-<meta name="description" content="Join the Waqt community: ideas, applications, verification and support.">
-<meta name="theme-color" content="#0d1224">
+<meta name="description" content="Join the Waqt community: contribution domains, the open-questions register, applications and support.">
+<meta name="theme-color" content="#10131b">
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/stitch.css">
+<link rel="stylesheet" href="assets/css/components.css">
 </head>
-<body>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen pt-16">
 <a class="skip" href="#main">Skip to content</a>
-<header class="site-header" role="banner">
-  <div class="wrap bar">
-    <a class="brand" href="index.html">Waqt<small>time infrastructure</small></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-    <nav aria-label="Primary">
-      <ul class="nav-list" id="site-nav">
-        <li><a href="index.html#overview">Overview</a></li>
-        <li><a href="index.html#problem">The Problem</a></li>
-        <li><a href="index.html#how-it-works">How It Works</a></li>
-        <li><a href="live-demo.html">Live Demo</a></li>
-        <li><a href="api.html">API</a></li>
-        <li><a href="applications.html">Applications</a></li>
-        <li><a href="governance.html">Governance</a></li>
-        <li><a href="community.html" aria-current="page">Community</a></li>
-        <li><a data-link="github" href="#">GitHub</a></li>
-        <li class="nav-cta"><a data-link="docs" href="resources.html#specifications">Read Spec / Docs</a></li>
+<header class="fixed top-0 inset-x-0 z-50 h-16 bg-background/90 backdrop-blur border-b border-outline-variant/50" role="banner">
+  <div class="max-w-[1400px] mx-auto h-full flex items-center gap-4 px-4 lg:px-8">
+    <a href="index.html" class="flex items-center gap-3 mr-auto" aria-label="Waqt — home">
+      <span class="relative grid place-items-center w-9 h-9 border border-primary-container/60 rounded-full" aria-hidden="true"><span class="w-3 h-3 rounded-full bg-primary-container"></span></span>
+      <span class="leading-none"><span class="block font-headline-md text-[18px] tracking-wide text-on-surface">WAQT</span><span class="block font-label-sm text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">Time API</span></span>
+    </a>
+    <button class="nav-toggle items-center gap-2 border border-outline-variant px-3 py-2 font-label-md text-[12px] uppercase tracking-wider text-on-surface" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav aria-label="Primary" class="contents">
+      <ul id="site-nav" class="nav-list flex flex-wrap items-center gap-1 list-none m-0 p-0">
+        <li><a href="index.html" data-nav="overview" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Overview</a></li>
+        <li><a href="problem.html" data-nav="problem" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">The Problem</a></li>
+        <li><a href="how-it-works.html" data-nav="how" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">How It Works</a></li>
+        <li><a href="live-demo.html" data-nav="demo" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Live Demo</a></li>
+        <li><a href="api.html" data-nav="api" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">API</a></li>
+        <li><a href="applications.html" data-nav="apps" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Applications</a></li>
+        <li><a href="governance.html" data-nav="gov" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Governance</a></li>
+        <li><a href="community.html" data-nav="community" aria-current="page" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container block">Community</a></li>
+        <li class="lg:ml-2"><a data-link="github" href="#" class="px-3 py-2 text-[13px] font-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-sm whitespace-nowrap aria-[current=page]:bg-surface-container-high aria-[current=page]:text-primary-container flex items-center gap-2 border border-outline-variant"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>GitHub</a></li>
+        <li><a data-link="docs" href="resources.html#specifications" class="flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider bg-primary-container text-on-primary rounded-sm hover:brightness-110 whitespace-nowrap"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Read Spec / Docs</a></li>
       </ul>
     </nav>
   </div>
 </header>
 <main id="main">
-
-<section class="block" aria-labelledby="h-comm">
-  <div class="wrap">
-    <p class="eyebrow">Community</p>
-    <h1 id="h-comm">Build it, test it, question it</h1>
-    <p class="lead">Waqt gets better when people use it, break it and propose changes. Here is how to take part.</p>
-    <div class="grid cols-3" style="margin-top:22px">
-      <article class="panel"><h3>Have an idea?</h3><p>Help shape Waqt. Project ideas, proposals and contribution requests go to one address.</p><a class="btn" data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></article>
-      <article class="panel"><h3>Build an application</h3><p>Start from the <a href="api.html">API</a> and the <a href="lab.html#build">Lab’s build step</a>. Tell us what you made.</p></article>
-      <article class="panel"><h3>Verify the astronomy</h3><p>Independent implementations and cross-checks make the standard credible. Experts: please get in touch.</p></article>
-    </div>
-  </div>
-</section>
-<section class="block" aria-labelledby="h-linked">
-  <div class="wrap">
-    <h2 id="h-linked">Applications and links</h2>
-    <p class="muted">Official applications are built and maintained by the Waqt project. Community applications are built by others and are not endorsed unless stated. Entries are added here as they are confirmed.</p>
-    <div class="grid cols-2">
-      <div class="panel"><h3>Official applications <span class="badge real">OFFICIAL</span></h3><ul id="links-official" class="facts"></ul></div>
-      <div class="panel"><h3>Community applications <span class="badge future">COMMUNITY</span></h3><ul id="links-community" class="facts"></ul></div>
-      <div class="panel"><h3>SDK repositories</h3><ul id="links-sdk" class="facts"></ul></div>
-      <div class="panel"><h3>Package registries</h3><ul id="links-pkg" class="facts"></ul></div>
-    </div>
-  </div>
-</section>
-<section class="block" aria-labelledby="h-support">
-  <div class="wrap">
-    <div class="support" style="max-width:640px"><h2 id="h-support" style="font-size:1.3rem">Support Waqt</h2><p>Waqt is built in the open. Contributing ideas, testing and expertise matters most; if you would also like to help cover costs, you can buy us a coffee. Entirely optional.</p><a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a></div>
-  </div>
-</section>
-
+<section class="pt-16 pb-8"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><p class="inline-flex border border-outline-variant/60 bg-surface-container-low px-3 py-1 font-label-sm text-[11px] tracking-[0.14em] uppercase text-on-surface-variant">Community</p><h1 class="mt-5 font-headline-xl text-headline-xl-mobile md:text-headline-xl max-w-4xl">Build the standard together.</h1><p class="mt-5 text-body-lg text-on-surface-variant max-w-3xl">Waqt gets better when people use it, break it and propose changes. Here is where help is genuinely needed — taken from the project’s own open-questions register.</p></div></section><section class="pb-12"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Contribute</p><h2 id="h-domains" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Active contribution domains</h2></div><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<article class="bg-surface-container-low p-6 "><p class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant text-primary-container">Independent implementation</p><h3 class="mt-3 font-headline-sm text-[16px]">Re-implement the contract</h3><p class="mt-2 text-body-md text-on-surface-variant">A second engine checked against the portable vectors is the strongest evidence a standard can have.</p></article>
+<article class="bg-surface-container-low p-6 "><p class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant text-primary-container">Astronomy &amp; accuracy</p><h3 class="mt-3 font-headline-sm text-[16px]">Verify the engine</h3><p class="mt-2 text-body-md text-on-surface-variant">The engine is accuracy level B. Independent cross-checks, especially at high latitudes, are welcome.</p></article>
+<article class="bg-surface-container-low p-6 "><p class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant text-primary-container">Calendars</p><h3 class="mt-3 font-headline-sm text-[16px]">Hijri providers</h3><p class="mt-2 text-body-md text-on-surface-variant">Scholarly review of provider behaviour, ranges and declared-calendar rules.</p></article>
+<article class="bg-surface-container-low p-6 "><p class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant text-primary-container">Applications</p><h3 class="mt-3 font-headline-sm text-[16px]">Build on the API</h3><p class="mt-2 text-body-md text-on-surface-variant">Clocks, watches, mobile and institutional tools. Tell us what you make — we list confirmed applications below.</p></article></div><div class="mt-8 flex flex-wrap gap-3"><a class="btn" data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a><a class="btn ghost" href="governance.html">How decisions are made</a></div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Register</p><h2 id="h-oq" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Open questions</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">12 of 28 questions in <code>conformance/spec/open-questions.json</code> are not resolved. Deferred questions are waiting for evidence or a decision.</p></div><div class="table-scroll bg-surface-container-low"><table class="data"><caption class="vh">Unresolved questions</caption><thead><tr><th scope="col">ID</th><th scope="col">Question</th><th scope="col">Requirement</th><th scope="col">Status</th></tr></thead><tbody><tr><td class="whitespace-nowrap text-primary-container">OQ-TIME-1</td><td style="font-family:Inter,sans-serif">Offset-less instant: reject or assume UTC</td><td class="whitespace-nowrap">TIME-002</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-TIME-2</td><td style="font-family:Inter,sans-serif">ISO basic date accepted?</td><td class="whitespace-nowrap">—</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-TIME-3</td><td style="font-family:Inter,sans-serif">Sub-second precision of output instants</td><td class="whitespace-nowrap">—</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-TAB-2</td><td style="font-family:Inter,sans-serif">Gregorian dates before the tabular epoch convert to AH year &lt;= 0</td><td class="whitespace-nowrap">—</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-TAB-3</td><td style="font-family:Inter,sans-serif">Tabular variants (other leap patterns, astronomical epoch) are not provided</td><td class="whitespace-nowrap">—</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-DT-1</td><td style="font-family:Inter,sans-serif">Delta-T model and decimal-year convention</td><td class="whitespace-nowrap">—</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-UND-1</td><td style="font-family:Inter,sans-serif">Existence of grazing events</td><td class="whitespace-nowrap">UND-004</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-UAQ-2</td><td style="font-family:Inter,sans-serif">Umm al-Qura computational conventions (limb, refraction, elevation, algorithms)</td><td class="whitespace-nowrap">CAL-007</td><td><span class="badge future">unresolved-by-design</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-ERR-1</td><td style="font-family:Inter,sans-serif">Valid ranges of fajr_angle, isha_angle, asr_ratio (ERR-004 is MUST but its vectors are open)</td><td class="whitespace-nowrap">ERR-004</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-PRV-1</td><td style="font-family:Inter,sans-serif">Does a short Retry-After shorten the 30 s cooldown</td><td class="whitespace-nowrap">PRV-007</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-PRV-2</td><td style="font-family:Inter,sans-serif">Circuit-breaker: does the 3rd soft failure open it for the next call</td><td class="whitespace-nowrap">PRV-007</td><td><span class="badge concept">deferred</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-PRV-3</td><td style="font-family:Inter,sans-serif">Outbound budget refill granularity</td><td class="whitespace-nowrap">PRV-007</td><td><span class="badge concept">deferred</span></td></tr></tbody></table></div><details class="mt-4"><summary class="cursor-pointer text-[12px] font-label-md uppercase tracking-wider text-primary-container">16 resolved questions</summary><div class="table-scroll bg-surface-container-low mt-3"><table class="data"><caption class="vh">Resolved questions</caption><tbody><tr><td class="whitespace-nowrap text-primary-container">OQ-TAB-1</td><td style="font-family:Inter,sans-serif">Leap pattern of arithmetic-tabular</td><td class="whitespace-nowrap">CAL-002</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-ASR-1</td><td style="font-family:Inter,sans-serif">Declination used for Asr altitude</td><td class="whitespace-nowrap">AST-001</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-ASR-2</td><td style="font-family:Inter,sans-serif">Asr when the Sun is below the horizon at noon</td><td class="whitespace-nowrap">AST-002</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-DAY-1</td><td style="font-family:Inter,sans-serif">Which date labels a Waqt day</td><td class="whitespace-nowrap">DAY-004</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-DAY-2</td><td style="font-family:Inter,sans-serif">Event-to-date assignment</td><td class="whitespace-nowrap">EVT-004</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-DAY-3</td><td style="font-family:Inter,sans-serif">Day with exactly one undefined bounding Maghrib</td><td class="whitespace-nowrap">UND-001</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-EVT-1</td><td style="font-family:Inter,sans-serif">next_event: occurrence or listing</td><td class="whitespace-nowrap">EVT-007</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-UAQ-1</td><td style="font-family:Inter,sans-serif">Origin of the Umm al-Qura chain</td><td class="whitespace-nowrap">—</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-UAQ-3</td><td style="font-family:Inter,sans-serif">Supported range of umm-al-qura and the error outside it</td><td class="whitespace-nowrap">CAL-011</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-ERR-2</td><td style="font-family:Inter,sans-serif">Error code for a non-existent Hijri day</td><td class="whitespace-nowrap">CAL-004</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-ERR-3</td><td style="font-family:Inter,sans-serif">Error for an unknown IANA zone</td><td class="whitespace-nowrap">ERR-002</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-SCH-1</td><td style="font-family:Inter,sans-serif">inclusive flag of next/prev points</td><td class="whitespace-nowrap">SCH-009</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-SCH-2</td><td style="font-family:Inter,sans-serif">Default slot of event_position</td><td class="whitespace-nowrap">SCH-010</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-SCH-3</td><td style="font-family:Inter,sans-serif">NO_VALID_WINDOW / WINDOW_UNDEFINED shapes</td><td class="whitespace-nowrap">SCH-011</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-SCH-4</td><td style="font-family:Inter,sans-serif">Which undefined slots are relevant</td><td class="whitespace-nowrap">SCH-012</td><td><span class="badge future">resolved</span></td></tr><tr><td class="whitespace-nowrap text-primary-container">OQ-SCH-5</td><td style="font-family:Inter,sans-serif">Stepping through an undefined day</td><td class="whitespace-nowrap">SCH-013</td><td><span class="badge future">resolved</span></td></tr></tbody></table></div></details></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Ecosystem</p><h2 id="h-linked" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Applications and links</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">Official applications are built by the Waqt project; community applications are built by others and are not endorsed unless stated. Entries appear once confirmed.</p></div><div class="grid md:grid-cols-2 gap-6"><div class="bg-surface-container-low p-6"><h3 class="font-headline-sm text-[16px] mb-3">Official applications <span class="badge real">OFFICIAL</span></h3><ul id="links-official" class="space-y-1 text-body-md list-none p-0"></ul></div><div class="bg-surface-container-low p-6"><h3 class="font-headline-sm text-[16px] mb-3">Community applications <span class="badge future">COMMUNITY</span></h3><ul id="links-community" class="space-y-1 text-body-md list-none p-0"></ul></div><div class="bg-surface-container-low p-6"><h3 class="font-headline-sm text-[16px] mb-3">SDK repositories</h3><ul id="links-sdk" class="space-y-1 text-body-md list-none p-0"></ul></div><div class="bg-surface-container-low p-6"><h3 class="font-headline-sm text-[16px] mb-3">Package registries</h3><ul id="links-pkg" class="space-y-1 text-body-md list-none p-0"></ul></div></div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="border border-outline-variant/50 bg-surface-container-low p-8 max-w-3xl"><h2 id="h-support" class="font-headline-md text-[24px]">Support Waqt</h2><p class="mt-2 text-body-md text-on-surface-variant">Ideas, testing and expertise matter most. If you would also like to help cover costs, you can buy us a coffee — entirely optional.</p><a data-link="buyMeACoffee" href="#" class="mt-4 inline-flex items-center gap-2 px-4 py-2 border border-secondary text-secondary font-label-md text-[12px] uppercase tracking-wider hover:bg-secondary/10">☕️ Buy Me a Coffee</a></div></div></section>
 </main>
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h2>Waqt</h2>
-        <p>A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Waqt provides temporal facts, not religious rulings.</p>
-        <p class="muted">Applications shown on this site are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> or <span class="badge future">FUTURE</span>.</p>
+<footer class="mt-24 border-t border-outline-variant/50 bg-surface-container-lowest">
+  <div class="max-w-[1400px] mx-auto px-4 lg:px-8 py-12">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
+      <div class="lg:col-span-2">
+        <div class="font-headline-md text-[18px] tracking-wide mb-3">WAQT</div>
+        <p class="text-[13px] text-on-surface-variant max-w-sm">A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Open temporal infrastructure — it provides temporal facts, not religious rulings.</p>
+        <p class="mt-4 text-[12px] text-on-surface-variant font-label-sm">Applications are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> <span class="badge future">FUTURE</span></p>
       </div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Platform</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="index.html">Overview</a></li><li><a class="hover:text-primary-container" href="problem.html">The problem</a></li><li><a class="hover:text-primary-container" href="how-it-works.html">How it works</a></li><li><a class="hover:text-primary-container" href="live-demo.html">Live demo</a></li><li><a class="hover:text-primary-container" href="lab.html">Experience Lab</a></li></ul></div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Developers</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="api.html">API reference</a></li><li><a class="hover:text-primary-container" data-api-docs href="#">Interactive API docs</a></li><li><a class="hover:text-primary-container" href="resources.html#sdks">SDKs</a></li><li><a class="hover:text-primary-container" href="resources.html#conformance">Conformance</a></li><li><a class="hover:text-primary-container" href="reference-viewer.html">Reference viewer</a></li></ul></div>
+      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Project</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="applications.html">Applications</a></li><li><a class="hover:text-primary-container" href="governance.html">Governance</a></li><li><a class="hover:text-primary-container" href="community.html">Community</a></li><li><a class="hover:text-primary-container" href="resources.html">Resources</a></li><li><a class="hover:text-primary-container" data-link="github" href="#">GitHub</a></li></ul></div>
       <div>
-        <h2>Explore</h2>
-        <ul>
-          <li><a href="lab.html">Waqt Experience Lab</a></li>
-          <li><a href="applications.html">Applications</a></li>
-          <li><a href="resources.html">Resources &amp; downloads</a></li>
-          <li><a href="governance.html">Governance</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Project</h2>
-        <ul>
-          <li><a data-link="github" href="#">GitHub</a></li>
-          <li><a data-link="docs" href="resources.html#specifications">Specification &amp; docs</a></li>
-          <li><a data-email href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a></li>
-          <li><a data-idea href="mailto:waqtapi@gmail.com">Send an Idea</a></li>
-        </ul>
-      </div>
-      <div>
-        <h2>Support Waqt</h2>
-        <div class="support">
-          <p>Waqt is open work. If it is useful to you, you can help keep it going — entirely optional.</p>
-          <a class="btn ghost small" data-link="buyMeACoffee" href="#">☕️ Buy Me a Coffee</a>
+        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Support Waqt</h2>
+        <div class="border border-outline-variant/60 p-4 bg-surface-container-low">
+          <p class="text-[12px] text-on-surface-variant mb-3">Open work, kept going by contributors. Entirely optional.</p>
+          <a data-link="buyMeACoffee" href="#" class="inline-flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider border border-secondary text-secondary hover:bg-secondary/10">☕️ Buy Me a Coffee</a>
         </div>
+        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mt-6 mb-2">Contact</h2>
+        <a data-email class="text-[13px] text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>
       </div>
     </div>
-    <p class="fine">© Waqt project. Concept images are design renders (“concept art”), not photographs of deployed products.</p>
+    <div class="mt-10 pt-6 border-t border-outline-variant/40 flex flex-wrap gap-x-8 gap-y-2 justify-between text-[11px] font-label-sm text-on-surface-variant">
+      <span>© Waqt project contributors · MIT License</span>
+      <span>Idea / Logical Owner: Dr. Salim Muhammed Redi · Technical Developer / Maintainer: Mr. Hawas Muhaba Hussein</span>
+      <span>Concept images are design renders, not photographs of deployed products.</span>
+    </div>
   </div>
 </footer>
 <script defer src="assets/js/config.js"></script>

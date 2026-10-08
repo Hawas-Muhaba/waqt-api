@@ -14,7 +14,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-PAGE = Path(__file__).resolve().parent.parent / "live-demo.html"  # the viewer moved here when the site gained a home page
+PAGE = Path(__file__).resolve().parent.parent / "reference-viewer.html"  # the original proof viewer; the site gained a home page and a new Live Demo
 
 # Constants/vocabulary that belong to waqt-core, never to a consumer.
 BANNED = [
