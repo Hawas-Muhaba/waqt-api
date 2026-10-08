@@ -25,7 +25,7 @@
       if (!m) { q("reading").textContent = store.state === "loading" ? "Loading…" : "No data"; return; }
       const s = store.snapshot();
       q("reading").textContent = s.readingDisplay;
-      q("sub").textContent = [m.hijri ? m.hijri.display : "Hijri date unavailable", m.weekday].filter(Boolean).join(" · ");
+      q("sub").textContent = [m.hijri ? `${m.hijri.display} (${m.hijri.provider})` : "Hijri date unavailable", m.weekday].filter(Boolean).join(" · ");
       q("next").textContent = m.next ? m.next.label : "No further event";
       q("count").textContent = m.next && s.countdownDisplay ? "in " + s.countdownDisplay : "";
       q("open").textContent = W.localClock(m.day.openIso, m.tzName); q("close").textContent = W.localClock(m.day.closeIso, m.tzName);

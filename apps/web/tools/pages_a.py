@@ -14,7 +14,7 @@ hero = f'''
     <p class="mt-5 text-body-lg text-on-surface-variant max-w-2xl mx-auto">Waqt is an open technical standard and API for computing, representing and interoperating with Islamic time — Maghrib-based day boundaries, astronomical events, Hijri dates and scheduling.</p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a href="live-demo.html" class="inline-flex items-center gap-2 px-5 py-3 bg-primary-container text-on-primary font-label-md text-[12px] uppercase tracking-wider hover:brightness-110">Try Waqt {icon("arrow_forward")}</a>
-      <a data-link="docs" href="resources.html#specifications" class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant text-on-surface font-label-md text-[12px] uppercase tracking-wider hover:bg-surface-container-high">{icon("description")}Read the specification</a>
+      <a data-cfg="docs.spec" href="resources.html" class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant text-on-surface font-label-md text-[12px] uppercase tracking-wider hover:bg-surface-container-high">{icon("description")}Read the specification</a>
     </div>
   </div>
   <div class="relative max-w-[1400px] mx-auto px-4 lg:px-8 pb-16">
@@ -58,8 +58,8 @@ live = f'''
   </div>
   <div class="{PANEL}">
     <div class="{MICRO} mb-3">Telemetry</div>
-    {kv("Maghrib opened", "open")}{kv("Next Maghrib", "close")}{kv("Day length", "length")}{kv("Next event", "next", False)}{kv("Countdown", "countdown")}{kv("Hijri date", "hijri", False)}{kv("Weekday", "weekday", False)}{kv("Hijri provider", "provider", False)}{kv("Engine", "engine")}{kv("ΔT", "deltaT")}{kv("Timescale", "timescale")}{kv("Last request", "latency")}
-    <p class="mt-4 text-[12px] text-on-surface-variant">A Waqt day is not 24 hours; the length above is measured, not assumed.</p>
+    {kv("Maghrib opened", "open")}{kv("Next Maghrib", "close")}{kv("Day length", "length")}{kv("Next event", "next", False)}{kv("Countdown", "countdown")}{kv("Hijri date", "hijri", False)}{kv("Hijri provider", "provider", False)}{kv("Weekday", "weekday", False)}{kv("Engine", "engine")}{kv("ΔT", "deltaT")}{kv("Timescale", "timescale")}{kv("Last request", "latency")}
+    <p class="mt-4 text-[12px] text-on-surface-variant">A Waqt day is not 24 hours; the length above is measured, not assumed.</p><p class="mt-2 text-[12px] text-on-surface-variant" data-bind="hijriNote"></p>
   </div>
 </div>'''
 

@@ -83,3 +83,29 @@ Only providers with a fixed, invertible rule support this: `arithmetic-tabular` 
 **Existence is checked (CAL-004).** After converting, the result is converted back; if it does not return the requested year, month and day, the date does not exist in that provider's calendar and `INVALID_HIJRI_DATE` is returned (for example day 30 of a 29-day Umm al-Qura month). Year < 1 is rejected before any conversion.
 
 `declared` and `local-observation` return `UNSUPPORTED_OPERATION` for this direction, honestly, rather than guessing at an inverse a sparse override table doesn't have.
+
+## Choosing a Hijri provider: the 2026-10-08 case (2 days apart, both correct for their convention)
+
+Waqt's day, reading and events never depend on the Hijri provider; only the **Hijri label** does. Two providers can
+therefore label the same Waqt day differently, and that is expected:
+
+| Gregorian civil date | `arithmetic-tabular` (API default) | `umm-al-qura` |
+|---|---|---|
+| 2026-10-06 | 23 Rabi al-Thani 1448 | 25 Rabi al-Thani 1448 |
+| 2026-10-07 | 24 Rabi al-Thani 1448 | 26 Rabi al-Thani 1448 |
+| 2026-10-08 | 25 Rabi al-Thani 1448 | **27** Rabi al-Thani 1448 |
+| 2026-10-09 | 26 Rabi al-Thani 1448 | 28 Rabi al-Thani 1448 |
+
+`arithmetic-tabular` begins 1 Rabi al-Thani on 2026-09-14 and `umm-al-qura` on 2026-09-12. Between 2025-06-01 and
+2027-11-30 the `umm-al-qura` provider agrees with the official Umm al-Qura table on **all 913 days** (checked against the
+independent `hijridate` package), while `arithmetic-tabular` differs on 590 of them. Neither provider has a manual
+offset; the difference is the calendar convention. A bare "Hijri date" with no provider name is therefore ambiguous, so
+every API response names its provider (`hijri.provider.name` and `hijri.provider.version`), and applications must show it.
+
+**Which civil date is converted.** A Waqt day is labelled with the civil date of its *closing* Maghrib in the
+location's own timezone (DR-0001), and that date is what the provider converts. The label therefore changes exactly
+once per Waqt day, at Maghrib — not at midnight, not at the UTC date change, and not in the server's timezone.
+
+Reproduce: `python3 -m pytest tests/test_hijri_regression.py -v` (the oracle test needs `pip install hijridate==2.3.0`).
+Waqt Web asks for `umm-al-qura` by default (a presentation choice made in `apps/web/assets/js/config.js`); the API's own
+default is unchanged because changing it would change the API contract.

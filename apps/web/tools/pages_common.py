@@ -43,8 +43,8 @@ def header() -> str:
     lis = []
     for key, label, href in NAV:
         lis.append(f'<li><a href="{href}" data-nav="{key}" class="{LINK} block">{label}</a></li>')
-    lis.append(f'<li class="lg:ml-2"><a data-link="github" href="#" class="{LINK} flex items-center gap-2 border border-outline-variant">{icon("code")}GitHub</a></li>')
-    lis.append('<li><a data-link="docs" href="resources.html#specifications" class="flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider bg-primary-container text-on-primary rounded-sm hover:brightness-110 whitespace-nowrap">'
+    lis.append(f'<li class="lg:ml-2"><a data-cfg="@repo" href="#" class="{LINK} flex items-center gap-2 border border-outline-variant">{icon("code")}GitHub</a></li>')
+    lis.append('<li><a data-cfg="docs.index" href="resources.html" class="flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider bg-primary-container text-on-primary rounded-sm hover:brightness-110 whitespace-nowrap">'
                f'{icon("description")}Read Spec / Docs</a></li>')
     items = "\n        ".join(lis)
     return f'''<a class="skip" href="#main">Skip to content</a>
@@ -79,13 +79,13 @@ FOOTER = f'''<footer class="mt-24 border-t border-outline-variant/50 bg-surface-
         <p class="mt-4 text-[12px] text-on-surface-variant font-label-sm">Applications are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> <span class="badge future">FUTURE</span></p>
       </div>
       {col("Platform", [f'<a {FA} href="index.html">Overview</a>', f'<a {FA} href="problem.html">The problem</a>', f'<a {FA} href="how-it-works.html">How it works</a>', f'<a {FA} href="live-demo.html">Live demo</a>', f'<a {FA} href="lab.html">Experience Lab</a>'])}
-      {col("Developers", [f'<a {FA} href="api.html">API reference</a>', f'<a {FA} data-api-docs href="#">Interactive API docs</a>', f'<a {FA} href="resources.html#sdks">SDKs</a>', f'<a {FA} href="resources.html#conformance">Conformance</a>', f'<a {FA} href="reference-viewer.html">Reference viewer</a>'])}
-      {col("Project", [f'<a {FA} href="applications.html">Applications</a>', f'<a {FA} href="governance.html">Governance</a>', f'<a {FA} href="community.html">Community</a>', f'<a {FA} href="resources.html">Resources</a>', f'<a {FA} data-link="github" href="#">GitHub</a>'])}
+      {col("Developers", [f'<a {FA} href="api.html">API reference</a>', f'<a {FA} data-cfg="docs.interactive" href="#">Interactive API docs</a>', f'<a {FA} href="resources.html#sdks">SDKs</a>', f'<a {FA} href="resources.html#conformance">Conformance</a>', f'<a {FA} href="reference-viewer.html">Reference viewer</a>'])}
+      {col("Project", [f'<a {FA} href="applications.html">Applications</a>', f'<a {FA} href="governance.html">Governance</a>', f'<a {FA} href="community.html">Community</a>', f'<a {FA} href="resources.html">Resources</a>', f'<a {FA} data-cfg="@repo" href="#">GitHub</a>'])}
       <div>
         <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Support Waqt</h2>
         <div class="border border-outline-variant/60 p-4 bg-surface-container-low">
           <p class="text-[12px] text-on-surface-variant mb-3">Open work, kept going by contributors. Entirely optional.</p>
-          <a data-link="buyMeACoffee" href="#" class="inline-flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider border border-secondary text-secondary hover:bg-secondary/10">☕️ Buy Me a Coffee</a>
+          <a data-cfg="@support" href="#" class="inline-flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider border border-secondary text-secondary hover:bg-secondary/10">☕️ Support on Ko-fi</a>
         </div>
         <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mt-6 mb-2">Contact</h2>
         <a data-email class="text-[13px] text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>
@@ -93,7 +93,7 @@ FOOTER = f'''<footer class="mt-24 border-t border-outline-variant/50 bg-surface-
     </div>
     <div class="mt-10 pt-6 border-t border-outline-variant/40 flex flex-wrap gap-x-8 gap-y-2 justify-between text-[11px] font-label-sm text-on-surface-variant">
       <span>© Waqt project contributors · MIT License</span>
-      <span>Idea / Logical Owner: Dr. Salim Muhammed Redi · Technical Developer / Maintainer: Mr. Hawas Muhaba Hussein</span>
+      <span data-maintainers>Project roles: see Governance (demo metadata)</span>
       <span>Concept images are design renders, not photographs of deployed products.</span>
     </div>
   </div>

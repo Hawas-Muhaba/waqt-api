@@ -73,42 +73,6 @@ def test_no_external_scripts_styles_or_images_in_pages():
         assert not re.search(r'<img[^>]+src="https?:', h), p.name
 
 
-def test_external_urls_are_configuration_not_hardcoded():
-    cfg = read(WEB / "assets/js/config.js")
-    for key in ("github", "docs", "spec", "issues", "buyMeACoffee"):
-        assert re.search(rf"{key}:\s*null", cfg), f"links.{key} must stay null until the real URL is supplied"
-    for key in ("sdkRepos", "packageRegistries", "officialApps", "communityApps"):
-        assert re.search(rf"{key}:\s*\[\]", cfg), key
-    for p in PAGES:
-        h = read(p)
-        for host in ("buymeacoffee.com", "github.com", "pypi.org", "npmjs.com"):
-            assert host not in h, f"{p.name} hard-codes {host}"
-
-
-def test_buy_me_a_coffee_is_footer_and_community_not_primary_cta():
-    for name in ("index.html", "applications.html", "community.html"):
-        assert 'data-link="buyMeACoffee"' in read(WEB / name), name
-    hero = re.search(r"<main id=\"main\">.*?</section>", read(WEB / "index.html"), re.S).group(0)
-    assert "buyMeACoffee" not in hero
-
-
-def test_contact_email_and_idea_cta():
-    assert 'contactEmail: "waqtapi@gmail.com"' in read(WEB / "assets/js/config.js")
-    for name in ("index.html", "governance.html", "community.html"):
-        h = read(WEB / name)
-        assert "data-idea" in h and "waqtapi@gmail.com" in h
-    home = read(WEB / "index.html")
-    assert "Have an idea?" in home and "Help shape Waqt." in home and "Send an Idea" in home
-
-
-def test_governance_roles_exact_and_no_invented_maintainers():
-    g = read(WEB / "governance.html")
-    assert "Dr. Salim Muhammed Redi" in g and "Mr. Hawas Muhaba Hussein" in g
-    assert "Idea / Logical Owner" in g and "Technical Developer / Maintainer" in g
-    assert "welcomes qualified experts" in g
-    assert "PENDING" in g
-
-
 def test_applications_page_labels_every_card_real_concept_or_future():
     h = read(WEB / "applications.html")
     for title in ["Mosque Waqt Clock", "Waqt Smartwatch", "Waqt Mobile App", "Circular Waqt Clock", "Waqt Day vs Midnight Day",
@@ -201,11 +165,135 @@ def test_open_questions_listed_are_the_real_unresolved_ones():
             assert item["id"] in c, item["id"]
 
 
-def test_reference_viewer_script_is_the_original_proof_viewer():
-    import subprocess
-    pat = re.compile(r'<script>\s*"use strict";.*?</script>', re.S)
-    try:
-        old = subprocess.run(["git", "show", "1766ff3:apps/web/index.html"], cwd=WEB, capture_output=True, text=True, check=True).stdout
-    except Exception:  # shallow clone / no history: the structural guards in test_no_second_implementation still apply
-        return
-    assert pat.search(read(WEB / "reference-viewer.html")).group(0) == pat.search(old).group(0)
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# Central configuration (assets/js/config.js is the ONE place for URLs, SDK locations, maintainers, governance state)
+import json as _json
+import shutil as _shutil
+import subprocess as _subprocess
+
+NODE = _shutil.which("node")
+REPO = WEB.parents[1]
+
+
+def config():
+    if not NODE:
+        import pytest
+        pytest.skip("node not installed: cannot evaluate config.js")
+    out = _subprocess.run([NODE, "-e", 'global.window={};require(process.argv[1]);console.log(JSON.stringify(window.WAQT_CONFIG))', str(WEB / "assets/js/config.js")],
+                          capture_output=True, text=True, check=True).stdout
+    return _json.loads(out)
+
+
+def refs(node, trail=""):
+    if isinstance(node, dict):
+        if any(k in node for k in ("path", "tree")) and not any(isinstance(v, dict) for v in node.values()):
+            yield trail, node
+        for k, v in node.items():
+            yield from refs(v, f"{trail}.{k}")
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            yield from refs(v, f"{trail}[{i}]")
+
+
+def test_every_repository_path_in_the_config_exists():
+    cfg = config()
+    found = list(refs({"docs": cfg["docs"], "sdks": cfg["sdks"], "resources": cfg["resources"], "governance": cfg["governance"]}))
+    ref_nodes = [r for t, r in found] + [i["ref"] for sec in cfg["resources"] for i in sec["items"] if "ref" in i]
+    paths = {r.get("path") or r.get("tree") for r in ref_nodes if isinstance(r, dict) and (r.get("path") or r.get("tree"))}
+    assert len(paths) >= 15, paths
+    for p in sorted(paths):
+        assert (REPO / p).exists(), f"config.js points at a repository path that does not exist: {p}"
+
+
+def test_repository_support_and_contact_come_from_the_config():
+    cfg = config()
+    assert cfg["project"]["repository"]["url"] == "https://github.com/Hawas-Muhaba/waqt-api"
+    assert cfg["project"]["repository"]["visibility"] == "private" and cfg["project"]["repository"]["branch"] == "main"
+    assert cfg["project"]["support"]["url"] == "https://ko-fi.com/ummatidawah"
+    assert cfg["contactEmail"] == "waqtapi@gmail.com"
+    for p in PAGES:
+        h = read(p)
+        for host in ("github.com", "ko-fi.com", "pypi.org", "npmjs.com", "drive.google"):
+            assert host not in h, f"{p.name} hard-codes {host}: URLs belong in config.js"
+    for p in JS:
+        if p.name in ("config.js", "demo-data.js"):
+            continue
+        s = read(p)
+        for host in ("github.com", "ko-fi.com", "pypi.org/", "npmjs.com/", "drive.google"):
+            assert host not in s, f"{p.name} hard-codes {host}"
+
+
+def test_sdk_locations_are_structured_and_nothing_unpublished_is_a_link():
+    cfg = config()
+    assert [s["id"] for s in cfg["sdks"]] == ["python", "javascript"]
+    for s in cfg["sdks"]:
+        assert set(s) >= {"source", "docs", "releases", "registry", "package", "version"}
+        assert "tree" in s["source"] and "path" in s["docs"]
+        assert s["releases"]["status"] in ("planned", "not_published") and "url" not in s["releases"]
+        assert s["registry"]["status"] in ("planned", "not_published") and "url" not in s["registry"]
+    assert [s["registry"]["name"] for s in cfg["sdks"]] == ["PyPI", "npm"]
+    assert cfg["docs"]["releaseNotes"]["status"] == "planned"
+    for sec in cfg["resources"]:
+        for it in sec["items"]:
+            assert "url" not in it.get("ref", {}), f"{it['label']}: absolute URLs only when a canonical public URL exists"
+
+
+def test_documentation_links_cover_the_required_fields():
+    cfg = config()
+    for k in ("api", "openapi", "interactive", "spec", "conformance", "sdk", "changelog", "releaseNotes", "contributing", "index"):
+        assert k in cfg["docs"], k
+    assert cfg["docs"]["openapi"] == {"api": "/openapi.json"} and cfg["docs"]["interactive"] == {"api": "/docs"}
+
+
+def test_maintainer_metadata_is_demo_editable_and_separate_from_governance_state():
+    cfg = config()
+    m, g = cfg["maintainers"], cfg["governance"]
+    assert m["status"] == "demo" and m["editable"] is True and "not a governance approval" in m["notice"]
+    assert [(r["role"], r["name"]) for r in m["roles"]] == [("Logical / Idea Owner", "Dr. Salim Muhammed Redi"), ("Technical Developer / Maintainer", "Mr. Hawas Muhaba Hussein")]
+    assert m["contact"] == "waqtapi@gmail.com" and "expert" in m["experts"].lower()
+    assert g["ratification"] == "pending-project-owner-approval" and g["contractReleased"] is False
+    assert "ratified" not in g["ratificationLabel"].lower()
+
+
+def test_governance_page_keeps_roles_decisions_and_ratification_apart_and_pending():
+    g = read(WEB / "governance.html")
+    assert "DEMO · EDITABLE PROJECT METADATA" in g and "Formal governance decisions" in g and "Ratification status" in g
+    assert "Pending project-owner approval" in g and "PENDING" in g and 'id="gov-roles"' in g
+    assert not re.search(r"ratified on \d|signed by|ratification date:", g, re.I)
+
+
+def test_support_link_is_in_footer_and_community_only_never_primary():
+    for p in PAGES:
+        assert 'data-cfg="@support"' in read(p), p.name          # footer on every page
+    hero = re.search(r"<main id=\"main\">.*?</section>", read(WEB / "index.html"), re.S).group(0)
+    assert "@support" not in hero
+    main = read(WEB / "resources.html").split("<main")[1].split("</main>")[0]
+    assert "@support" not in main, "support must not be hard-wired above the technical resources (the hub renders it last, from config)"
+
+
+def test_no_secrets_anywhere_in_the_web_app():
+    pattern = re.compile(r"github_pat_[A-Za-z0-9_]{20,}|ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|\bAQ\.[A-Za-z0-9_-]{30,}|sk-[A-Za-z0-9]{20,}|api[_-]?key\s*[:=]\s*[\"'][A-Za-z0-9]{16,}", re.I)
+    for p in list(WEB.rglob("*")):
+        if p.is_file() and "node_modules" not in p.parts and p.suffix in (".html", ".js", ".mjs", ".css", ".md", ".json", ".py", ".txt", ".yml"):
+            assert not pattern.search(p.read_text(encoding="utf-8", errors="ignore")), f"possible secret in {p}"
+
+
+def test_no_hard_coded_hijri_date_and_no_hard_coded_arithmetic_default_in_the_web_app():
+    months = r"(Muharram|Safar|Rabi|Jumada|Rajab|Sha.?ban|Ramadan|Shawwal|Dhu)"
+    for p in PAGES:
+        assert not re.search(r"\b\d{1,2} " + months, read(p)), f"{p.name} contains a hard-coded Hijri date"
+    for p in JS:
+        if p.name == "demo-data.js":
+            continue
+        assert not re.search(r"\b\d{1,2} " + months, read(p)), p.name
+    live = read(WEB / "assets/js/waqt-live.js")
+    assert 'provider: "arithmetic-tabular"' not in live and "defaultProvider" in live
+    viewer = read(WEB / "reference-viewer.html")
+    assert "umm-al-qura" in viewer and "arithmetic-tabular" in viewer      # both offered, Umm al-Qura preferred
+
+
+def test_docs_new_section_and_contributing_guide_exist():
+    assert (REPO / "CONTRIBUTING.md").exists()
+    assert "Choosing a Hijri provider" in (REPO / "docs" / "CALENDARS.md").read_text(encoding="utf-8")

@@ -7,12 +7,13 @@ export const read = (rel) => fs.readFileSync(path.join(WEB, rel), "utf8");
 const SCRIPTS = ["config", "waqt-api", "demo-data", "waqt-live", "waqt-clock", "waqt-widgets", "site"];
 
 /* Load a real page's HTML with the real site scripts into jsdom (no network: fetch is injected per test). */
-export function loadPage(file = "index.html", { url = "https://example.test/" + file, online = true } = {}) {
+export function loadPage(file = "index.html", { url = "https://example.test/" + file, online = true, extra = [], fetchImpl = null } = {}) {
   const html = read(file).replace(/<script[^>]*src="[^"]*"[^>]*><\/script>/g, "");
   const dom = new JSDOM(html, { url, runScripts: "outside-only", pretendToBeVisual: true });
   const w = dom.window;
   if (!online) Object.defineProperty(w.navigator, "onLine", { value: false, configurable: true });
-  for (const s of SCRIPTS) w.eval(read(`assets/js/${s}.js`));
+  if (fetchImpl) w.fetch = fetchImpl;
+  for (const s of SCRIPTS.concat(extra)) w.eval(read(`assets/js/${s}.js`));
   w.document.dispatchEvent(new w.Event("DOMContentLoaded"));
   return dom;
 }

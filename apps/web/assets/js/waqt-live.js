@@ -12,7 +12,7 @@
   const W = root.Waqt;
 
   function createLive(opts) {
-    const o = Object.assign({ lat: 9.0192, lon: 38.7525, provider: "arithmetic-tabular", autoRetry: true, tickMs: 1000 }, opts || {});
+    const o = Object.assign({ lat: 9.0192, lon: 38.7525, provider: (root.WAQT_CONFIG && root.WAQT_CONFIG.hijri && root.WAQT_CONFIG.hijri.defaultProvider) || "umm-al-qura", autoRetry: true, tickMs: 1000 }, opts || {});
     const now = o.now || (() => Date.now());
     const listeners = new Set();
     const store = {

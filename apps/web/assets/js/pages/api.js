@@ -33,6 +33,7 @@
   if (run) run.addEventListener("click", async () => {
     const ep = document.getElementById("t-ep").value, meta = document.getElementById("t-meta"), out = document.getElementById("t-out");
     const params = ["/v1/calendar", "/v1/version", "/v1/health"].includes(ep) ? {} : { lat: 9.0192, lon: 38.7525 };
+    if (ep === "/v1/waqt") params.calendar_provider = document.getElementById("t-prov").value;   // always explicit: provider is part of the question
     meta.textContent = `GET ${ep} …`; const t0 = Date.now();
     try {
       const data = await W.getJSON(ep, params);
