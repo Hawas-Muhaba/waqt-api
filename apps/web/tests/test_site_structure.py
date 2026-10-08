@@ -205,7 +205,7 @@ def test_reference_viewer_script_is_the_original_proof_viewer():
     import subprocess
     pat = re.compile(r'<script>\s*"use strict";.*?</script>', re.S)
     try:
-        old = subprocess.run(["git", "show", "1766ff3:apps/web/index.html"], cwd=WEB, capture_output=True, text=True, check=True).stdout
+        old = subprocess.run(["git", "show", "1766ff3:apps/web/index.html"], cwd=WEB, capture_output=True, text=True, encoding="utf-8", check=True).stdout
     except Exception:  # shallow clone / no history: the structural guards in test_no_second_implementation still apply
         return
     assert pat.search(read(WEB / "reference-viewer.html")).group(0) == pat.search(old).group(0)
