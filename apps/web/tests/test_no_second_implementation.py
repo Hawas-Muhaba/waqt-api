@@ -30,14 +30,14 @@ ALLOWED_API_PATHS = {"/v1/waqt", "/v1/events", "/v1/calendar", "/v1/version"}
 
 
 def _script() -> str:
-    html = PAGE.read_text()
+    html = PAGE.read_text(encoding="utf-8")
     m = re.search(r'<script>\s*"use strict";(.*?)</script>', html, re.S)
     assert m, "expected an inline <script> with \"use strict\";"
     return m.group(1)
 
 
 def test_page_exists_and_is_self_contained():
-    html = PAGE.read_text()
+    html = PAGE.read_text(encoding="utf-8")
     # no external script/style hosts: dependency-free per the roadmap brief
     assert "<script src=" not in html
     assert not re.search(r'<link[^>]+stylesheet[^>]+http', html)
@@ -106,7 +106,7 @@ def test_boundary_refresh_re_asks_the_server_and_never_computes_the_next_day():
 
 
 def test_public_default_targets_render_and_localhost_stays_local():
-    html = PAGE.read_text()
+    html = PAGE.read_text(encoding="utf-8")
     script = _script()
     assert 'const PUBLIC_API_BASE = "https://waqt-api-r6e0.onrender.com"' in script
     assert 'const LOCAL_API_BASE = "http://localhost:8000"' in script
@@ -117,7 +117,7 @@ def test_public_default_targets_render_and_localhost_stays_local():
 
 
 def test_about_computation_panel_displays_server_provenance():
-    html = PAGE.read_text()
+    html = PAGE.read_text(encoding="utf-8")
     script = _script()
     assert 'id="computationGrid"' in html
     for field in ("computation.engine", "computation.revision", "computation.accuracy_level",
@@ -126,7 +126,7 @@ def test_about_computation_panel_displays_server_provenance():
 
 
 def test_render_blueprint_hosts_web_and_allowlists_its_origin():
-    blueprint = (PAGE.parents[2] / "render.yaml").read_text()
+    blueprint = (PAGE.parents[2] / "render.yaml").read_text(encoding="utf-8")
     assert "name: waqt-web" in blueprint and "runtime: static" in blueprint
     assert "name: waqt-api" in blueprint
     assert "key: WAQT_CORS_ORIGINS" in blueprint and "sync: false" in blueprint
