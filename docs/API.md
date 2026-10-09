@@ -183,3 +183,12 @@ curl "$BASE/v1/waqt?lat=9.0192&lon=38.7525" | jq '.data.day, .data.hijri, .data.
 curl "$BASE/v1/waqt?lat=9.0192&lon=38.7525" | jq '.data.next_event'
 ```
 That's the whole integration for a typical wall-display or timetable use case — one call, three fields.
+
+
+### The `hijri` object and provider identification (clarification)
+
+`data.hijri` is the label of the *Waqt day* that contains `instant`, produced by the provider selected with
+`calendar_provider` (default `arithmetic-tabular`). It always carries `year`, `month`, `month_name`, `day`, `display`
+and `provider.{name,version}`, so a consumer can tell which calendar convention produced it. Different providers can
+legitimately return different days for the same instant (see `docs/CALENDARS.md`, "Choosing a Hijri provider"); the
+Waqt reading, day boundaries and events are identical across providers.

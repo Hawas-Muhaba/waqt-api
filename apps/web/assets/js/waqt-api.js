@@ -67,6 +67,38 @@
     return body.data;
   }
 
+
+  /* ----------------------------------------------------- config reference resolver (single implementation)
+     See the header of config.js for the reference forms. Returns { kind, url, status, private } where kind is
+     "link" | "internal" | "mailto" | "disabled". A reference with no real URL is "disabled" — never a guessed link. */
+  function resolveRef(ref, cfg) {
+    const C = cfg || root.WAQT_CONFIG || {};
+    const repo = C.project && C.project.repository;
+    if (!ref) return { kind: "disabled", status: "unavailable" };
+    if (ref.status) return { kind: "disabled", status: ref.status };
+    const priv = !!(repo && repo.visibility === "private");
+    const base = repo ? repo.url.replace(/\/+$/, "") : null;
+    if (ref.repo)   return base ? { kind: "link", url: base, status: "available", private: priv } : { kind: "disabled", status: "unavailable" };
+    if (ref.issues) return base ? { kind: "link", url: base + "/issues", status: "available", private: priv } : { kind: "disabled", status: "unavailable" };
+    if (ref.path)   return base ? { kind: "link", url: `${base}/blob/${repo.branch}/${ref.path}`, status: "available", private: priv } : { kind: "disabled", status: "unavailable" };
+    if (ref.tree)   return base ? { kind: "link", url: `${base}/tree/${repo.branch}/${ref.tree}`, status: "available", private: priv } : { kind: "disabled", status: "unavailable" };
+    if (ref.page)   return { kind: "internal", url: ref.page, status: "available" };
+    if (ref.api)    return { kind: "link", url: apiBase() + ref.api, status: "available" };
+    if (ref.mailto) return { kind: "mailto", url: "mailto:" + ref.mailto, status: "available" };
+    if (ref.support) { const s = C.project && C.project.support; return s && s.url ? { kind: "link", url: s.url, status: "available", name: s.name } : { kind: "disabled", status: "unavailable" }; }
+    if (ref.url)    return { kind: "link", url: ref.url, status: "available" };
+    return { kind: "disabled", status: "unavailable" };
+  }
+  /* "docs.api" -> config.docs.api; "@repo" "@issues" "@support" are shorthands. */
+  function resolveCfg(key, cfg) {
+    const C = cfg || root.WAQT_CONFIG || {};
+    if (key === "@repo") return resolveRef({ repo: true }, C);
+    if (key === "@issues") return resolveRef({ issues: true }, C);
+    if (key === "@support") return resolveRef({ support: true }, C);
+    const ref = key.split(".").reduce((o, k) => (o ? o[k] : undefined), C);
+    return resolveRef(ref, C);
+  }
+
   /* ---------------------------------------------------- presentation model */
   const LABELS = { fajr: "Fajr", sunrise: "Sunrise", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" };
   const labelOf = (name) => LABELS[name] || String(name);
@@ -161,12 +193,44 @@
 
   /* Example request text for docs/lab (documentation only; the page runs the request through getJSON, not through this text). */
   function exampleSnippet(lang, base, lat, lon) {
-    const url = `${base}/v1/waqt?lat=${lat}&lon=${lon}`;
+    const prov = root.WAQT_CONFIG && root.WAQT_CONFIG.hijri ? root.WAQT_CONFIG.hijri.defaultProvider : "umm-al-qura";
+    const url = `${base}/v1/waqt?lat=${lat}&lon=${lon}&calendar_provider=${prov}`;
     if (lang === "js") return `const res = await fetch("${url}");\nconst { data, error } = await res.json();\nif (error) throw new Error(error.code + ": " + error.message);\nif (data.status !== "OK") console.log("Waqt undefined here:", data.undefined_reason);\nelse console.log(data.waqt.reading.display, data.next_event);`;
     if (lang === "py") return `import json, urllib.request\n\nwith urllib.request.urlopen("${url}") as r:\n    body = json.load(r)\nif body["error"]:\n    raise RuntimeError(body["error"]["message"])\ndata = body["data"]\nprint(data["waqt"]["reading"]["display"], data["next_event"])`;
     return `curl "${url}"`;
   }
 
-  Object.assign(W, { exampleSnippet, WaqtApiError, defaultApiBase, apiBase, getJSON, LABELS, labelOf, fmtHMS, localClock,
+
+  /* Occurrence-awareness. /v1/waqt `events` lists each event's NEXT occurrence, so an event that already occurs earlier
+     in this Waqt day than the listed one (typically tonight's Isha, listed only as the next evening's ~25:05) is
+     missing. We never compute it: we ask the API at the day's opening instant what the next event is, and (if it is
+     not already listed) ask once more for its reading. Demo mode uses the recorded answers. Returns extra events. */
+  async function ownDayOccurrences(store) {
+    const m = store.model;
+    if (!m || m.state !== "ok") return [];
+    let ne, reading;
+    if (store.isDemo) {
+      const rec = root.WAQT_DEMO && root.WAQT_DEMO.own_day_isha;
+      if (!rec) return [];
+      ne = rec.next_event_after_open; reading = rec.reading_at_event;
+    } else {
+      const query = Object.assign({ lat: store.place.lat, lon: store.place.lon, calendar_provider: store.params.calendar_provider || (root.WAQT_CONFIG && root.WAQT_CONFIG.hijri.defaultProvider) }, store.params);
+      const first = await getJSON("/v1/waqt", Object.assign({}, query, { instant: new Date(m.day.openMs + 1000).toISOString() }));
+      ne = first.next_event;
+      if (!ne || !ne.instant) return [];
+      const at = await getJSON("/v1/waqt", Object.assign({}, query, { instant: ne.instant }));
+      reading = at.waqt.reading;
+    }
+    const ms = Date.parse(ne.instant);
+    if (!(ms > m.day.openMs && ms < m.day.closeMs)) return [];
+    if (m.events.some((e) => e.defined && e.instantIso === ne.instant)) return [];
+    return [{ name: ne.name, label: labelOf(ne.name), defined: true, instantIso: ne.instant, instantMs: ms, seconds: reading.seconds, display: reading.display,
+              position: "in-day", plot: reading.seconds / m.day.lengthSeconds, local: localClock(ne.instant, m.tzName), occurrence: "earlier-this-day" }];
+  }
+  function withOccurrences(model, extra) {
+    return Object.assign({}, model, { events: model.events.concat(extra).sort((a, b) => (a.instantMs || 0) - (b.instantMs || 0)) });
+  }
+
+  Object.assign(W, { ownDayOccurrences, withOccurrences, resolveRef, resolveCfg, exampleSnippet, WaqtApiError, defaultApiBase, apiBase, getJSON, LABELS, labelOf, fmtHMS, localClock,
                      fromWaqtData, makeAnchor, snapshotAt, nextEventAfter });
 })(typeof window !== "undefined" ? window : globalThis);

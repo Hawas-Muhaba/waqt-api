@@ -9,6 +9,21 @@
   const W = window.Waqt, esc = W.esc, $ = (id) => document.getElementById(id);
   const store = W.createLive({});
 
+  /* ---------- occurrence-aware model: /v1/waqt lists each event's NEXT occurrence, so tonight's Isha (earlier in this
+     Waqt day than the listed ~25:05 one) is fetched from the API, never computed, and merged in. */
+  const occ = { src: null, model: null, pending: null };
+  function labModel() {
+    const m = store.model;
+    if (!m) return null;
+    if (occ.src === m) return occ.model || m;
+    if (occ.pending !== m) {
+      occ.pending = m;
+      W.ownDayOccurrences(store).then((extra) => { if (store.model !== m) return; occ.src = m; occ.model = W.withOccurrences(m, extra); updateScrub(); drawPb(); })
+        .catch(() => { if (store.model !== m) return; occ.src = m; occ.model = m; });
+    }
+    return m;
+  }
+
   /* ---------- 01 scrub: a virtual store with the model's shape; the model object is reused so the clock does not rebuild */
   const scrubClock = W.createClock($("lab-clock"), { variant: "full", idPrefix: "lab", showList: false });
   const scrub = $("scrub"), scrubOut = $("scrub-out");
@@ -18,7 +33,7 @@
     snapshot() { return this.snap; }, snap: null
   };
   function updateScrub() {
-    const m = store.model;
+    const m = labModel();
     if (!m) { virtual.state = store.state; virtual.model = null; scrubClock.update(virtual); scrubOut.textContent = ""; return; }
     if (vsrc !== m) { vsrc = m; vmodel = Object.assign({}, m); }            // stable object per fetched model
     const frac = Number(scrub.value) / 1000, len = m.day.lengthSeconds, seconds = frac * len;
@@ -44,7 +59,7 @@
     pb.virtualMs = m.day.openMs; pb.nextKey = ""; drawPb();
   }
   function drawPb() {
-    const m = store.model; if (!m || pb.virtualMs == null) return;
+    const m = labModel(); if (!m || pb.virtualMs == null) return;
     const nx = W.nextEventAfter(m, pb.virtualMs), seconds = (pb.virtualMs - m.day.openMs) / 1000;
     $("pb-reading").textContent = "Waqt " + W.fmtHMS(Math.min(seconds, m.day.lengthSeconds));
     $("pb-next").textContent = nx ? `Next · ${nx.label}${nx.position === "after-close" ? " (after the next Maghrib)" : ""}` : "No further event in this Waqt day";
@@ -54,7 +69,7 @@
     if (key !== pb.nextKey) { pb.nextKey = key; $("pb-sr").textContent = nx ? `Next event: ${nx.label}` : "No further event"; }
   }
   function pbStep() {
-    const m = store.model; if (!m) return;
+    const m = labModel(); if (!m) return;
     const now = performance.now(), dt = (now - pb.lastWall) / 1000; pb.lastWall = now;
     pb.virtualMs += dt * Number($("pb-speed").value) * 1000;
     const end = m.day.closeMs + 1;

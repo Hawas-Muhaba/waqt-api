@@ -6,7 +6,7 @@
 > self-hosted fonts and inline-SVG icons — no CDN at runtime. Pages: `index`, `problem`, `how-it-works`, `live-demo`,
 > `api`, `applications`, `lab`, `governance`, `community`, `resources`, plus `reference-viewer.html` (the original
 > minimal API proof page, script unchanged). Shared JS is in `assets/js/`; **all external URLs are configuration** in
-> `assets/js/config.js` (null until supplied).
+> `assets/js/config.js` — the one central configuration (repository, docs, SDK source/release/registry locations, maintainer demo metadata, governance state, support link, default Hijri provider).
 >
 > **Editing:** pages are generated so the shared header/footer cannot drift:
 > `cd apps/web/tools && npm install && python3 build_pages.py && npm run build:css` (commit the generated files).

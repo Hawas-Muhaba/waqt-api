@@ -88,7 +88,7 @@
 
       // Markers (the opening Maghrib is the day's boundary, not an entry of data.events, so it is drawn separately).
       const marks = [{ key: "open", label: "Maghrib opens", plot: 0, local: W.localClock(model.day.openIso, model.tzName), display: "00:00:00", position: "open", aria: `Maghrib opens the Waqt day at ${W.localClock(model.day.openIso, model.tzName)} local, Waqt 00:00:00` }]
-        .concat(model.events.filter((e) => e.defined).map((e) => ({ key: e.name, label: e.position === "close" ? "Next Maghrib" : e.label, plot: e.plot, local: e.local, display: e.display, position: e.position, name: e.name,
+        .concat(model.events.filter((e) => e.defined && !(e.position === "after-close" && model.events.some((x) => x.defined && x.name === e.name && x.position === "in-day"))).map((e) => ({ key: e.name, label: e.position === "close" ? "Next Maghrib" : e.label, plot: e.plot, local: e.local, display: e.display, position: e.position, name: e.name,
           aria: `${e.label}${e.position === "after-close" ? " (the evening after the next Maghrib)" : e.position === "close" ? " (closes this Waqt day)" : ""}, ${e.local} local, Waqt ${e.display}` })));
       const ordered = marks.map((m, i) => ({ m, i })).sort((a, b) => a.m.plot - b.m.plot);
       let prevAngle = -999, bump = 0;
