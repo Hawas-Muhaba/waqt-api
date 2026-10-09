@@ -33,7 +33,7 @@ def test_success_envelope_shape():
     body = r.json()
     assert set(body.keys()) == {"meta", "data", "error"}
     assert body["error"] is None
-    assert body["meta"]["api_version"] == "1.6.0"
+    assert body["meta"]["api_version"] == "1.7.0"
     assert body["meta"]["spec"] == "waqt-core/0.1"
     assert "generated_at" in body["meta"]
 
@@ -201,6 +201,26 @@ def test_calendar_catalog_lists_all_five_providers():
     r = client.get("/v1/calendar")
     names = {p["name"] for p in r.json()["data"]["providers"]}
     assert names == {"arithmetic-tabular", "umm-al-qura", "declared", "local-observation", "aladhan"}
+
+
+def test_calendar_provider_query_defaults_are_umm_al_qura():
+    schema = client.get("/openapi.json").json()["paths"]
+    operations = {
+        "/v1/waqt": "get",
+        "/v1/hijri": "get",
+        "/v1/conversions": "get",
+        "/v1/calendar/convert": "get",
+        "/v1/schedule/snapshot": "get",
+        "/v1/schedule/span": "get",
+        "/v1/institutional/week": "get",
+        "/v1/institutional/fiscal-year": "get",
+        "/v1/institutional/academic-year": "get",
+        "/v1/institutional/profile": "get",
+    }
+    for path, method in operations.items():
+        params = schema[path][method]["parameters"]
+        provider = next(p for p in params if p["name"] == "calendar_provider")
+        assert provider["schema"]["default"] == "umm-al-qura", path
 
 
 # ---------------------------------------------------------------------------

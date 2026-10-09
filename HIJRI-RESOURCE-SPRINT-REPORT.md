@@ -1,7 +1,7 @@
 # Corrective sprint report — Hijri date, resource registry, maintainer demo config
 
-Branch `fix/hijri-provider-resource-config` (from `feature/stitch-web-design`). Nothing merged. **This report does not
-claim release readiness**; the independent audit stays authoritative until its blocked checks are run (§12–13).
+Branch `fix/hijri-provider-resource-config` was merged to `main` as `8343180`. This report records the original
+corrective sprint plus follow-up validation and the API-default decision below; it does not claim release readiness.
 
 ## 1. Root cause of "25 vs 27"
 There is **no calculation defect and no offset** in the Waqt-day → civil-date → provider → API → web path. Traced
@@ -16,7 +16,8 @@ and pinned by tests:
   first listed provider), and displayed the result as a bare "Hijri" date with the provider only in a minor telemetry row.
 * Evidence the `umm-al-qura` provider itself is right: it matches the official Umm al-Qura table (independent `hijridate`
   package) on **all 913 days** 2025-06-01…2027-11-30; `arithmetic-tabular` differs on 590 of them.
-* Left unchanged on purpose: the **API default** (`arithmetic-tabular`) — changing it would change the documented contract.
+* Follow-up decision: the API default is now `umm-al-qura`, matching the website. `arithmetic-tabular` remains available
+  by explicitly passing `calendar_provider=arithmetic-tabular`; the behavior change is identified as API 1.7.0.
 
 ## 2. Files changed
 Tests/tools: `tests/test_hijri_regression.py` (new, 25 tests), `tests/test_conformance_doc_counts.py` (new),
@@ -33,9 +34,9 @@ viewer). Provider choice never changes Waqt time (test: day/reading/events/next_
 No manual offset exists (a test scans the data flow for one).
 
 ## 4. API response before / after
-The API is unchanged (that is the point). `GET /v1/waqt?lat=9.0192&lon=38.7525&instant=2026-10-08T09:00:00Z`:
-* default / `arithmetic-tabular` → `hijri: {day: 25, display: "25 Rabi al-Thani 1448 AH", provider: {name: "arithmetic-tabular", …}}`
-* `calendar_provider=umm-al-qura` → `hijri: {day: 27, display: "27 Rabi al-Thani 1448 AH", provider: {name: "umm-al-qura", version: "astronomical-approx-2002-rules-v1"}}`
+`GET /v1/waqt?lat=9.0192&lon=38.7525&instant=2026-10-08T09:00:00Z` now defaults to:
+* `umm-al-qura` → `hijri: {day: 27, display: "27 Rabi al-Thani 1448 AH", provider: {name: "umm-al-qura", version: "astronomical-approx-2002-rules-v1"}}`
+* Explicit `calendar_provider=arithmetic-tabular` → `hijri: {day: 25, display: "25 Rabi al-Thani 1448 AH", provider: {name: "arithmetic-tabular", …}}`
 Year/month/month_name/day/display/provider{name,version} are all present; documentation clarified in `docs/API.md`.
 
 ## 5. Web before / after
@@ -80,15 +81,33 @@ No signature, approval or date is shown or stored.
   normative vector appears without closing the tracking entry. A real vector is a contract change for the owner.
 * Governance unratified — kept truthful (§10).
 
-## 12. Tests — results
-**PASS** — `tests/` 621 passed / 3 skipped (excluding the 3 below); `tests/test_hijri_regression.py` 25; `tests/test_conformance_doc_counts.py` 2;
-`tests/test_packaging_smoke.py` 1 (after installing `build`); `apps/web/tests` 36; `apps/web/tests/js` 42; `apps/cli/tests` 19;
-`apps/api-consumer/tests` 9; `sdks/js/waqt-client` 55; `conformance/independent` 13; headless Chromium over all 11 pages × desktop and mobile with no console errors.
-Mutation check: swapping the provider for arithmetic-tabular makes 8 regression tests fail.
-**FAIL** — `tests/test_conformance_contract.py` ×2: "contract.json is stale". **Fails identically on an untouched `main`**, so not caused here. I did **not**
-regenerate `contract.json` (the manifest hashes may be line-ending sensitive on your Windows checkout — unverified hypothesis).
-**ENVIRONMENT FAILURE (resolved)** — packaging smoke needed `pip install build`.
-**NOT RUN** — Python 3.9-specific/CI matrix, mutation suite, dependency advisory audit, real-device/screen-reader/contrast testing, live Render deployment.
+## 12. Tests — original and follow-up results
+**Original sprint results (historical):** `tests/` 621 passed / 3 skipped; `apps/web/tests` 36; `apps/web/tests/js` 42;
+`apps/cli/tests` 19; `apps/api-consumer/tests` 9; `sdks/js/waqt-client` 55; `conformance/independent` 13; Chromium over
+all 11 pages × desktop and mobile with no console errors. The packaging smoke required `build`, which was installed.
+
+**Follow-up PASS:** `tests/` 632 passed / 3 skipped; `tests/test_hijri_regression.py` 27 passed (including the official-table
+oracle after installing `hijridate==2.3.0`), also 27 passed with `TZ=America/Los_Angeles`; `apps/web/tests` 37,
+`apps/cli/tests` 19, `apps/api-consumer/tests` 9; web JS 42, JS SDK 55, independent conformance 13. The SDK integration
+server used the configured Windows venv through `PYTHON`.
+
+**Resolved blocker:** the two `tests/test_conformance_contract.py` failures reported earlier were due to the Windows-generated
+manifest using backslash paths and raw CRLF-sensitive hashes. The generator now writes POSIX paths and normalizes text
+line endings; all 9 contract tests pass, `contract.py verify` reports 0 problems, and generated documentation counts pass.
+
+**Not run:** Python 3.9/CI matrix, mutation suite, dependency advisory audit, real-device/screen-reader/contrast testing.
+Render was checked in the follow-up; see the deployment status below.
+
+### Follow-up validation and default decision
+
+The manifest staleness was caused by two Windows portability bugs in `conformance/tools/contract.py`: paths were serialized
+with platform-native separators (`spec\\requirements.json` on Windows versus `spec/requirements.json` on POSIX), and source
+hashes covered raw bytes, so CRLF and LF checkouts produced different digests. Manifest paths now use POSIX separators and
+text hashes normalize newlines. A regression test verifies the manifest against LF-normalized inputs.
+
+The API default change is documented as API 1.7.0. A live check before deployment of this follow-up found Render healthy
+on API 1.6.0, returning `arithmetic-tabular` when omitted and `umm-al-qura` when explicitly requested; the new default
+therefore requires a deployment before it is live.
 
 ## 13. Commands to run in your IDE
 ```
@@ -99,7 +118,7 @@ python -m pytest apps/web/tests apps/cli/tests apps/api-consumer/tests -q   # ru
 (cd apps/web/tests/js && npm install && npm test)
 (cd sdks/js/waqt-client && npm test)
 (cd conformance/independent && npm test)
-python conformance/tools/contract.py verify                 # currently FAILS on main too
+python conformance/tools/contract.py verify
 python conformance/tools/sync_doc_counts.py --check
 TZ=America/Los_Angeles python -m pytest tests/test_hijri_regression.py -q   # repeat under any TZ
 # mutation / advisory audit / normative vectors: use the project's own commands (docs/RELEASING.md, conformance/harness)
@@ -108,7 +127,6 @@ Rebuild the site after editing `config.js`-independent pages: `cd apps/web/tools
 
 ## 14. Remaining risks
 * `umm-al-qura` here is an astronomical **approximation** that matches the official table over the checked 913 days; it is not the table itself — keep the oracle test in CI.
-* Repo links point at `main`; new docs/CONTRIBUTING exist only on this branch until merged. The repo is private, so links 404 for the public until it is opened.
-* The API default is still `arithmetic-tabular`: other clients that omit `calendar_provider` will still see the older-convention date. Decide deliberately whether that default should change (a contract change).
-* The contract/audit blocked checks (§12) remain unexecuted by me; contract.json staleness is unresolved.
+* API 1.7.0 deliberately defaults provider-aware endpoints to `umm-al-qura`; `arithmetic-tabular` remains available explicitly.
+* The Render deployment checked above still runs API 1.6.0; deploy the updated API before expecting omitted-provider requests to switch to Umm al-Qura.
 * Rotate the previously shared GitHub token and Stitch key; no secret is in any file (tested).

@@ -32,7 +32,7 @@ from ..scheduling.model import parse_instant as parse_rule_instant
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 from .common import ApiError, ErrorCode, computation_block, iso, parse_instant, profile_block, success, timezone_block
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -80,7 +80,7 @@ def get_snapshot(
     fajr_angle: float = Query(18.0),
     isha_angle: float = Query(17.0),
     asr_ratio: float = Query(1.0, description="1.0 standard, 2.0 Hanafi"),
-    calendar_provider: str = Query("arithmetic-tabular", description=f"One of: {', '.join(PROVIDER_CATALOG)}. Affects labels only."),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER, description=f"One of: {', '.join(PROVIDER_CATALOG)}. Affects labels only."),
     precision: str = Query("second", description="second | microsecond"),
 ):
     rs = _check_precision(precision)
@@ -101,7 +101,7 @@ def get_span(
     end_inclusive: bool = Query(False, description="false: half-open [start, end). true: the instant-pair reading, end included."),
     elevation_m: float = Query(0.0, ge=0),
     timezone_override: Optional[str] = Query(None),
-    calendar_provider: str = Query("arithmetic-tabular"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER),
     precision: str = Query("second"),
 ):
     rs = _check_precision(precision)
@@ -164,7 +164,7 @@ def post_resolve(
     except RuleError as e:
         raise ApiError(400, ErrorCode.INVALID_INSTANT, str(e), {"received": body.get("anchor")})
 
-    ctx, eng = _engine(lat, lon, elev, profile, body.get("calendar_provider", "arithmetic-tabular"), body.get("timezone_override"), batch=True)
+    ctx, eng = _engine(lat, lon, elev, profile, body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER), body.get("timezone_override"), batch=True)
     op = body.get("operation")
     try:
         result = run_operation(eng, anchor, op, rs)

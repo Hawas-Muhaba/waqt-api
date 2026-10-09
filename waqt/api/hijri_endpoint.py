@@ -26,7 +26,7 @@ from fastapi import APIRouter, Query
 
 from ..hijri import weekday_name
 from .common import hijri_block, parse_date, success
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -34,7 +34,7 @@ router = APIRouter()
 @router.get("/v1/hijri")
 def get_hijri(
     date: Optional[str] = Query(None, description="Gregorian date, YYYY-MM-DD; defaults to today (UTC)"),
-    calendar_provider: str = Query("arithmetic-tabular", description=f"One of: {', '.join(PROVIDER_CATALOG)}"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER, description=f"One of: {', '.join(PROVIDER_CATALOG)}"),
     override_date: Optional[str] = Query(None, description="declared/local-observation: must equal `date` above to take effect"),
     declared_year: Optional[int] = Query(None),
     declared_month: Optional[int] = Query(None, ge=1, le=12),

@@ -65,6 +65,12 @@ def test_resolve_window_and_evaluate():
     assert e.json()["data"]["result"]["inside"] is False
 
 
+def test_resolve_defaults_to_umm_al_qura():
+    r = _resolve({"op": "day_bounds"})
+    assert r.status_code == 200
+    assert r.json()["data"]["calendar_provider"]["name"] == "umm-al-qura"
+
+
 def test_resolve_undefined_is_200_with_status():
     loc = {"lat": 51.5074, "lon": -0.1278}
     r = _resolve({"op": "resolve_interval", "interval": {"type": "interval", "start": {"type": "event", "name": "fajr"}, "end": {"type": "event", "name": "sunrise"}}},

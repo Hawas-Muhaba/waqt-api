@@ -45,7 +45,7 @@ from .common import (
     success,
     timezone_block,
 )
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -83,7 +83,7 @@ def convert_calendar(
     isha_angle: float = Query(17.0, description="Isha depression angle, degrees"),
     asr_ratio: float = Query(1.0, description="Asr shadow ratio: 1.0 = standard, 2.0 = Hanafi"),
     calendar_provider: str = Query(
-        "arithmetic-tabular", description=f"One of: {', '.join(PROVIDER_CATALOG)}. See GET /v1/calendar."
+        DEFAULT_CALENDAR_PROVIDER, description=f"One of: {', '.join(PROVIDER_CATALOG)}. See GET /v1/calendar."
     ),
     override_date: Optional[str] = Query(None),
     declared_year: Optional[int] = Query(None),

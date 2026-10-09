@@ -16,7 +16,7 @@ from typing import Optional
 from fastapi import APIRouter, Query
 
 from .common import ApiError, ErrorCode, hijri_block, parse_date, success
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 from ..hijri import InvalidHijriDate, checked_to_gregorian, weekday_name
 
 router = APIRouter()
@@ -25,7 +25,7 @@ router = APIRouter()
 @router.get("/v1/conversions")
 def convert(
     direction: str = Query(..., description="'to-hijri' or 'to-gregorian'"),
-    calendar_provider: str = Query("arithmetic-tabular", description=f"One of: {', '.join(PROVIDER_CATALOG)}"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER, description=f"One of: {', '.join(PROVIDER_CATALOG)}"),
     date: Optional[str] = Query(None, description="to-hijri: the Gregorian date, YYYY-MM-DD"),
     year: Optional[int] = Query(None, description="to-gregorian: Hijri year"),
     month: Optional[int] = Query(None, ge=1, le=12, description="to-gregorian: Hijri month (1-12)"),

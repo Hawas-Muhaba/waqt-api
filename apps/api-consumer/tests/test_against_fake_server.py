@@ -75,6 +75,7 @@ class FakeWaqtHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        FakeWaqtHandler.last_query = parsed.query
         qs = parse_qs(parsed.query)
         if parsed.path == "/v1/waqt":
             if qs.get("lat", ["0"])[0] == "999":  # trigger a validation error, like the real API would
@@ -123,6 +124,8 @@ def test_get_waqt_over_real_http(server):
     data = client.get_waqt(21.4225, 39.8262)
     assert data["waqt"]["reading"]["display"] == "20:45:00"
     assert data["computation"]["revision"] == "2"
+    query = parse_qs(FakeWaqtHandler.last_query)
+    assert query.get("calendar_provider") == ["umm-al-qura"]
 
 
 def test_get_version_over_real_http(server):

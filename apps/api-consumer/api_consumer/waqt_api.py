@@ -81,7 +81,7 @@ class WaqtApiClient:
 
     def get_waqt(self, lat: float, lon: float, *, elevation_m: float = 0.0, instant: Optional[str] = None,
                  timezone_override: Optional[str] = None, fajr_angle: float = 18.0, isha_angle: float = 17.0,
-                 asr_ratio: float = 1.0, calendar_provider: str = "arithmetic-tabular") -> dict:
+                 asr_ratio: float = 1.0, calendar_provider: str = "umm-al-qura") -> dict:
         """`GET /v1/waqt` — the combined result (docs/API.md; matches
         `waqt_local.waqt()`'s shape field-for-field)."""
         return self._get("/v1/waqt", {

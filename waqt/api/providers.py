@@ -37,6 +37,8 @@ from ..calendar_providers import (
 from ..hijri import HijriDate, HijriProvider
 from .common import ApiError, ErrorCode, parse_date
 
+DEFAULT_CALENDAR_PROVIDER = "umm-al-qura"
+
 PROVIDER_CATALOG = {
     "arithmetic-tabular": {
         "description": (

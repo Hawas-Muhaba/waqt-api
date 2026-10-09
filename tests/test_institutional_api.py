@@ -50,6 +50,20 @@ def test_fiscal_year_resolve_custom_rule():
     assert r.json()["data"]["start"]["hijri"][5:7] == "07"
 
 
+def test_fiscal_year_resolve_defaults_to_umm_al_qura():
+    body = {
+        "hijri_year": 1448,
+        "start_rule": {"type": "month_day", "month": 1, "day": 1},
+        "end_rule": {"type": "month_day", "month": 1, "day": 2},
+    }
+    default = c.post("/v1/institutional/fiscal-year/resolve", json=body).json()["data"]
+    arithmetic = c.post(
+        "/v1/institutional/fiscal-year/resolve",
+        json={**body, "calendar_provider": "arithmetic-tabular"},
+    ).json()["data"]
+    assert default["start"]["gregorian"] != arithmetic["start"]["gregorian"]
+
+
 def test_fiscal_year_resolve_invalid_rule_is_422():
     body = {"hijri_year": 1448, "start_rule": {"type": "month_day", "month": 12, "day": 1},
             "end_rule": {"type": "month_day", "month": 1, "day": 1}}

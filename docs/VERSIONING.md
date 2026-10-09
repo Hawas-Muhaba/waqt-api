@@ -13,7 +13,7 @@ means.
 |---|---|---|---|
 | **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.4.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
-| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.6.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract, additive-only within `/v1/`. |
+| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.7.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
 | **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.5.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
 | **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `2.0` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
 
@@ -21,7 +21,7 @@ Two more things look like versions and are easy to conflate with the axes
 above (Sprint 13 audit):
 
 - The **`waqt-api` distribution version** (`pyproject.toml` at the repo root,
-  currently `0.4.0`) is *not* the **API version** (`1.6.0`, the HTTP
+  currently `0.4.0`) is *not* the **API version** (`1.7.0`, the HTTP
   contract). The package can ship a fix without the contract moving, and the
   contract can gain an additive field in the same release as any package
   version. `GET /v1/version` reports the contract (`api_version`), never the
@@ -135,13 +135,18 @@ SDK work, for instance, could bump the API without touching the engine).
 {
   "waqt_core_version": "0.4.0",
   "spec": "waqt-core/0.1",
-  "api_version": "1.6.0",
+  "api_version": "1.7.0",
   "waqt_local_version": null,
   "computation": {"engine": "waqt-noaa-low-precision", "revision": "2", "accuracy_level": "B"},
   "engine_revision_history": {"1": {...}, "2": {...}},
   "conformance_vectors": {"vector_set_version": "2.0", "generated_at_engine_revision": "2"}
 }
 ```
+
+API contract 1.6.0 → 1.7.0 (intentional behavior change; response shape unchanged):
+the default `calendar_provider` on provider-aware HTTP endpoints changes from
+`arithmetic-tabular` to `umm-al-qura`; either provider remains explicitly selectable.
+The Python and JavaScript SDKs now record API 1.7.0 as their maximum tested version.
 
 `waqt_local_version` is `null` from the server (an HTTP API has no
 `waqt-local` layer) and `api_version` is `null` from `waqt_local.version()`

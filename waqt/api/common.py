@@ -20,7 +20,7 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.6.0"          # this HTTP contract's own version (1.6.0: additive INVALID_HIJRI_DATE / UNKNOWN_TIMEZONE / OUT_OF_RANGE errors; behaviour corrections DIS-001 and OQ-EVT-1, see conformance/CHANGELOG.md; 1.1.0: additive /v1/schedule/*; 1.2.0: additive /v1/institutional/*; 1.3.0: additive /v1/calendar/convert + /v1/calendar/boundary-crossing; 1.4.0: additive computation.engine/revision + /v1/version; 1.5.0: additive hijri.source/provenance, calendar_provider=aladhan, data.calendar_error, per-event representations, integrations in /v1/health + /v1/version, 429 RATE_LIMITED)
+API_VERSION = "1.7.0"          # 1.7.0: default calendar provider is Umm al-Qura; 1.6.0: error codes and behaviour corrections (see docs/API.md).
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
 # Sprint 12: computation identity is owned by waqt-core (one definition for the
 # API, waqt-local, the SDK vectors and the reference apps). These two names are

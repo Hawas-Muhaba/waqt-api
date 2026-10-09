@@ -26,8 +26,9 @@ function findFreePort() {
 
 export async function startServer() {
   const port = await findFreePort();
+  const python = process.env.PYTHON || (process.platform === "win32" ? "python" : "python3");
   const child = spawn(
-    "python3",
+    python,
     ["-m", "uvicorn", "waqt.api:app", "--host", "127.0.0.1", "--port", String(port), "--log-level", "warning"],
     { cwd: REPO_ROOT, stdio: "ignore" }
   );

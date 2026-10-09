@@ -8,7 +8,8 @@
 
 Standard library only. The contract hash covers requirements, vectors, the unresolved-question registry and the
 COP; it deliberately does NOT cover baselines/known-failures.json (status, not contract), which is hashed
-separately so a report can show both.
+separately so a report can show both. Manifest paths use POSIX separators and text hashes normalize line endings so
+Windows and POSIX checkouts compute the same contract.
 """
 from __future__ import annotations
 
@@ -30,7 +31,9 @@ STATUSES = ("resolved", "deferred", "unresolved-by-design")
 
 
 def sha256(p: Path) -> str:
-    return hashlib.sha256(p.read_bytes()).hexdigest()
+    # Contract files are text; normalize checkout line endings for stable hashes on Windows and POSIX.
+    content = p.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(content).hexdigest()
 
 
 def load(p: Path):
@@ -49,7 +52,7 @@ def compute() -> dict:
     req = load(REQ)
     files = {}
     for p in contract_files():
-        rel = str(p.relative_to(CONF))
+        rel = p.relative_to(CONF).as_posix()
         info = {"sha256": sha256(p)}
         if p.parent.name == "vectors":
             d = load(p)

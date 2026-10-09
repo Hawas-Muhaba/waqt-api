@@ -22,9 +22,9 @@ def _err(r):
 
 
 # ------------------------------------------------------------------ DIS-001
-def test_api_version_is_1_6_0():
+def test_api_version_includes_sprint_16_contract_changes():
     r = client.get("/v1/waqt", params={**ADDIS, "instant": "2026-09-19T15:42:00Z"})
-    assert r.json()["meta"]["api_version"] == "1.6.0"
+    assert r.json()["meta"]["api_version"] == "1.7.0"
 
 
 @pytest.mark.parametrize(
@@ -37,7 +37,9 @@ def test_api_version_is_1_6_0():
     ],
 )
 def test_waqt_label_is_the_civil_date_of_the_closing_maghrib(params, instant, hijri, weekday):
-    d = client.get("/v1/waqt", params={**params, "instant": instant}).json()["data"]
+    d = client.get("/v1/waqt", params={
+        **params, "instant": instant, "calendar_provider": "arithmetic-tabular",
+    }).json()["data"]
     assert d["hijri"]["date"] == hijri and d["weekday"] == weekday
 
 
@@ -52,7 +54,10 @@ def test_next_event_after_maghrib_is_tonights_isha():
 # ------------------------------------------------------------------ DIS-002
 @pytest.mark.parametrize("y,m,d", [(1448, 2, 30), (0, 1, 1), (-5, 1, 1), (1448, 12, 30)])
 def test_nonexistent_hijri_day_is_invalid_hijri_date(y, m, d):
-    r = client.get("/v1/conversions", params={"direction": "to-gregorian", "year": y, "month": m, "day": d})
+    r = client.get("/v1/conversions", params={
+        "direction": "to-gregorian", "year": y, "month": m, "day": d,
+        "calendar_provider": "arithmetic-tabular",
+    })
     assert r.status_code == 400
     e = _err(r)
     assert e["code"] == "INVALID_HIJRI_DATE"
@@ -60,7 +65,10 @@ def test_nonexistent_hijri_day_is_invalid_hijri_date(y, m, d):
 
 
 def test_leap_year_day_30_of_dhu_al_hijjah_converts():
-    r = client.get("/v1/conversions", params={"direction": "to-gregorian", "year": 1447, "month": 12, "day": 30})
+    r = client.get("/v1/conversions", params={
+        "direction": "to-gregorian", "year": 1447, "month": 12, "day": 30,
+        "calendar_provider": "arithmetic-tabular",
+    })
     assert r.status_code == 200 and r.json()["data"]["output"]["gregorian_date"] == "2026-06-16"
 
 

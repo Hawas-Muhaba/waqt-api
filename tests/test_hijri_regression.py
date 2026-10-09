@@ -176,10 +176,24 @@ def test_api_umm_al_qura_exposes_date_and_selected_provider(instant, day):
     assert h["provider"]["name"] == "umm-al-qura" and h["provider"]["version"]
 
 
-def test_api_default_provider_is_explicit_and_documented_arithmetic_tabular():
-    """The API default is unchanged (changing it would change the contract). It is identifiable in every response."""
+def test_api_default_provider_is_umm_al_qura():
+    """The default follows the web app; callers can still request arithmetic-tabular explicitly."""
     h = _api("2026-10-08T09:00:00Z")["hijri"]
+    assert h["provider"]["name"] == "umm-al-qura" and h["day"] == 27
+
+
+def test_api_explicit_arithmetic_tabular_remains_available():
+    h = _api("2026-10-08T09:00:00Z", "arithmetic-tabular")["hijri"]
     assert h["provider"]["name"] == "arithmetic-tabular" and h["day"] == 25
+
+
+def test_hijri_and_conversion_endpoints_default_to_umm_al_qura():
+    hijri = client.get("/v1/hijri", params={"date": "2026-10-08"}).json()["data"]["hijri"]
+    converted = client.get("/v1/conversions", params={
+        "direction": "to-hijri", "date": "2026-10-08",
+    }).json()["data"]["output"]["hijri"]
+    assert hijri["provider"]["name"] == converted["provider"]["name"] == "umm-al-qura"
+    assert hijri["day"] == converted["day"] == 27
 
 
 def test_api_provider_choice_never_changes_waqt_time():

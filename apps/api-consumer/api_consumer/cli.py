@@ -17,7 +17,7 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument("--lat", type=float, required=True)
     ap.add_argument("--lon", type=float, required=True)
     ap.add_argument("--instant", default=None, help="ISO 8601 (default: now)")
-    ap.add_argument("--provider", default="arithmetic-tabular")
+    ap.add_argument("--provider", default="umm-al-qura")
     return ap
 
 

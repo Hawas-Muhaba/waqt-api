@@ -24,7 +24,7 @@ from ..core import AstronomyProfile, Location, compute_waqt
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 from .common import computation_block, hijri_block, iso, parse_instant, profile_block, reading, success, timezone_block
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -71,7 +71,7 @@ def get_waqt(
     isha_angle: float = Query(17.0, description="Isha depression angle, degrees"),
     asr_ratio: float = Query(1.0, description="Asr shadow ratio: 1.0 = standard, 2.0 = Hanafi"),
     calendar_provider: str = Query(
-        "arithmetic-tabular", description=f"One of: {', '.join(PROVIDER_CATALOG)}. See GET /v1/calendar."
+        DEFAULT_CALENDAR_PROVIDER, description=f"One of: {', '.join(PROVIDER_CATALOG)}. See GET /v1/calendar."
     ),
     override_date: Optional[str] = Query(
         None, description="For calendar_provider=declared|local-observation: the Gregorian date (YYYY-MM-DD) this override applies to."

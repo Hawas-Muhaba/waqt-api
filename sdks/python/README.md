@@ -62,7 +62,7 @@ from waqt_client import WaqtClient, WaqtClientConfig
 config = WaqtClientConfig(
     base_url="https://your-deployment.example.com",
     timeout_seconds=5.0,
-    default_calendar_provider="umm-al-qura",   # applied unless a call overrides it
+    default_calendar_provider="umm-al-qura", # server default since API 1.7.0; applied unless overridden
     default_asr_shadow_ratio=2.0,              # Hanafi, applied unless overridden
     on_version_mismatch="warn",                # "ignore" | "warn" | "raise"
 )

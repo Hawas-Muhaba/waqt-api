@@ -11,7 +11,7 @@ KIRITIMATI = dict(lat=1.87, lon=-157.4)
 
 def test_health_reports_new_api_version():
     r = c.get("/v1/health")
-    assert r.json()["api_version"] == "1.6.0"
+    assert r.json()["api_version"] == "1.7.0"
 
 
 # ---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ def test_convert_instant_with_location_gives_full_bundle():
     assert b["waqt"]["status"] == "OK"
     assert b["waqt"]["day"]["hijri"]["date"] is not None
     assert b["waqt"]["day"]["weekday"] is not None
-    assert b["calendar_provider"]["name"] == "arithmetic-tabular"
+    assert b["calendar_provider"]["name"] == "umm-al-qura"
 
 
 def test_convert_instant_defaults_to_now_when_omitted():

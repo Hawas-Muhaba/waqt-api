@@ -20,7 +20,7 @@ from typing import Callable, Literal, Optional
 # compatible with a thin, spec-driven SDK like this one.
 SUPPORTED_API_MAJOR_VERSION = 1
 MIN_SUPPORTED_API_VERSION = "1.0.0"
-MAX_KNOWN_API_VERSION = "1.5.0"
+MAX_KNOWN_API_VERSION = "1.7.0"
 
 DEFAULT_BASE_URL = "https://waqt-api.onrender.com"
 DEFAULT_TIMEOUT_SECONDS = 10.0

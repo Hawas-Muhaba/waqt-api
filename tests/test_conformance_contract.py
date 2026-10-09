@@ -26,6 +26,23 @@ def test_contract_verify_reports_no_problem():
     assert "contract verify: ok" in p.stdout
 
 
+def test_contract_manifest_is_portable_across_path_and_line_endings(tmp_path):
+    work = tmp_path / "conformance"
+    for name in ("spec", "vectors", "baselines", "decisions", "tools"):
+        shutil.copytree(CONF / name, work / name)
+    for name in ("CHANGELOG.md", "contract.json"):
+        shutil.copy(CONF / name, work / name)
+    inputs = [work / "spec" / "requirements.json", work / "spec" / "open-questions.json",
+              work / "spec" / "COP.md", work / "baselines" / "known-failures.json",
+              *sorted((work / "vectors").glob("*.json"))]
+    for path in inputs:
+        path.write_bytes(path.read_bytes().replace(b"\r\n", b"\n"))
+    p = _run(work / "tools" / "contract.py", "verify", cwd=work)
+    assert p.returncode == 0, p.stdout + p.stderr
+    manifest = json.loads((work / "contract.json").read_text(encoding="utf-8"))
+    assert all("\\" not in path for path in manifest["files"])
+
+
 def test_unresolved_questions_are_always_visible():
     reg = json.loads((CONF / "spec" / "open-questions.json").read_text(encoding="utf-8"))["questions"]
     by = {q["id"]: q for q in reg}

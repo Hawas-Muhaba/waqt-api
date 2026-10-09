@@ -1,26 +1,26 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "c2ed8ff1c7f9a757b1a1b8df743f1c1a9bf0ac49169b736180ecef4e7a9504b5",
+ "contract_sha256": "c6011d8bc7bc6c5792fe14511480ca0444522a2869fc4b30d13b94d1a6d66c23",
  "files": {
-  "spec\\requirements.json": {
-   "sha256": "56cf51d5ea4dce14c641b08a861f87a84ea2d7927041cd967a29fb1ecd6d0d1d"
+  "spec/requirements.json": {
+   "sha256": "cc984010eed273a34c543c22398ddd23bbef8ba64551f191ad2f983bc66d4847"
   },
-  "spec\\open-questions.json": {
+  "spec/open-questions.json": {
    "sha256": "1bd085f18cddf25b414e228bef3db501ed59b368f609858d00c0bf21fcd0dd50"
   },
-  "spec\\COP.md": {
+  "spec/COP.md": {
    "sha256": "7baee31c7b8f91bd6b7b623b36fe922ae0830f73917243c02d7215e9a55761f5"
   },
-  "vectors\\calendar-core.json": {
-   "sha256": "061817bebbc484fc33174494a3a32045e747e2a385ebf1b837103251750ddb29",
+  "vectors/calendar-core.json": {
+   "sha256": "07027ca395d9c0afffbdb969601775ce3ba5b812682bf2e956524e6afd8b68ac",
    "vectors": 81,
    "metamorphic": 0,
    "tiers": {
     "exact": 81
    }
   },
-  "vectors\\calendar-providers.json": {
+  "vectors/calendar-providers.json": {
    "sha256": "994d55ee2a8df9b32f4438bda4962bb000ef675e7b871dbef7f6ed88f394f88a",
    "vectors": 9,
    "metamorphic": 0,
@@ -28,8 +28,8 @@
     "exact": 9
    }
   },
-  "vectors\\calendar-uaq.json": {
-   "sha256": "2875b1f74b1faeb69ba2f505bd122f2d6b9d021e19952eb4ea02ba89634ed753",
+  "vectors/calendar-uaq.json": {
+   "sha256": "ab1c6979d350949186f17b286933f435172aca1e59c8315b303b8cd4ebc83446",
    "vectors": 56,
    "metamorphic": 0,
    "tiers": {
@@ -37,8 +37,8 @@
     "informative": 43
    }
   },
-  "vectors\\day-model.json": {
-   "sha256": "49e75b36d5dbc7e81b81cb52cf8ea2f13664488a763af8ebbce4e9e89d0e2896",
+  "vectors/day-model.json": {
+   "sha256": "222b990481a2e848a64599be052ae198b0edf851d57848659d720a58902e870c",
    "vectors": 304,
    "metamorphic": 0,
    "tiers": {
@@ -46,8 +46,8 @@
     "tolerance": 152
    }
   },
-  "vectors\\errors.json": {
-   "sha256": "7f25884ec81f473f36ba8574643660c1b5d9cd56ea3fd017ba0c7abe7d19285e",
+  "vectors/errors.json": {
+   "sha256": "47ccb11dd27274b639ab59a05e40fc5a8f14d6db56bfcd0f469138fa7289b85e",
    "vectors": 13,
    "metamorphic": 0,
    "tiers": {
@@ -55,7 +55,7 @@
     "open": 5
    }
   },
-  "vectors\\gregorian-time.json": {
+  "vectors/gregorian-time.json": {
    "sha256": "5c1d49b58d9801994b732a07ccade0584999fb506f571788720b320a1bb92b66",
    "vectors": 31,
    "metamorphic": 0,
@@ -63,7 +63,7 @@
     "exact": 31
    }
   },
-  "vectors\\legacy-institutional.json": {
+  "vectors/legacy-institutional.json": {
    "sha256": "d9de9ed7269471b2bf39b6c03cafca0deb7be8fb0813c3e4490f0aad28ca6422",
    "vectors": 40,
    "metamorphic": 0,
@@ -72,7 +72,7 @@
     "informative": 9
    }
   },
-  "vectors\\legacy-interop.json": {
+  "vectors/legacy-interop.json": {
    "sha256": "07183ae9048dd75377cf4a75264813f076091f65e1fd2564dd20dd0ce978ba80",
    "vectors": 21,
    "metamorphic": 0,
@@ -82,16 +82,16 @@
     "exact": 9
    }
   },
-  "vectors\\legacy-scheduling.json": {
-   "sha256": "e803c4ef3cfe27a3916d586b32f92743997565d10e5c2366bfd791ce9e74854e",
+  "vectors/legacy-scheduling.json": {
+   "sha256": "3d0b39f75fd78ea3b5da131066662b99c0f27ef8c12a019fb0ecb1ed5d8ffb2a",
    "vectors": 116,
    "metamorphic": 0,
    "tiers": {
     "exact": 116
    }
   },
-  "vectors\\legacy-waqt.json": {
-   "sha256": "46124a4407430c7de3015238e5f0a4a2471f9473b90b09a76afdf4a6928e2a33",
+  "vectors/legacy-waqt.json": {
+   "sha256": "4a3bd80c495589fcc553e30d9ab7a4ec46484269e7267526fb081b2607c85278",
    "vectors": 10,
    "metamorphic": 0,
    "tiers": {
@@ -99,21 +99,21 @@
     "informative": 3
    }
   },
-  "vectors\\metamorphic.json": {
+  "vectors/metamorphic.json": {
    "sha256": "ff2bf02540473cea9c52a76386f73fa34033ec1527cbfcaf89c90149ea20dd87",
    "vectors": 0,
    "metamorphic": 43,
    "tiers": {}
   },
-  "vectors\\open-questions.json": {
-   "sha256": "57dd205ae9b2b8d35d506b6057f1405c2c2ea24e5bb7aa106ab3c2f703d5fe3d",
+  "vectors/open-questions.json": {
+   "sha256": "60425dde4b22914dd46a464460a1535d616b1b1c8068af90d6465a50949384e4",
    "vectors": 3,
    "metamorphic": 0,
    "tiers": {
     "open": 3
    }
   },
-  "vectors\\provider-failure.json": {
+  "vectors/provider-failure.json": {
    "sha256": "47c0820c829abe4fd29c6f8b07c261c1e8e0f9aac82dc9069dd29ce4c0b0cae1",
    "vectors": 25,
    "metamorphic": 0,
@@ -122,7 +122,7 @@
     "open": 3
    }
   },
-  "vectors\\scheduling-defaults.json": {
+  "vectors/scheduling-defaults.json": {
    "sha256": "3e94dd3a9273540de01a3abc4859b0278281303764bfbef1c1dd11d0eb34c94f",
    "vectors": 7,
    "metamorphic": 0,
@@ -130,7 +130,7 @@
     "exact": 7
    }
   },
-  "vectors\\scheduling-live.json": {
+  "vectors/scheduling-live.json": {
    "sha256": "0880a5bcfe12da4f33228907e66dad1db40d62297e66144665225f0604265efa",
    "vectors": 17,
    "metamorphic": 0,
@@ -152,7 +152,7 @@
   "unresolved-by-design": 1
  },
  "status": {
-  "known_failures_sha256": "10c4e882cca4d6516b9986980e0e669cde5aca1075cb64f31d6685872cb3b70c",
+  "known_failures_sha256": "81923f592eba26ff358076608f3d09dd4a8d8f43eea3ca325ef2a7c7c041faf2",
   "reference_known_failures": 0,
   "independent_known_failures": 0
  },

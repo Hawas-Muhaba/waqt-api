@@ -55,7 +55,7 @@ where appropriate" for this language.
 const client = new WaqtClient({
   baseUrl: "https://your-deployment.example.com",
   timeoutMs: 5000,
-  defaultCalendarProvider: "umm-al-qura",
+  defaultCalendarProvider: "umm-al-qura", // API 1.7.0 default; caller override still wins
   defaultAsrShadowRatio: 2.0,           // Hanafi, applied unless a call overrides it
   onVersionMismatch: "warn",            // "ignore" | "warn" | "raise"
 });

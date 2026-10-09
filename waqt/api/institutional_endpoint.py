@@ -45,7 +45,7 @@ from ..institutional.academic_year import AcademicCalendar, HolidayDefinition, T
 from ..institutional.fiscal_year import FiscalCalendar
 from ..scheduling import SchedulingContext
 from .common import ApiError, ErrorCode, hijri_block, iso, success
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -98,7 +98,7 @@ def get_week(
     instant: Optional[str] = Query(None, description="ISO 8601 UTC instant; defaults to now"),
     first_day: str = Query("al-Ahad", description="Islamic weekday name that starts the week"),
     jumuah_day: str = Query("al-Jumuah"),
-    calendar_provider: str = Query("arithmetic-tabular"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER),
 ):
     from .common import parse_instant
 
@@ -125,7 +125,7 @@ def get_fiscal_year(
     lat: Optional[float] = Query(None, ge=-90, le=90),
     lon: Optional[float] = Query(None, ge=-180, le=180),
     elevation_m: float = Query(0.0, ge=0),
-    calendar_provider: str = Query("arithmetic-tabular"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER),
 ):
     provider = _provider(calendar_provider)
     year = hijri_year if hijri_year is not None else _hijri_year_for_instant(instant, provider)
@@ -153,7 +153,7 @@ def post_fiscal_year_resolve(
         raise ApiError(400, ErrorCode.INVALID_CALENDAR_RULE, "Request body must be a JSON object", {})
     if "hijri_year" not in body:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`hijri_year` is required", {})
-    provider = _provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = _provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _optional_location(body.get("location"))
     ctx = SchedulingContext(loc, calendar_provider=provider) if loc is not None else None
 
@@ -180,7 +180,7 @@ def get_academic_year(
     lat: Optional[float] = Query(None, ge=-90, le=90),
     lon: Optional[float] = Query(None, ge=-180, le=180),
     elevation_m: float = Query(0.0, ge=0),
-    calendar_provider: str = Query("arithmetic-tabular"),
+    calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER),
 ):
     provider = _provider(calendar_provider)
     year = hijri_year if hijri_year is not None else _hijri_year_for_instant(instant, provider)
@@ -220,7 +220,7 @@ def post_academic_year_resolve(
         raise ApiError(400, ErrorCode.INVALID_CALENDAR_RULE, "Request body must be a JSON object", {})
     if "hijri_year" not in body:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`hijri_year` is required", {})
-    provider = _provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = _provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _optional_location(body.get("location"))
     ctx = SchedulingContext(loc, calendar_provider=provider) if loc is not None else None
 
@@ -242,7 +242,7 @@ def post_academic_year_resolve(
 
 
 @router.get("/v1/institutional/profile")
-def get_default_profile(calendar_provider: str = Query("arithmetic-tabular")):
+def get_default_profile(calendar_provider: str = Query(DEFAULT_CALENDAR_PROVIDER)):
     """A demo CalendarProfile as pure data — see waqt.institutional.profile.
     Not a claim that this is THE profile; it demonstrates the shape."""
     provider = _provider(calendar_provider)

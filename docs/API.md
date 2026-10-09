@@ -9,9 +9,10 @@ Base URL: wherever you deployed it (e.g. `https://waqt-api.onrender.com`). Inter
 ## 1. Versioning
 
 - The URL path carries the major version: every endpoint is under `/v1/`. A breaking change gets `/v2/`; `/v1/` never changes shape once released.
-- Every response also carries `meta.api_version` (currently `1.6.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
+- Every response also carries `meta.api_version` (currently `1.7.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
 
 - **1.6.0 (Sprint 16, conformance contract 2.0.0).** Additive: error codes `INVALID_HIJRI_DATE`, `UNKNOWN_TIMEZONE`, `OUT_OF_RANGE` (section 3). Two *corrections* to behaviour that contradicted the written specification, both recorded in `conformance/CHANGELOG.md`: the Hijri date / weekday of a Waqt day are those of the **civil** date of its closing Maghrib instant (SEMANTICS section 3, DAY-004), and `next_event` is the next event **by occurrence** (see `GET /v1/waqt`). No field was added, removed or renamed.
+- **1.7.0.** The default `calendar_provider` for endpoints that accept it is now `umm-al-qura` (previously `arithmetic-tabular`). The response shape is unchanged; callers can continue to request either provider explicitly. See section 6 and [`CALENDARS.md`](CALENDARS.md) for the provider's approximation caveat.
 
 ## 2. The envelope
 
@@ -19,7 +20,7 @@ Every response, success or failure, has exactly this shape:
 
 ```json
 {
-  "meta": { "api_version": "1.6.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
+  "meta": { "api_version": "1.7.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
   "data": { ... or null on error ... },
   "error": { "code": "...", "message": "...", "details": {...} } // or null on success
 }
@@ -88,7 +89,7 @@ Everything: day boundary, clock reading, all six events, Hijri date, timezone.
 | `timezone_override` | no | (looked up) | force an IANA zone, skip lookup |
 | `fajr_angle`, `isha_angle` | no | `18.0`, `17.0` | degrees below horizon |
 | `asr_ratio` | no | `1.0` | `1.0` standard, `2.0` Hanafi |
-| `calendar_provider` | no | `arithmetic-tabular` | see `GET /v1/calendar` |
+| `calendar_provider` | no | `umm-al-qura` | default since API 1.7.0; see `GET /v1/calendar` and section 6 |
 | `override_date`, `declared_year/month/day` | no | — | see §8 below — **only take effect if `override_date` exactly matches the label date** |
 | `sighting_year/month/day`, `observed_at` | no | — | same, for `local-observation` |
 
@@ -105,6 +106,7 @@ Same location/instant/timezone/profile params as `/v1/waqt`. **No `calendar_prov
 GET /v1/hijri?date=2026-09-20&calendar_provider=umm-al-qura
 ```
 **Takes no `lat`/`lon`.** Per the Core Time Model, the Gregorian→Hijri mapping is location-independent — Makkah computes the date once, for everyone. See §8 for the one thing that trips people up here.
+When omitted, `calendar_provider` defaults to `umm-al-qura`, as on the other API endpoints that accept a provider.
 
 ### `GET /v1/calendar` — provider discovery
 No params. Lists every `calendar_provider` value, its description, whether it needs an override to do anything, and whether it supports reverse conversion.
@@ -188,7 +190,7 @@ That's the whole integration for a typical wall-display or timetable use case �
 ### The `hijri` object and provider identification (clarification)
 
 `data.hijri` is the label of the *Waqt day* that contains `instant`, produced by the provider selected with
-`calendar_provider` (default `arithmetic-tabular`). It always carries `year`, `month`, `month_name`, `day`, `display`
+`calendar_provider` (default `umm-al-qura`). It always carries `year`, `month`, `month_name`, `day`, `display`
 and `provider.{name,version}`, so a consumer can tell which calendar convention produced it. Different providers can
 legitimately return different days for the same instant (see `docs/CALENDARS.md`, "Choosing a Hijri provider"); the
 Waqt reading, day boundaries and events are identical across providers.

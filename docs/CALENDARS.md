@@ -89,7 +89,7 @@ Only providers with a fixed, invertible rule support this: `arithmetic-tabular` 
 Waqt's day, reading and events never depend on the Hijri provider; only the **Hijri label** does. Two providers can
 therefore label the same Waqt day differently, and that is expected:
 
-| Gregorian civil date | `arithmetic-tabular` (API default) | `umm-al-qura` |
+| Gregorian civil date | `arithmetic-tabular` (explicit) | `umm-al-qura` (API default since 1.7.0) |
 |---|---|---|
 | 2026-10-06 | 23 Rabi al-Thani 1448 | 25 Rabi al-Thani 1448 |
 | 2026-10-07 | 24 Rabi al-Thani 1448 | 26 Rabi al-Thani 1448 |
@@ -107,5 +107,7 @@ location's own timezone (DR-0001), and that date is what the provider converts. 
 once per Waqt day, at Maghrib — not at midnight, not at the UTC date change, and not in the server's timezone.
 
 Reproduce: `python3 -m pytest tests/test_hijri_regression.py -v` (the oracle test needs `pip install hijridate==2.3.0`).
-Waqt Web asks for `umm-al-qura` by default (a presentation choice made in `apps/web/assets/js/config.js`); the API's own
-default is unchanged because changing it would change the API contract.
+Since API 1.7.0, the API and Waqt Web both default to `umm-al-qura`, chosen to align the out-of-the-box experience
+with the Umm al-Qura convention while keeping the provider visible in responses. This provider is an astronomical
+approximation of the official table, not the table itself. Clients needing the classical deterministic 30-year-cycle
+calendar can request `calendar_provider=arithmetic-tabular` explicitly; provider choice never changes Waqt times.
