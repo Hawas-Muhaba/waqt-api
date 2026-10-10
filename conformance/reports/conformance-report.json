@@ -1,17 +1,17 @@
 {
  "meta": {
-  "generated": "2026-10-10 03:20 UTC",
+  "generated": "2026-10-10 16:08 UTC",
   "cop": "1.1",
   "contract": {
    "contract_version": "2.0.0",
-   "contract_sha256": "c6011d8bc7bc6c5792fe14511480ca0444522a2869fc4b30d13b94d1a6d66c23",
+   "contract_sha256": "885ad4b6eef4abd12caf66277d709e84ff0f727c2ed9d1cdd67d54496218d88a",
    "manifest_matches_files": true,
    "released": false,
    "cop_version": "1.1",
    "questions": {
-    "total": 28,
+    "total": 29,
     "resolved": 16,
-    "deferred": 11,
+    "deferred": 12,
     "unresolved-by-design": 1
    },
    "unresolved": [
@@ -74,6 +74,11 @@
      "id": "OQ-PRV-3",
      "status": "deferred",
      "topic": "Outbound budget refill granularity"
+    },
+    {
+     "id": "OQ-CAL-1",
+     "status": "deferred",
+     "topic": "Omitted provider (umm-al-qura) outside 1700..2300: must waqt.compute / calendar.* refuse with OUT_OF_RANGE, or return the Waqt day with an empty Hijri label?"
     }
    ],
    "unenforced_musts": [
@@ -114,7 +119,7 @@
     "schedule.run",
     "waqt.compute"
    ],
-   "seconds": 8.67,
+   "seconds": 9.6,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -1011,6 +1016,90 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "There is no year zero and no negative year: the tabular domain starts at 1 AH (DR-0006)."
+    },
+    {
+     "id": "default/new-year/1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year-forward/1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year-forward/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year/1447",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year-forward/1447",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year-forward/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/day-before-new-year-1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/day-before-new-year-1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/label/date-to-waqt-day/addis/2025-06-26",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "DAY-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+    },
+    {
+     "id": "default/label/compute-midday/addis/2025-06-26",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "DAY-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
     },
     {
      "id": "reverse-unsupported/declared",
@@ -5957,7 +6046,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day"
+     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "label/compute-midday/kiritimati/2026-09-20",
@@ -6065,7 +6154,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree"
+     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "label/compute-midday/addis/2026-09-20",
@@ -6134,7 +6223,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001)."
+     "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001). [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "err/lat-91",
@@ -8916,6 +9005,28 @@
      "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
     },
     {
+     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+     "suite": "open-questions",
+     "tier": "open",
+     "requirements": [
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "PROPOSED: the Waqt day is returned with an empty Hijri label (a calendar failure never fails a Waqt computation; API 1.5.0 calendar_error). The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
+    },
+    {
+     "id": "default/out-of-range/compute/addis/1699-09-19",
+     "suite": "open-questions",
+     "tier": "open",
+     "requirements": [
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "PROPOSED: status OK with an empty Hijri label. The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
+    },
+    {
      "id": "aladhan/single/timeout",
      "suite": "provider-failure",
      "tier": "exact",
@@ -9941,7 +10052,7 @@
     "instant.parse",
     "date.parse"
    ],
-   "seconds": 15.76,
+   "seconds": 14.5,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -10838,6 +10949,90 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "There is no year zero and no negative year: the tabular domain starts at 1 AH (DR-0006)."
+    },
+    {
+     "id": "default/new-year/1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year-forward/1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year-forward/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year/1447",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/new-year-forward/1447",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/new-year-forward/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/day-before-new-year-1438",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-005"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "Copy of normative vector uaq/day-before-new-year-1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+    },
+    {
+     "id": "default/label/date-to-waqt-day/addis/2025-06-26",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "DAY-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+    },
+    {
+     "id": "default/label/compute-midday/addis/2025-06-26",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "DAY-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
     },
     {
      "id": "reverse-unsupported/declared",
@@ -15820,7 +16015,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day"
+     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "label/compute-midday/kiritimati/2026-09-20",
@@ -15928,7 +16123,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree"
+     "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "label/compute-midday/addis/2026-09-20",
@@ -15997,7 +16192,7 @@
      ],
      "verdict": "PASS",
      "diffs": [],
-     "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001)."
+     "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001). [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
     },
     {
      "id": "err/lat-91",
@@ -18748,6 +18943,40 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
+    },
+    {
+     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+     "suite": "open-questions",
+     "tier": "open",
+     "requirements": [
+      "CAL-012"
+     ],
+     "verdict": "FAIL",
+     "diffs": [
+      [
+       "$",
+       "expected success",
+       "{\"code\": \"OUT_OF_RANGE\", \"message\": \"umm-al-qura is supported for 1700-01-01..2300-12-31 only\"}"
+      ]
+     ],
+     "note": "PROPOSED: the Waqt day is returned with an empty Hijri label (a calendar failure never fails a Waqt computation; API 1.5.0 calendar_error). The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
+    },
+    {
+     "id": "default/out-of-range/compute/addis/1699-09-19",
+     "suite": "open-questions",
+     "tier": "open",
+     "requirements": [
+      "CAL-012"
+     ],
+     "verdict": "FAIL",
+     "diffs": [
+      [
+       "$",
+       "expected success",
+       "{\"code\": \"OUT_OF_RANGE\", \"message\": \"umm-al-qura is supported for 1700-01-01..2300-12-31 only\"}"
+      ]
+     ],
+     "note": "PROPOSED: status OK with an empty Hijri label. The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
     },
     {
      "id": "aladhan/single/timeout",

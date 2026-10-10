@@ -15,3 +15,4 @@ earlier one, it does not edit it.
 | [DR-0007](DR-0007.md) | Umm al-Qura: range, chain, and what stays unresolved | OQ-UAQ-1 and OQ-UAQ-3 (resolved), OQ-UAQ-2 (UNRESOLVED BY DESIGN) |
 | [DR-0008](DR-0008.md) | Scheduling rules that lived only in vectors | OQ-SCH-1 to OQ-SCH-5 (resolved) |
 | [DR-0009](DR-0009.md) | Default Hijri provider of the HTTP API is `umm-al-qura` (API 1.7.0) | none (API-level; no contract requirement) |
+| [DR-0010](DR-0010.md) | Default calendar provider of the contract and of waqt-core is `umm-al-qura` | CAL-012 (ratification PENDING) |

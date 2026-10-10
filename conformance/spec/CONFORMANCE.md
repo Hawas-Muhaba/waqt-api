@@ -1,7 +1,7 @@
 # Waqt Conformance Specification v1.0
 
 > Status: Sprint 15. Companion documents: [`COP.md`](COP.md) (the protocol), [`requirements.json`](requirements.json)
-> (<!-- generated:requirement-count -->71 requirement IDs (67 MUST, 4 OPEN)<!-- /generated -->), [`OPEN-QUESTIONS.md`](OPEN-QUESTIONS.md), and [`../DISAGREEMENTS.md`](../DISAGREEMENTS.md).
+> (<!-- generated:requirement-count -->72 requirement IDs (68 MUST, 4 OPEN)<!-- /generated -->), [`OPEN-QUESTIONS.md`](OPEN-QUESTIONS.md), and [`../DISAGREEMENTS.md`](../DISAGREEMENTS.md).
 
 ## 1. What conformance means here
 

@@ -1,16 +1,16 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "c6011d8bc7bc6c5792fe14511480ca0444522a2869fc4b30d13b94d1a6d66c23",
+ "contract_sha256": "885ad4b6eef4abd12caf66277d709e84ff0f727c2ed9d1cdd67d54496218d88a",
  "files": {
   "spec/requirements.json": {
-   "sha256": "cc984010eed273a34c543c22398ddd23bbef8ba64551f191ad2f983bc66d4847"
+   "sha256": "09abeb61cd48720538c7f005460287bdc04a7ec990b99e4638471d58f170b95d"
   },
   "spec/open-questions.json": {
-   "sha256": "1bd085f18cddf25b414e228bef3db501ed59b368f609858d00c0bf21fcd0dd50"
+   "sha256": "e574a3cb14fe6a2c1408c93f4adf63ae9026b920cd25e2b619a6abe3c360da6e"
   },
   "spec/COP.md": {
-   "sha256": "7baee31c7b8f91bd6b7b623b36fe922ae0830f73917243c02d7215e9a55761f5"
+   "sha256": "444f654bedd576b171027fce724a727f44a33309579c487c04a356d8d1bfd66e"
   },
   "vectors/calendar-core.json": {
    "sha256": "07027ca395d9c0afffbdb969601775ce3ba5b812682bf2e956524e6afd8b68ac",
@@ -18,6 +18,14 @@
    "metamorphic": 0,
    "tiers": {
     "exact": 81
+   }
+  },
+  "vectors/calendar-default.json": {
+   "sha256": "33754d95efd7b8f47a895c6ad32d5859dbd2d87ae56c47c8f3e7ca53e2e11329",
+   "vectors": 7,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 7
    }
   },
   "vectors/calendar-providers.json": {
@@ -38,7 +46,7 @@
    }
   },
   "vectors/day-model.json": {
-   "sha256": "222b990481a2e848a64599be052ae198b0edf851d57848659d720a58902e870c",
+   "sha256": "4d6fdf9a7a1f9830800af31ea1a0dd76508b51c1303e121e21da61bd49fd4cc8",
    "vectors": 304,
    "metamorphic": 0,
    "tiers": {
@@ -106,11 +114,11 @@
    "tiers": {}
   },
   "vectors/open-questions.json": {
-   "sha256": "60425dde4b22914dd46a464460a1535d616b1b1c8068af90d6465a50949384e4",
-   "vectors": 3,
+   "sha256": "60770b6896de84ed7c85d1286f2c74d74fa99a6c6e230ef18afbe3da3dc859f3",
+   "vectors": 5,
    "metamorphic": 0,
    "tiers": {
-    "open": 3
+    "open": 5
    }
   },
   "vectors/provider-failure.json": {
@@ -141,14 +149,14 @@
   }
  },
  "requirements": {
-  "total": 71,
-  "must": 67,
+  "total": 72,
+  "must": 68,
   "open": 4
  },
  "questions": {
-  "total": 28,
+  "total": 29,
   "resolved": 16,
-  "deferred": 11,
+  "deferred": 12,
   "unresolved-by-design": 1
  },
  "status": {

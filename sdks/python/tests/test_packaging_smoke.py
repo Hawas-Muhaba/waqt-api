@@ -54,7 +54,7 @@ SMOKE_SCRIPT = """
 import waqt_client
 from waqt_client import requests as R, WaqtClient, AsyncWaqtClient
 
-assert waqt_client.__version__ == "0.3.1", waqt_client.__version__
+assert waqt_client.__version__ == "__EXPECTED_VERSION__", waqt_client.__version__
 
 req = R.ScheduleResolveRequest(lat=9.0192, lon=38.7525, operation=R.NextEventOp())
 body = req.to_json()
@@ -90,7 +90,9 @@ def test_clean_install_from_built_artifact(tmp_path, artifact_kind):
     assert install.returncode == 0, install.stderr
 
     smoke_file = tmp_path / "smoke.py"
-    smoke_file.write_text(SMOKE_SCRIPT)
+    import re
+    sdk_version = re.search(r'__version__\s*=\s*"([^"]+)"', (PKG_ROOT / "waqt_client" / "_version.py").read_text(encoding="utf-8")).group(1)   # never a literal: it would go stale on every bump
+    smoke_file.write_text(SMOKE_SCRIPT.replace("__EXPECTED_VERSION__", sdk_version))
     result = subprocess.run([py, str(smoke_file)], capture_output=True, text=True, cwd=tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr
     assert "SMOKE OK" in result.stdout

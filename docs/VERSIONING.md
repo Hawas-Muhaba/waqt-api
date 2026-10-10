@@ -11,7 +11,7 @@ means.
 
 | Axis | Lives in | Current value | Changes when |
 |---|---|---|---|
-| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.4.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
+| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.5.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
 | **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.7.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
 | **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.7.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
@@ -21,11 +21,11 @@ Two more things look like versions and are easy to conflate with the axes
 above (Sprint 13 audit):
 
 - The **`waqt-api` distribution version** (`pyproject.toml` at the repo root,
-  currently `0.4.0`) is *not* the **API version** (`1.7.0`, the HTTP
+  currently `0.5.0`) is *not* the **API version** (`1.7.0`, the HTTP
   contract). The package can ship a fix without the contract moving, and the
   contract can gain an additive field in the same release as any package
   version. `GET /v1/version` reports the contract (`api_version`), never the
-  package version. `waqt-local` (`0.5.0`) likewise has its own version,
+  package version. `waqt-local` (`0.6.0`) likewise has its own version,
   reported as `waqt_local_version` only by `waqt_local.version()`.
 - `tests/test_version_consistency.py` enforces, mechanically, that each of
   these has its own literal source (nothing is computed from another), that
@@ -35,7 +35,7 @@ above (Sprint 13 audit):
   the running vector-set version and engine identity.
 
 A further thing that looks like a version but is not one: `waqt-cli`
-(`apps/cli`, `0.1.0`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
+(`apps/cli`, `0.2.0`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
 have their own versions too, same rule as an SDK — they track their own
 interface, not any of the five axes above.
 
@@ -111,6 +111,22 @@ waqt-core 0.3.0 → 0.4.0 ── engine revision "2" (unchanged: the fingerprint
      │                               frozen kiritimati-date-line label, two recorded next_event values)
      └── conformance contract 1.0.0 → 2.0.0   (conformance/VERSIONING.md: a narrowed accepted-code set is breaking)
 ```
+Option B (default calendar provider `umm-al-qura`; owner decision, DR-0009 / DR-0010):
+
+```
+waqt-core 0.4.0 → 0.5.0 ── engine revision "2" (unchanged: no solar output changed)
+     ├── waqt-api package 0.4.0 → 0.5.0, API contract 1.7.0 (unchanged: the 1.7.0 default change landed earlier, see
+     │        migrations/API-1.7.0-default-provider.md; this release only makes the API read the default from waqt-core
+     │        and fixes /v1/calendar/convert returning 500 outside 1700..2300; requires waqt-core>=0.5.0,<0.6)
+     ├── waqt-local 0.5.0 → 0.6.0   (default follows waqt-core; mirrors the additive blocks; requires waqt-core>=0.5.0,<0.6)
+     ├── waqt-cli 0.1.1 → 0.2.0     (--provider default follows waqt-local; requires waqt-local>=0.6.0,<0.7)
+     ├── SDKs 0.3.1 / 0.3.1, api-consumer 0.1.0   (unchanged: HTTP only; they omit the provider unless told)
+     ├── vector set 2.0             (unchanged: no expected value changed)
+     └── conformance contract 2.0.0 (draft, unreleased) + CAL-012: omitted provider = umm-al-qura (CCP-0001)
+```
+The API default and waqt-core's default are one definition (`waqt_core.calendar_providers.default`);
+`tests/test_default_provider_single_source.py` fails if any layer re-types it.
+
 Sprint 13 is the example of the *smallest* movement: a value that `waqt-core`
 reports changed (patch bump), while the engine revision, the HTTP contract and every
 other package stayed put. Nothing is inferred from anything else.

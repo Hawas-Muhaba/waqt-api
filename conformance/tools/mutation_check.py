@@ -10,6 +10,7 @@ MUT = [
  ("elevation dip ignored", "src/astro/events.mjs", "export const dipDeg = (elev) => (elev > 0 ? (1.76 / 60) * Math.sqrt(elev) : 0);", "export const dipDeg = (elev) => 0;", "EVT-006"),
  ("Isha angle used for Fajr", "src/astro/events.mjs", "morning('fajr', -profile.fajr_angle_deg, 'Fajr');", "morning('fajr', -profile.isha_angle_deg, 'Fajr');", "EVT-005"),
  ("Asr shadow ratio ignored", "src/astro/events.mjs", "Math.atan(1 / (profile.asr_shadow_ratio + Math.tan(zen)))", "Math.atan(1 / (1 + Math.tan(zen)))", "EVT-001"),
+ ("default provider reverted to arithmetic-tabular (omitted provider)", "src/defaults.mjs", "export const DEFAULT_PROVIDER = 'umm-al-qura';", "export const DEFAULT_PROVIDER = 'arithmetic-tabular';", "CAL-012"),
  ("tabular epoch off by one day", "src/calendar/tabular.mjs", "export const HIJRI_EPOCH_JDN = 1948440;", "export const HIJRI_EPOCH_JDN = 1948441;", "CAL-001"),
  ("stale-if-error disabled", "src/calendar/providers.mjs", "if (stale && now - stale.at < cfg.max_stale_seconds)", "if (false)", "PRV-004"),
  ("circuit breaker never opens", "src/calendar/providers.mjs", "if (now < openUntil) failure = 'circuit-open';", "if (false) failure = 'circuit-open';", "PRV-005"),
@@ -22,7 +23,7 @@ MUT = [
 def run(adapter_dir):
     cmd = [sys.executable, os.path.join(ROOT, "harness", "waqt_conform.py"), "--adapter", f"node {adapter_dir}/src/cli.mjs", "--label", "mut",
            "--out", tempfile.mkdtemp(), "--name", "m", "--suite", "day-model", "--suite", "metamorphic", "--suite", "calendar-core", "--suite", "calendar-providers",
-           "--suite", "provider-failure", "--suite", "legacy-scheduling", "--suite", "gregorian-time", "--suite", "scheduling-defaults"]
+           "--suite", "provider-failure", "--suite", "legacy-scheduling", "--suite", "gregorian-time", "--suite", "scheduling-defaults", "--suite", "calendar-default"]
     p = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=900, encoding="utf-8")
     m = re.search(r"normative pass=(\d+) fail=(\d+)", p.stderr)
     out = os.path.join(cmd[cmd.index("--out") + 1], "m.json")

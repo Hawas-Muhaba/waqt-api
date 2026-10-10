@@ -1,6 +1,6 @@
 {
   "browser": "HeadlessChrome (see run log)",
-  "ran_at": "2026-10-10T03:16:11.733Z",
+  "ran_at": "2026-10-10T16:11:34.594Z",
   "assertions": 58,
   "failed": 0,
   "results": [
@@ -38,13 +38,13 @@
       "id": "OB-S3",
       "name": "displayed Hijri date and provider label equal the API response (hijri.display / hijri.provider.name)",
       "ok": true,
-      "detail": "29 Rabi al-Thani 1448 AH | umm-al-qura vs 29 Rabi al-Thani 1448 AH | umm-al-qura"
+      "detail": "30 Rabi al-Thani 1448 AH | umm-al-qura vs 30 Rabi al-Thani 1448 AH | umm-al-qura"
     },
     {
       "id": "OB-S4",
       "name": "independent check at the same instant: screen == umm-al-qura and != arithmetic-tabular (the provider on the label is the one used)",
       "ok": true,
-      "detail": "29 Rabi al-Thani 1448 AH / uq 29 Rabi al-Thani 1448 AH / at 27 Rabi al-Thani 1448 AH"
+      "detail": "30 Rabi al-Thani 1448 AH / uq 30 Rabi al-Thani 1448 AH / at 28 Rabi al-Thani 1448 AH"
     },
     {
       "id": "OB-S5",
@@ -56,7 +56,7 @@
       "id": "OB-S6",
       "name": "canonical Waqt reading on screen = server reading + elapsed time (page does not compute its own)",
       "ok": true,
-      "detail": "shown 43433 expected ~43433.1"
+      "detail": "shown 3587 expected ~3587.1"
     },
     {
       "id": "OB-S7",
@@ -68,19 +68,19 @@
       "id": "OB-P1",
       "name": "switching to arithmetic-tabular: request names it, label + date follow the response",
       "ok": true,
-      "detail": "27 Rabi al-Thani 1448 AH"
+      "detail": "28 Rabi al-Thani 1448 AH"
     },
     {
       "id": "OB-P2",
       "name": "the two providers give different Hijri days for the same moment (the label differs, as documented)",
       "ok": true,
-      "detail": "29 Rabi al-Thani 1448 AH -> 27 Rabi al-Thani 1448 AH"
+      "detail": "30 Rabi al-Thani 1448 AH -> 28 Rabi al-Thani 1448 AH"
     },
     {
       "id": "OB-P3",
       "name": "provider choice moves NO Waqt instant: maghrib open/close, day length and every event instant are identical",
       "ok": true,
-      "detail": "{\"open\":\"18:11:30\",\"close\":\"18:10:59\",\"length\":\"23:59:29\"}"
+      "detail": "{\"open\":\"18:10:59\",\"close\":\"18:10:29\",\"length\":\"23:59:29\"}"
     },
     {
       "id": "OB-P4",
@@ -236,7 +236,7 @@
       "id": "OB-X0",
       "name": "API ground truth: at the opening Maghrib the next event is Isha, and it falls before Fajr",
       "ok": true,
-      "detail": "isha at +3944 s"
+      "detail": "isha at +3947 s"
     },
     {
       "id": "OB-X1",
@@ -248,25 +248,25 @@
       "id": "OB-X1",
       "name": "lab: at the opening Maghrib nothing has happened yet and the NEXT event is Isha (not Fajr)",
       "ok": true,
-      "detail": "Waqt 00:00:00 | Local time at this position: 18:11:30 | Last event: none yet this Waqt day · Next: Isha in 01:05:44"
+      "detail": "Waqt 00:00:00 | Local time at this position: 18:10:59 | Last event: none yet this Waqt day · Next: Isha in 01:05:47"
     },
     {
       "id": "OB-X2",
       "name": "lab: the Isha countdown at the opening equals the API's own Isha instant (not computed by the page)",
       "ok": true,
-      "detail": "page 3944s vs API 3944s"
+      "detail": "page 3947s vs API 3947s"
     },
     {
       "id": "OB-X3",
       "name": "lab: sweeping the whole Waqt day, the event order starts Isha, then Fajr, then Sunrise",
       "ok": true,
-      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib → Isha"
+      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib"
     },
     {
       "id": "OB-X4",
       "name": "lab: just after Isha, the last event is Isha and the next is Fajr",
       "ok": true,
-      "detail": "Waqt 01:10:32 | Local time at this position: 19:22:02 | Last event: Isha · Next: Fajr in 09:41:01"
+      "detail": "Waqt 01:10:32 | Local time at this position: 19:21:31 | Last event: Isha · Next: Fajr in 09:41:28"
     },
     {
       "id": "OB-X5",
@@ -326,25 +326,25 @@
       "id": "OB-Z1",
       "name": "lab: at the opening Maghrib nothing has happened yet and the NEXT event is Isha (not Fajr)",
       "ok": true,
-      "detail": "Waqt 00:00:00 | Local time at this position: 18:11:30 | Last event: none yet this Waqt day · Next: Isha in 01:05:44"
+      "detail": "Waqt 00:00:00 | Local time at this position: 18:10:59 | Last event: none yet this Waqt day · Next: Isha in 01:05:47"
     },
     {
       "id": "OB-Z2",
       "name": "lab: the Isha countdown at the opening equals the API's own Isha instant (not computed by the page)",
       "ok": true,
-      "detail": "page 3944s vs API 3944s"
+      "detail": "page 3947s vs API 3947s"
     },
     {
       "id": "OB-Z3",
       "name": "lab: sweeping the whole Waqt day, the event order starts Isha, then Fajr, then Sunrise",
       "ok": true,
-      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib → Isha"
+      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib"
     },
     {
       "id": "OB-Z4",
       "name": "lab: just after Isha, the last event is Isha and the next is Fajr",
       "ok": true,
-      "detail": "Waqt 01:10:32 | Local time at this position: 19:22:02 | Last event: Isha · Next: Fajr in 09:41:01"
+      "detail": "Waqt 01:10:32 | Local time at this position: 19:21:31 | Last event: Isha · Next: Fajr in 09:41:28"
     },
     {
       "id": "OB-Z5",

@@ -146,3 +146,12 @@ def test_json_flag_is_global_not_per_subcommand():
     code, out, _err = call("--json", "providers")
     data = json.loads(out)
     assert "providers" in data
+
+
+def test_provider_flag_default_is_the_single_waqt_core_default():
+    import waqt_local
+    from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER
+    from waqt_cli import main as m
+    ap = m.build_parser() if hasattr(m, "build_parser") else None
+    code, out, _ = call("convert", "--hijri", "1448-4-15")
+    assert waqt_local.DEFAULT_CALENDAR_PROVIDER == DEFAULT_CALENDAR_PROVIDER == "umm-al-qura" and code == 0 and "2026-09-26" in out

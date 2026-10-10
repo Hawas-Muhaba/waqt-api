@@ -24722,7 +24722,10 @@
      "lat": 1.8721,
      "lon": -157.4278
     },
-    "timezone": "Pacific/Kiritimati"
+    "timezone": "Pacific/Kiritimati",
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
    },
    "expect": {
     "output": {
@@ -24731,7 +24734,7 @@
      "weekday": "al-Ahad"
     }
    },
-   "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day"
+   "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. UTC+14: civil date and longitude-based solar date differ by one day [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
   },
   {
    "id": "label/compute-midday/kiritimati/2026-09-20",
@@ -24983,7 +24986,10 @@
      "lat": 9.0192,
      "lon": 38.7525
     },
-    "timezone": "Africa/Addis_Ababa"
+    "timezone": "Africa/Addis_Ababa",
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
    },
    "expect": {
     "output": {
@@ -24992,7 +24998,7 @@
      "weekday": "al-Ahad"
     }
    },
-   "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree"
+   "note": "The Waqt day whose closing Maghrib falls on civil date 2026-09-20 must carry THAT date's Hijri label and weekday. control: civil and solar date agree [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
   },
   {
    "id": "label/compute-midday/addis/2026-09-20",
@@ -25180,7 +25186,10 @@
      "lat": 64.1466,
      "lon": -21.9426
     },
-    "timezone": "Atlantic/Reykjavik"
+    "timezone": "Atlantic/Reykjavik",
+    "calendar": {
+     "provider": "arithmetic-tabular"
+    }
    },
    "expect": {
     "output": {
@@ -25198,7 +25207,7 @@
      "abs": 5
     }
    },
-   "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001)."
+   "note": "TWO Waqt days close on 2026-06-29 (00:00:16 and 23:59:04). The date resolves to the one containing the date's local noon, the later (DR-0001). [Provider pinned to arithmetic-tabular (CCP-0001): the rule is provider-independent and the expected label is arithmetic-tabular's; the default is now umm-al-qura, CAL-012.]"
   }
  ]
 }

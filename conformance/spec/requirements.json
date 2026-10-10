@@ -115,6 +115,16 @@
    "changed": "2.0.0"
   },
   {
+   "id": "CAL-012",
+   "kind": "MUST",
+   "title": "When a request names no calendar provider, the provider is umm-al-qura; an explicitly named provider is always honoured (the default changes Hijri labels only, never a Waqt instant)",
+   "section": "COP 4; API 1.7.0",
+   "since": "2.0.0",
+   "status": "normative",
+   "decision": "DR-0010",
+   "changed": "2.0.0"
+  },
+  {
    "id": "DAY-001",
    "kind": "MUST",
    "title": "A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1))",

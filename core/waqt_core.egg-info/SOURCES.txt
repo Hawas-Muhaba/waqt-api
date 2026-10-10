@@ -4,6 +4,7 @@ pyproject.toml
 tests/test_aladhan_isolation.py
 tests/test_aladhan_provider.py
 tests/test_calendar_interop_vectors_conformance.py
+tests/test_default_calendar_provider.py
 tests/test_engine_revision.py
 tests/test_institutional_vectors_conformance.py
 tests/test_packaging_smoke.py
@@ -30,6 +31,7 @@ waqt_core.egg-info/requires.txt
 waqt_core.egg-info/top_level.txt
 waqt_core/calendar_providers/__init__.py
 waqt_core/calendar_providers/aladhan.py
+waqt_core/calendar_providers/default.py
 waqt_core/calendar_providers/local_observation.py
 waqt_core/calendar_providers/registry.py
 waqt_core/calendar_providers/umm_al_qura.py

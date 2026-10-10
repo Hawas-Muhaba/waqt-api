@@ -33,7 +33,8 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 from ..core import DEFAULT_PROFILE, AstronomyProfile, Location, compute_waqt
-from ..hijri import ArithmeticTabularProvider, HijriProvider
+from ..calendar_providers.default import default_calendar_provider
+from ..hijri import HijriProvider
 from ..semantics import WaqtDay, WaqtUndefinedError, waqt_day_from_result
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER, TimeScaleProvider
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, TimezoneProvider
@@ -61,7 +62,7 @@ class SchedulingContext:
     ):
         self.location = location
         self.profile = profile
-        self.calendar_provider = calendar_provider or ArithmeticTabularProvider()
+        self.calendar_provider = calendar_provider or default_calendar_provider()
         self.tz_provider = tz_provider
         self.timescale = timescale
         self._days: list[WaqtDay] = []          # defined days, for containment lookup

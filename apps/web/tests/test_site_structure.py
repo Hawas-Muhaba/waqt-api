@@ -267,14 +267,18 @@ def test_maintainer_metadata_is_demo_editable_and_separate_from_governance_state
     assert m["status"] == "demo" and m["editable"] is True and "not a governance approval" in m["notice"]
     assert [(r["role"], r["name"]) for r in m["roles"]] == [("Logical / Idea Owner", "Dr. Salim Muhammed Redi"), ("Technical Developer / Maintainer", "Mr. Hawas Muhaba Hussein")]
     assert m["contact"] == "waqtapi@gmail.com" and "expert" in m["experts"].lower()
-    drs = (WEB.parents[1] / "conformance" / "decisions").glob("DR-*.md")
-    pending = any("PENDING" in p.read_text(encoding="utf-8").split("## Context")[0] for p in drs)
+    drs = list((WEB.parents[1] / "conformance" / "decisions").glob("DR-*.md"))
+    n_pending = sum("PENDING" in p.read_text(encoding="utf-8").split("## Context")[0] for p in drs)
     contract = json.loads((WEB.parents[1] / "conformance" / "contract.json").read_text(encoding="utf-8"))
     assert g["contractReleased"] is False and contract["released"] is False     # ratified records are not a release
-    if pending:
+    if n_pending == len(drs):
         assert g["ratification"] == "pending-project-owner-approval" and "ratified" not in g["ratificationLabel"].lower()
-    else:   # the site mirrors the repository: ratified records, but the label must still say the contract is unreleased
+    elif n_pending == 0:
         assert g["ratification"] == "decision-records-ratified" and "not yet released" in g["ratificationLabel"]
+    else:   # mixed: the site mirrors the repository and names the pending records
+        pend_ids = [p.stem for p in drs if "PENDING" in p.read_text(encoding="utf-8").split("## Context")[0]]
+        assert g["ratification"] == "decision-records-partly-ratified" and "not yet released" in g["ratificationLabel"]
+        assert all(i in g["ratificationLabel"] for i in pend_ids) and "pending" in g["ratificationLabel"]
 
 
 def test_governance_page_keeps_roles_decisions_and_ratification_apart():

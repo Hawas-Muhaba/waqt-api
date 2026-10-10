@@ -57,11 +57,11 @@
     }),
 
     /* Formal governance state — kept separate from the role metadata above. It mirrors the decision records in
-       conformance/decisions (DR-0001..DR-0009 record ratification by the named Maintainer, 2026-10-10; no signed
+       conformance/decisions (DR-0001..DR-0009 record ratification by the project owner, 2026-10-10; DR-0010 is PENDING the Maintainer; no signed
        artifact is held in the repository). The CONTRACT is still an unreleased 2.0.0: ratified records are not a release. */
     governance: Object.freeze({
-      ratification: "decision-records-ratified",
-      ratificationLabel: "Decision records ratified · contract not yet released",
+      ratification: "decision-records-partly-ratified",
+      ratificationLabel: "Decision records ratified except DR-0010 (pending) · contract not yet released",
       contractReleased: false,
       decisionRecords: Object.freeze({ tree: "conformance/decisions" }),
       process: Object.freeze({ path: "conformance/GOVERNANCE.md" }),

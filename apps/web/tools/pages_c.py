@@ -47,9 +47,16 @@ def _ratifiers():
 _who = ", ".join(_ratifiers())
 if npend == 0:
     _label = "Decision records ratified · contract not yet released"
-    _text = (f'All {len(DRS)} decision records state ratification by a named maintainer ({_who}). The repository holds <b class="text-on-surface">no signed artifact</b> for it, '
+    _text = (f'All {len(DRS)} decision records state ratification by a named owner ({_who}). The repository holds <b class="text-on-surface">no signed artifact</b> for it, '
              f'and ratifying decisions is not a release: the contract is version {CONTRACT["contract_version"]} (<b class="text-on-surface">draft — not released</b>), the independent-implementation reviewer role is unfilled, '
              'and open specification questions remain open.')
+    _third = "Ratification status — read from the decision records; separate from the contract's release status."
+elif npend < len(DRS):
+    _pend_ids = ", ".join(d["id"] for d in DRS if d["pending"])
+    _label = f"Decision records ratified except {_pend_ids} (pending) · contract not yet released"
+    _text = (f'{len(DRS) - npend} of {len(DRS)} decision records state ratification by a named owner ({_who}); <b class="text-on-surface">{_pend_ids}</b> '
+             f'{"is" if npend == 1 else "are"} marked <i>Ratification by a named maintainer: PENDING</i>. The repository holds <b class="text-on-surface">no signed artifact</b> for any ratification, '
+             f'the contract is version {CONTRACT["contract_version"]} (<b class="text-on-surface">draft — not released</b>), and the independent-implementation reviewer role is unfilled.')
     _third = "Ratification status — read from the decision records; separate from the contract's release status."
 else:
     _label = "Pending project-owner approval"

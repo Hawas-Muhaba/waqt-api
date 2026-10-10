@@ -56,13 +56,23 @@ def _venv_python(venv_dir: Path) -> str:
     return str(venv_dir / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python3"))
 
 
+def _source_version() -> str:
+    """The version in the source tree (never a literal here: it would go stale on every bump)."""
+    import re
+    return re.search(r'__version__\s*=\s*"([^"]+)"', (PKG_ROOT / "waqt_core" / "_version.py").read_text(encoding="utf-8")).group(1)
+
+
 SMOKE_SCRIPT = """
 import waqt_core
 from waqt_core.core import AstronomyProfile, Location, compute_waqt
 from waqt_core.hijri import ArithmeticTabularProvider
 from datetime import datetime, timezone
 
-assert waqt_core.__version__ == "0.4.0", waqt_core.__version__
+assert waqt_core.__version__ == "__EXPECTED_VERSION__", waqt_core.__version__
+
+# Option B: the shipped default Hijri provider is umm-al-qura, defined once in the installed package.
+from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER, default_calendar_provider
+assert DEFAULT_CALENDAR_PROVIDER == "umm-al-qura" and default_calendar_provider().name == "umm-al-qura"
 
 result = compute_waqt(
     datetime(2026, 9, 19, 15, 42, tzinfo=timezone.utc),
@@ -117,7 +127,7 @@ def test_clean_install_from_built_artifact(tmp_path, artifact_kind):
     assert install.returncode == 0, install.stderr
 
     smoke_file = tmp_path / "smoke.py"
-    smoke_file.write_text(SMOKE_SCRIPT)
+    smoke_file.write_text(SMOKE_SCRIPT.replace("__EXPECTED_VERSION__", _source_version()))
     # cwd is tmp_path, NOT this checkout -- proves no accidental reliance
     # on the repo layout (sys.path, relative imports of sibling packages).
     result = subprocess.run([py, str(smoke_file)], capture_output=True, text=True, cwd=tmp_path)

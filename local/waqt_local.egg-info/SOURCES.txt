@@ -6,6 +6,7 @@ tests/test_errors_and_typed_requests.py
 tests/test_institutional_vectors_conformance.py
 tests/test_local_vs_server_equivalence.py
 tests/test_scheduling_vectors_conformance.py
+tests/test_sprint16_local.py
 tests/test_waqt_vectors_conformance.py
 waqt_local/__init__.py
 waqt_local/_version.py

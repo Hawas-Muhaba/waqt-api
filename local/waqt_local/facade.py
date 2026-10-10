@@ -482,6 +482,7 @@ def waqt_day_for_gregorian_date(
         "waqt": {
             "status": "OK",
             "hijri": hijri_block(d.hijri_date),
+            **({"calendar_error": d.calendar_error} if d.calendar_error else {}),
             "weekday": d.weekday,
             "day": {
                 "maghrib_open": iso(d.open),

@@ -61,6 +61,58 @@
     }
    },
    "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
+  },
+  {
+   "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+   "requirements": [
+    "CAL-012"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "date": "1699-09-19",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null
+    }
+   },
+   "note": "PROPOSED: the Waqt day is returned with an empty Hijri label (a calendar failure never fails a Waqt computation; API 1.5.0 calendar_error). The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
+  },
+  {
+   "id": "default/out-of-range/compute/addis/1699-09-19",
+   "requirements": [
+    "CAL-012"
+   ],
+   "op": "waqt.compute",
+   "tier": "open",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "1699-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK"
+    }
+   },
+   "note": "PROPOSED: status OK with an empty Hijri label. The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
   }
  ]
 }

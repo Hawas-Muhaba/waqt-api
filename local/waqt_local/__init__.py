@@ -36,6 +36,7 @@ malformed `dict`). See docs/LOCAL.md.
 """
 
 from ._version import __version__
+from .providers import DEFAULT_CALENDAR_PROVIDER
 from . import facade
 from .errors import (
     CalendarDateUnresolvableError,
@@ -77,6 +78,7 @@ from .facade import (
 
 __all__ = [
     "__version__",
+    "DEFAULT_CALENDAR_PROVIDER",
     "facade",
     "waqt", "version", "day", "events", "location_info", "hijri", "list_calendar_providers",
     "convert", "represent_instant", "waqt_day_for_gregorian_date", "boundary_crossing",

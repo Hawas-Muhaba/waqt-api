@@ -1,4 +1,4 @@
-waqt-core<0.5,>=0.4.0
+waqt-core<0.6,>=0.5.0
 fastapi>=0.100
 uvicorn>=0.23
 

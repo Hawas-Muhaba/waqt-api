@@ -25,12 +25,19 @@ SDK_PY = lit(r'__version__\s*=\s*"([^"]+)"', read("sdks/python/waqt_client/_vers
 SDK_JS = json.loads(read("sdks/js/waqt-client/package.json"))["version"]
 API_CONTRACT = lit(r'(?m)^API_VERSION\s*=\s*"([^"]+)"', read("waqt/api/common.py"))
 API_PKG = toml_version("pyproject.toml")
+CLI = lit(r'__version__\s*=\s*"([^"]+)"', read("apps/cli/waqt_cli/_version.py"))
 
 def test_package_metadata_matches_in_code_versions():
     assert toml_version("core/pyproject.toml") == CORE
     assert toml_version("local/pyproject.toml") == LOCAL
     assert toml_version("sdks/python/pyproject.toml") == SDK_PY
     assert lit(r'export const VERSION\s*=\s*"([^"]+)"', read("sdks/js/waqt-client/src/index.mjs")) == SDK_JS
+
+def test_cli_version_changelog_and_docs_agree():
+    assert toml_version("apps/cli/pyproject.toml") == CLI
+    assert first_heading("apps/cli/CHANGELOG.md") == CLI
+    assert f"(`apps/cli`, `{CLI}`)" in read("docs/VERSIONING.md")
+
 
 def test_changelog_top_entry_is_current_version():
     assert first_heading("core/CHANGELOG.md") == CORE

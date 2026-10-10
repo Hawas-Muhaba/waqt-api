@@ -48,9 +48,9 @@ def test_unresolved_questions_are_always_visible():
     by = {q["id"]: q for q in reg}
     # Questions that are religious/institutional or not yet decided must still be listed, not quietly resolved.
     assert by["OQ-UAQ-2"]["status"] == "unresolved-by-design"
-    for qid in ("OQ-TAB-3", "OQ-TIME-1", "OQ-DT-1", "OQ-UND-1", "OQ-ERR-1"):
+    for qid in ("OQ-TAB-3", "OQ-TIME-1", "OQ-DT-1", "OQ-UND-1", "OQ-ERR-1", "OQ-CAL-1"):
         assert by[qid]["status"] == "deferred", qid
-    assert len(reg) == 28 and sum(q["status"] != "resolved" for q in reg) == 12
+    assert len(reg) == 29 and sum(q["status"] != "resolved" for q in reg) == 13   # OQ-CAL-1 added by CCP-0001
 
 
 def test_every_resolved_question_has_a_decision_record_and_every_record_is_indexed():

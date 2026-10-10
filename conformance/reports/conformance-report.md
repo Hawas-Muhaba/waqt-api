@@ -1,14 +1,14 @@
 # Waqt conformance report
 
-Generated 2026-10-10 03:20 UTC by `harness/waqt_conform.py` · COP 1.1 · 733 vectors + 43 metamorphic checks.
+Generated 2026-10-10 16:08 UTC by `harness/waqt_conform.py` · COP 1.1 · 742 vectors + 43 metamorphic checks.
 
 Reproduce: `python3 conformance/harness/waqt_conform.py --adapter "python3 conformance/adapters/reference_adapter.py" --label reference --adapter "node conformance/independent/src/cli.mjs" --label independent`
 
 ## 0. Contract and unresolved questions
 
-Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `c6011d8bc7bc6c57` - manifest matches - COP 1.1.
+Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `885ad4b6eef4abd1` - manifest matches - COP 1.1.
 
-**Unresolved specification questions: 12** of 28 (1 unresolved by design, 11 deferred; 16 resolved). A passing table below does not mean these are settled.
+**Unresolved specification questions: 13** of 29 (1 unresolved by design, 12 deferred; 16 resolved). A passing table below does not mean these are settled.
 
 - `OQ-TIME-1` [deferred] Offset-less instant: reject or assume UTC
 - `OQ-TIME-2` [deferred] ISO basic date accepted?
@@ -22,6 +22,7 @@ Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `c6011d8bc7bc6c5
 - `OQ-PRV-1` [deferred] Does a short Retry-After shorten the 30 s cooldown
 - `OQ-PRV-2` [deferred] Circuit-breaker: does the 3rd soft failure open it for the next call
 - `OQ-PRV-3` [deferred] Outbound budget refill granularity
+- `OQ-CAL-1` [deferred] Omitted provider (umm-al-qura) outside 1700..2300: must waqt.compute / calendar.* refuse with OUT_OF_RANGE, or return the Waqt day with an empty Hijri label?
 
 Declared MUST but not enforced by any normative vector: `ERR-004`.
 
@@ -29,8 +30,8 @@ Declared MUST but not enforced by any normative vector: `ERR-004`.
 
 | label | implementation | language | shares code with reference | run time |
 |---|---|---|---|---|
-| reference | waqt-reference waqt-core 0.4.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 8.67 s |
-| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 15.76 s |
+| reference | waqt-reference waqt-core 0.4.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 9.6 s |
+| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 14.5 s |
 
 ## 2. Results by tier
 
@@ -38,9 +39,9 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 
 | tier | reference pass / fail / n.a. | independent pass / fail / n.a. |
 |---|---|---|
-| exact | 476 / 0 / 3 | 479 / 0 / 0 |
+| exact | 483 / 0 / 3 | 486 / 0 / 0 |
 | tolerance | 182 / 0 / 0 | 182 / 0 / 0 |
-| open | 2 / 9 / 0 | 11 / 0 / 0 |
+| open | 4 / 9 / 0 | 11 / 2 / 0 |
 | informative | 60 / 1 / 0 | 55 / 6 / 0 |
 | metamorphic | 43 / 0 / 0 | 43 / 0 / 0 |
 
@@ -56,17 +57,18 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | CAL-002 | MUST | PASS (30/30) | PASS (30/30) | arithmetic-tabular leap years are the positions 2,5,7,10,13,16,18,21,24,26,29 of the 30-year cycle ((11*y+14) mod 30 < 11); a different pattern is a different provider, never a substitution |
 | CAL-003 | MUST | PASS (31/31) | PASS (31/31) | arithmetic-tabular reverse conversion is exact and round-trips |
 | CAL-004 | MUST | PASS (10/10) | PASS (10/10) | A Hijri date that does not exist is rejected, never normalised: year < 1, or a day beyond the month's length in that provider, is INVALID_HIJRI_DATE (out-of-range month/day numerals MAY be VALIDATION_ERROR) |
-| CAL-005 | MUST | PASS (9/9) | PASS (9/9) | umm-al-qura reproduces the validated New Year dates (1438, 1440, 1441, 1447) |
+| CAL-005 | MUST | PASS (14/14) | PASS (14/14) | umm-al-qura reproduces the validated New Year dates (1438, 1440, 1441, 1447) |
 | CAL-006 | MUST | PASS (8/8) | PASS (8/8) | umm-al-qura months have 29 or 30 days and Gregorian<->Hijri round-trips |
 | CAL-007 | OPEN | OPEN-ONLY | OPEN-ONLY | umm-al-qura month boundaries away from the validated anchors: UNRESOLVED BY DESIGN (institutional convention; see OQ-UAQ-2) |
 | CAL-008 | MUST | PASS (5/5) | PASS (5/5) | declared / local-observation override applies only on the exact label date; otherwise tabular |
 | CAL-009 | MUST | PASS (3/3) | PASS (3/3) | Providers without a fixed rule reject reverse conversion (UNSUPPORTED_OPERATION) |
 | CAL-010 | MUST | PASS (10/10) | PASS (13/13) | Swapping the calendar provider changes only the label, never an instant or position |
 | CAL-011 | MUST | PASS (4/4) | PASS (4/4) | umm-al-qura is supported for 1700-01-01..2300-12-31 only; outside it the provider refuses with OUT_OF_RANGE |
+| CAL-012 | MUST | PASS (7/7) | PASS (7/7) | When a request names no calendar provider, the provider is umm-al-qura; an explicitly named provider is always honoured (the default changes Hijri labels only, never a Waqt instant) |
 | DAY-001 | MUST | PASS (152/152) | PASS (152/152) | A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1)) |
 | DAY-002 | MUST | PASS (8/8) | PASS (8/8) | At the exact opening Maghrib the new day has begun (position 00:00:00) |
 | DAY-003 | MUST | PASS (8/8) | PASS (8/8) | One microsecond before a Maghrib belongs to the previous day; days tile without gap or overlap |
-| DAY-004 | MUST | PASS (162/162) | PASS (162/162) | The day label (Hijri date, weekday) is that of the civil date, in the location's IANA zone, on which the CLOSING Maghrib INSTANT falls |
+| DAY-004 | MUST | PASS (164/164) | PASS (164/164) | The day label (Hijri date, weekday) is that of the civil date, in the location's IANA zone, on which the CLOSING Maghrib INSTANT falls |
 | DAY-005 | MUST | PASS (151/151) | PASS (151/151) | Position is elapsed SI time since the opening Maghrib and is not clamped at 24:00:00 |
 | DAY-006 | MUST | PASS (137/137) | PASS (137/137) | Day length is the real interval, not 86400 s |
 | DAY-007 | MUST | PASS (293/293) | PASS (293/293) | Civil dates use the location's IANA zone (date line, DST) — not UTC and not solar time |
@@ -152,4 +154,6 @@ None.
 - **interop/instant/one-second-before-maghrib** (informative; INT-001, DAY-007): $.waqt_position_seconds expected `86401.137` got `0.240126`
 - **interop/boundary/ends-exactly-at-maghrib** (informative; INT-003): $.crosses_maghrib expected `false` got `true`
 - **waqt/london-long-day-near-24h-boundary** (informative; DAY-001, EVT-001, DAY-004, DAY-005, EVT-002): $.day.open expected `2026-02-14T17:13:44.159299+00:00` got `2026-02-14T17:13:40.639907+00:00`
+- **default/out-of-range/date-to-waqt-day/addis/1699-09-19** (open; CAL-012): $ expected `expected success` got `{"code": "OUT_OF_RANGE", "message": "umm-al-qura is supported for 1700-01-01..2300-12-31 only"}`
+- **default/out-of-range/compute/addis/1699-09-19** (open; CAL-012): $ expected `expected success` got `{"code": "OUT_OF_RANGE", "message": "umm-al-qura is supported for 1700-01-01..2300-12-31 only"}`
 - **live/15-kiritimati-day_bounds** (informative; SCH-006, SCH-008): $.hijri_label expected `1448-04-06` got `1448-04-07`

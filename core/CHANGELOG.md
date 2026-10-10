@@ -2,6 +2,24 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
+## 0.5.0 — Option B (default calendar provider)
+
+**Changed (behaviour change)**: when a caller passes no Hijri provider, `waqt-core` now uses **`umm-al-qura`**
+(was `arithmetic-tabular`). The default is defined once, in `waqt_core.calendar_providers.default`
+(`DEFAULT_CALENDAR_PROVIDER`, `default_calendar_provider()`), and is the same value as the HTTP API default (API 1.7.0),
+`waqt-local` and the `waqt` CLI. It affects `calendar_interop` (`represent_instant`, `waqt_day_for_gregorian_date`,
+`classify_boundary_crossing`) and `SchedulingContext`. It labels days only: no Waqt instant, position or countdown changes.
+Callers that need the previous results pass `ArithmeticTabularProvider()` explicitly. `umm-al-qura` supports
+1700-01-01..2300-12-31 (CAL-011); outside it the Hijri label is empty (see Fixed).
+
+**Fixed**: `InstantRepresentation.to_dict()` (and so `/v1/calendar/convert`, which returned HTTP 500) raised
+`AttributeError: 'NoneType' object has no attribute 'iso_like'` when the provider could not label the day. A calendar failure
+now leaves `hijri` empty and reports why in the new additive `WaqtDay.calendar_error` / `waqt.calendar_error`, never failing the
+Waqt computation (same policy as `/v1/waqt`). This was already reachable with an explicit `umm-al-qura`; the new default made it common.
+
+**Contract**: conformance contract 2.0.0 (draft) states the same default as requirement CAL-012 (DR-0010, ratification pending).
+Engine revision unchanged (`"2"`); no vector expected value changed.
+
 ## 0.4.0 — Sprint 16
 
 **Fixed (behaviour change)**: the Waqt-day label (`hijri_date`, `weekday`) is now that of the *civil* date, in the

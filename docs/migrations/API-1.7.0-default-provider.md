@@ -78,11 +78,16 @@ All eleven are *expected consequences of the approved change*. No astronomy outp
 
 `tests/test_default_provider_option_b.py` (every provider-aware route: omitted / explicit / other / invalid / named / deterministic; canonical-time independence over a location grid; historical reproducibility; new-vector accuracy), `verification/live_stack_check.py` (documented-version assertions on a real socket), and `verification/browser/run_web_option_b.sh` (real Chrome, 58 assertions). Reverting `DEFAULT_CALENDAR_PROVIDER` makes 46 of those tests fail.
 
-## 7. Open items (not decided by this change)
+## 7. Follow-up decided later (Option B, second change set)
 
-The ratification and the versioning rule are settled by DR-0009 (policy text in `docs/VERSIONING.md` section 4). What remains:
+* **Lower layers now follow the API default.** `waqt-core` defines the default once (`waqt_core.calendar_providers.default`) and the API, `waqt-local` and the CLI read it (`tests/test_default_provider_single_source.py`). The conformance contract states it as CAL-012 (DR-0010, CCP-0001). Versions: `waqt-core` 0.5.0, `waqt-api` package 0.5.0, `waqt-local` 0.6.0, `waqt-cli` 0.2.0; the API contract stays 1.7.0. Changelogs: `core/`, `local/`, `apps/cli/`; lineage: `docs/VERSIONING.md`.
+* **Bug found and fixed:** with the default, an instant or date outside 1700..2300 made `/v1/calendar/convert` return HTTP 500. It now returns the Waqt day with `hijri: null` and `calendar_error`.
+* **New risk for core callers.** A `waqt-core` caller that passed no provider now gets umm-al-qura labels, and an empty label (not arithmetic-tabular's) outside 1700..2300. Pass `ArithmeticTabularProvider()` to keep the old behaviour.
 
-1. **Signed artifact.** The ratification is recorded in the decision records on the requester's report; attach or link whatever signed record the project keeps if one is wanted.
-2. **`waqt-core` library default.** `core/waqt_core/calendar_interop._DEFAULT_PROVIDER` is still `ArithmeticTabularProvider`: it is used only when a *core* caller passes no provider (the HTTP API always passes one). It is tied to contract 2.0.0 and was deliberately not changed. Decide whether the library default should follow the API default (a `waqt-core` behaviour change).
-3. **Package versions.** `waqt-local` (0.5.0) and `waqt-cli` (0.1.0) now default to `umm-al-qura`; their version bumps and changelog entries belong to the release step, which was not performed.
-4. **External consumption of 1.7.0** is unknown (no tags or usage data in the repository); owners may wish to notify known consumers.
+## 8. Open items (not decided by this change)
+
+1. **Signed artifact** for the ratifications (none is held in the repository).
+2. **DR-0010 and CCP-0001 are not ratified/reviewed**: the Maintainer (Mr. Hawas Muhaba Hussein) has not ratified DR-0010 and the independent-implementation reviewer role is unfilled.
+3. **OQ-CAL-1** (new): what `waqt.compute` / `calendar.*` must do with the default provider outside 1700..2300: the reference returns the day with an empty label; the independent implementation refuses with `OUT_OF_RANGE`.
+4. **API contract number.** This change set adds a `calendar_error` key and fixes a 500 inside contract 1.7.0. If 1.7.0 was already consumed externally (unknown: no tags or usage data), the owners may prefer to call it 1.8.0.
+5. **External consumption of 1.7.0** is unknown.

@@ -37,7 +37,8 @@ from ..calendar_providers import (
 from ..hijri import HijriDate, HijriProvider
 from .common import ApiError, ErrorCode, parse_date
 
-DEFAULT_CALENDAR_PROVIDER = "umm-al-qura"
+# Single source of truth: the HTTP API default IS waqt-core's default (waqt_core/calendar_providers/default.py).
+from waqt_core.calendar_providers.default import DEFAULT_CALENDAR_PROVIDER  # noqa: E402,F401
 
 PROVIDER_CATALOG = {
     "arithmetic-tabular": {

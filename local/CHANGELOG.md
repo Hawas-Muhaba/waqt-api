@@ -1,5 +1,22 @@
 # Changelog — waqt-local
 
+## 0.6.0 — Option B (default calendar provider)
+
+**Changed (behaviour change)**: the default `calendar_provider` of every function (`waqt`, `hijri`, `convert`,
+`represent_instant`, `waqt_day_for_gregorian_date`, scheduling, institutional, `institutional_default_profile`) is now
+**`umm-al-qura`** (was `arithmetic-tabular`), read from `waqt-core` (`waqt_local.DEFAULT_CALENDAR_PROVIDER`), so it is
+always identical to the HTTP API default (API 1.7.0). To keep previous results pass `calendar_provider="arithmetic-tabular"`.
+The default institutional profile is named `demo-umm-al-qura` accordingly.
+
+**Added** (mirrors API 1.7.0): `calendar_provider {name, version}` on `convert` and on the institutional week / fiscal-year /
+academic-year results; `waqt.calendar_error` when the Hijri label is unavailable (for example outside 1700..2300) in
+`represent_instant` / `waqt_day_for_gregorian_date`.
+
+**Fixed**: `represent_instant` raised `AttributeError` instead of returning the Waqt day with an empty Hijri label for an
+instant outside umm-al-qura's range (needs `waqt-core` 0.5.0).
+
+**Requires** `waqt-core>=0.5.0,<0.6`.
+
 ## 0.5.0 — Sprint 16
 
 **Added** (mirrors API 1.6.0): `UnknownTimezoneError` (`UNKNOWN_TIMEZONE`), `InvalidHijriDateError`

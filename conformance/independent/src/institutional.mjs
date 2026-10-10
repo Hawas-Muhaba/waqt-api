@@ -3,6 +3,7 @@
 // month_table, in which case the table is authoritative (so rule semantics can be tested alone).
 import { WaqtError, parseDate, formatDate, islamicWeekdayName, ISLAMIC_WEEKDAYS, weekdaySun0 } from './timeutil.mjs';
 import { hijriToDay, hijriFromDay } from './calendar/providers.mjs';
+import { DEFAULT_PROVIDER } from './defaults.mjs';
 
 const fmtH = (y, m, d) => `${String(y).padStart(4, '0')}-${String(m).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
 const bad = (msg) => new WaqtError('INVALID_CALENDAR_RULE', msg);
@@ -60,7 +61,7 @@ export function weekDates(dateStr, firstDay = 'al-Ahad') {
 
 export function runInstitutional(input) {
   const op = input.operation, c = input.context || {};
-  const ctx = { provider: c.calendar_provider || 'arithmetic-tabular', month_table: c.month_table };
+  const ctx = { provider: c.calendar_provider || DEFAULT_PROVIDER, month_table: c.month_table };
   const year = op.year ?? c.hijri_year;
   switch (op.op) {
     case 'month_day': case 'month_end': case 'nth_weekday_of_month':

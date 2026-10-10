@@ -17,7 +17,7 @@
       "id": "S14-1c",
       "name": "metadata shows provider version, fetch time, cache state and local cross-check",
       "ok": true,
-      "detail": "[\"2026-10-10T03:16:18+00:00 (cache miss, age 0 s, TTL 43200 s)\",\"umm-al-qura: 1448-04-29 — DISAGREES by -2 day(s)\"]"
+      "detail": "[\"2026-10-10T16:11:40+00:00 (cache miss, age 0 s, TTL 43200 s)\",\"umm-al-qura: 1448-04-30 — DISAGREES by -2 day(s)\"]"
     },
     {
       "id": "S14-1d",
@@ -29,13 +29,13 @@
       "id": "S14-3a",
       "name": "hijri:null: page still renders, says Hijri unavailable and why",
       "ok": true,
-      "detail": "Hijri date unavailableumm-al-qura: ValueError: ephemeris range exceeded · as-SabtWaqt day: 18:11:30 → 18:10:59 localDay is shorter than 24:00:00 today; the reading will reset before conventional midnight would. errs="
+      "detail": "Hijri date unavailableumm-al-qura: ValueError: ephemeris range exceeded · al-AhadWaqt day: 18:10:59 → 18:10:29 localDay is shorter than 24:00:00 today; the reading will reset before conventional midnight would. errs="
     },
     {
       "id": "S14-3b",
       "name": "hijri:null: Representations card says unavailable instead of throwing",
       "ok": true,
-      "detail": "[\"Gregorian (local) | 06:16:21 | 10/10/2026\",\"Gregorian (UTC) | 03:16:21 | 2026-10-10\",\"Hijri | unavailable | see metadata\",\"Waqt | 12:04:50 | as-Sabt\"]"
+      "detail": "[\"Gregorian (local) | 19:11:43 | 10/10/2026\",\"Gregorian (UTC) | 16:11:43 | 2026-10-10\",\"Hijri | unavailable | see metadata\",\"Waqt | 01:00:43 | al-Ahad\"]"
     },
     {
       "id": "S14-4",
@@ -53,7 +53,7 @@
       "id": "S14-5b",
       "name": "Hijri day label stepped at Maghrib and is still a live (remote) value",
       "ok": true,
-      "detail": "27 -> 28; live · aladhan"
+      "detail": "28 -> 29; live · aladhan"
     },
     {
       "id": "S14-5c",
@@ -83,7 +83,7 @@
       "id": "S14-2b",
       "name": "page still renders events and clock (astronomy unaffected)",
       "ok": true,
-      "detail": "12:07:04"
+      "detail": "01:02:54"
     },
     {
       "id": "S14-2c",
