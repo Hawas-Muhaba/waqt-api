@@ -66,7 +66,7 @@ from .errors import (
 from zoneinfo import ZoneInfo
 
 from .formatting import computation_block, hijri_block, iso, parse_date, parse_instant, profile_block, reading, timezone_block
-from .providers import PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, provider_identity, resolve_calendar_provider
 
 _UNUSED_PROVIDER = ArithmeticTabularProvider()
 
@@ -148,7 +148,7 @@ def waqt(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/waqt`."""
@@ -305,7 +305,7 @@ def location_info(lat: float, lon: float, instant: Any = None, timezone_override
 # ---------------------------------------------------------------------------
 
 
-def hijri(date: Any = None, calendar_provider: str = "arithmetic-tabular", **provider_overrides: Any) -> dict:
+def hijri(date: Any = None, calendar_provider: str = DEFAULT_CALENDAR_PROVIDER, **provider_overrides: Any) -> dict:
     """Equivalent of `GET /v1/hijri`."""
     d = parse_date(date)
     provider = resolve_calendar_provider(calendar_provider, **provider_overrides)
@@ -350,7 +350,7 @@ def list_calendar_providers() -> dict:
 
 def convert(
     direction: str,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
     date: Any = None,
     year: Optional[int] = None,
     month: Optional[int] = None,
@@ -368,7 +368,7 @@ def convert(
             hd = provider.from_gregorian(g)
         except CalendarOutOfRange as e:
             raise _out_of_range(e) from e
-        return {"direction": "to-hijri", "input": {"gregorian_date": g.isoformat()}, "output": {"hijri": hijri_block(hd)}}
+        return {"direction": "to-hijri", "input": {"gregorian_date": g.isoformat()}, "output": {"hijri": hijri_block(hd)}, "calendar_provider": provider_identity(provider)}
 
     if year is None or month is None or day is None:
         raise validation_error("direction=to-gregorian requires year, month, and day.", received={"year": year, "month": month, "day": day})
@@ -391,6 +391,7 @@ def convert(
         "direction": "to-gregorian",
         "input": {"hijri": {"year": year, "month": month, "day": day}},
         "output": {"gregorian_date": g.isoformat(), "weekday": weekday_name(g)},
+        "calendar_provider": provider_identity(provider),
     }
 
 
@@ -411,7 +412,7 @@ def represent_instant(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/calendar/convert?direction=instant-to-calendars`."""
@@ -448,7 +449,7 @@ def waqt_day_for_gregorian_date(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/calendar/convert?direction=gregorian-date-to-waqt`."""
@@ -545,7 +546,7 @@ def _schedule_context_block(ctx: SchedulingContext, anchor: datetime) -> dict:
 def schedule_snapshot(
     lat: float, lon: float, elevation_m: float = 0.0, instant: Any = None, timezone_override: Optional[str] = None,
     fajr_angle: float = 18.0, isha_angle: float = 17.0, asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular", precision: str = "second",
+    calendar_provider: str = DEFAULT_CALENDAR_PROVIDER, precision: str = "second",
 ) -> dict:
     """Equivalent of `GET /v1/schedule/snapshot`."""
     rs = _check_precision(precision)
@@ -560,7 +561,7 @@ def schedule_snapshot(
 
 def schedule_span(
     lat: float, lon: float, start: Any, end: Any, end_inclusive: bool = False, elevation_m: float = 0.0,
-    timezone_override: Optional[str] = None, calendar_provider: str = "arithmetic-tabular", precision: str = "second",
+    timezone_override: Optional[str] = None, calendar_provider: str = DEFAULT_CALENDAR_PROVIDER, precision: str = "second",
 ) -> dict:
     """Equivalent of `GET /v1/schedule/span`."""
     rs = _check_precision(precision)
@@ -609,7 +610,7 @@ def schedule_resolve(request: Any) -> dict:
 
         raise InvalidInstantError(str(e), {"received": body.get("anchor")})
 
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     tz = _tz_provider(body.get("timezone_override"))
     ctx = SchedulingContext(location, profile, provider, tz_provider=tz)
     eng = SchedulingEngine(ctx)
@@ -647,7 +648,7 @@ def _resolve_and_wrap(build, label: str) -> dict:
 
 def institutional_week(
     lat: float, lon: float, elevation_m: float = 0.0, instant: Any = None,
-    first_day: str = "al-Ahad", jumuah_day: str = "al-Jumuah", calendar_provider: str = "arithmetic-tabular",
+    first_day: str = "al-Ahad", jumuah_day: str = "al-Jumuah", calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
 ) -> dict:
     """Equivalent of `GET /v1/institutional/week`."""
     t = parse_instant(instant)
@@ -658,12 +659,12 @@ def institutional_week(
     provider = resolve_calendar_provider(calendar_provider)
     ctx = SchedulingContext(_location(lat, lon, elevation_m), calendar_provider=provider)
     week = _resolve_and_wrap(lambda: week_containing(ctx, t, defn), "week")
-    return {**week.to_dict(ctx), "caveat": CAVEAT_INSTITUTIONAL}
+    return {**week.to_dict(ctx), "calendar_provider": provider_identity(provider), "caveat": CAVEAT_INSTITUTIONAL}
 
 
 def institutional_fiscal_year(
     hijri_year: Optional[int] = None, instant: Any = None, lat: Optional[float] = None, lon: Optional[float] = None,
-    elevation_m: float = 0.0, calendar_provider: str = "arithmetic-tabular",
+    elevation_m: float = 0.0, calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
 ) -> dict:
     """Equivalent of `GET /v1/institutional/fiscal-year`."""
     provider = resolve_calendar_provider(calendar_provider)
@@ -671,7 +672,7 @@ def institutional_fiscal_year(
     ctx = SchedulingContext(_location(lat, lon, elevation_m), calendar_provider=provider) if (lat is not None and lon is not None) else None
     fc = default_islamic_fiscal_calendar(provider)
     fy = _resolve_and_wrap(lambda: fc.year(year, ctx=ctx), "fiscal-year")
-    return {**fy.to_dict(), "definition": fc.to_dict(), "caveat": CAVEAT_INSTITUTIONAL}
+    return {**fy.to_dict(), "definition": fc.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT_INSTITUTIONAL}
 
 
 def institutional_fiscal_year_resolve(request: Any) -> dict:
@@ -681,7 +682,7 @@ def institutional_fiscal_year_resolve(request: Any) -> dict:
         raise InvalidCalendarRuleError("Request body must be a JSON object")
     if "hijri_year" not in body:
         raise validation_error("`hijri_year` is required")
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _location_or_none(body.get("location", {}).get("lat") if body.get("location") else None,
                              body.get("location", {}).get("lon") if body.get("location") else None,
                              body.get("location", {}).get("elevation_m", 0.0) if body.get("location") else 0.0)
@@ -695,12 +696,12 @@ def institutional_fiscal_year_resolve(request: Any) -> dict:
         return fc, fc.year(int(body["hijri_year"]), ctx=ctx)
 
     fc, fy = _resolve_and_wrap(build, "fiscal-year")
-    return {**fy.to_dict(), "definition": fc.to_dict(), "caveat": CAVEAT_INSTITUTIONAL}
+    return {**fy.to_dict(), "definition": fc.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT_INSTITUTIONAL}
 
 
 def institutional_academic_year(
     hijri_year: Optional[int] = None, instant: Any = None, lat: Optional[float] = None, lon: Optional[float] = None,
-    elevation_m: float = 0.0, calendar_provider: str = "arithmetic-tabular",
+    elevation_m: float = 0.0, calendar_provider: str = DEFAULT_CALENDAR_PROVIDER,
 ) -> dict:
     """Equivalent of `GET /v1/institutional/academic-year`."""
     provider = resolve_calendar_provider(calendar_provider)
@@ -708,7 +709,7 @@ def institutional_academic_year(
     ctx = SchedulingContext(_location(lat, lon, elevation_m), calendar_provider=provider) if (lat is not None and lon is not None) else None
     ac = default_islamic_academic_calendar(provider)
     ay = _resolve_and_wrap(lambda: ac.year(year, ctx=ctx), "academic-year")
-    return {**ay.to_dict(), "definition": ac.to_dict(), "caveat": CAVEAT_INSTITUTIONAL}
+    return {**ay.to_dict(), "definition": ac.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT_INSTITUTIONAL}
 
 
 def _term_defs(raw: list) -> tuple:
@@ -729,7 +730,7 @@ def institutional_academic_year_resolve(request: Any) -> dict:
         raise InvalidCalendarRuleError("Request body must be a JSON object")
     if "hijri_year" not in body:
         raise validation_error("`hijri_year` is required")
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _location_or_none(body.get("location", {}).get("lat") if body.get("location") else None,
                              body.get("location", {}).get("lon") if body.get("location") else None,
                              body.get("location", {}).get("elevation_m", 0.0) if body.get("location") else 0.0)
@@ -744,10 +745,10 @@ def institutional_academic_year_resolve(request: Any) -> dict:
         return ac, ac.year(int(body["hijri_year"]), ctx=ctx)
 
     ac, ay = _resolve_and_wrap(build, "academic-year")
-    return {**ay.to_dict(), "definition": ac.to_dict(), "caveat": CAVEAT_INSTITUTIONAL}
+    return {**ay.to_dict(), "definition": ac.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT_INSTITUTIONAL}
 
 
-def institutional_default_profile(calendar_provider: str = "arithmetic-tabular") -> dict:
+def institutional_default_profile(calendar_provider: str = DEFAULT_CALENDAR_PROVIDER) -> dict:
     """Equivalent of `GET /v1/institutional/profile`."""
     provider = resolve_calendar_provider(calendar_provider)
     profile = default_profile(name=f"demo-{calendar_provider}", calendar_provider=provider)

@@ -1,4 +1,5 @@
 import test from "node:test";
+import fs from "node:fs";
 import assert from "node:assert/strict";
 import { loadPage, demo, okEnvelope, errEnvelope, tick, read } from "./helpers.mjs";
 
@@ -387,14 +388,18 @@ test("resources: Ko-fi support appears only in the last section and only because
   assert.ok(!secs.slice(0, -1).some((s) => s.innerHTML.includes("ko-fi.com")));
 });
 
-test("governance: role metadata comes from config, is marked DEMO/EDITABLE, and ratification stays pending", () => {
+test("governance: role metadata comes from config, is marked DEMO/EDITABLE, and the ratification label mirrors the decision records", () => {
   const dom = loadPage("governance.html", { extra: ["pages/governance"] }), d = dom.window.document;
   const t = d.getElementById("gov-roles").textContent;
   for (const x of ["Dr. Salim Muhammed Redi", "Mr. Hawas Muhaba Hussein", "Logical / Idea Owner", "Technical Developer / Maintainer", "waqtapi@gmail.com", "Open to expert contributors and reviewers."]) assert.ok(t.includes(x), x);
   assert.match(d.body.textContent, /DEMO · EDITABLE PROJECT METADATA/);
-  assert.equal(d.querySelector("[data-ratification]").textContent, "Pending project-owner approval");
+  const decDir = new URL("../../../../conformance/decisions/", import.meta.url);
+  const pending = fs.readdirSync(decDir).filter((f) => /^DR-\d+\.md$/.test(f)).some((f) => fs.readFileSync(new URL(f, decDir), "utf8").split("## Context")[0].includes("PENDING"));
+  const label = pending ? "Pending project-owner approval" : "Decision records ratified · contract not yet released";
+  assert.equal(d.querySelector("[data-ratification]").textContent, label);
+  assert.equal(dom.window.WAQT_CONFIG.governance.contractReleased, false);
   assert.match(d.querySelector("[data-maint-notice]").textContent, /not a governance approval or ratification/);
   assert.doesNotMatch(d.body.textContent, /ratified on|signed by/i);
   assert.match(d.querySelector("footer [data-maintainers]").textContent, /demo metadata/);
-  assert.equal(dom.window.WAQT_CONFIG.governance.ratification, "pending-project-owner-approval");
+  assert.equal(dom.window.WAQT_CONFIG.governance.ratification, pending ? "pending-project-owner-approval" : "decision-records-ratified");
 });

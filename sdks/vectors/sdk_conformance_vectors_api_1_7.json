@@ -1,0 +1,1478 @@
+{
+  "spec": "waqt-api-sdk-conformance/1.0",
+  "vector_set_version": "2.0",
+  "astronomy_dependent": true,
+  "generated_at_computation": {
+    "engine": "waqt-noaa-low-precision",
+    "revision": "2",
+    "accuracy_level": "B"
+  },
+  "generated_by": "sdks/vectors/generate_api_1_7_default_provider_vectors.py",
+  "governing_api_version": "1.7.0",
+  "default_calendar_provider": "umm-al-qura",
+  "migration": "api-1.6.0-to-1.7.0-default-calendar-provider",
+  "note": "Real /v1/* responses recorded with calendar_provider OMITTED under API 1.7.0. The pre-1.7.0 recordings of the same requests remain in sdk_conformance_vectors.json (replayed with arithmetic-tabular made explicit).",
+  "vectors": [
+    {
+      "id": "waqt-addis-normal-default-1.7.0",
+      "replaces_historical_id": "waqt-addis-normal",
+      "description": "Full /v1/waqt result, ordinary instant, Addis Ababa. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/waqt",
+        "params": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "instant": "2026-09-19T15:42:00Z"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.534192+00:00"
+        },
+        "data": {
+          "status": "OK",
+          "instant": "2026-09-19T15:42:00+00:00",
+          "location": {
+            "lat": 9.0192,
+            "lon": 38.7525,
+            "elevation_m": 0.0
+          },
+          "timezone": {
+            "name": "Africa/Addis_Ababa",
+            "utc_offset_seconds": 10800
+          },
+          "undefined_reason": null,
+          "day": {
+            "maghrib_open": "2026-09-19T15:22:57+00:00",
+            "maghrib_close": "2026-09-20T15:22:20+00:00",
+            "length_si_seconds": 86363.831,
+            "note": "Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would."
+          },
+          "hijri": {
+            "date": "1448-04-09",
+            "display": "9 Rabi al-Thani 1448 AH",
+            "year": 1448,
+            "month": 4,
+            "month_name": "Rabi al-Thani",
+            "day": 9,
+            "provider": {
+              "name": "umm-al-qura",
+              "version": "astronomical-approx-2002-rules-v1"
+            },
+            "source_note": null,
+            "source": "local",
+            "provenance": null
+          },
+          "calendar_error": null,
+          "weekday": "al-Ahad",
+          "waqt": {
+            "display": "Waqt 00:19:02",
+            "reading": {
+              "display": "00:19:02",
+              "seconds": 1142.993
+            }
+          },
+          "events": [
+            {
+              "name": "fajr",
+              "instant": "2026-09-20T02:04:52+00:00",
+              "reading": {
+                "display": "10:41:55",
+                "seconds": 38515.682
+              }
+            },
+            {
+              "name": "sunrise",
+              "instant": "2026-09-20T03:14:29+00:00",
+              "reading": {
+                "display": "11:51:31",
+                "seconds": 42691.996
+              }
+            },
+            {
+              "name": "dhuhr",
+              "instant": "2026-09-20T09:18:28+00:00",
+              "reading": {
+                "display": "17:55:31",
+                "seconds": 64531.657
+              }
+            },
+            {
+              "name": "asr",
+              "instant": "2026-09-20T12:31:43+00:00",
+              "reading": {
+                "display": "21:08:46",
+                "seconds": 76126.405
+              }
+            },
+            {
+              "name": "maghrib",
+              "instant": "2026-09-20T15:22:20+00:00",
+              "reading": {
+                "display": "23:59:23",
+                "seconds": 86363.831
+              }
+            },
+            {
+              "name": "isha",
+              "instant": "2026-09-20T16:27:51+00:00",
+              "reading": {
+                "display": "25:04:54",
+                "seconds": 90294.479
+              }
+            }
+          ],
+          "event_representations": [
+            {
+              "name": "fajr",
+              "gregorian": {
+                "utc": "2026-09-20T02:04:52+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T05:04:52+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "05:04:52"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 10:41:55",
+                "seconds": 38515.682
+              }
+            },
+            {
+              "name": "sunrise",
+              "gregorian": {
+                "utc": "2026-09-20T03:14:29+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T06:14:29+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "06:14:29"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 11:51:31",
+                "seconds": 42691.996
+              }
+            },
+            {
+              "name": "dhuhr",
+              "gregorian": {
+                "utc": "2026-09-20T09:18:28+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T12:18:28+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "12:18:28"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 17:55:31",
+                "seconds": 64531.657
+              }
+            },
+            {
+              "name": "asr",
+              "gregorian": {
+                "utc": "2026-09-20T12:31:43+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T15:31:43+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "15:31:43"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 21:08:46",
+                "seconds": 76126.405
+              }
+            },
+            {
+              "name": "maghrib",
+              "gregorian": {
+                "utc": "2026-09-20T15:22:20+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T18:22:20+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "18:22:20"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 23:59:23",
+                "seconds": 86363.831
+              }
+            },
+            {
+              "name": "isha",
+              "gregorian": {
+                "utc": "2026-09-20T16:27:51+00:00",
+                "timezone": "Africa/Addis_Ababa",
+                "local": "2026-09-20T19:27:51+03:00",
+                "local_date": "2026-09-20",
+                "local_time": "19:27:51"
+              },
+              "hijri": {
+                "date": "1448-04-09",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 25:04:54",
+                "seconds": 90294.479
+              }
+            }
+          ],
+          "next_event": {
+            "name": "isha",
+            "instant": "2026-09-19T16:28:28+00:00",
+            "countdown": {
+              "display": "00:46:28",
+              "seconds": 2788.886
+            }
+          },
+          "profile": {
+            "name": "custom",
+            "fajr_angle_deg": 18.0,
+            "isha_angle_deg": 17.0,
+            "asr_shadow_ratio": 1.0
+          },
+          "computation": {
+            "engine": "waqt-noaa-low-precision",
+            "revision": "2",
+            "accuracy_level": "B",
+            "astronomy_engine": "waqt-noaa-low-precision",
+            "timescale_model": "espenak-meeus-2006",
+            "delta_t_seconds": 75.511
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "waqt-hanafi-asr-default-1.7.0",
+      "replaces_historical_id": "waqt-hanafi-asr",
+      "description": "Non-default astronomy profile (Hanafi Asr), Makkah. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/waqt",
+        "params": {
+          "lat": 21.4225,
+          "lon": 39.8262,
+          "instant": "2026-09-19T10:00:00Z",
+          "asr_ratio": 2.0
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.540315+00:00"
+        },
+        "data": {
+          "status": "OK",
+          "instant": "2026-09-19T10:00:00+00:00",
+          "location": {
+            "lat": 21.4225,
+            "lon": 39.8262,
+            "elevation_m": 0.0
+          },
+          "timezone": {
+            "name": "Asia/Riyadh",
+            "utc_offset_seconds": 10800
+          },
+          "undefined_reason": null,
+          "day": {
+            "maghrib_open": "2026-09-18T15:21:03+00:00",
+            "maghrib_close": "2026-09-19T15:20:05+00:00",
+            "length_si_seconds": 86342.056,
+            "note": "Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would."
+          },
+          "hijri": {
+            "date": "1448-04-08",
+            "display": "8 Rabi al-Thani 1448 AH",
+            "year": 1448,
+            "month": 4,
+            "month_name": "Rabi al-Thani",
+            "day": 8,
+            "provider": {
+              "name": "umm-al-qura",
+              "version": "astronomical-approx-2002-rules-v1"
+            },
+            "source_note": null,
+            "source": "local",
+            "provenance": null
+          },
+          "calendar_error": null,
+          "weekday": "as-Sabt",
+          "waqt": {
+            "display": "Waqt 18:38:56",
+            "reading": {
+              "display": "18:38:56",
+              "seconds": 67136.923
+            }
+          },
+          "events": [
+            {
+              "name": "fajr",
+              "instant": "2026-09-19T01:54:31+00:00",
+              "reading": {
+                "display": "10:33:28",
+                "seconds": 38008.605
+              }
+            },
+            {
+              "name": "sunrise",
+              "instant": "2026-09-19T03:08:41+00:00",
+              "reading": {
+                "display": "11:47:38",
+                "seconds": 42458.034
+              }
+            },
+            {
+              "name": "dhuhr",
+              "instant": "2026-09-19T09:14:32+00:00",
+              "reading": {
+                "display": "17:53:29",
+                "seconds": 64409.333
+              }
+            },
+            {
+              "name": "asr",
+              "instant": "2026-09-19T13:37:48+00:00",
+              "reading": {
+                "display": "22:16:44",
+                "seconds": 80204.946
+              }
+            },
+            {
+              "name": "maghrib",
+              "instant": "2026-09-19T15:20:05+00:00",
+              "reading": {
+                "display": "23:59:02",
+                "seconds": 86342.056
+              }
+            },
+            {
+              "name": "isha",
+              "instant": "2026-09-19T16:29:48+00:00",
+              "reading": {
+                "display": "25:08:45",
+                "seconds": 90525.287
+              }
+            }
+          ],
+          "event_representations": [
+            {
+              "name": "fajr",
+              "gregorian": {
+                "utc": "2026-09-19T01:54:31+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T04:54:31+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "04:54:31"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 10:33:28",
+                "seconds": 38008.605
+              }
+            },
+            {
+              "name": "sunrise",
+              "gregorian": {
+                "utc": "2026-09-19T03:08:41+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T06:08:41+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "06:08:41"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 11:47:38",
+                "seconds": 42458.034
+              }
+            },
+            {
+              "name": "dhuhr",
+              "gregorian": {
+                "utc": "2026-09-19T09:14:32+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T12:14:32+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "12:14:32"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 17:53:29",
+                "seconds": 64409.333
+              }
+            },
+            {
+              "name": "asr",
+              "gregorian": {
+                "utc": "2026-09-19T13:37:48+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T16:37:48+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "16:37:48"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 22:16:44",
+                "seconds": 80204.946
+              }
+            },
+            {
+              "name": "maghrib",
+              "gregorian": {
+                "utc": "2026-09-19T15:20:05+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T18:20:05+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "18:20:05"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 23:59:02",
+                "seconds": 86342.056
+              }
+            },
+            {
+              "name": "isha",
+              "gregorian": {
+                "utc": "2026-09-19T16:29:48+00:00",
+                "timezone": "Asia/Riyadh",
+                "local": "2026-09-19T19:29:48+03:00",
+                "local_date": "2026-09-19",
+                "local_time": "19:29:48"
+              },
+              "hijri": {
+                "date": "1448-04-08",
+                "provider": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1",
+                "source": "local",
+                "basis": "waqt-day-label"
+              },
+              "waqt": {
+                "display": "Waqt 25:08:45",
+                "seconds": 90525.287
+              }
+            }
+          ],
+          "next_event": {
+            "name": "asr",
+            "instant": "2026-09-19T13:37:48+00:00",
+            "countdown": {
+              "display": "03:37:48",
+              "seconds": 13068.023
+            }
+          },
+          "profile": {
+            "name": "custom",
+            "fajr_angle_deg": 18.0,
+            "isha_angle_deg": 17.0,
+            "asr_shadow_ratio": 2.0
+          },
+          "computation": {
+            "engine": "waqt-noaa-low-precision",
+            "revision": "2",
+            "accuracy_level": "B",
+            "astronomy_engine": "waqt-noaa-low-precision",
+            "timescale_model": "espenak-meeus-2006",
+            "delta_t_seconds": 75.511
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "hijri-ordinary-default-1.7.0",
+      "replaces_historical_id": "hijri-ordinary",
+      "description": "Gregorian date -> Hijri date, default provider. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/hijri",
+        "params": {
+          "date": "2026-09-19"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.550989+00:00"
+        },
+        "data": {
+          "gregorian_date": "2026-09-19",
+          "weekday": "as-Sabt",
+          "hijri": {
+            "date": "1448-04-08",
+            "display": "8 Rabi al-Thani 1448 AH",
+            "year": 1448,
+            "month": 4,
+            "month_name": "Rabi al-Thani",
+            "day": 8,
+            "provider": {
+              "name": "umm-al-qura",
+              "version": "astronomical-approx-2002-rules-v1"
+            },
+            "source_note": null,
+            "source": "local",
+            "provenance": null
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "conversions-to-hijri-default-1.7.0",
+      "replaces_historical_id": "conversions-to-hijri",
+      "description": "Bidirectional conversion utility, to-hijri. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/conversions",
+        "params": {
+          "direction": "to-hijri",
+          "date": "2026-09-19"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.557125+00:00"
+        },
+        "data": {
+          "direction": "to-hijri",
+          "input": {
+            "gregorian_date": "2026-09-19"
+          },
+          "output": {
+            "hijri": {
+              "date": "1448-04-08",
+              "display": "8 Rabi al-Thani 1448 AH",
+              "year": 1448,
+              "month": 4,
+              "month_name": "Rabi al-Thani",
+              "day": 8,
+              "provider": {
+                "name": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1"
+              },
+              "source_note": null,
+              "source": "local",
+              "provenance": null
+            }
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1"
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "conversions-to-gregorian-default-1.7.0",
+      "replaces_historical_id": "conversions-to-gregorian",
+      "description": "Bidirectional conversion utility, to-gregorian. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/conversions",
+        "params": {
+          "direction": "to-gregorian",
+          "year": 1448,
+          "month": 4,
+          "day": 7
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.559350+00:00"
+        },
+        "data": {
+          "direction": "to-gregorian",
+          "input": {
+            "hijri": {
+              "year": 1448,
+              "month": 4,
+              "day": 7
+            }
+          },
+          "output": {
+            "gregorian_date": "2026-09-18",
+            "weekday": "al-Jumuah"
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1"
+          }
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "calendar-convert-instant-default-1.7.0",
+      "replaces_historical_id": "calendar-convert-instant",
+      "description": "Instant -> UTC/civil Gregorian + Waqt day/position. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/calendar/convert",
+        "params": {
+          "direction": "instant-to-calendars",
+          "instant": "2026-09-19T15:42:00Z",
+          "lat": 9.0192,
+          "lon": 38.7525
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.580162+00:00"
+        },
+        "data": {
+          "direction": "instant-to-calendars",
+          "source": {
+            "calendar": "instant",
+            "instant": "2026-09-19T15:42:00+00:00"
+          },
+          "location": {
+            "lat": 9.0192,
+            "lon": 38.7525,
+            "elevation_m": 0.0
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1"
+          },
+          "gregorian": {
+            "utc": {
+              "date": "2026-09-19",
+              "time_of_day": "15:42:00",
+              "weekday_iso": 6,
+              "weekday_name_islamic": "as-Sabt",
+              "is_leap_year": false,
+              "timezone_name": null,
+              "utc_offset_seconds": 0
+            },
+            "civil": {
+              "date": "2026-09-19",
+              "time_of_day": "18:42:00",
+              "weekday_iso": 6,
+              "weekday_name_islamic": "as-Sabt",
+              "is_leap_year": false,
+              "timezone_name": "Africa/Addis_Ababa",
+              "utc_offset_seconds": 10800
+            }
+          },
+          "waqt": {
+            "status": "OK",
+            "undefined_reason": null,
+            "day": {
+              "hijri": {
+                "date": "1448-04-09",
+                "display": "9 Rabi al-Thani 1448 AH",
+                "provider": {
+                  "name": "umm-al-qura",
+                  "version": "astronomical-approx-2002-rules-v1"
+                }
+              },
+              "weekday": "al-Ahad",
+              "day_open_maghrib": "2026-09-19T15:22:57.007342+00:00",
+              "day_close_maghrib": "2026-09-20T15:22:20.838566+00:00",
+              "position_seconds": 1142.993
+            }
+          },
+          "profile": {
+            "name": "custom",
+            "fajr_angle_deg": 18.0,
+            "isha_angle_deg": 17.0,
+            "asr_shadow_ratio": 1.0
+          },
+          "computation": {
+            "engine": "waqt-noaa-low-precision",
+            "revision": "2",
+            "accuracy_level": "B",
+            "astronomy_engine": "waqt-noaa-low-precision",
+            "timescale_model": "espenak-meeus-2006",
+            "delta_t_seconds": 75.511
+          },
+          "caveat": "Waqt states calendar facts (which civil date, which Hijri date, which Waqt day/position), not institutional or religious obligations."
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "calendar-convert-date-to-waqt-default-1.7.0",
+      "replaces_historical_id": "calendar-convert-date-to-waqt",
+      "description": "Gregorian civil date + location -> Waqt day. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/calendar/convert",
+        "params": {
+          "direction": "gregorian-date-to-waqt",
+          "date": "2026-09-20",
+          "lat": 9.0192,
+          "lon": 38.7525
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.583088+00:00"
+        },
+        "data": {
+          "direction": "gregorian-date-to-waqt",
+          "source": {
+            "calendar": "gregorian",
+            "date": "2026-09-20"
+          },
+          "location": {
+            "lat": 9.0192,
+            "lon": 38.7525,
+            "elevation_m": 0.0
+          },
+          "timezone": {
+            "name": "Africa/Addis_Ababa",
+            "utc_offset_seconds": 10800
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1"
+          },
+          "waqt": {
+            "status": "OK",
+            "hijri": {
+              "date": "1448-04-09",
+              "display": "9 Rabi al-Thani 1448 AH",
+              "year": 1448,
+              "month": 4,
+              "month_name": "Rabi al-Thani",
+              "day": 9,
+              "provider": {
+                "name": "umm-al-qura",
+                "version": "astronomical-approx-2002-rules-v1"
+              },
+              "source_note": null,
+              "source": "local",
+              "provenance": null
+            },
+            "weekday": "al-Ahad",
+            "day": {
+              "maghrib_open": "2026-09-19T15:22:57+00:00",
+              "maghrib_close": "2026-09-20T15:22:20+00:00",
+              "length_si_seconds": 86363.831
+            }
+          },
+          "caveat": "Waqt states calendar facts (which civil date, which Hijri date, which Waqt day/position), not institutional or religious obligations."
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "schedule-snapshot-default-1.7.0",
+      "replaces_historical_id": "schedule-snapshot",
+      "description": "Scheduling snapshot for an instant. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/schedule/snapshot",
+        "params": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "instant": "2026-09-19T15:42:00Z"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.587463+00:00"
+        },
+        "data": {
+          "instant": "2026-09-19T15:42:00+00:00",
+          "day": {
+            "status": "OK",
+            "instant": "2026-09-19T15:42:00+00:00",
+            "open": "2026-09-19T15:22:57+00:00",
+            "close": "2026-09-20T15:22:20+00:00",
+            "length_seconds": 86363.831224,
+            "position": {
+              "seconds": 1142.992658,
+              "display": "00:19:02"
+            },
+            "hijri_label": "1448-04-09",
+            "reason": null
+          },
+          "next_event": {
+            "status": "OK",
+            "name": "isha",
+            "instant": "2026-09-19T16:28:28+00:00",
+            "seconds_until": 2788.885934,
+            "position": {
+              "seconds": 3931.878592,
+              "display": "01:05:31"
+            },
+            "undefined_events": [],
+            "reason": null
+          },
+          "events": [
+            {
+              "name": "fajr",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 37372.68947,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-20T02:04:52+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(fajr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 49022.221537,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T02:04:57+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(fajr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            },
+            {
+              "name": "sunrise",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 41549.003215,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-20T03:14:29+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(sunrise)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 44844.430163,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T03:14:35+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(sunrise)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            },
+            {
+              "name": "dhuhr",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 63388.664402,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-20T09:18:28+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(dhuhr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 22989.966151,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T09:18:50+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(dhuhr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            },
+            {
+              "name": "asr",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 74983.411901,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-20T12:31:43+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(asr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 11419.243564,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T12:31:40+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(asr)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            },
+            {
+              "name": "maghrib",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 85220.838566,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-20T15:22:20+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(maghrib)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 1142.992658,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T15:22:57+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(maghrib)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            },
+            {
+              "name": "isha",
+              "next": {
+                "kind": "until",
+                "status": "OK",
+                "seconds": 2788.885934,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-19T16:28:28+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "next(isha)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              },
+              "previous": {
+                "kind": "since",
+                "status": "OK",
+                "seconds": 83573.485613,
+                "target": {
+                  "status": "OK",
+                  "instant": "2026-09-18T16:29:06+00:00",
+                  "basis": "astronomical_event",
+                  "depends_on": [
+                    "astronomical_event"
+                  ],
+                  "description": "prev(isha)",
+                  "within_day": null,
+                  "reason": null,
+                  "cause": null,
+                  "undefined_ref": null,
+                  "skipped": []
+                }
+              }
+            }
+          ],
+          "timezone": {
+            "name": "Africa/Addis_Ababa",
+            "utc_offset_seconds": 10800
+          },
+          "location": {
+            "lat": 9.0192,
+            "lon": 38.7525,
+            "elevation_m": 0.0
+          },
+          "profile": {
+            "name": "custom",
+            "fajr_angle_deg": 18.0,
+            "isha_angle_deg": 17.0,
+            "asr_shadow_ratio": 1.0
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1",
+            "used_for": "display labels only — never an input to any scheduling result"
+          },
+          "computation": {
+            "engine": "waqt-noaa-low-precision",
+            "revision": "2",
+            "accuracy_level": "B",
+            "astronomy_engine": "waqt-noaa-low-precision",
+            "timescale_model": "espenak-meeus-2006",
+            "delta_t_seconds": 75.511
+          },
+          "caveat": "Waqt returns temporal facts derived from an astronomical profile. It does not decide religious rulings: whether and how an event, offset or window applies to any obligation is the caller's (or their scholar's) determination."
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "schedule-span-default-1.7.0",
+      "replaces_historical_id": "schedule-span",
+      "description": "Scheduling span classification. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/schedule/span",
+        "params": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "start": "2026-09-19T00:00:00Z",
+          "end": "2026-09-21T00:00:00Z"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.591823+00:00"
+        },
+        "data": {
+          "status": "OK",
+          "start": "2026-09-19T00:00:00+00:00",
+          "end": "2026-09-21T00:00:00+00:00",
+          "end_inclusive": false,
+          "duration_seconds": 172800.0,
+          "same_waqt_day": false,
+          "crosses_maghrib": true,
+          "maghrib_boundaries": [
+            "2026-09-19T15:22:57+00:00",
+            "2026-09-20T15:22:20+00:00"
+          ],
+          "waqt_days_touched": 3,
+          "start_day": {
+            "open": "2026-09-18T15:23:33.213316+00:00",
+            "close": "2026-09-19T15:22:57.007342+00:00",
+            "hijri_label": "1448-04-08"
+          },
+          "end_day": {
+            "open": "2026-09-20T15:22:20.838566+00:00",
+            "close": "2026-09-21T15:21:44.729141+00:00",
+            "hijri_label": "1448-04-10"
+          },
+          "crosses_civil_midnight": true,
+          "start_civil_date": "2026-09-19",
+          "end_civil_date": "2026-09-21",
+          "reason": null,
+          "location": {
+            "lat": 9.0192,
+            "lon": 38.7525,
+            "elevation_m": 0.0
+          },
+          "profile": {
+            "name": "default",
+            "fajr_angle_deg": 18.0,
+            "isha_angle_deg": 17.0,
+            "asr_shadow_ratio": 1.0
+          },
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1",
+            "used_for": "display labels only — never an input to any scheduling result"
+          },
+          "computation": {
+            "engine": "waqt-noaa-low-precision",
+            "revision": "2",
+            "accuracy_level": "B",
+            "astronomy_engine": "waqt-noaa-low-precision",
+            "timescale_model": "espenak-meeus-2006",
+            "delta_t_seconds": 75.511
+          },
+          "caveat": "Waqt returns temporal facts derived from an astronomical profile. It does not decide religious rulings: whether and how an event, offset or window applies to any obligation is the caller's (or their scholar's) determination."
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "institutional-week-default-1.7.0",
+      "replaces_historical_id": "institutional-week",
+      "description": "Institutional week containing an instant. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/institutional/week",
+        "params": {
+          "lat": 9.0192,
+          "lon": 38.7525,
+          "instant": "2026-09-19T15:42:00Z"
+        }
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.598473+00:00"
+        },
+        "data": {
+          "definition": {
+            "first_day": "al-Ahad",
+            "jumuah_day": "al-Jumuah",
+            "label": "default"
+          },
+          "week_start": "2026-09-19T15:22:57.007342+00:00",
+          "week_end": "2026-09-26T15:18:45.854555+00:00",
+          "jumuah_index": 5,
+          "days": [
+            {
+              "weekday": "al-Ahad",
+              "status": "OK",
+              "open": "2026-09-19T15:22:57.007342+00:00",
+              "close": "2026-09-20T15:22:20.838566+00:00",
+              "events": {
+                "fajr": "2026-09-20T02:04:52.689470+00:00",
+                "sunrise": "2026-09-20T03:14:29.003215+00:00",
+                "dhuhr": "2026-09-20T09:18:28.664402+00:00",
+                "asr": "2026-09-20T12:31:43.411901+00:00",
+                "maghrib": "2026-09-20T15:22:20.838566+00:00",
+                "isha": "2026-09-20T16:27:51.486062+00:00"
+              },
+              "hijri_label": "1448-04-09",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "al-Ithnayn",
+              "status": "OK",
+              "open": "2026-09-20T15:22:20.838566+00:00",
+              "close": "2026-09-21T15:21:44.729141+00:00",
+              "events": {
+                "fajr": "2026-09-21T02:04:47.454441+00:00",
+                "sunrise": "2026-09-21T03:14:22.494934+00:00",
+                "dhuhr": "2026-09-21T09:18:07.353235+00:00",
+                "asr": "2026-09-21T12:31:45.453753+00:00",
+                "maghrib": "2026-09-21T15:21:44.729141+00:00",
+                "isha": "2026-09-21T16:27:14.337531+00:00"
+              },
+              "hijri_label": "1448-04-10",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "ath-Thulatha",
+              "status": "OK",
+              "open": "2026-09-21T15:21:44.729141+00:00",
+              "close": "2026-09-22T15:21:08.701327+00:00",
+              "events": {
+                "fajr": "2026-09-22T02:04:42.090573+00:00",
+                "sunrise": "2026-09-22T03:14:16.062766+00:00",
+                "dhuhr": "2026-09-22T09:17:46.120367+00:00",
+                "asr": "2026-09-22T12:31:46.904358+00:00",
+                "maghrib": "2026-09-22T15:21:08.701327+00:00",
+                "isha": "2026-09-22T16:26:37.463061+00:00"
+              },
+              "hijri_label": "1448-04-11",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "al-Arbiaa",
+              "status": "OK",
+              "open": "2026-09-22T15:21:08.701327+00:00",
+              "close": "2026-09-23T15:20:32.777475+00:00",
+              "events": {
+                "fajr": "2026-09-23T02:04:36.615317+00:00",
+                "sunrise": "2026-09-23T03:14:09.724591+00:00",
+                "dhuhr": "2026-09-23T09:17:24.985914+00:00",
+                "asr": "2026-09-23T12:31:47.786557+00:00",
+                "maghrib": "2026-09-23T15:20:32.777475+00:00",
+                "isha": "2026-09-23T16:26:00.885335+00:00"
+              },
+              "hijri_label": "1448-04-12",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "al-Khamis",
+              "status": "OK",
+              "open": "2026-09-23T15:20:32.777475+00:00",
+              "close": "2026-09-24T15:19:56.980029+00:00",
+              "events": {
+                "fajr": "2026-09-24T02:04:31.046364+00:00",
+                "sunrise": "2026-09-24T03:14:03.498380+00:00",
+                "dhuhr": "2026-09-24T09:17:03.970085+00:00",
+                "asr": "2026-09-24T12:31:48.123654+00:00",
+                "maghrib": "2026-09-24T15:19:56.980029+00:00",
+                "isha": "2026-09-24T16:25:24.626989+00:00"
+              },
+              "hijri_label": "1448-04-13",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "al-Jumuah",
+              "status": "OK",
+              "open": "2026-09-24T15:19:56.980029+00:00",
+              "close": "2026-09-25T15:19:21.331518+00:00",
+              "events": {
+                "fajr": "2026-09-25T02:04:25.401631+00:00",
+                "sunrise": "2026-09-25T03:13:57.402186+00:00",
+                "dhuhr": "2026-09-25T09:16:43.093173+00:00",
+                "asr": "2026-09-25T12:31:47.939385+00:00",
+                "maghrib": "2026-09-25T15:19:21.331518+00:00",
+                "isha": "2026-09-25T16:24:48.710610+00:00"
+              },
+              "hijri_label": "1448-04-14",
+              "undefined_reason": null
+            },
+            {
+              "weekday": "as-Sabt",
+              "status": "OK",
+              "open": "2026-09-25T15:19:21.331518+00:00",
+              "close": "2026-09-26T15:18:45.854555+00:00",
+              "events": {
+                "fajr": "2026-09-26T02:04:19.699256+00:00",
+                "sunrise": "2026-09-26T03:13:51.454135+00:00",
+                "dhuhr": "2026-09-26T09:16:22.375545+00:00",
+                "asr": "2026-09-26T12:31:47.257907+00:00",
+                "maghrib": "2026-09-26T15:18:45.854555+00:00",
+                "isha": "2026-09-26T16:24:13.158727+00:00"
+              },
+              "hijri_label": "1448-04-15",
+              "undefined_reason": null
+            }
+          ],
+          "calendar_provider": {
+            "name": "umm-al-qura",
+            "version": "astronomical-approx-2002-rules-v1"
+          },
+          "caveat": "Waqt states calendar facts derived from a Hijri calendar provider and an institutional convention (which day starts the week, which rule opens a fiscal or academic year). It does not decide whether an institution should adopt any particular convention."
+        },
+        "error": null
+      }
+    },
+    {
+      "id": "institutional-profile-default-1.7.0",
+      "replaces_historical_id": "institutional-profile",
+      "description": "Default institutional profile. Provider omitted: API 1.7.0 default (umm-al-qura).",
+      "request": {
+        "method": "GET",
+        "path": "/v1/institutional/profile",
+        "params": {}
+      },
+      "expected_provider": "umm-al-qura",
+      "status_code": 200,
+      "response": {
+        "meta": {
+          "api_version": "1.7.0",
+          "spec": "waqt-core/0.1",
+          "generated_at": "2026-10-09T05:04:59.600254+00:00"
+        },
+        "data": {
+          "profile": {
+            "name": "demo-umm-al-qura",
+            "calendar_provider": {
+              "name": "umm-al-qura",
+              "version": "astronomical-approx-2002-rules-v1"
+            },
+            "week_definition": {
+              "first_day": "al-Ahad",
+              "jumuah_day": "al-Jumuah",
+              "label": "default"
+            },
+            "fiscal_year_definition": {
+              "label": "Islamic Fiscal Year (Muharram 1 -> end of Dhu al-Hijjah)",
+              "start_rule": {
+                "type": "month_day",
+                "month": 1,
+                "day": 1
+              },
+              "end_rule": {
+                "type": "month_end",
+                "month": 12
+              }
+            },
+            "academic_year_definition": {
+              "label": "Islamic Academic Year (first Ahad of Muharram -> last Khamis of Sha'ban)",
+              "opening_rule": {
+                "type": "nth_weekday_of_month",
+                "weekday": "al-Ahad",
+                "n": 1,
+                "month": 1
+              },
+              "closing_rule": {
+                "type": "nth_weekday_of_month",
+                "weekday": "al-Khamis",
+                "n": -1,
+                "month": 8
+              },
+              "term_rules": [],
+              "holidays": []
+            },
+            "timezone_policy": {},
+            "labeling_rules": {}
+          },
+          "caveat": "Waqt states calendar facts derived from a Hijri calendar provider and an institutional convention (which day starts the week, which rule opens a fiscal or academic year). It does not decide whether an institution should adopt any particular convention."
+        },
+        "error": null
+      }
+    }
+  ]
+}

@@ -17,7 +17,7 @@
       "id": "S14-1c",
       "name": "metadata shows provider version, fetch time, cache state and local cross-check",
       "ok": true,
-      "detail": "[\"2026-10-05T18:25:12+00:00 (cache miss, age 0 s, TTL 43200 s)\",\"umm-al-qura: 1448-04-25 — agrees\"]"
+      "detail": "[\"2026-10-10T03:16:18+00:00 (cache miss, age 0 s, TTL 43200 s)\",\"umm-al-qura: 1448-04-29 — DISAGREES by -2 day(s)\"]"
     },
     {
       "id": "S14-1d",
@@ -29,13 +29,13 @@
       "id": "S14-3a",
       "name": "hijri:null: page still renders, says Hijri unavailable and why",
       "ok": true,
-      "detail": "Hijri date unavailableumm-al-qura: ValueError: ephemeris range exceeded · ath-Thulatha / Waqt day: 18:13:38 → 18:13:05 local / Day is shorter than 24:00:00 today; the reading will reset before conventional midnight would. errs="
+      "detail": "Hijri date unavailableumm-al-qura: ValueError: ephemeris range exceeded · as-SabtWaqt day: 18:11:30 → 18:10:59 localDay is shorter than 24:00:00 today; the reading will reset before conventional midnight would. errs="
     },
     {
       "id": "S14-3b",
       "name": "hijri:null: Representations card says unavailable instead of throwing",
       "ok": true,
-      "detail": "[\"Gregorian (local) | 21:25:14 | 05/10/2026\",\"Gregorian (UTC) | 18:25:14 | 2026-10-05\",\"Hijri | unavailable | see metadata\",\"Waqt | 03:11:36 | ath-Thulatha\"]"
+      "detail": "[\"Gregorian (local) | 06:16:21 | 10/10/2026\",\"Gregorian (UTC) | 03:16:21 | 2026-10-10\",\"Hijri | unavailable | see metadata\",\"Waqt | 12:04:50 | as-Sabt\"]"
     },
     {
       "id": "S14-4",
@@ -46,50 +46,50 @@
     {
       "id": "S14-5a",
       "name": "page refreshed itself across Maghrib (extra /v1/waqt call, no polling storm)",
-      "ok": false,
-      "detail": "calls 6 -> 20"
+      "ok": true,
+      "detail": "calls 2 -> 4"
     },
     {
       "id": "S14-5b",
       "name": "Hijri day label stepped at Maghrib and is still a live (remote) value",
-      "ok": false,
-      "detail": "25 -> 25; live · aladhan"
+      "ok": true,
+      "detail": "27 -> 28; live · aladhan"
     },
     {
       "id": "S14-5c",
       "name": "clock restarted near 00:00 in the new Waqt day",
-      "ok": false,
-      "detail": "03:11:56"
+      "ok": true,
+      "detail": "00:00:08"
     },
     {
       "id": "S14-6a",
       "name": "429 on boundary refresh: last good view stays visible with a retry message",
-      "ok": false,
-      "detail": "RATE_LIMITED: Rate limit exceeded."
+      "ok": true,
+      "detail": "Refresh failed (RATE_LIMITED: Rate limit exceeded.); showing the last result, retrying in 20 s."
     },
     {
       "id": "S14-6b",
       "name": "429 backoff: no request storm (<=2 retries in 14 s)",
       "ok": true,
-      "detail": "calls after load: 0"
+      "detail": "calls after load: 1"
     },
     {
       "id": "S14-2a",
       "name": "upstream 500: fallback is VISIBLE in the headline badge",
-      "ok": false,
-      "detail": "live · aladhan"
+      "ok": true,
+      "detail": "fallback: umm-al-qura instead of aladhan (upstream-server-error)"
     },
     {
       "id": "S14-2b",
       "name": "page still renders events and clock (astronomy unaffected)",
       "ok": true,
-      "detail": "03:12:17"
+      "detail": "12:07:04"
     },
     {
       "id": "S14-2c",
       "name": "metadata names the fallback reason and requested provider",
-      "ok": false,
-      "detail": "[null,null]"
+      "ok": true,
+      "detail": "[\"upstream-server-error — HTTP 500\",\"aladhan\"]"
     },
     {
       "id": "S14-2d",

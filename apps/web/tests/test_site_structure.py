@@ -2,6 +2,7 @@
 Rules enforced: no second implementation of Waqt anywhere in assets/js; no invented endpoints/URLs/data;
 identical navigation on every page; honest REAL/CONCEPT/FUTURE labelling; asset budget; accessibility basics."""
 from __future__ import annotations
+import json
 import re
 from pathlib import Path
 
@@ -154,6 +155,10 @@ def test_decision_records_page_matches_the_repository():
     for dr_text in (p.read_text(encoding="utf-8") for p in drs):
         if "PENDING" in dr_text.split("## Context")[0]:
             assert "RATIFICATION PENDING" in g
+        else:   # a record that states ratification is shown as RATIFIED, never as pending
+            assert "Ratified by" in dr_text.split("## Context")[0]
+    pending = [p for p in drs if "PENDING" in p.read_text(encoding="utf-8").split("## Context")[0]]
+    assert g.count("RATIFICATION PENDING") == len(pending) and g.count(">RATIFIED<") == len(drs) - len(pending)
 
 
 def test_open_questions_listed_are_the_real_unresolved_ones():
@@ -262,14 +267,21 @@ def test_maintainer_metadata_is_demo_editable_and_separate_from_governance_state
     assert m["status"] == "demo" and m["editable"] is True and "not a governance approval" in m["notice"]
     assert [(r["role"], r["name"]) for r in m["roles"]] == [("Logical / Idea Owner", "Dr. Salim Muhammed Redi"), ("Technical Developer / Maintainer", "Mr. Hawas Muhaba Hussein")]
     assert m["contact"] == "waqtapi@gmail.com" and "expert" in m["experts"].lower()
-    assert g["ratification"] == "pending-project-owner-approval" and g["contractReleased"] is False
-    assert "ratified" not in g["ratificationLabel"].lower()
+    drs = (WEB.parents[1] / "conformance" / "decisions").glob("DR-*.md")
+    pending = any("PENDING" in p.read_text(encoding="utf-8").split("## Context")[0] for p in drs)
+    contract = json.loads((WEB.parents[1] / "conformance" / "contract.json").read_text(encoding="utf-8"))
+    assert g["contractReleased"] is False and contract["released"] is False     # ratified records are not a release
+    if pending:
+        assert g["ratification"] == "pending-project-owner-approval" and "ratified" not in g["ratificationLabel"].lower()
+    else:   # the site mirrors the repository: ratified records, but the label must still say the contract is unreleased
+        assert g["ratification"] == "decision-records-ratified" and "not yet released" in g["ratificationLabel"]
 
 
-def test_governance_page_keeps_roles_decisions_and_ratification_apart_and_pending():
+def test_governance_page_keeps_roles_decisions_and_ratification_apart():
     g = read(WEB / "governance.html")
     assert "DEMO · EDITABLE PROJECT METADATA" in g and "Formal governance decisions" in g and "Ratification status" in g
-    assert "Pending project-owner approval" in g and "PENDING" in g and 'id="gov-roles"' in g
+    assert json.loads(json.dumps(config()["governance"]["ratificationLabel"])) in g and 'id="gov-roles"' in g
+    assert "draft — not released" in g and "no signed artifact" in g
     assert not re.search(r"ratified on \d|signed by|ratification date:", g, re.I)
 
 

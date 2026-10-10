@@ -50,4 +50,6 @@ async def test_async_and_sync_agree_on_same_instant(asgi_transport):
         async_resp = await aclient.get_waqt(lat=9.0192, lon=38.7525, instant="2026-09-19T15:42:00Z")
 
     assert async_resp.status == "OK"
-    assert async_resp.hijri.display == "7 Rabi al-Thani 1448 AH"
+    # Provider omitted -> the API 1.7.0 default, umm-al-qura (it was arithmetic-tabular, "7 Rabi al-Thani", before 1.7.0).
+    assert async_resp.hijri.display == "9 Rabi al-Thani 1448 AH"
+    assert async_resp.hijri.provider_name == "umm-al-qura"

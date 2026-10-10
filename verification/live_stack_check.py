@@ -11,7 +11,11 @@ import json, os, socket, subprocess, sys, time, urllib.request, urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "verification"))
+from expected_versions import documented_api_version, api_version_matches  # noqa: E402
+from vector_migrations import effective_params, load_migration, MIGRATION_PATH  # noqa: E402
 RESULTS = []
+API_V = documented_api_version()          # the DOCUMENTED API version; a server reporting anything else fails
 
 def rec(name, ok, detail=""):
     RESULTS.append({"check": name, "ok": bool(ok), "detail": detail})
@@ -76,9 +80,9 @@ def sprint14_checks(rec_fn):
                and hj["provenance"]["fallback_reason"] == "upstream-server-error" and {k.lower(): v for k, v in h.items()}.get("access-control-allow-origin") == "http://localhost:8080")
         st, h, b = get(port, "/v1/health")
         i = b["integrations"]["hijri_aladhan"]
-        rec_fn("S14 /v1/health: status ok while degraded; circuit open; no network involved", st == 200 and b["status"] == "ok" and b["api_version"] == "1.6.0" and i["circuit"] == "open" and i["last_failure_reason"] == "upstream-server-error")
+        rec_fn("S14 /v1/health: status ok while degraded; circuit open; no network involved", st == 200 and b["status"] == "ok" and api_version_matches(b["api_version"]) and i["circuit"] == "open" and i["last_failure_reason"] == "upstream-server-error")
         st, h, b = get(port, "/v1/version"); d = b["data"]
-        rec_fn("S14 /v1/version: API 1.6.0, integrations listed, affects_astronomy=false", d["api_version"] == "1.6.0" and "aladhan" in d["integrations"]["calendar_providers"] and d["integrations"]["affects_astronomy"] is False)
+        rec_fn(f"S14 /v1/version: API {API_V}, integrations listed, affects_astronomy=false", api_version_matches(d["api_version"]) and "aladhan" in d["integrations"]["calendar_providers"] and d["integrations"]["affects_astronomy"] is False)
         st, h, b = get(port, "/v1/waqt?lat=90&lon=0&instant=2026-06-21T12:00:00Z&calendar_provider=aladhan")
         rec_fn("S14 polar: UNDEFINED, hijri null, no events, still HTTP 200", st == 200 and b["data"]["status"] == "UNDEFINED" and b["data"]["hijri"] is None and b["data"]["events"] == [])
         st, h, b = get(port, "/v1/waqt?lat=64.15&lon=-21.94&instant=2026-06-21T12:00:00Z&timezone_override=Atlantic/Reykjavik&calendar_provider=arithmetic-tabular")
@@ -113,7 +117,7 @@ def main():
         rec("/v1/version computation == waqt_core.versioning", d["computation"] == computation_identity(), json.dumps(d["computation"]))
         rec("/v1/version axes independent (core/api/vectors/engine)",
             (d["waqt_core_version"], d["api_version"], d["computation"]["revision"], d["conformance_vectors"]["vector_set_version"]) ==
-            (version_report(api_version=d["api_version"])["waqt_core_version"], d["api_version"], "2", VECTOR_SET_VERSION),
+            (version_report(api_version=d["api_version"])["waqt_core_version"], API_V, "2", VECTOR_SET_VERSION),
             f"core={d['waqt_core_version']} api={d['api_version']} rev={d['computation']['revision']} vec={d['conformance_vectors']['vector_set_version']}")
         rec("/v1/version waqt_local_version null from server", d["waqt_local_version"] is None)
         st, h, b = get(port, "/v1/health"); rec("GET /v1/health", st == 200 and b["computation"]["revision"] == "2")
@@ -132,14 +136,41 @@ def main():
         rec("waqt_vectors stamp == running engine", vec["generated_at_computation"] == computation_identity() and vec["vector_set_version"] == VECTOR_SET_VERSION)
         # live API <-> sdk conformance vectors (whole envelope minus generated_at)
         sv = json.load(open(ROOT / "sdks/vectors/sdk_conformance_vectors.json"))
+        mig = load_migration()
         bad = []
         from urllib.parse import urlencode
+        def contains(old, new):
+            """Additivity rule (same as vector_additivity_check.py): every recorded value must survive; new keys are allowed."""
+            if isinstance(old, dict):
+                return isinstance(new, dict) and all(k in new and contains(v, new[k]) for k, v in old.items())
+            if isinstance(old, list):
+                return isinstance(new, list) and len(old) == len(new) and all(contains(a, b) for a, b in zip(old, new))
+            return old == new
+        def replay(rq, params):
+            q = ("?" + urlencode(params, doseq=True)) if params else ""
+            return get(port, rq["path"] + q)
         for v in sv["vectors"]:
             rq = v["request"]
-            q = ("?" + urlencode(rq["params"], doseq=True)) if rq.get("params") else ""
-            st, h, b = get(port, rq["path"] + q)
+            st, h, b = replay(rq, effective_params(v, mig))   # migrated vectors: pre-1.7.0 provider made explicit
+            if st != v["status_code"] or not contains(strip_volatile(v["response"]), strip_volatile(b)): bad.append(v["id"])
+        rec(f"live API ⊇ sdk_conformance_vectors ({len(sv['vectors'])} vectors, real HTTP, recorded values all preserved, additive keys allowed; {len(mig['entries'])} replayed under their declared pre-1.7.0 provider)", not bad, "mismatch: " + ",".join(bad) if bad else "all identical")
+        # new-default vectors: provider OMITTED -> the 1.7.0 default, recorded in a separate file
+        nv = json.load(open(ROOT / mig["new_vector_file"]))
+        bad = []
+        for v in nv["vectors"]:
+            st, h, b = replay(v["request"], v["request"].get("params"))
             if st != v["status_code"] or strip_volatile(b) != strip_volatile(v["response"]): bad.append(v["id"])
-        rec(f"live API == sdk_conformance_vectors ({len(sv['vectors'])} vectors, real HTTP)", not bad, "mismatch: " + ",".join(bad) if bad else "all identical")
+        rec(f"live API == API 1.7.0 default-provider vectors ({len(nv['vectors'])} vectors, provider omitted)", not bad, "mismatch: " + ",".join(bad) if bad else "all identical")
+        # live API version == DOCUMENTED version on every surface (rejects any other value)
+        st, h, b = get(port, "/v1/health"); rec(f"/v1/health api_version == documented {API_V}", api_version_matches(b.get("api_version")), str(b.get("api_version")))
+        st, h, b = get(port, "/v1/version"); rec(f"/v1/version api_version == documented {API_V}", api_version_matches(b["data"]["api_version"]), str(b["data"]["api_version"]))
+        st, h, b = get(port, "/v1/waqt?lat=9.0192&lon=38.7525&instant=2026-09-19T15:42:00Z"); rec(f"/v1/waqt meta.api_version == documented {API_V}", api_version_matches(b["meta"]["api_version"]))
+        # provider selection on the real socket: omitted == explicit umm-al-qura, differs from arithmetic-tabular only in Hijri labels
+        q0 = "/v1/waqt?lat=9.0192&lon=38.7525&instant=2026-09-19T15:42:00Z"
+        _, _, d0 = get(port, q0); _, _, du = get(port, q0 + "&calendar_provider=umm-al-qura"); _, _, da = get(port, q0 + "&calendar_provider=arithmetic-tabular")
+        rec("provider: omitted == explicit umm-al-qura; arithmetic-tabular selectable; response names provider used",
+            d0["data"]["hijri"] == du["data"]["hijri"] and d0["data"]["hijri"]["provider"]["name"] == "umm-al-qura" and da["data"]["hijri"]["provider"]["name"] == "arithmetic-tabular" and d0["data"]["hijri"]["date"] != da["data"]["hijri"]["date"])
+        rec("provider choice does not move canonical Waqt time (day, position, events identical)", all(d0["data"][k] == da["data"][k] for k in ("instant", "day", "position", "events", "next_event") if k in d0["data"]))
     finally:
         p.terminate(); p.wait()
     # ---------- server 2: CORS opt-in ----------

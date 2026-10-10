@@ -19,7 +19,12 @@
   W.getJSON("/v1/calendar", {}).then((d) => {
     const list = (d.providers || []).map((p) => (typeof p === "string" ? p : p.name)).filter(Boolean);
     if (list.length) $("d-cal").innerHTML = list.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join("");
-  }).catch(() => {});
+  }).catch(() => {}).then(() => {
+    // The picker must show the provider the page is ACTUALLY using (the configured default, umm-al-qura), never whichever
+    // provider the API happens to list first; otherwise "Apply" would silently switch the user to another provider.
+    const cfg = window.WAQT_CONFIG && window.WAQT_CONFIG.hijri, want = (store.params && store.params.calendar_provider) || (cfg && cfg.defaultProvider) || "umm-al-qura";
+    const sel = $("d-cal"); if ([...sel.options].some((o) => o.value === want)) sel.value = want;
+  });
 
   const place = $("d-place"), lat = $("d-lat"), lon = $("d-lon");
   place.addEventListener("change", () => { if (place.value !== "custom") { const [a, b] = place.value.split(","); lat.value = a; lon.value = b; } });

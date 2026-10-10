@@ -14,7 +14,7 @@ means.
 | **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.4.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
 | **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.7.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
-| **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.5.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
+| **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.7.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
 | **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `2.0` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
 
 Two more things look like versions and are easy to conflate with the axes
@@ -143,10 +143,23 @@ SDK work, for instance, could bump the API without touching the engine).
 }
 ```
 
-API contract 1.6.0 → 1.7.0 (intentional behavior change; response shape unchanged):
+API contract 1.6.0 → 1.7.0 (intentional behavior change; no field removed or renamed):
 the default `calendar_provider` on provider-aware HTTP endpoints changes from
 `arithmetic-tabular` to `umm-al-qura`; either provider remains explicitly selectable.
+Additive: responses that did not name the provider they used now carry
+`calendar_provider: {name, version}` (institutional week / fiscal-year / academic-year,
+and `/v1/conversions`). The full record, with examples, risks and the disposition of the
+eleven changed recordings, is [`migrations/API-1.7.0-default-provider.md`](migrations/API-1.7.0-default-provider.md).
 The Python and JavaScript SDKs now record API 1.7.0 as their maximum tested version.
+
+**Policy for provider defaults (ratified in [DR-0009](../conformance/decisions/DR-0009.md) by Dr. Salim Muhammed Redi, recorded 2026-10-10).**
+The `/v1` guarantee is about *response shapes* and *explicitly selected* behavior: a request that names
+`calendar_provider` is reproducible across versions. The provider used when the parameter is **omitted** is
+a project default and may change only by a decision of the project owners, in a new API version, together
+with (a) a migration record under `docs/migrations/`, (b) versioned vectors (historical recordings are never
+rewritten; a declared migration replays them under their historical provider), and (c) instructions for
+preserving the previous results. Callers that need stability pin `calendar_provider`. A change of default
+is never made to make a test pass.
 
 `waqt_local_version` is `null` from the server (an HTTP API has no
 `waqt-local` layer) and `api_version` is `null` from `waqt_local.version()`

@@ -33,7 +33,7 @@ Add `--json` before the subcommand to get the exact `waqt_local` payload
 
 Every location command accepts `--elevation`, `--timezone` (IANA override),
 `--fajr-angle`, `--isha-angle`, `--asr-ratio`, and `--provider`
-(`arithmetic-tabular` default, or `umm-al-qura`, `declared`,
+(`umm-al-qura` default since API 1.7.0 -- pass `--provider arithmetic-tabular` for the previous default -- or `declared`,
 `local-observation` — see `waqt providers`).
 
 ## Why a CLI belongs in Sprint 12

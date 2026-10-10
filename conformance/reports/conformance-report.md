@@ -1,12 +1,12 @@
 # Waqt conformance report
 
-Generated 2026-10-06 03:47 UTC by `harness/waqt_conform.py` · COP 1.1 · 733 vectors + 43 metamorphic checks.
+Generated 2026-10-10 03:20 UTC by `harness/waqt_conform.py` · COP 1.1 · 733 vectors + 43 metamorphic checks.
 
 Reproduce: `python3 conformance/harness/waqt_conform.py --adapter "python3 conformance/adapters/reference_adapter.py" --label reference --adapter "node conformance/independent/src/cli.mjs" --label independent`
 
 ## 0. Contract and unresolved questions
 
-Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `c2ed8ff1c7f9a757` - manifest matches - COP 1.1.
+Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `c6011d8bc7bc6c57` - manifest matches - COP 1.1.
 
 **Unresolved specification questions: 12** of 28 (1 unresolved by design, 11 deferred; 16 resolved). A passing table below does not mean these are settled.
 
@@ -29,26 +29,26 @@ Declared MUST but not enforced by any normative vector: `ERR-004`.
 
 | label | implementation | language | shares code with reference | run time |
 |---|---|---|---|---|
-| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 31.44 s |
-| reference | waqt-reference waqt-core 0.4.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 15.54 s |
+| reference | waqt-reference waqt-core 0.4.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 8.67 s |
+| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 15.76 s |
 
 ## 2. Results by tier
 
 Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance. `open` and `informative` vectors are reported but never counted as failures (see CONFORMANCE.md §4).
 
-| tier | independent pass / fail / n.a. | reference pass / fail / n.a. |
+| tier | reference pass / fail / n.a. | independent pass / fail / n.a. |
 |---|---|---|
-| exact | 479 / 0 / 0 | 476 / 0 / 3 |
+| exact | 476 / 0 / 3 | 479 / 0 / 0 |
 | tolerance | 182 / 0 / 0 | 182 / 0 / 0 |
-| open | 11 / 0 / 0 | 2 / 9 / 0 |
-| informative | 55 / 6 / 0 | 60 / 1 / 0 |
+| open | 2 / 9 / 0 | 11 / 0 / 0 |
+| informative | 60 / 1 / 0 | 55 / 6 / 0 |
 | metamorphic | 43 / 0 / 0 | 43 / 0 / 0 |
 
 ## 3. Requirements
 
 `PASS` = every normative vector for the requirement passes; `FAIL` = at least one fails; `OPEN-ONLY` = only open/informative vectors exist; `NO-DATA` = no vector yet.
 
-| requirement | kind | independent | reference | title |
+| requirement | kind | reference | independent | title |
 |---|---|---|---|---|
 | AST-001 | MUST | PASS (137/137) | PASS (137/137) | The Asr target altitude uses the Sun's declination at the UPPER TRANSIT of the date (the noon shadow); the crossing instant is then solved with the Sun's position at the crossing |
 | AST-002 | MUST | PASS (1/1) | PASS (1/1) | Asr is undefined (omitted, UND-002) exactly when the Sun's geometric altitude at upper transit is <= 0 deg |
@@ -61,7 +61,7 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | CAL-007 | OPEN | OPEN-ONLY | OPEN-ONLY | umm-al-qura month boundaries away from the validated anchors: UNRESOLVED BY DESIGN (institutional convention; see OQ-UAQ-2) |
 | CAL-008 | MUST | PASS (5/5) | PASS (5/5) | declared / local-observation override applies only on the exact label date; otherwise tabular |
 | CAL-009 | MUST | PASS (3/3) | PASS (3/3) | Providers without a fixed rule reject reverse conversion (UNSUPPORTED_OPERATION) |
-| CAL-010 | MUST | PASS (13/13) | PASS (10/10) | Swapping the calendar provider changes only the label, never an instant or position |
+| CAL-010 | MUST | PASS (10/10) | PASS (13/13) | Swapping the calendar provider changes only the label, never an instant or position |
 | CAL-011 | MUST | PASS (4/4) | PASS (4/4) | umm-al-qura is supported for 1700-01-01..2300-12-31 only; outside it the provider refuses with OUT_OF_RANGE |
 | DAY-001 | MUST | PASS (152/152) | PASS (152/152) | A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1)) |
 | DAY-002 | MUST | PASS (8/8) | PASS (8/8) | At the exact opening Maghrib the new day has begun (position 00:00:00) |
@@ -101,7 +101,7 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | PRV-005 | MUST | PASS (2/2) | PASS (2/2) | Circuit breaker after a hard failure; Retry-After honoured and capped |
 | PRV-006 | MUST | PASS (11/11) | PASS (11/11) | The fallback result names the provider that actually produced it |
 | PRV-007 | OPEN | OPEN-ONLY | OPEN-ONLY | Soft-failure counting and outbound budget details |
-| SCH-001 | MUST | PASS (40/40) | PASS (37/37) | Point resolution: instant, anchor, event slots, next/prev occurrence, position, offset, fraction |
+| SCH-001 | MUST | PASS (37/37) | PASS (40/40) | Point resolution: instant, anchor, event slots, next/prev occurrence, position, offset, fraction |
 | SCH-002 | MUST | PASS (32/32) | PASS (32/32) | Windows are half-open; unbounded ends; inside/before/after relation |
 | SCH-003 | MUST | PASS (14/14) | PASS (14/14) | Deadlines: pending / reached / passed with signed remaining seconds |
 | SCH-004 | MUST | PASS (25/25) | PASS (25/25) | Three undefined statuses; strict vs skip policy; evaluate reports unknown, not false |
@@ -122,24 +122,15 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | UND-003 | MUST | PASS (26/26) | PASS (26/26) | Both implementations must agree on WHICH events exist away from the transition latitude |
 | UND-004 | OPEN | NO-DATA | NO-DATA | Existence of GRAZING events (Sun within arc-minutes of a threshold): unresolved, scan strategy is implementation-defined |
 
-## 4. Failing normative vectors — independent
-
-None.
-
-
 ## 4. Failing normative vectors — reference
 
 None.
 
 
-## 5. Open-question and informative divergences — independent
+## 4. Failing normative vectors — independent
 
-- **uaq/year-table/1420** (informative; CAL-007, CAL-006): $.months[9].length expected `29` got `30`
-- **uaq/year-table/1446** (informative; CAL-007, CAL-006): $.months[4].length expected `29` got `30`
-- **interop/instant/one-second-before-maghrib** (informative; INT-001, DAY-007): $.waqt_position_seconds expected `86401.137` got `0.240126`
-- **interop/boundary/ends-exactly-at-maghrib** (informative; INT-003): $.crosses_maghrib expected `false` got `true`
-- **waqt/london-long-day-near-24h-boundary** (informative; DAY-001, EVT-001, DAY-004, DAY-005, EVT-002): $.day.open expected `2026-02-14T17:13:44.159299+00:00` got `2026-02-14T17:13:40.639907+00:00`
-- **live/15-kiritimati-day_bounds** (informative; SCH-006, SCH-008): $.hijri_label expected `1448-04-06` got `1448-04-07`
+None.
+
 
 ## 5. Open-question and informative divergences — reference
 
@@ -152,4 +143,13 @@ None.
 - **instant/fraction-echo** (open; TIME-001): $.instant expected `2026-09-19T15:42:00.123456+00:00` got `2026-09-19T15:42:00+00:00`
 - **instant/naive** (open; TIME-002): $ expected `expected error ['INVALID_INSTANT', 'VALIDATION_ERROR']` got `succeeded: {"instant": "2026-09-19T15:42:00+00:00"}`
 - **aladhan/retry-after-short** (open; PRV-005): $.steps[2].provider expected `aladhan` got `umm-al-qura`
+- **live/15-kiritimati-day_bounds** (informative; SCH-006, SCH-008): $.hijri_label expected `1448-04-06` got `1448-04-07`
+
+## 5. Open-question and informative divergences — independent
+
+- **uaq/year-table/1420** (informative; CAL-007, CAL-006): $.months[9].length expected `29` got `30`
+- **uaq/year-table/1446** (informative; CAL-007, CAL-006): $.months[4].length expected `29` got `30`
+- **interop/instant/one-second-before-maghrib** (informative; INT-001, DAY-007): $.waqt_position_seconds expected `86401.137` got `0.240126`
+- **interop/boundary/ends-exactly-at-maghrib** (informative; INT-003): $.crosses_maghrib expected `false` got `true`
+- **waqt/london-long-day-near-24h-boundary** (informative; DAY-001, EVT-001, DAY-004, DAY-005, EVT-002): $.day.open expected `2026-02-14T17:13:44.159299+00:00` got `2026-02-14T17:13:40.639907+00:00`
 - **live/15-kiritimati-day_bounds** (informative; SCH-006, SCH-008): $.hijri_label expected `1448-04-06` got `1448-04-07`

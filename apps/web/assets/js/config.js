@@ -23,11 +23,11 @@
       requestTimeoutMs: 25000
     }),
 
-    /* Hijri display. The API default is arithmetic-tabular (unchanged, documented). The WEB chooses which provider to
+    /* Hijri display. The API default is umm-al-qura (since API 1.7.0; arithmetic-tabular stays selectable). The WEB still sends the provider EXPLICITLY, so what it shows never depends on a server default, and it chooses which provider to
        REQUEST and always shows the provider name next to the date; it never hard-codes a date. */
     hijri: Object.freeze({
       defaultProvider: "umm-al-qura",
-      ambiguityNote: "Hijri dates depend on the calendar convention. Another provider (for example arithmetic-tabular) can legitimately show a different day for the same moment; the Waqt time itself does not change."
+      ambiguityNote: "Hijri dates depend on the calendar convention. Waqt shows Umm al-Qura by default: a deliberate project choice, not a claim that every community follows it. Another provider (for example arithmetic-tabular) can legitimately show a different day for the same moment; the Waqt time itself does not change."
     }),
 
     contactEmail: contact,
@@ -56,11 +56,12 @@
       experts: "Open to expert contributors and reviewers."
     }),
 
-    /* Formal governance state — kept separate from the role metadata above. Do not change to "ratified" until the
-       project owner explicitly ratifies the decision records. */
+    /* Formal governance state — kept separate from the role metadata above. It mirrors the decision records in
+       conformance/decisions (DR-0001..DR-0009 record ratification by the named Maintainer, 2026-10-10; no signed
+       artifact is held in the repository). The CONTRACT is still an unreleased 2.0.0: ratified records are not a release. */
     governance: Object.freeze({
-      ratification: "pending-project-owner-approval",
-      ratificationLabel: "Pending project-owner approval",
+      ratification: "decision-records-ratified",
+      ratificationLabel: "Decision records ratified · contract not yet released",
       contractReleased: false,
       decisionRecords: Object.freeze({ tree: "conformance/decisions" }),
       process: Object.freeze({ path: "conformance/GOVERNANCE.md" }),

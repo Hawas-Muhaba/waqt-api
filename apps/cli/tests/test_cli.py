@@ -59,9 +59,16 @@ def test_convert_gregorian_to_hijri_no_location():
     assert code == 0 and "Rabi al-Thani 1448" in out
 
 
-def test_convert_hijri_to_gregorian():
-    code, out, _err = call("convert", "--hijri", "1448-4-15")
-    assert code == 0 and "2026-09-28" in out
+def test_convert_hijri_to_gregorian_default_provider_is_umm_al_qura():
+    code, out, _err = call("convert", "--hijri", "1448-4-15")                          # --provider omitted: API 1.7.0 default
+    assert code == 0 and "2026-09-26" in out
+    code2, out2, _ = call("convert", "--hijri", "1448-4-15", "--provider", "umm-al-qura")
+    assert code2 == 0 and "2026-09-26" in out2
+
+
+def test_convert_hijri_to_gregorian_arithmetic_tabular_still_selectable():
+    code, out, _err = call("convert", "--hijri", "1448-4-15", "--provider", "arithmetic-tabular")
+    assert code == 0 and "2026-09-28" in out                                           # the pre-1.7.0 default result
 
 
 def test_convert_instant_to_all_calendars_needs_no_flags_beyond_instant():

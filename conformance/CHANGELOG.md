@@ -3,7 +3,7 @@
 Newest first. Every entry lists what changed in requirements, vectors and registry, the decision records
 behind it, and whether it is breaking (GOVERNANCE.md section 2).
 
-## 2.0.0 -- Sprint 16 -- PROPOSED (decision records await maintainer ratification, see MAINTAINERS.md)
+## 2.0.0 -- Sprint 16 -- PROPOSED / UNRELEASED (decision records DR-0001..DR-0008 ratified by Dr. Salim Muhammed Redi on 2026-10-10; the contract itself is not released: ERR-004 has no normative vector and 12 questions are unresolved)
 
 **Breaking.** Narrowed accepted outcomes and changed expected values.
 

@@ -24,6 +24,14 @@ from waqt_core.hijri import HijriDate, HijriProvider
 from .errors import UnknownCalendarProviderError
 from .formatting import parse_date
 
+# Option B (API 1.7.0): the offline facade must agree with the server's default (waqt.api.providers.DEFAULT_CALENDAR_PROVIDER).
+DEFAULT_CALENDAR_PROVIDER = "umm-al-qura"
+
+def provider_identity(provider) -> dict:
+    """The provider ACTUALLY used, as {name, version}; same shape as the server's `waqt.api.providers.provider_identity` (API 1.7.0)."""
+    return {"name": provider.name, "version": provider.version}
+
+
 PROVIDER_CATALOG = {
     "arithmetic-tabular": {
         "description": (

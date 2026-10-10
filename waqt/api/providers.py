@@ -99,6 +99,12 @@ PROVIDER_CATALOG = {
     },
 }
 
+def provider_identity(provider: HijriProvider) -> dict:
+    """The provider ACTUALLY used for a response, as {name, version}. Every provider-aware endpoint reports this
+    (API 1.7.0), so a caller that omitted `calendar_provider` can see which default was applied."""
+    return {"name": provider.name, "version": provider.version}
+
+
 _instance_cache: dict[str, HijriProvider] = {}
 
 
