@@ -5,6 +5,8 @@ behind it, and whether it is breaking (GOVERNANCE.md section 2).
 
 ## 2.0.0 -- Sprint 16 -- PROPOSED / UNRELEASED (decision records DR-0001..DR-0008 ratified by Dr. Salim Muhammed Redi on 2026-10-10; the contract itself is not released: ERR-004 has no normative vector and 13 questions are unresolved)
 
+**Amendment to the 2.0.0 draft (DR-0011, DR-0012; owner decisions of 2026-10-11, NOT independently reviewed, no signed ratification held):** ERR-004 is now normative with explicit ranges (fajr/isha 0 < x <= 90, asr > 0; NaN, infinity, non-numbers rejected with VALIDATION_ERROR) and has normative vectors; new MUST **CAL-013**: operations that return a Waqt day never fail because the Hijri provider cannot label the date (empty label + `calendar_error`), closing **OQ-CAL-1**. COP gains the `$nonfinite` wire convention and a `calendar_error: {code}` output. Totals: 72 -> 73 requirements, 13 -> 12 unresolved questions. Promoted in place (same ids, no recorded value changed): 5 `err/profile/*` and 2 OQ-CAL-1 vectors. Audit trail: `tools/migrate_err004_oqcal1.py`.
+
 **Amendment to the 2.0.0 draft (CCP-0001 / DR-0010, 2026-10-10; ratification of DR-0010 PENDING):** new MUST **CAL-012**: an omitted calendar provider
 means `umm-al-qura`, an explicit one is honoured (COP `provider` inputs become optional). New suite `calendar-default.json` (7 exact vectors, expected values
 copied from normative Umm al-Qura vectors). Three normative DAY-004 label vectors now name `arithmetic-tabular` in their input; **no expected value changed**.

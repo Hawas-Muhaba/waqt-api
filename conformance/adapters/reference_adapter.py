@@ -15,7 +15,7 @@ from fastapi.testclient import TestClient  # noqa: E402
 from waqt.api import app  # noqa: E402
 from waqt.api.providers import resolve_calendar_provider  # noqa: E402
 from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER as DEFAULT_PROVIDER  # noqa: E402  (CAL-012: omitted provider = the default)
-from waqt_core.hijri import weekday_name  # noqa: E402
+from waqt_core.hijri import weekday_name, calendar_error_code  # noqa: E402
 from waqt_core._version import __version__ as _CORE_VERSION  # noqa: E402
 from waqt_core.core import AstronomyProfile, Location  # noqa: E402
 from waqt_core.scheduling import SchedulingContext, SchedulingEngine, run_operation  # noqa: E402
@@ -197,8 +197,11 @@ def op_compute(i):
     return {"status": "OK", "undefined_reason": None, **base,
             "day": {"open": d["day"]["maghrib_open"], "close": d["day"]["maghrib_close"], "length_seconds": d["day"]["length_si_seconds"]},
             "position": {"seconds": d["waqt"]["reading"]["seconds"], "display": d["waqt"]["reading"]["display"]},
-            "hijri": {"date": h.get("date"), "year": h.get("year"), "month": h.get("month"), "day": h.get("day"), "month_name": h.get("month_name"),
-                      "provider": (h.get("provider") or {}).get("name"), "source": h.get("source"), "fallback_reason": prov.get("fallback_reason")},
+            # CAL-013: no label (the provider could not label the date) is `null`, not an object of nulls.
+            "hijri": ({"date": h.get("date"), "year": h.get("year"), "month": h.get("month"), "day": h.get("day"), "month_name": h.get("month_name"),
+                       "provider": (h.get("provider") or {}).get("name"), "source": h.get("source"), "fallback_reason": prov.get("fallback_reason")}
+                      if h.get("date") else None),
+            "calendar_error": calendar_error_out(d.get("calendar_error")),
             "weekday": d["weekday"], "events": evs, "undefined_events": und,
             "next_event": {"name": ne["name"], "instant": ne["instant"], "seconds_until": ne["countdown"]["seconds"]} if ne else None}
 
@@ -233,7 +236,8 @@ def op_date_to_waqt(i):
     close = datetime.fromisoformat(w["day"]["maghrib_close"])
     return {"resolved": True, "close_civil_date": close.astimezone(ZoneInfo(d["timezone"]["name"])).date().isoformat(),
             "open": w["day"]["maghrib_open"], "close": w["day"]["maghrib_close"],
-            "hijri_date": (w.get("hijri") or {}).get("date"), "weekday": w.get("weekday"), "reason": None}
+            "hijri_date": (w.get("hijri") or {}).get("date"), "calendar_error": calendar_error_out(w.get("calendar_error")),
+            "weekday": w.get("weekday"), "reason": None}
 
 
 def _ctx(c):
@@ -338,12 +342,31 @@ DESCRIPTOR = {"name": "waqt-reference", "version": f"waqt-core {_CORE_VERSION} /
               "timezone_source": "IANA via Python zoneinfo + timezonefinder", "shares_code_with_reference": "n/a (this is the reference)"}
 
 
+def decode_nonfinite(v):
+    """COP wire convention (spec/COP.md section 2): {"$nonfinite": "NaN"|"Infinity"|"-Infinity"} -> a real float."""
+    if isinstance(v, list):
+        return [decode_nonfinite(x) for x in v]
+    if isinstance(v, dict):
+        if set(v) == {"$nonfinite"} and v["$nonfinite"] in ("NaN", "Infinity", "-Infinity"):
+            return float(v["$nonfinite"].replace("Infinity", "inf"))
+        return {k: decode_nonfinite(x) for k, x in v.items()}
+    return v
+
+
+def calendar_error_out(err):
+    """COP `calendar_error` (CAL-013): {code} only; the free-text message is not normative. None when there is no error."""
+    if not err:
+        return None
+    msg = err.get("message") if isinstance(err, dict) else str(err)
+    return {"code": calendar_error_code(msg)}
+
+
 def run_case(c):
     fn = OPS.get(c["op"])
     if not fn:
         return {"id": c["id"], "ok": False, "error": {"code": "UNSUPPORTED_OPERATION", "message": c["op"]}}
     try:
-        return {"id": c["id"], "ok": True, "output": fn(c.get("input") or {})}
+        return {"id": c["id"], "ok": True, "output": fn(decode_nonfinite(c.get("input") or {}))}
     except CopError as e:
         return {"id": c["id"], "ok": False, "error": {"code": e.code, "message": e.message}}
     except Exception as e:  # noqa

@@ -1,17 +1,17 @@
 {
  "meta": {
-  "generated": "2026-10-11 12:28 UTC",
+  "generated": "2026-10-11 14:00 UTC",
   "cop": "1.1",
   "contract": {
    "contract_version": "2.0.0",
-   "contract_sha256": "885ad4b6eef4abd12caf66277d709e84ff0f727c2ed9d1cdd67d54496218d88a",
+   "contract_sha256": "cfe9ca93ad1b453fc2d62fe702245e90371783d7a5cdbf8c73683c0cfffd184b",
    "manifest_matches_files": true,
    "released": false,
    "cop_version": "1.1",
    "questions": {
     "total": 29,
-    "resolved": 16,
-    "deferred": 12,
+    "resolved": 17,
+    "deferred": 11,
     "unresolved-by-design": 1
    },
    "unresolved": [
@@ -74,16 +74,9 @@
      "id": "OQ-PRV-3",
      "status": "deferred",
      "topic": "Outbound budget refill granularity"
-    },
-    {
-     "id": "OQ-CAL-1",
-     "status": "deferred",
-     "topic": "Omitted provider (umm-al-qura) outside 1700..2300: must waqt.compute / calendar.* refuse with OUT_OF_RANGE, or return the Waqt day with an empty Hijri label?"
     }
    ],
-   "unenforced_musts": [
-    "ERR-004"
-   ],
+   "unenforced_musts": [],
    "known_failures_sha256": "81923f592eba26ff358076608f3d09dd4a8d8f43eea3ca325ef2a7c7c041faf2"
   }
  },
@@ -119,7 +112,7 @@
     "schedule.run",
     "waqt.compute"
    ],
-   "seconds": 5.5,
+   "seconds": 5.76,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -1100,6 +1093,146 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+    },
+    {
+     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+    },
+    {
+     "id": "default/out-of-range/compute/addis/1699-09-19",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/1700-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/2300-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+    },
+    {
+     "id": "cal13/date-to-waqt-day-explicit/addis/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+    },
+    {
+     "id": "cal13/hijri-refuses/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-011",
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+    },
+    {
+     "id": "cal13/date-to-waqt-day-explicit/addis/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+    },
+    {
+     "id": "cal13/hijri-refuses/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-011",
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+    },
+    {
+     "id": "cal13/compute/addis/1699-12-31T12:00Z",
+     "suite": "calendar-default",
+     "tier": "tolerance",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. The day boundaries are recorded from the reference (the independent implementation agrees to < 1 s); the Waqt day is unchanged by the missing label."
+    },
+    {
+     "id": "cal13/compute/addis/1700-01-01T12:00Z",
+     "suite": "calendar-default",
+     "tier": "tolerance",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first supported day, inside the range, behaves exactly as before. (An upper-end waqt.compute vector is not possible: the independent implementation's microsecond-integer clock stops near 2255, RANGE_ERROR; the upper end is covered by calendar.gregorian_date_to_waqt_day.)"
     },
     {
      "id": "reverse-unsupported/declared",
@@ -6303,91 +6436,6 @@
      "note": null
     },
     {
-     "id": "err/profile/fajr-95",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected error ['VALIDATION_ERROR']",
-       "succeeded: {\"status\": \"OK\", \"undefined_reason\": null, \"instant\": \"2026-09-19T15:42:00+00:00\", \"timezone\": \"UTC\", \"profile\": {\"fajr_angle_deg\": 95.0, \"isha_angle_deg\": 17...."
-      ]
-     ],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/fajr-negative",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected error ['VALIDATION_ERROR']",
-       "succeeded: {\"status\": \"OK\", \"undefined_reason\": null, \"instant\": \"2026-09-19T15:42:00+00:00\", \"timezone\": \"UTC\", \"profile\": {\"fajr_angle_deg\": -5.0, \"isha_angle_deg\": 17...."
-      ]
-     ],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/isha-zero",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected error ['VALIDATION_ERROR']",
-       "succeeded: {\"status\": \"OK\", \"undefined_reason\": null, \"instant\": \"2026-09-19T15:42:00+00:00\", \"timezone\": \"UTC\", \"profile\": {\"fajr_angle_deg\": 18.0, \"isha_angle_deg\": 0.0..."
-      ]
-     ],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/asr-zero",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected error ['VALIDATION_ERROR']",
-       "succeeded: {\"status\": \"OK\", \"undefined_reason\": null, \"instant\": \"2026-09-19T15:42:00+00:00\", \"timezone\": \"UTC\", \"profile\": {\"fajr_angle_deg\": 18.0, \"isha_angle_deg\": 17...."
-      ]
-     ],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/asr-negative",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected error ['VALIDATION_ERROR']",
-       "succeeded: {\"status\": \"OK\", \"undefined_reason\": null, \"instant\": \"2026-09-19T15:42:00+00:00\", \"timezone\": \"UTC\", \"profile\": {\"fajr_angle_deg\": 18.0, \"isha_angle_deg\": 17...."
-      ]
-     ],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
      "id": "err/tz-malformed",
      "suite": "errors",
      "tier": "exact",
@@ -6397,6 +6445,380 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "A path-like zone name is an unknown zone, not a file lookup and not a server fault."
+    },
+    {
+     "id": "err/profile/fajr-95",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-90.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-neg-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-90.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-neg-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-valid/fajr-90",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/fajr-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/isha-90",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/isha-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/asr-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/asr-100",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-schedule/fajr-95",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-schedule/isha-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-schedule/asr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-date-to-waqt/fajr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-date-to-waqt/asr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
     },
     {
      "id": "greg/1970-01-01",
@@ -9005,28 +9427,6 @@
      "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
     },
     {
-     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
-     "suite": "open-questions",
-     "tier": "open",
-     "requirements": [
-      "CAL-012"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: the Waqt day is returned with an empty Hijri label (a calendar failure never fails a Waqt computation; API 1.5.0 calendar_error). The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
-    },
-    {
-     "id": "default/out-of-range/compute/addis/1699-09-19",
-     "suite": "open-questions",
-     "tier": "open",
-     "requirements": [
-      "CAL-012"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: status OK with an empty Hijri label. The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
-    },
-    {
      "id": "aladhan/single/timeout",
      "suite": "provider-failure",
      "tier": "exact",
@@ -10052,7 +10452,7 @@
     "instant.parse",
     "date.parse"
    ],
-   "seconds": 8.07,
+   "seconds": 8.33,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -11033,6 +11433,146 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+    },
+    {
+     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+    },
+    {
+     "id": "default/out-of-range/compute/addis/1699-09-19",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/1700-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+    },
+    {
+     "id": "cal13/date-to-waqt-day/addis/2300-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-012",
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+    },
+    {
+     "id": "cal13/date-to-waqt-day-explicit/addis/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+    },
+    {
+     "id": "cal13/hijri-refuses/1699-12-31",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-011",
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+    },
+    {
+     "id": "cal13/date-to-waqt-day-explicit/addis/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+    },
+    {
+     "id": "cal13/hijri-refuses/2301-01-01",
+     "suite": "calendar-default",
+     "tier": "exact",
+     "requirements": [
+      "CAL-011",
+      "CAL-012"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+    },
+    {
+     "id": "cal13/compute/addis/1699-12-31T12:00Z",
+     "suite": "calendar-default",
+     "tier": "tolerance",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. The day boundaries are recorded from the reference (the independent implementation agrees to < 1 s); the Waqt day is unchanged by the missing label."
+    },
+    {
+     "id": "cal13/compute/addis/1700-01-01T12:00Z",
+     "suite": "calendar-default",
+     "tier": "tolerance",
+     "requirements": [
+      "CAL-013"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0012: the first supported day, inside the range, behaves exactly as before. (An upper-end waqt.compute vector is not possible: the independent implementation's microsecond-integer clock stops near 2255, RANGE_ERROR; the upper end is covered by calendar.gregorian_date_to_waqt_day.)"
     },
     {
      "id": "reverse-unsupported/declared",
@@ -16272,61 +16812,6 @@
      "note": null
     },
     {
-     "id": "err/profile/fajr-95",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/fajr-negative",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/isha-zero",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/asr-zero",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
-     "id": "err/profile/asr-negative",
-     "suite": "errors",
-     "tier": "open",
-     "requirements": [
-      "ERR-004"
-     ],
-     "verdict": "PASS",
-     "diffs": [],
-     "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-    },
-    {
      "id": "err/tz-malformed",
      "suite": "errors",
      "tier": "exact",
@@ -16336,6 +16821,380 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "A path-like zone name is an unknown zone, not a file lookup and not a server fault."
+    },
+    {
+     "id": "err/profile/fajr-95",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-90.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-neg-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-90.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/isha-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-negative",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-neg-infinity",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-non-numeric-string",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/asr-boolean",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-valid/fajr-90",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/fajr-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/isha-90",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/isha-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/asr-0.0001",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-valid/asr-100",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+    },
+    {
+     "id": "err/profile-schedule/fajr-95",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-schedule/isha-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-schedule/asr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-date-to-waqt/fajr-zero",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile-date-to-waqt/asr-nan",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
     },
     {
      "id": "greg/1970-01-01",
@@ -18943,40 +19802,6 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "PROPOSED: reject. API.md says instant is 'ISO 8601 UTC' but never says whether an offset-less string is rejected or assumed UTC. The reference assumes UTC."
-    },
-    {
-     "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
-     "suite": "open-questions",
-     "tier": "open",
-     "requirements": [
-      "CAL-012"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected success",
-       "{\"code\": \"OUT_OF_RANGE\", \"message\": \"umm-al-qura is supported for 1700-01-01..2300-12-31 only\"}"
-      ]
-     ],
-     "note": "PROPOSED: the Waqt day is returned with an empty Hijri label (a calendar failure never fails a Waqt computation; API 1.5.0 calendar_error). The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
-    },
-    {
-     "id": "default/out-of-range/compute/addis/1699-09-19",
-     "suite": "open-questions",
-     "tier": "open",
-     "requirements": [
-      "CAL-012"
-     ],
-     "verdict": "FAIL",
-     "diffs": [
-      [
-       "$",
-       "expected success",
-       "{\"code\": \"OUT_OF_RANGE\", \"message\": \"umm-al-qura is supported for 1700-01-01..2300-12-31 only\"}"
-      ]
-     ],
-     "note": "PROPOSED: status OK with an empty Hijri label. The reference does this; the independent implementation returns OUT_OF_RANGE. OQ-CAL-1."
     },
     {
      "id": "aladhan/single/timeout",

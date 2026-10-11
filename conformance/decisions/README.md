@@ -16,3 +16,5 @@ earlier one, it does not edit it.
 | [DR-0008](DR-0008.md) | Scheduling rules that lived only in vectors | OQ-SCH-1 to OQ-SCH-5 (resolved) |
 | [DR-0009](DR-0009.md) | Default Hijri provider of the HTTP API is `umm-al-qura` (API 1.7.0) | none (API-level; no contract requirement) |
 | [DR-0010](DR-0010.md) | Default calendar provider of the contract and of waqt-core is `umm-al-qura` | CAL-012 (ratification PENDING) |
+| [DR-0011](DR-0011.md) | ERR-004: astronomy profile parameters are validated, with explicit ranges | ERR-004 (decided by owner instruction; ratification evidence NOT held) |
+| [DR-0012](DR-0012.md) | Out-of-range calendar dates never fail a Waqt computation (CAL-013) | OQ-CAL-1 (resolved; ratification evidence NOT held) |

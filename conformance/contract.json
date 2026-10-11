@@ -1,16 +1,16 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "885ad4b6eef4abd12caf66277d709e84ff0f727c2ed9d1cdd67d54496218d88a",
+ "contract_sha256": "cfe9ca93ad1b453fc2d62fe702245e90371783d7a5cdbf8c73683c0cfffd184b",
  "files": {
   "spec/requirements.json": {
-   "sha256": "09abeb61cd48720538c7f005460287bdc04a7ec990b99e4638471d58f170b95d"
+   "sha256": "95b4e94290b62817aacacdd6ceea767820f6352542b5bfa71201f14a37221bfd"
   },
   "spec/open-questions.json": {
-   "sha256": "e574a3cb14fe6a2c1408c93f4adf63ae9026b920cd25e2b619a6abe3c360da6e"
+   "sha256": "9a07dcfe4202b5a5736726bc86019574c9d90b198160b78020cdcd9eff77654f"
   },
   "spec/COP.md": {
-   "sha256": "444f654bedd576b171027fce724a727f44a33309579c487c04a356d8d1bfd66e"
+   "sha256": "b9df7aca33d0071a8f7862f0c3a02530fd5b3f9d1ca0eac1b0f4e9a29306709a"
   },
   "vectors/calendar-core.json": {
    "sha256": "07027ca395d9c0afffbdb969601775ce3ba5b812682bf2e956524e6afd8b68ac",
@@ -21,11 +21,12 @@
    }
   },
   "vectors/calendar-default.json": {
-   "sha256": "33754d95efd7b8f47a895c6ad32d5859dbd2d87ae56c47c8f3e7ca53e2e11329",
-   "vectors": 7,
+   "sha256": "1f60845a44b0fe65bf72dea764fc8090a4ebfc2cd98d576da8e6f53f679b8bf6",
+   "vectors": 19,
    "metamorphic": 0,
    "tiers": {
-    "exact": 7
+    "exact": 17,
+    "tolerance": 2
    }
   },
   "vectors/calendar-providers.json": {
@@ -55,12 +56,11 @@
    }
   },
   "vectors/errors.json": {
-   "sha256": "47ccb11dd27274b639ab59a05e40fc5a8f14d6db56bfcd0f469138fa7289b85e",
-   "vectors": 13,
+   "sha256": "9895234f491f89715dc296cfe7ad0b0b571b17331b9058ae8d311a7e26731cab",
+   "vectors": 42,
    "metamorphic": 0,
    "tiers": {
-    "exact": 8,
-    "open": 5
+    "exact": 42
    }
   },
   "vectors/gregorian-time.json": {
@@ -114,11 +114,11 @@
    "tiers": {}
   },
   "vectors/open-questions.json": {
-   "sha256": "60770b6896de84ed7c85d1286f2c74d74fa99a6c6e230ef18afbe3da3dc859f3",
-   "vectors": 5,
+   "sha256": "60425dde4b22914dd46a464460a1535d616b1b1c8068af90d6465a50949384e4",
+   "vectors": 3,
    "metamorphic": 0,
    "tiers": {
-    "open": 5
+    "open": 3
    }
   },
   "vectors/provider-failure.json": {
@@ -149,14 +149,14 @@
   }
  },
  "requirements": {
-  "total": 72,
-  "must": 68,
+  "total": 73,
+  "must": 69,
   "open": 4
  },
  "questions": {
   "total": 29,
-  "resolved": 16,
-  "deferred": 12,
+  "resolved": 17,
+  "deferred": 11,
   "unresolved-by-design": 1
  },
  "status": {

@@ -37,6 +37,7 @@ adapter --describe            writes {"implementation": {...}, "operations": ["o
 | Weekday names | Sunday-first Islamic names: `al-Ahad, al-Ithnayn, ath-Thulatha, al-Arbiaa, al-Khamis, al-Jumuah, as-Sabt`. |
 | Hijri month names | `Muharram, Safar, Rabi al-Awwal, Rabi al-Thani, Jumada al-Awwal, Jumada al-Thani, Rajab, Shaban, Ramadan, Shawwal, Dhu al-Qadah, Dhu al-Hijjah`. |
 | Absent vs null | A missing key and `null` are equivalent. A vector's `expect` is a **subset**: extra keys in an output are ignored; lists must have equal length. |
+| Non-finite numbers | JSON has no NaN or Infinity. A vector writes one as `{"$nonfinite": "NaN"}`, `{"$nonfinite": "Infinity"}` or `{"$nonfinite": "-Infinity"}` (nothing else); an adapter decodes it to a real non-finite number before calling the implementation (DR-0011). |
 | Time zone | Every location-dependent case supplies the IANA zone in `timezone`. Zone lookup from coordinates is **out of scope** (it depends on third-party boundary data). |
 
 ## 3. Error vocabulary
@@ -74,7 +75,7 @@ unit either side** instead of ±1 µs and says so in the report. Exact-boundary 
 ### `instant.parse` — `{value}` → `{instant}` (normalised to UTC) · errors `INVALID_INSTANT`
 ### Default calendar provider (CAL-012)
 Every `provider` (or `calendar.provider`, `calendar_provider`) input is **optional**. When it is omitted the provider is **`umm-al-qura`**; an explicitly named provider is always honoured, and an unknown name is still `UNKNOWN_CALENDAR_PROVIDER`. The default labels days only: it never changes a Waqt day, an event instant, a position or a countdown. It is a deliberate project default (DR-0010), not a claim that every community follows one calendar convention, which is why every other provider stays selectable. (Before contract 2.0.0 the COP left the default unspecified and both adapters used `arithmetic-tabular`.) Vectors that assert a Hijri value under a provider other than the default must name it.
-Outside `umm-al-qura`'s 1700-01-01..2300-12-31 (CAL-011), `hijri.*` operations that omit the provider return `OUT_OF_RANGE`. What the *other* operations (`waqt.compute`, `calendar.*`) must do there is **not yet specified** (open question OQ-CAL-1): the reference returns the Waqt day with an empty Hijri label, the independent implementation returns `OUT_OF_RANGE`.
+Outside `umm-al-qura`'s 1700-01-01..2300-12-31 (CAL-011), `hijri.*` operations return `OUT_OF_RANGE`. Operations that return a Waqt day (`waqt.compute`, `calendar.*`) do **not** fail (CAL-013, DR-0012, closing OQ-CAL-1): they return the Waqt day and every instant unchanged, an empty Hijri label (`hijri` / `hijri_date` null) and `calendar_error: {code: "OUT_OF_RANGE"}`. This holds for the default provider and for an explicitly named `umm-al-qura` alike; the free-text message is not normative and is not part of the COP output.
 
 ### `hijri.from_gregorian` — `{date, provider?, params?}` → `{year, month, day, date, month_name, display, provider, source, fallback_reason}`
 `provider` ∈ `arithmetic-tabular | umm-al-qura | declared | local-observation | aladhan`. `params` carries
@@ -92,6 +93,17 @@ when an override provider has no override for that date).
 No network is ever touched: the remote is a model. Fallback reason vocabulary: `timeout, network-error,
 upstream-rate-limited, upstream-server-error, upstream-rejected, malformed-response, date-mismatch,
 implausible-response, date-outside-remote-window, disabled, circuit-open, outbound-rate-limited`.
+### Astronomy profile validation (ERR-004)
+Every operation that accepts an astronomy profile (`waqt.compute`, `schedule.run`, `calendar.gregorian_date_to_waqt_day`, ...) validates it, and so does every HTTP endpoint, `waqt-local` and the CLI:
+
+| parameter | valid values |
+|---|---|
+| `fajr_angle_deg` | a finite number, `0 < x <= 90` |
+| `isha_angle_deg` | a finite number, `0 < x <= 90` |
+| `asr_shadow_ratio` | a finite number, `x > 0` |
+
+Zero, negatives, values above range, NaN, +/-Infinity, booleans and non-numeric text are rejected with `VALIDATION_ERROR` (HTTP 422 on the API). Nothing is clamped, coerced or replaced by a default. A parameter that is *omitted* takes its default (18, 17, 1); a JSON `null` is treated as omitted by both reference adapters and is **not specified** by the contract (flagged in DR-0011). The numeric *text* `"18"` is accepted by the HTTP GET API (every query parameter is text) and is therefore also not specified for JSON inputs.
+
 ### `waqt.compute`
 Input: `{location:{lat,lon,elevation_m?}, instant, timezone, profile?:{fajr_angle_deg,isha_angle_deg,asr_shadow_ratio}, calendar?:{provider, params?}}`
 Output: `{status: OK|UNDEFINED, undefined_reason, instant, timezone, profile, day:{open, close, length_seconds}, position:{seconds, display},

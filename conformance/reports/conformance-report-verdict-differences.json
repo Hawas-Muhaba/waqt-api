@@ -12,36 +12,6 @@
   "FAIL"
  ],
  [
-  "err/profile/fajr-95",
-  "open",
-  "FAIL",
-  "PASS"
- ],
- [
-  "err/profile/fajr-negative",
-  "open",
-  "FAIL",
-  "PASS"
- ],
- [
-  "err/profile/isha-zero",
-  "open",
-  "FAIL",
-  "PASS"
- ],
- [
-  "err/profile/asr-zero",
-  "open",
-  "FAIL",
-  "PASS"
- ],
- [
-  "err/profile/asr-negative",
-  "open",
-  "FAIL",
-  "PASS"
- ],
- [
   "interop/instant/one-second-before-maghrib",
   "informative",
   "PASS",
@@ -94,18 +64,6 @@
   "open",
   "FAIL",
   "PASS"
- ],
- [
-  "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
-  "open",
-  "PASS",
-  "FAIL"
- ],
- [
-  "default/out-of-range/compute/addis/1699-09-19",
-  "open",
-  "PASS",
-  "FAIL"
  ],
  [
   "aladhan/retry-after-short",

@@ -167,6 +167,361 @@
     }
    },
    "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+  },
+  {
+   "id": "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1699-09-19",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+  },
+  {
+   "id": "default/out-of-range/compute/addis/1699-09-19",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "1699-09-19T15:42:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. (promoted from OQ-CAL-1; the expectation is unchanged)"
+  },
+  {
+   "id": "cal13/date-to-waqt-day/addis/1699-12-31",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1699-12-31",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+  },
+  {
+   "id": "cal13/date-to-waqt-day/addis/2301-01-01",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2301-01-01",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure."
+  },
+  {
+   "id": "cal13/date-to-waqt-day/addis/1700-01-01",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1700-01-01",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": "1111-07-11",
+     "calendar_error": null
+    }
+   },
+   "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+  },
+  {
+   "id": "cal13/date-to-waqt-day/addis/2300-12-31",
+   "requirements": [
+    "CAL-012",
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2300-12-31",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": "1730-12-19",
+     "calendar_error": null
+    }
+   },
+   "note": "DR-0012: the first / last supported day behaves exactly as before; expected value is that of the normative uaq/range vector."
+  },
+  {
+   "id": "cal13/date-to-waqt-day-explicit/addis/1699-12-31",
+   "requirements": [
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1699-12-31",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa",
+    "calendar": {
+     "provider": "umm-al-qura"
+    }
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+  },
+  {
+   "id": "cal13/hijri-refuses/1699-12-31",
+   "requirements": [
+    "CAL-011",
+    "CAL-012"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "1699-12-31"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+  },
+  {
+   "id": "cal13/date-to-waqt-day-explicit/addis/2301-01-01",
+   "requirements": [
+    "CAL-013"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2301-01-01",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa",
+    "calendar": {
+     "provider": "umm-al-qura"
+    }
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. Same rule for an explicitly named provider."
+  },
+  {
+   "id": "cal13/hijri-refuses/2301-01-01",
+   "requirements": [
+    "CAL-011",
+    "CAL-012"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2301-01-01"
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "OUT_OF_RANGE"
+     ]
+    }
+   },
+   "note": "CAL-011 is unchanged: hijri.* operations refuse outside the range, with the default provider omitted."
+  },
+  {
+   "id": "cal13/compute/addis/1699-12-31T12:00Z",
+   "requirements": [
+    "CAL-013"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "1699-12-31T12:00:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": null,
+     "calendar_error": {
+      "code": "OUT_OF_RANGE"
+     },
+     "day": {
+      "open": "1699-12-30T15:16:36+00:00",
+      "close": "1699-12-31T15:17:08+00:00"
+     }
+    }
+   },
+   "note": "DR-0012 / CAL-013: the Waqt day is returned, the Hijri label is empty, calendar_error says OUT_OF_RANGE; no failure. The day boundaries are recorded from the reference (the independent implementation agrees to < 1 s); the Waqt day is unchanged by the missing label.",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   }
+  },
+  {
+   "id": "cal13/compute/addis/1700-01-01T12:00Z",
+   "requirements": [
+    "CAL-013"
+   ],
+   "op": "waqt.compute",
+   "tier": "tolerance",
+   "basis": "recorded",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "1700-01-01T12:00:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1111-07-11"
+     },
+     "calendar_error": null,
+     "day": {
+      "open": "1699-12-31T15:17:08+00:00",
+      "close": "1700-01-01T15:17:40+00:00"
+     }
+    }
+   },
+   "note": "DR-0012: the first supported day, inside the range, behaves exactly as before. (An upper-end waqt.compute vector is not possible: the independent implementation's microsecond-integer clock stops near 2255, RANGE_ERROR; the upper end is covered by calendar.gregorian_date_to_waqt_day.)",
+   "tolerance": {
+    "default": {
+     "instant_s": 5,
+     "abs": 5
+    }
+   }
   }
  ]
 }

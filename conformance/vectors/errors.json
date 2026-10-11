@@ -228,156 +228,6 @@
    }
   },
   {
-   "id": "err/profile/fajr-95",
-   "requirements": [
-    "ERR-004"
-   ],
-   "op": "waqt.compute",
-   "tier": "open",
-   "basis": "spec",
-   "input": {
-    "location": {
-     "lat": 0,
-     "lon": 0
-    },
-    "instant": "2026-09-19T15:42:00+00:00",
-    "timezone": "UTC",
-    "profile": {
-     "fajr_angle_deg": 95,
-     "isha_angle_deg": 17.0,
-     "asr_shadow_ratio": 1.0
-    }
-   },
-   "expect": {
-    "error": {
-     "code": [
-      "VALIDATION_ERROR"
-     ]
-    }
-   },
-   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-  },
-  {
-   "id": "err/profile/fajr-negative",
-   "requirements": [
-    "ERR-004"
-   ],
-   "op": "waqt.compute",
-   "tier": "open",
-   "basis": "spec",
-   "input": {
-    "location": {
-     "lat": 0,
-     "lon": 0
-    },
-    "instant": "2026-09-19T15:42:00+00:00",
-    "timezone": "UTC",
-    "profile": {
-     "fajr_angle_deg": -5,
-     "isha_angle_deg": 17.0,
-     "asr_shadow_ratio": 1.0
-    }
-   },
-   "expect": {
-    "error": {
-     "code": [
-      "VALIDATION_ERROR"
-     ]
-    }
-   },
-   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-  },
-  {
-   "id": "err/profile/isha-zero",
-   "requirements": [
-    "ERR-004"
-   ],
-   "op": "waqt.compute",
-   "tier": "open",
-   "basis": "spec",
-   "input": {
-    "location": {
-     "lat": 0,
-     "lon": 0
-    },
-    "instant": "2026-09-19T15:42:00+00:00",
-    "timezone": "UTC",
-    "profile": {
-     "fajr_angle_deg": 18.0,
-     "isha_angle_deg": 0,
-     "asr_shadow_ratio": 1.0
-    }
-   },
-   "expect": {
-    "error": {
-     "code": [
-      "VALIDATION_ERROR"
-     ]
-    }
-   },
-   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-  },
-  {
-   "id": "err/profile/asr-zero",
-   "requirements": [
-    "ERR-004"
-   ],
-   "op": "waqt.compute",
-   "tier": "open",
-   "basis": "spec",
-   "input": {
-    "location": {
-     "lat": 0,
-     "lon": 0
-    },
-    "instant": "2026-09-19T15:42:00+00:00",
-    "timezone": "UTC",
-    "profile": {
-     "fajr_angle_deg": 18.0,
-     "isha_angle_deg": 17.0,
-     "asr_shadow_ratio": 0
-    }
-   },
-   "expect": {
-    "error": {
-     "code": [
-      "VALIDATION_ERROR"
-     ]
-    }
-   },
-   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-  },
-  {
-   "id": "err/profile/asr-negative",
-   "requirements": [
-    "ERR-004"
-   ],
-   "op": "waqt.compute",
-   "tier": "open",
-   "basis": "spec",
-   "input": {
-    "location": {
-     "lat": 0,
-     "lon": 0
-    },
-    "instant": "2026-09-19T15:42:00+00:00",
-    "timezone": "UTC",
-    "profile": {
-     "fajr_angle_deg": 18.0,
-     "isha_angle_deg": 17.0,
-     "asr_shadow_ratio": -1
-    }
-   },
-   "expect": {
-    "error": {
-     "code": [
-      "VALIDATION_ERROR"
-     ]
-    }
-   },
-   "note": "PROPOSED: reject non-physical parameters. The specification gives the units but no valid range; the reference accepts all of these silently."
-  },
-  {
    "id": "err/tz-malformed",
    "requirements": [
     "ERR-002"
@@ -409,6 +259,1106 @@
     }
    },
    "note": "A path-like zone name is an unknown zone, not a file lookup and not a server fault."
+  },
+  {
+   "id": "err/profile/fajr-95",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 95,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-90.0001",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 90.0001,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-negative",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": -5,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-nan",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": {
+      "$nonfinite": "NaN"
+     },
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-infinity",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": {
+      "$nonfinite": "Infinity"
+     },
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-neg-infinity",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": {
+      "$nonfinite": "-Infinity"
+     },
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-non-numeric-string",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": "abc",
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-boolean",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": true,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-90.0001",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 90.0001,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-negative",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": -1,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-nan",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": {
+      "$nonfinite": "NaN"
+     },
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-infinity",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": {
+      "$nonfinite": "Infinity"
+     },
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-non-numeric-string",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": "abc",
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/isha-boolean",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": false,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-negative",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": -1
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-nan",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": {
+      "$nonfinite": "NaN"
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-infinity",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": {
+      "$nonfinite": "Infinity"
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-neg-infinity",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": {
+      "$nonfinite": "-Infinity"
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-non-numeric-string",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": "abc"
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/asr-boolean",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": true
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile-valid/fajr-90",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 90,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 90,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-valid/fajr-0.0001",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 0.0001,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 0.0001,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-valid/isha-90",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 90,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 90,
+      "asr_shadow_ratio": 1.0
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-valid/isha-0.0001",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 0.0001,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 0.0001,
+      "asr_shadow_ratio": 1.0
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-valid/asr-0.0001",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 0.0001
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 0.0001
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-valid/asr-100",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 100
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 100
+     }
+    }
+   },
+   "note": "DR-0011 / ERR-004: an inclusive boundary of the valid range is accepted and echoed unchanged."
+  },
+  {
+   "id": "err/profile-schedule/fajr-95",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "schedule.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     },
+     "profile": {
+      "fajr_angle_deg": 95,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 1.0
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "event",
+      "name": "fajr",
+      "day": 0
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile-schedule/isha-nan",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "schedule.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     },
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": {
+       "$nonfinite": "NaN"
+      },
+      "asr_shadow_ratio": 1.0
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "event",
+      "name": "fajr",
+      "day": 0
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile-schedule/asr-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "schedule.run",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "context": {
+     "location": {
+      "lat": 9.0192,
+      "lon": 38.7525,
+      "elevation_m": 0.0
+     },
+     "timezone": "Africa/Addis_Ababa",
+     "calendar": {
+      "provider": "arithmetic-tabular"
+     },
+     "profile": {
+      "fajr_angle_deg": 18.0,
+      "isha_angle_deg": 17.0,
+      "asr_shadow_ratio": 0
+     }
+    },
+    "anchor": "2026-09-19T15:42:00+00:00",
+    "operation": {
+     "op": "resolve_point",
+     "point": {
+      "type": "event",
+      "name": "fajr",
+      "day": 0
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile-date-to-waqt/fajr-zero",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-19",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile-date-to-waqt/asr-nan",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2026-09-19",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": {
+      "$nonfinite": "NaN"
+     }
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
   }
  ]
 }
