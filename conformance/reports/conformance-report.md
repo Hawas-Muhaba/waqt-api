@@ -1,6 +1,6 @@
 # Waqt conformance report
 
-Generated 2026-10-10 16:08 UTC by `harness/waqt_conform.py` · COP 1.1 · 742 vectors + 43 metamorphic checks.
+Generated 2026-10-11 12:28 UTC by `harness/waqt_conform.py` · COP 1.1 · 742 vectors + 43 metamorphic checks.
 
 Reproduce: `python3 conformance/harness/waqt_conform.py --adapter "python3 conformance/adapters/reference_adapter.py" --label reference --adapter "node conformance/independent/src/cli.mjs" --label independent`
 
@@ -30,8 +30,8 @@ Declared MUST but not enforced by any normative vector: `ERR-004`.
 
 | label | implementation | language | shares code with reference | run time |
 |---|---|---|---|---|
-| reference | waqt-reference waqt-core 0.4.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 9.6 s |
-| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 14.5 s |
+| reference | waqt-reference waqt-core 0.5.0 / waqt-api 0.5.0 | Python | n/a (this is the reference) | 5.5 s |
+| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 8.07 s |
 
 ## 2. Results by tier
 

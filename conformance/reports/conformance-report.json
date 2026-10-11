@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated": "2026-10-10 16:08 UTC",
+  "generated": "2026-10-11 12:28 UTC",
   "cop": "1.1",
   "contract": {
    "contract_version": "2.0.0",
@@ -93,7 +93,7 @@
    "command": "python3 adapters/reference_adapter.py",
    "descriptor": {
     "name": "waqt-reference",
-    "version": "waqt-core 0.4.0 / waqt-api 0.4.0",
+    "version": "waqt-core 0.5.0 / waqt-api 0.5.0",
     "language": "Python",
     "cop_version": "1.1",
     "instant_precision_us": 1000000,
@@ -119,7 +119,7 @@
     "schedule.run",
     "waqt.compute"
    ],
-   "seconds": 9.6,
+   "seconds": 5.5,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -10052,7 +10052,7 @@
     "instant.parse",
     "date.parse"
    ],
-   "seconds": 14.5,
+   "seconds": 8.07,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",

@@ -16,6 +16,7 @@ from waqt.api import app  # noqa: E402
 from waqt.api.providers import resolve_calendar_provider  # noqa: E402
 from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER as DEFAULT_PROVIDER  # noqa: E402  (CAL-012: omitted provider = the default)
 from waqt_core.hijri import weekday_name  # noqa: E402
+from waqt_core._version import __version__ as _CORE_VERSION  # noqa: E402
 from waqt_core.core import AstronomyProfile, Location  # noqa: E402
 from waqt_core.scheduling import SchedulingContext, SchedulingEngine, run_operation  # noqa: E402
 from waqt_core.institutional.rules import MonthDay, MonthEnd, NthWeekdayOfMonth, month_days  # noqa: E402
@@ -318,7 +319,21 @@ OPS = {"gregorian.weekday": op_weekday, "hijri.from_gregorian": op_h_from, "hijr
        "calendar.boundary_crossing": op_boundary, "schedule.run": op_schedule, "institutional.run": op_inst,
        "instant.parse": op_instant_parse}
 
-DESCRIPTOR = {"name": "waqt-reference", "version": "waqt-core 0.4.0 / waqt-api 0.4.0", "language": "Python", "cop_version": "1.1", "instant_precision_us": 1000000,
+def _pkg_api_version():
+    """waqt-api package version from installed metadata, falling back to the source pyproject.toml."""
+    try:
+        from importlib.metadata import version
+        return version("waqt-api")
+    except Exception:
+        import re
+        from pathlib import Path
+        m = re.search(r'^version\s*=\s*"([^"]+)"', (Path(__file__).resolve().parents[2] / "pyproject.toml").read_text(encoding="utf-8"), re.M)
+        return m.group(1) if m else "unknown"
+
+
+_PKG_API_VERSION = _pkg_api_version()
+
+DESCRIPTOR = {"name": "waqt-reference", "version": f"waqt-core {_CORE_VERSION} / waqt-api {_PKG_API_VERSION}", "language": "Python", "cop_version": "1.1", "instant_precision_us": 1000000,
               "astronomy": {"sun": "NOAA low-precision", "moon": "PyEphem (umm-al-qura)"},
               "timezone_source": "IANA via Python zoneinfo + timezonefinder", "shares_code_with_reference": "n/a (this is the reference)"}
 
