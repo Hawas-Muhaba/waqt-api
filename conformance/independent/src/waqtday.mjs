@@ -34,7 +34,7 @@ export class Site {
     this.site = normalizeSite(location);
     this.zone = zone;
     this.profile = normalizeProfile(profile);
-    this.calendar = calendar || { provider: 'arithmetic-tabular' };
+    this.calendar = calendar || { provider: 'umm-al-qura' };
   }
   listing(X) { return solarDay(this.site, this.zone, X, this.profile); }
   maghrib(X) { return this.listing(X).events.maghrib; }

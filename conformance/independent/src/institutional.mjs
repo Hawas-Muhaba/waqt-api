@@ -60,7 +60,7 @@ export function weekDates(dateStr, firstDay = 'al-Ahad') {
 
 export function runInstitutional(input) {
   const op = input.operation, c = input.context || {};
-  const ctx = { provider: c.calendar_provider || 'arithmetic-tabular', month_table: c.month_table };
+  const ctx = { provider: c.calendar_provider || 'umm-al-qura', month_table: c.month_table };
   const year = op.year ?? c.hijri_year;
   switch (op.op) {
     case 'month_day': case 'month_end': case 'nth_weekday_of_month':

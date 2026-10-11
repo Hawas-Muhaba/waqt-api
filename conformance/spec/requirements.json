@@ -115,6 +115,15 @@
    "changed": "2.0.0"
   },
   {
+   "id": "CAL-012",
+   "kind": "MUST",
+   "title": "umm-al-qura is the single default calendar provider across API, local facade, CLI, web, and SDKs",
+   "section": "CALENDARS",
+   "since": "2.0.0",
+   "status": "normative",
+   "decision": "DR-0009"
+  },
+  {
    "id": "DAY-001",
    "kind": "MUST",
    "title": "A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1))",
@@ -167,7 +176,7 @@
   {
    "id": "DAY-007",
    "kind": "MUST",
-   "title": "Civil dates use the location's IANA zone (date line, DST) — not UTC and not solar time",
+   "title": "Civil dates use the location's IANA zone (date line, DST) \u2014 not UTC and not solar time",
    "section": "CALENDAR-INTEROP 1",
    "since": "1.0.0",
    "status": "normative",

@@ -57,9 +57,9 @@ test('polar day yields undefined events, not guesses', () => {
 });
 
 test('tabular calendar: epoch and known dates', () => {
-  assert.equal(hijriFromDay(T.parseDate('2026-09-20')).date, '1448-04-07');
-  assert.equal(T.formatDate(hijriToDay(1, 1, 1)), '0622-07-19');      // 622-07-16 Julian == 622-07-19 proleptic Gregorian
-  assert.throws(() => hijriToDay(1448, 2, 30), (e) => e.code === 'INVALID_HIJRI_DATE');
+  assert.equal(hijriFromDay(T.parseDate('2026-09-20'), 'arithmetic-tabular').date, '1448-04-07');
+  assert.equal(T.formatDate(hijriToDay(1, 1, 1, 'arithmetic-tabular')), '0622-07-19');      // 622-07-16 Julian == 622-07-19 proleptic Gregorian
+  assert.throws(() => hijriToDay(1448, 2, 30, 'arithmetic-tabular'), (e) => e.code === 'INVALID_HIJRI_DATE');
 });
 
 test('umm-al-qura reproduces the four documented New Year anchors', () => {

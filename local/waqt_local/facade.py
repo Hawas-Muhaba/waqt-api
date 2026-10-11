@@ -148,7 +148,7 @@ def waqt(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = "umm-al-qura",
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/waqt`."""
@@ -305,7 +305,7 @@ def location_info(lat: float, lon: float, instant: Any = None, timezone_override
 # ---------------------------------------------------------------------------
 
 
-def hijri(date: Any = None, calendar_provider: str = "arithmetic-tabular", **provider_overrides: Any) -> dict:
+def hijri(date: Any = None, calendar_provider: str = "umm-al-qura", **provider_overrides: Any) -> dict:
     """Equivalent of `GET /v1/hijri`."""
     d = parse_date(date)
     provider = resolve_calendar_provider(calendar_provider, **provider_overrides)
@@ -350,7 +350,7 @@ def list_calendar_providers() -> dict:
 
 def convert(
     direction: str,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = "umm-al-qura",
     date: Any = None,
     year: Optional[int] = None,
     month: Optional[int] = None,
@@ -411,7 +411,7 @@ def represent_instant(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = "umm-al-qura",
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/calendar/convert?direction=instant-to-calendars`."""
@@ -448,7 +448,7 @@ def waqt_day_for_gregorian_date(
     fajr_angle: float = 18.0,
     isha_angle: float = 17.0,
     asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular",
+    calendar_provider: str = "umm-al-qura",
     **provider_overrides: Any,
 ) -> dict:
     """Equivalent of `GET /v1/calendar/convert?direction=gregorian-date-to-waqt`."""
@@ -545,7 +545,7 @@ def _schedule_context_block(ctx: SchedulingContext, anchor: datetime) -> dict:
 def schedule_snapshot(
     lat: float, lon: float, elevation_m: float = 0.0, instant: Any = None, timezone_override: Optional[str] = None,
     fajr_angle: float = 18.0, isha_angle: float = 17.0, asr_ratio: float = 1.0,
-    calendar_provider: str = "arithmetic-tabular", precision: str = "second",
+    calendar_provider: str = "umm-al-qura", precision: str = "second",
 ) -> dict:
     """Equivalent of `GET /v1/schedule/snapshot`."""
     rs = _check_precision(precision)
@@ -560,7 +560,7 @@ def schedule_snapshot(
 
 def schedule_span(
     lat: float, lon: float, start: Any, end: Any, end_inclusive: bool = False, elevation_m: float = 0.0,
-    timezone_override: Optional[str] = None, calendar_provider: str = "arithmetic-tabular", precision: str = "second",
+    timezone_override: Optional[str] = None, calendar_provider: str = "umm-al-qura", precision: str = "second",
 ) -> dict:
     """Equivalent of `GET /v1/schedule/span`."""
     rs = _check_precision(precision)
@@ -609,7 +609,7 @@ def schedule_resolve(request: Any) -> dict:
 
         raise InvalidInstantError(str(e), {"received": body.get("anchor")})
 
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", "umm-al-qura"))
     tz = _tz_provider(body.get("timezone_override"))
     ctx = SchedulingContext(location, profile, provider, tz_provider=tz)
     eng = SchedulingEngine(ctx)
@@ -647,7 +647,7 @@ def _resolve_and_wrap(build, label: str) -> dict:
 
 def institutional_week(
     lat: float, lon: float, elevation_m: float = 0.0, instant: Any = None,
-    first_day: str = "al-Ahad", jumuah_day: str = "al-Jumuah", calendar_provider: str = "arithmetic-tabular",
+    first_day: str = "al-Ahad", jumuah_day: str = "al-Jumuah", calendar_provider: str = "umm-al-qura",
 ) -> dict:
     """Equivalent of `GET /v1/institutional/week`."""
     t = parse_instant(instant)
@@ -663,7 +663,7 @@ def institutional_week(
 
 def institutional_fiscal_year(
     hijri_year: Optional[int] = None, instant: Any = None, lat: Optional[float] = None, lon: Optional[float] = None,
-    elevation_m: float = 0.0, calendar_provider: str = "arithmetic-tabular",
+    elevation_m: float = 0.0, calendar_provider: str = "umm-al-qura",
 ) -> dict:
     """Equivalent of `GET /v1/institutional/fiscal-year`."""
     provider = resolve_calendar_provider(calendar_provider)
@@ -681,7 +681,7 @@ def institutional_fiscal_year_resolve(request: Any) -> dict:
         raise InvalidCalendarRuleError("Request body must be a JSON object")
     if "hijri_year" not in body:
         raise validation_error("`hijri_year` is required")
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", "umm-al-qura"))
     loc = _location_or_none(body.get("location", {}).get("lat") if body.get("location") else None,
                              body.get("location", {}).get("lon") if body.get("location") else None,
                              body.get("location", {}).get("elevation_m", 0.0) if body.get("location") else 0.0)
@@ -700,7 +700,7 @@ def institutional_fiscal_year_resolve(request: Any) -> dict:
 
 def institutional_academic_year(
     hijri_year: Optional[int] = None, instant: Any = None, lat: Optional[float] = None, lon: Optional[float] = None,
-    elevation_m: float = 0.0, calendar_provider: str = "arithmetic-tabular",
+    elevation_m: float = 0.0, calendar_provider: str = "umm-al-qura",
 ) -> dict:
     """Equivalent of `GET /v1/institutional/academic-year`."""
     provider = resolve_calendar_provider(calendar_provider)
@@ -729,7 +729,7 @@ def institutional_academic_year_resolve(request: Any) -> dict:
         raise InvalidCalendarRuleError("Request body must be a JSON object")
     if "hijri_year" not in body:
         raise validation_error("`hijri_year` is required")
-    provider = resolve_calendar_provider(body.get("calendar_provider", "arithmetic-tabular"))
+    provider = resolve_calendar_provider(body.get("calendar_provider", "umm-al-qura"))
     loc = _location_or_none(body.get("location", {}).get("lat") if body.get("location") else None,
                              body.get("location", {}).get("lon") if body.get("location") else None,
                              body.get("location", {}).get("elevation_m", 0.0) if body.get("location") else 0.0)
@@ -747,7 +747,7 @@ def institutional_academic_year_resolve(request: Any) -> dict:
     return {**ay.to_dict(), "definition": ac.to_dict(), "caveat": CAVEAT_INSTITUTIONAL}
 
 
-def institutional_default_profile(calendar_provider: str = "arithmetic-tabular") -> dict:
+def institutional_default_profile(calendar_provider: str = "umm-al-qura") -> dict:
     """Equivalent of `GET /v1/institutional/profile`."""
     provider = resolve_calendar_provider(calendar_provider)
     profile = default_profile(name=f"demo-{calendar_provider}", calendar_provider=provider)

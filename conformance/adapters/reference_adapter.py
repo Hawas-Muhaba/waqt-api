@@ -96,12 +96,12 @@ def op_h_from(i):
 
 def op_h_to(i):
     data = http("/v1/conversions", dict(direction="to-gregorian", year=i["year"], month=i["month"], day=i["day"],
-                                         calendar_provider=i.get("provider", "arithmetic-tabular")))
+                                         calendar_provider=i.get("provider", "umm-al-qura")))
     return {"date": data["output"]["gregorian_date"]}
 
 
 def op_year_table(i):
-    prov = provider_from(i.get("provider", "arithmetic-tabular"))
+    prov = provider_from(i.get("provider", "umm-al-qura"))
     months = []
     for m in range(1, 13):
         months.append({"month": m, "start": prov.to_gregorian(i["year"], m, 1).isoformat(), "length": len(month_days(prov, i["year"], m))})
@@ -109,7 +109,7 @@ def op_year_table(i):
 
 
 def op_month_len(i):
-    prov = provider_from(i.get("provider", "arithmetic-tabular"))
+    prov = provider_from(i.get("provider", "umm-al-qura"))
     try:
         return {"days": len(month_days(prov, i["year"], i["month"]))}
     except Exception as e:
@@ -168,7 +168,7 @@ def common_params(i):
     d, s = p.get("declared") or {}, p.get("sighting") or {}
     return dict(lat=loc.get("lat"), lon=loc.get("lon"), elevation_m=loc.get("elevation_m", 0.0), timezone_override=i.get("timezone"),
                 fajr_angle=prof.get("fajr_angle_deg", 18.0), isha_angle=prof.get("isha_angle_deg", 17.0),
-                asr_ratio=prof.get("asr_shadow_ratio", 1.0), calendar_provider=cal.get("provider", "arithmetic-tabular"),
+                asr_ratio=prof.get("asr_shadow_ratio", 1.0), calendar_provider=cal.get("provider", "umm-al-qura"),
                 override_date=p.get("override_date"), declared_year=d.get("year"), declared_month=d.get("month"), declared_day=d.get("day"),
                 sighting_year=s.get("year"), sighting_month=s.get("month"), sighting_day=s.get("day"), observed_at=p.get("observed_at"))
 
@@ -240,7 +240,7 @@ def _ctx(c):
     prof = c.get("profile") or c.get("astronomy_profile") or {}
     p = AstronomyProfile(name="custom", fajr_angle_deg=prof.get("fajr_angle_deg", 18.0), isha_angle_deg=prof.get("isha_angle_deg", 17.0),
                          asr_shadow_ratio=prof.get("asr_shadow_ratio", 1.0))
-    cal = c.get("calendar") or {"provider": c.get("calendar_provider", "arithmetic-tabular")}
+    cal = c.get("calendar") or {"provider": c.get("calendar_provider", "umm-al-qura")}
     kw = {"tz_provider": ManualTimezoneProvider(c["timezone"])} if c.get("timezone") else {}
     return SchedulingContext(Location(loc["lat"], loc["lon"], loc.get("elevation_m", 0.0)), p, provider_from(cal["provider"], cal.get("params")), **kw)
 
@@ -278,7 +278,7 @@ def _rule(r):
 def op_inst(i):
     from waqt_core.institutional import rules as R
     op, c = i["operation"], i.get("context") or {}
-    prov = provider_from(c.get("calendar_provider", "arithmetic-tabular"))
+    prov = provider_from(c.get("calendar_provider", "umm-al-qura"))
     year = op.get("year", c.get("hijri_year"))
     hs = lambda hd: f"{hd.year:04d}-{hd.month:02d}-{hd.day:02d}"
     pack = lambda hd: {"hijri": hs(hd), "gregorian": prov.to_gregorian(hd.year, hd.month, hd.day).isoformat()}

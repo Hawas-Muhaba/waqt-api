@@ -29,7 +29,7 @@ function overrideHit(day, p, key) {
   return v;
 }
 
-export function hijriFromDay(day, provider = 'arithmetic-tabular', params = {}) {
+export function hijriFromDay(day, provider = 'umm-al-qura', params = {}) {
   switch (provider) {
     case 'arithmetic-tabular': return result(fromTabular(day));
     case 'umm-al-qura': return result(fromUaq(day));
@@ -47,7 +47,7 @@ export function hijriFromDay(day, provider = 'arithmetic-tabular', params = {}) 
   }
 }
 
-export function hijriToDay(y, m, d, provider = 'arithmetic-tabular') {
+export function hijriToDay(y, m, d, provider = 'umm-al-qura') {
   switch (provider) {
     case 'arithmetic-tabular': T.validateHijri(y, m, d, T.tabularMonthLength(y, m)); return T.tabularToDay(y, m, d);
     case 'umm-al-qura': T.validateHijri(y, m, d); return U.uaqToDay(y, m, d);
@@ -57,7 +57,7 @@ export function hijriToDay(y, m, d, provider = 'arithmetic-tabular') {
   }
 }
 
-export function monthLength(y, m, provider = 'arithmetic-tabular') {
+export function monthLength(y, m, provider = 'umm-al-qura') {
   if (!Number.isInteger(y) || !Number.isInteger(m) || y < 1 || m < 1 || m > 12) throw new WaqtError('INVALID_HIJRI_DATE', `no such Hijri month: ${y}-${m}`);
   if (provider === 'arithmetic-tabular') return T.tabularMonthLength(y, m);
   if (provider === 'umm-al-qura') return U.uaqMonthLength(y, m);

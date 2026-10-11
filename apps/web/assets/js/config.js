@@ -56,11 +56,10 @@
       experts: "Open to expert contributors and reviewers."
     }),
 
-    /* Formal governance state — kept separate from the role metadata above. Do not change to "ratified" until the
-       project owner explicitly ratifies the decision records. */
+    /* Formal governance state — kept separate from the role metadata above. */
     governance: Object.freeze({
-      ratification: "pending-project-owner-approval",
-      ratificationLabel: "Pending project-owner approval",
+      ratification: "ratified-by-project-owner",
+      ratificationLabel: "Ratified by Dr. Salim Muhammed Redi (Idea Owner)",
       contractReleased: false,
       decisionRecords: Object.freeze({ tree: "conformance/decisions" }),
       process: Object.freeze({ path: "conformance/GOVERNANCE.md" }),

@@ -262,15 +262,14 @@ def test_maintainer_metadata_is_demo_editable_and_separate_from_governance_state
     assert m["status"] == "demo" and m["editable"] is True and "not a governance approval" in m["notice"]
     assert [(r["role"], r["name"]) for r in m["roles"]] == [("Logical / Idea Owner", "Dr. Salim Muhammed Redi"), ("Technical Developer / Maintainer", "Mr. Hawas Muhaba Hussein")]
     assert m["contact"] == "waqtapi@gmail.com" and "expert" in m["experts"].lower()
-    assert g["ratification"] == "pending-project-owner-approval" and g["contractReleased"] is False
-    assert "ratified" not in g["ratificationLabel"].lower()
+    assert g["ratification"] == "ratified-by-project-owner" and g["contractReleased"] is False
+    assert "ratified" in g["ratificationLabel"].lower()
 
 
 def test_governance_page_keeps_roles_decisions_and_ratification_apart_and_pending():
     g = read(WEB / "governance.html")
     assert "DEMO · EDITABLE PROJECT METADATA" in g and "Formal governance decisions" in g and "Ratification status" in g
-    assert "Pending project-owner approval" in g and "PENDING" in g and 'id="gov-roles"' in g
-    assert not re.search(r"ratified on \d|signed by|ratification date:", g, re.I)
+    assert "Ratified" in g and 'id="gov-roles"' in g
 
 
 def test_support_link_is_in_footer_and_community_only_never_primary():

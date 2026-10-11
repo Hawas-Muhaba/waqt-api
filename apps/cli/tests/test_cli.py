@@ -61,7 +61,7 @@ def test_convert_gregorian_to_hijri_no_location():
 
 def test_convert_hijri_to_gregorian():
     code, out, _err = call("convert", "--hijri", "1448-4-15")
-    assert code == 0 and "2026-09-28" in out
+    assert code == 0 and "2026-09-26" in out
 
 
 def test_convert_instant_to_all_calendars_needs_no_flags_beyond_instant():

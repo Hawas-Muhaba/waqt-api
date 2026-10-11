@@ -1,10 +1,10 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "c6011d8bc7bc6c5792fe14511480ca0444522a2869fc4b30d13b94d1a6d66c23",
+ "contract_sha256": "91f0984954490c8845d53051b8966e0a211e05520ad597a75d57ca005296b5c2",
  "files": {
   "spec/requirements.json": {
-   "sha256": "cc984010eed273a34c543c22398ddd23bbef8ba64551f191ad2f983bc66d4847"
+   "sha256": "2c4fdadb3823c981e9935134a3526fcb19a1eaf5e8116b73472831fcb67a1ec7"
   },
   "spec/open-questions.json": {
    "sha256": "1bd085f18cddf25b414e228bef3db501ed59b368f609858d00c0bf21fcd0dd50"
@@ -141,8 +141,8 @@
   }
  },
  "requirements": {
-  "total": 71,
-  "must": 67,
+  "total": 72,
+  "must": 68,
   "open": 4
  },
  "questions": {

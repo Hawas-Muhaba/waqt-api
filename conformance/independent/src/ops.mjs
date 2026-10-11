@@ -17,9 +17,9 @@ export const OPS = {
     const n = parseDate(i.date); const { y, m } = civilFromDays(n);
     return { weekday_iso: weekdayIso(n), weekday_name_islamic: islamicWeekdayName(n), is_leap_year: isLeapYear(y), days_in_month: daysInMonth(y, m) };
   },
-  'hijri.from_gregorian': (i) => hijriFromDay(parseDate(i.date), i.provider || 'arithmetic-tabular', i.params || {}),
-  'hijri.to_gregorian': (i) => ({ date: formatDate(hijriToDay(i.year, i.month, i.day, i.provider || 'arithmetic-tabular')) }),
-  'hijri.month_length': (i) => ({ days: monthLength(i.year, i.month, i.provider || 'arithmetic-tabular') }),
+  'hijri.from_gregorian': (i) => hijriFromDay(parseDate(i.date), i.provider || 'umm-al-qura', i.params || {}),
+  'hijri.to_gregorian': (i) => ({ date: formatDate(hijriToDay(i.year, i.month, i.day, i.provider || 'umm-al-qura')) }),
+  'hijri.month_length': (i) => ({ days: monthLength(i.year, i.month, i.provider || 'umm-al-qura') }),
   'hijri.year_table': (i) => {
     const months = [];
     for (let m = 1; m <= 12; m++) { const len = monthLength(i.year, m, i.provider); months.push({ month: m, start: formatDate(hijriToDay(i.year, m, 1, i.provider)), length: len }); }

@@ -8,8 +8,10 @@ tests/test_calendar_interop.py
 tests/test_calendar_interop_vectors.py
 tests/test_calendar_providers.py
 tests/test_conformance_contract.py
+tests/test_conformance_doc_counts.py
 tests/test_conformance_suite.py
 tests/test_core.py
+tests/test_hijri_regression.py
 tests/test_institutional.py
 tests/test_institutional_api.py
 tests/test_institutional_vectors.py
