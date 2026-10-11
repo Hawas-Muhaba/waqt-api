@@ -23,12 +23,26 @@ V = CONF / "vectors"
 CONTRACT = "2.0.0"
 
 
+# --check must never touch the working tree: in check mode save() records the planned bytes here instead of
+# writing, and load() reads this overlay first so later migration steps see earlier steps' planned output.
+_PLANNED: dict[Path, bytes] = {}
+_CHECK_ONLY = False
+
+
 def load(p):
-    return json.loads(Path(p).read_text(encoding="utf-8"))
+    p = Path(p)
+    if _CHECK_ONLY and p in _PLANNED:
+        return json.loads(_PLANNED[p].decode("utf-8"))
+    return json.loads(p.read_text(encoding="utf-8"))
 
 
 def save(p, obj):
-    Path(p).write_text(json.dumps(obj, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    p = Path(p)
+    text = json.dumps(obj, indent=1, ensure_ascii=False) + "\n"
+    if _CHECK_ONLY:
+        _PLANNED[p] = text.encode("utf-8")
+        return
+    p.write_text(text, encoding="utf-8")
 
 
 def vec(d, vid):
@@ -36,6 +50,9 @@ def vec(d, vid):
 
 
 def main(check: bool) -> int:
+    global _CHECK_ONLY
+    _CHECK_ONLY = check
+    _PLANNED.clear()
     before = {p.name: p.read_bytes() for p in list(V.glob("*.json")) + [CONF / "spec" / "requirements.json", CONF / "baselines" / "known-failures.json"]}
 
     # ------------------------------------------------------------------ requirements
@@ -240,7 +257,7 @@ def main(check: bool) -> int:
     kf["independent"] = []
     save(kp, kf)
 
-    after = {p.name: p.read_bytes() for p in list(V.glob("*.json")) + [rp, kp]}
+    after = {p.name: (_PLANNED[p] if _CHECK_ONLY and p in _PLANNED else p.read_bytes()) for p in list(V.glob("*.json")) + [rp, kp]}
     changed = sorted(k for k in after if before.get(k) != after[k])
     print("changed:", changed if changed else "nothing (already migrated)")
     if check:
