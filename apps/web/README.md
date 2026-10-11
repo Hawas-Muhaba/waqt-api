@@ -47,6 +47,7 @@ from the API's own static-file mount if you add one, or via a reverse proxy.
 - **Prayer/event timeline**: all six events with local time and Waqt reading,
   next event highlighted.
 - **Gregorian / Hijri / Waqt representations** side by side.
+- **Hijri provider (Option B, API 1.7.0).** Waqt Web requests `calendar_provider=umm-al-qura` *explicitly* and displays the Hijri date and the provider name exactly as the API response states them (no hard-coded date, no manual day offset; the picker shows the provider actually in use). Umm al-Qura is a deliberate project default, **not** a claim that every community follows one calendar convention; the page says so, and `arithmetic-tabular` stays selectable. The Waqt time itself never depends on the provider. Real-browser checks: `bash verification/browser/run_web_option_b.sh`.
 - **Provider/method metadata**: Hijri provider, `computation.engine` +
   `.revision` + `.accuracy_level`, `waqt-core` version, API version — all
   read verbatim from the response, displayed in a collapsible panel, never

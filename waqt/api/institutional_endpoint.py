@@ -45,7 +45,7 @@ from ..institutional.academic_year import AcademicCalendar, HolidayDefinition, T
 from ..institutional.fiscal_year import FiscalCalendar
 from ..scheduling import SchedulingContext
 from .common import ApiError, ErrorCode, hijri_block, iso, success
-from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, provider_identity, resolve_calendar_provider
 
 router = APIRouter()
 
@@ -110,7 +110,7 @@ def get_week(
     provider = _provider(calendar_provider)
     ctx = SchedulingContext(Location(lat, lon, elevation_m), calendar_provider=provider)
     week = _resolve_and_wrap(lambda: week_containing(ctx, t, defn), "week")
-    return success({**week.to_dict(ctx), "caveat": CAVEAT})
+    return success({**week.to_dict(ctx), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
 
 
 # ---------------------------------------------------------------------------
@@ -134,7 +134,7 @@ def get_fiscal_year(
         ctx = SchedulingContext(Location(lat, lon, elevation_m), calendar_provider=provider)
     fc = default_islamic_fiscal_calendar(provider)
     fy = _resolve_and_wrap(lambda: fc.year(year, ctx=ctx), "fiscal-year")
-    return success({**fy.to_dict(), "definition": fc.to_dict(), "caveat": CAVEAT})
+    return success({**fy.to_dict(), "definition": fc.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
 
 
 @router.post("/v1/institutional/fiscal-year/resolve")
@@ -165,7 +165,7 @@ def post_fiscal_year_resolve(
         return fc, fc.year(int(body["hijri_year"]), ctx=ctx)
 
     fc, fy = _resolve_and_wrap(build, "fiscal-year")
-    return success({**fy.to_dict(), "definition": fc.to_dict(), "caveat": CAVEAT})
+    return success({**fy.to_dict(), "definition": fc.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
 
 
 # ---------------------------------------------------------------------------
@@ -189,7 +189,7 @@ def get_academic_year(
         ctx = SchedulingContext(Location(lat, lon, elevation_m), calendar_provider=provider)
     ac = default_islamic_academic_calendar(provider)
     ay = _resolve_and_wrap(lambda: ac.year(year, ctx=ctx), "academic-year")
-    return success({**ay.to_dict(), "definition": ac.to_dict(), "caveat": CAVEAT})
+    return success({**ay.to_dict(), "definition": ac.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
 
 
 def _term_defs(raw: list) -> tuple:
@@ -233,7 +233,7 @@ def post_academic_year_resolve(
         return ac, ac.year(int(body["hijri_year"]), ctx=ctx)
 
     ac, ay = _resolve_and_wrap(build, "academic-year")
-    return success({**ay.to_dict(), "definition": ac.to_dict(), "caveat": CAVEAT})
+    return success({**ay.to_dict(), "definition": ac.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
 
 
 # ---------------------------------------------------------------------------

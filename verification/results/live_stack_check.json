@@ -13,7 +13,7 @@
   {
    "check": "/v1/version axes independent (core/api/vectors/engine)",
    "ok": true,
-   "detail": "core=0.4.0 api=1.6.0 rev=2 vec=2.0"
+   "detail": "core=0.5.0 api=1.7.0 rev=2 vec=2.0"
   },
   {
    "check": "/v1/version waqt_local_version null from server",
@@ -61,9 +61,39 @@
    "detail": ""
   },
   {
-   "check": "live API == sdk_conformance_vectors (21 vectors, real HTTP)",
+   "check": "live API \u2287 sdk_conformance_vectors (21 vectors, real HTTP, recorded values all preserved, additive keys allowed; 11 replayed under their declared pre-1.7.0 provider)",
    "ok": true,
    "detail": "all identical"
+  },
+  {
+   "check": "live API == API 1.7.0 default-provider vectors (11 vectors, provider omitted)",
+   "ok": true,
+   "detail": "all identical"
+  },
+  {
+   "check": "/v1/health api_version == documented 1.7.0",
+   "ok": true,
+   "detail": "1.7.0"
+  },
+  {
+   "check": "/v1/version api_version == documented 1.7.0",
+   "ok": true,
+   "detail": "1.7.0"
+  },
+  {
+   "check": "/v1/waqt meta.api_version == documented 1.7.0",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "provider: omitted == explicit umm-al-qura; arithmetic-tabular selectable; response names provider used",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "provider choice does not move canonical Waqt time (day, position, events identical)",
+   "ok": true,
+   "detail": ""
   },
   {
    "check": "CORS opt-in: allowed origin echoed",
@@ -111,7 +141,7 @@
    "detail": ""
   },
   {
-   "check": "S14 /v1/version: API 1.6.0, integrations listed, affects_astronomy=false",
+   "check": "S14 /v1/version: API 1.7.0, integrations listed, affects_astronomy=false",
    "ok": true,
    "detail": ""
   },

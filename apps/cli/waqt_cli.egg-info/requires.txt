@@ -1,4 +1,4 @@
-waqt-local<0.4,>=0.3.0
+waqt-local<0.7,>=0.6.0
 
 [dev]
 pytest>=7

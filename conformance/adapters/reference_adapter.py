@@ -14,6 +14,7 @@ warnings.filterwarnings("ignore")
 from fastapi.testclient import TestClient  # noqa: E402
 from waqt.api import app  # noqa: E402
 from waqt.api.providers import resolve_calendar_provider  # noqa: E402
+from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER as DEFAULT_PROVIDER  # noqa: E402  (CAL-012: omitted provider = the default)
 from waqt_core.hijri import weekday_name  # noqa: E402
 from waqt_core.core import AstronomyProfile, Location  # noqa: E402
 from waqt_core.scheduling import SchedulingContext, SchedulingEngine, run_operation  # noqa: E402
@@ -84,7 +85,7 @@ def op_weekday(i):
 def op_h_from(i):
     d = parse_date(i["date"])
     try:
-        prov = provider_from(i.get("provider", "arithmetic-tabular"), i.get("params"))
+        prov = provider_from(i.get("provider", DEFAULT_PROVIDER), i.get("params"))
     except Exception as e:
         raise CopError(getattr(e, "code", None) or "UNKNOWN_CALENDAR_PROVIDER", str(e))
     try:
@@ -96,12 +97,12 @@ def op_h_from(i):
 
 def op_h_to(i):
     data = http("/v1/conversions", dict(direction="to-gregorian", year=i["year"], month=i["month"], day=i["day"],
-                                         calendar_provider=i.get("provider", "umm-al-qura")))
+                                         calendar_provider=i.get("provider", DEFAULT_PROVIDER)))
     return {"date": data["output"]["gregorian_date"]}
 
 
 def op_year_table(i):
-    prov = provider_from(i.get("provider", "umm-al-qura"))
+    prov = provider_from(i.get("provider", DEFAULT_PROVIDER))
     months = []
     for m in range(1, 13):
         months.append({"month": m, "start": prov.to_gregorian(i["year"], m, 1).isoformat(), "length": len(month_days(prov, i["year"], m))})
@@ -109,7 +110,7 @@ def op_year_table(i):
 
 
 def op_month_len(i):
-    prov = provider_from(i.get("provider", "umm-al-qura"))
+    prov = provider_from(i.get("provider", DEFAULT_PROVIDER))
     try:
         return {"days": len(month_days(prov, i["year"], i["month"]))}
     except Exception as e:
@@ -168,7 +169,7 @@ def common_params(i):
     d, s = p.get("declared") or {}, p.get("sighting") or {}
     return dict(lat=loc.get("lat"), lon=loc.get("lon"), elevation_m=loc.get("elevation_m", 0.0), timezone_override=i.get("timezone"),
                 fajr_angle=prof.get("fajr_angle_deg", 18.0), isha_angle=prof.get("isha_angle_deg", 17.0),
-                asr_ratio=prof.get("asr_shadow_ratio", 1.0), calendar_provider=cal.get("provider", "umm-al-qura"),
+                asr_ratio=prof.get("asr_shadow_ratio", 1.0), calendar_provider=cal.get("provider", DEFAULT_PROVIDER),
                 override_date=p.get("override_date"), declared_year=d.get("year"), declared_month=d.get("month"), declared_day=d.get("day"),
                 sighting_year=s.get("year"), sighting_month=s.get("month"), sighting_day=s.get("day"), observed_at=p.get("observed_at"))
 
@@ -240,7 +241,7 @@ def _ctx(c):
     prof = c.get("profile") or c.get("astronomy_profile") or {}
     p = AstronomyProfile(name="custom", fajr_angle_deg=prof.get("fajr_angle_deg", 18.0), isha_angle_deg=prof.get("isha_angle_deg", 17.0),
                          asr_shadow_ratio=prof.get("asr_shadow_ratio", 1.0))
-    cal = c.get("calendar") or {"provider": c.get("calendar_provider", "umm-al-qura")}
+    cal = c.get("calendar") or {"provider": c.get("calendar_provider", DEFAULT_PROVIDER)}
     kw = {"tz_provider": ManualTimezoneProvider(c["timezone"])} if c.get("timezone") else {}
     return SchedulingContext(Location(loc["lat"], loc["lon"], loc.get("elevation_m", 0.0)), p, provider_from(cal["provider"], cal.get("params")), **kw)
 
@@ -278,7 +279,7 @@ def _rule(r):
 def op_inst(i):
     from waqt_core.institutional import rules as R
     op, c = i["operation"], i.get("context") or {}
-    prov = provider_from(c.get("calendar_provider", "umm-al-qura"))
+    prov = provider_from(c.get("calendar_provider", DEFAULT_PROVIDER))
     year = op.get("year", c.get("hijri_year"))
     hs = lambda hd: f"{hd.year:04d}-{hd.month:02d}-{hd.day:02d}"
     pack = lambda hd: {"hijri": hs(hd), "gregorian": prov.to_gregorian(hd.year, hd.month, hd.day).isoformat()}

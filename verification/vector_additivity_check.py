@@ -17,6 +17,8 @@ from urllib.parse import urlencode
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "verification"))
+from vector_migrations import load_migration, effective_params  # noqa: E402
 
 
 #: Lists a new API version may legitimately APPEND to (a catalog gaining an entry). Everything else
@@ -54,14 +56,24 @@ def main(argv):
     from fastapi.testclient import TestClient
     from waqt.api import app
     client = TestClient(app, raise_server_exceptions=False)
-    f = Path(argv[1]) if len(argv) > 1 else ROOT / "sdks/vectors/sdk_conformance_vectors.json"
+    args = [a for a in argv[1:] if not a.startswith("--")]
+    f = Path(args[0]) if args else ROOT / "sdks/vectors/sdk_conformance_vectors.json"
     vecs = json.loads(f.read_text())["vectors"]
+    # --no-migration reproduces the raw comparison (what 1.7.0's default change does to unlisted-provider recordings).
+    # The migration only applies to the historical file it was written for.
+    mig = None if "--no-migration" in argv else load_migration()
+    if mig and f.resolve() != (ROOT / mig["historical_vector_file"]).resolve():
+        mig = None
+    replayed = []
     problems, added = [], Counter()
     for v in vecs:
         rq = v["request"]
         method = rq.get("method", "GET").upper()
         if method == "GET":
-            r = client.get(rq["path"], params=rq.get("params"))
+            params = effective_params(v, mig)
+            if mig and v["id"] in mig["_by_id"]:
+                replayed.append(v["id"])
+            r = client.get(rq["path"], params=params)
         else:
             r = client.post(rq["path"], json=rq.get("body"))
         p = []
@@ -71,6 +83,9 @@ def main(argv):
         # normalise the leading dot for readability
         problems += [f"[{v['id']}] {x}" for x in p]
     print(f"{len(vecs)} vectors checked against the live app")
+    if mig:
+        print(f"MIGRATION {mig['migration']} [{mig['status'][:11]}]: {len(replayed)} vector(s) replayed with "
+              f"calendar_provider={mig['replay_provider']} made explicit (recorded under the pre-1.7.0 default): {', '.join(replayed)}")
     print("ADDED (new keys, never removed/changed):")
     for k, n in sorted(added.items()):
         print(f"  + {k}  (x{n})")

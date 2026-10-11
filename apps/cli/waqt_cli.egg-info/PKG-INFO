@@ -1,12 +1,12 @@
 Metadata-Version: 2.4
 Name: waqt-cli
-Version: 0.1.0
+Version: 0.2.0
 Summary: Reference command-line application for Waqt: local computation, Gregorian/Hijri/Waqt conversion, prayer/event timeline, scheduling, computation metadata.
 Author: Waqt project
 License: MIT
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
-Requires-Dist: waqt-local<0.4,>=0.3.0
+Requires-Dist: waqt-local<0.7,>=0.6.0
 Provides-Extra: dev
 Requires-Dist: pytest>=7; extra == "dev"
 
@@ -45,7 +45,7 @@ Add `--json` before the subcommand to get the exact `waqt_local` payload
 
 Every location command accepts `--elevation`, `--timezone` (IANA override),
 `--fajr-angle`, `--isha-angle`, `--asr-ratio`, and `--provider`
-(`arithmetic-tabular` default, or `umm-al-qura`, `declared`,
+(`umm-al-qura` default since API 1.7.0 -- pass `--provider arithmetic-tabular` for the previous default -- or `declared`,
 `local-observation` — see `waqt providers`).
 
 ## Why a CLI belongs in Sprint 12

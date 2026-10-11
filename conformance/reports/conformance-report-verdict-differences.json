@@ -2,95 +2,107 @@
  [
   "uaq/year-table/1420",
   "informative",
-  "FAIL",
-  "PASS"
+  "PASS",
+  "FAIL"
  ],
  [
   "uaq/year-table/1446",
   "informative",
-  "FAIL",
-  "PASS"
+  "PASS",
+  "FAIL"
  ],
  [
   "err/profile/fajr-95",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "err/profile/fajr-negative",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "err/profile/isha-zero",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "err/profile/asr-zero",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "err/profile/asr-negative",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "interop/instant/one-second-before-maghrib",
   "informative",
-  "FAIL",
-  "PASS"
+  "PASS",
+  "FAIL"
  ],
  [
   "interop/boundary/ends-exactly-at-maghrib",
   "informative",
-  "FAIL",
-  "PASS"
+  "PASS",
+  "FAIL"
  ],
  [
   "sch-table/calendar-regional-offset-window",
   "exact",
-  "PASS",
-  "N/A"
+  "N/A",
+  "PASS"
  ],
  [
   "sch-table/calendar-regional-offset-span",
   "exact",
-  "PASS",
-  "N/A"
+  "N/A",
+  "PASS"
  ],
  [
   "sch-table/calendar-regional-offset-day-bounds",
   "exact",
-  "PASS",
-  "N/A"
+  "N/A",
+  "PASS"
  ],
  [
   "waqt/london-long-day-near-24h-boundary",
   "informative",
-  "FAIL",
-  "PASS"
+  "PASS",
+  "FAIL"
  ],
  [
   "date/basic-format-20260101",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ],
  [
   "instant/fraction-echo",
+  "open",
+  "FAIL",
+  "PASS"
+ ],
+ [
+  "instant/naive",
+  "open",
+  "FAIL",
+  "PASS"
+ ],
+ [
+  "default/out-of-range/date-to-waqt-day/addis/1699-09-19",
   "open",
   "PASS",
   "FAIL"
  ],
  [
-  "instant/naive",
+  "default/out-of-range/compute/addis/1699-09-19",
   "open",
   "PASS",
   "FAIL"
@@ -98,7 +110,7 @@
  [
   "aladhan/retry-after-short",
   "open",
-  "PASS",
-  "FAIL"
+  "FAIL",
+  "PASS"
  ]
 ]

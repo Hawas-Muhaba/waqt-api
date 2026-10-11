@@ -5,6 +5,7 @@
 import { solarDay, EVENT_NAMES } from './astro/events.mjs';
 import { US_PER_SEC, localDateNum, formatDate, islamicWeekdayName, WaqtError } from './timeutil.mjs';
 import { hijriFromDay } from './calendar/providers.mjs';
+import { DEFAULT_PROVIDER } from './defaults.mjs';
 
 export const UNDEF_MAGHRIB = 'Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.';
 
@@ -34,7 +35,7 @@ export class Site {
     this.site = normalizeSite(location);
     this.zone = zone;
     this.profile = normalizeProfile(profile);
-    this.calendar = calendar || { provider: 'umm-al-qura' };
+    this.calendar = calendar || { provider: DEFAULT_PROVIDER };
   }
   listing(X) { return solarDay(this.site, this.zone, X, this.profile); }
   maghrib(X) { return this.listing(X).events.maghrib; }

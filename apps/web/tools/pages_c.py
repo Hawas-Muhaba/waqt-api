@@ -37,10 +37,35 @@ def dr_card(d):
 roles = f'''<div class="flex flex-wrap items-center gap-3 mb-5"><span class="badge concept">DEMO · EDITABLE PROJECT METADATA</span><span class="text-[13px] text-on-surface-variant" data-maint-notice>Demo metadata — editable before public release.</span></div>
 <div id="gov-roles" class="grid md:grid-cols-3 gap-6"><noscript><p class="notice">Role information is loaded from <code>assets/js/config.js</code> and needs JavaScript.</p></noscript></div>
 <p class="mt-5 text-body-md text-on-surface-variant">Role information says who currently fills which role. It is <b class="text-on-surface">not</b> a governance decision and does not ratify anything. Waqt welcomes qualified experts and contributors.</p>'''
-rat_text = "Ratified by Dr. Salim Muhammed Redi (Idea Owner)" if npend == 0 else "Pending project-owner approval"
-rat_desc = f"All {len(DRS)} decision records are formally ratified by the Idea Owner and Technical Maintainer (<code>conformance/MAINTAINERS.md</code>), and the contract is version {CONTRACT['contract_version']}." if npend == 0 else f"{npend} of {len(DRS)} decision records are marked <i>Ratification by a named maintainer: PENDING</i>, the contract is version {CONTRACT['contract_version']} (<b class=\"text-on-surface\">draft — not released</b>), and the maintainer register (<code>conformance/MAINTAINERS.md</code>) is not yet filled in."
-status = f'''<div class="grid md:grid-cols-2 gap-6"><div class="{PANEL}"><p class="{MICRO} mb-3">Ratification status</p><p class="font-headline-md text-[22px]" data-ratification>{rat_text}</p><p class="mt-3 text-body-md text-on-surface-variant">{rat_desc}</p></div>
-<div class="{PANEL}"><p class="{MICRO} mb-3">Three different things</p><ul class="space-y-2 text-body-md text-on-surface-variant list-disc pl-5"><li><b class="text-on-surface">Project role information</b> — maintainer roster and logical ownership.</li><li><b class="text-on-surface">Formal governance decisions</b> — the decision records below, read from the repository.</li><li><b class="text-on-surface">Ratification status</b> — formally ratified by Dr. Salim Muhammed Redi and Hawas Muhaba Hussein.</li></ul></div></div>'''
+def _ratifiers():
+    names = set()
+    for p in sorted(glob.glob(os.path.join(REPO, "conformance", "decisions", "DR-*.md"))):
+        m = re.search(r"\*\*Ratified by ([^*]+)\*\*", open(p, encoding="utf-8").read().split("## Context")[0])
+        if m: names.add(m.group(1).strip())
+    return sorted(names)
+
+_who = ", ".join(_ratifiers())
+if npend == 0:
+    _label = "Decision records ratified · contract not yet released"
+    _text = (f'All {len(DRS)} decision records state ratification by a named owner ({_who}). The repository holds <b class="text-on-surface">no signed artifact</b> for it, '
+             f'and ratifying decisions is not a release: the contract is version {CONTRACT["contract_version"]} (<b class="text-on-surface">draft — not released</b>), the independent-implementation reviewer role is unfilled, '
+             'and open specification questions remain open.')
+    _third = "Ratification status — read from the decision records; separate from the contract's release status."
+elif npend < len(DRS):
+    _pend_ids = ", ".join(d["id"] for d in DRS if d["pending"])
+    _label = f"Decision records ratified except {_pend_ids} (pending) · contract not yet released"
+    _text = (f'{len(DRS) - npend} of {len(DRS)} decision records state ratification by a named owner ({_who}); <b class="text-on-surface">{_pend_ids}</b> '
+             f'{"is" if npend == 1 else "are"} marked <i>Ratification by a named maintainer: PENDING</i>. The repository holds <b class="text-on-surface">no signed artifact</b> for any ratification, '
+             f'the contract is version {CONTRACT["contract_version"]} (<b class="text-on-surface">draft — not released</b>), and the independent-implementation reviewer role is unfilled.')
+    _third = "Ratification status — read from the decision records; separate from the contract's release status."
+else:
+    _label = "Pending project-owner approval"
+    _text = (f'{npend} of {len(DRS)} decision records are marked <i>Ratification by a named maintainer: PENDING</i>, the contract is version {CONTRACT["contract_version"]} '
+             '(<b class="text-on-surface">draft — not released</b>), and the maintainer register (<code>conformance/MAINTAINERS.md</code>) is not yet filled in. No signatures, approvals or ratification dates exist, and none are shown here.')
+    _third = "Ratification status — pending until the project owner explicitly ratifies."
+
+status = f'''<div class="grid md:grid-cols-2 gap-6"><div class="{PANEL}"><p class="{MICRO} mb-3">Ratification status</p><p class="font-headline-md text-[22px]" data-ratification>{_label}</p><p class="mt-3 text-body-md text-on-surface-variant">{_text}</p></div>
+<div class="{PANEL}"><p class="{MICRO} mb-3">Three different things</p><ul class="space-y-2 text-body-md text-on-surface-variant list-disc pl-5"><li><b class="text-on-surface">Project role information</b> — demo, editable metadata (above).</li><li><b class="text-on-surface">Formal governance decisions</b> — the decision records below, read from the repository.</li><li><b class="text-on-surface">{_third.split(" — ")[0]}</b> — {_third.split(" — ")[1]}</li></ul></div></div>'''
 life = '''<ol class="grid md:grid-cols-5 gap-px bg-outline-variant/30 list-none p-0 m-0" aria-label="How the specification changes">
 <li class="bg-surface-container-low p-5"><p class="font-label-sm text-[11px] text-secondary">01</p><b class="block mt-1 font-headline-sm text-[15px]">Propose</b><span class="text-[13px] text-on-surface-variant">Anyone may open a change proposal: the question, evidence, proposed text and vectors.</span></li>
 <li class="bg-surface-container-low p-5"><p class="font-label-sm text-[11px] text-secondary">02</p><b class="block mt-1 font-headline-sm text-[15px]">Evidence</b><span class="text-[13px] text-on-surface-variant">Measurements from independent implementations — or a stated reason only one exists.</span></li>
@@ -48,7 +73,7 @@ life = '''<ol class="grid md:grid-cols-5 gap-px bg-outline-variant/30 list-none 
 <li class="bg-surface-container-low p-5"><p class="font-label-sm text-[11px] text-secondary">04</p><b class="block mt-1 font-headline-sm text-[15px]">Decide</b><span class="text-[13px] text-on-surface-variant">A decision record is written; dissent is recorded in the dissenter’s words; a named maintainer ratifies.</span></li>
 <li class="bg-surface-container-low p-5"><p class="font-label-sm text-[11px] text-secondary">05</p><b class="block mt-1 font-headline-sm text-[15px]">Change</b><span class="text-[13px] text-on-surface-variant">Requirement, vectors and prose change together, with a changelog entry.</span></li></ol>'''
 princ = f'''<div class="grid md:grid-cols-2 gap-6"><div class="{PANEL}"><ul class="space-y-3 text-body-md text-on-surface-variant list-disc pl-5"><li><b class="text-on-surface">Written requirements govern; test vectors illustrate.</b></li><li><b class="text-on-surface">Facts are normative; conventions are configurable</b> — astronomy is fixed; Hijri providers and Fajr/Isha angles are choices you pass in.</li><li><b class="text-on-surface">A clean report is not a goal.</b> Open questions stay open until genuinely settled.</li><li><b class="text-on-surface">Temporal facts, not religious rulings.</b></li></ul></div>
-<div class="{PANEL}"><p class="{MICRO} mb-3">Contract status</p>{"".join(f'<div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">{a}</span><span class="text-on-surface text-right">{b}</span></div>' for a, b in [("Contract version", CONTRACT["contract_version"]), ("Released", "no (draft)"), ("Reference known failures", CONTRACT["status"]["reference_known_failures"]), ("Independent engine known failures", CONTRACT["status"]["independent_known_failures"]), ("Decision records", f"{len(DRS)} accepted · {npend} awaiting ratification")])}</div></div>'''
+<div class="{PANEL}"><p class="{MICRO} mb-3">Contract status</p>{"".join(f'<div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">{a}</span><span class="text-on-surface text-right">{b}</span></div>' for a, b in [("Contract version", CONTRACT["contract_version"]), ("Released", "no (draft)"), ("Reference known failures", CONTRACT["status"]["reference_known_failures"]), ("Independent engine known failures", CONTRACT["status"]["independent_known_failures"]), ("Decision records", f"{len(DRS)} accepted · {len(DRS) - npend} ratified · {npend} awaiting ratification")])}</div></div>'''
 gov = hero("Governance", "Open governance, written down.", "Waqt is a standard first and software second. Its rules are versioned, and every change to them goes through a proposal and a decision record. This page keeps project roles, formal decisions and ratification status clearly apart.") \
   + wrap(h2("Project role information", "", "People", hid="h-roles") + roles, border=False, cls="pb-12") \
   + wrap(h2("Ratification status", "", "Status", hid="h-status") + status) \

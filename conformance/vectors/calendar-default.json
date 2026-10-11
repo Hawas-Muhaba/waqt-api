@@ -1,0 +1,172 @@
+{
+ "suite": "calendar-default",
+ "tier": "exact",
+ "vectors": [
+  {
+   "id": "default/new-year/1438",
+   "requirements": [
+    "CAL-012",
+    "CAL-005"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1438,
+    "month": 1,
+    "day": 1
+   },
+   "expect": {
+    "output": {
+     "date": "2016-10-02"
+    }
+   },
+   "note": "Copy of normative vector uaq/new-year/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+  },
+  {
+   "id": "default/new-year-forward/1438",
+   "requirements": [
+    "CAL-012",
+    "CAL-005"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2016-10-02"
+   },
+   "expect": {
+    "output": {
+     "year": 1438,
+     "month": 1,
+     "day": 1,
+     "provider": "umm-al-qura"
+    }
+   },
+   "note": "Copy of normative vector uaq/new-year-forward/1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+  },
+  {
+   "id": "default/new-year/1447",
+   "requirements": [
+    "CAL-012",
+    "CAL-005"
+   ],
+   "op": "hijri.to_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "year": 1447,
+    "month": 1,
+    "day": 1
+   },
+   "expect": {
+    "output": {
+     "date": "2025-06-26"
+    }
+   },
+   "note": "Copy of normative vector uaq/new-year/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+  },
+  {
+   "id": "default/new-year-forward/1447",
+   "requirements": [
+    "CAL-012",
+    "CAL-005"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2025-06-26"
+   },
+   "expect": {
+    "output": {
+     "year": 1447,
+     "month": 1,
+     "day": 1,
+     "provider": "umm-al-qura"
+    }
+   },
+   "note": "Copy of normative vector uaq/new-year-forward/1447 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+  },
+  {
+   "id": "default/day-before-new-year-1438",
+   "requirements": [
+    "CAL-012",
+    "CAL-005"
+   ],
+   "op": "hijri.from_gregorian",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2016-10-01"
+   },
+   "expect": {
+    "output": {
+     "year": 1437,
+     "month": 12,
+     "provider": "umm-al-qura"
+    }
+   },
+   "note": "Copy of normative vector uaq/day-before-new-year-1438 with the provider OMITTED: the answer must be umm-al-qura's (CAL-012)."
+  },
+  {
+   "id": "default/label/date-to-waqt-day/addis/2025-06-26",
+   "requirements": [
+    "CAL-012",
+    "DAY-004"
+   ],
+   "op": "calendar.gregorian_date_to_waqt_day",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "date": "2025-06-26",
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "timezone": "Africa/Addis_Ababa"
+   },
+   "expect": {
+    "output": {
+     "resolved": true,
+     "hijri_date": "1447-01-01",
+     "weekday": "al-Khamis"
+    }
+   },
+   "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+  },
+  {
+   "id": "default/label/compute-midday/addis/2025-06-26",
+   "requirements": [
+    "CAL-012",
+    "DAY-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 9.0192,
+     "lon": 38.7525
+    },
+    "instant": "2025-06-26T09:00:00+00:00",
+    "timezone": "Africa/Addis_Ababa",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "output": {
+     "status": "OK",
+     "hijri": {
+      "date": "1447-01-01"
+     },
+     "weekday": "al-Khamis"
+    }
+   },
+   "note": "2025-06-26 is 1 Muharram 1447 in umm-al-qura (normative vector uaq/new-year-forward/1447); DAY-004 gives the day closing on that civil date that label; no calendar is named, so the default applies."
+  }
+ ]
+}

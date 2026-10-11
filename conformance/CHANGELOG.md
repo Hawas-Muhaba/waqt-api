@@ -3,7 +3,13 @@
 Newest first. Every entry lists what changed in requirements, vectors and registry, the decision records
 behind it, and whether it is breaking (GOVERNANCE.md section 2).
 
-## 2.0.0 -- Sprint 16 -- PROPOSED (decision records await maintainer ratification, see MAINTAINERS.md)
+## 2.0.0 -- Sprint 16 -- PROPOSED / UNRELEASED (decision records DR-0001..DR-0008 ratified by Dr. Salim Muhammed Redi on 2026-10-10; the contract itself is not released: ERR-004 has no normative vector and 12 questions are unresolved)
+
+**Amendment to the 2.0.0 draft (CCP-0001 / DR-0010, 2026-10-10; ratification of DR-0010 PENDING):** new MUST **CAL-012**: an omitted calendar provider
+means `umm-al-qura`, an explicit one is honoured (COP `provider` inputs become optional). New suite `calendar-default.json` (7 exact vectors, expected values
+copied from normative Umm al-Qura vectors). Three normative DAY-004 label vectors now name `arithmetic-tabular` in their input; **no expected value changed**.
+New open question **OQ-CAL-1** (the two implementations disagree outside umm-al-qura's range) with 2 `open` vectors. Totals: 71 -> 72 requirements,
+13 unresolved questions, 733 -> 742 vectors. Audit trail: `tools/migrate_default_provider_option_b.py`.
 
 **Breaking.** Narrowed accepted outcomes and changed expected values.
 

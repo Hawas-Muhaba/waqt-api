@@ -7,6 +7,12 @@ Waqt Core             -> astronomical events -> Waqt dates -> temporal semantics
 Scheduling             -> windows, deadlines, event-relative rules                  (Sprint 6)
 Institutional layer    -> week, fiscal year, academic year, terms, periods          (Sprint 7)
 Calendar interop        -> Gregorian/solar calendar as a secondary, formal view      (Sprint 8, this document)
+> **Default provider.** When `calendar_provider` is omitted (HTTP) or no provider is passed (`waqt_core.calendar_interop`), the
+> provider is **`umm-al-qura`** — one definition, `waqt_core.calendar_providers.default`, shared by waqt-core, the API,
+> `waqt-local` and the CLI. This example names `arithmetic-tabular` explicitly. `umm-al-qura` supports 1700-01-01..2300-12-31
+> only; outside it the Waqt day and every instant are still returned, the Hijri label is empty (`hijri: null`) and
+> `calendar_error` says why. It never fails the whole call.
+
 ```
 
 Sprint 8 adds no astronomy and changes none of `waqt/core.py`, `waqt/solar.py`, `waqt/semantics.py`, `waqt/hijri.py`, `waqt/scheduling/`, `waqt/institutional/`, or `waqt/calendar_providers/` (verified byte-for-byte in CI via md5sum, the same posture every prior sprint has taken). Everything in this document is either a documented statement of a rule the engine already enforced, or a thin, explicit interface onto something `waqt.core.compute_waqt` and `waqt.semantics` already compute.

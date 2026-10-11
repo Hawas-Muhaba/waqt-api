@@ -109,20 +109,17 @@ from typing import Optional
 from zoneinfo import ZoneInfo
 
 from .core import DEFAULT_PROFILE, AstronomyProfile, Location, _bracket_maghrib, compute_waqt
-from .hijri import ArithmeticTabularProvider, HijriDate, HijriProvider, weekday_name
+from .calendar_providers.default import DEFAULT_CALENDAR_PROVIDER, default_calendar_provider
+from .hijri import HijriDate, HijriProvider, weekday_name
 from .semantics import WaqtDay, WaqtUndefinedError, crosses_maghrib, waqt_day_from_result
 from .timescale import DEFAULT_TIMESCALE_PROVIDER, TimeScaleProvider
 from .timezone_provider import DEFAULT_TIMEZONE_PROVIDER, TimezoneProvider
 
 _ONE_MICRO = timedelta(microseconds=1)
 
-# A calendar provider is required internally by core.compute_waqt even
-# for calls that never surface a Hijri date to the caller (e.g. a pure
-# Gregorian<->Gregorian or civil-midnight-only question). Using the
-# cheapest, dependency-free one avoids paying for umm-al-qura/ephem
-# setup for a question that doesn't need it — the same reasoning
-# waqt/api/day_endpoint.py already applies.
-_DEFAULT_PROVIDER = ArithmeticTabularProvider()
+# A calendar provider is required internally by core.compute_waqt even for calls that never surface a Hijri date.
+# When the caller passes none, the project default applies (umm-al-qura since waqt-core 0.5.0, identical to the HTTP
+# API default; see calendar_providers/default.py). It only labels days: it never changes a Waqt instant.
 
 
 # ---------------------------------------------------------------------------
@@ -290,15 +287,16 @@ class InstantRepresentation:
     def to_dict(self) -> dict:
         waqt_block = None
         if self.waqt_day is not None and self.waqt_status == "OK":
+            hd = self.waqt_day.hijri_date
             waqt_block = {
+                # A calendar failure (e.g. an instant outside umm-al-qura's 1700..2300) leaves the Hijri label empty and says
+                # why; it never fails the whole representation or moves a Waqt instant (same policy as /v1/waqt).
                 "hijri": {
-                    "date": self.waqt_day.hijri_date.iso_like(),
-                    "display": str(self.waqt_day.hijri_date),
-                    "provider": {
-                        "name": self.waqt_day.hijri_date.provider,
-                        "version": self.waqt_day.hijri_date.version,
-                    },
-                },
+                    "date": hd.iso_like(),
+                    "display": str(hd),
+                    "provider": {"name": hd.provider, "version": hd.version},
+                } if hd is not None else None,
+                **({"calendar_error": self.waqt_day.calendar_error} if self.waqt_day.calendar_error else {}),
                 "weekday": self.waqt_day.weekday,
                 "day_open_maghrib": self.waqt_day.open.astimezone(timezone.utc).isoformat(),
                 "day_close_maghrib": self.waqt_day.close.astimezone(timezone.utc).isoformat(),
@@ -341,7 +339,7 @@ def represent_instant(
         )
 
     gregorian_civil = gregorian_of_instant(instant, location, tz_provider)
-    provider = calendar_provider or _DEFAULT_PROVIDER
+    provider = calendar_provider or default_calendar_provider()
     r = compute_waqt(instant, location, provider, profile, tz_provider=tz_provider, timescale=timescale)
 
     waqt_day = None
@@ -404,7 +402,7 @@ def waqt_day_for_gregorian_date(
     than silently returning a mismatched one, and raises
     `CivilDateUnresolvable` if none of them match either.
     """
-    provider = calendar_provider or _DEFAULT_PROVIDER
+    provider = calendar_provider or default_calendar_provider()
     tz_name = tz_provider.timezone_name_for(location.lat, location.lon)
     zone = ZoneInfo(tz_name)
 
@@ -506,7 +504,7 @@ def classify_boundary_crossing(
     if end <= start:
         raise ValueError("end must be strictly after start (a half-open span cannot be empty or reversed)")
 
-    provider = calendar_provider or _DEFAULT_PROVIDER
+    provider = calendar_provider or default_calendar_provider()
     tz_name = tz_provider.timezone_name_for(location.lat, location.lon)
 
     start_civil = tz_provider.local_date(start, location.lat, location.lon)

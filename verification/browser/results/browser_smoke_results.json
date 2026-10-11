@@ -17,7 +17,7 @@
    "id": "1f",
    "name": "About computation shows engine, revision, level, Hijri provenance and local meridian",
    "ok": true,
-   "detail": "{\"Engine\":\"waqt-noaa-low-precision\",\"Revision\":\"2\",\"Accuracy level\":\"B\",\"Hijri provider\":\"arithmetic-tabular\",\"Hijri source\":\"local\",\"Provider version\":\"30-year-cycle-epoch-1948440\",\"Waqt day boundary\":\"Local Maghrib\",\"Reference meridian\":\"Local location\",\"Reference location\":\"21.4225, 39.8262 · Asia/Riyadh\"}"
+   "detail": "{\"Engine\":\"waqt-noaa-low-precision\",\"Revision\":\"2\",\"Accuracy level\":\"B\",\"Hijri provider\":\"umm-al-qura\",\"Hijri source\":\"local\",\"Provider version\":\"astronomical-approx-2002-rules-v1\",\"Waqt day boundary\":\"Local Maghrib\",\"Reference meridian\":\"Local location\",\"Reference location\":\"21.4225, 39.8262 · Asia/Riyadh\"}"
   },
   {
    "id": "1b",
@@ -35,13 +35,13 @@
    "id": "1d",
    "name": "CORS enforced (negative control): page on disallowed origin 127.0.0.1:8080 cannot read the API",
    "ok": true,
-   "detail": "fetch blocked=true, provider options=1 (fallback single option expected)"
+   "detail": "fetch blocked=true, provider options=0 (fallback single option expected)"
   },
   {
    "id": "1e",
    "name": "CORS allows the configured origin (positive control): /v1/version readable from localhost:8080",
    "ok": true,
-   "detail": "1.5.0"
+   "detail": "1.7.0 (documented 1.7.0)"
   },
   {
    "id": "2a",
@@ -53,31 +53,31 @@
    "id": "2b",
    "name": "six-event timeline present, in order",
    "ok": true,
-   "detail": "Fajr 05:03:50 | Sunrise 06:13:24 | Dhuhr 12:14:41 | Asr 15:31:37 | Maghrib 18:15:51 | Isha 19:21:21"
+   "detail": "Fajr 05:03:00 | Sunrise 06:12:52 | Dhuhr 12:11:44 | Asr 15:30:54 | Maghrib 18:10:29 | Isha 19:16:18"
   },
   {
    "id": "2c",
    "name": "Gregorian + Hijri + Waqt representation cards",
    "ok": true,
-   "detail": "[[\"Gregorian (local)\",\"10:51:38\",\"01/10/2026\"],[\"Gregorian (UTC)\",\"07:51:38\",\"2026-10-01\"],[\"Hijri\",\"18 Rabi al-Thani 1448 AH\",\"1448-04-18local\"],[\"Waqt\",\"16:35:12\",\"al-Khamis\"]]"
+   "detail": "[[\"Gregorian (local)\",\"19:12:39\",\"10/10/2026\"],[\"Gregorian (UTC)\",\"16:12:39\",\"2026-10-10\"],[\"Hijri\",\"30 Rabi al-Thani 1448 AH\",\"1448-04-30local\"],[\"Waqt\",\"01:01:39\",\"al-Ahad\"]]"
   },
   {
    "id": "2d",
    "name": "metadata: engine/revision/accuracy/provider/versions",
    "ok": true,
-   "detail": "{\"Hijri provider\":\"arithmetic-tabular (30-year-cycle-epoch-1948440)\",\"Hijri source\":\"local\",\"Astronomy engine\":\"waqt-noaa-low-precision, revision 2\",\"Accuracy level\":\"B\",\"Timescale model\":\"espenak-meeus-2006\",\"ΔT applied\":\"75.563 s\",\"waqt-core version\":\"0.3.0\",\"API version\":\"1.5.0\",\"Vector set\":\"1.1 (@ revision 2)\"}"
+   "detail": "{\"Hijri provider\":\"umm-al-qura (astronomical-approx-2002-rules-v1)\",\"Hijri source\":\"local\",\"Astronomy engine\":\"waqt-noaa-low-precision, revision 2\",\"Accuracy level\":\"B\",\"Timescale model\":\"espenak-meeus-2006\",\"ΔT applied\":\"75.563 s\",\"waqt-core version\":\"0.5.0\",\"API version\":\"1.7.0\",\"Vector set\":\"2.0 (@ revision 2)\"}"
   },
   {
    "id": "2e",
    "name": "day-progress ring has a percentage in [0,100]",
    "ok": true,
-   "detail": "69% dashoffset=108.58712188749138"
+   "detail": "4% dashoffset=336.7851226005188"
   },
   {
    "id": "2f",
    "name": "clock ticks (≥2 s advance in 2.3 s) with zero new API calls",
    "ok": true,
-   "detail": "16:35:12 -> 16:35:15, calls 5->5"
+   "detail": "01:01:40 -> 01:01:42, calls 5->5"
   },
   {
    "id": "2g",
@@ -89,25 +89,25 @@
    "id": "3",
    "name": "provider switch: Hijri card/provider change, event instants identical",
    "ok": true,
-   "detail": "18 Rabi al-Thani 1448 AH -> 20 Rabi al-Thani 1448 AH; provider umm-al-qura (astronomical-approx-2002-rules-v1)"
+   "detail": "30 Rabi al-Thani 1448 AH -> 30 Rabi al-Thani 1448 AH; provider umm-al-qura (astronomical-approx-2002-rules-v1)"
   },
   {
    "id": "4a",
    "name": "Makkah (second normal-latitude) loads",
    "ok": true,
-   "detail": "Showing 9.0192, 38.7525 · Africa/Addis_Ababa."
+   "detail": "Showing 21.4225, 39.8262 · Asia/Riyadh."
   },
   {
    "id": "4b",
    "name": "Reykjavik (high latitude): loads or reports plainly; never blank",
    "ok": true,
-   "detail": "Showing 64.1466, -21.9426 · Atlantic/Reykjavik. | Fajr 04:51:33 | Sunrise 07:36:34 | Dhuhr 13:17:25 | Asr 15:56:47 | Maghrib 18:56:44 | Isha 21:29:57"
+   "detail": "Showing 64.1466, -21.9426 · Atlantic/Reykjavik. | Fajr 05:21:58 | Sunrise 08:02:57 | Dhuhr 13:14:44 | Asr 15:33:50 | Maghrib 18:25:07 | Isha 20:55:27"
   },
   {
    "id": "4c",
    "name": "Reykjavik events either times or 'does not occur' (no NaN/undefined text)",
    "ok": true,
-   "detail": "[[\"Fajr\",\"04:51:33\",\"09:51:16\",\"\"],[\"Sunrise\",\"07:36:34\",\"12:36:18\",\"\"],[\"Dhuhr\",\"13:17:25\",\"18:17:08\",\"in 05:25:37\"],[\"Asr\",\"15:56:47\",\"20:56:30\",\"\"],[\"Maghrib\",\"18:56:44\",\"23:56:27\",\"\"],[\"Isha\",\"21:29:57\",\"26:29:41\",\"\"]]"
+   "detail": "[[\"Fajr\",\"05:21:58\",\"10:53:20\",\"\"],[\"Sunrise\",\"08:02:57\",\"13:34:20\",\"\"],[\"Dhuhr\",\"13:14:44\",\"18:46:07\",\"\"],[\"Asr\",\"15:33:50\",\"21:05:13\",\"\"],[\"Maghrib\",\"18:25:07\",\"23:56:30\",\"in 02:12:20\"],[\"Isha\",\"20:55:27\",\"26:26:50\",\"\"]]"
   },
   {
    "id": "5a",
@@ -185,13 +185,13 @@
    "id": "9a",
    "name": "before boundary: clock ≈ end of day (≥ 99%)",
    "ok": true,
-   "detail": "23:59:18 100%"
+   "detail": "23:59:22 100%"
   },
   {
    "id": "9b",
    "name": "after Maghrib the page starts a NEW Waqt day (clock resets to small value, ring reset, header day range advanced)",
    "ok": true,
-   "detail": "after clock=00:00:06 pct=0%; Waqt day: 18:16:26 → 18:15:51 local  =>  Waqt day: 18:15:51 → 18:15:17 local"
+   "detail": "after clock=00:00:06 pct=0%; Waqt day: 18:10:59 → 18:10:29 local  =>  Waqt day: 18:10:29 → 18:10:00 local"
   },
   {
    "id": "9c",
@@ -215,7 +215,7 @@
    "id": "10",
    "name": "page calls only /v1/waqt, /v1/calendar, /v1/version",
    "ok": true,
-   "detail": "/v1/calendar,/v1/waqt,/v1/version"
+   "detail": ""
   }
  ],
  "all_ok": true

@@ -7,7 +7,7 @@ independent implementers especially. Ideas, proposals and questions: **waqtapi@g
 - The specification changes only through the process in [`conformance/GOVERNANCE.md`](conformance/GOVERNANCE.md):
   proposal → evidence → review → decision record → change (requirements, vectors and prose together, with a changelog entry).
 - Decision records live in [`conformance/decisions/`](conformance/decisions/). A record is **accepted** only when a named maintainer
-  ratifies it; at the time of writing all records are pending ratification, and the contract is a draft.
+  ratifies it; at the time of writing DR-0001 to DR-0009 record ratification by the Maintainer named in `conformance/MAINTAINERS.md`, and the contract is still an unreleased draft.
 - Open questions are tracked in `conformance/spec/open-questions.json`. Do not weaken a requirement to make a check pass.
 
 ## Code and tests

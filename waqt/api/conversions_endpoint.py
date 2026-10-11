@@ -16,7 +16,7 @@ from typing import Optional
 from fastapi import APIRouter, Query
 
 from .common import ApiError, ErrorCode, hijri_block, parse_date, success
-from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
+from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, provider_identity, resolve_calendar_provider
 from ..hijri import InvalidHijriDate, checked_to_gregorian, weekday_name
 
 router = APIRouter()
@@ -47,6 +47,7 @@ def convert(
             "direction": "to-hijri",
             "input": {"gregorian_date": g.isoformat()},
             "output": {"hijri": hijri_block(hd)},
+            "calendar_provider": provider_identity(provider),
         })
 
     # to-gregorian
@@ -75,4 +76,5 @@ def convert(
         "direction": "to-gregorian",
         "input": {"hijri": {"year": year, "month": month, "day": day}},
         "output": {"gregorian_date": g.isoformat(), "weekday": weekday_name(g)},
+        "calendar_provider": provider_identity(provider),
     })

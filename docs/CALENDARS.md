@@ -4,7 +4,25 @@ Waqt does not hard-code one religious authority into the clock engine. The Grego
 
 Query `GET /v1/calendar` for the live, authoritative list. This document explains what each one actually promises.
 
-## `arithmetic-tabular` (default)
+## Which provider is used when `calendar_provider` is omitted
+
+**`umm-al-qura`**, since API 1.7.0 (before: `arithmetic-tabular`). This is a deliberate project default chosen by the project owners; it is **not** a claim that every Muslim community follows the same calendar convention — communities and institutions differ, which is why the provider is always selectable and always named in the response. Changing the provider changes Hijri *labels* only; the Waqt day (Maghrib to Maghrib), event instants, positions and countdowns are identical under every provider.
+
+| Request | Provider used |
+|---|---|
+| `calendar_provider` omitted | `umm-al-qura` |
+| `calendar_provider=umm-al-qura` | `umm-al-qura` |
+| `calendar_provider=arithmetic-tabular` | `arithmetic-tabular` (use this to keep pre-1.7.0 results) |
+| anything else not in `GET /v1/calendar` | `400 UNKNOWN_CALENDAR_PROVIDER` |
+
+```bash
+curl 'localhost:8000/v1/hijri?date=2026-09-19'                                       # 1448-04-08, provider umm-al-qura
+curl 'localhost:8000/v1/hijri?date=2026-09-19&calendar_provider=arithmetic-tabular'  # 1448-04-06, provider arithmetic-tabular
+```
+
+`GET /v1/conversions?direction=to-gregorian&year=1448&month=4&day=7` gives `2026-09-18` under `umm-al-qura` and `2026-09-20` under `arithmetic-tabular`: the same Hijri input is a different civil day. Store the provider name with any stored Hijri date. Full migration guidance and risks: [`migrations/API-1.7.0-default-provider.md`](migrations/API-1.7.0-default-provider.md).
+
+## `arithmetic-tabular` (the default before API 1.7.0)
 
 The classical 30-year-cycle tabular Islamic calendar (epoch JDN 1948440 = 1 Muharram, 1 AH). A pure, deterministic, closed-form arithmetic formula — no astronomy, no external data, works offline for any date instantly, and **inverts exactly** (`to-gregorian` is exact, not approximate, since the forward direction is closed-form).
 
@@ -21,7 +39,7 @@ This pins the *identity* of the provider so results are reproducible. It does no
 
 Not decided here (OQ-TAB-2): a Gregorian date before the epoch currently converts to an AH year <= 0 that cannot be converted back. This is outside the supported domain and stays open.
 
-## `umm-al-qura`
+## `umm-al-qura` (the default since API 1.7.0)
 
 An astronomical implementation of the *actual current Umm al-Qura calculation rule* (in force since 1423 AH / 2002 CE): a lunar month is 29 days if the astronomical conjunction occurs before Maghrib at Makkah **and** the moon sets after the sun that same evening at Makkah; otherwise it's 30 days. Built from Waqt's own validated solar engine (for Maghrib at Makkah) plus `ephem`/PyEphem (for the lunar conjunction and moonset — the one piece of astronomy nothing else in Waqt needs).
 

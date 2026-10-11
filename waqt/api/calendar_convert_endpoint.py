@@ -155,6 +155,7 @@ def convert_calendar(
             "waqt": {
                 "status": "OK",
                 "hijri": hijri_block(day.hijri_date),
+                **({"calendar_error": day.calendar_error} if day.calendar_error else {}),
                 "weekday": day.weekday,
                 "day": {
                     "maghrib_open": iso(day.open),

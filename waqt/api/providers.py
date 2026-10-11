@@ -37,7 +37,8 @@ from ..calendar_providers import (
 from ..hijri import HijriDate, HijriProvider
 from .common import ApiError, ErrorCode, parse_date
 
-DEFAULT_CALENDAR_PROVIDER = "umm-al-qura"
+# Single source of truth: the HTTP API default IS waqt-core's default (waqt_core/calendar_providers/default.py).
+from waqt_core.calendar_providers.default import DEFAULT_CALENDAR_PROVIDER  # noqa: E402,F401
 
 PROVIDER_CATALOG = {
     "arithmetic-tabular": {
@@ -98,6 +99,12 @@ PROVIDER_CATALOG = {
         "single_date_only": True,
     },
 }
+
+def provider_identity(provider: HijriProvider) -> dict:
+    """The provider ACTUALLY used for a response, as {name, version}. Every provider-aware endpoint reports this
+    (API 1.7.0), so a caller that omitted `calendar_provider` can see which default was applied."""
+    return {"name": provider.name, "version": provider.version}
+
 
 _instance_cache: dict[str, HijriProvider] = {}
 

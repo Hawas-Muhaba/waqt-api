@@ -197,6 +197,13 @@
    "status": "resolved",
    "requirement": "SCH-013",
    "decision": "DR-0008"
+  },
+  {
+   "id": "OQ-CAL-1",
+   "topic": "Omitted provider (umm-al-qura) outside 1700..2300: must waqt.compute / calendar.* refuse with OUT_OF_RANGE, or return the Waqt day with an empty Hijri label?",
+   "status": "deferred",
+   "requirement": "CAL-012",
+   "decision": null
   }
  ]
 }

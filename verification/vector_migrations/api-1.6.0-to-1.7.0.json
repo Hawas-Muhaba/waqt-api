@@ -1,0 +1,141 @@
+{
+  "migration": "api-1.6.0-to-1.7.0-default-calendar-provider",
+  "status": "PROVISIONAL: the version number and the amendment of docs/VERSIONING.md are awaiting owner decision (docs/migrations/API-1.7.0-default-provider.md, section 'Decisions required').",
+  "from_behaviour": {
+    "api_versions": "<= 1.6.0",
+    "default_calendar_provider": "arithmetic-tabular"
+  },
+  "to_behaviour": {
+    "api_version": "1.7.0",
+    "default_calendar_provider": "umm-al-qura"
+  },
+  "historical_vector_file": "sdks/vectors/sdk_conformance_vectors.json",
+  "historical_vector_set_version": "2.0",
+  "replay_provider": "arithmetic-tabular",
+  "replay_rule": "Replay the recorded request with calendar_provider=<replay_provider> made explicit; the recorded response must still be reproduced exactly (additivity rules unchanged).",
+  "new_vector_file": "sdks/vectors/sdk_conformance_vectors_api_1_7.json",
+  "new_vector_governing_api_version": "1.7.0",
+  "entries": [
+    {
+      "id": "waqt-addis-normal",
+      "endpoint": "/v1/waqt",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "waqt-addis-normal-default-1.7.0",
+      "note": "Only data.hijri.* and data.event_representations[].hijri.* change (7 -> 9 Rabi al-Thani 1448). Instants, day boundaries, position, events and countdowns are identical."
+    },
+    {
+      "id": "waqt-hanafi-asr",
+      "endpoint": "/v1/waqt",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "waqt-hanafi-asr-default-1.7.0",
+      "note": "Only Hijri labels change (6 -> 8 Rabi al-Thani 1448). Hanafi Asr instants unchanged."
+    },
+    {
+      "id": "hijri-ordinary",
+      "endpoint": "/v1/hijri",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "hijri-ordinary-default-1.7.0",
+      "note": "2026-09-19 reads 8 Rabi al-Thani 1448 (was 6) under umm-al-qura. The explicit umm-al-qura vector 'hijri-umm-al-qura' is unchanged."
+    },
+    {
+      "id": "conversions-to-hijri",
+      "endpoint": "/v1/conversions",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "conversions-to-hijri-default-1.7.0",
+      "note": "Same Hijri-label change as /v1/hijri."
+    },
+    {
+      "id": "conversions-to-gregorian",
+      "endpoint": "/v1/conversions",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "high",
+      "new_vector_id": "conversions-to-gregorian-default-1.7.0",
+      "note": "REINTERPRETATION: the SAME input (1448-04-07) now resolves to a different Gregorian date (2026-09-18, was 2026-09-20). Callers that persisted Hijri dates and convert them later are exposed; see docs/CALENDARS.md migration section."
+    },
+    {
+      "id": "calendar-convert-instant",
+      "endpoint": "/v1/calendar/convert",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "calendar-convert-instant-default-1.7.0",
+      "note": "Hijri label and provider block only; UTC/civil instants and Waqt position unchanged."
+    },
+    {
+      "id": "calendar-convert-date-to-waqt",
+      "endpoint": "/v1/calendar/convert",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "calendar-convert-date-to-waqt-default-1.7.0",
+      "note": "Hijri label and provider block only; Waqt day instants unchanged."
+    },
+    {
+      "id": "schedule-snapshot",
+      "endpoint": "/v1/schedule/snapshot",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "schedule-snapshot-default-1.7.0",
+      "note": "day.hijri_label and calendar_provider only (labels only, per endpoint contract)."
+    },
+    {
+      "id": "schedule-span",
+      "endpoint": "/v1/schedule/span",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "schedule-span-default-1.7.0",
+      "note": "start/end day hijri_label and calendar_provider only."
+    },
+    {
+      "id": "institutional-week",
+      "endpoint": "/v1/institutional/week",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "low",
+      "new_vector_id": "institutional-week-default-1.7.0",
+      "note": "Per-day hijri_label only; week membership and instants unchanged."
+    },
+    {
+      "id": "institutional-profile",
+      "endpoint": "/v1/institutional/profile",
+      "request_omitted_provider": true,
+      "provider_before": "arithmetic-tabular",
+      "provider_after": "umm-al-qura",
+      "classification": "expected-consequence-of-approved-default-provider-change",
+      "migration_risk": "medium",
+      "new_vector_id": "institutional-profile-default-1.7.0",
+      "note": "Default profile follows the default provider: name demo-arithmetic-tabular -> demo-umm-al-qura. The profile NAME changes; callers keying on it must pin a provider."
+    }
+  ]
+}

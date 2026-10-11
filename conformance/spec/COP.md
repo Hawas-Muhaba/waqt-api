@@ -72,14 +72,18 @@ unit either side** instead of ±1 µs and says so in the report. Exact-boundary 
 
 ### `gregorian.weekday` — `{date}` → `{weekday_iso, weekday_name_islamic, is_leap_year, days_in_month}`
 ### `instant.parse` — `{value}` → `{instant}` (normalised to UTC) · errors `INVALID_INSTANT`
-### `hijri.from_gregorian` — `{date, provider, params?}` → `{year, month, day, date, month_name, display, provider, source, fallback_reason}`
+### Default calendar provider (CAL-012)
+Every `provider` (or `calendar.provider`, `calendar_provider`) input is **optional**. When it is omitted the provider is **`umm-al-qura`**; an explicitly named provider is always honoured, and an unknown name is still `UNKNOWN_CALENDAR_PROVIDER`. The default labels days only: it never changes a Waqt day, an event instant, a position or a countdown. It is a deliberate project default (DR-0010), not a claim that every community follows one calendar convention, which is why every other provider stays selectable. (Before contract 2.0.0 the COP left the default unspecified and both adapters used `arithmetic-tabular`.) Vectors that assert a Hijri value under a provider other than the default must name it.
+Outside `umm-al-qura`'s 1700-01-01..2300-12-31 (CAL-011), `hijri.*` operations that omit the provider return `OUT_OF_RANGE`. What the *other* operations (`waqt.compute`, `calendar.*`) must do there is **not yet specified** (open question OQ-CAL-1): the reference returns the Waqt day with an empty Hijri label, the independent implementation returns `OUT_OF_RANGE`.
+
+### `hijri.from_gregorian` — `{date, provider?, params?}` → `{year, month, day, date, month_name, display, provider, source, fallback_reason}`
 `provider` ∈ `arithmetic-tabular | umm-al-qura | declared | local-observation | aladhan`. `params` carries
 `override_date` plus `declared:{year,month,day}` or `sighting:{year,month,day}`, `observed_at`.
 `provider` in the output names the provider that **actually produced** the answer (`arithmetic-tabular`
 when an override provider has no override for that date).
-### `hijri.to_gregorian` — `{year, month, day, provider}` → `{date}`; `INVALID_HIJRI_DATE` for a day that does not exist.
-### `hijri.month_length` — `{year, month, provider}` → `{days}`
-### `hijri.year_table` — `{year, provider}` → `{months:[{month, start, length}]}`
+### `hijri.to_gregorian` — `{year, month, day, provider?}` → `{date}`; `INVALID_HIJRI_DATE` for a day that does not exist.
+### `hijri.month_length` — `{year, month, provider?}` → `{days}`
+### `hijri.year_table` — `{year, provider?}` → `{months:[{month, start, length}]}`
 ### `hijri.provider_scenario` — scripted remote calendar provider
 `{config?, steps:[{at_seconds, date, remote}]}` → `{steps:[{date, provider, source, fallback_reason}]}`.
 `remote.kind` ∈ `ok{hijri}`, `timeout`, `network-error`, `http{status, retry_after?, hijri?}`, `malformed`,

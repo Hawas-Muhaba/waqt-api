@@ -1,0 +1,356 @@
+{
+  "browser": "HeadlessChrome (see run log)",
+  "ran_at": "2026-10-10T16:11:34.594Z",
+  "assertions": 58,
+  "failed": 0,
+  "results": [
+    {
+      "id": "OB-L1",
+      "name": "loading: banner says Waqt data is loading and the state is LOADING before the API answers",
+      "ok": true,
+      "detail": "Loading Waqt data… The public API runs on a free host and can take up to a minute to wake."
+    },
+    {
+      "id": "OB-L2",
+      "name": "loading: no Hijri date or provider is shown before data arrives",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-L3",
+      "name": "loading -> success: the page reaches LIVE once the delayed API answers",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-S1",
+      "name": "success: state is LIVE and the live strip (not the demo notice) is shown",
+      "ok": true,
+      "detail": "LIVE\n9.0192, 38.7525 · Africa/Addis_Ababa\nwaqt-noaa-low-precision · accuracy B"
+    },
+    {
+      "id": "OB-S2",
+      "name": "the page asks for the provider EXPLICITLY (calendar_provider=umm-al-qura in the request and in the inspector URL)",
+      "ok": true,
+      "detail": "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525&calendar_provider=umm-al-qura"
+    },
+    {
+      "id": "OB-S3",
+      "name": "displayed Hijri date and provider label equal the API response (hijri.display / hijri.provider.name)",
+      "ok": true,
+      "detail": "30 Rabi al-Thani 1448 AH | umm-al-qura vs 30 Rabi al-Thani 1448 AH | umm-al-qura"
+    },
+    {
+      "id": "OB-S4",
+      "name": "independent check at the same instant: screen == umm-al-qura and != arithmetic-tabular (the provider on the label is the one used)",
+      "ok": true,
+      "detail": "30 Rabi al-Thani 1448 AH / uq 30 Rabi al-Thani 1448 AH / at 28 Rabi al-Thani 1448 AH"
+    },
+    {
+      "id": "OB-S5",
+      "name": "the deliberate-default caveat (calendar conventions differ; Waqt time does not change) is on the page",
+      "ok": true,
+      "detail": "Hijri dates depend on the calendar convention. Waqt shows Umm al-Qura by default: a deliberate project choice, not a claim that every community follows it. Another provider (for example arithmetic-tabular) can legitimately show a different day for the same moment; the Waqt time itself does not change."
+    },
+    {
+      "id": "OB-S6",
+      "name": "canonical Waqt reading on screen = server reading + elapsed time (page does not compute its own)",
+      "ok": true,
+      "detail": "shown 3587 expected ~3587.1"
+    },
+    {
+      "id": "OB-S7",
+      "name": "no page errors / CORS failures on the live path",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-P1",
+      "name": "switching to arithmetic-tabular: request names it, label + date follow the response",
+      "ok": true,
+      "detail": "28 Rabi al-Thani 1448 AH"
+    },
+    {
+      "id": "OB-P2",
+      "name": "the two providers give different Hijri days for the same moment (the label differs, as documented)",
+      "ok": true,
+      "detail": "30 Rabi al-Thani 1448 AH -> 28 Rabi al-Thani 1448 AH"
+    },
+    {
+      "id": "OB-P3",
+      "name": "provider choice moves NO Waqt instant: maghrib open/close, day length and every event instant are identical",
+      "ok": true,
+      "detail": "{\"open\":\"18:10:59\",\"close\":\"18:10:29\",\"length\":\"23:59:29\"}"
+    },
+    {
+      "id": "OB-P4",
+      "name": "switching back restores umm-al-qura and the original Hijri date",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-A1",
+      "name": "server authority: a response saying reading=1000 s is shown as ~1000 s (+elapsed), not recomputed from instants",
+      "ok": true,
+      "detail": "shown 1000"
+    },
+    {
+      "id": "OB-A2",
+      "name": "server authority: Hijri date and provider text come from the response, not from page code or config",
+      "ok": true,
+      "detail": "99 Test al-Thani 9999 AH | test-provider"
+    },
+    {
+      "id": "OB-F1",
+      "name": "API failure: banner announces demonstration mode and a frozen recorded sample that is NOT live",
+      "ok": true,
+      "detail": "Live Waqt data unavailable — viewing demonstration mode. The numbers below are a recorded sample (2026-10-08 (local run of this repository's API)), frozen and not live. Could not reach http://localhost:8000. Is the server running, and does it allow this origin (WAQT_CORS_ORIGINS)? RETRY NOW"
+    },
+    {
+      "id": "OB-F2",
+      "name": "API failure: state badge says DEMO · NOT LIVE and the inspector marks the JSON as a recorded sample",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-F3",
+      "name": "API failure: the Hijri date shown is the recorded sample's own, with its provider (umm-al-qura), not invented",
+      "ok": true,
+      "detail": "27 Rabi al-Thani 1448 AH | Recorded sample — NOT live data"
+    },
+    {
+      "id": "OB-F4",
+      "name": "API failure: demo clock is frozen (does not tick, so it cannot pass for a live clock)",
+      "ok": true,
+      "detail": "17:47:26"
+    },
+    {
+      "id": "OB-F5",
+      "name": "recovery: after the API returns, 'Retry now' brings live data back and the demo notice disappears",
+      "ok": true,
+      "detail": "LIVE\n9.0192, 38.7525 · Africa/Addis_Ababa\nwaqt-noaa-low-precision · accuracy B"
+    },
+    {
+      "id": "OB-F6",
+      "name": "recovery: Hijri date/provider again equal the live response",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-F7",
+      "name": "no uncaught page errors through failure and recovery",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-F8",
+      "name": "offline: the browser-offline case also shows the labelled demo sample and says the browser is offline",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-F9",
+      "name": "offline: no /v1/waqt request is even attempted",
+      "ok": true,
+      "detail": "0 requests"
+    },
+    {
+      "id": "OB-M1",
+      "name": "mobile 375px: LIVE, Hijri date and provider are visible and equal the response",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-M2",
+      "name": "mobile 375px: no horizontal page scroll; the Apply control is reachable",
+      "ok": true,
+      "detail": "scrollWidth vs 375"
+    },
+    {
+      "id": "OB-M3:api.html",
+      "name": "mobile 375px: api.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:applications.html",
+      "name": "mobile 375px: applications.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:community.html",
+      "name": "mobile 375px: community.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:governance.html",
+      "name": "mobile 375px: governance.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:how-it-works.html",
+      "name": "mobile 375px: how-it-works.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:index.html",
+      "name": "mobile 375px: index.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:lab.html",
+      "name": "mobile 375px: lab.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:live-demo.html",
+      "name": "mobile 375px: live-demo.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:problem.html",
+      "name": "mobile 375px: problem.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:reference-viewer.html",
+      "name": "mobile 375px: reference-viewer.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-M3:resources.html",
+      "name": "mobile 375px: resources.html has no horizontal page scroll",
+      "ok": true,
+      "detail": "375px"
+    },
+    {
+      "id": "OB-X0",
+      "name": "API ground truth: at the opening Maghrib the next event is Isha, and it falls before Fajr",
+      "ok": true,
+      "detail": "isha at +3947 s"
+    },
+    {
+      "id": "OB-X1",
+      "name": "lab (desktop): live data, banner shows LIVE and no demonstration notice",
+      "ok": true,
+      "detail": "LIVE\n9.0192, 38.7525 · Africa/Addis_Ababa\nwaqt-noaa-low-precision · accuracy B"
+    },
+    {
+      "id": "OB-X1",
+      "name": "lab: at the opening Maghrib nothing has happened yet and the NEXT event is Isha (not Fajr)",
+      "ok": true,
+      "detail": "Waqt 00:00:00 | Local time at this position: 18:10:59 | Last event: none yet this Waqt day · Next: Isha in 01:05:47"
+    },
+    {
+      "id": "OB-X2",
+      "name": "lab: the Isha countdown at the opening equals the API's own Isha instant (not computed by the page)",
+      "ok": true,
+      "detail": "page 3947s vs API 3947s"
+    },
+    {
+      "id": "OB-X3",
+      "name": "lab: sweeping the whole Waqt day, the event order starts Isha, then Fajr, then Sunrise",
+      "ok": true,
+      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib"
+    },
+    {
+      "id": "OB-X4",
+      "name": "lab: just after Isha, the last event is Isha and the next is Fajr",
+      "ok": true,
+      "detail": "Waqt 01:10:32 | Local time at this position: 19:21:31 | Last event: Isha · Next: Fajr in 09:41:28"
+    },
+    {
+      "id": "OB-X5",
+      "name": "lab: the playback panel starts at Waqt 00:00:00 with Isha as the next event",
+      "ok": true,
+      "detail": "Next · Isha"
+    },
+    {
+      "id": "OB-X6",
+      "name": "lab (desktop): playback chip is not marked as demo while live",
+      "ok": true,
+      "detail": "SIMULATED PLAYBACK"
+    },
+    {
+      "id": "OB-X7",
+      "name": "lab (desktop): no page errors",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-Y0",
+      "name": "lab (API down): demonstration notice is shown and the playback chip says DEMO SAMPLE",
+      "ok": true,
+      "detail": "Live Waqt data unavailable — viewing demonstration mode. The numbers below are a recorded sample (2026-10-08 (local run of this repository's API)), frozen and not live.\nCould not reach http://localhost:8000. Is the server running, and does it allow this origin (WAQT_CORS_ORIGINS)? RETRY NOW"
+    },
+    {
+      "id": "OB-Y1",
+      "name": "lab: at the opening Maghrib nothing has happened yet and the NEXT event is Isha (not Fajr)",
+      "ok": true,
+      "detail": "Waqt 00:00:00 | Local time at this position: 18:12:33 (demo sample) | Last event: none yet this Waqt day · Next: Isha in 01:05:39"
+    },
+    {
+      "id": "OB-Y3",
+      "name": "lab: sweeping the whole Waqt day, the event order starts Isha, then Fajr, then Sunrise",
+      "ok": true,
+      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib → Isha"
+    },
+    {
+      "id": "OB-Y4",
+      "name": "lab: just after Isha, the last event is Isha and the next is Fajr",
+      "ok": true,
+      "detail": "Waqt 02:13:52 | Local time at this position: 20:26:25 (demo sample) | Last event: Isha · Next: Fajr in 08:36:47"
+    },
+    {
+      "id": "OB-Y5",
+      "name": "lab: the playback panel starts at Waqt 00:00:00 with Isha as the next event",
+      "ok": true,
+      "detail": "Next · Isha"
+    },
+    {
+      "id": "OB-Z0",
+      "name": "lab (mobile 375px): no horizontal scroll and the scrubber is visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "id": "OB-Z1",
+      "name": "lab: at the opening Maghrib nothing has happened yet and the NEXT event is Isha (not Fajr)",
+      "ok": true,
+      "detail": "Waqt 00:00:00 | Local time at this position: 18:10:59 | Last event: none yet this Waqt day · Next: Isha in 01:05:47"
+    },
+    {
+      "id": "OB-Z2",
+      "name": "lab: the Isha countdown at the opening equals the API's own Isha instant (not computed by the page)",
+      "ok": true,
+      "detail": "page 3947s vs API 3947s"
+    },
+    {
+      "id": "OB-Z3",
+      "name": "lab: sweeping the whole Waqt day, the event order starts Isha, then Fajr, then Sunrise",
+      "ok": true,
+      "detail": "Isha → Fajr → Sunrise → Dhuhr → Asr → Maghrib"
+    },
+    {
+      "id": "OB-Z4",
+      "name": "lab: just after Isha, the last event is Isha and the next is Fajr",
+      "ok": true,
+      "detail": "Waqt 01:10:32 | Local time at this position: 19:21:31 | Last event: Isha · Next: Fajr in 09:41:28"
+    },
+    {
+      "id": "OB-Z5",
+      "name": "lab: the playback panel starts at Waqt 00:00:00 with Isha as the next event",
+      "ok": true,
+      "detail": "Next · Isha"
+    }
+  ]
+}

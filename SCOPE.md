@@ -48,7 +48,7 @@ Polar-day non-existence (Tromsø and McMurdo Station, respective midsummers) cor
 
 ### `waqt/hijri.py` — calendar provider interface
 - `HijriProvider` protocol, exactly as specified: a stateless map from a Gregorian civil date to a Hijri date, with no location dependence.
-- One shipped provider, `ArithmeticTabularProvider` — the classical 30-year-cycle tabular Islamic calendar (JDN epoch 1948440). Deterministic, offline, well-published.
+- (Stage-1 text; since then `umm-al-qura` has shipped and, from API 1.7.0, is the **default** provider — see `docs/CALENDARS.md`.) One shipped provider at that stage, `ArithmeticTabularProvider` — the classical 30-year-cycle tabular Islamic calendar (JDN epoch 1948440). Deterministic, offline, well-published.
 - One override mechanism, `DeclaredProvider` — lets an operating institution pin specific dates (e.g. from local moon sighting) and fall back to another provider otherwise.
 - Weekday naming, correctly shifted: the Islamic weekday is derived from the *closing* Maghrib's Gregorian date, not the instant's own Gregorian weekday, so Jumu'ah correctly begins at Thursday-evening Maghrib.
 

@@ -59,9 +59,16 @@ def test_convert_gregorian_to_hijri_no_location():
     assert code == 0 and "Rabi al-Thani 1448" in out
 
 
-def test_convert_hijri_to_gregorian():
-    code, out, _err = call("convert", "--hijri", "1448-4-15")
+def test_convert_hijri_to_gregorian_default_provider_is_umm_al_qura():
+    code, out, _err = call("convert", "--hijri", "1448-4-15")                          # --provider omitted: API 1.7.0 default
     assert code == 0 and "2026-09-26" in out
+    code2, out2, _ = call("convert", "--hijri", "1448-4-15", "--provider", "umm-al-qura")
+    assert code2 == 0 and "2026-09-26" in out2
+
+
+def test_convert_hijri_to_gregorian_arithmetic_tabular_still_selectable():
+    code, out, _err = call("convert", "--hijri", "1448-4-15", "--provider", "arithmetic-tabular")
+    assert code == 0 and "2026-09-28" in out                                           # the pre-1.7.0 default result
 
 
 def test_convert_instant_to_all_calendars_needs_no_flags_beyond_instant():
@@ -139,3 +146,12 @@ def test_json_flag_is_global_not_per_subcommand():
     code, out, _err = call("--json", "providers")
     data = json.loads(out)
     assert "providers" in data
+
+
+def test_provider_flag_default_is_the_single_waqt_core_default():
+    import waqt_local
+    from waqt_core.calendar_providers import DEFAULT_CALENDAR_PROVIDER
+    from waqt_cli import main as m
+    ap = m.build_parser() if hasattr(m, "build_parser") else None
+    code, out, _ = call("convert", "--hijri", "1448-4-15")
+    assert waqt_local.DEFAULT_CALENDAR_PROVIDER == DEFAULT_CALENDAR_PROVIDER == "umm-al-qura" and code == 0 and "2026-09-26" in out

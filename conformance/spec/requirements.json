@@ -117,11 +117,12 @@
   {
    "id": "CAL-012",
    "kind": "MUST",
-   "title": "umm-al-qura is the single default calendar provider across API, local facade, CLI, web, and SDKs",
-   "section": "CALENDARS",
+   "title": "When a request names no calendar provider, the provider is umm-al-qura; an explicitly named provider is always honoured (the default changes Hijri labels only, never a Waqt instant)",
+   "section": "COP 4; API 1.7.0",
    "since": "2.0.0",
    "status": "normative",
-   "decision": "DR-0009"
+   "decision": "DR-0010",
+   "changed": "2.0.0"
   },
   {
    "id": "DAY-001",
@@ -176,7 +177,7 @@
   {
    "id": "DAY-007",
    "kind": "MUST",
-   "title": "Civil dates use the location's IANA zone (date line, DST) \u2014 not UTC and not solar time",
+   "title": "Civil dates use the location's IANA zone (date line, DST) — not UTC and not solar time",
    "section": "CALENDAR-INTEROP 1",
    "since": "1.0.0",
    "status": "normative",

@@ -293,6 +293,9 @@ class WaqtDay:
     status: str                      # "OK" | "UNDEFINED" | "ORDERING_VIOLATION"
     undefined_reason: Optional[str]
     _events: dict  # name -> Optional[WaqtInstant]
+    # Why `hijri_date` is None although the day is defined (e.g. `OutOfRange...: umm-al-qura supports 1700..2300`). A calendar
+    # failure never removes or changes the Waqt day; it only leaves the Hijri label empty and says why.
+    calendar_error: Optional[str] = None
 
     @property
     def is_defined(self) -> bool:
@@ -384,6 +387,7 @@ def waqt_day_from_result(r: WaqtResult) -> WaqtDay:
         status=r.status,
         undefined_reason=r.undefined_reason,
         _events=events,
+        calendar_error=getattr(r, "calendar_error", None),
     )
 
 

@@ -8,7 +8,9 @@ import puppeteer from "puppeteer-core";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 
-const PAGE = "http://localhost:8080/index.html", API = "http://localhost:8000", CTL = "http://localhost:8099";
+// index.html is now the multi-page marketing site (no #status); the minimal viewer these Sprint 14 scenarios drive is reference-viewer.html.
+// The site's own pages (live-demo.html, lab.html) are covered by run_web_option_b.mjs.
+const PAGE = "http://localhost:8080/reference-viewer.html", API = "http://localhost:8000", CTL = "http://localhost:8099";
 const OUT = fileURLToPath(new URL("./results/", import.meta.url)); fs.mkdirSync(OUT, { recursive: true });
 const executablePath = process.platform === "win32"
   ? [process.env.CHROME_PATH, "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
@@ -17,6 +19,7 @@ const executablePath = process.platform === "win32"
       .filter(Boolean).find((path) => fs.existsSync(path))
   : await chromium.executablePath();
 if (!executablePath) throw new Error("Set CHROME_PATH to a Windows Chrome or Edge executable.");
+const REQUIRED_IDS = ["lat", "lon", "provider", "goBtn", "status", "content", "heroSub", "metaGrid", "repsGrid", "eventsBody", "clockDisplay"];
 const results = [];
 const rec = (id, name, ok, detail = "") => { results.push({ id, name, ok: !!ok, detail }); console.log(`${ok ? "PASS" : "FAIL"} [${id}] ${name}${detail ? "  — " + detail : ""}`); };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -41,13 +44,16 @@ async function newPage({ clockOffsetMs = null, intercept = null } = {}) {
     const u = new URL(req.url());
     if (u.pathname === "/v1/waqt") {
       page.waqtCalls.push(Date.now());
-      if (clockOffsetMs !== null && !u.searchParams.has("instant")) u.searchParams.set("instant", new Date().toISOString().replace(".000Z", "Z"));
+      if (clockOffsetMs !== null && !u.searchParams.has("instant")) u.searchParams.set("instant", new Date(Date.now() + clockOffsetMs).toISOString().replace(/\.\d{3}Z$/, "Z"))   // the harness runs in Node: shift ITS clock by the same offset as the page;
       if (intercept) { const r = await intercept(req, page.waqtCalls.length); if (r) return req.respond(r); }
       return req.continue({ url: u.toString() });
     }
     req.continue();
   });
   await page.goto(PAGE, { waitUntil: "networkidle0" });
+  // Fail loudly, naming what is missing, BEFORE any scenario runs (an absent element used to surface as a bare TypeError).
+  const missing = await page.evaluate((ids) => ids.filter((id) => !document.getElementById(id)), REQUIRED_IDS);
+  if (missing.length) throw new Error(`${PAGE}: required element(s) not found: ${missing.map((m) => "#" + m).join(", ")} -- the page markup and this harness disagree`);
   return page;
 }
 async function go(page, lat, lon, provider) {
@@ -59,7 +65,7 @@ async function go(page, lat, lon, provider) {
 }
 const snap = (page) => page.evaluate(() => ({
   status: document.getElementById("status").textContent, statusErr: document.getElementById("status").className === "err",
-  hidden: document.getElementById("content").hidden, hero: document.getElementById("heroSub").innerText,
+  hidden: document.getElementById("content").hidden, hero: document.getElementById("heroSub").textContent,   // textContent: innerText applies CSS text-transform (uppercase) and would defeat case-sensitive matching
   badge: (document.querySelector("#heroSub .badge") || {}).textContent || null, badgeClass: (document.querySelector("#heroSub .badge") || {}).className || null,
   meta: Object.fromEntries([...document.querySelectorAll("#metaGrid dt")].map((dt) => [dt.textContent, dt.nextElementSibling.textContent])),
   providers: [...document.querySelectorAll("#provider option")].map((o) => o.value), clock: document.getElementById("clockDisplay").textContent,

@@ -37,8 +37,8 @@ def _profile(p: argparse.ArgumentParser) -> None:
 
 
 def _provider(p: argparse.ArgumentParser) -> None:
-    p.add_argument("--provider", default="umm-al-qura",
-                   help="Hijri calendar provider (see `waqt providers`; default umm-al-qura)")
+    p.add_argument("--provider", default=backend.lib.DEFAULT_CALENDAR_PROVIDER,
+                   help="Hijri calendar provider (see `waqt providers`; default umm-al-qura since API 1.7.0; pass --provider arithmetic-tabular for the previous behaviour)")
 
 
 def build_parser() -> argparse.ArgumentParser:
