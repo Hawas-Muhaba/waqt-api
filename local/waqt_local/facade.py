@@ -33,6 +33,7 @@ from typing import Any, Optional
 
 from waqt_core import calendar_interop as ci
 from waqt_core.core import AstronomyProfile, Location, compute_waqt
+from waqt_core.profile_validation import InvalidProfileError
 from waqt_core.hijri import ArithmeticTabularProvider, CalendarOutOfRange, InvalidHijriDate, checked_to_gregorian, weekday_name
 from waqt_core.institutional import (
     AcademicCalendar,
@@ -108,7 +109,10 @@ def _tz_provider(timezone_override: Optional[str]):
 
 
 def _profile(fajr_angle: float = 18.0, isha_angle: float = 17.0, asr_ratio: float = 1.0) -> AstronomyProfile:
-    return AstronomyProfile(name="custom", fajr_angle_deg=fajr_angle, isha_angle_deg=isha_angle, asr_shadow_ratio=asr_ratio)
+    try:
+        return AstronomyProfile(name="custom", fajr_angle_deg=fajr_angle, isha_angle_deg=isha_angle, asr_shadow_ratio=asr_ratio)
+    except InvalidProfileError as e:  # ERR-004: same code and details as the HTTP API
+        raise validation_error(str(e), parameter=e.parameter, received=e.received_json, expected=e.expected) from e
 
 
 # ---------------------------------------------------------------------------

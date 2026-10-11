@@ -32,6 +32,7 @@ from datetime import date, datetime, timedelta, timezone
 from . import solar
 from .hijri import HijriDate, HijriProvider, weekday_name
 from .timescale import DEFAULT_TIMESCALE_PROVIDER, TimeScaleProvider
+from .profile_validation import validate_profile
 from .timezone_provider import DEFAULT_TIMEZONE_PROVIDER, TimezoneProvider
 
 
@@ -44,6 +45,10 @@ class AstronomyProfile:
     fajr_angle_deg: float = 18.0
     isha_angle_deg: float = 17.0
     asr_shadow_ratio: float = 1.0  # 1.0 = standard, 2.0 = Hanafi
+
+    def __post_init__(self) -> None:
+        # ERR-004: reject non-physical parameters at construction -- never clamp, never coerce.
+        validate_profile(self.fajr_angle_deg, self.isha_angle_deg, self.asr_shadow_ratio)
 
 
 DEFAULT_PROFILE = AstronomyProfile()

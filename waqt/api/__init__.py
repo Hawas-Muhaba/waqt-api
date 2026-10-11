@@ -27,6 +27,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 
 from waqt_core.hijri import CalendarOutOfRange
+from waqt_core.profile_validation import InvalidProfileError
 from waqt_core.timezone_provider import UnknownTimezoneError
 from waqt_core.versioning import computation_identity
 
@@ -123,6 +124,16 @@ def create_app(cors_origins=None, rate_limit=None, trust_proxy=None) -> FastAPI:
             content=error_body(ErrorCode.OUT_OF_RANGE, str(exc),
                                {"calendar_provider": exc.provider, "supported_range": exc.supported,
                                 "received": exc.received}),
+        )
+
+    @application.exception_handler(InvalidProfileError)
+    async def handle_invalid_profile(request: Request, exc: InvalidProfileError):
+        # ERR-004: a non-numeric, non-finite or out-of-range astronomy-profile parameter. One
+        # structured 422 for every endpoint (GET query parameters and POST bodies alike).
+        return JSONResponse(
+            status_code=422,
+            content=error_body(ErrorCode.VALIDATION_ERROR, str(exc),
+                               {"parameter": exc.parameter, "received": exc.received_json, "expected": exc.expected}),
         )
 
     @application.exception_handler(RequestValidationError)
