@@ -28,8 +28,8 @@ export function gregorianDateToWaqtDay(input) {
   const site = new Site(input.location, input.timezone, input.profile, input.calendar);
   const d = site.dayByLabel(X);
   if (d.status !== 'OK') return { resolved: false, close_civil_date: null, open: null, close: null, reason: d.undefined_reason };
-  const h = site.hijriLabel(d);
-  return { resolved: true, close_civil_date: formatDate(localDateNum(input.timezone, d.close)), open: formatInstant(d.open), close: formatInstant(d.close), hijri_date: h.date, weekday: islamicWeekdayName(d.label_day), reason: null };
+  const { hijri: h, calendar_error } = site.hijriLabelSafe(d);
+  return { resolved: true, close_civil_date: formatDate(localDateNum(input.timezone, d.close)), open: formatInstant(d.open), close: formatInstant(d.close), hijri_date: h ? h.date : null, ...(calendar_error ? { calendar_error } : {}), weekday: islamicWeekdayName(d.label_day), reason: null };
 }
 export function boundaryCrossing(input) {
   const a = parseInstant(input.start), b = parseInstant(input.end);

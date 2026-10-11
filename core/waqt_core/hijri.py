@@ -124,6 +124,15 @@ class CalendarOutOfRange(ValueError):
         super().__init__(f"{provider} supports {supported} only; got {received}.")
 
 
+def calendar_error_code(message: str | None) -> str | None:
+    """Machine code of a ``calendar_error`` message (CAL-013). ``compute_waqt`` records a provider failure as
+    ``"<ExceptionName>: <text>"``; a refusal for a date outside the provider's range is ``OUT_OF_RANGE`` (CAL-011),
+    anything else is the generic ``CALENDAR_ERROR``. ``None`` for no error."""
+    if not message:
+        return None
+    return CalendarOutOfRange.code if str(message).startswith("CalendarOutOfRange") else "CALENDAR_ERROR"
+
+
 #: Tabular calendar domain: AH years start at 1 (no year zero, no negative years).
 TABULAR_MIN_YEAR = 1
 

@@ -47,7 +47,7 @@ export class LiveSource {
     if (!d) {
       d = this.site.dayByIndex(this.label0 + k);
       d.k = k;
-      d.hijri_label = d.status === 'OK' ? hijriFromDay(d.label_day, this.site.calendar.provider, this.site.calendar.params || {}).date : null;
+      d.hijri_label = d.status === 'OK' ? (this.site.hijriLabelSafe(d).hijri || { date: null }).date : null;
       this.cache.set(k, d);
     }
     return d;

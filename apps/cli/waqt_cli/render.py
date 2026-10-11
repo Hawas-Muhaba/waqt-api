@@ -56,6 +56,21 @@ def metadata_lines(comp: Optional[dict], hijri: Optional[dict], core_version: st
     return lines
 
 
+def _calendar_error_text(err) -> str:
+    """calendar_error is {provider, message} from now/events and a plain string from convert (API 1.7.0/1.8.0)."""
+    if isinstance(err, dict):
+        return err.get("message") or "calendar provider could not label this date"
+    return str(err) if err else "calendar provider could not label this date"
+
+
+def hijri_text(h: Optional[dict], err=None) -> str:
+    """The Hijri label, or - when the provider cannot label the date (CAL-013) - an explicit notice. The Waqt day is
+    still shown by the caller: a calendar failure never fails a Waqt computation."""
+    if h:
+        return h["display"]
+    return f"unavailable (calendar_error: {_calendar_error_text(err)})"
+
+
 def render_now(data: dict, core_version: str) -> str:
     tz = (data.get("timezone") or {}).get("name")
     out = []
@@ -63,9 +78,9 @@ def render_now(data: dict, core_version: str) -> str:
         out.append(f"Waqt day undefined here/now: {data.get('undefined_reason')}")
         out += metadata_lines(data.get("computation"), None, core_version)
         return "\n".join(out)
-    h = data["hijri"]
+    h = data.get("hijri")
     out.append(f"Waqt clock  : {data['waqt']['display']}   ({data['weekday']})")
-    out.append(f"Hijri       : {h['display']}")
+    out.append(f"Hijri       : {hijri_text(h, data.get('calendar_error'))}")
     out.append(f"timezone    : {tz}")
     out.append(f"day opened  : {local_hhmmss(data['day']['maghrib_open'], tz)} local (Maghrib)")
     out.append(f"day closes  : {local_hhmmss(data['day']['maghrib_close'], tz)} local (Maghrib)")
@@ -94,6 +109,8 @@ def render_events(data: dict, core_version: str) -> str:
     out.append("")
     if data.get("hijri"):
         out.append(f"Hijri {data['hijri']['display']} · timezone {tz}")
+    elif data.get("calendar_error"):
+        out.append(f"Hijri {hijri_text(None, data.get('calendar_error'))} · timezone {tz}")
     out += metadata_lines(data.get("computation"), data.get("hijri"), core_version)
     return "\n".join(out)
 
@@ -115,7 +132,7 @@ def render_convert(data: dict, core_version: str) -> str:
         w = data["waqt"]
         if w["status"] == "OK":
             day = w["day"]
-            out.append(f"Hijri     : {day['hijri']['display']}   ({day['weekday']})")
+            out.append(f"Hijri     : {hijri_text(day.get('hijri'), day.get('calendar_error') or w.get('calendar_error'))}   ({day['weekday']})")
             out.append(f"Waqt      : {hms(day['position_seconds'])} into the day")
         else:
             out.append(f"Waqt      : undefined ({w.get('undefined_reason')})")
@@ -125,7 +142,7 @@ def render_convert(data: dict, core_version: str) -> str:
     elif d == "gregorian-date-to-waqt":
         w = data["waqt"]
         if w["status"] == "OK":
-            out.append(f"{data['source']['date']}  ->  Hijri {w['hijri']['display']} ({w['weekday']})")
+            out.append(f"{data['source']['date']}  ->  Hijri {hijri_text(w.get('hijri'), w.get('calendar_error'))} ({w['weekday']})")
             out.append(f"Waqt day  : {local_hhmmss(w['day']['maghrib_open'], data['timezone']['name'])} local  ->  "
                        f"{local_hhmmss(w['day']['maghrib_close'], data['timezone']['name'])} local "
                        f"({hms(w['day']['length_si_seconds'])})")

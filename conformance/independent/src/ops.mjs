@@ -37,10 +37,27 @@ export const OPS = {
   'date.parse': (i) => ({ date: formatDate(parseDate(i.value)) }),
 };
 
+// COP wire convention (spec/COP.md section 2): JSON has no NaN/Infinity, so a vector writes a non-finite number
+// as {"$nonfinite": "NaN" | "Infinity" | "-Infinity"}; an adapter decodes it to a real non-finite number first.
+function decodeNonFinite(v) {
+  if (Array.isArray(v)) return v.map(decodeNonFinite);
+  if (v && typeof v === 'object') {
+    const keys = Object.keys(v);
+    if (keys.length === 1 && keys[0] === '$nonfinite') {
+      const t = v.$nonfinite;
+      if (t === 'NaN') return NaN;
+      if (t === 'Infinity') return Infinity;
+      if (t === '-Infinity') return -Infinity;
+    }
+    return Object.fromEntries(keys.map((k) => [k, decodeNonFinite(v[k])]));
+  }
+  return v;
+}
+
 export function runCase(c) {
   const fn = OPS[c.op];
   if (!fn) return { id: c.id, ok: false, error: { code: 'UNSUPPORTED_OPERATION', message: `operation not implemented: ${c.op}` } };
-  try { return { id: c.id, ok: true, output: fn(c.input || {}) }; }
+  try { return { id: c.id, ok: true, output: fn(decodeNonFinite(c.input || {})) }; }
   catch (e) {
     if (e instanceof WaqtError) return { id: c.id, ok: false, error: { code: e.code, message: e.message } };
     return { id: c.id, ok: false, error: { code: 'INTERNAL_ERROR', message: String(e && e.message || e) } };

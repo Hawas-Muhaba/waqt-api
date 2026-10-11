@@ -16,7 +16,7 @@ export function normalizeProfile(p = {}) {
     asr_shadow_ratio: p.asr_shadow_ratio ?? 1.0,
   };
   for (const k of ['fajr_angle_deg', 'isha_angle_deg']) {
-    if (typeof prof[k] !== 'number' || !isFinite(prof[k]) || prof[k] <= 0 || prof[k] >= 90) throw new WaqtError('VALIDATION_ERROR', `${k} must be a number in (0, 90)`);
+    if (typeof prof[k] !== 'number' || !isFinite(prof[k]) || prof[k] <= 0 || prof[k] > 90) throw new WaqtError('VALIDATION_ERROR', `${k} must be a finite number with 0 < value <= 90`);
   }
   if (typeof prof.asr_shadow_ratio !== 'number' || !isFinite(prof.asr_shadow_ratio) || prof.asr_shadow_ratio <= 0) throw new WaqtError('VALIDATION_ERROR', 'asr_shadow_ratio must be a positive number');
   return prof;
@@ -71,6 +71,16 @@ export class Site {
   hijriLabel(day) {
     return hijriFromDay(day.label_day, this.calendar.provider, this.calendar.params || {});
   }
+  // OQ-CAL-1 / DR-0012 (CAL-013): a calendar provider that cannot label a date never fails a Waqt computation.
+  // Only the provider's range refusal (OUT_OF_RANGE, CAL-011) is absorbed here; every other error propagates.
+  hijriLabelSafe(day) {
+    try {
+      return { hijri: this.hijriLabel(day), calendar_error: null };
+    } catch (e) {
+      if (e instanceof WaqtError && e.code === 'OUT_OF_RANGE') return { hijri: null, calendar_error: { code: 'OUT_OF_RANGE' } };
+      throw e;
+    }
+  }
 }
 export const posDisplay = (seconds) => {
   const s = Math.floor(seconds + 1e-9);
@@ -105,12 +115,12 @@ export function computeWaqt(input, toInstantStr, parseInst, zone) {
       if (e !== null && e !== undefined && e > us && (next === null || e < next.us)) next = { name: n, us: e };
     }
   }
-  const h = ctx.hijriLabel(day);
+  const { hijri: h, calendar_error } = ctx.hijriLabelSafe(day);
   return {
     status: 'OK', undefined_reason: null, ...base,
     day: { open: toInstantStr(day.open), close: toInstantStr(day.close), length_seconds: len },
     position: { seconds: (us - day.open) / US_PER_SEC, display: posDisplay((us - day.open) / US_PER_SEC) },
-    hijri: h, weekday: islamicWeekdayName(day.label_day),
+    hijri: h, ...(calendar_error ? { calendar_error } : {}), weekday: islamicWeekdayName(day.label_day),
     events, undefined_events: undef,
     next_event: next && { name: next.name, instant: toInstantStr(next.us), seconds_until: (next.us - us) / US_PER_SEC },
   };
