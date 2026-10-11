@@ -3,7 +3,7 @@
 Newest first. Every entry lists what changed in requirements, vectors and registry, the decision records
 behind it, and whether it is breaking (GOVERNANCE.md section 2).
 
-## 2.0.0 -- Sprint 16 -- PROPOSED / UNRELEASED (decision records DR-0001..DR-0008 ratified by Dr. Salim Muhammed Redi on 2026-10-10; the contract itself is not released: ERR-004 has no normative vector and 12 questions are unresolved)
+## 2.0.0 -- Sprint 16 -- PROPOSED / UNRELEASED (decision records DR-0001..DR-0008 ratified by Dr. Salim Muhammed Redi on 2026-10-10; the contract itself is not released: ERR-004 has no normative vector and 13 questions are unresolved)
 
 **Amendment to the 2.0.0 draft (CCP-0001 / DR-0010, 2026-10-10; ratification of DR-0010 PENDING):** new MUST **CAL-012**: an omitted calendar provider
 means `umm-al-qura`, an explicit one is honoured (COP `provider` inputs become optional). New suite `calendar-default.json` (7 exact vectors, expected values

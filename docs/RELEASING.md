@@ -38,7 +38,7 @@ rather than performing the upload itself.
 Both SDKs use [Semantic Versioning](https://semver.org/), and — per the
 Sprint 10 brief's explicit instruction — their version number is **not**
 automatically synchronized with the Waqt HTTP API's own `api_version`
-(`waqt.api.common.API_VERSION`, currently `1.3.0`). Instead, each SDK
+(`waqt.api.common.API_VERSION`, currently `1.7.0`). Instead, each SDK
 declares the `api_version` range it was built and tested against
 (`waqt_client/config.py`'s `MIN_SUPPORTED_API_VERSION` /
 `MAX_KNOWN_API_VERSION` on the Python side; the JS SDK checks the same
