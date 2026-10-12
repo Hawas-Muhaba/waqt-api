@@ -24,6 +24,7 @@ does: Waqt states calendar facts, not the institution's obligations.
 
 from __future__ import annotations
 
+import math
 from datetime import datetime, timezone
 from typing import Any, Optional
 
@@ -44,7 +45,7 @@ from ..institutional import (
 from ..institutional.academic_year import AcademicCalendar, HolidayDefinition, TermDefinition
 from ..institutional.fiscal_year import FiscalCalendar
 from ..scheduling import SchedulingContext
-from .common import ApiError, ErrorCode, hijri_block, iso, success
+from .common import ApiError, ErrorCode, hijri_block, iso, reject_null_fields, success
 from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, provider_identity, resolve_calendar_provider
 
 router = APIRouter()
@@ -66,9 +67,34 @@ def _optional_location(loc: Optional[dict]) -> Optional[Location]:
     if not isinstance(loc, dict) or "lat" not in loc or "lon" not in loc:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`location` must be an object with `lat` and `lon`", {})
     lat, lon, elev = loc["lat"], loc["lon"], loc.get("elevation_m", 0.0)
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in (lat, lon, elev)):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "location coordinates and elevation must be JSON numbers", {})
+    if any(isinstance(value, float) and not math.isfinite(value) for value in (lat, lon, elev)):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "location coordinates and elevation must be finite", {})
     if not (-90 <= lat <= 90 and -180 <= lon <= 180 and elev >= 0):
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "location out of range (|lat|<=90, |lon|<=180, elevation_m>=0)", {})
     return Location(lat, lon, elev)
+
+
+def _body_integer(body: dict, field: str) -> int:
+    value = body.get(field)
+    if not isinstance(value, int) or isinstance(value, bool) or value < 1:
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, f"`{field}` must be a positive JSON integer", {"received": value})
+    return value
+
+
+def _body_string(body: dict, field: str, default: str) -> str:
+    value = body.get(field, default)
+    if not isinstance(value, str):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, f"`{field}` must be a string", {"received": value})
+    return value
+
+
+def _body_list(body: dict, field: str) -> list:
+    value = body.get(field, [])
+    if not isinstance(value, list):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, f"`{field}` must be a JSON array", {"received": value})
+    return value
 
 
 def _hijri_year_for_instant(instant: Optional[str], provider) -> int:
@@ -151,18 +177,23 @@ def post_fiscal_year_resolve(
 ):
     if not isinstance(body, dict):
         raise ApiError(400, ErrorCode.INVALID_CALENDAR_RULE, "Request body must be a JSON object", {})
+    reject_null_fields(body, ("calendar_provider", "location", "label"))
     if "hijri_year" not in body:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`hijri_year` is required", {})
-    provider = _provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
+    hijri_year = _body_integer(body, "hijri_year")
+    provider = _provider(_body_string(body, "calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _optional_location(body.get("location"))
     ctx = SchedulingContext(loc, calendar_provider=provider) if loc is not None else None
+    if not isinstance(body.get("start_rule"), dict) or not isinstance(body.get("end_rule"), dict):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`start_rule` and `end_rule` must be JSON objects", {})
+    label = _body_string(body, "label", "Fiscal Year")
 
     def build():
         fc = FiscalCalendar(
             start_rule=rule_from_dict(body["start_rule"]), end_rule=rule_from_dict(body["end_rule"]),
-            label=body.get("label", "Fiscal Year"), calendar_provider=provider,
+            label=label, calendar_provider=provider,
         )
-        return fc, fc.year(int(body["hijri_year"]), ctx=ctx)
+        return fc, fc.year(hijri_year, ctx=ctx)
 
     fc, fy = _resolve_and_wrap(build, "fiscal-year")
     return success({**fy.to_dict(), "definition": fc.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})
@@ -193,14 +224,44 @@ def get_academic_year(
 
 
 def _term_defs(raw: list) -> tuple:
-    return tuple(
-        TermDefinition(t["label"], rule_from_dict(t["start_rule"]), rule_from_dict(t["end_rule"]), t.get("year_offset", 0))
-        for t in raw
-    )
+    if any(not isinstance(t, dict) for t in raw):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`term_rules` entries must be JSON objects", {})
+    for term in raw:
+        missing = [key for key in ("label", "start_rule", "end_rule") if key not in term]
+        if missing:
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, f"term missing required field(s): {', '.join(missing)}", {})
+        offset = term.get("year_offset", 0)
+        if not isinstance(offset, int) or isinstance(offset, bool):
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, "term `year_offset` must be an integer", {"received": offset})
+        if not isinstance(term.get("label"), str):
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, "term `label` must be a string", {"received": term.get("label")})
+    try:
+        return tuple(
+            TermDefinition(
+                t["label"], rule_from_dict(t["start_rule"]), rule_from_dict(t["end_rule"]), t.get("year_offset", 0)
+            )
+            for t in raw
+        )
+    except RuleError as exc:
+        raise ApiError(422, ErrorCode.INVALID_CALENDAR_RULE, f"academic-year term: {exc}", {}) from exc
 
 
 def _holiday_defs(raw: list) -> tuple:
-    return tuple(HolidayDefinition(h["label"], rule_from_dict(h["rule"]), h.get("year_offset", 0)) for h in raw)
+    if any(not isinstance(h, dict) for h in raw):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`holidays` entries must be JSON objects", {})
+    for holiday in raw:
+        missing = [key for key in ("label", "rule") if key not in holiday]
+        if missing:
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, f"holiday missing required field(s): {', '.join(missing)}", {})
+        offset = holiday.get("year_offset", 0)
+        if not isinstance(offset, int) or isinstance(offset, bool):
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, "holiday `year_offset` must be an integer", {"received": offset})
+        if not isinstance(holiday.get("label"), str):
+            raise ApiError(422, ErrorCode.VALIDATION_ERROR, "holiday `label` must be a string", {"received": holiday.get("label")})
+    try:
+        return tuple(HolidayDefinition(h["label"], rule_from_dict(h["rule"]), h.get("year_offset", 0)) for h in raw)
+    except RuleError as exc:
+        raise ApiError(422, ErrorCode.INVALID_CALENDAR_RULE, f"academic-year holiday: {exc}", {}) from exc
 
 
 @router.post("/v1/institutional/academic-year/resolve")
@@ -218,19 +279,26 @@ def post_academic_year_resolve(
 ):
     if not isinstance(body, dict):
         raise ApiError(400, ErrorCode.INVALID_CALENDAR_RULE, "Request body must be a JSON object", {})
+    reject_null_fields(body, ("calendar_provider", "location", "label", "term_rules", "holidays"))
     if "hijri_year" not in body:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`hijri_year` is required", {})
-    provider = _provider(body.get("calendar_provider", DEFAULT_CALENDAR_PROVIDER))
+    hijri_year = _body_integer(body, "hijri_year")
+    provider = _provider(_body_string(body, "calendar_provider", DEFAULT_CALENDAR_PROVIDER))
     loc = _optional_location(body.get("location"))
     ctx = SchedulingContext(loc, calendar_provider=provider) if loc is not None else None
+    if not isinstance(body.get("opening_rule"), dict) or not isinstance(body.get("closing_rule"), dict):
+        raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`opening_rule` and `closing_rule` must be JSON objects", {})
+    term_rules = _term_defs(_body_list(body, "term_rules"))
+    holidays = _holiday_defs(_body_list(body, "holidays"))
+    label = _body_string(body, "label", "Academic Year")
 
     def build():
         ac = AcademicCalendar(
             opening_rule=rule_from_dict(body["opening_rule"]), closing_rule=rule_from_dict(body["closing_rule"]),
-            term_rules=_term_defs(body.get("term_rules", [])), holidays=_holiday_defs(body.get("holidays", [])),
-            label=body.get("label", "Academic Year"), calendar_provider=provider,
+            term_rules=term_rules, holidays=holidays, label=label,
+            calendar_provider=provider,
         )
-        return ac, ac.year(int(body["hijri_year"]), ctx=ctx)
+        return ac, ac.year(hijri_year, ctx=ctx)
 
     ac, ay = _resolve_and_wrap(build, "academic-year")
     return success({**ay.to_dict(), "definition": ac.to_dict(), "calendar_provider": provider_identity(provider), "caveat": CAVEAT})

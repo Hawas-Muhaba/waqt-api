@@ -44,9 +44,9 @@ def test_clean_install_of_the_whole_chain(tmp_path):
     core_v, local_v, cli_v = (src_version(VERSION_FILES[k][0]) for k in ("core", "local", "cli"))
 
     # the pins every changelog promises, read from the BUILT wheels
-    assert f"waqt-core<0.6,>={core_v}" in requires(whls["api"]) or any(r.startswith("waqt-core") and f">={core_v}" in r for r in requires(whls["api"]))
-    assert any(r.startswith("waqt-core") and f">={core_v}" in r and "<0.6" in r for r in requires(whls["local"]))
-    assert any(r.startswith("waqt-local") and f">={local_v}" in r and "<0.7" in r for r in requires(whls["cli"]))
+    assert any(r.startswith("waqt-core") and f">={core_v}" in r and "<0.7" in r for r in requires(whls["api"]))
+    assert any(r.startswith("waqt-core") and f">={core_v}" in r and "<0.7" in r for r in requires(whls["local"]))
+    assert any(r.startswith("waqt-local") and f">={local_v}" in r and "<0.8" in r for r in requires(whls["cli"]))
 
     vdir = tmp_path / "venv"
     venv.EnvBuilder(with_pip=True).create(vdir)

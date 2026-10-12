@@ -19,7 +19,7 @@ rather than performing the upload itself.
 | | Python (`waqt-client`) | JS (`waqt-client`) |
 |---|---|---|
 | Manifest | `sdks/python/pyproject.toml` | `sdks/js/waqt-client/package.json` |
-| Version | `0.3.0` | `0.3.0` |
+| Version | `0.3.1` | `0.3.1` |
 | License | MIT (`LICENSE` in each package dir) | MIT |
 | Typed | `py.typed` marker, full type hints | `index.d.ts`, checked with `tsc --noEmit -p tsconfig.json` |
 | Changelog | `sdks/python/CHANGELOG.md` | `sdks/js/waqt-client/CHANGELOG.md` |
@@ -92,8 +92,10 @@ a minor bump: 0.1.0 -> 0.2.0), not when the server's `api_version` ticks.
    (`pip install waqt-client==<version>` / `npm install waqt-client@<version>`)
    in a scratch environment, one last time, against the network.
 
-Steps 1-5 are exactly what this sprint did and verified; steps 6-8 are
-the credentialed continuation a maintainer performs.
+Steps 1-5 must be performed and recorded for each SDK release; steps
+6-8 are the credentialed continuation a maintainer performs. Current
+manifests are Python 0.3.1 and JavaScript 0.3.1, and both SDKs record
+API 1.8.0 as their maximum tested version.
 
 ## Package smoke tests / clean-install tests
 
@@ -116,12 +118,17 @@ dependency, ...) fails the same test run a code change would.
 ## `waqt-core`, `waqt-api`, `waqt-local` (Sprint 11)
 
 Three more distributions are now packageable (see `docs/PACKAGING.md`):
-`core/` → `waqt-core` 0.1.0, repo root → `waqt-api` 0.1.0, `local/` →
-`waqt-local` 0.3.0 (Sprint 12: additive `computation.engine`/`.revision`, `version()`). Same policy as above: built and clean-install-tested,
-not uploaded (credentials).
+`core/` → `waqt-core` 0.6.0, repo root → `waqt-api` 0.6.0, `local/` →
+`waqt-local` 0.7.0, and `apps/cli/` → `waqt-cli` 0.3.0. Build and
+clean-install-test each artifact before publication; repository versions
+are not evidence of publication.
 
-**Release order matters:** `waqt-core` first, then `waqt-api` and
-`waqt-local` (both declare `waqt-core>=0.1.0,<0.2`).
+**Release order matters:** publish `waqt-core` 0.6.0 first, then
+`waqt-api` 0.6.0 and `waqt-local` 0.7.0 (both require
+`waqt-core>=0.6.0,<0.7`), and finally `waqt-cli` 0.3.0 (requires
+`waqt-local>=0.7.0,<0.8`). Until these versions are available from an
+index, install from the checkout or build all artifacts and install them
+in dependency order.
 
 **Versioning `waqt-core`.** SemVer. Unlike the SDKs, `waqt-core`'s version
 *is* about computed values: any change to `solar.py` that moves an output

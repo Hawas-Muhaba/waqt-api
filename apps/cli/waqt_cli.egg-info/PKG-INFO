@@ -1,12 +1,12 @@
 Metadata-Version: 2.4
 Name: waqt-cli
-Version: 0.2.0
+Version: 0.3.0
 Summary: Reference command-line application for Waqt: local computation, Gregorian/Hijri/Waqt conversion, prayer/event timeline, scheduling, computation metadata.
 Author: Waqt project
 License: MIT
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
-Requires-Dist: waqt-local<0.7,>=0.6.0
+Requires-Dist: waqt-local<0.8,>=0.7.0
 Provides-Extra: dev
 Requires-Dist: pytest>=7; extra == "dev"
 

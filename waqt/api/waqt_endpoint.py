@@ -21,6 +21,7 @@ from zoneinfo import ZoneInfo
 from fastapi import APIRouter, Query, Response
 
 from ..core import AstronomyProfile, Location, compute_waqt
+from ..hijri import calendar_error_code
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 from .common import computation_block, hijri_block, iso, parse_instant, profile_block, reading, success, timezone_block
@@ -153,6 +154,7 @@ def get_waqt(
         # every astronomical field above/below is still fully computed.
         "calendar_error": ({"provider": provider.name, "message": r.calendar_error}
                            if r.calendar_error else None),
+        "calendar_error_code": calendar_error_code(r.calendar_error),
         "weekday": r.weekday,
         "waqt": waqt_field,
         "events": events_field,

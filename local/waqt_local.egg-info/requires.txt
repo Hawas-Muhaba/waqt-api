@@ -1,4 +1,4 @@
-waqt-core<0.6,>=0.5.0
+waqt-core<0.7,>=0.6.0
 
 [dev]
 pytest>=7

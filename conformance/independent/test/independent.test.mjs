@@ -121,6 +121,15 @@ test('ERR-004: 90 degrees is valid (inclusive upper bound); just above, zero, ne
   }
 });
 
+test('ERR-004 (DR-0014): explicit null and numeric text are rejected; omission alone selects defaults', () => {
+  assert.equal(compute(undefined).ok, true);
+  for (const p of [{ fajr_angle_deg: null }, { isha_angle_deg: '18' }, { asr_shadow_ratio: null }, null]) {
+    const r = compute(p);
+    assert.equal(r.ok, false, JSON.stringify(p));
+    assert.equal(r.error.code, 'VALIDATION_ERROR', JSON.stringify(p));
+  }
+});
+
 test('ERR-004: the COP $nonfinite wire convention decodes to real NaN / Infinity before validation', () => {
   for (const t of ['NaN', 'Infinity', '-Infinity']) {
     const r = compute({ fajr_angle_deg: { $nonfinite: t } });

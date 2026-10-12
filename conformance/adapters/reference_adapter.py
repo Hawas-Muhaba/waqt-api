@@ -6,6 +6,7 @@ This file is the ONLY place the conformance suite touches reference internals; i
 reference's native shapes onto the portable COP output schema.
 """
 import json
+import math
 import sys
 import warnings
 from datetime import date, datetime, timedelta, timezone
@@ -165,7 +166,7 @@ def op_scenario(i):
 
 
 def common_params(i):
-    loc, prof, cal = i.get("location") or {}, i.get("profile") or {}, i.get("calendar") or {}
+    loc, prof, cal = i.get("location") or {}, _profile(i), i.get("calendar") or {}
     p = cal.get("params") or {}
     d, s = p.get("declared") or {}, p.get("sighting") or {}
     return dict(lat=loc.get("lat"), lon=loc.get("lon"), elevation_m=loc.get("elevation_m", 0.0), timezone_override=i.get("timezone"),
@@ -173,6 +174,19 @@ def common_params(i):
                 asr_ratio=prof.get("asr_shadow_ratio", 1.0), calendar_provider=cal.get("provider", DEFAULT_PROVIDER),
                 override_date=p.get("override_date"), declared_year=d.get("year"), declared_month=d.get("month"), declared_day=d.get("day"),
                 sighting_year=s.get("year"), sighting_month=s.get("month"), sighting_day=s.get("day"), observed_at=p.get("observed_at"))
+
+
+def _profile(i):
+    prof = i["profile"] if "profile" in i else i.get("astronomy_profile", {})
+    if not isinstance(prof, dict):
+        raise CopError("VALIDATION_ERROR", "profile must be a JSON object")
+    for key in ("fajr_angle_deg", "isha_angle_deg", "asr_shadow_ratio"):
+        if key not in prof:
+            continue
+        value = prof[key]
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            raise CopError("VALIDATION_ERROR", f"{key} must be a finite JSON number")
+    return prof
 
 
 def op_compute(i):
@@ -201,7 +215,7 @@ def op_compute(i):
             "hijri": ({"date": h.get("date"), "year": h.get("year"), "month": h.get("month"), "day": h.get("day"), "month_name": h.get("month_name"),
                        "provider": (h.get("provider") or {}).get("name"), "source": h.get("source"), "fallback_reason": prov.get("fallback_reason")}
                       if h.get("date") else None),
-            "calendar_error": calendar_error_out(d.get("calendar_error")),
+            "calendar_error": calendar_error_out(d.get("calendar_error"), d.get("calendar_error_code")),
             "weekday": d["weekday"], "events": evs, "undefined_events": und,
             "next_event": {"name": ne["name"], "instant": ne["instant"], "seconds_until": ne["countdown"]["seconds"]} if ne else None}
 
@@ -236,14 +250,15 @@ def op_date_to_waqt(i):
     close = datetime.fromisoformat(w["day"]["maghrib_close"])
     return {"resolved": True, "close_civil_date": close.astimezone(ZoneInfo(d["timezone"]["name"])).date().isoformat(),
             "open": w["day"]["maghrib_open"], "close": w["day"]["maghrib_close"],
-            "hijri_date": (w.get("hijri") or {}).get("date"), "calendar_error": calendar_error_out(w.get("calendar_error")),
+            "hijri_date": (w.get("hijri") or {}).get("date"),
+            "calendar_error": calendar_error_out(w.get("calendar_error"), w.get("calendar_error_code")),
             "weekday": w.get("weekday"), "reason": None}
 
 
 def _ctx(c):
     from waqt_core.timezone_provider import ManualTimezoneProvider
     loc = c["location"]
-    prof = c.get("profile") or c.get("astronomy_profile") or {}
+    prof = _profile(c)
     p = AstronomyProfile(name="custom", fajr_angle_deg=prof.get("fajr_angle_deg", 18.0), isha_angle_deg=prof.get("isha_angle_deg", 17.0),
                          asr_shadow_ratio=prof.get("asr_shadow_ratio", 1.0))
     cal = c.get("calendar") or {"provider": c.get("calendar_provider", DEFAULT_PROVIDER)}
@@ -353,10 +368,12 @@ def decode_nonfinite(v):
     return v
 
 
-def calendar_error_out(err):
+def calendar_error_out(err, code=None):
     """COP `calendar_error` (CAL-013): {code} only; the free-text message is not normative. None when there is no error."""
     if not err:
         return None
+    if code:
+        return {"code": code}
     msg = err.get("message") if isinstance(err, dict) else str(err)
     return {"code": calendar_error_code(msg)}
 

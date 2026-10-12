@@ -31,7 +31,10 @@ from ..scheduling import RuleError, SchedulingContext, SchedulingEngine, run_ope
 from ..scheduling.model import parse_instant as parse_rule_instant
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
-from .common import ApiError, ErrorCode, computation_block, iso, parse_instant, profile_block, success, timezone_block
+from .common import (
+    ApiError, ErrorCode, computation_block, iso, parse_instant, profile_block, reject_null_fields, success,
+    timezone_block,
+)
 from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, resolve_calendar_provider
 
 router = APIRouter()
@@ -143,6 +146,7 @@ def post_resolve(
     """
     if not isinstance(body, dict):
         raise _bad_body("Request body must be a JSON object")
+    reject_null_fields(body, ("anchor", "profile", "precision", "calendar_provider", "timezone_override"))
     loc = body.get("location")
     if not isinstance(loc, dict) or "lat" not in loc or "lon" not in loc:
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`location` must be an object with `lat` and `lon`", {})
@@ -150,7 +154,7 @@ def post_resolve(
     if not (-90 <= lat <= 90 and -180 <= lon <= 180 and elev >= 0):
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "location out of range (|lat|<=90, |lon|<=180, elevation_m>=0)", {})
 
-    pr = body.get("profile") or {}
+    pr = body.get("profile", {})
     if not isinstance(pr, dict):
         raise ApiError(422, ErrorCode.VALIDATION_ERROR, "`profile` must be an object", {})
     profile = AstronomyProfile(

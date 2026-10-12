@@ -50,8 +50,14 @@ def _require_month(month: int) -> None:
         raise RuleError(f"month must be an integer 1-12, got {month!r}")
 
 
+def _require_integer(value: Any, field: str) -> int:
+    if not isinstance(value, int) or isinstance(value, bool):
+        raise RuleError(f"{field} must be an integer, got {value!r}")
+    return value
+
+
 def _require_weekday(name: str) -> None:
-    if name not in ISLAMIC_WEEKDAY_NAMES:
+    if not isinstance(name, str) or name not in ISLAMIC_WEEKDAY_NAMES:
         raise RuleError(f"unknown Islamic weekday {name!r}; known: {list(ISLAMIC_WEEKDAY_NAMES)}")
 
 
@@ -177,11 +183,20 @@ def rule_from_dict(d: dict) -> CalendarRule:
         raise RuleError("a calendar rule must be a JSON object with a `type` field")
     t = d["type"]
     if t == "month_day":
-        return MonthDay(month=d["month"], day=d.get("day", 1))
+        if "month" not in d:
+            raise RuleError("month_day: missing required field 'month'")
+        return MonthDay(month=_require_integer(d["month"], "month"), day=_require_integer(d.get("day", 1), "day"))
     if t == "month_end":
-        return MonthEnd(month=d["month"])
+        if "month" not in d:
+            raise RuleError("month_end: missing required field 'month'")
+        return MonthEnd(month=_require_integer(d["month"], "month"))
     if t == "nth_weekday_of_month":
-        return NthWeekdayOfMonth(weekday=d["weekday"], n=d["n"], month=d["month"])
+        missing = [key for key in ("weekday", "n", "month") if key not in d]
+        if missing:
+            raise RuleError(f"nth_weekday_of_month: missing required field(s) {', '.join(missing)}")
+        return NthWeekdayOfMonth(
+            weekday=d["weekday"], n=_require_integer(d["n"], "n"), month=_require_integer(d["month"], "month")
+        )
     raise RuleError(f"unknown calendar rule type {t!r}")
 
 

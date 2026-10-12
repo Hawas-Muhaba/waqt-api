@@ -10,10 +10,11 @@ import { DEFAULT_PROVIDER } from './defaults.mjs';
 export const UNDEF_MAGHRIB = 'Maghrib (sunset) does not occur for this date/location \u2014 polar day or polar night. No high-latitude fallback is applied automatically; see SCOPE.md.';
 
 export function normalizeProfile(p = {}) {
+  if (!p || typeof p !== 'object' || Array.isArray(p)) throw new WaqtError('VALIDATION_ERROR', 'profile must be a JSON object');
   const prof = {
-    fajr_angle_deg: p.fajr_angle_deg ?? 18.0,
-    isha_angle_deg: p.isha_angle_deg ?? 17.0,
-    asr_shadow_ratio: p.asr_shadow_ratio ?? 1.0,
+    fajr_angle_deg: p.fajr_angle_deg === undefined ? 18.0 : p.fajr_angle_deg,
+    isha_angle_deg: p.isha_angle_deg === undefined ? 17.0 : p.isha_angle_deg,
+    asr_shadow_ratio: p.asr_shadow_ratio === undefined ? 1.0 : p.asr_shadow_ratio,
   };
   for (const k of ['fajr_angle_deg', 'isha_angle_deg']) {
     if (typeof prof[k] !== 'number' || !isFinite(prof[k]) || prof[k] <= 0 || prof[k] > 90) throw new WaqtError('VALIDATION_ERROR', `${k} must be a finite number with 0 < value <= 90`);

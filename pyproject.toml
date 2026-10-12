@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-api"
-version = "0.5.0"
+version = "0.6.0"
 description = "Waqt HTTP API v1 — a Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API, built on the waqt-core computation package."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
 ]
 dependencies = [
-    "waqt-core>=0.5.0,<0.6",
+    "waqt-core>=0.6.0,<0.7",
     "fastapi>=0.100",
     "uvicorn>=0.23",
 ]
@@ -34,6 +34,7 @@ dev = ["pytest>=7", "httpx", "build", "astral"]
 [project.urls]
 Homepage = "https://github.com/waqt-project/waqt-api"
 Documentation = "https://github.com/waqt-project/waqt-api/blob/main/docs/API.md"
+Changelog = "https://github.com/waqt-project/waqt-api/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 include = ["waqt*"]

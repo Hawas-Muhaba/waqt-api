@@ -8,7 +8,7 @@ docs/RELEASING.md's "Compatibility policy".
 
 ### Added
 - `HijriDate.source` / `.provenance` / `.isFallback` and `WaqtResponse.calendarError` (API 1.5.0);
-  `null`/`false` against an older server. `MAX_KNOWN_API_VERSION` → `1.5.0`.
+  `null`/`false` against an older server. `MAX_KNOWN_API_VERSION` → `1.8.0`; the current 0.3.1 SDK suite is verified against API 1.8.0.
 
 ## 0.3.0 — Sprint 12
 

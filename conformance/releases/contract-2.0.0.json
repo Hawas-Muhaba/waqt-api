@@ -1,0 +1,168 @@
+{
+ "contract_version": "2.0.0",
+ "cop_version": "1.1",
+ "contract_sha256": "b291992d32b85e823a843adb52a10d596234dc055394d95fa1b9be7712e8a633",
+ "files": {
+  "spec/requirements.json": {
+   "sha256": "71b37da56731a23aaa81b4e6bee4d81d8e0100378b57ae727538255c0e8c2456"
+  },
+  "spec/open-questions.json": {
+   "sha256": "346f35002ffa9ae2528972f61a4474b1b2322bb7252cd76ff0bdaa7051d1a184"
+  },
+  "spec/COP.md": {
+   "sha256": "e1ffa4d0eff76f6be9b52f2efcfea66c1106b6b5fafdad04075a59528c757fa3"
+  },
+  "vectors/calendar-core.json": {
+   "sha256": "07027ca395d9c0afffbdb969601775ce3ba5b812682bf2e956524e6afd8b68ac",
+   "vectors": 81,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 81
+   }
+  },
+  "vectors/calendar-default.json": {
+   "sha256": "1f60845a44b0fe65bf72dea764fc8090a4ebfc2cd98d576da8e6f53f679b8bf6",
+   "vectors": 19,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 17,
+    "tolerance": 2
+   }
+  },
+  "vectors/calendar-providers.json": {
+   "sha256": "994d55ee2a8df9b32f4438bda4962bb000ef675e7b871dbef7f6ed88f394f88a",
+   "vectors": 9,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 9
+   }
+  },
+  "vectors/calendar-uaq.json": {
+   "sha256": "ab1c6979d350949186f17b286933f435172aca1e59c8315b303b8cd4ebc83446",
+   "vectors": 56,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 13,
+    "informative": 43
+   }
+  },
+  "vectors/day-model.json": {
+   "sha256": "4d6fdf9a7a1f9830800af31ea1a0dd76508b51c1303e121e21da61bd49fd4cc8",
+   "vectors": 304,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 152,
+    "tolerance": 152
+   }
+  },
+  "vectors/errors.json": {
+   "sha256": "980b5ac3c20921213298a41225a9e1a8d698e2b0ba8369d15faedc9b24917378",
+   "vectors": 46,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 46
+   }
+  },
+  "vectors/gregorian-time.json": {
+   "sha256": "5c1d49b58d9801994b732a07ccade0584999fb506f571788720b320a1bb92b66",
+   "vectors": 31,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 31
+   }
+  },
+  "vectors/legacy-institutional.json": {
+   "sha256": "d9de9ed7269471b2bf39b6c03cafca0deb7be8fb0813c3e4490f0aad28ca6422",
+   "vectors": 40,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 31,
+    "informative": 9
+   }
+  },
+  "vectors/legacy-interop.json": {
+   "sha256": "07183ae9048dd75377cf4a75264813f076091f65e1fd2564dd20dd0ce978ba80",
+   "vectors": 21,
+   "metamorphic": 0,
+   "tiers": {
+    "tolerance": 7,
+    "informative": 5,
+    "exact": 9
+   }
+  },
+  "vectors/legacy-scheduling.json": {
+   "sha256": "3d0b39f75fd78ea3b5da131066662b99c0f27ef8c12a019fb0ecb1ed5d8ffb2a",
+   "vectors": 116,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 116
+   }
+  },
+  "vectors/legacy-waqt.json": {
+   "sha256": "4a3bd80c495589fcc553e30d9ab7a4ec46484269e7267526fb081b2607c85278",
+   "vectors": 10,
+   "metamorphic": 0,
+   "tiers": {
+    "tolerance": 7,
+    "informative": 3
+   }
+  },
+  "vectors/metamorphic.json": {
+   "sha256": "ff2bf02540473cea9c52a76386f73fa34033ec1527cbfcaf89c90149ea20dd87",
+   "vectors": 0,
+   "metamorphic": 43,
+   "tiers": {}
+  },
+  "vectors/open-questions.json": {
+   "sha256": "60425dde4b22914dd46a464460a1535d616b1b1c8068af90d6465a50949384e4",
+   "vectors": 3,
+   "metamorphic": 0,
+   "tiers": {
+    "open": 3
+   }
+  },
+  "vectors/provider-failure.json": {
+   "sha256": "47c0820c829abe4fd29c6f8b07c261c1e8e0f9aac82dc9069dd29ce4c0b0cae1",
+   "vectors": 25,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 22,
+    "open": 3
+   }
+  },
+  "vectors/scheduling-defaults.json": {
+   "sha256": "3e94dd3a9273540de01a3abc4859b0278281303764bfbef1c1dd11d0eb34c94f",
+   "vectors": 7,
+   "metamorphic": 0,
+   "tiers": {
+    "exact": 7
+   }
+  },
+  "vectors/scheduling-live.json": {
+   "sha256": "0880a5bcfe12da4f33228907e66dad1db40d62297e66144665225f0604265efa",
+   "vectors": 17,
+   "metamorphic": 0,
+   "tiers": {
+    "tolerance": 16,
+    "informative": 1
+   }
+  }
+ },
+ "requirements": {
+  "total": 73,
+  "must": 69,
+  "open": 4
+ },
+ "questions": {
+  "total": 29,
+  "resolved": 18,
+  "deferred": 10,
+  "unresolved-by-design": 1
+ },
+ "status": {
+  "known_failures_sha256": "81923f592eba26ff358076608f3d09dd4a8d8f43eea3ca325ef2a7c7c041faf2",
+  "reference_known_failures": 0,
+  "independent_known_failures": 0
+ },
+ "released": true
+}

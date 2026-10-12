@@ -18,7 +18,8 @@ def test_err004_is_normative_with_explicit_ranges_and_exact_vectors():
     """DR-0011 closed the ERR-004 gap: MUST, normative, ranges stated in the title, no unresolved tracking question, and normative
     vectors for the valid boundaries, the invalid boundaries, zero, negatives, NaN, infinity and non-numeric input."""
     reqs = {r["id"]: r for r in json.loads((CONF / "spec" / "requirements.json").read_text(encoding="utf-8"))["requirements"]}
-    assert reqs["ERR-004"]["kind"] == "MUST" and reqs["ERR-004"]["status"] == "normative" and reqs["ERR-004"]["decision"] == "DR-0011"
+    assert reqs["ERR-004"]["kind"] == "MUST" and reqs["ERR-004"]["status"] == "normative"
+    assert set(reqs["ERR-004"]["decision"].split(", ")) == {"DR-0011", "DR-0014"}
     assert "0 < value <= 90" in reqs["ERR-004"]["title"] and "NaN" in reqs["ERR-004"]["title"]
     questions = json.loads((CONF / "spec" / "open-questions.json").read_text(encoding="utf-8"))["questions"]
     assert not [q for q in questions if "ERR-004" in q["topic"] and q["status"] != "resolved"]

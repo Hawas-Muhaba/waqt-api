@@ -1,16 +1,16 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "8324e57a1715c5b0894e2cac4109a83b6e06ae748c8c015497c7ab0644d2f2be",
+ "contract_sha256": "b291992d32b85e823a843adb52a10d596234dc055394d95fa1b9be7712e8a633",
  "files": {
   "spec/requirements.json": {
-   "sha256": "95b4e94290b62817aacacdd6ceea767820f6352542b5bfa71201f14a37221bfd"
+   "sha256": "71b37da56731a23aaa81b4e6bee4d81d8e0100378b57ae727538255c0e8c2456"
   },
   "spec/open-questions.json": {
    "sha256": "346f35002ffa9ae2528972f61a4474b1b2322bb7252cd76ff0bdaa7051d1a184"
   },
   "spec/COP.md": {
-   "sha256": "b9df7aca33d0071a8f7862f0c3a02530fd5b3f9d1ca0eac1b0f4e9a29306709a"
+   "sha256": "e1ffa4d0eff76f6be9b52f2efcfea66c1106b6b5fafdad04075a59528c757fa3"
   },
   "vectors/calendar-core.json": {
    "sha256": "07027ca395d9c0afffbdb969601775ce3ba5b812682bf2e956524e6afd8b68ac",
@@ -56,11 +56,11 @@
    }
   },
   "vectors/errors.json": {
-   "sha256": "9895234f491f89715dc296cfe7ad0b0b571b17331b9058ae8d311a7e26731cab",
-   "vectors": 42,
+   "sha256": "980b5ac3c20921213298a41225a9e1a8d698e2b0ba8369d15faedc9b24917378",
+   "vectors": 46,
    "metamorphic": 0,
    "tiers": {
-    "exact": 42
+    "exact": 46
    }
   },
   "vectors/gregorian-time.json": {
@@ -164,5 +164,5 @@
   "reference_known_failures": 0,
   "independent_known_failures": 0
  },
- "released": false
+ "released": true
 }

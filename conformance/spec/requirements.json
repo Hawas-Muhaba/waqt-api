@@ -127,7 +127,7 @@
   {
    "id": "CAL-013",
    "kind": "MUST",
-   "title": "An operation that returns a Waqt day (waqt.compute, calendar.*) never fails because the calendar provider cannot label the date: the Waqt day and every instant are unchanged, the Hijri label is empty and calendar_error {code: OUT_OF_RANGE} says why; hijri.* operations still refuse with OUT_OF_RANGE (CAL-011)",
+   "title": "An operation that returns a Waqt day (waqt.compute, calendar.*) never fails because the calendar provider cannot label the date: the Waqt day and every instant are unchanged, the Hijri label is empty, and the COP calendar_error has the machine code OUT_OF_RANGE; hijri.* operations still refuse with OUT_OF_RANGE (CAL-011)",
    "section": "COP 5; API 1.8.0",
    "since": "2.0.0",
    "status": "normative",
@@ -238,11 +238,11 @@
   {
    "id": "ERR-004",
    "kind": "MUST",
-   "title": "Astronomy profile parameters are validated: fajr_angle_deg and isha_angle_deg must be finite numbers with 0 < value <= 90, asr_shadow_ratio a finite number with value > 0; zero, negatives, values above range, NaN, +/-Infinity and non-numbers are rejected with VALIDATION_ERROR (HTTP 422); nothing is clamped or coerced",
+   "title": "Astronomy profile parameters are validated: fajr_angle_deg and isha_angle_deg must be finite JSON numbers with 0 < value <= 90, asr_shadow_ratio a finite JSON number with value > 0; zero, negatives, values above range, NaN, +/-Infinity, booleans, null and strings are rejected with VALIDATION_ERROR (HTTP 422); omitted fields alone use defaults, and nothing is clamped or coerced",
    "section": "API errors",
    "since": "1.0.0",
    "status": "normative",
-   "decision": "DR-0011",
+   "decision": "DR-0011, DR-0014",
    "changed": "2.0.0"
   },
   {

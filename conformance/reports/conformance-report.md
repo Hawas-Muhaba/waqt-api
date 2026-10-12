@@ -1,12 +1,12 @@
 # Waqt conformance report
 
-Generated 2026-10-11 20:03 UTC by `harness/waqt_conform.py` · COP 1.1 · 781 vectors + 43 metamorphic checks.
+Generated 2026-10-12 09:36 UTC by `harness/waqt_conform.py` · COP 1.1 · 785 vectors + 43 metamorphic checks.
 
 Reproduce: `python3 conformance/harness/waqt_conform.py --adapter "python3 conformance/adapters/reference_adapter.py" --label reference --adapter "node conformance/independent/src/cli.mjs" --label independent`
 
 ## 0. Contract and unresolved questions
 
-Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `8324e57a1715c5b0` - manifest matches - COP 1.1.
+Contract **2.0.0** (released) - sha256 `b291992d32b85e82` - manifest matches - COP 1.1.
 
 **Unresolved specification questions: 11** of 29 (1 unresolved by design, 10 deferred; 18 resolved). A passing table below does not mean these are settled.
 
@@ -26,8 +26,8 @@ Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `8324e57a1715c5b
 
 | label | implementation | language | shares code with reference | run time |
 |---|---|---|---|---|
-| reference | waqt-reference waqt-core 0.5.0 / waqt-api 0.5.0 | Python | n/a (this is the reference) | 5.71 s |
-| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 8.36 s |
+| reference | waqt-reference waqt-core 0.6.0 / waqt-api 0.4.0 | Python | n/a (this is the reference) | 12.54 s |
+| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 25.95 s |
 
 ## 2. Results by tier
 
@@ -35,7 +35,7 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 
 | tier | reference pass / fail / n.a. | independent pass / fail / n.a. |
 |---|---|---|
-| exact | 527 / 0 / 3 | 530 / 0 / 0 |
+| exact | 531 / 0 / 3 | 534 / 0 / 0 |
 | tolerance | 184 / 0 / 0 | 184 / 0 / 0 |
 | open | 2 / 4 / 0 | 6 / 0 / 0 |
 | informative | 60 / 1 / 0 | 55 / 6 / 0 |
@@ -61,7 +61,7 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | CAL-010 | MUST | PASS (10/10) | PASS (13/13) | Swapping the calendar provider changes only the label, never an instant or position |
 | CAL-011 | MUST | PASS (6/6) | PASS (6/6) | umm-al-qura is supported for 1700-01-01..2300-12-31 only; outside it the provider refuses with OUT_OF_RANGE |
 | CAL-012 | MUST | PASS (15/15) | PASS (15/15) | When a request names no calendar provider, the provider is umm-al-qura; an explicitly named provider is always honoured (the default changes Hijri labels only, never a Waqt instant) |
-| CAL-013 | MUST | PASS (10/10) | PASS (10/10) | An operation that returns a Waqt day (waqt.compute, calendar.*) never fails because the calendar provider cannot label the date: the Waqt day and every instant are unchanged, the Hijri label is empty and calendar_error {code: OUT_OF_RANGE} says why; hijri.* operations still refuse with OUT_OF_RANGE (CAL-011) |
+| CAL-013 | MUST | PASS (10/10) | PASS (10/10) | An operation that returns a Waqt day (waqt.compute, calendar.*) never fails because the calendar provider cannot label the date: the Waqt day and every instant are unchanged, the Hijri label is empty, and the COP calendar_error has the machine code OUT_OF_RANGE; hijri.* operations still refuse with OUT_OF_RANGE (CAL-011) |
 | DAY-001 | MUST | PASS (152/152) | PASS (152/152) | A Waqt day is the half-open interval [Maghrib(D), Maghrib(D+1)) |
 | DAY-002 | MUST | PASS (8/8) | PASS (8/8) | At the exact opening Maghrib the new day has begun (position 00:00:00) |
 | DAY-003 | MUST | PASS (8/8) | PASS (8/8) | One microsecond before a Maghrib belongs to the previous day; days tile without gap or overlap |
@@ -74,7 +74,7 @@ Normative tiers (`exact`, `tolerance`) and metamorphic checks decide conformance
 | ERR-001 | MUST | PASS (4/4) | PASS (4/4) | Out-of-range latitude/longitude is rejected |
 | ERR-002 | MUST | PASS (2/2) | PASS (2/2) | An unknown IANA time zone is rejected with UNKNOWN_TIMEZONE (a client error, never INTERNAL_ERROR) |
 | ERR-003 | MUST | PASS (2/2) | PASS (2/2) | Unknown calendar provider is rejected |
-| ERR-004 | MUST | PASS (34/34) | PASS (34/34) | Astronomy profile parameters are validated: fajr_angle_deg and isha_angle_deg must be finite numbers with 0 < value <= 90, asr_shadow_ratio a finite number with value > 0; zero, negatives, values above range, NaN, +/-Infinity and non-numbers are rejected with VALIDATION_ERROR (HTTP 422); nothing is clamped or coerced |
+| ERR-004 | MUST | PASS (38/38) | PASS (38/38) | Astronomy profile parameters are validated: fajr_angle_deg and isha_angle_deg must be finite JSON numbers with 0 < value <= 90, asr_shadow_ratio a finite JSON number with value > 0; zero, negatives, values above range, NaN, +/-Infinity, booleans, null and strings are rejected with VALIDATION_ERROR (HTTP 422); omitted fields alone use defaults, and nothing is clamped or coerced |
 | EVT-001 | MUST | PASS (144/144) | PASS (144/144) | Event definitions: Fajr/Isha angles, sunrise/Maghrib -0.8333 deg, Dhuhr transit, Asr shadow ratio (accuracy bands in CONFORMANCE 5) |
 | EVT-002 | MUST | PASS (151/151) | PASS (151/151) | An event's reading is its instant minus the day's opening Maghrib |
 | EVT-003 | MUST | PASS (8/8) | PASS (8/8) | The closing Maghrib is listed at the day length; Isha is listed beyond the day length |

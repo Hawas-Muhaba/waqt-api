@@ -1,12 +1,12 @@
 {
  "meta": {
-  "generated": "2026-10-11 20:03 UTC",
+  "generated": "2026-10-12 09:36 UTC",
   "cop": "1.1",
   "contract": {
    "contract_version": "2.0.0",
-   "contract_sha256": "8324e57a1715c5b0894e2cac4109a83b6e06ae748c8c015497c7ab0644d2f2be",
+   "contract_sha256": "b291992d32b85e823a843adb52a10d596234dc055394d95fa1b9be7712e8a633",
    "manifest_matches_files": true,
-   "released": false,
+   "released": true,
    "cop_version": "1.1",
    "questions": {
     "total": 29,
@@ -78,10 +78,10 @@
  "runs": [
   {
    "label": "reference",
-   "command": "python3 adapters/reference_adapter.py",
+   "command": "python adapters\\reference_adapter.py",
    "descriptor": {
     "name": "waqt-reference",
-    "version": "waqt-core 0.5.0 / waqt-api 0.5.0",
+    "version": "waqt-core 0.6.0 / waqt-api 0.4.0",
     "language": "Python",
     "cop_version": "1.1",
     "instant_precision_us": 1000000,
@@ -107,7 +107,7 @@
     "schedule.run",
     "waqt.compute"
    ],
-   "seconds": 5.71,
+   "seconds": 12.54,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -6816,6 +6816,50 @@
      "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
     },
     {
+     "id": "err/profile/fajr-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+    },
+    {
+     "id": "err/profile/isha-numeric-text",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: numeric text in a JSON profile is not a JSON number; reject instead of coercing."
+    },
+    {
+     "id": "err/profile/asr-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+    },
+    {
+     "id": "err/profile-object-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: omit the optional profile object to use defaults; explicit null is not omission."
+    },
+    {
      "id": "greg/1970-01-01",
      "suite": "gregorian-time",
      "tier": "exact",
@@ -10416,7 +10460,7 @@
   },
   {
    "label": "independent",
-   "command": "node independent/src/cli.mjs",
+   "command": "node independent\\src\\cli.mjs",
    "descriptor": {
     "name": "waqt-independent",
     "version": "0.1.0",
@@ -10447,7 +10491,7 @@
     "instant.parse",
     "date.parse"
    ],
-   "seconds": 8.36,
+   "seconds": 25.95,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -17190,6 +17234,50 @@
      "verdict": "PASS",
      "diffs": [],
      "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+    },
+    {
+     "id": "err/profile/fajr-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+    },
+    {
+     "id": "err/profile/isha-numeric-text",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: numeric text in a JSON profile is not a JSON number; reject instead of coercing."
+    },
+    {
+     "id": "err/profile/asr-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+    },
+    {
+     "id": "err/profile-object-null",
+     "suite": "errors",
+     "tier": "exact",
+     "requirements": [
+      "ERR-004"
+     ],
+     "verdict": "PASS",
+     "diffs": [],
+     "note": "DR-0014: omit the optional profile object to use defaults; explicit null is not omission."
     },
     {
      "id": "greg/1970-01-01",

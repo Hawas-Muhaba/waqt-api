@@ -63,6 +63,17 @@ class ApiError(HTTPException):
         self.details = details or {}
 
 
+def reject_null_fields(body: dict, fields: tuple[str, ...]) -> None:
+    """Optional JSON body fields are omitted when unused; explicit null is not a value."""
+    null_fields = [field for field in fields if field in body and body[field] is None]
+    if null_fields:
+        raise ApiError(
+            422, ErrorCode.VALIDATION_ERROR,
+            "Explicit JSON null is not accepted for these fields; omit optional fields instead.",
+            {"fields": null_fields},
+        )
+
+
 # ---------------------------------------------------------------------------
 # Envelope
 # ---------------------------------------------------------------------------

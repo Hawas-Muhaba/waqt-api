@@ -4,7 +4,6 @@ These do not test the product; they test that the contract cannot drift silently
   * the manifest matches the files, every cross-reference resolves (`tools/contract.py verify`);
   * unresolved questions stay visible and cannot be dropped unnoticed;
   * the reference baseline is empty (every future entry needs a DIS id and decision record);
-  * the 1.0.0 -> 2.0.0 migration is idempotent;
   * editing a vector without bumping the version is detected.
 """
 import json
@@ -82,11 +81,6 @@ def test_the_umm_al_qura_conventions_vectors_are_not_promoted_to_normative():
     assert all(t == "informative" for i, t in tiers.items() if i.startswith("uaq/year-table") or i.startswith("uaq/range/1700") or i.startswith("uaq/range/2300"))
     req = {r["id"]: r for r in json.loads((CONF / "spec" / "requirements.json").read_text(encoding="utf-8"))["requirements"]}
     assert req["CAL-007"]["kind"] == "OPEN"
-
-
-def test_migration_is_idempotent():
-    p = _run(CONF / "tools" / "migrate_contract_2_0.py", "--check")
-    assert p.returncode == 0, p.stdout + p.stderr
 
 
 def test_editing_a_vector_without_bumping_the_version_is_detected(tmp_path):

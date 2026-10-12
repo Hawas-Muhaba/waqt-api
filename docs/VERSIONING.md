@@ -11,17 +11,17 @@ means.
 
 | Axis | Lives in | Current value | Changes when |
 |---|---|---|---|
-| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.5.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
+| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.6.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
 | **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.8.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
-| **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.7.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
+| **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.8.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
 | **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `2.0` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
 
 Two more things look like versions and are easy to conflate with the axes
 above (Sprint 13 audit):
 
 - The **`waqt-api` distribution version** (`pyproject.toml` at the repo root,
-  currently `0.5.0`) is *not* the **API version** (`1.8.0`, the HTTP
+  currently `0.6.0`) is *not* the **API version** (`1.8.0`, the HTTP
   contract). The package can ship a fix without the contract moving, and the
   contract can gain an additive field in the same release as any package
   version. `GET /v1/version` reports the contract (`api_version`), never the
@@ -35,7 +35,7 @@ above (Sprint 13 audit):
   the running vector-set version and engine identity.
 
 A further thing that looks like a version but is not one: `waqt-cli`
-(`apps/cli`, `0.2.0`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
+(`apps/cli`, `0.3.0`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
 have their own versions too, same rule as an SDK — they track their own
 interface, not any of the five axes above.
 
@@ -114,15 +114,14 @@ waqt-core 0.3.0 → 0.4.0 ── engine revision "2" (unchanged: the fingerprint
 Option B (default calendar provider `umm-al-qura`; owner decision, DR-0009 / DR-0010):
 
 ```
-waqt-core 0.4.0 → 0.5.0 ── engine revision "2" (unchanged: no solar output changed)
-     ├── waqt-api package 0.4.0 → 0.5.0, API contract 1.7.0 (unchanged: the 1.7.0 default change landed earlier, see
-     │        migrations/API-1.7.0-default-provider.md; this release only makes the API read the default from waqt-core
-     │        and fixes /v1/calendar/convert returning 500 outside 1700..2300; requires waqt-core>=0.5.0,<0.6)
-     ├── waqt-local 0.5.0 → 0.6.0   (default follows waqt-core; mirrors the additive blocks; requires waqt-core>=0.5.0,<0.6)
-     ├── waqt-cli 0.1.1 → 0.2.0     (--provider default follows waqt-local; requires waqt-local>=0.6.0,<0.7)
+waqt-core 0.5.0 → 0.6.0 ── engine revision "2" (unchanged: no solar output changed)
+     ├── waqt-api package 0.5.0 → 0.6.0, API contract 1.8.0 (strict JSON validation and additive CAL-013 machine-code field;
+     │        requires waqt-core>=0.6.0,<0.7)
+     ├── waqt-local 0.6.0 → 0.7.0   (strict ERR-004 validation; requires waqt-core>=0.6.0,<0.7)
+     ├── waqt-cli 0.2.0 → 0.3.0     (consistent validation; requires waqt-local>=0.7.0,<0.8)
      ├── SDKs 0.3.1 / 0.3.1, api-consumer 0.1.0   (unchanged: HTTP only; they omit the provider unless told)
      ├── vector set 2.0             (unchanged: no expected value changed)
-     └── conformance contract 2.0.0 (draft, unreleased) + CAL-012: omitted provider = umm-al-qura (CCP-0001)
+     └── conformance contract 2.0.0 (release authorized by DR-0015; independent review not performed by explicit exception)
 ```
 The API default and waqt-core's default are one definition (`waqt_core.calendar_providers.default`);
 `tests/test_default_provider_single_source.py` fails if any layer re-types it.
@@ -168,13 +167,16 @@ and `/v1/conversions`). The full record, with examples, risks and the dispositio
 eleven changed recordings, is [`migrations/API-1.7.0-default-provider.md`](migrations/API-1.7.0-default-provider.md).
 The Python and JavaScript SDKs recorded API 1.7.0 as their maximum tested version at that point.
 
-API contract 1.7.0 → 1.8.0 (**unreleased**; behaviour changes, no field removed or renamed, `/v1` unchanged):
+API contract 1.7.0 → 1.8.0 (behavior changes, no existing field removed or renamed, `/v1` unchanged):
 (1) astronomy profile parameters are validated and invalid ones return `422 VALIDATION_ERROR` (ERR-004 / DR-0011);
 (2) an out-of-range calendar date returns the Waqt day with a `null` Hijri label and a `calendar_error` instead of failing
-(CAL-013 / DR-0012; the default provider remains `umm-al-qura`). A new contract number was chosen because the deployment
+(CAL-013 / DR-0012; the default provider remains `umm-al-qura`), with additive `calendar_error_code` for machine mapping;
+(3) JSON null and numeric strings are rejected for ERR-004 profile values, while numeric query text is parsed by the HTTP endpoint (DR-0014).
+A new contract number was chosen because the deployment
 exists and external use of 1.7.0 is **unknown** (no tags, no usage data): the project does not claim 1.7.0 had no consumers
 (DR-0013). The 1.7.0 recordings (`sdks/vectors/sdk_conformance_vectors_api_1_7.json`, `verification/vector_migrations/`) are
-preserved unchanged. The SDKs now record API 1.8.0 as their maximum tested version. Record:
+preserved unchanged. The SDKs record API 1.8.0 as their maximum tested version. Owner approval and the independent-review exception are recorded in
+[`DR-0015`](../conformance/decisions/DR-0015.md); no independent review was performed. Record:
 [`migrations/API-1.8.0-validation-and-out-of-range.md`](migrations/API-1.8.0-validation-and-out-of-range.md).
 
 **Policy for provider defaults (ratified in [DR-0009](../conformance/decisions/DR-0009.md) by Dr. Salim Muhammed Redi, recorded 2026-10-10).**

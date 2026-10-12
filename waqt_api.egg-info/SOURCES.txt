@@ -13,6 +13,7 @@ tests/test_conformance_suite.py
 tests/test_core.py
 tests/test_default_provider_option_b.py
 tests/test_default_provider_single_source.py
+tests/test_err004_and_cal013_api.py
 tests/test_hijri_regression.py
 tests/test_institutional.py
 tests/test_institutional_api.py

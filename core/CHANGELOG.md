@@ -2,9 +2,9 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
-## Unreleased
+## 0.6.0 — API 1.8.0 / conformance 2.0.0
 
-**Changed (behaviour change, DR-0011)**: `AstronomyProfile` validates its parameters on construction (ERR-004): `fajr_angle_deg`/`isha_angle_deg` finite with 0 < x <= 90, `asr_shadow_ratio` finite with x > 0; anything else raises `waqt_core.profile_validation.InvalidProfileError` (a `ValueError`, code `VALIDATION_ERROR`). Nothing is clamped. **Added**: `waqt_core.hijri.calendar_error_code()`. Out-of-range calendar dates still return the Waqt day with `calendar_error` (CAL-013, DR-0012). Package version not bumped.
+**Changed (behaviour change, DR-0011/DR-0014):** ERR-004 profile fields accept finite numeric values only; nulls, booleans and numeric strings are rejected instead of coerced or treated as omitted. **Added:** `calendar_error_code()` provides the stable CAL-013 machine code for adapters. The independent implementation's upper instant limit remains disclosed; no full-range instant-conformance claim is made.
 
 ## 0.5.0 — Option B (default calendar provider)
 

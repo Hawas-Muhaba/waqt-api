@@ -232,7 +232,13 @@ def replay(v, params):
 def strip_meta(body):
     body = copy.deepcopy(body)
     body["meta"].pop("generated_at", None); body["meta"].pop("api_version", None)
-    return body
+    def strip_additive_calendar_code(value):
+        if isinstance(value, dict):
+            return {k: strip_additive_calendar_code(v) for k, v in value.items() if k != "calendar_error_code"}
+        if isinstance(value, list):
+            return [strip_additive_calendar_code(v) for v in value]
+        return value
+    return strip_additive_calendar_code(body)
 
 
 @pytest.mark.parametrize("entry", MIG["entries"], ids=[e["id"] for e in MIG["entries"]])

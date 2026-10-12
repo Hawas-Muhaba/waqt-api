@@ -1,8 +1,8 @@
 # Changelog — waqt-local
 
-## Unreleased
+## 0.7.0 — API 1.8.0 / conformance 2.0.0
 
-**Changed (DR-0011, DR-0012)**: invalid `fajr_angle` / `isha_angle` / `asr_ratio` raise a `ValidationError` (code `VALIDATION_ERROR`, details `{parameter, received, expected}`), the same as the HTTP API 1.8.0. Out-of-range calendar dates return the Waqt day with a null Hijri label and a `calendar_error`. Package version not bumped.
+**Changed (behaviour change):** strict ERR-004 numeric validation is consistent with `waqt-core` 0.6.0: nulls, booleans and numeric strings are rejected; omission alone selects defaults. Requires `waqt-core>=0.6.0,<0.7`.
 
 ## 0.6.0 — Option B (default calendar provider)
 

@@ -50,3 +50,12 @@ src/institutional.mjs   src/interop.mjs   src/ops.mjs (COP dispatcher)   src/cli
 * Expected values for normative astronomy vectors come from JPL DE421, never from either implementation.
 * The Node runtime is the only second language available in the build environment; a Go/Rust/Java port is the
   natural next test of language-level independence.
+
+## Instant range and conformance claim
+
+Instants are integer microseconds stored as JavaScript `Number`. Integer microseconds are exact only while their
+magnitude is at most `Number.MAX_SAFE_INTEGER`, which limits this implementation to roughly years 1685–2255.
+It returns `RANGE_ERROR` outside that representable range rather than silently rounding. Gregorian calendar
+operations use integer day numbers and can cover dates through 2300, but those date-only vectors do **not**
+verify upper-range instants. The current conformance report makes no full-range instant-conformance claim. A
+second independent method must verify upper-range instants before any such claim is made.

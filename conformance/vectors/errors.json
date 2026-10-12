@@ -1359,6 +1359,122 @@
     }
    },
    "note": "DR-0011 / ERR-004: rejected with VALIDATION_ERROR; never clamped, never defaulted."
+  },
+  {
+   "id": "err/profile/fajr-null",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": null,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+  },
+  {
+   "id": "err/profile/isha-numeric-text",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": "18",
+     "asr_shadow_ratio": 1.0
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0014: numeric text in a JSON profile is not a JSON number; reject instead of coercing."
+  },
+  {
+   "id": "err/profile/asr-null",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": {
+     "fajr_angle_deg": 18.0,
+     "isha_angle_deg": 17.0,
+     "asr_shadow_ratio": null
+    }
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0014: explicit null is invalid; omit the field to use its default."
+  },
+  {
+   "id": "err/profile-object-null",
+   "requirements": [
+    "ERR-004"
+   ],
+   "op": "waqt.compute",
+   "tier": "exact",
+   "basis": "spec",
+   "input": {
+    "location": {
+     "lat": 0,
+     "lon": 0
+    },
+    "instant": "2026-09-19T15:42:00+00:00",
+    "timezone": "UTC",
+    "profile": null
+   },
+   "expect": {
+    "error": {
+     "code": [
+      "VALIDATION_ERROR"
+     ]
+    }
+   },
+   "note": "DR-0014: omit the optional profile object to use defaults; explicit null is not omission."
   }
  ]
 }

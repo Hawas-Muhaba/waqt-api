@@ -1,8 +1,8 @@
 # Changelog — waqt-cli
 
-## Unreleased
+## 0.3.0 — API 1.8.0 / conformance 2.0.0
 
-**Fixed (DR-0012)**: `waqt convert` / `now` / `events` crashed with a TypeError for a Gregorian date or instant outside the calendar provider's range; they now print the Waqt day and `Hijri: unavailable (calendar_error: ...)`. **Changed (DR-0011)**: invalid angles / ratio are rejected with a clear message. Package version not bumped.
+**Changed:** CLI input validation follows `waqt-local` 0.7.0 and `waqt-core` 0.6.0; invalid profile values receive a clear validation error. Requires `waqt-local>=0.7.0,<0.8`.
 
 ## 0.2.0 — Option B (default calendar provider)
 

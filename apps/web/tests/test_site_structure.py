@@ -196,7 +196,7 @@ def config():
         import pytest
         pytest.skip("node not installed: cannot evaluate config.js")
     out = _subprocess.run([NODE, "-e", 'global.window={};require(process.argv[1]);console.log(JSON.stringify(window.WAQT_CONFIG))', str(WEB / "assets/js/config.js")],
-                          capture_output=True, text=True, check=True).stdout
+                          capture_output=True, text=True, encoding="utf-8", check=True).stdout
     return _json.loads(out)
 
 
@@ -270,8 +270,12 @@ def test_maintainer_metadata_is_demo_editable_and_separate_from_governance_state
     drs = list((WEB.parents[1] / "conformance" / "decisions").glob("DR-*.md"))
     n_pending = sum("PENDING" in p.read_text(encoding="utf-8").split("## Context")[0] for p in drs)
     contract = json.loads((WEB.parents[1] / "conformance" / "contract.json").read_text(encoding="utf-8"))
-    assert g["contractReleased"] is False and contract["released"] is False     # ratified records are not a release
-    if n_pending == len(drs):
+    assert g["contractReleased"] is contract["released"]
+    assert g["releaseApprovalRecord"] == "DR-0015"
+    if contract["released"]:
+        assert g["ratification"] == "owner-approved-release"
+        assert "independent review explicitly waived and not performed" in g["ratificationLabel"]
+    elif n_pending == len(drs):
         assert g["ratification"] == "pending-project-owner-approval" and "ratified" not in g["ratificationLabel"].lower()
     elif n_pending == 0:
         assert g["ratification"] == "decision-records-ratified" and "not yet released" in g["ratificationLabel"]
@@ -285,7 +289,10 @@ def test_governance_page_keeps_roles_decisions_and_ratification_apart():
     g = read(WEB / "governance.html")
     assert "DEMO · EDITABLE PROJECT METADATA" in g and "Formal governance decisions" in g and "Ratification status" in g
     assert json.loads(json.dumps(config()["governance"]["ratificationLabel"])) in g and 'id="gov-roles"' in g
-    assert "draft — not released" in g and "no signed artifact" in g
+    if config()["governance"]["contractReleased"]:
+        assert "Conformance 2.0.0 released" in g and "Independent review was not performed" in g
+    else:
+        assert "draft — not released" in g and "no signed artifact" in g
     assert not re.search(r"ratified on \d|signed by|ratification date:", g, re.I)
 
 

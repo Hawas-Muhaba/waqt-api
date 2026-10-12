@@ -1,5 +1,7 @@
 """Sprint 7: the /v1/institutional/* HTTP surface."""
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from waqt.api import app
@@ -72,6 +74,35 @@ def test_fiscal_year_resolve_invalid_rule_is_422():
     assert r.json()["error"]["code"] == "INVALID_CALENDAR_RULE"
 
 
+@pytest.mark.parametrize("field,value", [("hijri_year", "1448"), ("hijri_year", None)])
+def test_fiscal_year_resolve_requires_positive_json_integer(field, value):
+    body = {
+        "hijri_year": 1448,
+        "start_rule": {"type": "month_day", "month": 1, "day": 1},
+        "end_rule": {"type": "month_end", "month": 12},
+        field: value,
+    }
+    r = c.post("/v1/institutional/fiscal-year/resolve", json=body)
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
+@pytest.mark.parametrize("invalid", [
+    {"location": None},
+    {"location": {"lat": "9.0192", "lon": 38.7525}},
+    {"start_rule": {"type": "month_day", "month": "1", "day": 1}},
+])
+def test_fiscal_year_resolve_rejects_null_and_coerced_json_values(invalid):
+    body = {
+        "hijri_year": 1448,
+        "start_rule": {"type": "month_day", "month": 1, "day": 1},
+        "end_rule": {"type": "month_end", "month": 12},
+        **invalid,
+    }
+    r = c.post("/v1/institutional/fiscal-year/resolve", json=body)
+    assert r.status_code == 422
+    assert r.json()["error"]["code"] in ("VALIDATION_ERROR", "INVALID_CALENDAR_RULE")
+
+
 def test_academic_year_default_matches_brief_example():
     r = c.get("/v1/institutional/academic-year", params={"hijri_year": 1448})
     b = r.json()["data"]
@@ -93,6 +124,32 @@ def test_academic_year_resolve_with_terms():
     r = c.post("/v1/institutional/academic-year/resolve", json=body)
     assert r.status_code == 200
     assert len(r.json()["data"]["terms"]) == 1
+
+
+@pytest.mark.parametrize("field,value", [("term_rules", None), ("holidays", None)])
+def test_academic_year_resolve_optional_arrays_are_omitted_not_null(field, value):
+    body = {
+        "hijri_year": 1448,
+        "opening_rule": {"type": "month_day", "month": 1, "day": 1},
+        "closing_rule": {"type": "month_end", "month": 8},
+        field: value,
+    }
+    r = c.post("/v1/institutional/academic-year/resolve", json=body)
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
+def test_academic_year_resolve_requires_integer_year_offset():
+    body = {
+        "hijri_year": 1448,
+        "opening_rule": {"type": "month_day", "month": 1, "day": 1},
+        "closing_rule": {"type": "month_end", "month": 8},
+        "term_rules": [{
+            "label": "Term", "start_rule": {"type": "month_day", "month": 1},
+            "end_rule": {"type": "month_end", "month": 2}, "year_offset": "1",
+        }],
+    }
+    r = c.post("/v1/institutional/academic-year/resolve", json=body)
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR"
 
 
 def test_calendar_provider_swap_changes_dates_not_structure():

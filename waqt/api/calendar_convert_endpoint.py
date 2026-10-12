@@ -31,6 +31,7 @@ from fastapi import APIRouter, Query
 
 from .. import calendar_interop as ci
 from ..core import AstronomyProfile, Location
+from ..hijri import calendar_error_code
 from ..timescale import DEFAULT_TIMESCALE_PROVIDER
 from ..timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
 from .common import (
@@ -156,6 +157,7 @@ def convert_calendar(
                 "status": "OK",
                 "hijri": hijri_block(day.hijri_date),
                 **({"calendar_error": day.calendar_error} if day.calendar_error else {}),
+                "calendar_error_code": calendar_error_code(day.calendar_error),
                 "weekday": day.weekday,
                 "day": {
                     "maghrib_open": iso(day.open),
@@ -181,7 +183,9 @@ def convert_calendar(
         "location": {"lat": location.lat, "lon": location.lon, "elevation_m": location.elevation_m} if location else None,
         "calendar_provider": {"name": provider.name, "version": provider.version} if location else None,
         "gregorian": {"utc": body["gregorian_utc"], "civil": body["gregorian_civil"]},
-        "waqt": {"status": body["waqt_status"], "undefined_reason": body["undefined_reason"], **({"day": body["waqt"]} if body["waqt"] else {})}
+        "waqt": {"status": body["waqt_status"], "undefined_reason": body["undefined_reason"],
+                 **({"day": {**body["waqt"], "calendar_error_code": calendar_error_code(body["waqt"].get("calendar_error"))}}
+                    if body["waqt"] else {})}
         if location else None,
         "profile": profile_block(profile) if location else None,
         "computation": computation_block(DEFAULT_TIMESCALE_PROVIDER.name, DEFAULT_TIMESCALE_PROVIDER.delta_t_seconds(rep.gregorian_utc.date)) if location else None,

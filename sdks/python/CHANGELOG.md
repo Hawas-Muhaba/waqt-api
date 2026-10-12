@@ -12,7 +12,7 @@ Waqt specification requires it.
 
 **Added** (API 1.5.0, all optional/defaulted, so existing code is unaffected): `HijriDate.source`,
 `HijriDate.provenance`, `HijriDate.is_fallback`, `WaqtResponse.calendar_error`. Against a pre-1.5.0
-server they are `None`. `MAX_KNOWN_API_VERSION` → `1.5.0`.
+server they are `None`. `MAX_KNOWN_API_VERSION` → `1.8.0`; the current 0.3.1 SDK suite is verified against API 1.8.0.
 
 ## 0.3.0 — Sprint 12
 

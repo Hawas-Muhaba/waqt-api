@@ -69,9 +69,12 @@ def test_calendar_convert_out_of_range_instant_is_200_with_empty_label_and_reaso
         h = w.get("hijri") if "hijri" in w else w["day"]["hijri"]
         err = w.get("calendar_error") or w["day"].get("calendar_error")
         assert h is None and "CalendarOutOfRange" in err
+        assert w.get("calendar_error_code") == "OUT_OF_RANGE" or w["day"].get("calendar_error_code") == "OUT_OF_RANGE"
         ref = c.get("/v1/calendar/convert", params={**params, "calendar_provider": "arithmetic-tabular"})
         rw = ref.json()["data"]["waqt"]
-        assert ref.status_code == 200 and (rw.get("hijri") or rw["day"]["hijri"]) is not None and "calendar_error" not in ref.text   # explicit arithmetic-tabular still labels the day
+        assert ref.status_code == 200 and (rw.get("hijri") or rw["day"]["hijri"]) is not None
+        assert rw.get("calendar_error") is None and rw.get("calendar_error_code") is None
+        assert rw.get("day", {}).get("calendar_error") is None and rw.get("day", {}).get("calendar_error_code") is None
 
 
 def test_local_facade_matches_the_server_for_an_out_of_range_instant():

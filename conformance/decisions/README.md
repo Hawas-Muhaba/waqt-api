@@ -19,3 +19,5 @@ earlier one, it does not edit it.
 | [DR-0011](DR-0011.md) | ERR-004: astronomy profile parameters are validated, with explicit ranges | ERR-004 (decided by owner instruction; ratification evidence NOT held) |
 | [DR-0012](DR-0012.md) | Out-of-range calendar dates never fail a Waqt computation (CAL-013) | OQ-CAL-1 (resolved; ratification evidence NOT held) |
 | [DR-0013](DR-0013.md) | API contract version 1.8.0 for the next release | none (API versioning; ratification evidence NOT held) |
+| [DR-0014](DR-0014.md) | Strict JSON request types; retain `calendar_error` shapes pending compatibility review | API 1.8.0 request validation; ratification pending |
+| [DR-0015](DR-0015.md) | Owner approval to release conformance 2.0.0 with an explicit independent-review exception | Contract 2.0.0 release |

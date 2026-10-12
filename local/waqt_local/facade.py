@@ -34,7 +34,7 @@ from typing import Any, Optional
 from waqt_core import calendar_interop as ci
 from waqt_core.core import AstronomyProfile, Location, compute_waqt
 from waqt_core.profile_validation import InvalidProfileError
-from waqt_core.hijri import ArithmeticTabularProvider, CalendarOutOfRange, InvalidHijriDate, checked_to_gregorian, weekday_name
+from waqt_core.hijri import ArithmeticTabularProvider, CalendarOutOfRange, InvalidHijriDate, calendar_error_code, checked_to_gregorian, weekday_name
 from waqt_core.institutional import (
     AcademicCalendar,
     FiscalCalendar,
@@ -210,6 +210,7 @@ def waqt(
         "hijri": hijri_block(r.hijri_date),
         "calendar_error": ({"provider": provider.name, "message": r.calendar_error}
                            if r.calendar_error else None),
+        "calendar_error_code": calendar_error_code(r.calendar_error),
         "weekday": r.weekday,
         "waqt": waqt_field,
         "events": events_field,
@@ -435,7 +436,8 @@ def represent_instant(
         "calendar_provider": {"name": provider.name, "version": provider.version} if location else None,
         "gregorian": {"utc": body["gregorian_utc"], "civil": body["gregorian_civil"]},
         "waqt": (
-            {"status": body["waqt_status"], "undefined_reason": body["undefined_reason"], **({"day": body["waqt"]} if body["waqt"] else {})}
+            {"status": body["waqt_status"], "undefined_reason": body["undefined_reason"],
+             **({"day": {**body["waqt"], "calendar_error_code": calendar_error_code(body["waqt"].get("calendar_error"))}} if body["waqt"] else {})}
             if location else None
         ),
         "profile": profile_block(profile) if location else None,
@@ -487,6 +489,7 @@ def waqt_day_for_gregorian_date(
             "status": "OK",
             "hijri": hijri_block(d.hijri_date),
             **({"calendar_error": d.calendar_error} if d.calendar_error else {}),
+            "calendar_error_code": calendar_error_code(d.calendar_error),
             "weekday": d.weekday,
             "day": {
                 "maghrib_open": iso(d.open),

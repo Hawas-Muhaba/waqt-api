@@ -2,6 +2,11 @@
 
 Nothing here is a stub: real uvicorn + FastAPI on real sockets, and a real (headless) Chrome.
 
+**Conformance range note:** the independent Node adapter stores instants as JavaScript `Number` microseconds and
+cannot exactly represent instants beyond roughly year 2255. Date-level vectors through 2300 are not evidence of
+full-range instant conformance. No full-range instant claim is made; require a second independent verification
+method before making one.
+
 | Script | What it proves | Run |
 |---|---|---|
 | `live_stack_check.py` | `/v1/version` + `/v1/health`; CORS off by default and on with `WAQT_CORS_ORIGINS` (incl. preflight, error responses); validation/error envelopes; live API == `sdk_conformance_vectors.json` (21 vectors); vector stamp == running engine. Writes `results/live_stack_check.json`. | `python verification/live_stack_check.py` |

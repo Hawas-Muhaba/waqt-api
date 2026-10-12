@@ -56,13 +56,13 @@
       experts: "Open to expert contributors and reviewers."
     }),
 
-    /* Formal governance state — kept separate from the role metadata above. It mirrors the decision records in
-       conformance/decisions (DR-0001..DR-0009 record ratification by the project owner, 2026-10-10; DR-0010 is PENDING the Maintainer; no signed
-       artifact is held in the repository). The CONTRACT is still an unreleased 2.0.0: ratified records are not a release. */
+    /* Formal governance state — kept separate from the role metadata above. DR-0015 records release authorization
+       and an explicit independent-review exception; no independent review was performed. */
     governance: Object.freeze({
-      ratification: "decision-records-partly-ratified",
-      ratificationLabel: "Decision records ratified except DR-0010, DR-0011, DR-0012, DR-0013 (pending) · contract not yet released",
-      contractReleased: false,
+      ratification: "owner-approved-release",
+      ratificationLabel: "Conformance 2.0.0 released · independent review explicitly waived and not performed (DR-0015)",
+      contractReleased: true,
+      releaseApprovalRecord: "DR-0015",
       decisionRecords: Object.freeze({ tree: "conformance/decisions" }),
       process: Object.freeze({ path: "conformance/GOVERNANCE.md" }),
       maintainerRegister: Object.freeze({ path: "conformance/MAINTAINERS.md" })
@@ -114,7 +114,7 @@
         Object.freeze({ kind: "source", label: "Source repository", ref: { repo: true }, note: "core/, local/, waqt/ and the web app" }),
         Object.freeze({ kind: "spec", label: "Specification — the Waqt time model", ref: { path: "docs/TIME-MODEL.md" } }),
         Object.freeze({ kind: "spec", label: "Time and calendar semantics", ref: { path: "docs/SEMANTICS.md" } }),
-        Object.freeze({ kind: "conformance", label: "Conformance specification", ref: { path: "conformance/spec/CONFORMANCE.md" }, note: "contract 2.0.0 — draft, not released" }),
+        Object.freeze({ kind: "conformance", label: "Conformance specification", ref: { path: "conformance/spec/CONFORMANCE.md" }, note: "contract 2.0.0 — released; independent review was not performed by explicit owner-approved exception (DR-0015)" }),
         Object.freeze({ kind: "conformance", label: "Conformance vectors", ref: { tree: "conformance/vectors" } })
       ]) }),
       Object.freeze({ id: "api", title: "API", intro: "The HTTP contract.", items: Object.freeze([

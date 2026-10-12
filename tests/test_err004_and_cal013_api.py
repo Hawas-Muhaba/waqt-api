@@ -38,6 +38,34 @@ def test_post_schedule_profile_validation_matches():
         assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR", (prof, r.text)
 
 
+@pytest.mark.parametrize("field,value", [
+    ("fajr_angle_deg", None), ("fajr_angle_deg", "18"), ("isha_angle_deg", "17"), ("asr_shadow_ratio", None),
+])
+def test_schedule_profile_json_requires_non_null_numbers(field, value):
+    body = {"location": {"lat": 9.0, "lon": 38.7}, "operation": {"op": "day_bounds"},
+            "profile": {field: value}}
+    r = c.post("/v1/schedule/resolve", json=body)
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR", (value, r.text)
+
+
+@pytest.mark.parametrize("field", ["anchor", "profile"])
+def test_schedule_optional_json_fields_use_omission_not_null(field):
+    body = {"location": {"lat": 9.0, "lon": 38.7}, "operation": {"op": "day_bounds"}, field: None}
+    r = c.post("/v1/schedule/resolve", json=body)
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
+def test_get_profile_numeric_text_remains_valid_query_input():
+    r = c.get("/v1/waqt", params={**LOC, "fajr_angle": "18"})
+    assert r.status_code == 200
+
+
+@pytest.mark.parametrize("value", ["null", "18x"])
+def test_get_profile_null_or_malformed_numeric_text_is_rejected(value):
+    r = c.get("/v1/waqt", params={**LOC, "fajr_angle": value})
+    assert r.status_code == 422 and r.json()["error"]["code"] == "VALIDATION_ERROR"
+
+
 def test_defaults_are_unchanged():
     d = c.get("/v1/waqt", params=LOC).json()["data"]
     assert d["profile"]["fajr_angle_deg"] == 18.0 and d["profile"]["isha_angle_deg"] == 17.0 and d["profile"]["asr_shadow_ratio"] == 1.0
@@ -62,6 +90,27 @@ def test_waqt_endpoint_out_of_range_is_200_with_structured_calendar_error():
     assert r.status_code == 200
     d = r.json()["data"]
     assert d["hijri"] is None and d["calendar_error"]["message"] and d["day"]["maghrib_open"] == "1699-12-30T15:16:36+00:00"  # the Waqt day is intact
+    assert d["calendar_error_code"] == "OUT_OF_RANGE"
+
+
+@pytest.mark.parametrize("date", ["1699-12-31", "2301-01-01"])
+def test_calendar_convert_date_route_has_cal013_machine_code(date):
+    r = c.get("/v1/calendar/convert", params={
+        "direction": "gregorian-date-to-waqt", "date": date, **PLACE,
+    })
+    w = r.json()["data"]["waqt"]
+    assert r.status_code == 200 and w["hijri"] is None
+    assert isinstance(w["calendar_error"], str)
+    assert w["calendar_error_code"] == "OUT_OF_RANGE"
+
+
+def test_calendar_convert_instant_route_has_cal013_machine_code():
+    r = c.get("/v1/calendar/convert", params={
+        "direction": "instant-to-calendars", "instant": "1699-12-31T12:00:00+00:00", **PLACE,
+    })
+    d = r.json()["data"]["waqt"]["day"]
+    assert r.status_code == 200 and d["hijri"] is None
+    assert d["calendar_error_code"] == "OUT_OF_RANGE"
 
 
 def test_conversions_endpoint_still_refuses_out_of_range():
