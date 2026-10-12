@@ -1,14 +1,14 @@
 # Waqt conformance report
 
-Generated 2026-10-11 14:00 UTC by `harness/waqt_conform.py` · COP 1.1 · 781 vectors + 43 metamorphic checks.
+Generated 2026-10-11 20:03 UTC by `harness/waqt_conform.py` · COP 1.1 · 781 vectors + 43 metamorphic checks.
 
 Reproduce: `python3 conformance/harness/waqt_conform.py --adapter "python3 conformance/adapters/reference_adapter.py" --label reference --adapter "node conformance/independent/src/cli.mjs" --label independent`
 
 ## 0. Contract and unresolved questions
 
-Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `cfe9ca93ad1b453f` - manifest matches - COP 1.1.
+Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `8324e57a1715c5b0` - manifest matches - COP 1.1.
 
-**Unresolved specification questions: 12** of 29 (1 unresolved by design, 11 deferred; 17 resolved). A passing table below does not mean these are settled.
+**Unresolved specification questions: 11** of 29 (1 unresolved by design, 10 deferred; 18 resolved). A passing table below does not mean these are settled.
 
 - `OQ-TIME-1` [deferred] Offset-less instant: reject or assume UTC
 - `OQ-TIME-2` [deferred] ISO basic date accepted?
@@ -18,7 +18,6 @@ Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `cfe9ca93ad1b453
 - `OQ-DT-1` [deferred] Delta-T model and decimal-year convention
 - `OQ-UND-1` [deferred] Existence of grazing events
 - `OQ-UAQ-2` [unresolved-by-design] Umm al-Qura computational conventions (limb, refraction, elevation, algorithms)
-- `OQ-ERR-1` [deferred] Valid ranges of fajr_angle, isha_angle, asr_ratio (ERR-004 is MUST but its vectors are open)
 - `OQ-PRV-1` [deferred] Does a short Retry-After shorten the 30 s cooldown
 - `OQ-PRV-2` [deferred] Circuit-breaker: does the 3rd soft failure open it for the next call
 - `OQ-PRV-3` [deferred] Outbound budget refill granularity
@@ -27,8 +26,8 @@ Contract **2.0.0** (DRAFT - not yet released/ratified) - sha256 `cfe9ca93ad1b453
 
 | label | implementation | language | shares code with reference | run time |
 |---|---|---|---|---|
-| reference | waqt-reference waqt-core 0.5.0 / waqt-api 0.5.0 | Python | n/a (this is the reference) | 5.76 s |
-| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 8.33 s |
+| reference | waqt-reference waqt-core 0.5.0 / waqt-api 0.5.0 | Python | n/a (this is the reference) | 5.71 s |
+| independent | waqt-independent 0.1.0 | JavaScript (Node.js, zero dependencies) | False | 8.36 s |
 
 ## 2. Results by tier
 

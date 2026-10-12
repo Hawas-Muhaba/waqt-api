@@ -1,14 +1,14 @@
 # Open specification questions found by independent implementation
 
 > **Status at contract 2.0.0 (Sprint 16).** The machine-readable registry is `open-questions.json`; the table below is
-> Sprint 15's *evidence*, kept unchanged for traceability. Of 29 questions (OQ-CAL-1 added by CCP-0001): **16 resolved** (decision records
-> `../decisions/`), **12 deferred**, **1 unresolved by design (OQ-UAQ-2)**.
+> Sprint 15's *evidence*, kept unchanged for traceability. Of 29 questions (OQ-CAL-1 added by CCP-0001): **18 resolved** (decision records
+> `../decisions/`), **10 deferred**, **1 unresolved by design (OQ-UAQ-2)**.
 >
 > | Status | Questions |
 > |---|---|
-> | resolved | OQ-TAB-1, OQ-ASR-1, OQ-ASR-2, OQ-DAY-1, OQ-DAY-2, OQ-DAY-3, OQ-EVT-1, OQ-UAQ-1, OQ-UAQ-3, OQ-ERR-2, OQ-ERR-3, OQ-SCH-1..5 |
+> | resolved | OQ-TAB-1, OQ-ASR-1, OQ-ASR-2, OQ-DAY-1, OQ-DAY-2, OQ-DAY-3, OQ-EVT-1, OQ-UAQ-1, OQ-UAQ-3, OQ-ERR-2, OQ-ERR-3, OQ-SCH-1..5, **OQ-ERR-1** (DR-0011), **OQ-CAL-1** (DR-0012) |
 > | **unresolved by design** | **OQ-UAQ-2** (Umm al-Qura computational conventions: institutional, not technical) |
-> | deferred | OQ-TIME-1..3, OQ-TAB-2, OQ-TAB-3, OQ-DT-1, OQ-UND-1, OQ-ERR-1, OQ-PRV-1..3, **OQ-CAL-1** |
+> | deferred | OQ-TIME-1..3, OQ-TAB-2, OQ-TAB-3, OQ-DT-1, OQ-UND-1, OQ-PRV-1..3 |
 >
 > A resolved question's "Proposal" column below is what was *proposed*; the ruling is in its decision record and may differ.
 
@@ -37,13 +37,13 @@ dangerous: no cross-implementation test can ever expose them, because the same a
 | OQ-UAQ-1 | Origin of the Umm al-Qura chain ("29 days iff…, else 30") | seed + burn-in, block grid | cached chain | no | **none**: 6-month burn-in gives identical starts to 96-month for all 492 months of 1420–1460 | state that the chain is self-synchronising; give an anchor |
 | OQ-UAQ-2 | Test inputs: Makkah elevation, limb vs centre, refraction, which sunset algorithm | elev 0, upper-limb convention (-34′), same Sun engine | PyEphem | no | 2 of 492 month starts differ; both are evenings where the Moon sets **3.7 s and 6.8 s before** the Sun (DE421 agrees: −3.7 s, −6.8 s) | state conventions; accept ±10 s indecision as inherent |
 | OQ-UAQ-3 | Supported range of `umm-al-qura` and the error outside it | 1700–2300, `OUT_OF_RANGE` | returns a date for 1650…2300; fails at year 500 | no | different behaviour outside 1900–2100 | state range and code |
-| OQ-ERR-1 | Valid range of `fajr_angle`, `isha_angle`, `asr_ratio` | reject ≤0 / ≥90 / ≤0 | accepts anything | no | 95° or −5° silently yield garbage | add ranges to API.md |
+| OQ-ERR-1 | Valid range of `fajr_angle`, `isha_angle`, `asr_ratio` | reject ≤0 / ≥90 / ≤0 | accepts anything | no | 95° or −5° silently yield garbage | **RESOLVED by DR-0011**: 0 < angle <= 90, ratio > 0, else VALIDATION_ERROR; vectors now exact |
 | OQ-ERR-2 | Error code for a non-existent Hijri day | `INVALID_HIJRI_DATE` | none (normalises) — see DIS-002 | no | `1448-02-30` → 15 Aug 2026 (a different month) | add the code |
 | OQ-ERR-3 | Error for unknown IANA zone | `VALIDATION_ERROR` | `INTERNAL_ERROR` (HTTP 500) — see DIS-003 | no | client mistakes look like server faults | add to API.md |
 | OQ-PRV-1 | Does a short `Retry-After` shorten the 30 s cooldown? | yes (replaces) | no (30 s floor) | no | circuit stays open 25 s longer | state it |
 | OQ-PRV-2 | "Three consecutive soft failures open the circuit": does the 3rd failure itself open it for the next call | yes | yes | **yes** | — | state it |
 | OQ-PRV-3 | Outbound budget refill (token bucket granularity) | continuous | continuous | **yes** | — | state it |
-| OQ-CAL-1 | Omitted provider (`umm-al-qura`) for a date outside 1700..2300: `waqt.compute` / `calendar.*` | refuse with `OUT_OF_RANGE` | return the Waqt day with an empty Hijri label (`calendar_error`) | no | with the new default a caller outside the range gets a day from one implementation and an error from the other (added by CCP-0001; vectors `default/out-of-range/*`, tier open) | return the day with an empty label: a calendar failure must not fail a Waqt computation (API 1.5.0 policy) |
+| OQ-CAL-1 | Omitted provider (`umm-al-qura`) for a date outside 1700..2300: `waqt.compute` / `calendar.*` | refuse with `OUT_OF_RANGE` | return the Waqt day with an empty Hijri label (`calendar_error`) | no | with the new default a caller outside the range gets a day from one implementation and an error from the other (added by CCP-0001; vectors `default/out-of-range/*`, tier open) | **RESOLVED by DR-0012 (CAL-013)**: the vectors are now exact. Original proposal: return the day with an empty label: a calendar failure must not fail a Waqt computation (API 1.5.0 policy) |
 | OQ-SCH-1 | `next_event`/`prev_event` points have an `inclusive` flag (default true) | implemented from vectors | present | — | **not in SCHEDULING.md**; needed vector `point-next-maghrib-at-exact-maghrib-exclusive` | document |
 | OQ-SCH-2 | Default slot of `event_position` (isha/maghrib → previous listing, others → day 0) | implemented from vectors | present | — | **not in prose**; first run failed until read from vectors | document |
 | OQ-SCH-3 | `NO_VALID_WINDOW.duration_seconds = null`; `maghrib_boundaries: []` on `WINDOW_UNDEFINED` | implemented from vectors | present | — | 6 of the first 8 scheduling failures | document |

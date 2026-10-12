@@ -1,17 +1,17 @@
 {
  "meta": {
-  "generated": "2026-10-11 14:00 UTC",
+  "generated": "2026-10-11 20:03 UTC",
   "cop": "1.1",
   "contract": {
    "contract_version": "2.0.0",
-   "contract_sha256": "cfe9ca93ad1b453fc2d62fe702245e90371783d7a5cdbf8c73683c0cfffd184b",
+   "contract_sha256": "8324e57a1715c5b0894e2cac4109a83b6e06ae748c8c015497c7ab0644d2f2be",
    "manifest_matches_files": true,
    "released": false,
    "cop_version": "1.1",
    "questions": {
     "total": 29,
-    "resolved": 17,
-    "deferred": 11,
+    "resolved": 18,
+    "deferred": 10,
     "unresolved-by-design": 1
    },
    "unresolved": [
@@ -54,11 +54,6 @@
      "id": "OQ-UAQ-2",
      "status": "unresolved-by-design",
      "topic": "Umm al-Qura computational conventions (limb, refraction, elevation, algorithms)"
-    },
-    {
-     "id": "OQ-ERR-1",
-     "status": "deferred",
-     "topic": "Valid ranges of fajr_angle, isha_angle, asr_ratio (ERR-004 is MUST but its vectors are open)"
     },
     {
      "id": "OQ-PRV-1",
@@ -112,7 +107,7 @@
     "schedule.run",
     "waqt.compute"
    ],
-   "seconds": 5.76,
+   "seconds": 5.71,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",
@@ -10452,7 +10447,7 @@
     "instant.parse",
     "date.parse"
    ],
-   "seconds": 8.33,
+   "seconds": 8.36,
    "vectors": [
     {
      "id": "tab/from/2026-09-20",

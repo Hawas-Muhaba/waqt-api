@@ -190,6 +190,8 @@ def open_question():
     for x in q["questions"]:
         if x["id"] == "OQ-CAL-1":
             x["status"], x["requirement"], x["decision"] = "resolved", "CAL-013", "DR-0012"
+        if x["id"] == "OQ-ERR-1":
+            x["status"], x["requirement"], x["decision"] = "resolved", "ERR-004", "DR-0011"
     save(p, q)
 
 
@@ -233,10 +235,10 @@ DR11 = """# DR-0011: ERR-004 -- astronomy profile parameters are validated, with
 
 | | |
 |---|---|
-| **Status** | DECIDED by the project owner's written instruction of 2026-10-11 (pre-release review owner decisions). **Independent review: NOT performed. Signed ratification artifact: NONE held.** This record does not claim ratification; see GOVERNANCE.md section 3 and the CCP-0001 / DR-0010 open items. |
+| **Status** | DECIDED by the project owner's written instruction of 2026-10-11 (pre-release review owner decisions). **Ratification by a named maintainer: PENDING.** Independent review: NOT performed. Signed ratification artifact: NONE held. This record does not claim ratification; see GOVERNANCE.md section 3 and the CCP-0001 / DR-0010 open items. |
 | **Contract** | 2.0.0 (draft, unreleased): amended in place; no released manifest is altered |
 | **Date** | 2026-10-11 |
-| **Questions** | none opened or closed |
+| **Questions** | closes OQ-ERR-1 (valid ranges of fajr_angle, isha_angle, asr_ratio) |
 | **Requirements** | ERR-004 (MUST, now with explicit ranges and normative vectors) |
 
 ## Context
@@ -279,7 +281,7 @@ DR12 = """# DR-0012: Out-of-range calendar dates never fail a Waqt computation (
 
 | | |
 |---|---|
-| **Status** | DECIDED by the project owner's written instruction of 2026-10-11, adopting the existing API 1.5.0+ policy. **Independent review: NOT performed. Signed ratification artifact: NONE held.** This record does not claim ratification. |
+| **Status** | DECIDED by the project owner's written instruction of 2026-10-11, adopting the existing API 1.5.0+ policy. **Ratification by a named maintainer: PENDING.** Independent review: NOT performed. Signed ratification artifact: NONE held. This record does not claim ratification. |
 | **Contract** | 2.0.0 (draft, unreleased): amended in place |
 | **Date** | 2026-10-11 |
 | **Questions** | closes OQ-CAL-1 |
@@ -321,6 +323,21 @@ A provider with a different range becomes the default, or the HTTP shape of `cal
 """
 
 
+def tracking_docs():
+    p = CONF / "spec" / "OPEN-QUESTIONS.md"
+    t = rd(p)
+    t = t.replace("**16 resolved** (decision records", "**18 resolved** (decision records").replace("**12 deferred**,", "**10 deferred**,")
+    t = t.replace("OQ-ERR-2, OQ-ERR-3, OQ-SCH-1..5 |", "OQ-ERR-2, OQ-ERR-3, OQ-SCH-1..5, **OQ-ERR-1** (DR-0011), **OQ-CAL-1** (DR-0012) |")
+    t = t.replace("OQ-UND-1, OQ-ERR-1, OQ-PRV-1..3, **OQ-CAL-1** |", "OQ-UND-1, OQ-PRV-1..3 |")
+    t = t.replace("| 95° or −5° silently yield garbage | add ranges to API.md |", "| 95° or −5° silently yield garbage | **RESOLVED by DR-0011**: 0 < angle <= 90, ratio > 0, else VALIDATION_ERROR; vectors now exact |")
+    t = t.replace("tier open) | return th", "tier open) | **RESOLVED by DR-0012 (CAL-013)**: the vectors are now exact. Original proposal: return th")
+    put(p, t)
+    p = CONF / "DISAGREEMENTS.md"
+    t = rd(p)
+    t = t.replace("independent rejects with `VALIDATION_ERROR`. Five `open` vectors. | OQ-ERR-1 |", "independent rejects with `VALIDATION_ERROR`. Five `open` vectors. **RESOLVED (DR-0011, 2026-10-11): both reject with `VALIDATION_ERROR`; ranges 0 < angle <= 90, ratio > 0; vectors exact.** | OQ-ERR-1 |")
+    put(p, t)
+
+
 def decisions():
     for name, text in (("DR-0011.md", DR11), ("DR-0012.md", DR12)):
         p = CONF / "decisions" / name
@@ -339,19 +356,20 @@ def changelog():
     p = CONF / "CHANGELOG.md"
     s = rd(p)
     if "DR-0011" in s:
+        put(p, s.replace("Totals: 72 -> 73 requirements, 13 -> 12 unresolved questions.", "Closes OQ-ERR-1 and OQ-CAL-1. Totals: 72 -> 73 requirements, 13 -> 11 unresolved questions."))
         return
     marker = "**Amendment to the 2.0.0 draft (CCP-0001 / DR-0010"
     assert s.count(marker) == 1
     entry = ("**Amendment to the 2.0.0 draft (DR-0011, DR-0012; owner decisions of 2026-10-11, NOT independently reviewed, no signed ratification held):** "
              "ERR-004 is now normative with explicit ranges (fajr/isha 0 < x <= 90, asr > 0; NaN, infinity, non-numbers rejected with VALIDATION_ERROR) and has normative vectors; "
              "new MUST **CAL-013**: operations that return a Waqt day never fail because the Hijri provider cannot label the date (empty label + `calendar_error`), closing **OQ-CAL-1**. "
-             "COP gains the `$nonfinite` wire convention and a `calendar_error: {code}` output. Totals: 72 -> 73 requirements, 13 -> 12 unresolved questions. "
+             "COP gains the `$nonfinite` wire convention and a `calendar_error: {code}` output. Closes OQ-ERR-1 and OQ-CAL-1. Totals: 72 -> 73 requirements, 13 -> 11 unresolved questions. "
              "Promoted in place (same ids, no recorded value changed): 5 `err/profile/*` and 2 OQ-CAL-1 vectors. Audit trail: `tools/migrate_err004_oqcal1.py`.\n\n")
     put(p, s.replace(marker, entry + marker, 1))
 
 
 def main(check: bool) -> int:
-    requirements(); errors_vectors(); default_vectors(); open_question(); cop(); decisions(); changelog()
+    requirements(); errors_vectors(); default_vectors(); open_question(); cop(); tracking_docs(); decisions(); changelog()
     changed = []
     for p, text in PLANNED.items():
         if not p.exists() or p.read_text(encoding="utf-8") != text:

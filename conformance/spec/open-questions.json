@@ -124,9 +124,9 @@
   {
    "id": "OQ-ERR-1",
    "topic": "Valid ranges of fajr_angle, isha_angle, asr_ratio (ERR-004 is MUST but its vectors are open)",
-   "status": "deferred",
+   "status": "resolved",
    "requirement": "ERR-004",
-   "decision": null
+   "decision": "DR-0011"
   },
   {
    "id": "OQ-ERR-2",

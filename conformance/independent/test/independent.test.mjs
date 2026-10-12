@@ -103,3 +103,48 @@ test('errors never escape as exceptions', () => {
   assert.equal(r.ok, false); assert.equal(r.error.code, 'VALIDATION_ERROR');
   assert.equal(runCase({ id: 'y', op: 'waqt.compute', input: { location: { lat: 0, lon: 0 }, instant: '2026-09-19T15:42:00Z', timezone: 'Mars/Base' } }).error.code, 'UNKNOWN_TIMEZONE');
 });
+
+// ---- ERR-004 / CAL-013 (DR-0011, DR-0012) -------------------------------------------------------------------------
+const ADDIS = { lat: 9.0192, lon: 38.7525 };
+const compute = (profile, instant = '2026-09-19T15:42:00+00:00') =>
+  runCase({ id: 'x', op: 'waqt.compute', input: { location: ADDIS, instant, timezone: 'Africa/Addis_Ababa', profile } });
+
+test('ERR-004: 90 degrees is valid (inclusive upper bound); just above, zero, negatives and non-finite values are rejected', () => {
+  assert.equal(compute({ fajr_angle_deg: 90 }).ok, true);
+  assert.equal(compute({ isha_angle_deg: 0.0001 }).ok, true);
+  assert.equal(compute({ asr_shadow_ratio: 0.0001 }).ok, true);
+  for (const p of [{ fajr_angle_deg: 90.0001 }, { fajr_angle_deg: 0 }, { isha_angle_deg: -1 }, { asr_shadow_ratio: 0 }, { asr_shadow_ratio: -2 },
+    { fajr_angle_deg: NaN }, { isha_angle_deg: Infinity }, { asr_shadow_ratio: -Infinity }, { fajr_angle_deg: 'abc' }, { fajr_angle_deg: true }]) {
+    const r = compute(p);
+    assert.equal(r.ok, false, JSON.stringify(p));
+    assert.equal(r.error.code, 'VALIDATION_ERROR', JSON.stringify(p));
+  }
+});
+
+test('ERR-004: the COP $nonfinite wire convention decodes to real NaN / Infinity before validation', () => {
+  for (const t of ['NaN', 'Infinity', '-Infinity']) {
+    const r = compute({ fajr_angle_deg: { $nonfinite: t } });
+    assert.equal(r.ok, false);
+    assert.equal(r.error.code, 'VALIDATION_ERROR');
+  }
+});
+
+test('CAL-013: a date outside the Umm al-Qura range returns the Waqt day with a null Hijri label and calendar_error OUT_OF_RANGE', () => {
+  for (const date of ['1699-12-31', '2301-01-01']) {
+    const r = runCase({ id: 'x', op: 'calendar.gregorian_date_to_waqt_day', input: { date, location: ADDIS, timezone: 'Africa/Addis_Ababa' } });
+    assert.equal(r.ok, true);
+    assert.equal(r.output.resolved, true);
+    assert.equal(r.output.hijri_date, null);
+    assert.deepEqual(r.output.calendar_error, { code: 'OUT_OF_RANGE' });
+    assert.ok(r.output.open && r.output.close);
+  }
+  const inRange = runCase({ id: 'x', op: 'calendar.gregorian_date_to_waqt_day', input: { date: '1700-01-01', location: ADDIS, timezone: 'Africa/Addis_Ababa' } });
+  assert.equal(inRange.output.hijri_date, '1111-07-11');
+  assert.equal(inRange.output.calendar_error, undefined);
+});
+
+test('CAL-011 is unchanged: hijri.from_gregorian outside the range still refuses with OUT_OF_RANGE', () => {
+  const r = runCase({ id: 'x', op: 'hijri.from_gregorian', input: { date: '1699-12-31' } });
+  assert.equal(r.ok, false);
+  assert.equal(r.error.code, 'OUT_OF_RANGE');
+});

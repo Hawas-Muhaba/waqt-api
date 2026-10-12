@@ -1,13 +1,13 @@
 {
  "contract_version": "2.0.0",
  "cop_version": "1.1",
- "contract_sha256": "cfe9ca93ad1b453fc2d62fe702245e90371783d7a5cdbf8c73683c0cfffd184b",
+ "contract_sha256": "8324e57a1715c5b0894e2cac4109a83b6e06ae748c8c015497c7ab0644d2f2be",
  "files": {
   "spec/requirements.json": {
    "sha256": "95b4e94290b62817aacacdd6ceea767820f6352542b5bfa71201f14a37221bfd"
   },
   "spec/open-questions.json": {
-   "sha256": "9a07dcfe4202b5a5736726bc86019574c9d90b198160b78020cdcd9eff77654f"
+   "sha256": "346f35002ffa9ae2528972f61a4474b1b2322bb7252cd76ff0bdaa7051d1a184"
   },
   "spec/COP.md": {
    "sha256": "b9df7aca33d0071a8f7862f0c3a02530fd5b3f9d1ca0eac1b0f4e9a29306709a"
@@ -155,8 +155,8 @@
  },
  "questions": {
   "total": 29,
-  "resolved": 17,
-  "deferred": 11,
+  "resolved": 18,
+  "deferred": 10,
   "unresolved-by-design": 1
  },
  "status": {

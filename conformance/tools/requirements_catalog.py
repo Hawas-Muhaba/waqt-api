@@ -1,4 +1,7 @@
-"""Single source of truth for conformance requirement IDs.  `python3 tools/build_vectors.py` writes
+"""NOTE (DR-0011, DR-0012): ERR-004 (explicit ranges) and CAL-013 were amended in spec/requirements.json by tools/migrate_err004_oqcal1.py;
+the entries below predate that and are stale for those two IDs (build_vectors.py is already superseded and must not be re-run).
+
+Single source of truth for conformance requirement IDs.  `python3 tools/build_vectors.py` writes
 spec/requirements.json from this list; vectors may only cite IDs defined here.
 
 kind:  MUST      normative: an implementation that disagrees is non-conformant

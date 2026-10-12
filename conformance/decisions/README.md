@@ -18,3 +18,4 @@ earlier one, it does not edit it.
 | [DR-0010](DR-0010.md) | Default calendar provider of the contract and of waqt-core is `umm-al-qura` | CAL-012 (ratification PENDING) |
 | [DR-0011](DR-0011.md) | ERR-004: astronomy profile parameters are validated, with explicit ranges | ERR-004 (decided by owner instruction; ratification evidence NOT held) |
 | [DR-0012](DR-0012.md) | Out-of-range calendar dates never fail a Waqt computation (CAL-013) | OQ-CAL-1 (resolved; ratification evidence NOT held) |
+| [DR-0013](DR-0013.md) | API contract version 1.8.0 for the next release | none (API versioning; ratification evidence NOT held) |

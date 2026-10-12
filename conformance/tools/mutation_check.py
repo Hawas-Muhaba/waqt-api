@@ -19,10 +19,13 @@ MUT = [
  ("polar day guessed (undefined Maghrib replaced by transit+6h)", "src/astro/events.mjs", "    out.events[name] = t;\n    if (t === null) out.reasons[name] = noonAlt < target\n      ? `${label}: the Sun never reaches ${target.toFixed(4)} deg on this date (polar night)`\n      : `${label}: the Sun never falls to ${target.toFixed(4)} deg on this date (polar day / white night)`;\n  };\n\n  morning('fajr'", "    out.events[name] = t === null ? T + 6 * H : t;\n  };\n\n  morning('fajr'", "UND-001"),
  ("scheduling: window end treated as inclusive by default", "src/schedule.mjs", "end_inclusive: iv.end_inclusive ?? false", "end_inclusive: iv.end_inclusive ?? true", "SCH-002"),
  ("fixed 86400 s day length reported", "src/waqtday.mjs", "length_seconds: len }", "length_seconds: 86400 }", "DAY-006"),
+ ("ERR-004: upper bound of the angles made exclusive again (90 rejected)", "src/waqtday.mjs", "prof[k] <= 0 || prof[k] > 90)", "prof[k] <= 0 || prof[k] >= 90)", "ERR-004"),
+ ("ERR-004: lower bound relaxed (0 accepted for the angles)", "src/waqtday.mjs", "prof[k] <= 0 || prof[k] > 90)", "prof[k] < 0 || prof[k] > 90)", "ERR-004"),
+ ("CAL-013: a calendar range refusal fails the whole Waqt computation", "src/waqtday.mjs", "if (e instanceof WaqtError && e.code === 'OUT_OF_RANGE') return", "if (false) return", "CAL-013"),
 ]
 def run(adapter_dir):
     cmd = [sys.executable, os.path.join(ROOT, "harness", "waqt_conform.py"), "--adapter", f"node {adapter_dir}/src/cli.mjs", "--label", "mut",
-           "--out", tempfile.mkdtemp(), "--name", "m", "--suite", "day-model", "--suite", "metamorphic", "--suite", "calendar-core", "--suite", "calendar-providers",
+           "--out", tempfile.mkdtemp(), "--name", "m", "--suite", "day-model", "--suite", "metamorphic", "--suite", "calendar-core", "--suite", "calendar-providers", "--suite", "errors", "--suite", "calendar-default",
            "--suite", "provider-failure", "--suite", "legacy-scheduling", "--suite", "gregorian-time", "--suite", "scheduling-defaults", "--suite", "calendar-default"]
     p = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=900, encoding="utf-8")
     m = re.search(r"normative pass=(\d+) fail=(\d+)", p.stderr)
