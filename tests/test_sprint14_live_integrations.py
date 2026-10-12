@@ -363,7 +363,7 @@ def test_health_is_network_free_and_reports_integration_state(up):
     r = client.get("/v1/health")
     assert r.status_code == 200 and len(up.calls) == n
     b = r.json()
-    assert b["status"] == "ok" and b["api_version"] == "1.7.0"
+    assert b["status"] == "ok" and b["api_version"] == "1.8.0"
     assert b["components"]["optional_providers"]["aladhan"]["status"] == "degraded"
     i = b["integrations"]["hijri_aladhan"]
     assert i["provider"] == "aladhan" and i["circuit"] == "open" and i["last_failure_reason"] == "network-error"
@@ -384,7 +384,7 @@ def test_version_reports_api_engine_and_integrations():
     response = client.get("/v1/version")
     d = response.json()["data"]
     assert response.headers["cache-control"] == "public, max-age=30"
-    assert d["api_version"] == "1.7.0"
+    assert d["api_version"] == "1.8.0"
     assert d["integrations"]["affects_astronomy"] is False
     assert "aladhan" in d["integrations"]["calendar_providers"]
     a = d["integrations"]["hijri_aladhan"]
@@ -409,7 +409,7 @@ def test_engine_identity_is_identical_in_health_version_and_every_waqt_response(
     w = waqt().json()["data"]["computation"]
     v = client.get("/v1/version").json()["data"]
     assert h["engine"] == w["engine"] and str(h["revision"]) == str(w["revision"])
-    assert v["api_version"] == "1.7.0"
+    assert v["api_version"] == "1.8.0"
 
 
 def test_env_disables_remote_lookups(monkeypatch):

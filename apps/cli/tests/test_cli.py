@@ -155,3 +155,22 @@ def test_provider_flag_default_is_the_single_waqt_core_default():
     ap = m.build_parser() if hasattr(m, "build_parser") else None
     code, out, _ = call("convert", "--hijri", "1448-4-15")
     assert waqt_local.DEFAULT_CALENDAR_PROVIDER == DEFAULT_CALENDAR_PROVIDER == "umm-al-qura" and code == 0 and "2026-09-26" in out
+
+
+# ---- ERR-004 / CAL-013 (DR-0011, DR-0012) -----------------------------------------------------------------------------
+@pytest.mark.parametrize("flag,value", [("--fajr-angle", "95"), ("--fajr-angle", "nan"), ("--isha-angle", "0"), ("--asr-ratio", "0")])
+def test_invalid_profile_is_rejected_with_a_clear_message(flag, value):
+    code, out, err = call("now", *ADDIS, "--timezone", "Africa/Addis_Ababa", *INSTANT, flag, value)
+    assert code != 0 and "must be a finite number" in (out + err)
+
+
+@pytest.mark.parametrize("date", ["1699-12-31", "2301-01-01"])
+def test_out_of_range_gregorian_date_prints_the_waqt_day_instead_of_crashing(date):
+    code, out, err = call("convert", "--gregorian", date, *ADDIS, "--timezone", "Africa/Addis_Ababa")
+    assert code == 0 and "Traceback" not in (out + err) and "TypeError" not in (out + err)
+    assert "unavailable" in out and "calendar_error" in out and date in out
+
+
+def test_out_of_range_instant_prints_the_waqt_clock_and_a_calendar_notice():
+    code, out, err = call("now", *ADDIS, "--timezone", "Africa/Addis_Ababa", "--instant", "1699-12-31T12:00:00Z")
+    assert code == 0 and "Waqt clock" in out and "unavailable" in out

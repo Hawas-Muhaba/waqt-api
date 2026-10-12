@@ -24,7 +24,7 @@ def _err(r):
 # ------------------------------------------------------------------ DIS-001
 def test_api_version_includes_sprint_16_contract_changes():
     r = client.get("/v1/waqt", params={**ADDIS, "instant": "2026-09-19T15:42:00Z"})
-    assert r.json()["meta"]["api_version"] == "1.7.0"
+    assert r.json()["meta"]["api_version"] == "1.8.0"
 
 
 @pytest.mark.parametrize(

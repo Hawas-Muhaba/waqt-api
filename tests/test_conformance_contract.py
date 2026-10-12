@@ -48,9 +48,15 @@ def test_unresolved_questions_are_always_visible():
     by = {q["id"]: q for q in reg}
     # Questions that are religious/institutional or not yet decided must still be listed, not quietly resolved.
     assert by["OQ-UAQ-2"]["status"] == "unresolved-by-design"
-    for qid in ("OQ-TAB-3", "OQ-TIME-1", "OQ-DT-1", "OQ-UND-1", "OQ-ERR-1", "OQ-CAL-1"):
+    for qid in ("OQ-TAB-3", "OQ-TIME-1", "OQ-DT-1", "OQ-UND-1"):
         assert by[qid]["status"] == "deferred", qid
-    assert len(reg) == 29 and sum(q["status"] != "resolved" for q in reg) == 13   # OQ-CAL-1 added by CCP-0001
+    assert len(reg) == 29 and sum(q["status"] != "resolved" for q in reg) == 11   # OQ-CAL-1 added by CCP-0001; OQ-CAL-1 (DR-0012) and OQ-ERR-1 (DR-0011) resolved
+
+
+def test_oq_err_1_and_oq_cal_1_are_resolved_by_their_decision_records():
+    by = {q["id"]: q for q in json.loads((CONF / "spec" / "open-questions.json").read_text(encoding="utf-8"))["questions"]}
+    assert (by["OQ-ERR-1"]["status"], by["OQ-ERR-1"]["decision"], by["OQ-ERR-1"]["requirement"]) == ("resolved", "DR-0011", "ERR-004")
+    assert (by["OQ-CAL-1"]["status"], by["OQ-CAL-1"]["decision"], by["OQ-CAL-1"]["requirement"]) == ("resolved", "DR-0012", "CAL-013")
 
 
 def test_every_resolved_question_has_a_decision_record_and_every_record_is_indexed():
