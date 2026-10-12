@@ -1,5 +1,9 @@
 # Changelog — waqt-cli
 
+## Unreleased
+
+**Fixed (DR-0012)**: `waqt convert` / `now` / `events` crashed with a TypeError for a Gregorian date or instant outside the calendar provider's range; they now print the Waqt day and `Hijri: unavailable (calendar_error: ...)`. **Changed (DR-0011)**: invalid angles / ratio are rejected with a clear message. Package version not bumped.
+
 ## 0.2.0 — Option B (default calendar provider)
 
 **Changed (behaviour change)**: `--provider` now defaults to **`umm-al-qura`** (was `arithmetic-tabular`), taken from

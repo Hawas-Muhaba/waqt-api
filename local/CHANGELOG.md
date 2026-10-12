@@ -1,5 +1,9 @@
 # Changelog — waqt-local
 
+## Unreleased
+
+**Changed (DR-0011, DR-0012)**: invalid `fajr_angle` / `isha_angle` / `asr_ratio` raise a `ValidationError` (code `VALIDATION_ERROR`, details `{parameter, received, expected}`), the same as the HTTP API 1.8.0. Out-of-range calendar dates return the Waqt day with a null Hijri label and a `calendar_error`. Package version not bumped.
+
 ## 0.6.0 — Option B (default calendar provider)
 
 **Changed (behaviour change)**: the default `calendar_provider` of every function (`waqt`, `hijri`, `convert`,

@@ -61,7 +61,7 @@
        artifact is held in the repository). The CONTRACT is still an unreleased 2.0.0: ratified records are not a release. */
     governance: Object.freeze({
       ratification: "decision-records-partly-ratified",
-      ratificationLabel: "Decision records ratified except DR-0010 (pending) · contract not yet released",
+      ratificationLabel: "Decision records ratified except DR-0010, DR-0011, DR-0012, DR-0013 (pending) · contract not yet released",
       contractReleased: false,
       decisionRecords: Object.freeze({ tree: "conformance/decisions" }),
       process: Object.freeze({ path: "conformance/GOVERNANCE.md" }),
