@@ -13,7 +13,7 @@ means.
 |---|---|---|---|
 | **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.5.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
-| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.7.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
+| **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.8.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
 | **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.7.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
 | **Conformance-vector-set version** | `core/waqt_core/versioning.py` (`VECTOR_SET_VERSION`) | `2.0` | MAJOR when any vector's *expected value* changes for an input that is still present (near-certainly because the engine revision moved); MINOR when cases are added or replaced with no such change. `1.1` (Sprint 13) replaced one case whose expected value was not reproducible across tz-database releases; engine revision unchanged. |
 
@@ -21,7 +21,7 @@ Two more things look like versions and are easy to conflate with the axes
 above (Sprint 13 audit):
 
 - The **`waqt-api` distribution version** (`pyproject.toml` at the repo root,
-  currently `0.5.0`) is *not* the **API version** (`1.7.0`, the HTTP
+  currently `0.5.0`) is *not* the **API version** (`1.8.0`, the HTTP
   contract). The package can ship a fix without the contract moving, and the
   contract can gain an additive field in the same release as any package
   version. `GET /v1/version` reports the contract (`api_version`), never the
@@ -151,7 +151,7 @@ SDK work, for instance, could bump the API without touching the engine).
 {
   "waqt_core_version": "0.4.0",
   "spec": "waqt-core/0.1",
-  "api_version": "1.7.0",
+  "api_version": "1.8.0",
   "waqt_local_version": null,
   "computation": {"engine": "waqt-noaa-low-precision", "revision": "2", "accuracy_level": "B"},
   "engine_revision_history": {"1": {...}, "2": {...}},
@@ -166,7 +166,16 @@ Additive: responses that did not name the provider they used now carry
 `calendar_provider: {name, version}` (institutional week / fiscal-year / academic-year,
 and `/v1/conversions`). The full record, with examples, risks and the disposition of the
 eleven changed recordings, is [`migrations/API-1.7.0-default-provider.md`](migrations/API-1.7.0-default-provider.md).
-The Python and JavaScript SDKs now record API 1.7.0 as their maximum tested version.
+The Python and JavaScript SDKs recorded API 1.7.0 as their maximum tested version at that point.
+
+API contract 1.7.0 → 1.8.0 (**unreleased**; behaviour changes, no field removed or renamed, `/v1` unchanged):
+(1) astronomy profile parameters are validated and invalid ones return `422 VALIDATION_ERROR` (ERR-004 / DR-0011);
+(2) an out-of-range calendar date returns the Waqt day with a `null` Hijri label and a `calendar_error` instead of failing
+(CAL-013 / DR-0012; the default provider remains `umm-al-qura`). A new contract number was chosen because the deployment
+exists and external use of 1.7.0 is **unknown** (no tags, no usage data): the project does not claim 1.7.0 had no consumers
+(DR-0013). The 1.7.0 recordings (`sdks/vectors/sdk_conformance_vectors_api_1_7.json`, `verification/vector_migrations/`) are
+preserved unchanged. The SDKs now record API 1.8.0 as their maximum tested version. Record:
+[`migrations/API-1.8.0-validation-and-out-of-range.md`](migrations/API-1.8.0-validation-and-out-of-range.md).
 
 **Policy for provider defaults (ratified in [DR-0009](../conformance/decisions/DR-0009.md) by Dr. Salim Muhammed Redi, recorded 2026-10-10).**
 The `/v1` guarantee is about *response shapes* and *explicitly selected* behavior: a request that names

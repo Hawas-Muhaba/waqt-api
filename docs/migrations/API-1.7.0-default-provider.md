@@ -91,3 +91,4 @@ All eleven are *expected consequences of the approved change*. No astronomy outp
 3. **OQ-CAL-1** (new): what `waqt.compute` / `calendar.*` must do with the default provider outside 1700..2300: the reference returns the day with an empty label; the independent implementation refuses with `OUT_OF_RANGE`.
 4. **API contract number.** This change set adds a `calendar_error` key and fixes a 500 inside contract 1.7.0. If 1.7.0 was already consumed externally (unknown: no tags or usage data), the owners may prefer to call it 1.8.0.
 5. **External consumption of 1.7.0** is unknown.
+6. **Update (2026-10-11):** items 3 and 4 above were decided by the project owner: OQ-CAL-1 is resolved by DR-0012 and the next release uses API contract **1.8.0** (DR-0013; see [API-1.8.0-validation-and-out-of-range.md](API-1.8.0-validation-and-out-of-range.md)). This record of 1.7.0 is otherwise unchanged. Items 1, 2 and 5 remain open.

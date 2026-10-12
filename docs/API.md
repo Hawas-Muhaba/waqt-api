@@ -9,10 +9,11 @@ Base URL: wherever you deployed it (e.g. `https://waqt-api.onrender.com`). Inter
 ## 1. Versioning
 
 - The URL path carries the major version: every endpoint is under `/v1/`. A breaking change gets `/v2/`; `/v1/` never changes shape once released.
-- Every response also carries `meta.api_version` (currently `1.7.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
+- Every response also carries `meta.api_version` (currently `1.8.0`, semver) for finer-grained tracking, and `meta.spec` (`waqt-core/0.1`) identifying which version of the underlying Core Time Model this deployment implements — these are two different things and can change independently.
 
 - **1.6.0 (Sprint 16, conformance contract 2.0.0).** Additive: error codes `INVALID_HIJRI_DATE`, `UNKNOWN_TIMEZONE`, `OUT_OF_RANGE` (section 3). Two *corrections* to behaviour that contradicted the written specification, both recorded in `conformance/CHANGELOG.md`: the Hijri date / weekday of a Waqt day are those of the **civil** date of its closing Maghrib instant (SEMANTICS section 3, DAY-004), and `next_event` is the next event **by occurrence** (see `GET /v1/waqt`). No field was added, removed or renamed.
 - **1.7.0.** The default `calendar_provider` for endpoints that accept it is now `umm-al-qura` (previously `arithmetic-tabular`) — a deliberate project default, not a claim that every community follows one convention. Callers that need the previous results send `calendar_provider=arithmetic-tabular`. Additive: `calendar_provider: {name, version}` is now present on `/v1/institutional/week`, `/fiscal-year`, `/academic-year` (and their `/resolve` forms) and `/v1/conversions`, so every provider-aware response names the provider used. `GET /v1/calendar/convert` no longer answers `500 INTERNAL_ERROR` for an instant or date outside `umm-al-qura`'s 1700..2300: it returns the Waqt day with `hijri: null` and a `calendar_error` (additive key, present only on failure). Canonical Waqt time never depends on the provider. Migration record, examples and risks: [`migrations/API-1.7.0-default-provider.md`](migrations/API-1.7.0-default-provider.md); provider caveats: [`CALENDARS.md`](CALENDARS.md).
+- **1.8.0.** Two observable behaviour changes; **no field is removed or renamed and the `/v1` URL namespace is unchanged** (full record: [`migrations/API-1.8.0-validation-and-out-of-range.md`](migrations/API-1.8.0-validation-and-out-of-range.md)). (1) *Astronomy profile parameters are validated* (conformance ERR-004, DR-0011): `fajr_angle` and `isha_angle` must be finite numbers with `0 < x <= 90`, `asr_ratio` a finite number `> 0`; anything else (zero, negative, above range, `nan`, `inf`, non-numeric text) now returns `422 VALIDATION_ERROR` with `error.details {parameter, received, expected}` instead of a result. Nothing is clamped. (2) *Out-of-range calendar dates never fail a Waqt computation* (CAL-013, DR-0012): for a date outside the calendar provider's range (`umm-al-qura`: 1700-01-01..2300-12-31 — the **default** provider since 1.7.0) the Waqt day and every instant are returned unchanged, the Hijri label is `null` and `calendar_error` explains that the date is outside the provider's supported range (`/v1/waqt`: an object `{provider, message}`; `/v1/calendar/convert`: a string — the shapes are not unified in 1.8.0). `GET /v1/hijri` and `/v1/conversions`, which have no Waqt day to return, still answer `400 OUT_OF_RANGE`. No endpoint returns HTTP 500 for this condition.
 
 ## 2. The envelope
 
@@ -20,7 +21,7 @@ Every response, success or failure, has exactly this shape:
 
 ```json
 {
-  "meta": { "api_version": "1.7.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
+  "meta": { "api_version": "1.8.0", "spec": "waqt-core/0.1", "generated_at": "2026-09-23T04:25:14Z" },
   "data": { ... or null on error ... },
   "error": { "code": "...", "message": "...", "details": {...} } // or null on success
 }
@@ -40,7 +41,7 @@ Every response, success or failure, has exactly this shape:
 | `UNKNOWN_TIMEZONE` | 400 | (1.6.0) `timezone_override` (query or body) is not an IANA zone name. Applies to every endpoint that accepts it. `details` carries `parameter`, `received`, `expected`. Before 1.6.0 this was an HTTP 500 `INTERNAL_ERROR`. |
 | `OUT_OF_RANGE` | 400 | (1.6.0) a date outside the chosen calendar provider's supported range; `umm-al-qura` supports 1700-01-01..2300-12-31 only (CAL-011). `details` carries `calendar_provider`, `supported_range`, `received`. |
 | `UNSUPPORTED_OPERATION` | 400 | e.g. asking `declared` or `local-observation` to reverse-convert, which they structurally can't |
-| `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12; an unknown time zone is `UNKNOWN_TIMEZONE`, not this) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
+| `VALIDATION_ERROR` | 422 | a query parameter's own constraints failed (e.g. `lat` out of ±90, `month` out of 1–12; (1.8.0) `fajr_angle` / `isha_angle` not a finite number in `(0, 90]`, `asr_ratio` not a finite number `> 0`; an unknown time zone is `UNKNOWN_TIMEZONE`, not this) — this is FastAPI/pydantic's own validation, reshaped into the same envelope |
 | `RATE_LIMITED` | 429 | (1.5.0, only when the operator enabled `WAQT_RATE_LIMIT`) the caller exceeded its request budget. `Retry-After` and `details.retry_after_seconds` say when to retry. |
 | `INTERNAL_ERROR` | 500 | anything unexpected. **Every** exception is caught here — you will never receive a raw stack trace or an empty connection reset. `details.exception_type` names the underlying Python exception for bug reports, nothing more. |
 

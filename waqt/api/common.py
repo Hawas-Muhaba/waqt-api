@@ -20,7 +20,7 @@ from typing import Any, Optional
 from fastapi import HTTPException
 from zoneinfo import ZoneInfo
 
-API_VERSION = "1.7.0"          # 1.7.0: default calendar provider is Umm al-Qura; 1.6.0: error codes and behaviour corrections (see docs/API.md).
+API_VERSION = "1.8.0"          # 1.8.0: astronomy-profile validation (ERR-004, 422) and the out-of-range calendar rule (CAL-013), see docs/migrations/API-1.8.0-validation-and-out-of-range.md; 1.7.0: default calendar provider is Umm al-Qura; 1.6.0: error codes and behaviour corrections (see docs/API.md).
 CORE_SPEC_VERSION = "waqt-core/0.1"   # the Core Time Model version it implements
 # Sprint 12: computation identity is owned by waqt-core (one definition for the
 # API, waqt-local, the SDK vectors and the reference apps). These two names are
