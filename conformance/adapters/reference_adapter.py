@@ -339,15 +339,22 @@ OPS = {"gregorian.weekday": op_weekday, "hijri.from_gregorian": op_h_from, "hijr
        "instant.parse": op_instant_parse}
 
 def _pkg_api_version():
-    """waqt-api package version from installed metadata, falling back to the source pyproject.toml."""
+    """waqt-api package version from source pyproject.toml, falling back to installed metadata."""
+    import re
+    from pathlib import Path
+    try:
+        pyproject = Path(__file__).resolve().parents[2] / "pyproject.toml"
+        if pyproject.exists():
+            m = re.search(r'^version\s*=\s*"([^"]+)"', pyproject.read_text(encoding="utf-8"), re.M)
+            if m:
+                return m.group(1)
+    except Exception:
+        pass
     try:
         from importlib.metadata import version
         return version("waqt-api")
     except Exception:
-        import re
-        from pathlib import Path
-        m = re.search(r'^version\s*=\s*"([^"]+)"', (Path(__file__).resolve().parents[2] / "pyproject.toml").read_text(encoding="utf-8"), re.M)
-        return m.group(1) if m else "unknown"
+        return "unknown"
 
 
 _PKG_API_VERSION = _pkg_api_version()

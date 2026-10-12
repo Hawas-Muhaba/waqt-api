@@ -1,19 +1,11 @@
 #!/usr/bin/env python3
-"""Audit trail for the contract 2.0.0 (draft) amendments of DR-0011 and DR-0012.
+"""HISTORICAL / AUDIT TRAIL for contract 2.0.0 amendments DR-0011 and DR-0012.
 
-    python3 tools/migrate_err004_oqcal1.py            # apply (idempotent; run from conformance/)
-    python3 tools/migrate_err004_oqcal1.py --check    # STRICTLY READ-ONLY: exit 1 if anything would still change
+    python3 tools/migrate_err004_oqcal1.py --check    # verify that the migration is present in the released contract
+    python3 tools/migrate_err004_oqcal1.py --reapply-historical  # reapply historical draft state (warn: overwrites 2.0.0 additions)
 
-DR-0011  ERR-004 becomes a normative requirement with explicit ranges:
-         fajr_angle_deg, isha_angle_deg: finite, 0 < x <= 90;  asr_shadow_ratio: finite, x > 0.
-         Anything else (zero, negative, above range, NaN, +/-Infinity, a non-number) is rejected with VALIDATION_ERROR.
-         The five `open` vectors err/profile/* are PROMOTED in place (same ids) and extended.
-DR-0012  OQ-CAL-1 is resolved by adopting the API policy as the contract rule CAL-013: an operation that returns a
-         Waqt day never fails because the calendar provider cannot label the date; hijri.* operations still refuse
-         (CAL-011). The two `open` vectors of OQ-CAL-1 are PROMOTED (moved to calendar-default.json, same ids).
-
-No recorded value of any pre-existing vector changes: only tiers (open -> exact) and, for promoted vectors, the
-expectation that was already PROPOSED in them. Standard library only.
+SUPERSEDED in contract 2.0.0 released baseline, which additionally incorporates DR-0014 and DR-0015.
+Direct apply without --reapply-historical is blocked to prevent accidental reversion of later decision records.
 """
 from __future__ import annotations
 
@@ -368,17 +360,75 @@ def changelog():
     put(p, s.replace(marker, entry + marker, 1))
 
 
-def main(check: bool) -> int:
+def check_released_state() -> list[str]:
+    """Validate that the released contract embodies the ERR-004 / CAL-013 migrations."""
+    issues = []
+    # 1. requirements
+    p_req = CONF / "spec" / "requirements.json"
+    req_data = load(p_req)
+    err004 = next((q for q in req_data.get("requirements", []) if q["id"] == "ERR-004"), None)
+    if not err004 or err004.get("status") != "normative" or "DR-0011" not in err004.get("decision", ""):
+        issues.append("ERR-004 is not normative with DR-0011 in spec/requirements.json")
+    cal013 = next((q for q in req_data.get("requirements", []) if q["id"] == "CAL-013"), None)
+    if not cal013 or cal013.get("status") != "normative" or "DR-0012" not in cal013.get("decision", ""):
+        issues.append("CAL-013 is not normative with DR-0012 in spec/requirements.json")
+
+    # 2. open questions resolved
+    p_reg = CONF / "spec" / "open-questions.json"
+    reg_data = load(p_reg)
+    for qid in ("OQ-ERR-1", "OQ-CAL-1"):
+        q = next((item for item in reg_data.get("questions", []) if item["id"] == qid), None)
+        if not q or q.get("status") != "resolved":
+            issues.append(f"{qid} is not resolved in spec/open-questions.json")
+
+    # 3. vectors
+    p_err = CONF / "vectors" / "errors.json"
+    err_vecs = {v["id"]: v for v in load(p_err).get("vectors", [])}
+    for tag in ("fajr-95", "fajr-zero", "isha-zero", "asr-zero"):
+        vid = f"err/profile/{tag}"
+        if vid not in err_vecs or err_vecs[vid].get("tier") != "exact":
+            issues.append(f"Normative vector {vid} missing or not exact in vectors/errors.json")
+
+    p_def = CONF / "vectors" / "calendar-default.json"
+    def_vecs = {v["id"]: v for v in load(p_def).get("vectors", [])}
+    for vid in ("default/out-of-range/date-to-waqt-day/addis/1699-09-19", "default/out-of-range/compute/addis/1699-09-19"):
+        if vid not in def_vecs or def_vecs[vid].get("tier") != "exact":
+            issues.append(f"CAL-013 vector {vid} missing or not exact in vectors/calendar-default.json")
+
+    # 4. decisions exist
+    for dr in ("DR-0011.md", "DR-0012.md"):
+        if not (CONF / "decisions" / dr).exists():
+            issues.append(f"Decision record conformance/decisions/{dr} is missing")
+
+    return issues
+
+
+def main(argv: list[str]) -> int:
+    check = "--check" in argv
+    reapply = "--reapply-historical" in argv
+
+    if check:
+        issues = check_released_state()
+        if issues:
+            print("check FAILED:", issues)
+            return 1
+        print("check ok: ERR-004 and CAL-013 are verified in the released contract baseline (historical script)")
+        return 0
+
+    if not reapply:
+        print("migrate_err004_oqcal1.py is historical (contract 2.0.0 released baseline incorporates DR-0011, DR-0012, DR-0014 and DR-0015).")
+        print("Refusing accidental apply against the released baseline. Pass --check to verify or --reapply-historical if intending to overwrite.")
+        return 1
+
     requirements(); errors_vectors(); default_vectors(); open_question(); cop(); tracking_docs(); decisions(); changelog()
     changed = []
     for p, text in PLANNED.items():
         if not p.exists() or p.read_text(encoding="utf-8") != text:
             changed.append(p.relative_to(CONF).as_posix())
-            if not check:
-                p.write_text(text, encoding="utf-8")
+            p.write_text(text, encoding="utf-8")
     print("changed:", sorted(changed) if changed else "nothing (already migrated)")
-    return 1 if (check and changed) else 0
+    return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main("--check" in sys.argv))
+    sys.exit(main(sys.argv))

@@ -396,14 +396,24 @@ test("governance: role metadata comes from config, is marked DEMO/EDITABLE, and 
   const decDir = new URL("../../../../conformance/decisions/", import.meta.url);
   const heads = fs.readdirSync(decDir).filter((f) => /^DR-\d+\.md$/.test(f)).map((f) => [f.replace(".md", ""), fs.readFileSync(new URL(f, decDir), "utf8").split("## Context")[0].includes("PENDING")]);
   const pendingIds = heads.filter(([, p]) => p).map(([id]) => id);
-  const state = pendingIds.length === heads.length ? "pending" : pendingIds.length === 0 ? "ratified" : "partly";
   const cfg = dom.window.WAQT_CONFIG.governance;
-  const label = { pending: "Pending project-owner approval", ratified: "Decision records ratified · contract not yet released", partly: `Decision records ratified except ${pendingIds.join(", ")} (pending) · contract not yet released` }[state];
-  assert.equal(d.querySelector("[data-ratification]").textContent, label);
-  assert.equal(cfg.ratificationLabel, label);
-  assert.equal(dom.window.WAQT_CONFIG.governance.contractReleased, false);
+  const expectedLabel = "Conformance 2.0.0 released · independent review explicitly waived and not performed (DR-0015)";
+  assert.equal(d.querySelector("[data-ratification]").textContent, expectedLabel);
+  assert.equal(cfg.ratificationLabel, expectedLabel);
+  assert.equal(cfg.contractReleased, true);
+  assert.equal(cfg.ratification, "owner-approved-release");
+  assert.equal(cfg.releaseApprovalRecord, "DR-0015");
+  assert.deepEqual(pendingIds, ["DR-0010", "DR-0011", "DR-0012", "DR-0013", "DR-0014"]);
+  for (const article of d.querySelectorAll("[data-dr]")) {
+    const drId = article.querySelector(".font-label-md")?.textContent?.trim();
+    const badge = article.querySelector(".badge")?.textContent?.trim();
+    if (pendingIds.includes(drId)) {
+      assert.equal(badge, "RATIFICATION PENDING", `${drId} should be visibly pending ratification`);
+    } else {
+      assert.equal(badge, "RATIFIED", `${drId} should be ratified`);
+    }
+  }
   assert.match(d.querySelector("[data-maint-notice]").textContent, /not a governance approval or ratification/);
   assert.doesNotMatch(d.body.textContent, /ratified on|signed by/i);
   assert.match(d.querySelector("footer [data-maintainers]").textContent, /demo metadata/);
-  assert.equal(dom.window.WAQT_CONFIG.governance.ratification, { pending: "pending-project-owner-approval", ratified: "decision-records-ratified", partly: "decision-records-partly-ratified" }[state]);
 });

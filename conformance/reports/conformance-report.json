@@ -81,7 +81,7 @@
    "command": "python adapters\\reference_adapter.py",
    "descriptor": {
     "name": "waqt-reference",
-    "version": "waqt-core 0.6.0 / waqt-api 0.4.0",
+    "version": "waqt-core 0.6.0 / waqt-api 0.6.0",
     "language": "Python",
     "cop_version": "1.1",
     "instant_precision_us": 1000000,
