@@ -133,3 +133,69 @@ Path: `waqt_square_card.jpg`
 > 
 > 🔗 GitHub: [Link to your GitHub]  
 > 🌐 Website & Demo: [Link to Website]
+
+---
+
+## 6. Personal Post from the Idea Owner (Dr. Salim Muhammed Redi)
+
+### Option A: LinkedIn & Facebook (Personal, Visionary & Mission-Driven)
+
+> **Headline:** A vision realized: Reclaiming Islamic time in the digital era.
+>
+> In the name of Allah, the Most Gracious, the Most Merciful.
+>
+> For years, a fundamental disconnect has troubled me. As Muslims, our sacred observances, our fasts, our prayers, and our calendar days are fundamentally tied to the cosmic clock created by Allah: the day begins when the sun sets at **Maghrib**. 
+>
+> Yet for decades, every computer, phone, smart watch, and operating system on Earth has forced our lives into an arbitrary midnight-to-midnight solar grid. Our prayer times were reduced to disconnected alarm notifications, isolated from their natural astronomical continuum.
+>
+> I asked a simple question:  
+> *What if we built an open, modern, mathematically rigorous computational standard for Islamic civil time? A clock that treats the interval between consecutive Maghribs as a continuous day, verifiable to the second?*
+>
+> Today, alhamdulillah, what began as a logical concept has become a living reality. Together with my brilliant collaborator **Hawas Muhaba Hussein** (Technical Lead & Maintainer) and our dedicated engineering work, we are officially releasing **Waqt** as an open-source project to the world.
+>
+> 🏛️ **Where we stand today:**  
+> We have published the first four core packages live on PyPI (`waqt-core`, `waqt-local`, `waqt-api`, `waqt-client`), designed a full interactive web suite, and built an offline mathematical engine backed by verifiable solar mechanics and astronomical proofs.
+>
+> 💡 **Why we are opening this to the Ummah and humanity:**  
+> No single individual or company should own time infrastructure. Time belongs to all of us. We are making Waqt completely open-source so that scholars, astrophysicists, software engineers, and designers worldwide can build mosque displays, smart clocks, mobile apps, and institutional calendars upon it.
+>
+> ⚡ **A Transparent Note on Infrastructure & Support:**  
+> Our public demonstration server is currently operating on temporary free cloud hosting that will expire soon. To ensure permanent uptime, support our server costs, and encourage us to build and contribute more technological initiatives for the Ummah and humanity, we welcome your support — whether through code, constructive feedback, sharing the project, or supporting our hosting on Ko-fi.
+>
+> We have taken the first steps. The road ahead belongs to all of us. I warmly invite you to test it, star the repository, and share your ideas.
+>
+> 🔗 Explore the Repository: [GitHub Link]  
+> 🌐 Experience the Live Clock & Interactive Spec: [Website Link]  
+> ☕ Support Our Infrastructure on Ko-fi: https://ko-fi.com/ummatidawah  
+>
+> — **Dr. Salim Muhammed Redi**  
+> *Logical / Idea Owner, Waqt Project*
+
+---
+
+### Option B: X / Twitter Thread (From Dr. Salim)
+
+> **Tweet 1:**  
+> Today is a deeply meaningful day for me. 🌙  
+> 
+> What began as a question about why our digital tools don't reflect Islamic time has now become **Waqt** — an open-source standard and computation engine where the day begins at Maghrib.  
+> 
+> Here is why we built it & where we are heading 🧵👇  
+> 
+> **Tweet 2:**  
+> In Islamic civil tradition and celestial physics, the day is `[Maghrib, next Maghrib)`. But all digital operating systems force our schedules into a midnight grid.  
+> 
+> With Waqt, we built a 24h continuous clock anchored to the sunset horizon, backed by rigorous solar algorithms.  
+> 
+> **Tweet 3:**  
+> Huge gratitude to my technical collaborator @[HawasHandle] and our engineering team who turned this concept into four live PyPI packages (`waqt-core`, `waqt-local`, `waqt-api`, `waqt-client`) with 100% test coverage.  
+> 
+> **Tweet 4:**  
+> We made Waqt completely open source because time infrastructure belongs to the Ummah and humanity.  
+> 
+> Our live API demo is currently on temporary free hosting that will expire soon. If you'd like to help us sustain the servers & build more open tools, we welcome your support!  
+> 
+> 🔗 Repo: [GitHub Link]  
+> ☕ Support: https://ko-fi.com/ummatidawah  
+> 🌐 Live demo: [Website Link]
+
