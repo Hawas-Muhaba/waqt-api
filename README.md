@@ -32,7 +32,8 @@ docs/
   VERSIONING.md                  — Sprint 12: how waqt-core version / engine revision / API version / SDK
                                     version / conformance-vector-set version relate
   ACCURACY-LEVEL-REVIEW.md       — Sprint 12: promotion criteria for Level A, evidence so far, decision record
-SCOPE.md, SPRINT-*-REPORT.md     — build history and honest limitations
+  sprints/                       — build history and sprint reports (Sprint 2 through 17)
+SCOPE.md                         — scope, architecture rules, and honest limitations
 ```
 ```
 
@@ -131,4 +132,4 @@ the exact-Maghrib boundary rule, same-day-only comparison enforcement,
 undefined-event handling, and 10 portable conformance vectors an independent
 implementation in another language could check itself against.
 
-Read `SCOPE.md` and the `SPRINT-*-REPORT.md` files before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.
+Read `SCOPE.md` and the reports in `docs/sprints/` before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.
