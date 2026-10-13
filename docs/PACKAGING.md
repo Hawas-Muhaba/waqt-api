@@ -21,10 +21,10 @@ declared dependency (`dependencies = []`), and nothing in the repo could be
 
 | Distribution | Import name | Directory | Depends on |
 |---|---|---|---|
-| `waqt-core` 0.6.0 | `waqt_core` | `core/` | `ephem`, `timezonefinder` (the live Hijri provider uses only the standard library) |
-| `waqt-api` 0.6.0 | `waqt` (only `waqt.api` is real code) | repo root | `waqt-core>=0.6.0,<0.7`, `fastapi`, `uvicorn` |
-| `waqt-local` 0.7.0 | `waqt_local` | `local/` | `waqt-core>=0.6.0,<0.7` |
-| `waqt-cli` 0.3.0 | `waqt_cli` | `apps/cli/` | `waqt-local>=0.7.0,<0.8` |
+| `waqt-core` 0.7.0 | `waqt_core` | `core/` | `ephem`, `timezonefinder` (the live Hijri provider uses only the standard library) |
+| `waqt-api` 0.6.0 | `waqt` (only `waqt.api` is real code) | repo root | `waqt-core>=0.7.0,<0.8`, `fastapi`, `uvicorn` |
+| `waqt-local` 0.7.0 | `waqt_local` | `local/` | `waqt-core>=0.7.0,<0.8` |
+| `waqt-cli` 0.3.1 | `waqt_cli` | `apps/cli/` | `waqt-local>=0.7.0,<0.8` |
 | `waqt-client` (SDKs) | `waqt_client` / npm | `sdks/` | unchanged (HTTP only) |
 
 ## What moved, and how it was verified

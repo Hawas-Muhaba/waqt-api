@@ -23,7 +23,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
 ]
 dependencies = [
-    "waqt-core>=0.6.0,<0.7",
+    "waqt-core>=0.7.0,<0.8",
     "fastapi>=0.100",
     "uvicorn>=0.23",
 ]

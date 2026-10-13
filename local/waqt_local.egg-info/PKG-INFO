@@ -9,7 +9,7 @@ Project-URL: Documentation, https://github.com/waqt-project/waqt-api/blob/main/d
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: waqt-core<0.7,>=0.6.0
+Requires-Dist: waqt-core<0.8,>=0.7.0
 Provides-Extra: dev
 Requires-Dist: pytest>=7; extra == "dev"
 Dynamic: license-file

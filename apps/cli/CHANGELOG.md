@@ -1,5 +1,12 @@
 # Changelog — waqt-cli
 
+## 0.3.1 — AT/BT display
+
+**Added:** `waqt now --at-bt` — an experimental opt-in flag that appends
+an AT/BT (After Twelve / Before Twelve) friendly line to the human-readable
+`now` output.  JSON output (`--json`) is unaffected.  Requires `waqt-core`
+≥ 0.7.0 (installed transitively via `waqt-local`).
+
 ## 0.3.0 — API 1.8.0 / conformance 2.0.0
 
 **Changed:** CLI input validation follows `waqt-local` 0.7.0 and `waqt-core` 0.6.0; invalid profile values receive a clear validation error. Requires `waqt-local>=0.7.0,<0.8`.

@@ -50,6 +50,8 @@ def build_parser() -> argparse.ArgumentParser:
     s = sub.add_parser("now", help="the Waqt clock, Hijri date and next event for a place")
     _loc(s); _profile(s); _provider(s)
     s.add_argument("--instant", default=None, help="ISO 8601 (default: now)")
+    s.add_argument("--at-bt", action="store_true", dest="at_bt",
+                   help="add AT/BT (After Twelve / Before Twelve) friendly display (experimental; does not affect --json)")
 
     s = sub.add_parser("events", help="the prayer/event timeline for the Waqt day containing an instant")
     _loc(s); _profile(s); _provider(s)
@@ -131,7 +133,21 @@ def run(argv: Optional[Sequence[str]] = None, out=None) -> int:
         if a.cmd in ("now", "events"):
             data = lib.waqt(lat=a.lat, lon=a.lon, elevation_m=a.elevation, instant=a.instant, timezone_override=a.timezone,
                             fajr_angle=a.fajr_angle, isha_angle=a.isha_angle, asr_ratio=a.asr_ratio, calendar_provider=a.provider)
-            emit(data, (render.render_now if a.cmd == "now" else render.render_events)(data, core_v))
+            text = (render.render_now if a.cmd == "now" else render.render_events)(data, core_v)
+            if a.cmd == "now" and getattr(a, "at_bt", False) and not a.json:
+                try:
+                    format_at_bt = getattr(lib, "format_at_bt", None)
+                    waqt_display = (data.get("waqt") or {}).get("display", "")
+                    if waqt_display and format_at_bt is not None:
+                        lines = text.split("\n")
+                        for i, line in enumerate(lines):
+                            if line.startswith("Waqt clock  :"):
+                                lines.insert(i + 1, f"AT/BT       : {format_at_bt(waqt_display)}")
+                                break
+                        text = "\n".join(lines)
+                except Exception:
+                    pass  # AT/BT display is experimental; never crash the main command
+            emit(data, text)
         elif a.cmd == "convert":
             have_loc = a.lat is not None and a.lon is not None
             common = dict(calendar_provider=a.provider)

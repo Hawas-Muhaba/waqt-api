@@ -126,6 +126,8 @@ def parse_at_bt(value: Union[str, time, timedelta, int, float, dict[str, Any], A
 
     if isinstance(value, str):
         s_val = value.strip()
+        if s_val.startswith("Waqt "):
+            s_val = s_val[5:].strip()
         m = _TIME_RE.match(s_val)
         if not m:
             raise ValueError(f"Invalid time format for AT/BT conversion: {value!r}")

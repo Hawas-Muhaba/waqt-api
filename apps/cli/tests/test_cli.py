@@ -174,3 +174,22 @@ def test_out_of_range_gregorian_date_prints_the_waqt_day_instead_of_crashing(dat
 def test_out_of_range_instant_prints_the_waqt_clock_and_a_calendar_notice():
     code, out, err = call("now", *ADDIS, "--timezone", "Africa/Addis_Ababa", "--instant", "1699-12-31T12:00:00Z")
     assert code == 0 and "Waqt clock" in out and "unavailable" in out
+
+
+def test_now_at_bt_flag_is_opt_in():
+    code_default, out_default, _ = call("now", *ADDIS, "--timezone", "Africa/Addis_Ababa", *INSTANT)
+    assert code_default == 0
+    assert "AT/BT" not in out_default
+
+    code_flag, out_flag, _ = call("now", *ADDIS, "--timezone", "Africa/Addis_Ababa", *INSTANT, "--at-bt")
+    assert code_flag == 0
+    assert "AT/BT       :" in out_flag
+    assert "BT" in out_flag or "AT" in out_flag
+
+
+def test_now_at_bt_json_flag_leaves_json_unaltered():
+    code_json_default, out_json_default, _ = call("--json", "now", *ADDIS, "--timezone", "Africa/Addis_Ababa", *INSTANT)
+    code_json_atbt, out_json_atbt, _ = call("--json", "now", *ADDIS, "--timezone", "Africa/Addis_Ababa", *INSTANT, "--at-bt")
+    assert code_json_default == 0 and code_json_atbt == 0
+    assert json.loads(out_json_default) == json.loads(out_json_atbt)
+

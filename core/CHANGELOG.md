@@ -2,6 +2,17 @@
 
 All notable changes to the `waqt-core` distribution are documented here.
 
+## 0.7.0 — AT/BT display
+
+**Added:** `waqt_core.display.at_bt` — an experimental, optional 12-hour
+friendly display convention (After Twelve / After Twelve).  Exports
+`format_at_bt(value)`, `parse_at_bt(value)` → `AtBtTime`, and the
+`AtBtTime` dataclass.  Canonical Waqt times, instants, prayer events,
+schedules, and day boundaries are unchanged.  The feature is not included
+in Conformance Contract 2.0.0 and is not a normative Waqt standard
+(governance decision pending).  See
+`core/waqt_core/display/at_bt/SPEC.md` for the full specification.
+
 ## 0.6.0 — API 1.8.0 / conformance 2.0.0
 
 **Changed (behaviour change, DR-0011/DR-0014):** ERR-004 profile fields accept finite numeric values only; nulls, booleans and numeric strings are rejected instead of coerced or treated as omitted. **Added:** `calendar_error_code()` provides the stable CAL-013 machine code for adapters. The independent implementation's upper instant limit remains disclosed; no full-range instant-conformance claim is made.

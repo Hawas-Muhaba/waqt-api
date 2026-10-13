@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "waqt-cli"
-version = "0.3.0"
+version = "0.3.1"
 description = "Reference command-line application for Waqt: local computation, Gregorian/Hijri/Waqt conversion, prayer/event timeline, scheduling, computation metadata."
 readme = "README.md"
 requires-python = ">=3.9"

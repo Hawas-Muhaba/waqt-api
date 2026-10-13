@@ -11,7 +11,7 @@ means.
 
 | Axis | Lives in | Current value | Changes when |
 |---|---|---|---|
-| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.6.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
+| **waqt-core version** | `core/waqt_core/_version.py` (`waqt_core.__version__`) | `0.7.0` | Any change to `waqt-core`'s Python API or behavior — semver against that API. |
 | **Astronomical engine revision** | `core/waqt_core/versioning.py` (`ENGINE_REVISION`) | `"2"` | Only when `solar.py`/`timescale.py`'s *output* changes — see §2. Independent of waqt-core's own version: waqt-core can gain new features (a new endpoint's worth of Python, say) without the engine's numbers moving, and conversely a waqt-core patch release can carry an engine revision bump if that's the only change in it. |
 | **API version** | `waqt/api/common.py` (`API_VERSION`) | `1.8.0` | Any change to the HTTP contract (docs/API.md) — semver against that contract; response shapes remain stable within `/v1/`, and behavior changes are explicitly documented/versioned. |
 | **SDK version** | `sdks/python/pyproject.toml`, `sdks/js/waqt-client/package.json` | Python `0.3.1`, JS `0.3.1` | Any change to the SDK's own public interface. Each SDK also tracks `MAX_KNOWN_API_VERSION` (`1.8.0`): the highest API version it has been tested against, checked at runtime — see `sdks/python/waqt_client/config.py`. |
@@ -35,7 +35,7 @@ above (Sprint 13 audit):
   the running vector-set version and engine identity.
 
 A further thing that looks like a version but is not one: `waqt-cli`
-(`apps/cli`, `0.3.0`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
+(`apps/cli`, `0.3.1`) and `waqt-api-consumer` (`apps/api-consumer`, `0.1.0`)
 have their own versions too, same rule as an SDK — they track their own
 interface, not any of the five axes above.
 
@@ -122,6 +122,17 @@ waqt-core 0.5.0 → 0.6.0 ── engine revision "2" (unchanged: no solar output
      ├── SDKs 0.3.1 / 0.3.1, api-consumer 0.1.0   (unchanged: HTTP only; they omit the provider unless told)
      ├── vector set 2.0             (unchanged: no expected value changed)
      └── conformance contract 2.0.0 (release authorized by DR-0015; independent review not performed by explicit exception)
+```
+AT/BT display feature (experimental opt-in presentation convention):
+
+```
+waqt-core 0.6.0 → 0.7.0 ── engine revision "2" (unchanged: no solar output changed)
+     ├── waqt-api package 0.6.0, API contract 1.8.0   (unchanged; waqt-api pin updated to waqt-core>=0.7.0,<0.8)
+     ├── waqt-local 0.7.0   (unchanged; pin updated to waqt-core>=0.7.0,<0.8)
+     ├── waqt-cli 0.3.0 → 0.3.1   (additive: --at-bt opt-in flag on `waqt now`)
+     ├── SDKs 0.3.1 / 0.3.1   (unchanged: feature is in waqt_core.display.at_bt; no SDK surface change)
+     ├── vector set 2.0   (unchanged: AT/BT is display-only; no expected computation values changed)
+     └── conformance contract 2.0.0   (unchanged: AT/BT is not a normative Waqt Standard; governance decision pending)
 ```
 The API default and waqt-core's default are one definition (`waqt_core.calendar_providers.default`);
 `tests/test_default_provider_single_source.py` fails if any layer re-types it.
