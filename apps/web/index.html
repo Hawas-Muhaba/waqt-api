@@ -3,21 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Overview — Waqt</title>
-<meta name="description" content="Waqt: open Maghrib-to-Maghrib civil time and Hijri calendar API — Islamic time infrastructure for the open web.">
-<meta name="theme-color" content="#10131b">
+<title>Waqt — Open Islamic Time Infrastructure</title>
+<meta name="description" content="Waqt: open Maghrib-to-Maghrib civil time and Hijri calendar API — Islamic time infrastructure for the open web. Precise, transparent, testable.">
+<meta name="theme-color" content="#090c14">
+<meta property="og:title" content="Waqt — Open Islamic Time Infrastructure">
+<meta property="og:description" content="Open Maghrib-to-Maghrib civil time standard. Islamic time infrastructure for developers, researchers, and institutions.">
+<meta property="og:type" content="website">
 <link rel="icon" href="data:,">
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/stitch.css">
 <link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased min-h-screen pt-16">
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- Reading progress bar -->
+<div id="r-progress-bar" aria-hidden="true" style="position:fixed;top:64px;left:0;height:2px;background:linear-gradient(90deg,var(--r-cyan),var(--r-amber));z-index:60;transition:width .1s linear;width:0"></div>
+
+<!-- ═══════════════════════════════════════════ HEADER ═══════════════════════════════════════════ -->
 <header class="fixed top-0 inset-x-0 z-50 h-16 bg-background/90 backdrop-blur border-b border-outline-variant/50" role="banner">
   <div class="max-w-[1400px] mx-auto h-full flex items-center gap-4 px-4 lg:px-8">
     <a href="index.html" class="flex items-center gap-3 mr-auto" aria-label="Waqt — home">
-      <span class="relative grid place-items-center w-9 h-9 border border-primary-container/60 rounded-full" aria-hidden="true"><span class="w-3 h-3 rounded-full bg-primary-container"></span></span>
-      <span class="leading-none"><span class="block font-headline-md text-[18px] tracking-wide text-on-surface">WAQT</span><span class="block font-label-sm text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">Time API</span></span>
+      <span class="waqt-logo-ring" aria-hidden="true"></span>
+      <span class="leading-none">
+        <span class="block font-headline-md text-[18px] tracking-wide text-on-surface">WAQT</span>
+        <span class="block font-label-sm text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">Time API</span>
+      </span>
     </a>
     <button class="nav-toggle items-center gap-2 border border-outline-variant px-3 py-2 font-label-md text-[12px] uppercase tracking-wider text-on-surface" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav aria-label="Primary" class="contents">
@@ -36,108 +49,748 @@
     </nav>
   </div>
 </header>
+
 <main id="main">
 
-<section class="relative overflow-hidden" aria-labelledby="h-home">
-  <div class="absolute inset-0 opacity-60" aria-hidden="true" style="background-image:linear-gradient(rgba(0,240,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(#000 30%,transparent);-webkit-mask-image:linear-gradient(#000 30%,transparent)"></div>
-  <div class="relative max-w-[1400px] mx-auto px-4 lg:px-8 pt-16 pb-10 text-center">
-    <p class="inline-flex items-center gap-2 border border-outline-variant/60 bg-surface-container-low px-3 py-1 font-label-sm text-[11px] tracking-[0.14em] uppercase text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>Open temporal infrastructure · Maghrib-to-Maghrib civil time</p>
-    <h1 id="h-home" class="mt-6 font-headline-xl text-headline-xl-mobile md:text-headline-xl max-w-4xl mx-auto">Islamic Time Infrastructure for the Open Web</h1>
-    <p class="mt-5 text-body-lg text-on-surface-variant max-w-2xl mx-auto">Waqt is an open technical standard and API for computing, representing and interoperating with Islamic time — Maghrib-based day boundaries, astronomical events, Hijri dates and scheduling.</p>
-    <div class="mt-8 flex flex-wrap justify-center gap-3">
-      <a href="live-demo.html" class="inline-flex items-center gap-2 px-5 py-3 bg-primary-container text-on-primary font-label-md text-[12px] uppercase tracking-wider hover:brightness-110">Try Waqt <svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a>
-      <a data-cfg="docs.spec" href="resources.html" class="inline-flex items-center gap-2 px-5 py-3 border border-outline-variant text-on-surface font-label-md text-[12px] uppercase tracking-wider hover:bg-surface-container-high"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>Read the specification</a>
-    </div>
-  </div>
-  <div class="relative max-w-[1400px] mx-auto px-4 lg:px-8 pb-16">
-    <div class="border border-outline-variant/50 bg-surface-container-lowest" id="home-live">
-      <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-2 border-b border-outline-variant/40 font-label-sm text-[11px] text-on-surface-variant">
-        <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="ml-2 tracking-wider">WAQT-VIEWPORT // LIVE CLOCK</span></span>
-        <span class="flex flex-wrap gap-x-4 gap-y-1">ENGINE <b class="text-on-surface" data-bind="engine">—</b> <span>ACCURACY <b class="text-on-surface" data-bind="accuracy">—</b></span> <b data-bind="state" data-bind-state class="tracking-wider">LOADING</b></span>
-      </div>
-      <div class="grid lg:grid-cols-[1.15fr_1fr]">
-        <div class="relative min-h-[260px] lg:min-h-[480px]"><div class=" overflow-hidden bg-surface-container absolute inset-0 "><img class="w-full h-full object-cover" src="assets/img/hero-astronomy.webp" width="1280" height="714" alt="Concept render: observatory-style celestial grid over a desert horizon at dusk"><span class="art-tag">Concept art</span></div>
-          <div class="absolute left-4 top-4 bg-background/80 border border-outline-variant/50 p-3 font-label-sm text-[11px] w-56 hidden sm:block">
-            <div class="text-secondary tracking-wider mb-1">OBSERVER HORIZON</div>
-            <div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">LATITUDE</span><span data-bind="lat" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">LONGITUDE</span><span data-bind="lon" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">TIMEZONE</span><span data-bind="tz" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">ELEVATION</span><span data-bind="elevation" class="text-on-surface text-right mono">—</span></div></div></div>
-        <div class="p-5 md:p-8 flex flex-col justify-center gap-4"><div id="home-banner"></div><div id="home-clock"></div></div>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-px bg-outline-variant/30 font-label-sm text-[11px] text-center text-on-surface-variant">
-        <div class="bg-surface-container-low px-3 py-3"><span class="text-secondary">T₀</span> MAGHRIB (opens)</div><div class="bg-surface-container-low px-3 py-3">[T₀, T₁) WAQT DAY</div>
-        <div class="bg-surface-container-low px-3 py-3">SOLAR EVENTS ON THE DAY</div><div class="bg-surface-container-low px-3 py-3"><span class="text-secondary">T₁</span> NEXT MAGHRIB</div><div class="bg-surface-container-low px-3 py-3 col-span-2 md:col-span-1">HALF-OPEN INTERVAL</div>
-      </div>
-    </div>
-    <p class="mt-3 text-[12px] text-on-surface-variant font-label-sm">Every value in this viewport comes from the Waqt API. If the API cannot be reached the viewport switches to a recorded, frozen sample and says so on the face of the clock.</p>
-  </div>
-</section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Foundational formalisation</p><h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Time is more than a timestamp.</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">A single coordinate frame replacing fragmented calculators, static timetables and midnight-based assumptions.</p></div>
-<div class="grid md:grid-cols-3 gap-6">
-  <article class="bg-surface-container-low p-6 "><div class="flex justify-between font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant"><span>01 // Interval model</span><span class="text-secondary">continuous</span></div><h3 class="mt-4 font-headline-sm text-[16px] uppercase tracking-wide">One temporal model</h3><p class="mt-2 text-body-md text-on-surface-variant">A Waqt day begins at local sunset (Maghrib) and ends at the next one. The reading is ordinary SI time elapsed since Maghrib, so an hour is always 60 minutes.</p><div class="mt-5 bg-surface-container-lowest p-4"><svg viewBox="0 0 260 120" role="img" aria-label="Diagram: the day is the interval from one Maghrib to the next, with the solar transit between them" class="w-full"><path d="M16 86 Q130 -34 244 86" fill="none" stroke="#00f0ff" stroke-width="2"/><line x1="10" y1="86" x2="250" y2="86" stroke="#ffb95f" stroke-dasharray="3 4" opacity=".6"/><circle cx="16" cy="86" r="5" fill="#ffb95f"/><circle cx="244" cy="86" r="5" fill="#ffb95f"/><circle cx="130" cy="26" r="4" fill="#00f0ff"/><g font-family="JetBrains Mono,monospace" font-size="9" fill="#b9cacb"><text x="4" y="106">Maghrib(L, D)</text><text x="256" y="106" text-anchor="end">Maghrib(L, D+1)</text><text x="130" y="14" text-anchor="middle">solar transit (Dhuhr)</text></g></svg><p class="mt-2 text-center font-label-sm text-[11px] bg-surface-container px-2 py-1">[Maghrib(L, D), Maghrib(L, D+1))</p></div></article>
-  <article class="bg-surface-container-low p-6 "><div class="flex justify-between font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant"><span>02 // Conventions</span><span class="text-secondary">parameters</span></div><h3 class="mt-4 font-headline-sm text-[16px] uppercase tracking-wide">Configurable, never hidden</h3><p class="mt-2 text-body-md text-on-surface-variant">Astronomy and the day boundary are fixed. Conventions are explicit request parameters, and changing one moves only the event it governs.</p><div class="mt-5 bg-surface-container-lowest p-4 font-label-sm text-[12px] space-y-2"><div class="flex justify-between"><span class="text-on-surface-variant">fajr_angle</span><span>18.0° default</span></div><div class="flex justify-between"><span class="text-on-surface-variant">isha_angle</span><span>17.0° default</span></div><div class="flex justify-between"><span class="text-on-surface-variant">asr_ratio</span><span>1.0 · 2.0 (Hanafi)</span></div><div class="flex justify-between gap-3"><span class="text-on-surface-variant">calendar_provider</span><span class="text-right">umm-al-qura (default)</span></div><p class="pt-2 text-[11px] text-on-surface-variant">Providers are listed by <code>GET /v1/calendar</code>.</p></div></article>
-  <article class="bg-surface-container-low p-6 "><div class="flex justify-between font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant"><span>03 // Clients</span><span class="text-secondary">one contract</span></div><h3 class="mt-4 font-headline-sm text-[16px] uppercase tracking-wide">One envelope, many clients</h3><p class="mt-2 text-body-md text-on-surface-variant">Every response is the same documented envelope. The web viewer, CLI and the Python and JavaScript client libraries read it; none recompute it.</p><div class="mt-5 bg-surface-container-lowest p-4 font-label-sm text-[12px]"><div class="grid grid-cols-4 gap-2 text-center text-on-surface-variant mb-4"><span><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 5.08 16zm2.95-8H5.08a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg><br>Web</span><span><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16c1.1 0 2-.9 2-2V6a2 2 0 0 0-2-2zm0 14H4V8h16v10zm-2-1h-6v-2h6v2zM7.5 17l-1.41-1.41L8.67 13l-2.59-2.59L7.5 9l4 4-4 4z"/></svg><br>CLI</span><span><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg><br>Python</span><span><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 7v2c0 .55-.45 1-1 1H2v4h1c.55 0 1 .45 1 1v2c0 1.65 1.35 3 3 3h3v-2H7c-.55 0-1-.45-1-1v-2c0-1.3-.84-2.42-2-2.83v-.34C5.16 11.42 6 10.3 6 9V7c0-.55.45-1 1-1h3V4H7C5.35 4 4 5.35 4 7zm17 3c-.55 0-1-.45-1-1V7c0-1.65-1.35-3-3-3h-3v2h3c.55 0 1 .45 1 1v2c0 1.3.84 2.42 2 2.83v.34c-1.16.41-2 1.52-2 2.83v2c0 .55-.45 1-1 1h-3v2h3c1.65 0 3-1.35 3-3v-2c0-.55.45-1 1-1h1v-4h-1z"/></svg><br>JS</span></div><div class="bg-surface-container p-3 text-primary-container">{ meta, data, error }</div></div></article>
-</div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Live data</p><h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">The Waqt temporal coordinate</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">Where you are in the Maghrib-to-Maghrib day, live.</p></div>
-<div class="grid lg:grid-cols-[1.1fr_1fr] gap-6" id="home-coord">
-  <div class="bg-surface-container-low p-6">
-    <div class="flex justify-between items-center font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant"><span>Waqt coordinate · right now</span><b data-bind="state" data-bind-state>LOADING</b></div>
-    <div class="mt-5 mono text-[56px] md:text-[72px] leading-none text-on-surface" data-bind="reading">––:––:––</div>
-    <div class="mt-2 font-label-sm text-[13px] text-on-surface-variant">T₀ + <span data-bind="readingSeconds" class="text-primary-container">—</span> since Maghrib opened</div>
-    <div class="mt-6" id="home-day"></div>
-  </div>
-  <div class="bg-surface-container-low p-6">
-    <div class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant mb-3">Telemetry</div>
-    <div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Maghrib opened</span><span data-bind="open" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Next Maghrib</span><span data-bind="close" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Day length</span><span data-bind="length" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Next event</span><span data-bind="next" class="text-on-surface text-right ">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Countdown</span><span data-bind="countdown" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Hijri date</span><span data-bind="hijri" class="text-on-surface text-right ">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Hijri provider</span><span data-bind="provider" class="text-on-surface text-right ">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Weekday</span><span data-bind="weekday" class="text-on-surface text-right ">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Engine</span><span data-bind="engine" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">ΔT</span><span data-bind="deltaT" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Timescale</span><span data-bind="timescale" class="text-on-surface text-right mono">—</span></div><div class="flex justify-between gap-4 py-1.5 border-b border-outline-variant/30 font-label-sm text-[12px]"><span class="text-on-surface-variant">Last request</span><span data-bind="latency" class="text-on-surface text-right mono">—</span></div>
-    <p class="mt-4 text-[12px] text-on-surface-variant">A Waqt day is not 24 hours; the length above is measured, not assumed.</p><p class="mt-2 text-[12px] text-on-surface-variant" data-bind="hijriNote"></p>
-  </div>
-</div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Ecosystem</p><h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">What happens when Islamic time becomes infrastructure?</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">Most of these are design concepts. The infrastructure under them is real.</p></div>
-<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  <article class="bg-surface-container-low flex flex-col"><div class="relative overflow-hidden bg-surface-container aspect-[4/3] "><img class="w-full h-full object-cover" src="assets/img/mosque-wall-clock.webp" width="1280" height="714" alt="Mosque Waqt clock (concept art)" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div><div class="p-5 flex flex-col gap-2 flex-1"><div class="flex justify-between items-start gap-2"><h3 class="font-headline-sm text-[16px]">Mosque Waqt clock</h3><span class="badge concept">CONCEPT</span></div><p class="text-body-md text-on-surface-variant">A wall display with the Waqt reading, the next event and the Maghrib boundary.</p><p class="mt-auto pt-2 font-label-sm text-[11px] text-on-surface-variant">Data: /v1/waqt · no device deployed</p></div></article>
-  <article class="bg-surface-container-low flex flex-col"><div class="relative overflow-hidden bg-surface-container aspect-[4/3] "><img class="w-full h-full object-cover" src="assets/img/smartwatch.webp" width="900" height="1117" alt="Waqt smartwatch (concept art)" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div><div class="p-5 flex flex-col gap-2 flex-1"><div class="flex justify-between items-start gap-2"><h3 class="font-headline-sm text-[16px]">Waqt smartwatch</h3><span class="badge concept">CONCEPT</span></div><p class="text-body-md text-on-surface-variant">The same event timeline on a wrist, drawn from the same response as the web clock.</p><p class="mt-auto pt-2 font-label-sm text-[11px] text-on-surface-variant">Data: /v1/waqt · no watch app exists</p></div></article>
-  <article class="bg-surface-container-low flex flex-col"><div class="relative overflow-hidden bg-surface-container aspect-[4/3] "><img class="w-full h-full object-cover" src="assets/img/mobile-app.webp" width="900" height="1117" alt="Waqt mobile app (concept art)" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div><div class="p-5 flex flex-col gap-2 flex-1"><div class="flex justify-between items-start gap-2"><h3 class="font-headline-sm text-[16px]">Waqt mobile app</h3><span class="badge concept">CONCEPT</span></div><p class="text-body-md text-on-surface-variant">A phone-first day ring, next event and Hijri date.</p><p class="mt-auto pt-2 font-label-sm text-[11px] text-on-surface-variant">Data: /v1/waqt · no mobile app published</p></div></article>
-  <article class="bg-surface-container-low flex flex-col"><div class="relative overflow-hidden bg-surface-container aspect-[4/3] "><img class="w-full h-full object-cover" src="assets/img/institutional-calendar.webp" width="1280" height="714" alt="Institutional calendars (concept art)" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div><div class="p-5 flex flex-col gap-2 flex-1"><div class="flex justify-between items-start gap-2"><h3 class="font-headline-sm text-[16px]">Institutional calendars</h3><span class="badge concept">CONCEPT</span></div><p class="text-body-md text-on-surface-variant">Islamic week, fiscal and academic years for schools, offices and mosques.</p><p class="mt-auto pt-2 font-label-sm text-[11px] text-on-surface-variant">Backend: /v1/institutional/* exist · no calendar product</p></div></article>
-  <article class="bg-surface-container-low flex flex-col"><div class="relative overflow-hidden bg-surface-container aspect-[4/3] "><img class="w-full h-full object-cover" src="assets/img/developer-api.webp" width="1280" height="714" alt="Developer tooling (concept art)" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div><div class="p-5 flex flex-col gap-2 flex-1"><div class="flex justify-between items-start gap-2"><h3 class="font-headline-sm text-[16px]">Developer tooling</h3><span class="badge real">REAL</span></div><p class="text-body-md text-on-surface-variant">The HTTP API, an offline CLI, the reference viewer and Python/JS client libraries exist today.</p><p class="mt-auto pt-2 font-label-sm text-[11px] text-on-surface-variant">See API and Resources</p></div></article>
-  <article class="bg-surface-container-low p-6 flex flex-col justify-center gap-3"><p class="font-label-sm text-[11px] tracking-[0.12em] uppercase text-on-surface-variant">All applications</p><p class="text-body-md text-on-surface-variant">Ten applications, each labelled REAL, CONCEPT or FUTURE — plus five interactive demonstrations in the Experience Lab.</p><a class="inline-flex items-center gap-2 text-primary-container font-label-md text-[12px] uppercase tracking-wider hover:underline" href="applications.html">See applications <svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a><a class="inline-flex items-center gap-2 text-primary-container font-label-md text-[12px] uppercase tracking-wider hover:underline" href="lab.html">Open the Experience Lab <svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a></article>
-</div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="mb-10"><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Build with it</p><h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">One temporal infrastructure. Many experiences.</h2></div>
-<div class="grid lg:grid-cols-2 gap-8 items-center">
-  <div class="relative overflow-hidden bg-surface-container aspect-video "><img class="w-full h-full object-cover" src="assets/img/api-ecosystem.webp" width="1280" height="714" alt="Concept render: devices connected to a central Waqt clock" loading="lazy" decoding="async"><span class="art-tag">Concept art</span></div>
-  <div><pre class="code" tabindex="0" aria-label="Example request and response">curl "https://&lt;your-waqt-api&gt;/v1/waqt?lat=9.0192&amp;lon=38.7525"
+<!-- ═══════════════════════════════════════════ HERO ═══════════════════════════════════════════ -->
+<section class="r-hero" aria-labelledby="h-home">
+  <div class="r-hero-grid" aria-hidden="true"></div>
+  <div class="r-hero-grain" aria-hidden="true"></div>
+  <div class="r-hero-glow-1" aria-hidden="true"></div>
+  <div class="r-hero-glow-2" aria-hidden="true"></div>
 
-{ "meta":  { "api_version": "…", "spec": "waqt-core/0.1" },
-  "data":  { "status": "OK",
-             "day":   { "maghrib_open": "…", "maghrib_close": "…", "length_si_seconds": … },
-             "waqt":  { "reading": { "display": "04:22:28", "seconds": … } },
-             "events": [ … ], "next_event": { … }, "hijri": { … } },
-  "error": null }</pre><div class="mt-4 flex flex-wrap gap-3"><a class="inline-flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary font-label-md text-[12px] uppercase tracking-wider" href="api.html">API reference <svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg></a><a class="inline-flex items-center gap-2 px-4 py-2 border border-outline-variant font-label-md text-[12px] uppercase tracking-wider hover:bg-surface-container-high" href="lab.html#build">Build an application</a></div></div>
-</div></div></section><section class="py-16 md:py-20 border-t border-outline-variant/30"><div class="max-w-[1400px] mx-auto px-4 lg:px-8"><div class="bg-surface-container-low border border-outline-variant/40 p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
-  <div><p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Have an idea?</p><h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Help shape Waqt.</h2><p class="mt-3 text-body-md text-on-surface-variant max-w-2xl">Project ideas, proposals, contribution requests, or a question — write to <a data-email class="text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>. Qualified experts and contributors are welcome.</p></div>
-  <a data-idea href="mailto:waqtapi@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-on-primary font-label-md text-[12px] uppercase tracking-wider hover:brightness-110"><svg class="ic " aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 4.99L4 6h16zm0 12H4V8l8 5 8-5v10z"/></svg>Send an Idea</a></div></div></section>
+  <div class="r-container relative" style="z-index:2">
+
+    <!-- Eyebrow -->
+    <div class="text-center mb-8">
+      <span class="r-eyebrow" id="h-home" role="banner">
+        <span class="r-eyebrow-dot" aria-hidden="true"></span>
+        Open temporal infrastructure &nbsp;·&nbsp; Maghrib-to-Maghrib civil time
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <div class="text-center max-w-5xl mx-auto mb-6">
+      <h1 class="r-h1">
+        Islamic Time Infrastructure<br>
+        <span class="r-grad-text">for the Open Web</span>
+      </h1>
+    </div>
+
+    <!-- Sub-headline -->
+    <p class="r-lead text-center mx-auto mb-10" style="max-width:580px">
+      Waqt is an open technical standard and API for computing, representing, and interoperating with
+      Islamic time — Maghrib-based day boundaries, prayer events, Hijri dates, and scheduling.
+    </p>
+
+    <!-- CTA row -->
+    <div class="flex flex-wrap justify-center gap-3 mb-14" style="animation:r-fade-up 1s cubic-bezier(.16,1,.3,1) .3s both">
+      <a href="live-demo.html" class="r-btn r-btn-primary">
+        Try Waqt Live
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg>
+      </a>
+      <a data-cfg="docs.spec" href="resources.html" class="r-btn r-btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 16h8v2H8zm0-4h8v2H8zm6-10H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+        Read the Specification
+      </a>
+      <a href="api.html" class="r-btn r-btn-amber">
+        API Explorer →
+      </a>
+    </div>
+
+    <!-- Live Waqt viewport panel -->
+    <div id="home-live" class="r-hud-glow" style="border-radius:4px;overflow:hidden;border:1px solid rgba(0,240,255,0.12)">
+      <!-- Viewport chrome bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-b border-outline-variant/40 font-label-sm text-[11px] text-on-surface-variant" style="background:rgba(13,16,24,0.9)">
+        <span class="flex items-center gap-2">
+          <span class="r-terminal-dot" style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+          <span class="r-terminal-dot" style="width:10px;height:10px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+          <span class="r-terminal-dot" style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+          <span class="ml-3 tracking-[0.14em] text-on-surface-variant" style="font-size:10px;text-transform:uppercase;letter-spacing:.14em">WAQT-VIEWPORT // LIVE CLOCK</span>
+        </span>
+        <span class="flex flex-wrap gap-x-4 gap-y-1">
+          ENGINE <b class="text-on-surface" data-bind="engine">—</b>
+          <span>ACCURACY <b class="text-on-surface" data-bind="accuracy">—</b></span>
+          <b data-bind="state" data-bind-state class="tracking-wider">LOADING</b>
+        </span>
+      </div>
+
+      <!-- Viewport body: image left, clock right -->
+      <div class="grid lg:grid-cols-[1.15fr_1fr]">
+        <!-- Hero image with overlay HUD -->
+        <div class="relative min-h-[260px] lg:min-h-[500px]">
+          <div class="overflow-hidden bg-surface-container absolute inset-0">
+            <img class="w-full h-full object-cover" src="assets/img/hero-astronomy.webp" width="1280" height="714" alt="Concept render: observatory-style celestial grid over a desert horizon at dusk">
+            <span class="art-tag">Concept art</span>
+          </div>
+          <!-- HUD overlay -->
+          <div class="absolute left-4 top-4 r-viewport-hud w-56 hidden sm:block" style="font-size:11px">
+            <div class="r-viewport-section">OBSERVER HORIZON</div>
+            <div class="r-viewport-row"><span>LATITUDE</span><b data-bind="lat">—</b></div>
+            <div class="r-viewport-row"><span>LONGITUDE</span><b data-bind="lon">—</b></div>
+            <div class="r-viewport-row"><span>TIMEZONE</span><b data-bind="tz">—</b></div>
+            <div class="r-viewport-row"><span>ELEVATION</span><b data-bind="elevation">—</b></div>
+          </div>
+          <!-- Bottom-left: Hijri date badge -->
+          <div class="absolute left-4 bottom-4 hidden sm:block" style="background:rgba(9,12,20,.85);border:1px solid rgba(255,185,95,.2);border-radius:3px;padding:8px 12px;font-family:var(--mono);font-size:11px">
+            <div style="color:var(--r-amber);letter-spacing:.12em;font-size:9px;text-transform:uppercase;margin-bottom:3px">Hijri Date (Umm al-Qura)</div>
+            <div data-bind="hijri" style="color:var(--r-text);font-size:13px">—</div>
+          </div>
+        </div>
+
+        <!-- Clock panel -->
+        <div class="p-5 md:p-8 flex flex-col justify-center gap-4" style="background:rgba(9,12,20,0.6)">
+          <div id="home-banner"></div>
+          <div id="home-clock"></div>
+        </div>
+      </div>
+
+      <!-- Bottom metrics strip -->
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-px font-label-sm text-[11px] text-center text-on-surface-variant" style="background:rgba(59,73,75,0.2)">
+        <div class="px-3 py-3" style="background:rgba(9,12,20,.8)"><span class="text-secondary">T₀</span> MAGHRIB (opens)</div>
+        <div class="px-3 py-3" style="background:rgba(9,12,20,.8)">[T₀, T₁) WAQT DAY</div>
+        <div class="px-3 py-3" style="background:rgba(9,12,20,.8)">SOLAR EVENTS ON THE DAY</div>
+        <div class="px-3 py-3" style="background:rgba(9,12,20,.8)"><span class="text-secondary">T₁</span> NEXT MAGHRIB</div>
+        <div class="px-3 py-3 col-span-2 md:col-span-1" style="background:rgba(9,12,20,.8)">HALF-OPEN INTERVAL</div>
+      </div>
+    </div>
+
+    <p class="mt-3 text-[12px] text-on-surface-variant font-label-sm">
+      Every value comes from the Waqt API. If the API cannot be reached, the viewport switches to a recorded sample and says so on the clock face.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ WHY WAQT ═══════════════════════════════════════════ -->
+<section class="r-section r-section-alt" aria-labelledby="h-why">
+  <div class="r-container">
+    <div class="max-w-3xl mx-auto text-center mb-14 r-reveal">
+      <p class="r-section-label">The core insight</p>
+      <h2 id="h-why" class="r-section-title">Time is more than a timestamp.</h2>
+      <p class="r-section-body mx-auto text-center">
+        A single coordinate frame replacing fragmented calculators, static timetables, and midnight-based assumptions —
+        giving every application a shared, verifiable foundation for Islamic time.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Card 1: Interval model -->
+      <article class="r-card r-reveal r-reveal-delay-1">
+        <div class="r-card-num">01 // Interval model</div>
+        <div class="r-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+        </div>
+        <h3 class="r-card-title">One temporal model</h3>
+        <p class="r-card-body">A Waqt day begins at local sunset (Maghrib) and ends at the next one. The reading is ordinary SI time elapsed since Maghrib, so an hour is always 60 minutes.</p>
+        <div class="mt-5" style="background:var(--r-bg-1);border:1px solid var(--r-line);border-radius:3px;padding:1.25rem">
+          <svg viewBox="0 0 260 120" role="img" aria-label="Diagram: the day is the interval from one Maghrib to the next, with the solar transit between them" class="w-full">
+            <defs>
+              <linearGradient id="arc-grad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#ffb95f" stop-opacity=".7"/>
+                <stop offset="50%" stop-color="#00f0ff" stop-opacity=".9"/>
+                <stop offset="100%" stop-color="#ffb95f" stop-opacity=".7"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 90 Q130 -20 244 90" fill="none" stroke="url(#arc-grad)" stroke-width="2"/>
+            <line x1="10" y1="90" x2="250" y2="90" stroke="#ffb95f" stroke-dasharray="3 4" opacity=".45"/>
+            <circle cx="16" cy="90" r="6" fill="#ffb95f" opacity=".9"/>
+            <circle cx="244" cy="90" r="6" fill="#ffb95f" opacity=".9"/>
+            <circle cx="130" cy="28" r="5" fill="#00f0ff" opacity=".9"/>
+            <g font-family="JetBrains Mono,monospace" font-size="9" fill="#b9cacb">
+              <text x="4" y="110">Maghrib(L, D)</text>
+              <text x="256" y="110" text-anchor="end">Maghrib(L, D+1)</text>
+              <text x="130" y="15" text-anchor="middle" fill="#00f0ff">solar transit</text>
+            </g>
+          </svg>
+          <p class="mt-2 text-center font-label-sm text-[11px] px-2 py-1" style="background:var(--r-bg-2);color:var(--r-cyan);border-radius:2px">[Maghrib(L, D),&nbsp;Maghrib(L, D+1))</p>
+        </div>
+      </article>
+
+      <!-- Card 2: Configurable -->
+      <article class="r-card r-reveal r-reveal-delay-2">
+        <div class="r-card-num">02 // Conventions</div>
+        <div class="r-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        </div>
+        <h3 class="r-card-title">Configurable, never hidden</h3>
+        <p class="r-card-body">Astronomy and the day boundary are fixed. Conventions are explicit request parameters — changing one moves only the event it governs.</p>
+        <div class="mt-5" style="background:var(--r-bg-1);border:1px solid var(--r-line);border-radius:3px;padding:1rem;font-size:12px;font-family:var(--mono)">
+          <div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--r-line)"><span style="color:var(--r-text-3)">fajr_angle</span><span style="color:var(--r-amber)">18.0°</span></div>
+          <div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--r-line)"><span style="color:var(--r-text-3)">isha_angle</span><span style="color:var(--r-amber)">17.0°</span></div>
+          <div class="flex justify-between py-1.5" style="border-bottom:1px solid var(--r-line)"><span style="color:var(--r-text-3)">asr_ratio</span><span style="color:var(--r-text)">1.0 · 2.0 (Hanafi)</span></div>
+          <div class="flex justify-between py-1.5"><span style="color:var(--r-text-3)">calendar_provider</span><span style="color:var(--r-cyan)">umm-al-qura</span></div>
+          <p class="pt-2 text-[11px]" style="color:var(--r-text-4)">Providers listed by <code>GET /v1/calendar</code></p>
+        </div>
+      </article>
+
+      <!-- Card 3: One envelope -->
+      <article class="r-card r-reveal r-reveal-delay-3">
+        <div class="r-card-num">03 // Clients</div>
+        <div class="r-card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56A8.03 8.03 0 0 1 18.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96z"/></svg>
+        </div>
+        <h3 class="r-card-title">One envelope, many clients</h3>
+        <p class="r-card-body">Every response is the same documented envelope. The web viewer, CLI, and the Python and JavaScript client libraries read it — none recompute it.</p>
+        <div class="mt-5" style="background:var(--r-bg-1);border:1px solid var(--r-line);border-radius:3px;padding:1rem;font-size:12px;font-family:var(--mono)">
+          <div class="grid grid-cols-4 gap-2 text-center mb-4" style="color:var(--r-text-3);font-size:11px">
+            <div style="display:grid;gap:4px;place-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2z"/></svg>Web
+            </div>
+            <div style="display:grid;gap:4px;place-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16c1.1 0 2-.9 2-2V6a2 2 0 0 0-2-2z"/></svg>CLI
+            </div>
+            <div style="display:grid;gap:4px;place-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4z"/></svg>Python
+            </div>
+            <div style="display:grid;gap:4px;place-items:center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 7v2c0 .55-.45 1-1 1H2v4h1c.55 0 1 .45 1 1v2c0 1.65 1.35 3 3 3h3v-2H7c-.55 0-1-.45-1-1z"/></svg>JS
+            </div>
+          </div>
+          <div style="background:var(--r-bg-2);border:1px solid rgba(0,240,255,.15);padding:10px 14px;border-radius:2px;color:var(--r-cyan);text-align:center;font-size:13px">{ meta, data, error }</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ WAQT COORDINATE ═══════════════════════════════════════════ -->
+<section class="r-section" aria-labelledby="h-coord">
+  <div class="r-container">
+    <div class="mb-10 r-reveal">
+      <p class="r-section-label">Live data</p>
+      <h2 id="h-coord" class="r-section-title">The Waqt temporal coordinate</h2>
+      <p class="r-section-body">Where you are in the Maghrib-to-Maghrib day, live.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-6 r-reveal" id="home-coord">
+      <div class="r-card" style="background:var(--r-bg-2)">
+        <div class="flex justify-between items-center r-card-num mb-4">
+          <span>Waqt coordinate · right now</span>
+          <b data-bind="state" data-bind-state>LOADING</b>
+        </div>
+        <div class="mono text-[56px] md:text-[72px] leading-none" style="color:var(--r-text);font-variant-numeric:tabular-nums" data-bind="reading">––:––:––</div>
+        <div class="mt-2 font-label-sm text-[13px]" style="color:var(--r-text-2)">T₀ + <span data-bind="readingSeconds" style="color:var(--r-cyan)">—</span> since Maghrib opened</div>
+        <div class="mt-6" id="home-day"></div>
+      </div>
+
+      <div class="r-card" style="background:var(--r-bg-2)">
+        <div class="r-card-num mb-4">Telemetry</div>
+        <dl style="display:grid;gap:0;font-family:var(--mono);font-size:12px">
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Maghrib opened</dt><dd data-bind="open" class="text-right" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Next Maghrib</dt><dd data-bind="close" class="text-right" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Day length</dt><dd data-bind="length" class="text-right" style="color:var(--r-cyan)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Next event</dt><dd data-bind="next" class="text-right" style="color:var(--r-amber)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Countdown</dt><dd data-bind="countdown" class="text-right mono" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Hijri date</dt><dd data-bind="hijri" class="text-right" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Hijri provider</dt><dd data-bind="provider" class="text-right" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2" style="border-bottom:1px solid rgba(59,73,80,.3)"><dt style="color:var(--r-text-3)">Engine</dt><dd data-bind="engine" class="text-right mono" style="color:var(--r-text)">—</dd></div>
+          <div class="flex justify-between gap-4 py-2"><dt style="color:var(--r-text-3)">Last request</dt><dd data-bind="latency" class="text-right mono" style="color:var(--r-text)">—</dd></div>
+        </dl>
+        <p class="mt-4 text-[12px]" style="color:var(--r-text-4)">A Waqt day is not 24 hours; the length above is measured, not assumed.</p>
+        <p class="mt-2 text-[12px]" style="color:var(--r-text-4)" data-bind="hijriNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOUR-LAYER DIAGRAM ═══════════════════════════════════════════ -->
+<section class="r-section r-section-alt" aria-labelledby="h-layers">
+  <div class="r-container">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div class="r-reveal">
+        <p class="r-section-label">Conceptual architecture</p>
+        <h2 id="h-layers" class="r-section-title">Four distinct concerns, kept separate</h2>
+        <p class="r-section-body mb-8">
+          Software often conflates day boundaries, clock readings, prayer events, and Hijri calendar labels.
+          Waqt models them as four independent layers so applications can use each one correctly.
+        </p>
+        <a href="problem.html" class="r-btn r-btn-ghost" style="display:inline-flex">See the problem in full →</a>
+      </div>
+
+      <div class="r-reveal r-reveal-delay-1">
+        <div class="r-layer-stack">
+          <div class="r-layer r-layer:hover" style="border-color:rgba(0,240,255,0.25);background:rgba(0,240,255,0.04)">
+            <span class="r-layer-num" style="color:var(--r-cyan)">L1</span>
+            <span class="r-layer-label">Day boundary</span>
+            <span class="r-layer-desc" style="color:var(--r-text-3)">Astronomical: local Maghrib instant</span>
+            <span class="r-badge r-badge-live r-layer-badge">FIXED</span>
+          </div>
+          <div style="text-align:center;padding:4px 0;font-size:14px;color:var(--r-text-4)">↕ independent</div>
+          <div class="r-layer" style="border-color:rgba(94,245,224,0.2)">
+            <span class="r-layer-num" style="color:var(--r-teal)">L2</span>
+            <span class="r-layer-label">Waqt clock</span>
+            <span class="r-layer-desc" style="color:var(--r-text-3)">SI seconds elapsed from T₀</span>
+            <span class="r-badge r-badge-live r-layer-badge">FIXED</span>
+          </div>
+          <div style="text-align:center;padding:4px 0;font-size:14px;color:var(--r-text-4)">↕ independent</div>
+          <div class="r-layer" style="border-color:rgba(255,185,95,0.2)">
+            <span class="r-layer-num" style="color:var(--r-amber)">L3</span>
+            <span class="r-layer-label">Prayer events</span>
+            <span class="r-layer-desc" style="color:var(--r-text-3)">Configurable positions on the clock</span>
+            <span class="r-badge r-badge-amber r-layer-badge">PARAM</span>
+          </div>
+          <div style="text-align:center;padding:4px 0;font-size:14px;color:var(--r-text-4)">↕ independent</div>
+          <div class="r-layer" style="border-color:rgba(139,127,255,0.2)">
+            <span class="r-layer-num" style="color:var(--r-violet)">L4</span>
+            <span class="r-layer-label">Hijri label</span>
+            <span class="r-layer-desc" style="color:var(--r-text-3)">Pluggable calendar provider</span>
+            <span class="r-badge r-badge-violet r-layer-badge">PLUG-IN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ QUICK API ═══════════════════════════════════════════ -->
+<section class="r-section" aria-labelledby="h-api-quick">
+  <div class="r-container">
+    <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+      <!-- Terminal -->
+      <div class="r-reveal">
+        <div class="r-terminal">
+          <div class="r-terminal-bar">
+            <div class="r-terminal-dot"></div>
+            <div class="r-terminal-dot"></div>
+            <div class="r-terminal-dot"></div>
+            <span class="r-terminal-label">WAQT API · LIVE REQUEST</span>
+          </div>
+          <div class="r-terminal-body" data-copy>
+<span class="r-code-d">$ </span><span class="r-code-c">curl</span> <span class="r-code-a">"https://&lt;waqt-api&gt;/v1/waqt?lat=9.019&amp;lon=38.752"</span>
+
+<span class="r-code-d">{</span>
+  <span class="r-code-c">"meta"</span><span class="r-code-d">: {</span>
+    <span class="r-code-t">"api_version"</span><span class="r-code-d">: </span><span class="r-code-a">"1.7.0"</span><span class="r-code-d">,</span>
+    <span class="r-code-t">"spec"</span><span class="r-code-d">: </span><span class="r-code-a">"waqt-core/0.1"</span>
+  <span class="r-code-d">},</span>
+  <span class="r-code-c">"data"</span><span class="r-code-d">: {</span>
+    <span class="r-code-t">"status"</span><span class="r-code-d">: </span><span class="r-code-a">"OK"</span><span class="r-code-d">,</span>
+    <span class="r-code-t">"waqt"</span><span class="r-code-d">: { </span><span class="r-code-t">"reading"</span><span class="r-code-d">: { </span><span class="r-code-t">"display"</span><span class="r-code-d">: </span><span class="r-code-a">"04:22:28"</span><span class="r-code-d"> } },</span>
+    <span class="r-code-t">"day"</span><span class="r-code-d">: { </span><span class="r-code-t">"length_si_seconds"</span><span class="r-code-d">: </span><span class="r-code-a">86712</span><span class="r-code-d"> },</span>
+    <span class="r-code-t">"hijri"</span><span class="r-code-d">: { </span><span class="r-code-t">"date"</span><span class="r-code-d">: </span><span class="r-code-a">"…"</span><span class="r-code-d">, </span><span class="r-code-t">"provider"</span><span class="r-code-d">: </span><span class="r-code-a">"umm-al-qura"</span><span class="r-code-d"> },</span>
+    <span class="r-code-t">"events"</span><span class="r-code-d">: [ … ]</span>
+  <span class="r-code-d">},</span>
+  <span class="r-code-c">"error"</span><span class="r-code-d">: </span><span class="r-code-a">null</span>
+<span class="r-code-d">}</span></div>
+        </div>
+      </div>
+
+      <!-- Text + actions -->
+      <div class="r-reveal r-reveal-delay-1">
+        <p class="r-section-label">Build with it</p>
+        <h2 id="h-api-quick" class="r-section-title">One temporal infrastructure. Many experiences.</h2>
+        <p class="r-section-body mb-8">
+          HTTP API · Python SDK · JavaScript SDK · offline CLI · conformance test vectors.
+          Everything returns the same documented envelope — no hidden computation on the client side.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="r-btn r-btn-primary" href="api.html">API Reference →</a>
+          <a class="r-btn r-btn-ghost" href="resources.html#sdks">SDKs &amp; Libraries</a>
+        </div>
+
+        <!-- SDK badges row -->
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="r-badge r-badge-live">
+            <span class="r-badge-dot"></span> Python SDK · PyPI
+          </span>
+          <span class="r-badge r-badge-cyan">
+            <span class="r-badge-dot"></span> JS SDK · npm
+          </span>
+          <span class="r-badge r-badge-amber">
+            <span class="r-badge-dot"></span> CLI · waqt-cli
+          </span>
+          <span class="r-badge r-badge-violet">
+            <span class="r-badge-dot"></span> REST API
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ AT/BT DISPLAY ═══════════════════════════════════════════ -->
+<section class="r-section r-section-alt" aria-labelledby="h-atbt">
+  <div class="r-container">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="r-reveal">
+        <p class="r-section-label">Optional feature · AT/BT Display</p>
+        <h2 id="h-atbt" class="r-section-title">After Twelve / Before Twelve</h2>
+        <p class="r-section-body mb-4">
+          An optional human-friendly display layer — analogous to AM/PM but mapped to the Waqt clock:
+          hours 00–11 are <strong style="color:var(--r-cyan)">BT (Before Twelve)</strong>,
+          hours 12–23 are <strong style="color:var(--r-amber)">AT (After Twelve)</strong>.
+        </p>
+        <div class="r-notice mb-6">
+          <strong>AT/BT is presentation only.</strong> It does not change canonical Waqt time, prayer events, day boundaries, calculations, or the Hijri date.
+        </div>
+        <a href="lab.html#atbt" class="r-btn r-btn-ghost">Explore in the Experience Lab →</a>
+      </div>
+
+      <!-- Interactive slider -->
+      <div class="r-reveal r-reveal-delay-1">
+        <div class="r-atbt-slider-wrap">
+          <div class="r-atbt-slider-label">Canonical Waqt time</div>
+          <div class="mono mb-4" style="font-size:clamp(1.6rem,4vw,2.4rem);color:var(--r-text);font-variant-numeric:tabular-nums" id="r-atbt-out-canon">12:00</div>
+
+          <input id="r-atbt-slider" type="range" min="0" max="1439" value="720"
+            style="width:100%;accent-color:var(--r-cyan);margin-bottom:1.5rem"
+            aria-label="Slide to explore AT/BT conversion">
+
+          <div class="r-atbt-slider-label">AT/BT friendly display</div>
+          <div class="flex items-baseline gap-2">
+            <span class="r-atbt-display-big" id="r-atbt-out-disp">12:00</span>
+            <span class="r-atbt-period-badge r-atbt-at" id="r-atbt-out-period">AT</span>
+          </div>
+
+          <hr class="r-divider" style="margin:1.5rem 0">
+
+          <!-- Mapping table (compact) -->
+          <table class="r-atbt-table" aria-label="AT/BT conversion examples">
+            <thead><tr>
+              <th>Canonical</th>
+              <th class="r-atbt-arrow" aria-hidden="true">→</th>
+              <th>Friendly</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="r-atbt-canonical">00:00</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">12:00</span> <span class="r-atbt-period r-atbt-bt" style="background:rgba(0,240,255,.1);padding:2px 6px;border-radius:2px;font-size:11px">BT</span></td></tr>
+              <tr><td class="r-atbt-canonical">06:00</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">6:00</span> <span class="r-atbt-period r-atbt-bt" style="background:rgba(0,240,255,.1);padding:2px 6px;border-radius:2px;font-size:11px">BT</span></td></tr>
+              <tr><td class="r-atbt-canonical">11:59</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">11:59</span> <span class="r-atbt-period r-atbt-bt" style="background:rgba(0,240,255,.1);padding:2px 6px;border-radius:2px;font-size:11px">BT</span></td></tr>
+              <tr><td class="r-atbt-canonical">12:00</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">12:00</span> <span class="r-atbt-period r-atbt-at" style="background:rgba(255,185,95,.1);padding:2px 6px;border-radius:2px;font-size:11px">AT</span></td></tr>
+              <tr><td class="r-atbt-canonical">17:50</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">5:50</span> <span class="r-atbt-period r-atbt-at" style="background:rgba(255,185,95,.1);padding:2px 6px;border-radius:2px;font-size:11px">AT</span></td></tr>
+              <tr><td class="r-atbt-canonical">23:59</td><td class="r-atbt-arrow">→</td><td><span class="r-atbt-display">11:59</span> <span class="r-atbt-period r-atbt-at" style="background:rgba(255,185,95,.1);padding:2px 6px;border-radius:2px;font-size:11px">AT</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ECOSYSTEM / APPLICATIONS ═══════════════════════════════════════════ -->
+<section class="r-section" aria-labelledby="h-ecosystem">
+  <div class="r-container">
+    <div class="mb-12 r-reveal">
+      <p class="r-section-label">Ecosystem</p>
+      <h2 id="h-ecosystem" class="r-section-title">What happens when Islamic time becomes infrastructure?</h2>
+      <p class="r-section-body">Most of these are design concepts. The infrastructure under them is real.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="r-card r-card-amber r-reveal r-reveal-delay-1" style="display:flex;flex-direction:column">
+        <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--r-bg-3);margin:-1.5rem -1.5rem 1.5rem;border-radius:3px 3px 0 0">
+          <img class="w-full h-full object-cover" src="assets/img/mosque-wall-clock.webp" width="1280" height="714" alt="Mosque Waqt clock (concept art)" loading="lazy" decoding="async">
+          <span class="art-tag">Concept art</span>
+          <span class="r-badge r-badge-amber" style="position:absolute;top:10px;right:10px">CONCEPT</span>
+        </div>
+        <h3 class="r-card-title">Mosque Waqt clock</h3>
+        <p class="r-card-body">A wall display with the Waqt reading, the next event and the Maghrib boundary.</p>
+        <p class="mt-auto pt-3 font-label-sm text-[11px]" style="color:var(--r-text-4)">Data: /v1/waqt · no device deployed</p>
+      </article>
+
+      <article class="r-card r-card-amber r-reveal r-reveal-delay-2" style="display:flex;flex-direction:column">
+        <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--r-bg-3);margin:-1.5rem -1.5rem 1.5rem;border-radius:3px 3px 0 0">
+          <img class="w-full h-full object-cover" src="assets/img/smartwatch.webp" width="900" height="1117" alt="Waqt smartwatch (concept art)" loading="lazy" decoding="async">
+          <span class="art-tag">Concept art</span>
+          <span class="r-badge r-badge-amber" style="position:absolute;top:10px;right:10px">CONCEPT</span>
+        </div>
+        <h3 class="r-card-title">Waqt smartwatch</h3>
+        <p class="r-card-body">The same event timeline on a wrist, drawn from the same response as the web clock.</p>
+        <p class="mt-auto pt-3 font-label-sm text-[11px]" style="color:var(--r-text-4)">Data: /v1/waqt · no watch app exists</p>
+      </article>
+
+      <article class="r-card r-card-amber r-reveal r-reveal-delay-3" style="display:flex;flex-direction:column">
+        <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--r-bg-3);margin:-1.5rem -1.5rem 1.5rem;border-radius:3px 3px 0 0">
+          <img class="w-full h-full object-cover" src="assets/img/mobile-app.webp" width="900" height="1117" alt="Waqt mobile app (concept art)" loading="lazy" decoding="async">
+          <span class="art-tag">Concept art</span>
+          <span class="r-badge r-badge-amber" style="position:absolute;top:10px;right:10px">CONCEPT</span>
+        </div>
+        <h3 class="r-card-title">Waqt mobile app</h3>
+        <p class="r-card-body">A phone-first day ring, next event and Hijri date — all from the live API.</p>
+        <p class="mt-auto pt-3 font-label-sm text-[11px]" style="color:var(--r-text-4)">Data: /v1/waqt · no mobile app published</p>
+      </article>
+
+      <article class="r-card r-card-amber r-reveal" style="display:flex;flex-direction:column">
+        <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--r-bg-3);margin:-1.5rem -1.5rem 1.5rem;border-radius:3px 3px 0 0">
+          <img class="w-full h-full object-cover" src="assets/img/institutional-calendar.webp" width="1280" height="714" alt="Institutional calendars (concept art)" loading="lazy" decoding="async">
+          <span class="art-tag">Concept art</span>
+          <span class="r-badge r-badge-amber" style="position:absolute;top:10px;right:10px">CONCEPT</span>
+        </div>
+        <h3 class="r-card-title">Institutional calendars</h3>
+        <p class="r-card-body">Islamic week, fiscal and academic years for schools, offices, and mosques.</p>
+        <p class="mt-auto pt-3 font-label-sm text-[11px]" style="color:var(--r-text-4)">Backend: /v1/institutional/* · no calendar product</p>
+      </article>
+
+      <article class="r-card r-reveal r-reveal-delay-1" style="display:flex;flex-direction:column;border-color:rgba(0,240,255,.2)">
+        <div class="relative overflow-hidden" style="aspect-ratio:4/3;background:var(--r-bg-3);margin:-1.5rem -1.5rem 1.5rem;border-radius:3px 3px 0 0">
+          <img class="w-full h-full object-cover" src="assets/img/developer-api.webp" width="1280" height="714" alt="Developer tooling (concept art)" loading="lazy" decoding="async">
+          <span class="art-tag">Concept art</span>
+          <span class="r-badge r-badge-live" style="position:absolute;top:10px;right:10px">REAL</span>
+        </div>
+        <h3 class="r-card-title">Developer tooling</h3>
+        <p class="r-card-body">The HTTP API, an offline CLI, the reference viewer and Python/JS client libraries exist today.</p>
+        <p class="mt-auto pt-3 font-label-sm text-[11px]" style="color:var(--r-text-4)">See API and Resources pages</p>
+      </article>
+
+      <!-- HalalDaily panel -->
+      <article class="r-halal-panel r-reveal r-reveal-delay-2" style="display:flex;flex-direction:column">
+        <div class="flex items-center gap-3 mb-4">
+          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(255,185,95,.15));border:1px solid rgba(0,240,255,.2);display:grid;place-items:center;font-size:1.4rem">🌙</div>
+          <div>
+            <div class="r-card-title" style="margin:0 0 2px">HalalDaily</div>
+            <span class="r-badge r-badge-dim">Integration example · link pending</span>
+          </div>
+        </div>
+        <p class="r-card-body mb-4">An application being built with Waqt APIs. A real-world integration example demonstrating how apps consume Waqt endpoints without re-implementing the time model.</p>
+        <div class="r-terminal" style="flex:1">
+          <div class="r-terminal-bar">
+            <div class="r-terminal-dot"></div><div class="r-terminal-dot"></div><div class="r-terminal-dot"></div>
+            <span class="r-terminal-label">waqt-client · npm</span>
+          </div>
+          <div class="r-terminal-body" style="font-size:11px">
+<span class="r-code-d">import </span><span class="r-code-t">WaqtClient</span><span class="r-code-d"> from </span><span class="r-code-a">'waqt-client'</span><span class="r-code-d">;</span>
+<span class="r-code-t">const</span> <span class="r-code-c">waqt</span> <span class="r-code-d">= new</span> <span class="r-code-t">WaqtClient</span><span class="r-code-d">();</span>
+<span class="r-code-t">const</span> <span class="r-code-c">day</span> <span class="r-code-d">=</span> <span class="r-code-t">await</span> <span class="r-code-c">waqt</span><span class="r-code-d">.</span><span class="r-code-a">getWaqt</span><span class="r-code-d">({</span>
+  <span class="r-code-t">lat</span><span class="r-code-d">: </span><span class="r-code-a">9.019</span><span class="r-code-d">,</span>
+  <span class="r-code-t">lon</span><span class="r-code-d">: </span><span class="r-code-a">38.752</span>
+<span class="r-code-d">});</span>
+<span class="r-code-d">// day.data.waqt.reading.display → "04:22:28"</span></div>
+        </div>
+        <p class="mt-3 text-[11px]" style="color:var(--r-text-4)">Application URL will be linked when publicly available.</p>
+      </article>
+    </div>
+
+    <!-- Published Packages on PyPI -->
+    <div class="mt-12 r-card r-reveal" style="border-color:rgba(0,240,255,0.25);background:linear-gradient(135deg,rgba(0,240,255,0.03),rgba(13,16,24,0.95))">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-outline-variant/30">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="r-badge r-badge-live">LIVE ON PYPI</span>
+            <span class="r-badge r-badge-dim">OFFICIAL PACKAGES</span>
+          </div>
+          <h3 class="r-card-title" style="font-size:1.3rem;margin:0">Available on Python Package Index</h3>
+        </div>
+        <p class="text-[12px]" style="color:var(--r-text-3)">Standardized, tested, ready to install</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- waqt-core -->
+        <div class="p-4" style="background:var(--r-bg-3);border:1px solid var(--r-line);border-radius:3px">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-[14px] text-on-surface">waqt-core</span>
+            <span class="r-badge r-badge-live">v0.7.0</span>
+          </div>
+          <p class="text-[12px] mb-3" style="color:var(--r-text-3)">Time model calculations &amp; vector engine</p>
+          <code class="block text-[11px] px-2 py-1 mb-3 rounded" style="background:var(--r-bg);color:var(--r-cyan)">pip install waqt-core</code>
+          <a href="https://pypi.org/project/waqt-core/0.7.0/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-primary-container hover:underline">View on PyPI ↗</a>
+        </div>
+
+        <!-- waqt-local -->
+        <div class="p-4" style="background:var(--r-bg-3);border:1px solid var(--r-line);border-radius:3px">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-[14px] text-on-surface">waqt-local</span>
+            <span class="r-badge r-badge-live">v0.7.0</span>
+          </div>
+          <p class="text-[12px] mb-3" style="color:var(--r-text-3)">High-speed offline computation layer</p>
+          <code class="block text-[11px] px-2 py-1 mb-3 rounded" style="background:var(--r-bg);color:var(--r-cyan)">pip install waqt-local</code>
+          <a href="https://pypi.org/project/waqt-local/0.7.0/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-primary-container hover:underline">View on PyPI ↗</a>
+        </div>
+
+        <!-- waqt-api -->
+        <div class="p-4" style="background:var(--r-bg-3);border:1px solid var(--r-line);border-radius:3px">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-[14px] text-on-surface">waqt-api</span>
+            <span class="r-badge r-badge-live">v0.6.0</span>
+          </div>
+          <p class="text-[12px] mb-3" style="color:var(--r-text-3)">FastAPI HTTP standard server</p>
+          <code class="block text-[11px] px-2 py-1 mb-3 rounded" style="background:var(--r-bg);color:var(--r-cyan)">pip install waqt-api</code>
+          <a href="https://pypi.org/project/waqt-api/0.6.0/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-primary-container hover:underline">View on PyPI ↗</a>
+        </div>
+
+        <!-- waqt-client -->
+        <div class="p-4" style="background:var(--r-bg-3);border:1px solid var(--r-line);border-radius:3px">
+          <div class="flex items-center justify-between mb-2">
+            <span class="font-bold text-[14px] text-on-surface">waqt-client</span>
+            <span class="r-badge r-badge-live">v0.3.1</span>
+          </div>
+          <p class="text-[12px] mb-3" style="color:var(--r-text-3)">Python HTTP client SDK</p>
+          <code class="block text-[11px] px-2 py-1 mb-3 rounded" style="background:var(--r-bg);color:var(--r-cyan)">pip install waqt-client</code>
+          <a href="https://pypi.org/project/waqt-client/0.3.1/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-primary-container hover:underline">View on PyPI ↗</a>
+        </div>
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-outline-variant/20 flex flex-wrap items-center justify-between gap-3 text-[11px]" style="color:var(--r-text-4)">
+        <span>Next releases: <b>waqt-cli</b> (CLI tool) &amp; <b>waqt-client</b> (npm) publishing soon</span>
+        <a href="resources.html" class="hover:underline text-primary-container">View full developer resources →</a>
+      </div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3 r-reveal">
+      <a href="applications.html" class="r-btn r-btn-ghost">View all applications →</a>
+      <a href="lab.html" class="r-btn r-btn-amber">Open Experience Lab</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ GOVERNANCE PIPELINE ═══════════════════════════════════════════ -->
+<section class="r-section r-section-alt" aria-labelledby="h-gov-quick">
+  <div class="r-container">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="r-reveal">
+        <p class="r-section-label">Governance &amp; Trust</p>
+        <h2 id="h-gov-quick" class="r-section-title">Open infrastructure you can inspect.</h2>
+        <p class="r-section-body mb-6">
+          Waqt is not a religious authority. Its assumptions, calculation methods, and conformance status are
+          all documented and open to review. The conformance contract is released under DR-0015.
+        </p>
+        <div class="r-notice-cyan r-notice mb-6">
+          <strong>Independent review status:</strong> DR-0015 records an explicit one-time waiver of independent review,
+          authorized by the project owner. No independent review was performed.
+        </div>
+        <a href="governance.html" class="r-btn r-btn-ghost">Governance &amp; Decision Records →</a>
+      </div>
+
+      <div class="r-reveal r-reveal-delay-1">
+        <div class="r-pipeline-step" style="display:grid;gap:2px">
+          <div class="r-pipeline" style="border-radius:3px;overflow:hidden">
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">Specification</div>
+              <div class="r-pipeline-step-status r-pipeline-done">Released</div>
+            </div>
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">Conformance Contract</div>
+              <div class="r-pipeline-step-status r-pipeline-done">2.0.0 Released</div>
+            </div>
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">Test Vectors</div>
+              <div class="r-pipeline-step-status r-pipeline-done">Published</div>
+            </div>
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">Independent Review</div>
+              <div class="r-pipeline-step-status r-pipeline-pend">Waived · DR-0015</div>
+            </div>
+          </div>
+          <div class="r-pipeline" style="border-radius:3px;overflow:hidden;margin-top:4px">
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">Decision Records</div>
+              <div class="r-pipeline-step-status r-pipeline-active">DR-0001 – DR-0015</div>
+            </div>
+            <div class="r-pipeline-step">
+              <div class="r-pipeline-step-label">AT/BT Feature</div>
+              <div class="r-pipeline-step-status r-pipeline-pend">Experimental</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ COMMUNITY CTA ═══════════════════════════════════════════ -->
+<section class="r-section" aria-labelledby="h-cta">
+  <div class="r-container">
+    <div class="r-card r-reveal" style="background:linear-gradient(135deg,rgba(0,240,255,0.04),rgba(255,185,95,0.04));border-color:rgba(0,240,255,0.15);position:relative;overflow:hidden;padding:clamp(2rem,5vw,3.5rem)">
+      <!-- Decorative -->
+      <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--r-cyan),transparent)"></div>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 100% 0%,rgba(0,240,255,0.05),transparent)"></div>
+
+      <div class="relative grid md:grid-cols-[1fr_auto] gap-8 items-center">
+        <div>
+          <p class="r-section-label">Have an idea?</p>
+          <h2 id="h-cta" class="r-section-title" style="font-size:clamp(1.5rem,3.5vw,2.5rem)">Help shape Waqt.</h2>
+          <p class="r-section-body">
+            Project ideas, proposals, contribution requests, or a question — write to
+            <a data-email class="text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>.
+            Qualified experts, researchers, and contributors are welcome.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 shrink-0">
+          <a data-idea href="mailto:waqtapi@gmail.com" class="r-btn r-btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0-8 4.99L4 6h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+            Send an Idea
+          </a>
+          <a href="community.html" class="r-btn r-btn-ghost" style="text-align:center">Community →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
-<footer class="mt-24 border-t border-outline-variant/50 bg-surface-container-lowest">
-  <div class="max-w-[1400px] mx-auto px-4 lg:px-8 py-12">
+
+<!-- ═══════════════════════════════════════════ FOOTER ═══════════════════════════════════════════ -->
+<footer class="r-footer" role="contentinfo">
+  <div class="r-container">
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-6">
       <div class="lg:col-span-2">
-        <div class="font-headline-md text-[18px] tracking-wide mb-3">WAQT</div>
-        <p class="text-[13px] text-on-surface-variant max-w-sm">A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API. Open temporal infrastructure — it provides temporal facts, not religious rulings.</p>
-        <p class="mt-4 text-[12px] text-on-surface-variant font-label-sm">Applications are labelled <span class="badge real">REAL</span> <span class="badge concept">CONCEPT</span> <span class="badge future">FUTURE</span></p>
+        <div class="r-footer-brand">WAQT</div>
+        <div class="r-footer-tagline mb-4">Islamic Time Infrastructure</div>
+        <p class="text-[13px]" style="color:var(--r-text-3);max-width:300px">
+          A Maghrib-to-Maghrib civil time and Hijri calendar API. Open temporal infrastructure — it provides temporal facts, not religious rulings.
+        </p>
+        <p class="mt-4 text-[12px]" style="color:var(--r-text-4)">
+          Applications labelled
+          <span class="badge real" style="font-size:9px">REAL</span>
+          <span class="badge concept" style="font-size:9px">CONCEPT</span>
+          <span class="badge future" style="font-size:9px">FUTURE</span>
+        </p>
       </div>
-      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Platform</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="index.html">Overview</a></li><li><a class="hover:text-primary-container" href="problem.html">The problem</a></li><li><a class="hover:text-primary-container" href="how-it-works.html">How it works</a></li><li><a class="hover:text-primary-container" href="live-demo.html">Live demo</a></li><li><a class="hover:text-primary-container" href="lab.html">Experience Lab</a></li></ul></div>
-      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Developers</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="api.html">API reference</a></li><li><a class="hover:text-primary-container" data-cfg="docs.interactive" href="#">Interactive API docs</a></li><li><a class="hover:text-primary-container" href="resources.html#sdks">SDKs</a></li><li><a class="hover:text-primary-container" href="resources.html#conformance">Conformance</a></li><li><a class="hover:text-primary-container" href="reference-viewer.html">Reference viewer</a></li></ul></div>
-      <div><h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Project</h2><ul class="space-y-2 text-[13px] text-on-surface-variant"><li><a class="hover:text-primary-container" href="applications.html">Applications</a></li><li><a class="hover:text-primary-container" href="governance.html">Governance</a></li><li><a class="hover:text-primary-container" href="community.html">Community</a></li><li><a class="hover:text-primary-container" href="resources.html">Resources</a></li><li><a class="hover:text-primary-container" data-cfg="@repo" href="#">GitHub</a></li></ul></div>
+
       <div>
-        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mb-4">Support Waqt</h2>
-        <div class="border border-outline-variant/60 p-4 bg-surface-container-low">
-          <p class="text-[12px] text-on-surface-variant mb-3">Open work, kept going by contributors. Entirely optional.</p>
-          <a data-cfg="@support" href="#" class="inline-flex items-center gap-2 px-3 py-2 text-[12px] font-label-md uppercase tracking-wider border border-secondary text-secondary hover:bg-secondary/10">☕️ Support on Ko-fi</a>
+        <h2 class="r-footer-col-title">Platform</h2>
+        <ul class="space-y-2" style="list-style:none;padding:0;margin:0">
+          <li><a class="r-footer-link" href="index.html">Overview</a></li>
+          <li><a class="r-footer-link" href="problem.html">The Problem</a></li>
+          <li><a class="r-footer-link" href="how-it-works.html">How It Works</a></li>
+          <li><a class="r-footer-link" href="live-demo.html">Live Demo</a></li>
+          <li><a class="r-footer-link" href="lab.html">Experience Lab</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="r-footer-col-title">Developers</h2>
+        <ul class="space-y-2" style="list-style:none;padding:0;margin:0">
+          <li><a class="r-footer-link" href="api.html">API Reference</a></li>
+          <li><a class="r-footer-link" data-cfg="docs.interactive" href="#">Interactive Docs</a></li>
+          <li><a class="r-footer-link" href="resources.html#sdks">SDKs</a></li>
+          <li><a class="r-footer-link" href="resources.html#conformance">Conformance</a></li>
+          <li><a class="r-footer-link" href="reference-viewer.html">Reference Viewer</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="r-footer-col-title">Project</h2>
+        <ul class="space-y-2" style="list-style:none;padding:0;margin:0">
+          <li><a class="r-footer-link" href="applications.html">Applications</a></li>
+          <li><a class="r-footer-link" href="governance.html">Governance</a></li>
+          <li><a class="r-footer-link" href="community.html">Community</a></li>
+          <li><a class="r-footer-link" href="resources.html">Resources</a></li>
+          <li><a class="r-footer-link" data-cfg="@repo" href="#">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="r-footer-col-title">Support Waqt</h2>
+        <div style="border:1px solid var(--r-line);padding:1rem;border-radius:3px;background:var(--r-bg-2);margin-bottom:1.5rem">
+          <p class="text-[12px] mb-3" style="color:var(--r-text-3)">Open work, kept going by contributors. Entirely optional.</p>
+          <a data-cfg="@support" href="#" class="r-btn r-btn-amber" style="padding:7px 14px;font-size:11px">☕ Support on Ko-fi</a>
         </div>
-        <h2 class="font-label-md text-[11px] tracking-[0.14em] text-on-surface uppercase mt-6 mb-2">Contact</h2>
-        <a data-email class="text-[13px] text-primary-container hover:underline" href="mailto:waqtapi@gmail.com">waqtapi@gmail.com</a>
+        <h2 class="r-footer-col-title">Contact</h2>
+        <a data-email class="r-footer-link" href="mailto:waqtapi@gmail.com" style="color:var(--r-cyan)">waqtapi@gmail.com</a>
       </div>
     </div>
-    <div class="mt-10 pt-6 border-t border-outline-variant/40 flex flex-wrap gap-x-8 gap-y-2 justify-between text-[11px] font-label-sm text-on-surface-variant">
+
+    <hr class="r-divider" style="margin:2.5rem 0 1.5rem">
+
+    <div class="flex flex-wrap gap-x-8 gap-y-2 justify-between text-[11px] font-label-sm" style="color:var(--r-text-4)">
       <span>© Waqt project contributors · MIT License</span>
       <span data-maintainers>Project roles: see Governance (demo metadata)</span>
       <span>Concept images are design renders, not photographs of deployed products.</span>
     </div>
   </div>
 </footer>
+
 <script defer src="assets/js/config.js"></script>
 <script defer src="assets/js/waqt-api.js"></script>
 <script defer src="assets/js/demo-data.js"></script>
@@ -145,6 +798,7 @@
 <script defer src="assets/js/waqt-clock.js"></script>
 <script defer src="assets/js/waqt-widgets.js"></script>
 <script defer src="assets/js/site.js"></script>
+<script defer src="assets/js/redesign.js"></script>
 <script defer src="assets/js/pages/home.js"></script>
 </body>
 </html>

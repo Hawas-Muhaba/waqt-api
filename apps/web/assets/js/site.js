@@ -86,7 +86,29 @@
       set("engine", c.engine); set("accuracy", c.accuracy_level); set("deltaT", c.delta_t_seconds != null ? c.delta_t_seconds + " s" : "—");
       set("timescale", c.timescale_model);
       set("hijriNote", CFG.hijri ? CFG.hijri.ambiguityNote : "");
+      if (s && s.readingDisplay) {
+        const atbt = W.formatAtBt ? W.formatAtBt(s.readingDisplay) : s.readingDisplay;
+        set("atbt", atbt); set("atBt", atbt);
+      }
     } };
+  };
+
+  /* AT/BT 12-hour presentation formatter (waqt_core.display.at_bt specification) */
+  W.formatAtBt = function (reading) {
+    if (!reading || reading === "—") return "—";
+    const parts = String(reading).trim().split(":");
+    if (parts.length < 2) return reading;
+    const h = parseInt(parts[0], 10);
+    const m = parts[1];
+    const s = parts[2] ? ":" + parts[2] : "";
+    if (isNaN(h)) return reading;
+    const dayOffset = Math.floor(h / 24);
+    const hourInDay = ((h % 24) + 24) % 24;
+    const period = hourInDay < 12 ? "BT" : "AT";
+    let dispH = hourInDay % 12;
+    if (dispH === 0) dispH = 12;
+    const suffix = dayOffset > 0 ? ` (+${dayOffset} day${dayOffset > 1 ? "s" : ""})` : dayOffset < 0 ? ` (${dayOffset} day)` : "";
+    return `${dispH}:${m}${s} ${period}${suffix}`;
   };
 
   function init() { applyLinks(); navToggle(); }

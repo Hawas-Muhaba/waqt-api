@@ -1,0 +1,1113 @@
+/* =============================================================================
+   WAQT — Redesign Layer
+   Observatory × Editorial fusion: deep midnight navy, luminous cyan, restrained amber.
+   This file EXTENDS stitch.css + components.css — it does not replace them.
+   Load order: stitch.css → components.css → redesign.css
+   ============================================================================= */
+
+/* -------------------------------------------------------------------------- */
+/* 1. Enhanced design tokens                                                    */
+/* -------------------------------------------------------------------------- */
+:root {
+  /* Surface hierarchy */
+  --r-bg:       #090c14;
+  --r-bg-1:     #0d1018;
+  --r-bg-2:     #121520;
+  --r-bg-3:     #181c28;
+  --r-bg-4:     #1e2230;
+  --r-bg-5:     #252938;
+
+  /* Brand palette — richer, more saturated */
+  --r-cyan:     #00f0ff;
+  --r-cyan-2:   #00d5e8;
+  --r-cyan-3:   #00b8cc;
+  --r-amber:    #ffb95f;
+  --r-amber-2:  #f0a040;
+  --r-teal:     #5ef5e0;
+  --r-violet:   #8b7fff;
+
+  /* Text */
+  --r-text:     #e8eaf6;
+  --r-text-2:   #c2cfd0;
+  --r-text-3:   #8fa0a2;
+  --r-text-4:   #5a6a6c;
+
+  /* Glows */
+  --r-glow-cyan:  rgba(0, 240, 255, 0.18);
+  --r-glow-amber: rgba(255, 185, 95, 0.18);
+  --r-glow-teal:  rgba(94, 245, 224, 0.14);
+
+  /* Borders */
+  --r-line:     rgba(59, 73, 80, 0.5);
+  --r-line-2:   rgba(0, 240, 255, 0.15);
+  --r-line-3:   rgba(255, 185, 95, 0.15);
+
+  /* Spacing */
+  --r-section:  clamp(5rem, 10vw, 9rem);
+  --r-section-sm: clamp(3rem, 6vw, 5rem);
+
+  /* Motion */
+  --r-ease:     cubic-bezier(.16, 1, .3, 1);
+  --r-ease-in:  cubic-bezier(.4, 0, 1, 1);
+  --r-ease-out: cubic-bezier(0, 0, .2, 1);
+
+  /* Radius */
+  --r-rad:      3px;
+  --r-rad-lg:   8px;
+  --r-rad-pill: 999px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. Base overrides                                                             */
+/* -------------------------------------------------------------------------- */
+html { background: var(--r-bg); }
+
+body {
+  background: var(--r-bg);
+  color: var(--r-text);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Smooth anchor scrolling with generous offset for fixed header */
+html { scroll-padding-top: 90px; }
+
+/* Selection styling */
+::selection { background: rgba(0, 240, 255, 0.22); color: #fff; }
+
+/* -------------------------------------------------------------------------- */
+/* 3. Enhanced header / navigation                                               */
+/* -------------------------------------------------------------------------- */
+header[role="banner"] {
+  background: rgba(9, 12, 20, 0.88) !important;
+  border-bottom: 1px solid var(--r-line) !important;
+  backdrop-filter: blur(18px) saturate(1.4) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.4) !important;
+  box-shadow: 0 1px 0 rgba(0, 240, 255, 0.04);
+}
+
+.waqt-logo-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  background: rgba(0, 240, 255, 0.06);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.15), inset 0 0 8px rgba(0, 240, 255, 0.05);
+  transition: box-shadow .3s var(--r-ease);
+}
+.waqt-logo-ring:hover { box-shadow: 0 0 22px rgba(0, 240, 255, 0.3), inset 0 0 12px rgba(0, 240, 255, 0.08); }
+.waqt-logo-ring::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+.waqt-logo-ring::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--r-cyan);
+  box-shadow: 0 0 8px var(--r-cyan);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. Hero section                                                               */
+/* -------------------------------------------------------------------------- */
+.r-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(5rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+  background: radial-gradient(ellipse 120% 90% at 50% -10%, rgba(0, 240, 255, 0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 80% 60% at 80% 60%, rgba(255, 185, 95, 0.04) 0%, transparent 50%),
+              var(--r-bg);
+}
+
+/* Animated grid backdrop */
+.r-hero-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6) 15%, rgba(0,0,0,0.6) 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6) 15%, rgba(0,0,0,0.6) 70%, transparent);
+  animation: r-grid-drift 25s ease-in-out infinite alternate;
+}
+@keyframes r-grid-drift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+/* Grain texture overlay */
+.r-hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* Radial glow spots */
+.r-hero-glow-1 {
+  position: absolute;
+  top: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(0, 240, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.r-hero-glow-2 {
+  position: absolute;
+  bottom: 0;
+  right: -10%;
+  width: 600px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 185, 95, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Hero eyebrow badge */
+.r-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 14px 4px 8px;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  border-radius: var(--r-rad-pill);
+  background: rgba(0, 240, 255, 0.05);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--r-cyan);
+  backdrop-filter: blur(8px);
+  animation: r-fade-in .8s var(--r-ease) both;
+}
+.r-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--r-cyan);
+  box-shadow: 0 0 6px var(--r-cyan);
+  animation: r-pulse 2.5s ease-in-out infinite;
+}
+@keyframes r-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--r-cyan); }
+  50% { opacity: 0.5; box-shadow: 0 0 12px var(--r-cyan); }
+}
+
+/* Hero headline */
+.r-h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--r-text);
+  animation: r-fade-up .9s var(--r-ease) .1s both;
+}
+.r-h1-accent { color: var(--r-cyan); }
+.r-h1-amber  { color: var(--r-amber); }
+
+/* Gradient text utility */
+.r-grad-text {
+  background: linear-gradient(135deg, var(--r-cyan) 0%, var(--r-teal) 50%, var(--r-cyan-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.r-lead {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--r-text-2);
+  max-width: 640px;
+  animation: r-fade-up 1s var(--r-ease) .2s both;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. Buttons                                                                    */
+/* -------------------------------------------------------------------------- */
+.r-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--r-rad);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .25s var(--r-ease);
+  border: none;
+  white-space: nowrap;
+}
+.r-btn-primary {
+  background: var(--r-cyan);
+  color: #00363a;
+  box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+}
+.r-btn-primary:hover {
+  background: #20f6ff;
+  box-shadow: 0 0 28px rgba(0, 240, 255, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+.r-btn-ghost {
+  background: transparent;
+  color: var(--r-text);
+  border: 1px solid var(--r-line);
+}
+.r-btn-ghost:hover {
+  border-color: rgba(0, 240, 255, 0.4);
+  color: var(--r-cyan);
+  background: rgba(0, 240, 255, 0.05);
+}
+.r-btn-amber {
+  background: transparent;
+  color: var(--r-amber);
+  border: 1px solid rgba(255, 185, 95, 0.35);
+}
+.r-btn-amber:hover {
+  background: rgba(255, 185, 95, 0.08);
+  border-color: var(--r-amber);
+  box-shadow: 0 0 20px rgba(255, 185, 95, 0.2);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. Section layout utilities                                                   */
+/* -------------------------------------------------------------------------- */
+.r-section {
+  padding: var(--r-section) 0;
+  border-top: 1px solid var(--r-line);
+}
+.r-section-sm { padding: var(--r-section-sm) 0; }
+
+.r-section-alt {
+  background: linear-gradient(180deg, var(--r-bg-1) 0%, var(--r-bg) 100%);
+}
+
+.r-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+.r-section-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--r-cyan);
+  margin-bottom: 1rem;
+}
+
+.r-section-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--r-text);
+  margin: 0 0 1rem;
+}
+
+.r-section-body {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--r-text-2);
+  max-width: 700px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. Cards                                                                      */
+/* -------------------------------------------------------------------------- */
+.r-card {
+  background: var(--r-bg-2);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  position: relative;
+  transition: border-color .3s var(--r-ease), box-shadow .3s var(--r-ease), transform .3s var(--r-ease);
+  overflow: hidden;
+}
+.r-card:hover {
+  border-color: rgba(0, 240, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 240, 255, 0.06);
+  transform: translateY(-2px);
+}
+.r-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.r-card:hover::before { opacity: 1; }
+
+.r-card-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.r-card-amber { border-color: rgba(255, 185, 95, 0.15); }
+.r-card-amber:hover { border-color: rgba(255, 185, 95, 0.35); box-shadow: 0 8px 32px rgba(255, 185, 95, 0.08); }
+
+/* Card number badge */
+.r-card-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--r-text-4);
+  margin-bottom: 1rem;
+}
+
+.r-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-rad);
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.12);
+  display: grid;
+  place-items: center;
+  margin-bottom: 1.25rem;
+  color: var(--r-cyan);
+  font-size: 1.2rem;
+}
+.r-card-icon-amber {
+  background: rgba(255, 185, 95, 0.06);
+  border-color: rgba(255, 185, 95, 0.15);
+  color: var(--r-amber);
+}
+
+.r-card-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--r-text);
+  margin: 0 0 0.6rem;
+}
+
+.r-card-body {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--r-text-2);
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. Code / terminal blocks                                                     */
+/* -------------------------------------------------------------------------- */
+.r-terminal {
+  background: var(--r-bg-1);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  overflow: hidden;
+}
+.r-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--r-line);
+  background: rgba(255, 255, 255, 0.025);
+}
+.r-terminal-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--r-bg-4);
+}
+.r-terminal-dot:nth-child(1) { background: #ff5f57; }
+.r-terminal-dot:nth-child(2) { background: #ffbd2e; }
+.r-terminal-dot:nth-child(3) { background: #28c840; }
+.r-terminal-label {
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--r-text-4);
+  text-transform: uppercase;
+}
+.r-terminal-body {
+  padding: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--r-text-2);
+  overflow-x: auto;
+  white-space: pre;
+}
+.r-code-c  { color: var(--r-cyan); }
+.r-code-a  { color: var(--r-amber); }
+.r-code-t  { color: var(--r-teal); }
+.r-code-v  { color: var(--r-violet); }
+.r-code-d  { color: var(--r-text-3); }
+
+/* -------------------------------------------------------------------------- */
+/* 9. Feature table / comparison                                                 */
+/* -------------------------------------------------------------------------- */
+.r-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1px;
+  background: var(--r-line);
+  border: 1px solid var(--r-line);
+}
+.r-feature-cell {
+  background: var(--r-bg-2);
+  padding: 1.5rem;
+}
+.r-feature-cell:hover { background: var(--r-bg-3); }
+
+/* -------------------------------------------------------------------------- */
+/* 10. Diagram SVG helpers                                                       */
+/* -------------------------------------------------------------------------- */
+.r-diagram {
+  width: 100%;
+  overflow: visible;
+  display: block;
+}
+.r-diagram-wrap {
+  background: var(--r-bg-1);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 11. Timeline component                                                        */
+/* -------------------------------------------------------------------------- */
+.r-timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+}
+.r-timeline::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--r-line) 10%, var(--r-line) 90%, transparent);
+}
+.r-timeline-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  position: relative;
+}
+.r-timeline-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.r-timeline-node-cyan {
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--r-cyan);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.12);
+}
+.r-timeline-node-amber {
+  background: rgba(255, 185, 95, 0.08);
+  border: 1px solid rgba(255, 185, 95, 0.3);
+  color: var(--r-amber);
+  box-shadow: 0 0 14px rgba(255, 185, 95, 0.12);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 12. AT/BT Display showcase                                                    */
+/* -------------------------------------------------------------------------- */
+.r-atbt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+.r-atbt-table th {
+  text-align: left;
+  padding: 8px 16px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--r-text-3);
+  border-bottom: 1px solid var(--r-line);
+}
+.r-atbt-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(59, 73, 80, 0.3);
+  font-variant-numeric: tabular-nums;
+}
+.r-atbt-table tr:last-child td { border-bottom: none; }
+.r-atbt-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+.r-atbt-canonical { color: var(--r-text-2); }
+.r-atbt-display   { color: var(--r-cyan); font-weight: 500; }
+.r-atbt-period    { color: var(--r-amber); }
+.r-atbt-arrow     { color: var(--r-text-4); }
+
+/* AT/BT slider visualization */
+.r-atbt-slider-wrap {
+  background: var(--r-bg-1);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  padding: 2rem;
+}
+.r-atbt-slider-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--r-text-3);
+  margin-bottom: 0.5rem;
+}
+.r-atbt-display-big {
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-variant-numeric: tabular-nums;
+  color: var(--r-cyan);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.r-atbt-period-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-left: 8px;
+}
+.r-atbt-bt { background: rgba(0, 240, 255, 0.12); color: var(--r-cyan); border: 1px solid rgba(0, 240, 255, 0.25); }
+.r-atbt-at { background: rgba(255, 185, 95, 0.12); color: var(--r-amber); border: 1px solid rgba(255, 185, 95, 0.25); }
+
+/* -------------------------------------------------------------------------- */
+/* 13. Badges & pills                                                            */
+/* -------------------------------------------------------------------------- */
+.r-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--r-rad-pill);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.r-badge-live    { background: rgba(94, 245, 224, 0.1);  color: var(--r-teal);   border: 1px solid rgba(94, 245, 224, 0.25); }
+.r-badge-cyan    { background: rgba(0, 240, 255, 0.1);   color: var(--r-cyan);   border: 1px solid rgba(0, 240, 255, 0.25); }
+.r-badge-amber   { background: rgba(255, 185, 95, 0.1);  color: var(--r-amber);  border: 1px solid rgba(255, 185, 95, 0.25); }
+.r-badge-violet  { background: rgba(139, 127, 255, 0.1); color: var(--r-violet); border: 1px solid rgba(139, 127, 255, 0.25); }
+.r-badge-dim     { background: rgba(255, 255, 255, 0.04); color: var(--r-text-3); border: 1px solid var(--r-line); }
+
+.r-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 14. Stats / metrics strip                                                     */
+/* -------------------------------------------------------------------------- */
+.r-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--r-line);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  overflow: hidden;
+}
+.r-stat-cell {
+  background: var(--r-bg-2);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+.r-stat-value {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--r-text);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.r-stat-value span { color: var(--r-cyan); }
+.r-stat-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--r-text-3);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 15. Clock ring (enhanced)                                                     */
+/* -------------------------------------------------------------------------- */
+.r-clock-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.r-clock-glow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 185, 95, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 16. Dividers                                                                   */
+/* -------------------------------------------------------------------------- */
+.r-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--r-line) 20%, var(--r-line) 80%, transparent);
+  margin: 0;
+  border: none;
+}
+.r-divider-cyan {
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2) 20%, rgba(0, 240, 255, 0.2) 80%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 17. Layer-diagram (the "four layers" concept)                                 */
+/* -------------------------------------------------------------------------- */
+.r-layer-stack {
+  display: grid;
+  gap: 3px;
+}
+.r-layer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  background: var(--r-bg-2);
+  font-size: 0.875rem;
+  transition: border-color .25s, background .25s;
+  cursor: default;
+}
+.r-layer:hover { border-color: rgba(0, 240, 255, 0.2); background: var(--r-bg-3); }
+.r-layer-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--r-text-4);
+  flex-shrink: 0;
+  width: 24px;
+}
+.r-layer-label {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  color: var(--r-text);
+  flex: 1;
+  font-size: 0.9rem;
+}
+.r-layer-desc { font-size: 0.8rem; color: var(--r-text-3); flex: 2; }
+.r-layer-badge { margin-left: auto; flex-shrink: 0; }
+
+/* -------------------------------------------------------------------------- */
+/* 18. Notice / callout boxes                                                    */
+/* -------------------------------------------------------------------------- */
+.r-notice {
+  border-left: 2px solid var(--r-amber);
+  background: rgba(255, 185, 95, 0.05);
+  padding: 1rem 1.25rem;
+  border-radius: 0 var(--r-rad) var(--r-rad) 0;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--r-text-2);
+}
+.r-notice-cyan {
+  border-color: var(--r-cyan);
+  background: rgba(0, 240, 255, 0.04);
+}
+.r-notice strong { color: var(--r-text); font-weight: 600; }
+
+/* -------------------------------------------------------------------------- */
+/* 19. API endpoint card                                                         */
+/* -------------------------------------------------------------------------- */
+.r-endpoint {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  background: var(--r-bg-2);
+  cursor: pointer;
+  transition: border-color .25s, background .25s;
+  text-align: left;
+  width: 100%;
+}
+.r-endpoint:hover { border-color: rgba(0, 240, 255, 0.25); background: var(--r-bg-3); }
+.r-endpoint-method {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 2px;
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--r-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+}
+.r-endpoint-path {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--r-text);
+}
+.r-endpoint-desc {
+  grid-column: 2;
+  font-size: 0.8rem;
+  color: var(--r-text-3);
+  margin-top: 2px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 20. Footer                                                                    */
+/* -------------------------------------------------------------------------- */
+.r-footer {
+  border-top: 1px solid var(--r-line);
+  background: var(--r-bg-1);
+  padding: clamp(2.5rem, 6vw, 4rem) 0 clamp(1.5rem, 3vw, 2rem);
+}
+.r-footer-brand {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--r-text);
+  margin-bottom: 0.5rem;
+}
+.r-footer-tagline {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--r-text-4);
+}
+.r-footer-link {
+  font-size: 0.85rem;
+  color: var(--r-text-3);
+  text-decoration: none;
+  transition: color .2s;
+}
+.r-footer-link:hover { color: var(--r-cyan); }
+.r-footer-col-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--r-text-4);
+  margin-bottom: 1rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 21. Animations                                                                */
+/* -------------------------------------------------------------------------- */
+@keyframes r-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes r-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes r-fade-right {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes r-scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes r-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes r-clock-tick {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes r-glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.8; }
+}
+
+/* Scroll reveal utility — add .r-reveal to elements; JS can add .r-revealed */
+.r-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s var(--r-ease), transform .7s var(--r-ease);
+}
+.r-reveal.r-revealed {
+  opacity: 1;
+  transform: none;
+}
+.r-reveal-delay-1 { transition-delay: .1s; }
+.r-reveal-delay-2 { transition-delay: .2s; }
+.r-reveal-delay-3 { transition-delay: .3s; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .r-hero-grid { animation: none; }
+  .r-eyebrow-dot { animation: none; }
+  .r-reveal { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 22. Specific page enhancements                                                */
+/* -------------------------------------------------------------------------- */
+
+/* Waqt viewport panel (home live clock area) */
+#home-live {
+  background: var(--r-bg-1) !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: var(--r-rad) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 240, 255, 0.04);
+}
+
+/* Enhanced hero clock viewport */
+.r-viewport-hud {
+  background: rgba(9, 12, 20, 0.85);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: var(--r-rad);
+  padding: 1rem;
+  backdrop-filter: blur(12px);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+}
+.r-viewport-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(59, 73, 80, 0.3);
+  color: var(--r-text-3);
+}
+.r-viewport-row:last-child { border-bottom: none; }
+.r-viewport-row b { color: var(--r-text); font-weight: 500; font-variant-numeric: tabular-nums; }
+.r-viewport-section { color: var(--r-cyan); letter-spacing: 0.12em; font-size: 10px; margin-bottom: 4px; }
+
+/* Problem-page concept layers */
+.r-problem-layer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  margin-bottom: 3px;
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  font-size: 0.875rem;
+  background: var(--r-bg-2);
+  position: relative;
+  transition: all .25s;
+}
+.r-problem-layer::after {
+  content: "≠";
+  position: absolute;
+  left: 1.25rem;
+  bottom: -14px;
+  font-size: 14px;
+  color: var(--r-text-4);
+  z-index: 1;
+}
+.r-problem-layer:last-child::after { display: none; }
+.r-problem-layer.r-conflated {
+  border-color: rgba(255, 90, 90, 0.3);
+  background: rgba(255, 90, 90, 0.05);
+}
+.r-problem-layer.r-waqt {
+  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.04);
+}
+
+/* HalalDaily integration panel */
+.r-halal-panel {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.04), rgba(255, 185, 95, 0.04));
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  position: relative;
+  overflow: hidden;
+}
+.r-halal-panel::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--r-cyan), var(--r-amber));
+}
+
+/* Conformance / governance pipeline */
+.r-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  background: var(--r-bg-1);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  overflow: hidden;
+}
+.r-pipeline-step {
+  flex: 1;
+  min-width: 120px;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  position: relative;
+  border-right: 1px solid var(--r-line);
+  font-size: 0.8rem;
+}
+.r-pipeline-step:last-child { border-right: none; }
+.r-pipeline-step-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--r-text-3);
+  margin-bottom: 0.25rem;
+}
+.r-pipeline-step-status { font-weight: 600; }
+.r-pipeline-done   { color: var(--r-teal); }
+.r-pipeline-active { color: var(--r-cyan); }
+.r-pipeline-pend   { color: var(--r-amber); }
+.r-pipeline-wait   { color: var(--r-text-4); }
+
+/* Religious context source citation */
+.r-source {
+  font-size: 0.78rem;
+  color: var(--r-text-4);
+  font-family: "JetBrains Mono", monospace;
+  margin-top: 0.5rem;
+}
+.r-source a { color: var(--r-text-3); text-decoration: underline; text-underline-offset: 3px; }
+.r-source a:hover { color: var(--r-cyan); }
+
+/* Arabic text */
+.r-arabic {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  line-height: 2;
+  direction: rtl;
+  text-align: right;
+  color: var(--r-amber);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+/* Provider pluggability diagram */
+.r-provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+.r-provider-card {
+  background: var(--r-bg-2);
+  border: 1px solid var(--r-line);
+  border-radius: var(--r-rad);
+  padding: 1rem;
+  font-size: 0.85rem;
+  transition: border-color .2s;
+}
+.r-provider-card.r-provider-active {
+  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.03);
+}
+.r-provider-card:hover { border-color: rgba(0, 240, 255, 0.2); }
+
+/* -------------------------------------------------------------------------- */
+/* 23. Responsive overrides                                                      */
+/* -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .r-h1 { letter-spacing: -0.02em; }
+  .r-stat-strip { grid-template-columns: 1fr 1fr; }
+  .r-pipeline { flex-direction: column; }
+  .r-pipeline-step { border-right: none; border-bottom: 1px solid var(--r-line); }
+  .r-pipeline-step:last-child { border-bottom: none; }
+  .r-layer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .r-layer-desc { display: none; }
+}
+
+@media (max-width: 480px) {
+  .r-btn { padding: 11px 18px; font-size: 11px; }
+  .r-card { padding: 1.25rem; }
+  .r-stat-strip { grid-template-columns: 1fr; }
+  .r-terminal-body { font-size: 11px; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 24. Scrollbar                                                                  */
+/* -------------------------------------------------------------------------- */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--r-bg-1); }
+::-webkit-scrollbar-thumb { background: var(--r-bg-4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--r-bg-5); }
+
+/* -------------------------------------------------------------------------- */
+/* 25. Navigation link enhancement                                               */
+/* -------------------------------------------------------------------------- */
+#site-nav a {
+  position: relative;
+}
+#site-nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: var(--r-cyan);
+  transform: scaleX(0);
+  transition: transform .2s var(--r-ease);
+  transform-origin: center;
+}
+#site-nav a:hover::after { transform: scaleX(0.6); }
+#site-nav a[aria-current="page"]::after { transform: scaleX(0.7); }
+
+/* -------------------------------------------------------------------------- */
+/* 26. Viewport banner / HUD panel glow                                         */
+/* -------------------------------------------------------------------------- */
+.r-hud-glow {
+  box-shadow: 0 0 60px rgba(0, 240, 255, 0.06), 0 0 120px rgba(255, 185, 95, 0.04);
+}
+
+/* 27. Scroll-reveal IntersectionObserver hook — applied via redesign.js */

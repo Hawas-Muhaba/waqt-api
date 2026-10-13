@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
@@ -10,13 +10,14 @@
 <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/stitch.css">
 <link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/redesign.css">
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased min-h-screen pt-16">
 <a class="skip" href="#main">Skip to content</a>
 <header class="fixed top-0 inset-x-0 z-50 h-16 bg-background/90 backdrop-blur border-b border-outline-variant/50" role="banner">
   <div class="max-w-[1400px] mx-auto h-full flex items-center gap-4 px-4 lg:px-8">
     <a href="index.html" class="flex items-center gap-3 mr-auto" aria-label="Waqt — home">
-      <span class="relative grid place-items-center w-9 h-9 border border-primary-container/60 rounded-full" aria-hidden="true"><span class="w-3 h-3 rounded-full bg-primary-container"></span></span>
+      <span class="waqt-logo-ring" aria-hidden="true"></span>
       <span class="leading-none"><span class="block font-headline-md text-[18px] tracking-wide text-on-surface">WAQT</span><span class="block font-label-sm text-[10px] tracking-[0.2em] text-on-surface-variant uppercase">Time API</span></span>
     </a>
     <button class="nav-toggle items-center gap-2 border border-outline-variant px-3 py-2 font-label-md text-[12px] uppercase tracking-wider text-on-surface" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
@@ -74,6 +75,7 @@ curl "http://localhost:8000/v1/waqt?lat=9.0192&amp;lon=38.7525&amp;calendar_prov
 <script defer src="assets/js/config.js"></script>
 <script defer src="assets/js/waqt-api.js"></script>
 <script defer src="assets/js/site.js"></script>
+<script defer src="assets/js/redesign.js"></script>
 <script defer src="assets/js/pages/resources.js"></script>
 </body>
 </html>
