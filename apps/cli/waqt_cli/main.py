@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from typing import Optional, Sequence
+from typing import Any, Optional, Sequence
 
 from . import backend, render
 from ._version import __version__
@@ -157,16 +157,17 @@ def run(argv: Optional[Sequence[str]] = None, out=None) -> int:
             emit(data, "\n".join(f"{p['name']:<22} reverse={'yes' if p['supports_reverse_conversion'] else 'no '}  {p['description'][:80]}"
                                  for p in data["providers"]))
         elif a.cmd == "version":
-            data = lib.version()
-            data = {**data, "waqt_cli_version": __version__}
-            c = data["computation"]
+            data: dict[str, Any] = lib.version()
+            data["waqt_cli_version"] = __version__
+            c: dict[str, Any] = data["computation"]
+            vecs: dict[str, Any] = data["conformance_vectors"]
             emit(data, "\n".join([
                 f"waqt-cli        {__version__}",
                 f"waqt-local      {data['waqt_local_version']}",
                 f"waqt-core       {data['waqt_core_version']}",
                 f"engine          {c['engine']}  revision {c['revision']}  accuracy {c['accuracy_level']}",
-                f"vector set      {data['conformance_vectors']['vector_set_version']} (generated at engine revision "
-                f"{data['conformance_vectors']['generated_at_engine_revision']})",
+                f"vector set      {vecs['vector_set_version']} (generated at engine revision "
+                f"{vecs['generated_at_engine_revision']})",
             ]))
         return 0
     except (backend.WaqtLocalError, CliUsageError, ValueError, OSError) as e:

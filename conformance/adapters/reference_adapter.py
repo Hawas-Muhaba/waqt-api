@@ -256,14 +256,14 @@ def op_date_to_waqt(i):
 
 
 def _ctx(c):
-    from waqt_core.timezone_provider import ManualTimezoneProvider
+    from waqt_core.timezone_provider import DEFAULT_TIMEZONE_PROVIDER, ManualTimezoneProvider
     loc = c["location"]
     prof = _profile(c)
     p = AstronomyProfile(name="custom", fajr_angle_deg=prof.get("fajr_angle_deg", 18.0), isha_angle_deg=prof.get("isha_angle_deg", 17.0),
                          asr_shadow_ratio=prof.get("asr_shadow_ratio", 1.0))
     cal = c.get("calendar") or {"provider": c.get("calendar_provider", DEFAULT_PROVIDER)}
-    kw = {"tz_provider": ManualTimezoneProvider(c["timezone"])} if c.get("timezone") else {}
-    return SchedulingContext(Location(loc["lat"], loc["lon"], loc.get("elevation_m", 0.0)), p, provider_from(cal["provider"], cal.get("params")), **kw)
+    tz = ManualTimezoneProvider(c["timezone"]) if c.get("timezone") else DEFAULT_TIMEZONE_PROVIDER
+    return SchedulingContext(Location(loc["lat"], loc["lon"], loc.get("elevation_m", 0.0)), p, provider_from(cal["provider"], cal.get("params")), tz_provider=tz)
 
 
 def op_boundary(i):

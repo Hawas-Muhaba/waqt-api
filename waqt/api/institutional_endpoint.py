@@ -26,15 +26,19 @@ from __future__ import annotations
 
 import math
 from datetime import datetime, timezone
-from typing import Any, Optional
+from typing import Any, Callable, Optional, TypeVar
 
 from fastapi import APIRouter, Body, Query
 
-from ..core import Location
-from ..hijri import HijriDate
-from ..institutional import (
+from waqt_core.core import Location
+from waqt_core.hijri import HijriDate
+from waqt_core.institutional import (
+    AcademicCalendar,
     CalendarProfile,
+    FiscalCalendar,
+    HolidayDefinition,
     RuleError,
+    TermDefinition,
     WeekDefinition,
     default_islamic_academic_calendar,
     default_islamic_fiscal_calendar,
@@ -42,9 +46,7 @@ from ..institutional import (
     rule_from_dict,
     week_containing,
 )
-from ..institutional.academic_year import AcademicCalendar, HolidayDefinition, TermDefinition
-from ..institutional.fiscal_year import FiscalCalendar
-from ..scheduling import SchedulingContext
+from waqt_core.scheduling import SchedulingContext
 from .common import ApiError, ErrorCode, hijri_block, iso, reject_null_fields, success
 from .providers import DEFAULT_CALENDAR_PROVIDER, PROVIDER_CATALOG, provider_identity, resolve_calendar_provider
 
@@ -104,7 +106,10 @@ def _hijri_year_for_instant(instant: Optional[str], provider) -> int:
     return provider.from_gregorian(t.astimezone(timezone.utc).date()).year
 
 
-def _resolve_and_wrap(build, label: str) -> dict:
+_T = TypeVar("_T")
+
+
+def _resolve_and_wrap(build: Callable[[], _T], label: str) -> _T:
     try:
         return build()
     except RuleError as e:

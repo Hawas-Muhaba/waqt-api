@@ -42,3 +42,6 @@ exclude = ["tests*"]
 
 [tool.setuptools.package-data]
 waqt = ["py.typed"]
+
+[tool.pyright]
+extraPaths = ["core", "local", "apps/cli", "sdks/python", "apps/api-consumer"]

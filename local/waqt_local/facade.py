@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from datetime import date as _date
 from datetime import datetime
-from typing import Any, Optional
+from typing import Any, Callable, Optional, TypeVar
 
 from waqt_core import calendar_interop as ci
 from waqt_core.core import AstronomyProfile, Location, compute_waqt
@@ -628,6 +628,7 @@ def schedule_resolve(request: Any) -> dict:
     except SchedulingRuleError as e:
         raise InvalidRuleError(str(e), {"operation": op if isinstance(op, dict) else None})
 
+    assert isinstance(op, dict)
     return {
         "anchor": iso(anchor) if rs else anchor.isoformat(),
         "operation": op["op"],
@@ -647,7 +648,10 @@ def _hijri_year_for_instant(instant: Any, provider) -> int:
     return provider.from_gregorian(t.date()).year
 
 
-def _resolve_and_wrap(build, label: str) -> dict:
+_T = TypeVar("_T")
+
+
+def _resolve_and_wrap(build: Callable[[], _T], label: str) -> _T:
     try:
         return build()
     except InstitutionalRuleError as e:

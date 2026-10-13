@@ -37,6 +37,7 @@ waqt_core/calendar_providers/default.py
 waqt_core/calendar_providers/local_observation.py
 waqt_core/calendar_providers/registry.py
 waqt_core/calendar_providers/umm_al_qura.py
+waqt_core/display/at_bt/formatter.py
 waqt_core/institutional/__init__.py
 waqt_core/institutional/academic_year.py
 waqt_core/institutional/binding.py

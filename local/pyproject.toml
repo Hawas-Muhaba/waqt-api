@@ -23,3 +23,6 @@ Documentation = "https://github.com/waqt-project/waqt-api/blob/main/docs/LOCAL.m
 
 [tool.setuptools.packages.find]
 include = ["waqt_local*"]
+
+[tool.pyright]
+extraPaths = ["../core"]
