@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
@@ -68,6 +68,156 @@
 <div class="bg-surface-container-low p-6"><div class="field-row"><div class="field"><label for="inv-angle">Fajr angle (degrees below horizon)</label><select id="inv-angle"><option>15</option><option>16</option><option>17</option><option selected>18</option><option>19</option><option>19.5</option></select></div><button id="inv-go" class="btn" type="button">Ask the API</button></div>
 <div id="inv-status" class="mt-3 text-[13px] text-on-surface-variant" role="status"></div>
 <div class="table-scroll mt-3"><table class="data" id="inv-table" hidden><caption class="vh">Fajr angle versus event readings</caption><thead><tr><th scope="col">Fajr angle</th><th scope="col">Fajr (local)</th><th scope="col">Fajr reading</th><th scope="col">Maghrib opens</th><th scope="col">Next Maghrib</th></tr></thead><tbody id="inv-rows"></tbody></table></div></div></div></section>
+
+<!-- ═══════════════════════════════════════════ SCIENCE & FOUNDATIONS ═══════════════════════════════════════════ -->
+<section class="py-16 md:py-20 border-t border-outline-variant/30" aria-labelledby="h-science">
+  <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
+    <div class="mb-10">
+      <p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Foundations</p>
+      <h2 id="h-science" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Celestial Mechanics &amp; Standardized Time</h2>
+      <p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">
+        How astronomical physics translate into an immutable software contract. Waqt distinguishes physical reality, geographic conventions, and software representations.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <span class="badge live mb-3">LEVEL 1 · PHYSICAL</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface mt-2 mb-2">Solar Horizon Physics</h3>
+          <p class="text-body-sm text-on-surface-variant">
+            Maghrib occurs physically when the upper limb of the solar disc sinks below the horizon. The engine accounts for atmospheric refraction (34 arcmin) and semidiameter (16 arcmin), yielding a standard depression of −0.833°.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-outline-variant/20 font-label-sm text-[11px] mono text-primary-container">
+          h = −0° 50′ · geometric transit
+        </div>
+      </div>
+
+      <div class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <span class="badge concept mb-3">LEVEL 2 · CONVENTION</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface mt-2 mb-2">Twilight &amp; Angle Parameters</h3>
+          <p class="text-body-sm text-on-surface-variant">
+            Fajr (astronomical dawn) and Isha (crepuscular dusk) are angles of solar depression below the horizon (typically 15° to 19.5°). They are parameterized inputs, chosen by community convention and verified scholarship.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-outline-variant/20 font-label-sm text-[11px] mono text-secondary">
+          fajr_angle &amp; isha_angle (10°–25°)
+        </div>
+      </div>
+
+      <div class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <span class="badge future mb-3">LEVEL 3 · ENGINE</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface mt-2 mb-2">Continuous Model</h3>
+          <p class="text-body-sm text-on-surface-variant">
+            Waqt defines the day as a continuous half-open interval [Maghrib_D, Maghrib_D+1) measured in SI seconds. If a solar day spans 86,470 seconds, the clock seamlessly displays extended readings without artificial clamping.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-outline-variant/20 font-label-sm text-[11px] mono text-primary-container">
+          t − Maghrib(L, D) · SI seconds
+        </div>
+      </div>
+
+      <div class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <span class="badge live mb-3">LEVEL 4 · CONTRACT</span>
+          <h3 class="font-headline-sm text-[16px] text-on-surface mt-2 mb-2">Deterministic Vector Proof</h3>
+          <p class="text-body-sm text-on-surface-variant">
+            The reference engine applies the Espenak-Meeus (2006) ΔT model, and tests its accuracy (Level B, ~1s precision) against JPL DE421 and VSOP87 test vectors across all world coordinates.
+          </p>
+        </div>
+        <div class="mt-4 pt-3 border-t border-outline-variant/20 font-label-sm text-[11px] mono text-secondary">
+          Vector Set 2.0 · Conformance 2.0.0
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ RELIGIOUS CONTEXT ═══════════════════════════════════════════ -->
+<section class="py-16 md:py-20 border-t border-outline-variant/30" aria-labelledby="h-religious">
+  <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
+    <div class="mb-10">
+      <p class="font-label-sm text-[11px] tracking-[0.18em] uppercase text-primary-container mb-3">Tradition &amp; Context</p>
+      <h2 id="h-religious" class="font-headline-lg text-headline-lg-mobile md:text-headline-lg">Night, Day &amp; Temporal Observance</h2>
+      <p class="mt-3 text-body-md text-on-surface-variant max-w-3xl">
+        Waqt is open software infrastructure, not a religious authority or legal body. It provides verified temporal facts reflecting classical Islamic calendar traditions without issuing religious rulings (fatwas).
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6">
+      <!-- Verse 1 -->
+      <article class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-label-sm text-[11px] uppercase tracking-wider text-primary-container">Surah Ya-Sin · 36:40</span>
+            <span class="badge live">CELESTIAL ORDER</span>
+          </div>
+          <p class="text-[17px] leading-relaxed text-right mb-4 font-serif text-on-surface" dir="rtl" lang="ar" style="font-family:'Amiri',serif,'Times New Roman'">
+            لَا الشَّمْسُ يَنبَغِي لَهَا أَن تُدْرِكَ الْقَمَرَ وَلَا اللَّيْلُ سَابِقُ النَّهَارِ ۚ وَكُلٌّ فِي فَلَكٍ يَسْبَحُونَ
+          </p>
+          <blockquote class="text-body-sm text-on-surface-variant italic border-l-2 border-primary-container/40 pl-3 my-3">
+            “It is not allowable for the sun to reach the moon, nor does the night overtake the day, but each, in an orbit, is swimming.”
+          </blockquote>
+        </div>
+        <p class="mt-4 pt-3 border-t border-outline-variant/20 text-[11px] text-on-surface-variant">
+          Establishes celestial regularity: night and day progress independently through astronomical orbits.
+        </p>
+      </article>
+
+      <!-- Verse 2 -->
+      <article class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-label-sm text-[11px] uppercase tracking-wider text-primary-container">Surah Al-Baqarah · 2:187</span>
+            <span class="badge live">DAY BOUNDARY</span>
+          </div>
+          <p class="text-[17px] leading-relaxed text-right mb-4 font-serif text-on-surface" dir="rtl" lang="ar" style="font-family:'Amiri',serif,'Times New Roman'">
+            حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ ۖ ثُمَّ أَتِمُّوا الصِّيَامَ إِلَى اللَّيْلِ
+          </p>
+          <blockquote class="text-body-sm text-on-surface-variant italic border-l-2 border-primary-container/40 pl-3 my-3">
+            “...until the white thread of dawn becomes distinct to you from the black thread [of night]. Then complete the fast until the night [sunset].”
+          </blockquote>
+        </div>
+        <p class="mt-4 pt-3 border-t border-outline-variant/20 text-[11px] text-on-surface-variant">
+          Defines the fasting span from the emergence of optical dawn (Fajr) to the arrival of night at sunset (Maghrib).
+        </p>
+      </article>
+
+      <!-- Hadith -->
+      <article class="bg-surface-container-low p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="font-label-sm text-[11px] uppercase tracking-wider text-primary-container">Sahih al-Bukhari 1954 · Muslim 1100</span>
+            <span class="badge live">SUNSET ONSET</span>
+          </div>
+          <p class="text-[17px] leading-relaxed text-right mb-4 font-serif text-on-surface" dir="rtl" lang="ar" style="font-family:'Amiri',serif,'Times New Roman'">
+            إِذَا أَقْبَلَ اللَّيْلُ مِنْ هَا هُنَا، وَأَدْبَرَ النَّهَارُ مِنْ هَا هُنَا، وَغَرَبَتِ الشَّمْسُ، فَقَدْ أَفْطَرَ الصَّائِمُ
+          </p>
+          <blockquote class="text-body-sm text-on-surface-variant italic border-l-2 border-primary-container/40 pl-3 my-3">
+            “When the night approaches from here, and the day retreats from here, and the sun has set, then the fasting person breaks their fast.”
+          </blockquote>
+        </div>
+        <p class="mt-4 pt-3 border-t border-outline-variant/20 text-[11px] text-on-surface-variant">
+          Affirms sunset as the operational transition between daytime fasting and nighttime observance.
+        </p>
+      </article>
+    </div>
+
+    <!-- Jurisprudential & Scope Note -->
+    <div class="mt-8 bg-surface-container-low p-6 border-l-4 border-primary-container">
+      <h3 class="font-headline-sm text-[16px] text-on-surface mb-2">Scope &amp; Technical Independence</h3>
+      <p class="text-body-md text-on-surface-variant">
+        <b>What these sources establish:</b> Classical Islamic jurisprudence and civil tradition historically count the calendar day from Maghrib (sunset), anchoring prayer times and fasting to celestial transitions.
+      </p>
+      <p class="text-body-md text-on-surface-variant mt-2">
+        <b>What these sources do not establish:</b> Scriptural texts do not dictate computer algorithms, SI-second intervals, or software protocols. Waqt acts as a standardized computational utility; it provides verifiable temporal coordinates while leaving religious determinations to qualified scholars and individuals.
+      </p>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="mt-24 border-t border-outline-variant/50 bg-surface-container-lowest">
   <div class="max-w-[1400px] mx-auto px-4 lg:px-8 py-12">
