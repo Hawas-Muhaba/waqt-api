@@ -255,7 +255,7 @@ test("links: nav/footer resolve from the central configuration (repository, docs
 test("links: references without a real URL are DISABLED, never guessed", () => {
   const w = loadPage().window, d = w.document;
   const a = d.createElement("a"); a.setAttribute("data-cfg", "docs.releaseNotes"); a.setAttribute("href", "#"); d.body.appendChild(a);
-  const b = d.createElement("a"); b.setAttribute("data-cfg", "sdks.0.registry"); b.setAttribute("href", "#"); d.body.appendChild(b);
+  const b = d.createElement("a"); b.setAttribute("data-cfg", "sdks.1.registry"); b.setAttribute("href", "#"); d.body.appendChild(b);
   w.eval(read("assets/js/site.js")); w.document.dispatchEvent(new w.Event("DOMContentLoaded"));
   for (const x of [a, b]) { assert.equal(x.getAttribute("href"), null); assert.equal(x.getAttribute("aria-disabled"), "true"); assert.match(x.title, /Planned|Not published/); }
   assert.equal(w.Waqt.resolveRef({ status: "not_published" }).kind, "disabled");
@@ -364,7 +364,7 @@ test("resources: documentation links are repository-relative Markdown on the con
   assert.match(d.querySelector("[data-repo-note]").textContent, /Private repository until public release/);
 });
 
-test("resources: SDKs separate Source / Releases / Package registry / Documentation; unpublished items are disabled", async () => {
+test("resources: SDKs separate Source / Releases / Package registry / Documentation; Python SDK published on PyPI, JS SDK not on npm", async () => {
   const w = hubOf(); await tick(10); const d = w.document, hub = d.getElementById("hub");
   const sdks = [...hub.querySelectorAll("#hub-sdks")].length; assert.equal(sdks, 1);
   const tables = [...hub.querySelectorAll("section[aria-labelledby=hub-sdks] table")];
@@ -374,11 +374,21 @@ test("resources: SDKs separate Source / Releases / Package registry / Documentat
     assert.deepEqual(heads, ["Source", "Releases", "Package registry", "Documentation"]);
     const rows = [...t.querySelectorAll("tr")];
     assert.ok(rows[1].querySelector(".res-off") && /PLANNED/.test(rows[1].textContent), "releases planned");
-    assert.ok(rows[2].querySelector(".res-off") && /NOT PUBLISHED/.test(rows[2].textContent), "registry not published");
-    assert.equal(rows[1].querySelector("a"), null); assert.equal(rows[2].querySelector("a"), null);
+    assert.equal(rows[1].querySelector("a"), null, "releases row must not be a link");
   }
+  // Python SDK: registry must now be a live PyPI link
+  const pyTable = tables[0];
+  const pyRegRow = [...pyTable.querySelectorAll("tr")][2];
+  assert.ok(pyRegRow.querySelector("a"), "Python SDK registry must be a published link");
+  assert.match(pyRegRow.querySelector("a").getAttribute("href"), /pypi\.org\/project\/waqt-client/);
+  // JS SDK: registry must still be disabled (npm not published)
+  const jsTable = tables[1];
+  const jsRegRow = [...jsTable.querySelectorAll("tr")][2];
+  assert.ok(jsRegRow.querySelector(".res-off") && /NOT PUBLISHED/.test(jsRegRow.textContent), "JS registry not published");
+  assert.equal(jsRegRow.querySelector("a"), null, "JS registry row must not be a link");
+  // No direct download or Google Drive links anywhere in the hub
   const hrefs = [...hub.querySelectorAll("a")].map((a) => a.getAttribute("href")).join(" ");
-  assert.doesNotMatch(hrefs, /pypi\.org|npmjs\.com|drive\.google|releases\/download/);
+  assert.doesNotMatch(hrefs, /drive\.google|releases\/download/);
 });
 
 test("resources: Ko-fi support appears only in the last section and only because a real URL is configured", async () => {

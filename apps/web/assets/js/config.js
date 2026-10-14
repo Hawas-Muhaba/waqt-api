@@ -84,17 +84,17 @@
       contributing: Object.freeze({ path: "CONTRIBUTING.md" })
     }),
 
-    /* SDK locations. Source / Releases / Package registry / Documentation are described SEPARATELY. Nothing is
-       published yet, so releases and registries are not links. When publication happens, replace the status object
-       with { url: "<real canonical URL>" } — never before. Canonical hierarchy: repository → GitHub Releases →
-       package registries → this site (which links, and never hosts archives). */
+    /* SDK locations. Source / Releases / Package registry / Documentation are described SEPARATELY.
+       Canonical hierarchy: repository → GitHub Releases → package registries → this site (which links,
+       and never hosts archives). Use { url: "<real canonical URL>" } only when the package exists.
+       Use { status: "planned" | "not_published" } to render disabled (never as a link). */
     sdks: Object.freeze([
       Object.freeze({
         id: "python", name: "Python SDK", package: "waqt-client", version: "0.3.1",
         source: Object.freeze({ tree: "sdks/python" }),
         docs: Object.freeze({ path: "sdks/python/README.md" }),
         releases: Object.freeze({ status: "planned" }),               // intended: GitHub Releases of the repository
-        registry: Object.freeze({ name: "PyPI", status: "not_published" })
+        registry: Object.freeze({ name: "PyPI", url: "https://pypi.org/project/waqt-client/" })
       }),
       Object.freeze({
         id: "javascript", name: "JavaScript SDK", package: "waqt-client", version: "0.3.1",
@@ -103,6 +103,15 @@
         releases: Object.freeze({ status: "planned" }),
         registry: Object.freeze({ name: "npm", status: "not_published" })
       })
+    ]),
+
+    /* Published packages on package registries. Add an entry here for every package that has been
+       uploaded. { name, registry, url } — url must be the canonical registry page for the package. */
+    packages: Object.freeze([
+      Object.freeze({ name: "waqt-core",   registry: "PyPI", url: "https://pypi.org/project/waqt-core/" }),
+      Object.freeze({ name: "waqt-local",  registry: "PyPI", url: "https://pypi.org/project/waqt-local/" }),
+      Object.freeze({ name: "waqt-api",    registry: "PyPI", url: "https://pypi.org/project/waqt-api/" }),
+      Object.freeze({ name: "waqt-client", registry: "PyPI", url: "https://pypi.org/project/waqt-client/" })
     ]),
 
     officialApps: Object.freeze([]),     // [{ name, ref, note }] — add only when a real application exists
@@ -124,7 +133,7 @@
         Object.freeze({ kind: "source", label: "API repository", ref: { repo: true } }),
         Object.freeze({ kind: "issues", label: "Issue tracker", ref: { issues: true } })
       ]) }),
-      Object.freeze({ id: "sdks", title: "SDKs", intro: "Source, releases, package registries and documentation are separate things. Nothing is published yet.", sdk: true, items: Object.freeze([]) }),
+      Object.freeze({ id: "sdks", title: "SDKs", intro: "Source, releases, package registries and documentation are separate things. The Python SDK (waqt-client) is published on PyPI. The JavaScript SDK is not yet on npm.", sdk: true, items: Object.freeze([]) }),
       Object.freeze({ id: "developer", title: "Developer resources", intro: "Tools and consumers that exist in the repository.", items: Object.freeze([
         Object.freeze({ kind: "tool", label: "Command-line tool (offline)", ref: { tree: "apps/cli" } }),
         Object.freeze({ kind: "example", label: "API consumer (Python)", ref: { tree: "apps/api-consumer" } }),

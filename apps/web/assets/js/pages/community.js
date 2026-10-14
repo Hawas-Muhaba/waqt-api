@@ -1,4 +1,4 @@
-/* Community page: lists come from WAQT_CONFIG (officialApps, communityApps, sdks); empty lists say so honestly. */
+/* Community page: lists come from WAQT_CONFIG (officialApps, communityApps, sdks, packages); empty lists say so honestly. */
 (function () {
   "use strict";
   const W = window.Waqt, C = window.WAQT_CONFIG;
@@ -13,5 +13,14 @@
   const sdk = document.getElementById("links-sdk");
   if (sdk) sdk.innerHTML = C.sdks.map((s) => { const r = W.resolveRef(s.source, C); return `<li>${r.kind === "disabled" ? esc(s.name) : `<a class="text-primary-container hover:underline" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(s.name)} — source</a>`}</li>`; }).join("");
   const pkg = document.getElementById("links-pkg");
-  if (pkg) pkg.innerHTML = C.sdks.map((s) => { const r = W.resolveRef(s.registry, C); return `<li>${esc(s.registry.name)} (${esc(s.package)}): ${r.kind === "disabled" ? `<span class="link-pending">${esc((r.status || "").replace("_", " "))}</span>` : `<a class="text-primary-container hover:underline" href="${esc(r.url)}" target="_blank" rel="noopener">open</a>`}</li>`; }).join("");
+  if (pkg) {
+    const pkgs = C.packages || [];
+    if (pkgs.length) {
+      pkg.innerHTML = pkgs.map((p) =>
+        `<li><span class="text-on-surface-variant font-label-sm">${esc(p.registry)}</span> &middot; <a class="text-primary-container hover:underline" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.name)}</a></li>`
+      ).join("");
+    } else {
+      pkg.innerHTML = pending("None published yet");
+    }
+  }
 })();

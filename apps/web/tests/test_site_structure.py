@@ -246,12 +246,26 @@ def test_sdk_locations_are_structured_and_nothing_unpublished_is_a_link():
         assert set(s) >= {"source", "docs", "releases", "registry", "package", "version"}
         assert "tree" in s["source"] and "path" in s["docs"]
         assert s["releases"]["status"] in ("planned", "not_published") and "url" not in s["releases"]
-        assert s["registry"]["status"] in ("planned", "not_published") and "url" not in s["registry"]
+        # registry is valid if it has a real url (published) OR a status (not yet published) — never both absent
+        reg = s["registry"]
+        assert "url" in reg or reg.get("status") in ("planned", "not_published"), \
+            f"SDK '{s['id']}' registry must have a url (published) or a valid status (not published): {reg}"
     assert [s["registry"]["name"] for s in cfg["sdks"]] == ["PyPI", "npm"]
     assert cfg["docs"]["releaseNotes"]["status"] == "planned"
     for sec in cfg["resources"]:
         for it in sec["items"]:
             assert "url" not in it.get("ref", {}), f"{it['label']}: absolute URLs only when a canonical public URL exists"
+
+
+def test_published_packages_have_valid_registry_urls():
+    """Every entry in config.packages must point to a real canonical registry URL."""
+    cfg = config()
+    pkgs = cfg.get("packages", [])
+    assert len(pkgs) > 0, "At least one package must be listed once packages are published"
+    for p in pkgs:
+        assert "name" in p and "registry" in p and "url" in p, f"Package entry missing fields: {p}"
+        assert p["url"].startswith("https://"), f"Package url must be absolute https: {p['url']}"
+        assert p["name"] in p["url"], f"Package name '{p['name']}' should appear in its url: {p['url']}"
 
 
 def test_documentation_links_cover_the_required_fields():
