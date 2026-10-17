@@ -1,6 +1,6 @@
 # Calendar Providers
 
-Waqt does not hard-code one religious authority into the clock engine. The Gregorian↔Hijri mapping is a pluggable interface (`HijriProvider`: `name`, `version`, `from_gregorian`, optionally `to_gregorian`), and `waqt/core.py` and `waqt/solar.py` never change to accept a new one — verified directly by `md5sum` on every sprint that's touched this system, not just asserted.
+Waqt does not hard-code one religious authority into the clock engine. The Gregorian↔Hijri mapping is a pluggable interface (`HijriProvider`: `name`, `version`, `from_gregorian`, optionally `to_gregorian`), and `waqt_core/core.py` and `waqt_core/solar.py` never change to accept a new one — verified directly by `md5sum` on every sprint that's touched this system, not just asserted.
 
 Query `GET /v1/calendar` for the live, authoritative list. This document explains what each one actually promises.
 

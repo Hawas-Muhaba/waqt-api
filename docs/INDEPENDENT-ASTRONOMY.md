@@ -81,7 +81,7 @@ other returned polar-day/night `None`, or vice versa).
   solar-position disagreement together with a second, unrelated source of
   drift, making it harder to say what the comparison is actually
   measuring. `independent_solar/deltat.py` is written from scratch (it
-  does not import `waqt.timescale`) but deliberately follows the same
+  does not import `waqt_core.timescale`) but deliberately follows the same
   published NASA/Espenak-Meeus polynomial family, so that every
   disagreement in the results above is attributable to the solar-position
   and event-finding algorithms — the part this milestone is actually
@@ -120,33 +120,19 @@ other returned polar-day/night `None`, or vice versa).
   `docs/ASTRONOMY.md`'s Level A row is still "Not implemented" — this
   milestone doesn't change that.
 
-  **Update, Sprint 10:** this gap is now closed for measurement purposes
-  (not for production use) — see `independent-astronomy/level_a/` and
-  `docs/RELEASING.md`'s sibling doc for the local library, or read on:
-  `compare_level_a.py` checks both `waqt/solar.py` and `independent_solar`
-  against a genuine Level-A reference (full VSOP87, via the published,
-  independently-tested `pymeeus` library — not hand-derived coefficients).
-  The result was more interesting than "both engines are fine": across
-  every latitude band, `independent_solar` (Meeus low-accuracy, this
-  milestone) tracks the VSOP87 reference within 2-5 seconds, while
-  `waqt/solar.py` (NOAA low-precision, production) diverges considerably
-  more — up to ~40 seconds at mid-latitude and ~430 seconds at high
-  latitude. Two Level-B algorithms agreeing with each other, in other
-  words, was hiding the fact that they are not equally close to the
-  truth; `waqt/solar.py` is unchanged by this finding (Sprint 10's DoD
-  explicitly forbids "silently changing the production astronomical
-  engine" on this basis alone) — see the Sprint 10 report for the full
-  discussion and what a fix would look like if one is chosen later.
+> **Update, Sprint 11 (supersedes above):** the production engine's Level-A gap was traced
+> to three bugs in `waqt_core/solar.py`'s event solver (all fixed in Sprint 11).
+> After the fixes, `waqt_core/solar.py` agrees with a full-VSOP87 reference within ~1.0 s
+> (3.6 s at high latitude) on the 80-row benchmark matrix. The Level-A label is still
+> **not claimed** (stays at B) because validation is one reference over one year
+> and high-latitude drift reaches 43.5 s in dense daily scans at 78°N.
+> See [`ASTRONOMY-ENGINE-EVALUATION.md`](ASTRONOMY-ENGINE-EVALUATION.md) and
+> [`ASTRONOMY-SPRINT13.md`](ASTRONOMY-SPRINT13.md) for current numbers.
 - **`independent_solar`'s Newton-style iteration has a fixed 10-iteration
   cap and a 1e-7° tolerance**; it has not been stress-tested against
-  contrived non-convergent cases the way `waqt/solar.py`'s two-pass
-  refinement has years of production exposure behind it. In every case in
-  the 60-row test matrix it converges in well under 10 iterations.
+  contrived non-convergent cases the way `waqt_core/solar.py`'s two-pass
+  refinement has. In every case in the 60-row test matrix it converges
+  in well under 10 iterations.
 - **The comparison matrix is 12 locations × 5 dates, not exhaustive.** It
   reuses and extends the project's existing documented geographic
-  coverage rather than an arbitrary larger grid; a location/date far
-  outside this matrix (e.g. a different date-line location, or a date far
-  from an equinox/solstice at extreme latitude) has not specifically been
-  checked, though nothing about either engine's math is date- or
-  location-specific in a way that would suggest hidden surprises outside
-  the tested range.
+  coverage rather than an arbitrary larger grid.

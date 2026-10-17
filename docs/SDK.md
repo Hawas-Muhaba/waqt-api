@@ -1,4 +1,4 @@
-# SDKs & Language Bindings (Sprint 9)
+# SDKs & Language Bindings
 
 Official thin SDKs over the documented `/v1/*` HTTP/JSON contract:
 
@@ -77,7 +77,7 @@ Both SDKs provide, per the Sprint 9 brief:
 
 Both SDKs are **remote Waqt API clients**. Neither should be read as
 "Python/JS SDK = Waqt itself" — a **local Waqt computation library**
-now exists (Sprint 10): `local/waqt_local` (Python), embedding the
+exists: `local/waqt_local` (Python), embedding the
 astronomical/calendar engine directly, no network round-trip, no
 `httpx`. See `docs/LOCAL.md` for the full architecture note and
 `local/README.md` for usage. (Parallel Milestone A's
@@ -102,8 +102,8 @@ serializable request builders for all three:
   `requests.event(...)`, ...). `client.scheduleResolve(...)` accepts
   either a typed request (anything with `toJSON()`) or a plain object.
 
-Every documented `v1.x` endpoint now has a typed representation in both
-official SDKs (this sprint's public-contract goal). See each SDK's
+Every documented `v1.x` endpoint has a typed representation in both
+official SDKs. See each SDK's
 `CHANGELOG.md` and `tests/test_requests_types.py` /
 `test/requests_types.test.mjs` for the full shape reference.
 
@@ -169,8 +169,6 @@ cd sdks/js/waqt-client && npm test
   different retry behavior than one serving a live prayer-times widget).
   Left to the caller, or a future explicit opt-in.
 
-## Honest limitations
-
 - **Not every endpoint has a fully-typed response.** `/v1/schedule/*`
   and `/v1/institutional/*` (except `week`) return their full JSON on
   `.raw`/`raw` with only the fields common to all variants explicitly
@@ -186,8 +184,5 @@ cd sdks/js/waqt-client && npm test
   uvicorn` subprocess.** This means the JS test suite has an implicit
   Python + the repo's own dependencies as a test-time requirement; it is
   not needed to *use* the JS SDK, only to run its own integration tests.
-- **Neither SDK has been published to PyPI/npm** — both are installed
-  from the checkout (`pip install -e sdks/python`,
-  `npm install ./sdks/js/waqt-client`) for this sprint. Publishing is a
-  packaging/release-process step, not an SDK-design one, and is left for
-  a deliberate follow-up rather than assumed here.
+- **Both SDKs are published** as `waqt-client` on PyPI (Python)
+  and npm (JavaScript), version `0.3.1`.

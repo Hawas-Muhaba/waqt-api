@@ -1,4 +1,4 @@
-# Packaging architecture (Sprint 11)
+# Packaging architecture
 
 Until Sprint 10 the repository shipped one combined `waqt/` package that mixed
 the *computation layer* (astronomy, Hijri calendars, scheduling, institutional
@@ -90,12 +90,16 @@ invocations: none of these test directories has an `__init__.py` except
 both `core/tests` and `local/tests`) collide under pytest's basename import if
 collected in one command. CI already runs them as separate steps.
 
-## Not done / next
+## Status
 
-- `waqt-core` is not published to PyPI (needs credentials).
-- The API's `computation` block still reports the engine as
-  `waqt-noaa-low-precision` / accuracy level `B`; see the evaluation doc for why
-  that label was deliberately not changed and why an engine *revision* field
-  is recommended.
-- `local/README.md` still shows the pre-Sprint-11 dev flow in places; the
-  install section was updated, prose elsewhere was left.
+All distributions are published to PyPI. Install order:
+
+```bash
+pip install waqt-core      # computation engine; no web dependencies
+pip install waqt-api       # FastAPI HTTP server
+pip install waqt-local     # embeddable offline library
+pip install waqt-cli       # command-line tool
+pip install waqt-client    # Python HTTP SDK
+```
+
+See `docs/RELEASING.md` for the full release procedure.

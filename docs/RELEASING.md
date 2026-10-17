@@ -1,18 +1,6 @@
-# Releasing the Waqt SDKs
+# Releasing the Waqt packages
 
-This sprint's publishing goal is `sdks/python/waqt_client` (PyPI, as
-`waqt-client`) and `sdks/js/waqt-client` (npm, as `waqt-client`). This
-document is what Sprint 10 asked to "establish before publication":
-package metadata, versioning, changelog, supported versions,
-installation, release procedure, compatibility policy, and the tests
-that gate a release.
-
-Actually pushing to PyPI/npm's registries is a credentialed, human step
-(an API token / npm login this environment does not have and should
-not be handed), so this sprint stops at "packageable and release-ready"
-— every artifact a release would publish has been built and
-clean-install-tested from a fresh, isolated environment (see below) —
-rather than performing the upload itself.
+This document covers the release procedure for all Waqt distributions.
 
 ## Package metadata
 
@@ -115,17 +103,17 @@ Both are part of each package's normal test run (`pytest tests/` /
 (a missing file in `include`/`files`, an accidentally-required dev
 dependency, ...) fails the same test run a code change would.
 
-## `waqt-core`, `waqt-api`, `waqt-local` (Sprint 11)
+## `waqt-core`, `waqt-api`, `waqt-local`, `waqt-cli`
 
-Three more distributions are now packageable (see `docs/PACKAGING.md`):
-`core/` → `waqt-core` 0.6.0, repo root → `waqt-api` 0.6.0, `local/` →
-`waqt-local` 0.7.0, and `apps/cli/` → `waqt-cli` 0.3.0. Build and
+All four are published to PyPI (see `docs/PACKAGING.md`):
+`core/` → `waqt-core` 0.7.0, repo root → `waqt-api` 0.6.0, `local/` →
+`waqt-local` 0.7.0, and `apps/cli/` → `waqt-cli` 0.3.1. Build and
 clean-install-test each artifact before publication; repository versions
 are not evidence of publication.
 
-**Release order matters:** publish `waqt-core` 0.6.0 first, then
+**Release order matters:** publish `waqt-core` 0.7.0 first, then
 `waqt-api` 0.6.0 and `waqt-local` 0.7.0 (both require
-`waqt-core>=0.6.0,<0.7`), and finally `waqt-cli` 0.3.0 (requires
+`waqt-core>=0.7.0,<0.8`), and finally `waqt-cli` 0.3.1 (requires
 `waqt-local>=0.7.0,<0.8`). Until these versions are available from an
 index, install from the checkout or build all artifacts and install them
 in dependency order.

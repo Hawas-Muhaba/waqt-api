@@ -159,7 +159,7 @@ SDK work, for instance, could bump the API without touching the engine).
 
 ```json
 {
-  "waqt_core_version": "0.4.0",
+  "waqt_core_version": "0.7.0",
   "spec": "waqt-core/0.1",
   "api_version": "1.8.0",
   "waqt_local_version": null,

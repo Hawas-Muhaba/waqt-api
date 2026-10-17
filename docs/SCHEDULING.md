@@ -1,4 +1,4 @@
-# Waqt Scheduling & Deadlines (Sprint 6)
+# Waqt Scheduling & Deadlines
 
 The specification `waqt/scheduling/` implements. It sits **above** `SEMANTICS.md`: it adds no astronomy, no calendar dependence and no new clock. It lets an application *write down* an Islamic temporal rule precisely and evaluate it reproducibly.
 
@@ -87,7 +87,7 @@ Stepping from a defined day *into* an undefined one returns that day; stepping *
 
 ## 8. Operations (HTTP and vectors share this format)
 
-`{"op": …}` — `resolve_point`, `resolve_interval`, `evaluate`, `check_deadline`, `until`, `since`, `next_event`, `event_position`, `day_bounds`, `classify_span`. Point types: `instant`, `anchor`, `event`, `next_event`, `prev_event`, `position`, `offset`, `fraction`. See `waqt/scheduling/ops.py` and `tests/vectors/scheduling_vectors.json` for worked examples of each.
+`{"op": …}` — `resolve_point`, `resolve_interval`, `evaluate`, `check_deadline`, `until`, `since`, `next_event`, `event_position`, `day_bounds`, `classify_span`. Point types: `instant`, `anchor`, `event`, `next_event`, `prev_event`, `position`, `offset`, `fraction`. See `waqt_core/scheduling/ops.py` and `tests/vectors/scheduling_vectors.json` for worked examples of each.
 
 ```json
 {"op": "resolve_interval", "interval": {"type": "interval",
@@ -107,7 +107,7 @@ Exactness rules: instants are ISO 8601 UTC with ≤ microsecond precision. Deriv
 
 ## 10. Calendar independence
 
-The Hijri provider is passed through to `compute_waqt` only because it labels each Waqt day. Nothing in `waqt/scheduling` reads that label to decide anything; it is copied into results for display. Tests swap `arithmetic-tabular`, `umm-al-qura` and a shifted custom provider: labels change, no instant, window, span or status does — in Python, over HTTP, and in the JavaScript consumer. A structural test fails if scheduling code ever branches on a label.
+The Hijri provider is passed through to `compute_waqt` only because it labels each Waqt day. Nothing in `waqt_core/scheduling` reads that label to decide anything; it is copied into results for display. Tests swap `arithmetic-tabular`, `umm-al-qura` and a shifted custom provider: labels change, no instant, window, span or status does — in Python, over HTTP, and in the JavaScript consumer. A structural test fails if scheduling code ever branches on a label.
 
 ## 11. Rules that previously lived only in the vectors (contract 2.0.0, DR-0008)
 

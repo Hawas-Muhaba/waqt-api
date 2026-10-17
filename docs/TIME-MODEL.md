@@ -31,3 +31,14 @@ The Hijri *date* is computed once, globally, using Makkah's own Maghrib as the r
 ## Everything is a projection over an ordinary UTC instant
 
 Underneath all of the above, every computation starts from a plain UTC timestamp. Nothing in Waqt invents a new absolute time standard — it's a *rendering* of an ordinary instant into Islamic terms, for a given place. This is why every endpoint accepts (or defaults) a UTC `instant`, and why comparing, sorting, or storing by the Waqt reading itself is never a good idea — always do that on the underlying instant, and use Waqt's readings for display.
+
+## AT/BT — an optional 12-hour presentation layer (experimental)
+
+The core clock is always a 24 h+ counter from Maghrib. The AT/BT layer (`waqt_core.display.at_bt`, opt-in via `waqt-cli --at-bt`) maps that into a more familiar 12-hour vocabulary without touching the underlying model:
+
+- **BT (Before Twelve):** hours 00–11 after Maghrib. The period from Maghrib to just before the midpoint of the day.
+- **AT (After Twelve):** hours 12–23 (and beyond, on a long day). The period from the midpoint onward.
+
+A reading of `14:30:00` displays as `AT 02:30:00`. A reading of `25:00:00` (past-24 on a long day) displays as `AT 13:00:00 +1 day`.
+
+This convention is **display-only and experimental** — it is not normative Waqt Standard and is not part of the conformance contract. It has no effect on any computed instant, event time, or day boundary. `waqt_core.display.at_bt.format_at_bt(display_string)` converts any `HH:MM:SS` Waqt reading to its AT/BT form.

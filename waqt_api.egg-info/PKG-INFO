@@ -30,137 +30,199 @@ Requires-Dist: build; extra == "dev"
 Requires-Dist: astral; extra == "dev"
 Dynamic: license-file
 
-# Waqt API v1
+# Waqt (وقت) — Open Islamic Civil Time Standard & Software Engine
 
-A Makkah-anchored, Maghrib-to-Maghrib civil time and Hijri calendar API — a stable, versioned, language-independent HTTP contract. You do not need to read any Python here to integrate it; start with [`docs/API.md`](docs/API.md).
+[![PyPI - waqt-core](https://img.shields.io/pypi/v/waqt-core?label=waqt-core&color=0ea5e9)](https://pypi.org/project/waqt-core/)
+[![PyPI - waqt-local](https://img.shields.io/pypi/v/waqt-local?label=waqt-local&color=0ea5e9)](https://pypi.org/project/waqt-local/)
+[![PyPI - waqt-api](https://img.shields.io/pypi/v/waqt-api?label=waqt-api&color=0ea5e9)](https://pypi.org/project/waqt-api/)
+[![PyPI - waqt-client](https://img.shields.io/pypi/v/waqt-client?label=waqt-client&color=0ea5e9)](https://pypi.org/project/waqt-client/)
+[![Conformance 2.0.0](https://img.shields.io/badge/conformance-2.0.0-emerald)](conformance/spec/CONFORMANCE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+
+**Waqt** is an open-source civil time standard and computational infrastructure that models time according to Islamic astronomical tradition: **every day begins at local sunset (Maghrib)**.
+
+Rather than forcing Islamic calendars and prayer times into arbitrary midnight-to-midnight solar grids, Waqt treats the day as a continuous, mathematically rigorous interval `[Maghrib(D), Maghrib(D+1))`. It provides deterministic temporal coordinates, pluggable Hijri calendar engines, high-accuracy solar mechanics, and scheduling algebra for modern applications.
+
+---
+
+## 🌟 Key Features
+
+- **Maghrib-to-Maghrib Time Continuum:** Day boundaries are anchored to celestial physics: $[M_0, M_1)$. Exactly at sunset, the day rolls over and the clock resets to `00:00:00`.
+- **Continuous 24h+ Clock:** Time advances in standard SI minutes from Maghrib. Extended solar days naturally read past `24:00:00` (e.g., `24:15:30`) without silent wraps or artificial clamping.
+- **AT / BT 12-Hour Presentation:** Experimental human-friendly display mapping Before Twelve (`BT`, hours 00–11) and After Twelve (`AT`, hours 12–23) with explicit day-offset markers (`+1 day`).
+- **Deterministic Solar Mechanics:** NOAA-based solar engine refined with iterative hour-angle solvers, atmospheric refraction, elevation modeling (`elevation_m`), and NASA polynomial ΔT corrections.
+- **Calendar Interoperability:** Pluggable Hijri calendar system supporting official Umm al-Qura astronomical approximations, classical arithmetic tabular, and institutional declared overrides.
+- **Cross-Platform Ecosystem:** Pure Python core engine, embeddable offline package, FastAPI HTTP server, CLI terminal utility, Python/JS SDKs, and static web frontend.
+- **Formal Conformance:** Verified against Conformance Contract 2.0.0, 600+ portable test vectors, and an independent clean-room Node.js implementation.
+
+---
+
+## 📦 Package Architecture
+
+The repository is organized into cleanly decoupled, independently versioned components:
 
 ```
-core/                          — Sprint 11: `waqt-core`, the independently installable computation layer
-  waqt_core/                     (import name waqt_core; deps: ephem, timezonefinder — no FastAPI)
-    core.py, solar.py, hijri.py, semantics.py, timescale.py, timezone_provider.py, calendar_interop.py
-    calendar_providers/           — Umm al-Qura, local observation, registry
-    scheduling/                   — Sprint 6: windows, deadlines, event-relative rules
-    institutional/                — Sprint 7: week, fiscal year, academic year, calendar profiles
-  tests/                         — standalone conformance vs all vector files, shim-identity, clean-install, solar regressions
-waqt/                          — `waqt-api` (repo root pyproject.toml): the HTTP layer only
-  __init__.py                    — aliases waqt.core/.hijri/.scheduling/... to the SAME objects as waqt_core.*
-  api/                           — Waqt API v1: common.py, providers.py and one *_endpoint.py per endpoint group
-local/                         — Sprint 10: `waqt-local`, embeddable no-server library (depends on waqt-core)
-sdks/                          — Sprint 9/10: remote HTTP clients (Python, JS) + shared conformance vectors
-consumers/js/                  — independent zero-dependency Node consumer of the shared vector files
-independent-astronomy/         — Sprint 9-12: Level-B (independent_solar) and Level-A (level_a, VSOP87) references,
-                                  comparison matrices, threshold-day truth scan, multi-year evidence (Sprint 12)
-apps/                          — Sprint 12: reference applications, the first user-facing consumers of Waqt
-  cli/                            — waqt-cli: offline command-line app on waqt-local
-  web/                             — waqt-web: static, dependency-free page consuming the HTTP API
-  api-consumer/                    — stdlib-only HTTP client, demonstrates consuming the API with no Waqt import
-tests/                         — waqt.api suite + vectors/ (portable conformance vectors + their generators)
-docs/
-  API.md, TIME-MODEL.md, CALENDARS.md, SEMANTICS.md, SCHEDULING.md, INSTITUTIONAL.md, CALENDAR-INTEROP.md,
-  SDK.md, LOCAL.md, RELEASING.md, VERSIONING.md, ACCURACY-LEVEL-REVIEW.md
-  ASTRONOMY.md                   — solar engine, accuracy levels (measured), elevation, DeltaT, edge cases
-  ASTRONOMY-ENGINE-EVALUATION.md — Sprint 11: NOAA vs Level B vs Level A, the bugs found, the production-engine decision
-  PACKAGING.md                   — Sprint 11: package architecture, shim, install, gating tests
-  VERSIONING.md                  — Sprint 12: how waqt-core version / engine revision / API version / SDK
-                                    version / conformance-vector-set version relate
-  ACCURACY-LEVEL-REVIEW.md       — Sprint 12: promotion criteria for Level A, evidence so far, decision record
-SCOPE.md, SPRINT-*-REPORT.md     — build history and honest limitations
-```
+waqt-api/
+├── core/                         # waqt-core (PyPI: 0.7.0): pure calculation engine
+│   └── waqt_core/                # Zero web dependencies (ephem, timezonefinder)
+│       ├── core.py               # Core Time Model: [Maghrib(D), Maghrib(D+1))
+│       ├── solar.py              # NOAA low-precision solar engine & solver
+│       ├── hijri.py              # Hijri date protocol & arithmetic
+│       ├── calendar_providers/   # Umm al-Qura, Arithmetic Tabular, Declared
+│       ├── scheduling/           # Windows, deadlines, event-relative intervals
+│       ├── institutional/        # Islamic week, fiscal year, academic year
+│       └── display/at_bt/        # AT/BT 12-hour presentation formatter
+├── local/                        # waqt-local (PyPI: 0.7.0): embeddable offline library
+│   └── waqt_local/               # High-speed in-process API (no HTTP server required)
+├── waqt/                         # waqt-api (PyPI: 0.6.0): FastAPI HTTP standard server
+│   └── api/                      # 10+ endpoints with unified error & response envelopes
+├── apps/
+│   ├── cli/                      # waqt-cli (0.3.1): command-line terminal tool
+│   ├── web/                      # waqt-web: responsive static website & live interactive dial
+│   └── api-consumer/             # Zero-dependency standard-library HTTP consumer
+├── sdks/
+│   ├── python/                   # waqt-client (PyPI: 0.3.1): Python HTTP SDK
+│   └── js/waqt-client/           # waqt-client (npm: 0.3.1): JavaScript/TypeScript SDK
+├── conformance/                  # Conformance Contract 2.0.0, portable test vectors & JS runner
+├── independent-astronomy/        # Level-B & Level-A (VSOP87) reference benchmarks
+├── docs/                         # Specifications, guides, and architecture records
+│   └── sprints/                  # Archived development sprint reports (Sprint 2 through 17)
+└── tests/                        # Comprehensive test suite (unit, integration, vectors)
 ```
 
-## Quickstart
+---
+
+## 🚀 Quickstart
+
+### 1. Install via PyPI
+
+Choose the package that fits your use case:
 
 ```bash
-pip install -r requirements.txt      # editable installs of core/, ., local/ + dev tools
+# Pure computation engine (no web dependencies)
+pip install waqt-core
+
+# Embeddable offline library (full local API)
+pip install waqt-local
+
+# Python client SDK
+pip install waqt-client
+
+# Full HTTP server
+pip install waqt-api
+```
+
+### 2. Using `waqt-local` (In-Process Python)
+
+```python
+from waqt_local import now, format_at_bt
+
+# Compute current Waqt time for Makkah
+res = now(lat=21.4225, lon=39.8262)
+
+print(f"Hijri Date:    {res['hijri']['date']} ({res['hijri']['provider']})")
+print(f"Waqt Reading:  {res['waqt']['reading']['display']}")
+print(f"AT/BT Display: {format_at_bt(res['waqt']['reading']['display'])}")
+print(f"Next Event:    {res['next_event']['name']} in {res['next_event']['countdown']['display']}")
+```
+
+### 3. Running from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/Hawas-Muhaba/waqt-api.git
+cd waqt-api
+
+# Install in development mode
+pip install -r requirements.txt
+
+# Start the API server
 uvicorn waqt.api:app --reload --port 8000
-curl "http://localhost:8000/v1/waqt?lat=9.0192&lon=38.7525"
 ```
 
-Or open `http://localhost:8000/docs` for interactive testing (Swagger UI, generated automatically from the same code that serves requests).
+Open `http://localhost:8000/docs` in your browser for the interactive Swagger documentation.
 
-## The seven endpoints
+---
 
-| Endpoint | What it returns |
-|---|---|
-| `GET /v1/waqt` | Everything — day boundary, clock reading, all six events, Hijri date |
-| `GET /v1/day` | Day boundary only |
-| `GET /v1/events` | The six prayer/solar events only (no calendar) |
-| `GET /v1/hijri` | Calendar lookup only, **no location needed** — see `docs/API.md` §8 for the one gotcha |
-| `GET /v1/calendar` | Discovery: what calendar providers exist |
-| `GET /v1/location` | Timezone + local civil date resolution, standalone |
-| `GET /v1/conversions` | Gregorian ↔ Hijri, either direction |
-| `GET /v1/version` | Sprint 12: every version axis — `waqt-core` version, engine + revision + accuracy level, API version, conformance-vector-set version |
+## 🌐 The HTTP API Contract
 
-Full request/response schemas, every error code, units, and versioning policy: [`docs/API.md`](docs/API.md) and [`docs/VERSIONING.md`](docs/VERSIONING.md).
+All responses conform to a unified envelope `{ meta, data, error }`.
 
-## Scheduling (Sprint 6)
+### Core Time & Calendar Endpoints
 
-| Endpoint | What it answers |
-|---|---|
-| `GET /v1/schedule/snapshot` | Day begin/end, next event, time until/since every event |
-| `GET /v1/schedule/span` | Does `[start, end)` cross a Maghrib boundary? Civil midnight? |
-| `POST /v1/schedule/resolve` | Any rule: windows, deadlines, "30 min before Maghrib", `between(Fajr, Sunrise)` … |
+| Endpoint | Method | Description |
+|---|---|---|
+| `/v1/waqt` | `GET` | Full snapshot: day boundaries, clock reading, 6 events, Hijri date, timezone |
+| `/v1/day` | `GET` | Day interval only: opening/closing Maghrib instants and day duration |
+| `/v1/events` | `GET` | All 6 prayer/solar events (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha) |
+| `/v1/hijri` | `GET` | Authoritative Hijri date resolution for a given civil date |
+| `/v1/calendar` | `GET` | Discovery catalog of available calendar providers |
+| `/v1/conversions`| `GET` | Pure calendar conversion between Gregorian and Hijri |
+| `/v1/location` | `GET` | IANA timezone and local civil date resolution |
+| `/v1/version` | `GET` | Machine-readable engine revision, accuracy level, and version axes |
 
-Waqt provides temporal facts, not religious rulings — see [`docs/SCHEDULING.md`](docs/SCHEDULING.md).
+### Scheduling Engine
 
-## Institutional calendars (Sprint 7)
+| Endpoint | Method | Description |
+|---|---|---|
+| `/v1/schedule/snapshot` | `GET` | Current point in day, active interval, elapsed/remaining time |
+| `/v1/schedule/span` | `GET` | Analyzes whether an interval `[start, end)` crosses a Maghrib boundary |
+| `/v1/schedule/resolve` | `POST` | Evaluates complex scheduling rules (windows, deadlines, offsets) |
 
-| Endpoint | What it answers |
-|---|---|
-| `GET /v1/institutional/week` | The Islamic week containing an instant — first day, Jumu'ah slot, all configurable |
-| `GET`/`POST /v1/institutional/fiscal-year(/resolve)` | Muharram-1-to-Dhu-al-Hijjah by default, or any `start_rule`/`end_rule` you supply |
-| `GET`/`POST /v1/institutional/academic-year(/resolve)` | First-Ahad-of-Muharram-to-last-Khamis-of-Sha'ban by default, or your own opening/closing/terms/holidays |
-| `GET /v1/institutional/profile` | A demo `CalendarProfile` as pure JSON configuration |
+### Institutional Calendars
 
-No universal Islamic fiscal or school calendar is baked in — see [`docs/INSTITUTIONAL.md`](docs/INSTITUTIONAL.md).
+| Endpoint | Method | Description |
+|---|---|---|
+| `/v1/institutional/week` | `GET` | Islamic week containing an instant (Friday slot, configurable start) |
+| `/v1/institutional/fiscal-year` | `GET`/`POST` | Configurable Islamic fiscal year resolution |
+| `/v1/institutional/academic-year` | `GET`/`POST`| Configurable academic terms and holiday calendars |
 
-## SDKs, local computation, and independent astronomy (Sprint 9-10)
+---
 
-- **Official SDKs** — `sdks/python/waqt_client` and `sdks/js/waqt-client`,
-  remote HTTP clients with full read coverage plus typed request builders
-  for every `POST` endpoint. See [`docs/SDK.md`](docs/SDK.md) and each
-  package's `CHANGELOG.md`. Packaging/versioning/release procedure:
-  [`docs/RELEASING.md`](docs/RELEASING.md).
-- **Local computation library** — `local/waqt_local`, a no-HTTP, in-process
-  Python package computing the same facts the server does, straight from
-  `waqt.core`/`waqt.scheduling`/`waqt.institutional`. See
-  [`docs/LOCAL.md`](docs/LOCAL.md).
-- **Independent astronomy** — `independent-astronomy/independent_solar`
-  (a from-scratch Level-B solar engine) and `independent-astronomy/level_a`
-  (a VSOP87-based Level-A reference, Sprint 10, used to measure both
-  Level-B engines). See [`docs/INDEPENDENT-ASTRONOMY.md`](docs/INDEPENDENT-ASTRONOMY.md)
-  and [`docs/ASTRONOMY.md`](docs/ASTRONOMY.md)'s "Accuracy levels" section.
-  Sprint 12 extended the comparison across 7 years; see
-  [`docs/ACCURACY-LEVEL-REVIEW.md`](docs/ACCURACY-LEVEL-REVIEW.md).
-- **Reference applications** (Sprint 12) — `apps/cli` (offline CLI on
-  `waqt-local`), `apps/web` (a static page on the HTTP API), and
-  `apps/api-consumer` (a stdlib-only HTTP client proving the API needs no
-  Waqt package to use). None compute Waqt semantics themselves — each has
-  a structural test enforcing that. See each package's own `README.md`.
+## 🧪 Testing & Verification
 
-## Formal conformance and an independent implementation (Sprint 15)
-
-`conformance/` holds a portable conformance specification (protocol, 63 requirement IDs, accuracy bands), a
-language-neutral harness, 600+ vectors (DE421-oracle, closed-form, metamorphic, provider-failure), and a clean-room
-second implementation in Node.js that shares no code with `waqt-core`. Run `conformance/run.sh`; read
-`conformance/DISAGREEMENTS.md` for what it found and `conformance/spec/OPEN-QUESTIONS.md` for where the written
-specification is ambiguous. Report: `SPRINT-15-REPORT.md`.
-
-## Verify
+Run the entire automated verification suite across all layers:
 
 ```bash
-python3 -m pytest tests/ -v
+# Run core and API pytest suite
+pytest tests/ -v
+
+# Run reference CLI tests
+pytest apps/cli/tests/test_cli.py -v
+
+# Run web app structural conformance tests
+pytest apps/web/tests/test_site_structure.py -v
+
+# Run web frontend JavaScript unit tests (Node.js required)
+node --test apps/web/tests/js/site.test.mjs
 ```
 
-Sprint 7 adds 86 tests (institutional-layer unit tests, HTTP surface, 22 portable
-calendar-table vectors, and the independent JS consumer, run from pytest when Node
-is installed) on top of Sprint 6's 320. Sprint 6 added 200+ tests (scheduling
-engine, HTTP, 116 portable vectors, and the independent JS consumer). Sprint 5's
-baseline was 106 tests: the full geographic matrix, elevation, the date-line fix,
-ΔT, all five calendar provider categories (including 4/4 historical Umm al-Qura
-dates), the complete v1 HTTP contract, and Sprint 5's formal temporal semantics —
-the exact-Maghrib boundary rule, same-day-only comparison enforcement,
-undefined-event handling, and 10 portable conformance vectors an independent
-implementation in another language could check itself against.
+---
 
-Read `SCOPE.md` and the `SPRINT-*-REPORT.md` files before using this for anything beyond development and review — especially before trusting any Hijri date for a religious purpose.
+## 🤝 Contributing
+
+We warmly welcome developers, astronomers, designers, and students of Islamic jurisprudence to join the Waqt project.
+
+- **Contribution Guide:** Read [`CONTRIBUTING.md`](CONTRIBUTING.md) for environment setup and PR guidelines.
+- **Scope & Limitations:** Review [`SCOPE.md`](SCOPE.md) for architectural boundaries and technical honesty.
+- **Specifications:** Dive into [`docs/`](docs/) for in-depth time-model, astronomy, and calendar documentation.
+- **Questions & Ideas:** Reach out to the maintainers at [`waqtapi@gmail.com`](mailto:waqtapi@gmail.com) or open an issue on GitHub.
+
+---
+
+## ☕ Support the Project
+
+Waqt is an open community infrastructure project. Our public demonstration server is currently deployed on free-tier cloud hosting that will expire soon. 
+
+If you would like to help cover ongoing server hosting expenses and support the team in building further open-source technology for the Ummah and humanity, you can support us on Ko-fi:
+
+👉 **[Support Waqt on Ko-fi](https://ko-fi.com/ummatidawah)** *(Entirely optional, deeply appreciated)*
+
+---
+
+## 📜 Governance & License
+
+- **Logical / Idea Owner:** Dr. Salim Muhammed Redi
+- **Technical Maintainer:** Hawas Muhaba Hussein
+- **License:** [MIT License](LICENSE) — free and open for personal, academic, and commercial integration.

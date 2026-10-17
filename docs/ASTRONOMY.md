@@ -4,7 +4,7 @@ What actually computes sunrise, sunset, Fajr, Dhuhr, Asr, and Isha — and, just
 
 ## The engine
 
-`waqt/solar.py` implements the NOAA low-precision solar position algorithm (the same formulas behind NOAA's public Solar Calculator spreadsheet): solar declination and equation of time from a low-order polynomial series, refined by two iterations to account for how those quantities drift across the day. It is self-contained — no external ephemeris files, no network calls.
+`waqt_core/solar.py` implements the NOAA low-precision solar position algorithm (the same formulas behind NOAA's public Solar Calculator spreadsheet): solar declination and equation of time from a low-order polynomial series, refined by two iterations to account for how those quantities drift across the day. It is self-contained — no external ephemeris files, no network calls.
 
 Every response that used this engine identifies it explicitly:
 ```json
@@ -78,7 +78,7 @@ Verified two ways in `tests/test_core.py`: sunset gets monotonically later (and 
 
 ## Time scale (ΔT)
 
-Solar formulas are properly functions of Terrestrial Time, not UTC. The difference (ΔT = TT − UT1) is supplied by `waqt/timescale.py`'s `EspenakMeeusDeltaT` — the standard NASA-published polynomial, valid with documented accuracy across roughly 1900–2150. Current-era value is ~69–76 seconds and slowly increasing; every response reports the exact value used.
+Solar formulas are properly functions of Terrestrial Time, not UTC. The difference (ΔT = TT − UT1) is supplied by `waqt_core/timescale.py`'s `EspenakMeeusDeltaT` — the standard NASA-published polynomial, valid with documented accuracy across roughly 1900–2150. Current-era value is ~69–76 seconds and slowly increasing; every response reports the exact value used.
 
 ## Edge cases: polar day and polar night
 

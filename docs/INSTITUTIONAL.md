@@ -1,4 +1,4 @@
-# Waqt Institutional Calendars (Sprint 7)
+# Waqt Institutional Calendars
 
 The specification `waqt/institutional/` implements. It sits **above** `SCHEDULING.md`, which sits above `SEMANTICS.md`, which sits above the Core Time Model:
 
@@ -8,7 +8,7 @@ Scheduling            -> windows, deadlines, event-relative rules            (Sp
 Institutional layer    -> week, fiscal year, academic year, terms, periods   (Sprint 7, this document)
 ```
 
-Sprint 7 adds no astronomy and changes neither `waqt/core.py` nor `waqt/solar.py` (verified byte-for-byte in every test run — see `tests/test_institutional.py::TestArchitecture`). `waqt/scheduling/`, `waqt/semantics.py`, `waqt/hijri.py` and `waqt/calendar_providers/` are likewise unmodified.
+Sprint 7 adds no astronomy and changes neither `waqt_core/core.py` nor `waqt_core/solar.py` (verified byte-for-byte in every test run — see `tests/test_institutional.py::TestArchitecture`). `waqt_core/scheduling/`, `waqt_core/semantics.py`, `waqt_core/hijri.py` and `waqt_core/calendar_providers/` are likewise unmodified.
 
 ## 1. What this layer does — and does not — claim
 

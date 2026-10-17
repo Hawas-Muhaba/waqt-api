@@ -1,7 +1,8 @@
 # Local computation — `waqt-local`
 
-Sprint 10's answer to the gap Sprint 9 named and deliberately left open:
-a Waqt computation surface that works **without an HTTP server**.
+The offline Waqt computation surface that works **without an HTTP server**.
+Delivered in Sprint 10, packaged as an independent PyPI distribution in Sprint 11,
+and continuously updated through Sprint 17.
 
 ## Architecture
 
@@ -25,8 +26,7 @@ a Waqt computation surface that works **without an HTTP server**.
 other. Both call directly into the same computation package
 (`waqt_core.core`, `waqt_core.solar`, `waqt_core.semantics`,
 `waqt_core.hijri`, `waqt_core.scheduling`, `waqt_core.institutional`,
-`waqt_core.calendar_interop` — the `waqt-core` distribution since Sprint 11;
-`waqt.core` etc. remain as aliases to the same module objects);
+`waqt_core.calendar_interop` — the `waqt-core` distribution);
 neither is layered on top of the other, and `waqt_local` has zero
 dependency on FastAPI or `waqt.api`. `waqt_client` (the remote SDKs)
 sits below the HTTP API only, and has zero dependency on `waqt` or
@@ -57,23 +57,21 @@ it drives a real, in-process `waqt.api` FastAPI app (via
 same input, and asserts the two response bodies are equal, field by
 field, for every endpoint that has a local equivalent.
 
-## Why typed requests aren't a shared package (yet)
+## Why typed requests aren't a shared package
 
 `waqt_local.schedule_resolve` / `institutional_fiscal_year_resolve` /
 `institutional_academic_year_resolve` accept either a plain `dict` (the
 wire JSON shape) or any object with a `.to_json()` method. The Python
-SDK's new `waqt_client.requests` typed builders (docs/SDK.md) satisfy
+SDK's `waqt_client.requests` typed builders (docs/SDK.md) satisfy
 that same duck type — a caller can build a request once and hand it to
 either — but the two modules do not import each other: `waqt_client`
 must stay dependency-free of `waqt`/`waqt_local` (it is a client for
 *any* server speaking the wire protocol, not just this checkout), and
-`waqt_local` has no reason to depend on an HTTP-client package. A third,
-shared `waqt-requests` package that both import is the natural
-Sprint 11 candidate if this duplication becomes painful in practice —
-today it is two independent ~350-line modules kept honest by
+`waqt_local` has no reason to depend on an HTTP-client package. The
+arrangement is two independent ~350-line modules kept honest by
 `local/tests/test_errors_and_typed_requests.py`'s duck-typing test and
 by both being checked against the same server-side wire format
-(`waqt.scheduling.model`, `waqt.scheduling.ops`, `waqt.institutional.rules`)
+(`waqt_core.scheduling.model`, `waqt_core.scheduling.ops`, `waqt_core.institutional.rules`)
 in their own test suites.
 
 ## Conformance
@@ -108,12 +106,12 @@ regression in `waqt_local`'s own facade/formatting layer (not just in
 
 ## Distribution
 
-`waqt-local` is not yet an independently installable PyPI package,
-because the `waqt` core package (`waqt/` at the repository root) isn't
-split out as its own distribution — see `local/README.md`'s "Install"
-section for the full explanation and the Sprint 11 candidate this
-points at (a `waqt-core` package that both `waqt.api` and `waqt_local`
-would depend on normally). This is a real, named limitation, not an
-oversight: Sprint 10's publishing goal was specifically the two
-`waqt_client` SDKs (docs/RELEASING.md), which this sprint's report
-addresses directly.
+`waqt-local` (`0.7.0`) is an independently installable PyPI package,
+depending only on `waqt-core>=0.7.0,<0.8`. Install it with:
+
+```bash
+pip install waqt-local
+```
+
+For the full install order and release procedure (publish `waqt-core` first,
+then `waqt-local`, then `waqt-cli`), see `docs/RELEASING.md` and `docs/PACKAGING.md`.

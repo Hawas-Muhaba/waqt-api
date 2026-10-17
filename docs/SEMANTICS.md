@@ -1,6 +1,6 @@
 # Waqt Temporal Semantics
 
-This is the specification `waqt/semantics.py` implements. Where `TIME-MODEL.md` explains *why* the numbers look the way they do, this document defines *how software is allowed to reason about them* — precisely enough that an independent implementation in another language could be checked against it using `tests/vectors/waqt_vectors.json`.
+This is the specification `waqt_core/semantics.py` implements. Where `TIME-MODEL.md` explains *why* the numbers look the way they do, this document defines *how software is allowed to reason about them* — precisely enough that an independent implementation in another language could be checked against it using `tests/vectors/waqt_vectors.json`.
 
 Every rule below has a corresponding test in `tests/test_semantics.py`, cited by name, so nothing here is aspirational.
 
@@ -30,7 +30,7 @@ A `WaqtDay`'s length is not guaranteed to be 86,400 seconds (see §4).
 
 ## 3. Waqt Date
 
-The Hijri date and the weekday attached to `WaqtDay(L, D)` are those of the **label date**: the Gregorian *civil* date, in the IANA time zone of location `L`, on which the day's **closing** Maghrib *instant* falls. **[DAY-004, decision DR-0001]** The Hijri date is the calendar provider's date for the label date; the weekday is that date's weekday name. Before Maghrib the label is today's, at or after Maghrib it is tomorrow's. `core.compute_waqt` computes exactly `label_date = tz.local_date(closing_maghrib_instant)` and exposes it as `WaqtResult.label_date`.
+The Hijri date and the weekday attached to `WaqtDay(L, D)` are those of the **label date**: the Gregorian *civil* date, in the IANA time zone of location `L`, on which the day's **closing** Maghrib *instant* falls. **[DAY-004, decision DR-0001]** The Hijri date is the calendar provider's date for the label date; the weekday is that date's weekday name. Before Maghrib the label is today's, at or after Maghrib it is tomorrow's. `waqt_core.core.compute_waqt` computes exactly `label_date = tz.local_date(closing_maghrib_instant)` and exposes it as `WaqtResult.label_date`.
 
 Normative details:
 
